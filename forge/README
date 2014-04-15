@@ -110,5 +110,12 @@ Command log:
           net.minecraft.launchwrapper.Launch
 
 
+Source last commits
+=====================
+
+Apr 7 2014: 2cef9c5  pull 1029
+            cc54645  fix stensil buffer
+            2b40a5e  small wording in license
+
 
 
