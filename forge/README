@@ -1,0 +1,114 @@
+
+
+Install forge after playing 1.7.2
+===================================
+
+http://www.minecraftforge.net/forum/
+http://www.minecraftforge.net/wiki/
+http://www.minecraftforge.net/wiki/Installation/Universal
+http://minecraft.gamepedia.com/Mods/Installing_forge_mods
+
+[.minecraft]$ diff -r --brief ../arc/dot1-demo/ ./
+Files ../arc/dot1-demo/launcher_profiles.json and ./launcher_profiles.json differ
+Only in ./libraries/net: minecraftforge
+Only in ./libraries/org: scala-lang
+Only in ./versions: 1.7.2-Forge10.12.0.1057
+
+[.minecraft]$ tree libraries/net/minecraftforge
+libraries/net/minecraftforge
+└── forge
+    └── 1.7.2-10.12.0.1057
+        └── forge-1.7.2-10.12.0.1057.jar
+
+[.minecraft]$ tree libraries/org/scala-lang
+libraries/org/scala-lang
+├── scala-compiler
+│   └── 2.10.2
+│       └── scala-compiler-2.10.2.jar
+└── scala-library
+    └── 2.10.2
+        └── scala-library-2.10.2.jar
+
+
+Play forge once
+=================
+
+Run once by choosing the forge version from default profile.
+
+[.minecraft]$ diff -r ../arc/dot2-forge/ ./ --brief
+Only in ./: config                    ---forge conf two files
+Files ../arc/dot2-forge/launcher_profiles.json and ./launcher_profiles.json differ
+                                      ---minimal last used etc
+Only in ./libraries: lzma             ---lzma-0.0.1.jar
+Only in ./libraries/net: minecraft    ---launchwrapper-1.9.jar
+Only in ./libraries/org: ow2          ---asm-all-4.1.jar
+Only in ./: mods                      ---empty
+Files ../arc/dot2-forge/options.txt and ./options.txt differ
+Files ../arc/dot2-forge/versions/1.7.2-Forge10.12.0.1057/1.7.2-Forge10.12.0.1057.json and ./versions/1.7.2-Forge10.12.0.1057/1.7.2-Forge10.12.0.1057.json differ
+                                      ---classes url etc
+
+[.minecraft]$ tree libraries/lzma/
+libraries/lzma/
+└── lzma
+    └── 0.0.1
+        ├── lzma-0.0.1.jar
+        └── lzma-0.0.1.jar.sha
+
+[.minecraft]$ tree libraries/net/minecraft
+libraries/net/minecraft
+└── launchwrapper
+    └── 1.9
+        ├── launchwrapper-1.9.jar
+        └── launchwrapper-1.9.jar.sha
+
+[.minecraft]$ tree libraries/org/ow2
+libraries/org/ow2
+└── asm
+    └── asm-all
+        └── 4.1
+            ├── asm-all-4.1.jar
+            └── asm-all-4.1.jar.sha
+
+Run again by choosing the forge profile.
+Bug: https://github.com/MinecraftForge/MinecraftForge/issues/1030
+
+    151 [07:55:26 INFO]: Client> [07:55:26] [Client thread/ERROR]: ########## GL         ERROR ##########
+    152 [07:55:26 INFO]: Client> [07:55:26] [Client thread/ERROR]: @ Post render
+    153 [07:55:26 INFO]: Client> [07:55:26] [Client thread/ERROR]: 1286: Invalid         framebuffer operation
+
+Command log:
+     98 [07:54:50 INFO]: Half command: /home/me/bin/jre/bin/java -Xmx512M \
+          -Djava.library.path=/home/me/.minecraft/versions/1.7.2-Forge10.12.0.1057/1.7.2-Forge10.12.0.1057-natives-1311162434417292 \
+          -cp /home/me/.minecraft/libraries/net/minecraftforge/forge/1.7.2-10.12.0.1057/forge-1.7.2-10.12.0.1057.jar:\
+          /home/me/.minecraft/libraries/net/minecraft/launchwrapper/1.9/launchwrapper-1.9.jar:\
+          /home/me/.minecraft/libraries/org/ow2/asm/asm-all/4.1/asm-all-4.1.jar:\
+          /home/me/.minecraft/libraries/org/scala-lang/scala-library/2.10.2/scala-library-2.10.2.jar:\
+          /home/me/.minecraft/libraries/org/scala-lang/scala-compiler/2.10.2/scala-compiler-2.10.2.jar:\
+          /home/me/.minecraft/libraries/java3d/vecmath/1.3.1/vecmath-1.3.1.jar:\
+          /home/me/.minecraft/libraries/net/sf/trove4j/trove4j/3.0.3/trove4j-3.0.3.jar:\
+          /home/me/.minecraft/libraries/com/ibm/icu/icu4j-core-mojang/51.2/icu4j-core-mojang-51.2.jar:\
+          /home/me/.minecraft/libraries/net/sf/jopt-simple/jopt-simple/4.5/jopt-simple-4.5.jar:\
+          /home/me/.minecraft/libraries/lzma/lzma/0.0.1/lzma-0.0.1.jar:\
+          /home/me/.minecraft/libraries/com/paulscode/codecjorbis/20101023/codecjorbis-20101023.jar:\
+          /home/me/.minecraft/libraries/com/paulscode/codecwav/20101023/codecwav-20101023.jar:\
+          /home/me/.minecraft/libraries/com/paulscode/libraryjavasound/20101123/libraryjavasound-20101123.jar:\
+          /home/me/.minecraft/libraries/com/paulscode/librarylwjglopenal/20100824/librarylwjglopenal-20100824.jar:\
+          /home/me/.minecraft/libraries/com/paulscode/soundsystem/20120107/soundsystem-20120107.jar:\
+          /home/me/.minecraft/libraries/io/netty/netty-all/4.0.10.Final/netty-all-4.0.10.Final.jar:\
+          /home/me/.minecraft/libraries/com/google/guava/guava/15.0/guava-15.0.jar:\
+          /home/me/.minecraft/libraries/org/apache/commons/commons-lang3/3.1/commons-lang3-3.1.jar:\
+          /home/me/.minecraft/libraries/commons-io/commons-io/2.4/commons-io-2.4.jar:\
+          /home/me/.minecraft/libraries/net/java/jinput/jinput/2.0.5/jinput-2.0.5.jar:\
+          /home/me/.minecraft/libraries/net/java/jutils/jutils/1.0.0/jutils-1.0.0.jar:\
+          /home/me/.minecraft/libraries/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar:\
+          /home/me/.minecraft/libraries/com/mojang/authlib/1.3/authlib-1.3.jar:\
+          /home/me/.minecraft/libraries/org/apache/logging/log4j/log4j-api/2.0-beta9/log4j-api-2.0-beta9.jar:\
+          /home/me/.minecraft/libraries/org/apache/logging/log4j/log4j-core/2.0-beta9/log4j-core-2.0-beta9.jar:\
+          /home/me/.minecraft/libraries/org/lwjgl/lwjgl/lwjgl/2.9.0/lwjgl-2.9.0.jar:\
+          /home/me/.minecraft/libraries/org/lwjgl/lwjgl/lwjgl_util/2.9.0/lwjgl_util-2.9.0.jar:\
+          /home/me/.minecraft/versions/1.7.2-Forge10.12.0.1057/1.7.2-Forge10.12.0.1057.jar \
+          net.minecraft.launchwrapper.Launch
+
+
+
+
