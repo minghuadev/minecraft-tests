@@ -1,0 +1,328 @@
+
+
+chroot fedora 20 system
+=========================
+
+rpm --root /home/pyjs/chroot-f20 --initdb
+rpm --root /home/pyjs/chroot-f20 -i /tmp/fedora-release-20-3.noarch.rpm
+rpm --root /home/pyjs/chroot-f20 --import https://fedoraproject.org/static/246110C1.txt
+
+yum installroot=/home/pyjs/chroot-f20 install bash yum net-tools iputils passwd tar
+
+schroot -c pyjs ... now inside the chroot fedora 20 ...
+
+yum install xterm
+yum install webkitgtk3
+yum install pygobject3
+
+other packages installed later
+
+   13  yum install which vi strace gdb
+   23  yum install yum-utils
+   29  yum install kde-workspace
+   36  yum install xorg-x11-fonts-ISO8859-1-100dpi.noarch
+   42  yum install findutils
+   43  cat /tmp/fonts | xargs yum install
+   53  yum install python-pudb
+
+
+pyjs.org install
+===================
+
+$ pwd
+/home/pyjs/pyjstest/virtualenv-1.11.4
+$ python virtualenv.py /home/pyjs/pyjstest/pyjsroot/mypy
+New python executable in /home/pyjs/pyjstest/pyjsroot/mypy/bin/python
+Installing setuptools, pip...done.
+
+$ pwd
+/home/pyjs/pyjstest/pyjsroot
+$ mypy/bin/pip install /home/pyjs/pyjstest/pyjsroot 
+
+
+test run one -- crash
+-----------------------
+
+$ PYTHONPATH=.:/lib/python2.7/site-packages mypy/bin/python examples/helloworld/Hello.py 
+INFO:pyjs.runners:conf:
+[('runner', 'giwebkit'),
+ ('home', '/home/pyjs/.pyjd'),
+ ('is_desktop', True),
+ ('native_dnd', True),
+ ('engine', 'giwebkit')]
+GLib-GIO-Message: Using the 'memory' GSettings backend.  Your settings will not be saved or shared with other applications.
+INFO:pyjs.runners.giwebkit:uri:
+[('scheme', 'file'),
+ ('user', None),
+ ('password', None),
+ ('host', ''),
+ ('port', 0L),
+ ('path', '/home/pyjs/pyjstest/pyjsroot/public/Hello.html'),
+ ('query', 'fred=foo'),
+ ('fragment', 'me')]
+Traceback (most recent call last):
+  File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 609, in _frame_loaded_cb
+    __pyjamas__.set_main_frame(self)
+  File "/home/pyjs/pyjstest/pyjsroot/pyjswidgets/__pyjamas__.py", line 38, in set_main_frame
+    DOM.init()
+  File "/home/pyjs/pyjstest/pyjsroot/pyjswidgets/pyjamas/DOM.py", line 83, in init
+    mf._addWindowEventListener("click", browser_event_cb)
+  File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 693, in addWindowEventListener
+    self._wnd.add_event_listener(event_name, listener, False)
+TypeError: add_event_listener() takes exactly 5 arguments (4 given)
+Segmentation fault
+
+
+edit to disable add_event_listener() temporary
+
+
+test run two with strace -- crash
+-----------------------------------
+
+PYTHONPATH=.:/lib/python2.7/site-packages strace mypy/bin/python examples/helloworld/Hello.py 
+-bas
+
+mmap2(NULL, 126976, PROT_NONE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_NORESERVE, -1, 0) = 0x6dda2000
+madvise(0x6dda2000, 126976, MADV_DONTNEED) = 0
+mprotect(0x6ddb0000, 65536, PROT_READ|PROT_WRITE) = 0
+madvise(0x6ddb0000, 65536, MADV_WILLNEED) = -1 EBADF (Bad file descriptor)
+stat64("/home/pyjs/pyjstest/pyjsroot/pyjs/runners/__pyjamas__", 0x7f859a0c) = -1 ENOENT (No such file or directory)
+open("/home/pyjs/pyjstest/pyjsroot/pyjs/runners/__pyjamas__.so", O_RDONLY|O_LARGEFILE) = -1 ENOENT (No such file or directory)
+open("/home/pyjs/pyjstest/pyjsroot/pyjs/runners/__pyjamas__module.so", O_RDONLY|O_LARGEFILE) = -1 ENOENT (No such file or directory)
+open("/home/pyjs/pyjstest/pyjsroot/pyjs/runners/__pyjamas__.py", O_RDONLY|O_LARGEFILE) = -1 ENOENT (No such file or directory)
+open("/home/pyjs/pyjstest/pyjsroot/pyjs/runners/__pyjamas__.pyc", O_RDONLY|O_LARGEFILE) = -1 ENOENT (No such file or directory)
+write(7, "\1\0\0\0\0\0\0\0", 8)         = 8
+readlink("/proc/self/exe", "/home/pyjs/pyjstest/pyjsroot/mypy/b"..., 4096) = 41
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0} ---
++++ killed by SIGSEGV +++
+Segmentation fault
+
+
+test run three with gdb -- crash
+-----------------------------------
+
+$ gdb --args  mypy/bin/python examples/helloworld/Hello.py 
+
+('path', '/home/pyjs/pyjstest/pyjsroot/public/Hello.html'),
+ 
+[New Thread 0x70618b40 (LWP 15070)]
+[New Thread 0x6fe17b40 (LWP 15071)]
+[New Thread 0x6eeffb40 (LWP 15072)]
+
+Program received signal SIGSEGV, Segmentation fault.
+0x74a1bc87 in WebCore::RenderStyle::fontMetrics() const () from /lib/libwebkitgtk-3.0.so.0
+
+Segmentation fault in WebCore::RenderStyle::fontMetrics() const () from /lib/libwebkitgtk-3.0.so.0
+
+Program received signal SIGSEGV, Segmentation fault.
+0x74a1bc87 in WebCore::RenderStyle::fontMetrics() const () from /lib/libwebkitgtk-3.0.so.0
+Missing separate debuginfos, use: 
+debuginfo-install
+  at-spi2-atk-2.10.2-1.fc20.i686 at-spi2-core-2.10.2-1.fc20.i686
+  atk-2.10.0-1.fc20.i686 cairo-1.13.1-0.1.git337ab1f.fc20.i686
+  cairo-gobject-1.13.1-0.1.git337ab1f.fc20.i686
+  dbus-glib-0.100.2-2.fc20.i686 dbus-libs-1.6.12-8.fc20.i686
+  enchant-1.6.0-7.fc20.i686 expat-2.1.0-7.fc20.i686
+  fontconfig-2.11.0-1.fc20.i686 freetype-2.5.0-5.fc20.i686
+  gdk-pixbuf2-2.30.3-1.fc20.i686 geoclue-0.12.99-5.fc20.i686
+  glib-networking-2.38.2-1.fc20.i686 glib2-2.38.2-2.fc20.i686
+  glibc-2.18-12.fc20.i686 gobject-introspection-1.38.0-1.fc20.i686
+  gstreamer1-1.2.3-1.fc20.i686 gstreamer1-plugins-base-1.2.3-1.fc20.i686
+  gtk3-3.10.8-1.fc20.i686 harfbuzz-0.9.27-1.fc20.i686
+  harfbuzz-icu-0.9.27-1.fc20.i686 hunspell-1.3.2-14.fc20.i686
+  keyutils-libs-1.5.9-1.fc20.i686 krb5-libs-1.11.5-5.fc20.i686
+  libICE-1.0.8-6.fc20.i686 libSM-1.2.1-6.fc20.i686
+  libX11-1.6.1-1.fc20.i686 libXau-1.0.8-2.fc20.i686
+  libXcomposite-0.4.4-4.fc20.i686 libXcursor-1.1.14-2.fc20.i686
+  libXdamage-1.1.4-4.fc20.i686 libXext-1.3.2-2.fc20.i686
+  libXfixes-5.0.1-2.fc20.i686 libXi-1.7.2-2.fc20.i686
+  libXinerama-1.1.3-2.fc20.i686 libXrandr-1.4.1-2.fc20.i686
+  libXrender-0.9.8-2.fc20.i686 libXt-1.1.4-7.fc20.i686
+  libXxf86vm-1.1.3-2.fc20.i686 libcom_err-1.42.8-3.fc20.i686
+  libdrm-2.4.53-1.fc20.i686 libffi-3.0.13-5.fc20.i686
+  libgcc-4.8.2-7.fc20.i686 libgcrypt-1.5.3-2.fc20.i686
+  libgpg-error-1.12-1.fc20.i686 libicu-50.1.2-10.fc20.i686
+  libjpeg-turbo-1.3.1-2.fc20.i686 libmodman-2.0.1-7.fc20.i686
+  libpng-1.6.3-3.fc20.i686 libproxy-0.4.11-8.fc20.i686
+  libsecret-0.16-1.fc20.i686 libselinux-2.2.1-6.fc20.i686
+  libsoup-2.44.2-1.fc20.i686 libstdc++-4.8.2-7.fc20.i686
+  libuuid-2.24.2-1.fc20.i686 libwayland-client-1.2.0-3.fc20.i686
+  libwayland-cursor-1.2.0-3.fc20.i686 libwayland-server-1.2.0-3.fc20.i686
+  libwebp-0.3.1-3.fc20.i686 libxcb-1.9.1-3.fc20.i686
+  libxkbcommon-0.3.1-1.fc20.i686 libxml2-2.9.1-2.fc20.i686
+  libxslt-1.1.28-5.fc20.i686 mesa-libEGL-10.1.3-1.20140509.fc20.i686
+  mesa-libGL-10.1.3-1.20140509.fc20.i686 mesa-libgbm-10.1.3-1.20140509.fc20.i686
+  mesa-libglapi-10.1.3-1.20140509.fc20.i686 openssl-libs-1.0.1e-37.fc20.1.i686
+  orc-0.4.18-1.fc20.i686 pango-1.36.1-3.fc20.i686
+  pcre-8.33-4.fc20.i686 pixman-0.30.0-3.fc20.i686
+  pygobject3-base-3.10.2-1.fc20.i686 python-libs-2.7.5-11.fc20.i686
+  sqlite-3.8.4.3-1.fc20.i686 systemd-libs-208-16.fc20.i686
+  webkitgtk3-2.2.7-1.fc20.i686 xz-libs-5.1.2-8alpha.fc20.i686
+  zlib-1.2.8-3.fc20.i686
+
+
+test run four with gdb symbols -- back-trace
+--------------------------------------------------
+
+Program received signal SIGSEGV, Segmentation fault.
+primarySimpleFontData (description=..., this=0x71101b60) at Source/WebCore/platform/graphics/FontGlyphs.h:123
+123             m_cachedPrimarySimpleFontData = primaryFontData(description)->fontDataForCharacter(' ');
+
+(gdb) list
+118
+119     inline const SimpleFontData* FontGlyphs::primarySimpleFontData(const FontDescription& description) const
+120     {
+121         ASSERT(isMainThread());
+122         if (!m_cachedPrimarySimpleFontData)
+123             m_cachedPrimarySimpleFontData = primaryFontData(description)->fontDataForCharacter(' ');
+124         return m_cachedPrimarySimpleFontData;
+125     }
+
+(gdb) bt
+#0  primarySimpleFontData (description=..., this=0x71101b60) at Source/WebCore/platform/graphics/FontGlyphs.h:123
+#1  primaryFont (this=<optimized out>) at Source/WebCore/platform/graphics/Font.h:326
+#2  fontMetrics (this=<optimized out>) at Source/WebCore/platform/graphics/Font.h:143
+#3  WebCore::RenderStyle::fontMetrics (this=this@entry=0x71153c40) at Source/WebCore/rendering/style/RenderStyle.cpp:1335
+#4  0x74a1bea3 in WebCore::RenderStyle::computedLineHeight (this=0x71153c40, renderView=0x7110c010)
+    at Source/WebCore/rendering/style/RenderStyle.cpp:1376
+#5  0x7488ef06 in WebCore::RenderBlock::lineHeight (this=0x7110c300, firstLine=true, direction=WebCore::HorizontalLine, 
+    linePositionMode=linePositionMode@entry=WebCore::PositionOfInteriorLineBoxes) at Source/WebCore/rendering/RenderBlock.cpp:6651
+
+(gdb) up
+#1  primaryFont (this=<optimized out>) at Source/WebCore/platform/graphics/Font.h:326
+326         return m_glyphs->primarySimpleFontData(m_fontDescription);
+
+(gdb) list
+323     inline const SimpleFontData* Font::primaryFont() const
+324     {
+325         ASSERT(m_glyphs);
+326         return m_glyphs->primarySimpleFontData(m_fontDescription);
+327     }
+
+(gdb) up
+#2  fontMetrics (this=<optimized out>) at Source/WebCore/platform/graphics/Font.h:143
+143         const FontMetrics& fontMetrics() const { return primaryFont()->fontMetrics(); }
+
+(gdb) list
+138         FontWeight weight() const { return m_fontDescription.weight(); }
+139         FontWidthVariant widthVariant() const { return m_fontDescription.widthVariant(); }
+140
+141         bool isPlatformFont() const { return m_glyphs->isForPlatformFont(); }
+142
+143         const FontMetrics& fontMetrics() const { return primaryFont()->fontMetrics(); }
+144         float spaceWidth() const { return primaryFont()->spaceWidth() + m_letterSpacing; }
+145         float tabWidth(const SimpleFontData&, unsigned tabSize, float position) const;
+146         float tabWidth(unsigned tabSize, float position) const { return tabWidth(*primaryFont(), tabSize, position); }
+147
+
+
+install fonts -- first kde-workspace, then other fonts
+--------------------------------------------------------
+
+# rpm -q -a | grep font
+fontpackages-filesystem-1.44-9.fc20.noarch
+fontconfig-2.11.0-1.fc20.i686
+fontconfig-debuginfo-2.11.0-1.fc20.i686
+
+
+yum install kde-workspace
+
+
+Program received signal SIGSEGV, Segmentation fault.
+primarySimpleFontData (description=..., this=0x71101b60) at Source/WebCore/platform/graphics/FontGlyphs.h:123
+123             m_cachedPrimarySimpleFontData = primaryFontData(description)->fontDataForCharacter(' ');
+Missing separate debuginfos, use: debuginfo-install GConf2-3.2.6-7.fc20.i686
+
+
+install all fonts packages found on another fedora desktop
+
+
+  File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 704, in addEventListener
+    element.add_event_listener(event_name, listener, False)
+TypeError: add_event_listener() takes exactly 5 arguments (4 given)
+
+
+[lib]# grep -r add_event_listener *
+Binary file debug/usr/lib/libwebkit2gtk-3.0.so.25.4.9.debug matches
+Binary file debug/usr/lib/libwebkitgtk-3.0.so.0.19.15.debug matches
+Binary file girepository-1.0/WebKit-3.0.typelib matches
+Binary file libwebkitgtk-3.0.so.0 matches
+Binary file libwebkitgtk-3.0.so.0.19.15 matches
+
+
+  File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 704, in addEventListener
+    element.add_event_listener(event_name, listener, False)
+TypeError: add_event_listener() takes exactly 5 arguments (4 given)
+
+
+summary
+-----------
+
+still crash a lot. either add_event_listener() not right (filled the 4th with False) or 
+another api is not right.
+
+
+
+reference about add_event_listener
+====================================
+
+pyjs.org user list
+
+Sarvi Shanmugham 	
+17/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+I don't see a dom_create_event_listener in the webkit DOMWindow.idl below
+https://github.com/WebKit/webkit/blob/master/Source/WebCore/page/DOMWindow.idl
+
+But I see this below. am I way off? where did you find the dom_create_event_listener?
+
+    // EventTarget interface
+    [Custom] void addEventListener(DOMString type,
+                                  EventListener listener,
+                                  optional boolean useCapture);
+    [Custom] void removeEventListener(DOMString type,
+                                      EventListener listener,
+                                      optional boolean useCapture);
+    [RaisesException] boolean dispatchEvent(Event evt);
+
+    void captureEvents(/*in long eventFlags*/);
+    void releaseEvents(/*in long eventFlags*/);
+
+I read through some of your threads/bug to WebKit/Gobject introspection about adding addEventListener below. 
+Is the above what you were looking for?
+
+https://bugs.webkit.org/show_bug.cgi?id=77835
+
+C Anthony Risinger 	
+17/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+- show quoted text -
+
+Yep, this is the remaining thing that I have to implement via ctypes... the method is defined in the underlying gobject api, but since WebKitGTK authors did not add a GNotify callback to the signature, or use a GClosure, the introspection stuff is unable to automatically generate a non-leaky binding... therefore it gets skipped altogether.
+
+If you just change the function to skip that stuff (possibly by just `pass`ing it entirely), you should be able to run most if not all examples... event handling won't work, but it should still construct the DOM.
+
+I plan to wrap up the ctypes stuff over the weekend... I'll be at the in-laws house with my chromebook, but VPN+SSH usually let's me work all the same.
+
+C Anthony [mobile]
+
+Sarvi Shanmugham 	
+28/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+Hi Anthony,
+     I've been reading up on how to fix this add_event_listener problem and I came across a thread from you on the topic
+https://lists.webkit.org/pipermail/webkit-gtk/2012-February/000936.html
+Yet I can't seem to find any documentation on this add_event_listener API
+
+On the other hand I found this
+http://python-gtk-3-tutorial.readthedocs.org/en/latest/introduction.html
+which seems to be using connect() to add the listeners to both the GTK level window objects as well
+Webkit objects link links, docs, etc. I also noticed while debugging the Window and Document objects in runners.giwebkit 
+they have connect() API in them.
+
+I am gonna look at fixing this later this evening. Was just hoping you could throw some context on why add_event_listener and why not connect() ?
+
+Sarvi
+
+
+

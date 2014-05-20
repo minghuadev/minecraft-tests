@@ -1,0 +1,114 @@
+
+note-install-linux.txt
+========================
+========================
+
+
+
+Linux hulahop
+===============
+
+http://ubuntuforums.org/showthread.php?t=1467805
+Can't find python-hulahop in 10.04 
+
+I'm using Kubuntu 10.04 and this is how I installed python-hulahop to get pyjamas-desktop running.
+
+System Settings -> Add and Remove Software -> Settings -> Edit Software Sources
+Unchecked all boxes under the tabs Kubuntu Software and Other Software
+(Remember what they were so that you can reactivate them afterwards)
+Under Other Software click Add
+Enter: deb http://ftp.de.debian.org/debian sid main
+Click OK
+Click Close
+Click Reload
+Now you should be able to install python-hulahop either through Software Management or sudo apt-get install python-hulahop
+After it's installed be sure to reset your Software Sources 
+
+
+
+Linux pywebkitgtk
+===================
+
+gnu.org ref page
+------------------
+http://www.gnu.org/software/pythonwebkit/
+
+
+pyjs wiki 
+-----------
+https://github.com/pyjs/pyjs/wiki/pyjamasubuntu#Setting_Up_PyjamasDesktop_Webkit
+
+    git clone --depth 1 git://git.savannah.gnu.org/pythonwebkit.git
+
+the checkout does not contain python_codegen branch as the intruction says.
+running on a centos 64 machine works well. the .git size is about 800M.
+
+
+the full checkout command gets .git about 2G:
+
+    git clone git://git.savannah.gnu.org/pythonwebkit.git
+
+
+
+Linux giwebkit
+===================
+
+it intends to replace pywebkitgtk, see pyjs user list post by C Anthony Risinger 
+03/08/2012. it uses libwebkit3-1.8.1-1-x86_64.pkg.tar.gz. 
+
+    $ cat giwebkit.sh
+    #!/bin/bash
+    
+    pkg_file=libwebkit3-1.8.1-1-x86_64.pkg.tar.gz
+    pkg_uri=https://github.com/downloads/pyjs/pyjs/${pkg_file}
+    git_uri=https://github.com/pyjs/pyjs.git
+    
+    cd
+    mkdir -p .pyjd/
+    echo -e '[gui]\nengine = giwebkit' > ~/.pyjd/pyjdrc
+    mkdir giwebkit/
+    cd giwebkit/
+    git clone -b feature/giwebkit --depth=1 --single-branch ${git_uri}
+    
+    git clone -b feature/giwebkit --depth=1 --single-branch ${git_uri}
+    curl -L ${pkg_uri} | tee ${pkg_file} | tar xz usr/lib
+    cd pyjs/
+    python2.7 bootstrap.py
+    cd examples/helloworld/
+    
+    export GI_TYPELIB_PATH=~/giwebkit/usr/lib/girepository-1.0
+    export LD_LIBRARY_PATH=~/giwebkit/usr/lib
+    ../../bin/pyjd Hello.py
+
+also 
+
+    $ sudo ldconfig -v | grep webkit
+         libwebkitgtk-3.0.so.0 -> libwebkitgtk-3.0.so.0.13.2
+         libwebkitgtk-python-1.0.so.0 -> libwebkitgtk-python-1.0.so.0.2.0
+         libwebkitgtk-1.0.so.0 -> libwebkitgtk-1.0.so.0.13.1
+         libwebkitgtk-3.0.so.0 -> libwebkitgtk-3.0.so.0.13.1
+
+later use libwebkit3-1.8.2-1-x86_64.pkg.tar.gz. 
+
+setup also arch package 'python2-gobject' or ubuntu 'python-gi'. it should 
+privide /usr/lib/python2.7/site-packages/gi/__init__.py. 
+
+
+try this out on fedora
+
+    3  yum install pywebkitgtk
+    5  yum install which
+   11  yum install xterm
+   13  yum install tar
+   16  yum install vi
+   18  yum install git
+   19  yum list git
+   20  yum install git
+   22  yum install webkitgtk3
+   23  yum search python-g
+   24  yum search python2-g
+   25  yum search gobject
+
+   22  yum install webkitgtk3
+       pygobject3
+
