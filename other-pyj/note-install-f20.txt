@@ -242,6 +242,9 @@ install all fonts packages found on another fedora desktop
 TypeError: add_event_listener() takes exactly 5 arguments (4 given)
 
 
+add_event_listener()
+-------------------------------
+
 [lib]# grep -r add_event_listener *
 Binary file debug/usr/lib/libwebkit2gtk-3.0.so.25.4.9.debug matches
 Binary file debug/usr/lib/libwebkitgtk-3.0.so.0.19.15.debug matches
@@ -253,6 +256,111 @@ Binary file libwebkitgtk-3.0.so.0.19.15 matches
   File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 704, in addEventListener
     element.add_event_listener(event_name, listener, False)
 TypeError: add_event_listener() takes exactly 5 arguments (4 given)
+
+
+modify pyjs/runners/giwebkit.py
+add Nont to add_event_listener at 693, 704:
+    691     def addWindowEventListener(self, event_name, cb):
+    692         listener = Callback(self, cb, True)
+    693         self._wnd.add_event_listener(event_name, listener, False, None)
+    694         #TODO: this can probably just be removed now?
+    695         # if not, MUST USE WEAKREFS OR IT WILL LEAK!
+    696         self.listeners[listener] = self._wnd
+    ...
+    702     def addEventListener(self, element, event_name, cb):
+    703         listener = Callback(element, cb, False)
+    704         element.add_event_listener(event_name, listener, False, None)
+    705         #TODO: this can probably just be removed now?
+    706         # if not, MUST USE WEAKREFS OR IT WILL LEAK!
+    707         self.listeners[listener] = element
+
+$ cat ../../senv 
+PYTHONPATH=/home/pyjs/pyjstest/pyjsroot:/lib/python2.7/site-packages
+$ source ../../senv 
+$ ../../mypy/bin/python Hello.py 
+
+error when moving mouse into the window or to the button in the window:
+TypeError: __call__() takes exactly 3 arguments (1 given)
+
+
+modify: give Callback.__call__ default argument values of None:
+    465 class Callback(object):
+    ...
+    472     ###def __call__(self, sender, event):
+    473     def __call__(self, sender=None, event=None):
+    474         try:
+    475             return self.cb(self.sender, event, self.boolparam)
+    476         except:
+    477             print_exc()
+    478             return None
+error:
+Traceback (most recent call last):
+  File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 475, in __call__
+    return self.cb(self.sender, event, self.boolparam)
+  File "/home/pyjs/pyjstest/pyjsroot/pyjswidgets/pyjamas/DOM.py", line 184, in browser_event_cb
+    event = wnd().event
+  File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 411, in __call__
+    return self.getattr(inst, key)
+  File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 422, in getattr
+    inst.__class__.__name__, key))
+AttributeError: 'DOMDOMWindow' object has no attribute 'event'
+Segmentation fault
+
+
+modify: add "FakeEvent" return:
+    414     def getattr(self, inst, key):
+    415         for impl in (self.getattr_gi, self.getattr_w3):
+    416             attr = impl(inst, key)
+    417             if attr is not self.NONE:
+    418                 logger.debug('%s:%s.%s', impl.__name__,
+    419                     inst.__class__.__name__, key)
+    420                 return attr
+    421         return "FakeEvent"
+    422         raise AttributeError('%r object has no attribute %r' % (
+    423                                     inst.__class__.__name__, key))
+error:
+Traceback (most recent call last):
+  File "/home/pyjs/pyjstest/pyjsroot/pyjs/runners/giwebkit.py", line 476, in __call__
+    return self.cb(self.sender, event, self.boolparam)
+  File "/home/pyjs/pyjstest/pyjsroot/pyjswidgets/pyjamas/DOM.py", line 192, in browser_event_cb
+    et = eventGetType(event)
+  File "/home/pyjs/pyjstest/pyjsroot/pyjswidgets/pyjamas/DOM.py", line 424, in eventGetType
+    return event.type
+AttributeError: 'str' object has no attribute 'type'
+Segmentation fault
+
+
+the crashing code: pyjswidgets/pyjamas/DOM.py
+
+    179 def browser_event_cb(view, event, from_window):
+    180 
+    181     global sCaptureElem
+    182     #print "sCaptureElem", sCaptureElem
+    183     if event is None:
+    184         event = wnd().event
+    185     else:
+    186         try:
+    187             event = get_main_frame().gobject_wrap(event) # webkit HACK!
+    188         except:
+    189             pass
+    190 
+    191     #print "browser_event_cb", event
+    192     et = eventGetType(event)
+    193     #print "browser_event_cb", event, et
+    194     if et == "resize":
+    195         onResize()
+    196         return
+    197     if et == 'mouseout':
+    198         #print "mouse out", event
+    199         _dispatchCapturedMouseoutEvent(event)
+    200     if (et == 'keyup' or et == 'keydown' or
+    201           et == 'keypress' or et == 'change'):
+    202         return _dispatchCapturedEvent(event)
+    203     else:
+    204         return _dispatchCapturedMouseEvent(event)
+    ...
+    423 def eventGetType(event):
+    424     return event.type
 
 
 summary
@@ -269,8 +377,266 @@ reference about add_event_listener
 pyjs.org user list
 
 Sarvi Shanmugham 	
+13/10/2013
+In which case I don't have anyway to test how my restructuring has impacted pyjamas-desktop.
+
+Could I trouble you to quickly see if pyjamas-Desktop works with my directory restructuring at https://github.com/sarvi/pyjs
+
+Sarvi
+
+
+Lex Berezhny 	
+15/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+I had a lengthy conversation with Anthony today about the layout and we made a bunch of updates to the wiki doc.
+
+Everyone should take a look and provide feedback:
+https://github.com/pyjs/pyjs/wiki/The-Grand-Schism
+
+I will try to explain some of the decisions:
+
+1. In an effort to keep a flatter namespace for users we decided that all of the user modules should be at the root of pyjs. So that it is possible to do things like:
+
+from pyjs.dom import Div,Table, Tr, Td
+from pyjs.ajax import AjaxComms
+from pyjs.storage import LocalStorage
+
+The above is similar to how Django has flattened their namespace.
+
+2. Initially we had the runtimes and translator at the root as well but we felt that since it's never meant to be imported by users it shouldn't pollute the namespace. We moved it into core and then to really make the point made it a private module with an underscore (this means that "from pyjs import *" will not import _core).
+
+3. The names of the two modules in _core are named to match up with eventual pyjs sub commands.
+
+pyjs run app.MyApp
+pyjs translate app.MyApp
+
+
+Finally, one thing that came up that I don't think has been discussed before is what version of Python is stdlib supposed to target?
+
+Another thing I would like to discuss is using the built-in python ast library and eliminating the parsing code that's currently in pyjs. Less code == less bugs. This would also make the translator code much simpler to read and work on.
+
+ - lex 
+
+
+C Anthony Risinger 	
+16/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+it's merged and works fine; ATM it's not the default and you have to manually enable it with ..pyjd/pyjdrc:
+
+[gui]
+engine=giwebkit
+
+...it could pretty easily auto-detect, or just try to import all three...
+
+it needs addEventListener to be impl'd in ctypes (or cffi, but ctypes is stdlib) to be useful -- i started this 2 nights ago and got about 1/2 thru.  i'll be at the in-laws all weekend tho and i usually get pretty good chunks of time there (since the kiddo spends time with Nana :) so my plan was to finish this weekend if possible.
+
+the pythonwebkit stuff AFAIK is completely broken for about 2-3 years now... i thought i removed all refs to it, but maybe i only removed wiki stuff; will recheck.
+^^^ this, and don't bother with pythonwebkit at all... it's massively out-of-date and won't build against current libs without at least 5 patches i know of, and probably several more i don't.
+
+TBH, i've never tried the giwebkit stuff on Mac, as i don't have access to such machine; i'm not aware of any inherent reasons preventing it from working tho... it does require GTK[23] and GObject Introspection libraries, so long as those work on a Mac it would probably work.
+
+i plan on testing your stuff tonight tho, i just didn't quite get to it last night (though i got most of the way there).
+
+...
+yes i agree -- this layout is just a super-high-level/coarse-grained overview of where it's heading -- my meta_path work will be merged before any of this, and that transparently handles aliasing old code.
+
+IOW: it'll be fully back-compat and any existing code should continue to work (native or translated)
+
+C Anthony 
+
+
+Sarvi Shanmugham 	
+16/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+Can you point me to some documentation on how to get this giwebkit compiling 
+from scratch so that I can give it a go on the mac.
+
+So far in looking for document I have been confused between
+  pywebkitgtk, then pythonwebkit and no giwebkit
+
+pywebkitgtk is a standard port I can find in my mac port repo
+From what I read pythonwebkit is an old branch of webkit with luke's python changes/wrappers.
+
+what is this giwebkit? Is it a standard part of webkit? or is it a branch of like pythonwebkit?
+
+Sarvi
+
+
+C Anthony Risinger 	
+16/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+On Wed, Oct 16, 2013 at 1:00 PM, Sarvi Shanmugham <sarv...@gmail.com> wrote:
+
+    Can you point me to some documentation on how to get this giwebkit compiling 
+    from scratch so that I can give it a go on the mac.
+
+    So far in looking for document I have been confused between
+      pywebkitgtk, then pythonwebkit and no giwebkit
+
+    pywebkitgtk is a standard port I can find in my mac port repo
+    From what I read pythonwebkit is an old branch of webkit with luke's python changes/wrappers.
+
+    what is this giwebkit? Is it a standard part of webkit? or is it a branch of like pythonwebkit?
+
+
+ * pywebkitgtk is (was?) a python binding to webkitgtk that i think uses pygtk2
+ * pythonwebkit is webkitgtk + luke's patches for direct python bindings
+ * giwebkit is `pyjs/runners/giwebkit.py` (a dynamic binding to a GI-enabled webkitgtk build)
+
+...`giwebkit` is just the name i gave it, but it should work out-of-the box with any recent (last 2 yrs or so) webkitgtk build so long as it was built with `--enable-introspection`
+
+the missing piece (addEventListener) is used pretty early so it might fail to boot, but it should be pretty easy to temporarily fake it.
+
+from python you must be able to do this:
+    from gi.repository import WebKit
+
+you need [upstream!] GTK3 and webkitgtk (libwebkitgtk-3.0.so.*) to make it work.
+
+
+Sarvi Shanmugham 	
+16/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+- show quoted text -
+I see the following 2 choices in mac ports. From my read of pyjs/runners/giwebkit.py
+I think I need the following
+----------------
+localhost:pyjs sarvi$ sudo port info webkit-gtk3
+webkit-gtk3 @2.0.4_2 (www, gnome)
+Variants:             quartz, universal, [+]video
+
+Description:          Apple's WebKit HTML rendering library for GTK+
+Homepage:             http://webkitgtk.org/
+
+Extract Dependencies: xz
+Build Dependencies:   gtk-doc, pkgconfig, autoconf, automake, libtool
+Library Dependencies: glib2, bison, flex, enchant, geoclue, gobject-introspection, harfbuzz-icu, libxslt, libpng, libsecret, libsoup, mesa,
+                      sqlite3, webp, xorg-libXt, gtk3, gstreamer1-gst-plugins-base
+Platforms:            darwin, freebsd
+License:              LGPL-2+ BSD
+Maintainers:          jere...@macports.org, dev...@macports.org
+------------
+
+So It looks like I should be picking the later i.e "sudo port info webkit-gtk3"
+
+So I can go ahead and install this and don't have to patch it before compiling right?
+
+After I install webkit-gtk3, and lets say I have the latest pyjs sources from git.
+What else do I need to do?
+
+Sarvi
+PS: If I get this to work, I promise I will do the documentation for pyjd on MacOS
+
+
+Sarvi Shanmugham 	
 17/10/2013
 Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+Well I almost got it up. keyword being almost :-)
+
+I got webkit-gtk3 +quartz installed
+I am able to do 
+import gi 
+from python
+
+Had a to a little tweek in pyjd/__init__.py to add the paths pyjswidgets and pyjsaddons into sys.path
+...
+DEBUG:pyjs.runners.giwebkit:sub-frame: <WebFrame object at 0x15108a1e0 (WebKitWebFrame at 0x7ff43a874e80)>
+Traceback (most recent call last):
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 588, in _frame_loaded_cb
+    self._doc.ctx = self
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 409, in __call__
+    self.setattr(inst, key, attr)
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 456, in setattr
+    inst.set_data(key, attr)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gi/overrides/GObject.py", line 590, in _unsupported_data_method
+    raise RuntimeError('Data access methods are unsupported. '
+RuntimeError: Data access methods are unsupported. Use normal Python attributes instead
+
+
+Sarvi Shanmugham 	
+17/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+Found this
+http://comments.gmane.org/gmane.linux.laptop.olpc.sugar/39321
+https://bugzilla.gnome.org/show_bug.cgi?id=641944
+
+Which talks about the issue and a change in the gobject API
+
+Sarvi
+
+
+C Anthony Risinger 	
+17/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+On Thu, Oct 17, 2013 at 4:50 AM, Sarvi Shanmugham <sarv...@gmail.com> wrote:
+
+    Found this
+    http://comments.gmane.org/gmane.linux.laptop.olpc.sugar/39321
+    https://bugzilla.gnome.org/show_bug.cgi?id=641944
+
+    Which talks about the issue and a change in the gobject API
+
+ah dang, thanks for the link.
+
+i'll have to update the backend then... there wasn't a reason i used the set/get methods other than i thought they might be more stable...
+
+if you change:
+
+    def setattr(self, inst, key, attr):
+        # hasattr() *specifically* chosen because it calls getattr()
+        # internally, possibly setting a proxy object; if True, super()
+        # will then properly setattr() against the proxy or instance.
+        if hasattr(inst, key):
+            super(self._type_gi, inst).__setattr__(key, attr)
+        else:
+            inst.set_data(key, attr)
+            logger.debug('setattr(inst, %r, attr):\n%s', key,
+                pformat([('inst', inst), ('attr', attr)]))
+...to:
+    def setattr(self, inst, key, attr):
+        self.getattr(inst, key)
+        super(self._type_gi, inst).__setattr__(key, attr)
+
+...i think it will probably work.
+
+the good news is you seem to be up and running! any issue from here is ours... i was a bit skeptical this would work at all, but you're way past that.
+
+-- 
+
+C Anthony
+
+    def setattr(self, inst, key, attr):
+        # hasattr() *specifically* chosen because it calls getattr()
+        # internally, possibly setting a proxy object; if True, super()
+        # will then properly setattr() against the proxy or instance.
+        hasattr(inst, key)
+        super(self._type_gi, inst).__setattr__(key, attr)
+
+...the "empty" call to hasattr is purely to trigger the creation of a proxy object, if need be.
+
+C Anthony
+
+
+Sarvi Shanmugham 	
+17/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+The second one got me pas that error and I hit the following which I suspect is related to the lack of EventListener support
+
+DEBUG:pyjs.runners.giwebkit:sub-frame: <WebFrame object at 0x1510481e0 (WebKitWebFrame at 0x7fbae4009840)>
+Traceback (most recent call last):
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 603, in _frame_loaded_cb
+    __pyjamas__.set_main_frame(self)
+  File "/Users/sarvi/Workspace/pyjs/pyjswidgets/__pyjamas__.py", line 38, in set_main_frame
+    DOM.init()
+  File "/Users/sarvi/Workspace/pyjs/pyjswidgets/pyjamas/DOM.py", line 83, in init
+    mf._addWindowEventListener("click", browser_event_cb)
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 687, in addWindowEventListener
+    listener = WebKit.dom_create_event_listener(cb._callback, None)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gi/module.py", line 313, in __getattr__
+    return getattr(self._introspection_module, name)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gi/module.py", line 134, in __getattr__
+    self.__name__, name))
+AttributeError: 'gi.repository.WebKit' object has no attribute 'dom_create_event_listener'
+
 I don't see a dom_create_event_listener in the webkit DOMWindow.idl below
 https://github.com/WebKit/webkit/blob/master/Source/WebCore/page/DOMWindow.idl
 
@@ -293,6 +659,7 @@ Is the above what you were looking for?
 
 https://bugs.webkit.org/show_bug.cgi?id=77835
 
+
 C Anthony Risinger 	
 17/10/2013
 Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
@@ -305,6 +672,60 @@ If you just change the function to skip that stuff (possibly by just `pass`ing i
 I plan to wrap up the ctypes stuff over the weekend... I'll be at the in-laws house with my chromebook, but VPN+SSH usually let's me work all the same.
 
 C Anthony [mobile]
+
+
+C Anthony Risinger 	
+17/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+the goog news is add_event_listener REALLY does work, the problem is the handler doesn't recieve any args.  i know what the problem is, and i'm pretty sure there is a solution using PyGI's overrides system, but i'll have to look at that later... FTW, i somewhat described the issue last year, here:
+
+https://bugs.webkit.org/show_bug.cgi?id=77835#c16
+
+...it relates to the fact that a GCallback (before casting) doesn't receive any args, therefore PyGI doesn't send any.
+
+RE: the `app` issue, honestly i don't know how that worked before... more than likely i changed the global from app -> context at the last second and never tested it before committing, but i promise you, this thing worked at one point :)
+
+so, even though event handling is busted, and will cause a segfault, you should be able to do this:
+
+# cd examples/kitchensink/
+# ../../bin/pyjd KitchenSink.py
+
+...and see the example in all it's glory. you must be in the proper directory else it won't find the template HTML file. mousing over the window will lead to a segfault until i figure out how to tell PyGI which args to expect for a handler... i know it can be done by modifying the annotation in the source (as i demonstrated in the link above), but obviously we don't want to do that because then you have to recompile webkit for a very stupid reason.
+
+i may have time tonight to look into this, otherwise i'l have to punt until the weekend, but feel free to explore until then! this is probably the final hurdle to a fully out-of-the-box solution for Linux (and apparently MacOS!)
+
+C Anthony
+
+
+Sarvi Shanmugham 	
+26/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+Was the addlistener problem fixed for the pyjamas-desktop with your recent commits?
+Are you able to run examples from pyajamas-desktop using giwebkit?
+
+I was able to run examples/helloworld
+sarvi-mac:helloworld sarvi$ ../../lpython/bin/python HelloWorld.py
+
+But the KitchenSink still fails for the addlistener
+
+sarvi-mac:kitchensink sarvi$ ../../lpython/bin/python KitchenSink.py 
+...
+DEBUG:pyjs.runners.giwebkit:sub-frame: <WebFrame object at 0x149894b40 (WebKitWebFrame at 0x7fcc2a023c40)>
+Traceback (most recent call last):
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 608, in _frame_loaded_cb
+    __pyjamas__.set_main_frame(self)
+  File "/Users/sarvi/Workspace/pyjs/pyjswidgets/__pyjamas__.py", line 38, in set_main_frame
+    DOM.init()
+  File "/Users/sarvi/Workspace/pyjs/pyjswidgets/pyjamas/DOM.py", line 83, in init
+    mf._addWindowEventListener("click", browser_event_cb)
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 692, in addWindowEventListener
+    self._wnd.add_event_listener(event_name, listener, False, None)
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 410, in __call__
+    return self.getattr(inst, key)
+  File "/Users/sarvi/Workspace/pyjs/pyjs/runners/giwebkit.py", line 421, in getattr
+    inst.__class__.__name__, key))
+AttributeError: 'DOMDOMWindow' object has no attribute 'add_event_listener'
+
 
 Sarvi Shanmugham 	
 28/10/2013
@@ -323,6 +744,46 @@ they have connect() API in them.
 I am gonna look at fixing this later this evening. Was just hoping you could throw some context on why add_event_listener and why not connect() ?
 
 Sarvi
+
+
+C Anthony Risinger 	
+28/10/2013
+Re: [pyjs-users] Re: pyjamas-desktop on MacOS - Need help from the whoever got pythonwebkit running on Ubuntu
+On Mon, Oct 28, 2013 at 1:55 PM, Sarvi Shanmugham <sarv...@gmail.com> wrote:
+
+    Hi Anthony,
+         I've been reading up on how to fix this add_event_listener problem and I came across a thread from you on the topic
+    https://lists.webkit.org/pipermail/webkit-gtk/2012-February/000936.html
+    Yet I can't seem to find any documentation on this add_event_listener API
+ 
+yeah for the most part there isn't much info out there :( the GObject stuff is pretty much 1-to-1 with DOM spec though, except using GObject naming convention, ie. underscores vs. .
+
+    On the other hand I found this
+    http://python-gtk-3-tutorial.readthedocs.org/en/latest/introduction.html
+    which seems to be using connect() to add the listeners to both the GTK level window objects as well
+    Webkit objects link links, docs, etc. I also noticed while debugging the Window and Document objects in runners.giwebkit 
+    they have connect() API in them.
+
+those objects have a connect() method IIRC because they are high-level obects that interact with other GTK3 objects, but i don't think everything does.
+
+    I am gonna look at fixing this later this evening. Was just hoping you could throw some context on why add_event_listener and why not connect() ?
+
+there is some race problems due to events coming from GTK3 instead of WebKit, though to be honest, i can't expand much more than that.  additionally, i believe the GTK3 connect() stuff would require all objects to register for all events ahead of time(!)... IIRC this was a limitation of the GTK3 framework that "might be addressed" at some point.  if you search the pyjamas-dev archives you can probably dredge up at least 10-20 pages of Luke rampaging about it, among other related things ;)
+
+i'm actually on my way out of the office so i hope this isn't too terse, i mainly wanted to catch you early so you don't waste any time on this... because as of:
+
+http://trac.webkit.org/changeset/157918
+
+...we no longer have a problem :) after i tried to get it working the other day, and discovered it was supposedly "fixed", i sort of raged on them myself:
+
+https://bugs.webkit.org/show_bug.cgi?id=114980#c9
+https://bugs.webkit.org/show_bug.cgi?id=77835#c52
+ 
+...but lo and behold, the patch we need was merged 4 days later, so the next release should have everything we need to implement this runtime using vanilla upstream sources, and hence should soon work properly in all modern distros (and probably Mac too!).
+
+-- 
+
+C Anthony
 
 
 
