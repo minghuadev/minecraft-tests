@@ -797,4 +797,13 @@ https://bugs.webkit.org/show_bug.cgi?id=77835#c52
 C Anthony
 
 
+summary links:
+17/10: https://bugs.webkit.org/show_bug.cgi?id=77835#c16
+28/10: https://lists.webkit.org/pipermail/webkit-gtk/2012-February/000936.html
+       http://trac.webkit.org/changeset/157918
+       https://bugs.webkit.org/show_bug.cgi?id=114980#c9
+       https://bugs.webkit.org/show_bug.cgi?id=77835#c52
+
+the patch is not in webkitgtk3-2.2.7. it is in 2.3.1 and later.
+
 
