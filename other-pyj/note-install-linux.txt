@@ -5,6 +5,29 @@ note-install-linux.txt
 
 
 
+Linux browser build
+=====================
+
+   cd /home/pyjs/pyjstest/
+   tar zxf pyjs-564cf5f.tgz 
+   mv pyjs-564cf5f/ pyjsroot
+
+   tar zxf virtualenv-1.11.4.tgz 
+   cd virtualenv-1.11.4
+   python virtualenv.py /home/pyjs/pyjstest/pyjsroot/mypy
+   cd ..
+
+   cd pyjsroot/
+   mypy/bin/pip install /home/pyjs/pyjstest/pyjsroot
+
+   cd examples/
+   cd helloworld
+   ../../mypy/bin/pyjsbuild Hello.py 
+
+in browser open the result in output/
+
+
+
 Linux hulahop
 ===============
 

@@ -371,7 +371,7 @@ the crashing code: pyjswidgets/pyjamas/DOM.py
 summary
 -----------
 
-still crash a lot. either add_event_listener() not right (filled the 4th with False) or 
+still crash a lot. either add_event_listener() not right (filled the 4th with None) or 
 another api is not right.
 
 
@@ -379,7 +379,13 @@ another api is not right.
 reference about add_event_listener
 ====================================
 
+webkit ref
+------------
+http://webkitgtk.org/reference/webkitdomgtk/stable/WebKitDOMEventTarget.html#webkit-dom-event-target-add-event-listener
+
+
 pyjs.org user list
+--------------------
 
 Sarvi Shanmugham 	
 13/10/2013
