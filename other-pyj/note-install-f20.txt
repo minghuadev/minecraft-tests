@@ -26,6 +26,7 @@ other packages installed later
    53  yum install python-pudb
 
 
+
 pyjs.org install
 ===================
 
@@ -39,6 +40,10 @@ $ pwd
 /home/pyjs/pyjstest/pyjsroot
 $ mypy/bin/pip install /home/pyjs/pyjstest/pyjsroot 
 
+
+
+pyjs.org desktop run
+======================
 
 test run one -- crash
 -----------------------

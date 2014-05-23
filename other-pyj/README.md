@@ -14,6 +14,10 @@ List of files
 * note-install-f20.txt note-install-f20-fonts.txt
  * install on fedora 20
 
+* arc
+ * stable pyjs packages and virtualenv.
+
+
 
 Fork pyjx
 ===============
