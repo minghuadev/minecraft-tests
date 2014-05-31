@@ -1,0 +1,65 @@
+
+debuginfo-install at-spi2-atk-2.10.2-1.fc20.i686 at-spi2-core-2.10.2-1.fc20.i686 atk-2.10.0-1.fc20.i686 \
+    cairo-1.13.1-0.1.git337ab1f.fc20.i686 cairo-gobject-1.13.1-0.1.git337ab1f.fc20.i686 \
+    dbus-libs-1.6.12-8.fc20.i686 enchant-1.6.0-7.fc20.i686 expat-2.1.0-7.fc20.i686 \
+    fontconfig-2.11.0-1.fc20.i686 freetype-2.5.0-5.fc20.i686 \
+    gdk-pixbuf2-2.30.3-1.fc20.i686 glib-networking-2.38.2-1.fc20.i686 glib2-2.38.2-2.fc20.i686 \
+    glibc-2.18-12.fc20.i686 gobject-introspection-1.38.0-1.fc20.i686 \
+    gstreamer1-1.2.3-1.fc20.i686 gstreamer1-plugins-base-1.2.3-1.fc20.i686 \
+    gtk3-3.10.9-1.fc20.i686 harfbuzz-0.9.27-1.fc20.i686 harfbuzz-icu-0.9.27-1.fc20.i686 \
+    hunspell-1.3.2-14.fc20.i686 \
+    keyutils-libs-1.5.9-1.fc20.i686 krb5-libs-1.11.5-5.fc20.i686 \
+    libICE-1.0.8-6.fc20.i686 libSM-1.2.1-6.fc20.i686 libX11-1.6.1-1.fc20.i686 \
+    libXau-1.0.8-2.fc20.i686 libXcomposite-0.4.4-4.fc20.i686 libXcursor-1.1.14-2.fc20.i686 \
+    libXdamage-1.1.4-4.fc20.i686 libXext-1.3.2-2.fc20.i686 libXfixes-5.0.1-2.fc20.i686 \
+    libXi-1.7.2-2.fc20.i686 libXinerama-1.1.3-2.fc20.i686 libXrandr-1.4.1-2.fc20.i686 \
+    libXrender-0.9.8-2.fc20.i686 libXt-1.1.4-7.fc20.i686 \
+    libXxf86vm-1.1.3-2.fc20.i686 \
+    libcom_err-1.42.8-3.fc20.i686 libdrm-2.4.54-1.fc20.i686 libffi-3.0.13-5.fc20.i686 \
+    libgcc-4.8.2-7.fc20.i686 libgcrypt-1.5.3-2.fc20.i686 libgpg-error-1.12-1.fc20.i686 \
+    libicu-50.1.2-10.fc20.i686 libjpeg-turbo-1.3.1-2.fc20.i686 libmodman-2.0.1-7.fc20.i686 \
+    libpng-1.6.3-3.fc20.i686 libproxy-0.4.11-8.fc20.i686 libsecret-0.16-1.fc20.i686 \
+    libselinux-2.2.1-6.fc20.i686 libsoup-2.44.2-1.fc20.i686 libstdc++-4.8.2-7.fc20.i686 \
+    libuuid-2.24.2-1.fc20.i686 libwayland-client-1.2.0-3.fc20.i686 \
+    libwayland-cursor-1.2.0-3.fc20.i686 libwayland-server-1.2.0-3.fc20.i686 \
+    libwebp-0.3.1-3.fc20.i686 libxcb-1.9.1-3.fc20.i686 libxkbcommon-0.3.1-1.fc20.i686 \
+    libxml2-2.9.1-2.fc20.i686 libxslt-1.1.28-5.fc20.i686 \
+    mesa-libEGL-10.1.3-1.20140509.fc20.i686 mesa-libGL-10.1.3-1.20140509.fc20.i686 \
+    mesa-libgbm-10.1.3-1.20140509.fc20.i686 mesa-libglapi-10.1.3-1.20140509.fc20.i686 \
+    openssl-libs-1.0.1e-37.fc20.1.i686 orc-0.4.18-1.fc20.i686 pango-1.36.1-3.fc20.i686 \
+    pcre-8.33-4.fc20.i686 pixman-0.30.0-3.fc20.i686 pygobject3-base-3.13.1-1.fc20.i686 \
+    python-libs-2.7.5-11.fc20.i686 sqlite-3.8.4.3-1.fc20.i686 \
+    systemd-libs-208-16.fc20.i686 webkitgtk3-2.4.2-4.fc20.i686 \
+    xz-libs-5.1.2-8alpha.fc20.i686 zlib-1.2.8-3.fc20.i686
+
+
+debuginfo-install python-libs-2.7.5-11.fc20.i686
+
+Installing:
+ bzip2-debuginfo            i686   1.0.6-9.fc20         fedora-debuginfo  126 k
+ expat-debuginfo            i686   2.1.0-7.fc20         fedora-debuginfo  191 k
+ gdbm-debuginfo             i686   1.10-7.fc20          fedora-debuginfo  105 k
+ glibc-debuginfo            i686   2.18-12.fc20         updates-debuginfo  11 M
+ libdb-debuginfo            i686   5.3.28-1.fc20        fedora-debuginfo  9.9 M
+ libffi-debuginfo           i686   3.0.13-5.fc20        fedora-debuginfo  104 k
+ ncurses-debuginfo          i686   5.9-12.20130511.fc20 fedora-debuginfo  1.1 M
+ openssl-debuginfo          i686   1:1.0.1e-37.fc20.1   updates-debuginfo 3.4 M
+ python-debuginfo           i686   2.7.5-11.fc20        updates-debuginfo 6.4 M
+ readline-debuginfo         i686   6.2-8.fc20           fedora-debuginfo  334 k
+ sqlite-debuginfo           i686   3.8.4.3-1.fc20       updates-debuginfo 4.1 M
+ yum-plugin-auto-update-debug-info
+                            noarch 1.1.31-20.fc20       updates            22 k
+ zlib-debuginfo             i686   1.2.8-3.fc20         fedora-debuginfo  241 k
+Installing for dependencies:
+ glibc-debuginfo-common     i686   2.18-12.fc20         updates-debuginfo 7.6 M
+
+
+debuginfo-install pygobject3-base-3.13.1-1.fc20.i686 
+
+Installing:
+ glib2-debuginfo                  i686  2.38.2-2.fc20   fedora-debuginfo  6.2 M
+ gobject-introspection-debuginfo  i686  1.38.0-1.fc20   fedora-debuginfo  589 k
+ pygobject3-debuginfo             i686  3.13.1-1.fc20   pygo3             514 k
+
+
+

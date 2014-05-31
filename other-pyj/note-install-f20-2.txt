@@ -1,0 +1,276 @@
+#!/bin/bash
+#senv -- invoke python
+
+export PYTHONPATH=/home/pyjs/pyjstest/pyjsroot:\
+/home/pyjs/pyjstest/pyjsroot/mypy/lib/python2.7/site-packages:\
+/lib/python2.7/site-packages \
+
+#gdb --args ../../mypy/bin/python Hello.py
+ ../../mypy/bin/python Hello.py
+# python Hello.py
+
+
+exit 0
+
+
+"../../pyjs/runners/giwebkit.py"
+
+    499 class RunnerContext(object):
+    500 
+    501     platform = 'webkit'
+    502     uri = 'about:blank'
+    503     #TODO: rename, accidentally removed?
+    504     appdir = None
+    505     width = 800
+    506     height = 600
+    507     # TODO: change WebKit patch to hold reference
+    508     listeners = None
+    509 
+    510     def __init__(self):
+    511         self.listeners = dict()
+
+    704     def addWindowEventListener(self, event_name, cb):
+    705         listener = Callback(self, cb, True)
+    706         self._wnd.add_event_listener(event_name, listener, False)
+    707         #TODO: this can probably just be removed now?
+    708         # if not, MUST USE WEAKREFS OR IT WILL LEAK!
+    709         self.listeners[listener] = self._wnd
+
+    732     _alert = alert
+    733     _addEventListener = addEventListener
+    734     _addWindowEventListener = addWindowEventListener
+    735     _addXMLHttpRequestEventListener = addXMLHttpRequestEventListener
+
+    461     def _key_gi(self, key):
+    462         return self.UPPER.sub(r'_\1', key).lower()
+    463 
+    464 
+    465 class CallbackEvent(object):
+    466 
+    467     def __init__(self, sender):
+    468         self.sender = sender
+    469         self.type = "button"
+    470 
+    471 class Callback(object):
+    472 
+    473     def __init__(self, sender, cb, boolparam):
+    474         self.sender = sender
+    475         self.cb = cb
+    476         self.boolparam = boolparam
+    477 
+    478     def __call__(self, sender=None, event=None):
+    479         if event is None:
+    480             print "Callback __call__ gets no event reference"
+    481             event = CallbackEvent(sender)
+    482             return self
+    483         print "Callback __call__ gets yes event reference"
+    484         try:
+    485             #return self.cb(self.sender, event, self.boolparam)
+    486             self.cb(self.sender, event, self.boolparam)
+    487             return True
+    488         except:
+    489             print_exc()
+    490             return None
+    491 
+    492 
+    493 class ApplicationFrame(object):
+    494 
+    495     #TODO: split RunnerContext (multi-frame support)
+
+
+#0x77e63de7 in PyObject_Call () from /lib/libpython2.7.so.1.0
+
+Program received signal SIGSEGV, Segmentation fault.
+PyObject_Call (func=func@entry=0x0, arg=arg@entry=(), kw=kw@entry=0x0)
+    at /usr/src/debug/Python-2.7.5/Objects/abstract.c:2525
+2525        if ((call = func->ob_type->tp_call) != NULL) {
+
+(gdb) list
+2520    PyObject *
+2521    PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw)
+2522    {
+2523        ternaryfunc call;
+2524
+2525        if ((call = func->ob_type->tp_call) != NULL) {
+2526            PyObject *result;
+2527            if (Py_EnterRecursiveCall(" while calling a Python object"))
+2528                return NULL;
+2529            result = (*call)(func, arg, kw);
+(gdb) print func
+$1 = 0x0
+(gdb) print arg
+$2 = ()
+
+(gdb) up
+#1  0x77efb3b3 in PyEval_CallObjectWithKeywords (func=func@entry=0x0, 
+    arg=arg@entry=(), kw=kw@entry=0x0)
+    at /usr/src/debug/Python-2.7.5/Python/ceval.c:3967
+3967        result = PyObject_Call(func, arg, kw);
+
+3939    /* External interface to call any callable object.
+3940       The arg must be a tuple or NULL.  The kw must be a dict or NULL. */
+3941
+3942    PyObject *
+3943    PyEval_CallObjectWithKeywords(PyObject *func, PyObject *arg, PyObject *kw)
+3944    {
+(gdb) list
+
+(gdb) up
+#2  0x77e63dbc in PyObject_CallObject (o=0x0, a=())
+    at /usr/src/debug/Python-2.7.5/Objects/abstract.c:2517
+2517        return PyEval_CallObjectWithKeywords(o, a, NULL);
+(gdb) list
+2512    /* XXX PyCallable_Check() is in object.c */
+2513
+2514    PyObject *
+2515    PyObject_CallObject(PyObject *o, PyObject *a)
+2516    {
+2517        return PyEval_CallObjectWithKeywords(o, a, NULL);
+2518    }
+
+(gdb) up
+#3  0x775be1db in _pygi_closure_handle (cif=0x852503c, result=0x7fffe0d0, 
+    args=0x7fffe080, data=0x8525030) at pygi-closure.c:588
+588         retval = PyObject_CallObject ( (PyObject *) closure->function, py_args);
+
+(gdb) list
+565     _pygi_closure_handle (ffi_cif *cif,
+566                           void    *result,
+567                           void   **args,
+568                           void    *data)
+569     {
+570         PyGILState_STATE state;
+571         PyGICClosure *closure = data;
+...
+588         retval = PyObject_CallObject ( (PyObject *) closure->function, py_args);
+589         Py_DECREF (py_args);
+
+(gdb) print *((PyGICClosure*)data)
+$2 = {info = 0x8522230, function = 0x0, closure = 0x76106058, cif = {
+    abi = FFI_SYSV, nargs = 0, arg_types = 0x8384d88, 
+    rtype = 0x7725b718 <ffi_type_void>, bytes = 0, flags = 0}, 
+  scope = GI_SCOPE_TYPE_ASYNC, user_data = 0x0}
+
+(gdb) up
+#4  0x7725b34f in ffi_closure_SYSV_inner (closure=0x76106058, 
+    respp=0x7fffe0dc, args=0x7fffe0f0) at ../src/x86/ffi.c:496
+496       (closure->fun) (cif, *respp, arg_area, closure->user_data);
+(gdb) list
+491        * a structure, it will change RESP to point to the
+492        * structure return address.  */
+493
+494       ffi_prep_incoming_args_SYSV(args, respp, arg_area, cif);
+495
+496       (closure->fun) (cif, *respp, arg_area, closure->user_data);
+497
+498       return cif->flags;
+499     }
+500     #endif /* !X86_WIN64 */
+
+478     unsigned int FFI_HIDDEN __attribute__ ((regparm(1)))
+479     ffi_closure_SYSV_inner (ffi_closure *closure, void **respp, void *args)
+480     {
+481       /* our various things...  */
+482       ffi_cif       *cif;
+483       void         **arg_area;
+
+
+
+#0  PyObject_Call (func=func@entry=0x0, arg=arg@entry=(), kw=kw@entry=0x0)
+    at /usr/src/debug/Python-2.7.5/Objects/abstract.c:2525
+
+#1  0x77efb3b3 in PyEval_CallObjectWithKeywords (func=func@entry=0x0, 
+    arg=arg@entry=(), kw=kw@entry=0x0)
+    at /usr/src/debug/Python-2.7.5/Python/ceval.c:3967
+
+#2  0x77e63dbc in PyObject_CallObject (o=0x0, a=())
+    at /usr/src/debug/Python-2.7.5/Objects/abstract.c:2517
+
+#3  0x775bd1db in _pygi_closure_handle ()
+   from /lib/python2.7/site-packages/gi/_gi.so
+#3  0x775be1db in _pygi_closure_handle (cif=0x852503c, result=0x7fffe0d0, 
+    args=0x7fffe080, data=0x8525030) at pygi-closure.c:588
+
+
+#4  0x7725a34f in ffi_closure_SYSV_inner (closure=0x77b1e058, 
+    respp=0x7fffe0dc, args=0x7fffe0f0) at ../src/x86/ffi.c:496
+
+#5  0x7725a5a2 in ffi_closure_SYSV () at ../src/x86/sysv.S:199
+#6  0x7725a4e6 in ffi_call_SYSV () at ../src/x86/sysv.S:65
+#
+
+-bash-4.2$ rpm -q -f /lib/python2.7/site-packages/gi/_gi.so
+pygobject3-base-3.13.1-1.fc20.i686
+
+-bash-4.2$ ldd /lib/python2.7/site-packages/gi/_gi.so
+ldd: warning: you do not have execution permission for `/lib/python2.7/site-packages/gi/_gi.so'
+        linux-gate.so.1 =>  (0x77789000)
+        libgthread-2.0.so.0 => /lib/libgthread-2.0.so.0 (0x77735000)
+        libgirepository-1.0.so.1 => /lib/libgirepository-1.0.so.1 (0x776fd000)
+        libgobject-2.0.so.0 => /lib/libgobject-2.0.so.0 (0x776ab000)
+        libglib-2.0.so.0 => /lib/libglib-2.0.so.0 (0x7757a000)
+        libpthread.so.0 => /lib/libpthread.so.0 (0x7755e000)
+        libc.so.6 => /lib/libc.so.6 (0x773a0000)
+        libm.so.6 => /lib/libm.so.6 (0x77359000)
+        libgmodule-2.0.so.0 => /lib/libgmodule-2.0.so.0 (0x77354000)
+        libgio-2.0.so.0 => /lib/libgio-2.0.so.0 (0x771e0000)
+        libffi.so.6 => /lib/libffi.so.6 (0x771d8000)
+        libdl.so.2 => /lib/libdl.so.2 (0x771d3000)
+        /lib/ld-linux.so.2 (0x7778a000)
+        libz.so.1 => /lib/libz.so.1 (0x771bc000)
+        libselinux.so.1 => /lib/libselinux.so.1 (0x77198000)
+        libresolv.so.2 => /lib/libresolv.so.2 (0x7717f000)
+        libpcre.so.1 => /lib/libpcre.so.1 (0x77114000)
+        liblzma.so.5 => /lib/liblzma.so.5 (0x770ea000)
+
+
+
+grep _addWindowEventListener() ...
+  pyjswidgets/pyjamas/DOM.mshtml.py:
+  pyjswidgets/pyjamas/DOM.hulahop.py:
+  pyjswidgets/pyjamas/DOM.py:    ... browser_event_cb  line 80...
+
+    733     _addEventListener = addEventListener
+    734     _addWindowEventListener = addWindowEventListener
+    735     _addXMLHttpRequestEventListener = addXMLHttpRequestEventListener
+
+
+
+http://osdir.com/ml/commits.gnome/2013-10/msg02105.html
+
+commit 73c6213e8b47fa7c4c2c7a517fe7b56126145888
+Author: Simon Feltman <sfeltman@xxxxxxxxxxxxx>
+Date: Thu Sep 26 19:05:20 2013 -0700
+
+Don't pass None to callbacks when user data is not specified
+
+For APIs which support a callback and optional user data,
+don't pass the user data to the callback if it was not explicitly
+specified when the callback was connected.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=640812
+
+
+bash-4.2# yum remove pygobject3-base
+Removing:
+ pygobject3-base        i686        3.13.1-1.fc20           @pygo3        1.1 M
+Removing for dependencies:
+ pygobject3             i686        3.13.1-1.fc20           @pygo3         10 k
+
+
+bash-4.2# yum install pygobject2
+bash-4.2# yum remove  pygobject2
+
+bash-4.2# yum install pygobject3
+
+bash-4.2# yum install python3-gobject
+
+Installing:
+ python3-gobject        i686        3.13.1-1.fc20          pygo3          301 k
+Installing for dependencies:
+ python3                i686        3.3.2-11.fc20          updates         44 k
+ python3-cairo          i686        1.10.0-6.fc20          fedora          64 k
+ python3-libs           i686        3.3.2-11.fc20          updates        6.1 M
+
+
+

@@ -1,0 +1,66 @@
+
+
+chroot fedora 21 system
+=========================
+
+rpm --root /home/pyjs/chroot-f21 --initdb
+rpm --root /home/pyjs/chroot-f21 -i fedora-release-21-0.6.noarch.rpm  fedora-release-rawhide-21-0.6.noarch.rpm
+#rpm --root /home/pyjs/chroot-f21 --import https://fedoraproject.org/static/246110C1.txt
+
+yum installroot=/home/pyjs/chroot-f21 install yum bash net-tools iputils tar passwd
+
+schroot -c pyjs ... now inside the chroot fedora 21 ...
+
+yum install which vi findutils 
+yum install xterm
+yum install pygobject3
+yum install webkitgtk3
+yum install xorg-x11-fonts-ISO8859-1-100dpi
+
+yum install  gnu-free-fonts-common
+yum install  gnu-free-mono-fonts
+yum install  gnu-free-sans-fonts
+yum install  gnu-free-serif-fonts
+
+
+
+pyjs.org install
+===================
+
+$ pwd
+/home/pyjs/pyjstest/virtualenv-1.11.4
+$ python virtualenv.py /home/pyjs/pyjstest/pyjsroot/mypy
+New python executable in /home/pyjs/pyjstest/pyjsroot/mypy/bin/python
+Installing setuptools, pip...done.
+
+$ pwd
+/home/pyjs/pyjstest/pyjsroot
+$ mypy/bin/pip install /home/pyjs/pyjstest/pyjsroot 
+
+
+
+pyjs.org desktop run
+======================
+
+$ pwd
+/home/pyjs/pyjstest/pyjsroot/examples/helloworld
+
+$ cat senv
+#!/bin/bash
+#senv -- invoke python webkit
+
+export DISPLAY=:0.0
+export PYTHONPATH=/home/pyjs/pyjstest/pyjsroot:\
+/home/pyjs/pyjstest/pyjsroot/mypy/lib/python2.7/site-packages:\
+/lib/python2.7/site-packages 
+
+# python Hello.py
+#gdb --args ../../mypy/bin/python Hello.py
+ ../../mypy/bin/python Hello.py
+
+exit 0
+
+
+run "sh senv" to invoke the desktop app.
+
+
