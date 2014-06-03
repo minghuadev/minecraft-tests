@@ -1,0 +1,105 @@
+
+
+chroot fedora 20 system
+=========================
+
+rpm --root /home/pyjs/chroot-f20 --initdb
+rpm --root /home/pyjs/chroot-f20 -i /tmp/fedora-release-20-3.noarch.rpm
+rpm --root /home/pyjs/chroot-f20 --import https://fedoraproject.org/static/246110C1.txt
+
+yum installroot=/home/pyjs/chroot-f20 install bash yum net-tools iputils passwd tar
+
+schroot -c pyjs ... now inside the chroot fedora 20 ...
+
+yum install xterm
+yum install webkitgtk3
+yum install pygobject3
+
+other packages installed later
+
+yum install which vi findutils
+
+
+
+install fonts
+================
+
+installed these which may not be required
+-------------------------------------------
+fontpackages-filesystem-1.44-9.fc20.noarch
+fontconfig-2.11.0-1.fc20.i686
+fontconfig-debuginfo-2.11.0-1.fc20.i686
+
+
+gnu-free fonts are required
+-----------------------------
+
+# yum install gnu-free-mono-fonts gnu-free-serif-fonts gnu-free-sans-fonts
+Installing:
+ gnu-free-mono-fonts        noarch      20120503-8.fc20       fedora      693 k
+ gnu-free-sans-fonts        noarch      20120503-8.fc20       fedora      1.3 M
+ gnu-free-serif-fonts       noarch      20120503-8.fc20       fedora      2.6 M
+Installing for dependencies:
+ gnu-free-fonts-common      noarch      20120503-8.fc20       fedora      128 k
+
+
+
+update webkitgtk3 2.3.1+, pygobject3 3.13.2, gobject-introspection 1.39+
+==========================================================================
+
+bash-4.2# yum update pygobject3 webkitgtk3 gobject-introspection
+Updating:
+ gobject-introspection       i686       1.40.0-2.fc20         wk3u2       228 k
+ pygobject3                  i686       3.13.2-1.fc20         wk3u2        14 k
+ webkitgtk3                  i686       2.4.3-1.fc20          wk3u2        11 M
+Updating for dependencies:
+ pygobject3-base             i686       3.13.2-1.fc20         wk3u2       296 k
+
+
+
+pyjs.org install
+===================
+
+$ pwd
+/home/pyjs/pyjstest/virtualenv-1.11.4
+$ python virtualenv.py /home/pyjs/pyjstest/pyjsroot/mypy
+New python executable in /home/pyjs/pyjstest/pyjsroot/mypy/bin/python
+Installing setuptools, pip...done.
+
+$ pwd
+/home/pyjs/pyjstest/pyjsroot
+$ mypy/bin/pip install /home/pyjs/pyjstest/pyjsroot 
+
+
+
+pyjs.org desktop run
+======================
+
+set rc
+--------
+
+$ cat ~/.pyjd/pyjdrc 
+[gui]
+engine=giwebkit
+
+
+run app using the script
+--------------------------
+
+$ cat senv 
+#!/bin/bash
+#senv -- invoke python
+
+export DISPLAY=:0.0
+export PYTHONPATH=/home/pyjs/pyjstest/pyjsroot:\
+/home/pyjs/pyjstest/pyjsroot/mypy/lib/python2.7/site-packages:\
+/lib/python2.7/site-packages
+
+# python Hello.py
+#gdb --args ../../mypy/bin/python Hello.py
+ ../../mypy/bin/python Hello.py
+
+exit 0
+
+
+
