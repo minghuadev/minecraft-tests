@@ -8,11 +8,17 @@ List of files
 * pythonwebkit-html.pdf 
  * the gnu page refered to by pywebkitgtk pyjd instruction.
 
-* note-install-linux.txt 
- * note how to install pyjs on linux. hulahop, pywebkitgtk, giwebkit.
+* note-install-linux.txt (obsolete)
+ * note how to install pyjs on linux. hulahop, pywebkitgtk, giwebkit. not verified.
 
-* note-install-f20.txt note-install-f20-fonts.txt
- * install on fedora 20
+* note-install-f20-1.txt note-install-f20-1-fonts.txt (obsolete)
+ * install on fedora 20. lots of crashes. 
+
+* note-f20-summary.txt (successful)
+ * note how to install pyjs on fedora 20 with updated webkitgtk3 gobject-introspection packages. 
+
+* note-install-f21.txt (successful)
+ * note how to install pyjs on fedora 21. 
 
 * arc
  * stable pyjs packages and virtualenv.
