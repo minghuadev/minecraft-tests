@@ -3,11 +3,11 @@
 
 export PYTHONPATH=/home/pyjs/pyjstest/pyjsroot:\
 /home/pyjs/pyjstest/pyjsroot/mypy/lib/python2.7/site-packages:\
-/lib/python2.7/site-packages \
+/lib/python2.7/site-packages 
 
+# python Hello.py
 #gdb --args ../../mypy/bin/python Hello.py
  ../../mypy/bin/python Hello.py
-# python Hello.py
 
 
 exit 0
@@ -271,6 +271,16 @@ Installing for dependencies:
  python3                i686        3.3.2-11.fc20          updates         44 k
  python3-cairo          i686        1.10.0-6.fc20          fedora          64 k
  python3-libs           i686        3.3.2-11.fc20          updates        6.1 M
+
+
+Remove python3:
+# yum remove python3-gobject python3-cairo python3 python3-libs pygobject3 pygobject3-base
+
+
+Update to new gobject-introspection (1.39 required by pygobject3-3.13.2-1):
+    pygobject3-3.13.2-1.fc21 gobject-introspection-1.40.0-2.fc21 webkitgtk3-2.4.3-1.fc21
+
+It works!
 
 
 
