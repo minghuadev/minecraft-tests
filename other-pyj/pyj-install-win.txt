@@ -1,0 +1,11 @@
+
+install python2.7
+install pywin32
+extract pyj-master.tar.gz, then
+
+C:\pyjtest\virtualenv-1.11.4>c:\python2\python.exe virtualenv.py c:\pyjtest\pyjamas\mypy
+C:\pyjtest\pyjamas>mypy\Scripts\pip.exe install c:\pyjtest\comtypes-1.0.0
+C:\pyjtest\pyjamas>mypy\Scripts\python.exe bootstrap.py c:\pyjtest\pyjamas
+C:\pyjtest\pyjamas>mypy\Scripts\python.exe run_bootstrap_first_then_pyjd_setup.py install
+
+

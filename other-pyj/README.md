@@ -23,6 +23,9 @@ List of files
 * arc
  * stable pyjs packages and virtualenv.
 
+* pyj-install-win.txt
+ * win install commands
+
 
 
 Fork pyjx
