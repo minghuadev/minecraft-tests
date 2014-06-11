@@ -26,6 +26,8 @@ List of files
 * pyj-install-win.txt
  * win install commands
 
+* pyjs-win-patch.txt
+ * win patch to make pyjs running
 
 
 Fork pyjx

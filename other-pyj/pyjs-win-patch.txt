@@ -1,0 +1,138 @@
+
+
+onCloseWindow not working in pyjd
+====================================
+https://groups.google.com/forum/#!topic/pyjs-users/wB5BQY9_ZZM
+
+
+Clavier 	
+May 15 2014
+
+I want to capture an event leaving a page or closing the current window, 
+I tried pyjamas.Window.addWindowCloseListener(), but it didn't work in pyjd 
+(MS Windows). Following is an example.
+
+from pyjamas import Window
+class CloseHandler(object):
+    def __init__(self):
+        Window.addWindowCloseListener(self)
+        Window.addWindowResizeListener(self)
+    def onWindowClosed(self):
+        Window.alert('in onWindowClosed()')
+    def onWindowClosing(self):
+        Window.alert('in onWindowClosing()')
+    def onWindowResized(self, width, height):
+        Window.alert('in onWindowResized()')
+
+In the above example, the resize event is captured, but not the other events. 
+I looked at DOM.py, ui/Event.py, and I found that window closing events were not defined. 
+
+In pyjamas/Window.py, onClosed() and onClosing() are defined, but I cannot 
+find pyjs source code calling them. Are they not implemented?
+    
+    in pyjamas/Window.py:
+
+    # TODO: call fireClosedAndCatch
+    def onClosed():
+        fireClosedImpl()
+
+    # TODO: call fireClosingAndCatch
+    def onClosing():
+        fireClosingImpl()
+
+If they are not implemented, I want to implement it for MS Windows, but I don't 
+know how to do it. Please give me advice if you know anything about it. 
+
+
+Clavier 	
+May 30 2014
+I found a way to catch the window close event.  Browser.on_unload_callback() 
+in mshtml.py catches the window close event. I modified Browser() class 
+to add event handlers, and pyjd to return the browser object created. 
+
+    import pyjd
+    from pyjamas import Window
+
+    browser=pyjd.setup(url)
+    browser.addCloseHandler(Window.onClosing)
+    
+Now,  Window.addWindowCloseListener() will catch the event:
+
+    class WindowListener:
+        def __init__(self):
+            Window.addWindowCloseListener(self)
+            Window.addWindowResizeListener(self)
+
+The current pyjs in GitHub doesn't have pyjd installation and I tested 
+the code only in the release version (pyjs0.8.1a)  You can find the code 
+in my GitHub fork (https://github.com/chopin/pyjs)
+
+
+Clavier 	
+Jun 1 2014
+pyjd.setup() returns None in pyjs mode. So, a safe way to run both in pyjs and pyjd is:
+
+    import pyjd
+    from pyjamas import Window
+    browser=pyjd.setup(url)
+    if browser:
+        browser.addCloseHandler(Window.onClosing)
+
+
+
+pyjd on windows -  Trying to make it installable with pip
+=============================================================
+https://groups.google.com/forum/#!topic/pyjs-users/I9aqeVBtq0A
+
+Clavier 	
+May 30
+On Friday, October 11, 2013 4:59:39 PM UTC+9, Sarvi Shanmugham wrote:
+
+    There is probably more work need to get pyjd complete.
+
+I tested pyjd from the latest GitHub version. It didn't work.  I found that 
+pyjd and other related directories were not copied during installation. 
+I modified the setup file so that they were copied to the target directory 
+as following.
+
+    in setup_pyjd.py (created):
+
+    packages=['pyjd', 'pyjs.runners']
+    package_data={}
+    entry_points = {}
+
+pyjd/ and pyjs.runners/ directories were copied correctly 
+(to C:\Python27\Lib\site-packages\pyjs-0.8.1-py2.7.egg\pyjs), but still 
+an error appears when importing a class in pyjamas.ui. I tried to trace down 
+this error further, but it was too complicated because pyjd intercepted 
+"import" using its own library. 
+
+I think that this problem appeared due to the modification for pip installation. 
+I hope that pyjd installation by pip is implemented soon. I am using pyjs 
+installed from GitHub version, and pyjd installed from a released version. 
+It makes really difficult to fix other bugs in pyjd in the current GitHub version. 
+
+
+
+Windows Time.mshtml is missing pyjd.threading and pyjd.add_timer_queue
+=========================================================================
+https://groups.google.com/forum/#!topic/pyjs-users/-D1lpRBCEAY
+june 10 2014
+
+Change at the end of pyjd/__init__.py:
+
+ add_setup_callback = _manager.add_setup_listener
+ setup = _manager.setup
+ run = _manager.run
++add_timer_queue = _manager.add_timer_queue
++import threading
+
+Change to pyjd/runners/__init__.py:
+
+     def run(self, *args, **kwds):
+         self._runner.run(*args, **kwds)
+ 
++    def add_timer_queue(self, *args, **kwds):
++        self._runner.add_timer_queue(*args, **kwds)
+
+
