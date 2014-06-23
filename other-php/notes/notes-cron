@@ -1,0 +1,44 @@
+
+
+To schedule your scripts to run on a periodic basis, add the scripts to 
+your application's .openshift/cron/{minutely,hourly,daily,weekly,monthly}/
+directories (and commit and redeploy your application).
+
+Example: A script .openshift/cron/hourly/crony added to your application
+         will be executed once every hour.
+         Similarly, a script .openshift/cron/weekly/chronograph added
+         to your application will be executed once every week.
+
+
+
+https://www.openshift.com/forums/openshift/what-is-the-correct-way-to-run-background-jobs-with-openshiift
+
+Add cron cartridge to your app using procedure at https://www.openshift.com/blogs/getting-started-with-cron-jobs-on-openshift
+ 
+script file in .openshift/cron/hourly/redis-check.sh containing
+#!/bin/sh
+kill -0 cat ${OPENSHIFT_RUN_DIR}redis.pid || ${OPENSHIFT_DATA_DIR}redis/bin/redis-server ${OPENSHIFT_DATA_DIR}redis/bin/redis.conf
+ 
+Then
+$ git add .openshift/cron/hourly/redis-check.sh
+$ git commit -a -m "add redis-server check cron job"
+$ git push origin
+
+https://github.com/razorinc/redis-openshift-example/issues/1#issuecomment-8227768
+
+
+
+There are two ways to view the environment variables for an application:
+
+    Add an export statement to the App_Name/.openshift/action_hooks/build file, then run git push. The variables are listed in the Git output and start with remote: declare -x.
+    Access the application with SSH and run the env command at the shell prompt. 
+
+
+
+OPENSHIFT_HOMEDIR 	The home directory of the application.
+OPENSHIFT_DATA_DIR 	A persistent data directory.
+OPENSHIFT_REPO_DIR 	Repository containing the currently deployed version of the application.
+OPENSHIFT_TMP_DIR 	A temporary directory you can use; SELinux protects data in this directory from other users.
+OPENSHIFT_LOG_DIR 	Where all cartridge logs are stored. 
+
+
