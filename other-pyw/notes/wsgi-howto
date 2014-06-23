@@ -1,0 +1,37 @@
+
+How do I use Python with apache2?
+http://askubuntu.com/questions/29152/how-do-i-use-python-with-apache2
+
+
+mod_python is basically non-maintained - you should look into mod_wsgi. 
+Install the package libapache2-mod-wsgi, then issue sudo a2enmod wsgi 
+to enable it.
+
+Just as a quick example to get it running, stuff something like this 
+in your /etc/apache2/sites-enabled/default:
+
+    WSGIScriptAlias /test /path/to/python/file.py
+
+And in the file /path/to/python/file.py:
+
+    def application(environ, start_response):
+        start_response('200 OK', [('Content-Type', 'text/plain')])
+        return "Hello World"
+
+After re-starting Apache2, any request to /test will turn into a call 
+of application() in your python file.
+
+Python (unsurprisingly) has a small WSGI server in the standard library 
+for testing. If you add this in the bottom of your file, you can run it 
+as any old executable for testing purposes, and then let Apache take over 
+for production:
+
+    if __name__ == '__main__':
+        from wsgiref.simple_server import make_server
+    
+        httpd = make_server('', 8080, application)
+        print "Serving on http://localhost:8080"
+    
+        httpd.serve_forever()
+
+
