@@ -1,4 +1,127 @@
 
 http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 
+see the pdf for the article. some discussions copied below. 
+
+
+Nick Coghlan • 2 years ago
+
+While an admirable attempt, there are a number of issues with this article 
+which are going to perpetuate confusion rather than alleviate it.
+
+1. *Using* decorators is easy, it's only writing *new ones* that can be 
+a little tricky.
+
+2. Please keep the distinction between function parameters (the name listed 
+in a function definition header) and function arguments (the values supplied 
+at call time) clear. A programmer does *not* provide parameters directly 
+at call time - they provide arguments which the interpreter then binds 
+to parameters (PEP 362 covers this in more detail).
+
+3. It's a lot easier to start by implementing a simple decorator without 
+a closure (for example, one that sets a function attribute) rather than 
+jumping straight to a complex decorator factory that relies on closures.
+
+4. Most of the article isn't about understanding decorators, it's about 
+understanding closures in general. Closures are a common implementation 
+technique for decorators and decorator factories for speed reasons, but 
+that doesn't make them a great way to introduce the necessary concepts. 
+One useful technique for teaching decorators is to show how to implement 
+a decorator factory as a class with a custom __call__ method rather than 
+as a closure. When understanding closures is treated as a prerequisite 
+for understanding decorators, then its no wonder people get confused.
+
+
+    simeon Mod Nick Coghlan • 2 years ago
+
+     Nick -
+
+    Thanks so much for reading and taking the time to reply - I really 
+    appreciate it.
+
+    1. I should mention this point. I do mention this point prominently 
+    when teaching my "Intro" class - as far as I'm concerned writing 
+    decorators using closures is an intermediate/advanced topic, but 
+    using them (classmethod/staticmethod) is very basic.
+    2. Absolutely correct - I'll edit as soon as possible.
+    3. Hmm. I hadn't thought of that - maybe because I haven't seen 
+    a (non class decorator) application. I did think about starting 
+    with a decorator that just returned an inner function that did 
+    nothing - a "pass" decorator. I'll rethink that transition from 
+    closures to decorators.
+    4. This one I'll have to push back on - I agree that decorators 
+    are easier to write and understand using classes -  and I note that 
+    in the last paragraph and link to Bruce Eckel's two part essay 
+    demonstrating oop based decorators. But understanding closures *is* 
+    a pre-requisite for understanding decorators because many decorators 
+    will be implemented with closures. If I taught only oop based 
+    decorators my students would then be baffled by most sample 
+    decorator code they encounter online...
+
+
+        Matt Harrison simeon • 2 years ago
+
+        A stripped down definition of a decorator is a callable that 
+        returns a callable. If you start from that, the identity decorator 
+        is pretty straightforward. A function (say identity_dec) that 
+        accepts a function (say func) and just returns the function (func).
+
+        def identity_dec(func): #func is a callable
+            return func #returns a callable
+
+        This definition also lends itself to using classes as decorators 
+        easily. But I think that closures are so useful that I still agree 
+        with that route (even if Eckel disagrees). Perhaps I've been 
+        reading too much functional propaganda though...
+
+
+            simeon Mod Matt Harrison • 2 years ago
+
+             Ooh. The identity decorator! Can I use that?
+
+
+        Nick Coghlan simeon • 2 years ago
+
+        Agreed on the last point - I was only suggesting OOP decorators 
+        as part of a multi step intro (annotating decorator, OOP wrapping 
+        decorator, closure based wrapping decorator). For concrete examples, 
+        functools.wraps is an annotating decorator, contextlib2.contextmanager 
+        is an OOP wrapping decorator (albeit one to turn a generator into 
+        a context manager), as are classmethod, staticmethod and property 
+        and functools.lru_cache is a closure based wrapper. Such an introduction 
+        also highlights that transformative decorators that turn a function 
+        into a different kind of object are also quite common.
+
+
+    Matt Harrison Nick Coghlan • 2 years ago
+
+    Having taught lots of people how to write decorators, I stand by the closure 
+    first approach. Yes, closures are a little mind-bending at first, but 
+    they are useful in other contexts as well.
+
+    The cognitive leap from closure to decorator is pretty small. If people 
+    grok closures, then the additional cognitive leap to a parameterized 
+    decorator isn't bad (since closures are commonly used as function factories, 
+    we are now creating a decorator factory). But yes, I agree, if you show 
+    someone a parameterized decorator first, they just read it as a jumbled mess. 
+
+    Also people with a JS background seem to be pretty comfortable with them. 
+    It's those Java people that struggle with it a little more. Using classes 
+    as decorators can be problematic as it requires descriptor understanding as well.
+
+    BTW. I agree the distinction between arguments and parameters in Python 
+    isn't made clear by most of the literature. I've tried to be clear about 
+    them in my books.
+
+
+
+Marty MacGyver • 7 months ago
+
+Concerning part 8: it'd be good to mention PEP 3104 and the whole outer 
+scope problem in Python 2.x. The example you gave works and seems 
+intuitive - but it fails when an assignment occurs in inner(), e.g., x=x+1 
+which isn't as intuitive. A brief mention of the problem and how one deals 
+with this in 2.x (such as using a list to wrap the value) or 3.x (nonlocal 
+keyword) would be quite useful for readers.
+
 
