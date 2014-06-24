@@ -1,0 +1,5 @@
+GET /lidn.txt HTTP/1.1
+Host: mysite.hosting.org
+Referrer: mypage.com
+User-Agent: my-browser
+

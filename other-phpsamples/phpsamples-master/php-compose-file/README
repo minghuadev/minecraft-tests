@@ -1,0 +1,18 @@
+
+add lf to file: 
+
+  cat req2lf | nc mysite.hosting.org 80
+
+add date to file: 
+
+  cat req1dt | nc mysite.hosting.org 80
+
+add data in req3h2 to file:
+
+  (cat req3h1 ; echo -n `cat req3h2` ; cat req3h3 ) | nc mysite.hosting.org 80
+
+show the composed file:
+
+  cat req4lidn | nc mysite.hosting.org 80
+
+
