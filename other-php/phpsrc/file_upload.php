@@ -1,6 +1,8 @@
 <?php
     // http://www.w3schools.com/php/php_file_upload.asp
 
+    session_name("upload"); session_start();
+
     $errcnt = 0;
     $debug = 0;
 
@@ -8,13 +10,60 @@
     $allowedExts = array("txt", "tgz", "<none>");
 
 do {
+    $varptype = gettype($_POST);
+    if ( $varptype != "array" ) {
+        echo "Error: _POST not an array";  echo "<br />";  $errcnt = 1;  break;
+    }
+
+    // text field value check
+    if ( ! in_array("text", array_keys($_POST) ) ) {
+        echo "Error: _POST does not have a text key";  echo "<br />";  $errcnt = 1;  break;
+    }
+    {
+        // string crypt ( string $str, string $salt )
+        //      sha256 salt: $5$ + 16 character 
+        // int    strcmp ( string $str, string $str ) : return 0 if equal
+        $rxtxt = $_POST['text'];
+        $basesalt = '$5$DTEXdghLhZCea2wV';
+        $basehash = '$5$DTEXdghLhZCea2wV$.NvcxTlULnTBjZLylFJi94rM9JQtCNGJHp..JLknbm.';
+                   //123456789 123456789 223456789 323456789 423456789 523456789 623
+        $basehashlen = 63;
+
+        if ( substr( $rxtxt, 0, 3) != '$5$' ) {
+            if (strlen($rxtxt) > 16 ) {
+                echo "Error: _POST text failed raw length limit of 16 <br />";  $errcnt = 1;  break;
+            }
+            $rxhash = crypt( $rxtxt, $basesalt );
+            $rxlen  = strlen($rxhash);
+            if ( strcmp($basehash, $rxhash) != 0 ) {
+                echo "Hash len: " . $rxlen . "<br />\n";
+                echo "Hash between &lt;colon&gt;&lt;space&gt; and &lt;space&gt;&lt;colon&gt;<br />\n";
+                echo "Hash: " . $rxhash . " :<br />\n";
+                //echo "Base hash: " . $basehash . "<br />\n";
+                //echo "Rcvd hash: " . $rxhash . "<br />\n";
+                //echo "Rcvd text: " . $rxtxt . "<br />\n";
+                $rl = strlen($rxtxt);
+                echo "Rcv len:  " . $rl . "<br />\n";
+                echo "Rcv tail: " . substr( $rxtxt, $rl-3, 3) . "<br />\n";
+                echo "Error: variable _POST failed raw value check <br />";  $errcnt = 1;  break;
+                break;
+            }
+        } else {
+          // validate
+          if ($basehashlen != strlen($rxtxt) ) {
+            echo "Error: variable _POST failed hashed length check <br />";  $errcnt = 1;  break;
+          }
+          if ( strcmp($basehash, $rxtxt) != 0 ) {
+            //echo "Base hash: " . $basehash . "<br />\n";
+            //echo "Rcvd hash: " . $rxtxt . "<br />\n";
+            echo "Error: variable _POST failed hashed value check <br />";  $errcnt = 1;  break;
+          }
+        }
+    }
+
     $varftype = gettype($_FILES);
     if ( $varftype != "array" ) {
         echo "Error: variable _FILES not an array";  echo "<br />";  $errcnt = 1;  break;
-    }
-    $varptype = gettype($_POST);
-    if ( $varptype != "array" ) {
-        echo "Error: variable _POST not an array";  echo "<br />";  $errcnt = 1;  break;
     }
 
     $temp = explode(".", $_FILES["file"]["name"]);
@@ -43,48 +92,6 @@ do {
         echo "<br />";
     }
 
-    // value check
-    if ( ! in_array("text", array_keys($_POST) ) ) {
-        echo "Error: variable _POST does not have a text key";  echo "<br />";  $errcnt = 1;  break;
-    }
-    // string crypt ( string $str, string $salt )
-    //      sha256 salt: $5$ + 16 character 
-    // int    strcmp ( string $str, string $str ) : return 0 if equal
-    $rxtxt = $_POST['text'];
-    $basesalt = '$5$DTEXdghLhZCea2wV';
-    $basehash = '$5$DTEXdghLhZCea2wV$Ir4PHLIoGuZJBtZCopIJMN1GiuMJweePqCQOKk2F3y/';
-    $basehashlen = 63;
-    if ( substr( $rxtxt, 0, 3) == '$5$' ) {
-        if ($basehashlen != strlen($rxtxt) ) {
-            echo "Error: variable _POST failed hashed length check <br />";  $errcnt = 1;  break;
-        }
-        if ( strcmp($basehash, $rxtxt) != 0 ) {
-            //echo "Base hash: " . $basehash . "<br />\n";
-            //echo "Rcvd hash: " . $rxtxt . "<br />\n";
-            echo "Error: variable _POST failed hashed value check <br />";  $errcnt = 1;  break;
-        }
-    } else {
-        if (strlen($rxtxt) > 16 ) {
-            echo "Error: variable _POST failed raw length limit of 16 <br />";  $errcnt = 1;  break;
-        }
-        $rxhash = crypt( $rxtxt, $basesalt );
-        $rxlen  = strlen($rxhash);
-        $debughash = 1;
-        if ( $debughash ) {
-            echo "Hash len: " . $rxlen . "<br />\n";
-            echo "Hash below between &lt;colon&gt;&lt;space&gt; and &lt;space&gt;&lt;colon&gt;<br />\n";
-            echo "Hash: " . $rxhash . " :<br />\n";
-        }
-        if ($basehashlen != $rxlen ) {
-            echo "Error: variable _POST failed raw length check <br />";  $errcnt = 1;  break;
-        }
-        if ( strcmp($basehash, $rxhash) != 0 ) {
-            //echo "Base hash: " . $basehash . "<br />\n";
-            //echo "Rcvd hash: " . $rxhash . "<br />\n";
-            //echo "Rcvd text: " . $rxtxt . "<br />\n";
-            echo "Error: variable _POST failed raw value check <br />";  $errcnt = 1;  break;
-        }
-    }
 
     if ( !( ( ($_FILES["file"]["type"] == "image/gif")
            || ($_FILES["file"]["type"] == "application/octet-stream")

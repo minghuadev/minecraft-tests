@@ -1,4 +1,5 @@
 <?php
+    session_name("upload"); session_start();
 
     $errcnt = 0;
     $debug = 0;

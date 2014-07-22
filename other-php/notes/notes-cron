@@ -42,3 +42,9 @@ OPENSHIFT_TMP_DIR 	A temporary directory you can use; SELinux protects data in t
 OPENSHIFT_LOG_DIR 	Where all cartridge logs are stored. 
 
 
+
+cron and hot deploy:
+        new file:   .openshift/cron/minutely/cron_min.sh
+        new file:   .openshift/markers/hot_deploy
+
+
