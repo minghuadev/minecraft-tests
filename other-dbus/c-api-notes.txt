@@ -1,0 +1,9 @@
+
+www.matthew.ath.cx/misc/dbus by Matthew Johnson
+
+
+
+http://maemo.org/maemo_training_material/maemo4.x/html/maemo_Platform_Development_Chinook/APPENDIX_A_Source_code_for_the_libdbus_example.html
+
+
+
