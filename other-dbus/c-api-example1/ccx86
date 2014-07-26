@@ -1,0 +1,32 @@
+#!/bin/bash
+#ccx86  -- compile dbus-example.c for centos x86-64 platform.
+#
+
+
+gcc -I/usr/include/dbus-1.0 -I/usr/lib64/dbus-1.0/include dbus-example.c -L/lib64 -ldbus-1 -lpthread -lrt
+
+
+#
+#to run:
+#
+#   dbus-launch
+#
+# copy the returned two lines into ssenv. add export to each of the two lines.
+#
+# terminal 1:
+#
+#   source ssenv
+#   ./a.out receive
+#
+# terminal 2:
+#
+#   source ssenv
+#   ./a.out send 1234
+#
+#
+# Note: dbus-launch is from:
+#       [dbs]$ rpm -q -f /usr/bin/dbus-launch
+#       dbus-x11-1.2.24-7.el6_3.x86_64
+#
+
+
