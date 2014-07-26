@@ -1,0 +1,111 @@
+--- ./dbus-example.c	2014-07-25 20:35:33.183434680 -0700
++++ ware/dbus-example.c	2014-07-25 20:34:20.499132900 -0700
+@@ -1,4 +1,13 @@
+-#define DBUS_API_SUBJECT_TO_CHANGE
++/*
++ * Example low-level D-Bus code.
++ * Written by Matthew Johnson <dbus@matthew.ath.cx>
++ *
++ * This code has been released into the Public Domain.
++ * You may do whatever you like with it.
++ *
++ * Subsequent tweaks by Will Ware <wware@alum.mit.edu>
++ * Still in the public domain.
++ */
+ #include <dbus/dbus.h>
+ #include <stdbool.h>
+ #include <unistd.h>
+@@ -23,7 +32,7 @@
+    dbus_error_init(&err);
+ 
+    // connect to the DBUS system bus, and check for errors
+-   conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
++   conn = dbus_bus_get(DBUS_BUS_SESSION, &err);
+    if (dbus_error_is_set(&err)) { 
+       fprintf(stderr, "Connection Error (%s)\n", err.message); 
+       dbus_error_free(&err); 
+@@ -68,9 +77,8 @@
+    
+    printf("Signal Sent\n");
+    
+-   // free the message and close the connection
++   // free the message
+    dbus_message_unref(msg);
+-   dbus_connection_close(conn);
+ }
+ 
+ /**
+@@ -93,7 +101,7 @@
+    dbus_error_init(&err);
+ 
+    // connect to the system bus and check for errors
+-   conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
++   conn = dbus_bus_get(DBUS_BUS_SESSION, &err);
+    if (dbus_error_is_set(&err)) { 
+       fprintf(stderr, "Connection Error (%s)\n", err.message); 
+       dbus_error_free(&err);
+@@ -174,9 +182,8 @@
+ 
+    printf("Got Reply: %d, %d\n", stat, level);
+    
+-   // free reply and close connection
++   // free reply
+    dbus_message_unref(msg);   
+-   dbus_connection_close(conn);
+ }
+ 
+ void reply_to_method_call(DBusMessage* msg, DBusConnection* conn)
+@@ -242,7 +249,7 @@
+    dbus_error_init(&err);
+    
+    // connect to the bus and check for errors
+-   conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
++   conn = dbus_bus_get(DBUS_BUS_SESSION, &err);
+    if (dbus_error_is_set(&err)) { 
+       fprintf(stderr, "Connection Error (%s)\n", err.message); 
+       dbus_error_free(&err); 
+@@ -271,7 +278,7 @@
+ 
+       // loop again if we haven't got a message
+       if (NULL == msg) { 
+-         sleep(1); 
++         usleep(10000);
+          continue; 
+       }
+       
+@@ -283,8 +290,6 @@
+       dbus_message_unref(msg);
+    }
+ 
+-   // close the connection
+-   dbus_connection_close(conn);
+ }
+ 
+ /**
+@@ -305,7 +310,7 @@
+    dbus_error_init(&err);
+    
+    // connect to the bus and check for errors
+-   conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err);
++   conn = dbus_bus_get(DBUS_BUS_SESSION, &err);
+    if (dbus_error_is_set(&err)) { 
+       fprintf(stderr, "Connection Error (%s)\n", err.message);
+       dbus_error_free(&err); 
+@@ -342,7 +347,7 @@
+ 
+       // loop again if we haven't read a message
+       if (NULL == msg) { 
+-         sleep(1);
++         usleep(10000);
+          continue;
+       }
+ 
+@@ -363,8 +368,6 @@
+       // free the message
+       dbus_message_unref(msg);
+    }
+-   // close the connection
+-   dbus_connection_close(conn);
+ }
+ 
+ int main(int argc, char** argv)
