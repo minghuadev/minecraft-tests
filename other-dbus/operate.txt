@@ -1,0 +1,28 @@
+
+
+http://unix.stackexchange.com/questions/46301/a-list-of-available-dbus-services
+
+Session:
+
+dbus-send --session           \
+  --dest=org.freedesktop.DBus \
+  --type=method_call          \
+  --print-reply               \
+  /org/freedesktop/DBus       \
+  org.freedesktop.DBus.ListNames
+
+System:
+
+dbus-send --system            \
+  --dest=org.freedesktop.DBus \
+  --type=method_call          \
+  --print-reply               \
+  /org/freedesktop/DBus       \
+  org.freedesktop.DBus.ListNames
+
+You can also use DFeet if you prefer a GUI tool.
+
+
+Or qdbusviewer.
+
+
