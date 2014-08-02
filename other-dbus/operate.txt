@@ -1,4 +1,6 @@
 
+List Names and GUI Tools
+=========================
 
 http://unix.stackexchange.com/questions/46301/a-list-of-available-dbus-services
 
@@ -25,4 +27,31 @@ You can also use DFeet if you prefer a GUI tool.
 
 Or qdbusviewer.
 
+
+
+Introspection
+===============
+
+http://cheesehead-techblog.blogspot.ca/2012/08/dbus-tutorial-introspection-figuring.html
+
+
+$ dbus-send --system --print-reply \
+            --dest=org.freedesktop.NetworkManager \
+            /org/freedesktop/NetworkManager \
+            org.freedesktop.DBus.Introspectable.Introspect
+
+
+$ dbus-send --system --print-reply \
+            --dest=org.freedesktop.NetworkManager \
+            org/freedesktop/NetworkManager \
+            org.freedesktop.DBus.Properties.GetAll \
+            string:"org.freedesktop.NetworkManager"
+
+
+Without d-feet, use the following dbus-send command to find out what's available on the bus:
+
+$ dbus-send --session --print-reply \
+            --dest="org.freedesktop.DBus" \
+            /org/freedesktop/DBus \
+            org.freedesktop.DBus.ListActivatableNames
 
