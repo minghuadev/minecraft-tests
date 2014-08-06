@@ -3,3 +3,15 @@ Intro to programming with Python and Tkinter - Python Wiki
 https://wiki.python.org/moin/Intro%20to%20programming%20with%20Python%20and%20Tkinter
 
 
+yum install tkinter
+
+Installed: tkinter
+Dependency Installed: tcl  tix  tk
+Dependency Updated: python  python-libs
+
+
+
+http://zetcode.com/gui/tkinter/introduction/
+
+install: python-pillow python-pillow-tk
+
