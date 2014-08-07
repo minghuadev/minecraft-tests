@@ -1,0 +1,80 @@
+
+
+
+Prerequisites: 
+=================
+python-2.7.6.msi
+pywin32-218.win32-py2.7.exe
+
+
+
+
+Step 1 unpack pyjs copy
+=============================
+
+$ cat inst1.sh
+#!/bin/bash -x
+
+cd /cygdrive/c/pyjsroot
+cp -a arc/pyjs-root-copy0 pyj
+
+
+echo "  Copied pyj root to c:\pyjsroot\pyj"
+echo "  Please run the other install scripts in a dos command window"
+
+
+
+
+Step 2 install virtual env
+=============================
+
+$ cat inst2.bat
+REM
+
+c:
+cd \pyjsroot\arc\virtualenv-1.11.4
+c:\py276\python.exe virtualenv.py c:\pyjsroot\pyj\mypython
+
+REM
+REM New python executable in c:\pyjsroot\pyj\myphthon\Scripts\python.exe
+REM
+
+
+
+
+Step 3 install comtypes-1.0.0
+=============================
+
+$ cat inst3.bat
+REM
+
+c:
+cd \pyjsroot\pyj
+mypython\Scripts\pip.exe install c:\pyjsroot\arc\comtypes-1.0.0
+
+
+
+Step 4 install pyj
+=============================
+
+$ cat inst4.bat
+REM
+
+c:
+cd \pyjsroot\pyj
+mypython\Scripts\pip.exe install c:\pyjsroot\pyj
+
+REM
+REM
+
+
+
+
+Normal build
+=============================
+
+$ cat bld.bat
+..\..\mypython\Scripts\pyjsbuild.exe -P Mozilla  xmlloader.py
+
+
+
