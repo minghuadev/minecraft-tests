@@ -1,0 +1,76 @@
+#
+#u1.py
+#
+
+import Tkinter as Tw
+import ttk
+
+import sys
+#sys.path.append("C:/python27/Lib/site-packages") # for PIL package installed differently
+from PIL import Image, ImageTk
+
+toproot = Tw.Tk()
+def toproot_init():
+    global toproot
+    toproot.tk.call('wm', 'iconphoto', toproot._w, ImageTk.PhotoImage(file="lens-icon.png"))
+    top_winfo_w = toproot.winfo_screenwidth()
+    top_winfo_h = toproot.winfo_screenheight()
+    top_w = top_winfo_w / 10 * 5
+    top_h = top_winfo_h / 10 * 5
+    toproot.title("test title %d x %d over %d x %d" % (top_w, top_h, top_winfo_w, top_winfo_h))
+    toproot.geometry('%dx%d+%d+%d' % (top_w, top_h,(top_winfo_w-top_w)/2,(top_winfo_h-top_h)/2))
+toproot_init()
+
+# pane left
+paneleft = Tw.Frame(toproot)
+paneleft.grid(row=0,column=0, sticky=Tw.E)
+
+myshow = Tw.Label(paneleft, text="my left pane", relief=Tw.RAISED, padx=16, pady=16)
+myshow.pack()
+
+# pane right
+paneright = Tw.Frame(toproot)
+paneright.grid(row=0,column=1, sticky=Tw.N+Tw.E+Tw.S+Tw.W, padx=10, pady=10, ipadx=10, ipady=10)
+
+# pane right frame
+root = Tw.Frame(paneright)
+root.pack(expand=1,fill=Tw.BOTH, padx=10, pady=10, ipadx=10, ipady=10)
+
+style = ttk.Style(root)
+style.configure("TFrame", background="#ff33")
+
+image = Image.open("lens-page.jpg")
+photo = ImageTk.PhotoImage(image)
+mylabel = Tw.Label(root, text="my label text", image=photo, relief=Tw.RAISED, padx=16, pady=16)
+mylabel.pack(expand=1,fill=Tw.BOTH, padx=10,pady=10)
+
+mystatus = Tw.Label(root, text="my status text")
+mystatus.pack(expand=1,fill=Tw.BOTH)
+
+btnholder = Tw.Frame(root, relief=Tw.RAISED, border=1)
+btnholder.pack(side=Tw.LEFT, padx=10, pady=10)
+
+btnholderLine1 = Tw.Frame(btnholder)
+btnholderLine1.grid(row=0, column=0, sticky=Tw.E)
+btnholderLine2 = Tw.Frame(btnholder)
+btnholderLine2.grid(row=1, column=0)
+
+callcount = 0
+longstr = "long "
+def btnact():
+    global callcount
+    callcount = callcount + 1
+    global longstr
+    longstr = longstr + "long "
+    mystatus.config(text="status update call count %d of a %s line." % (callcount,longstr))
+mybutton1 = Tw.Button(btnholderLine1, text="my button text", command=btnact)
+mybutton1.pack(side=Tw.LEFT, padx=5, pady=5)
+mybutton2 = Tw.Button(btnholderLine1, text="my button2 text dummy")
+mybutton2.pack(side=Tw.LEFT, padx=5, pady=5)
+
+mybutton2 = Tw.Button(btnholderLine2, text="my quit text", command=root.quit)
+mybutton2.pack(padx=5, pady=5)
+
+root.mainloop()
+
+
