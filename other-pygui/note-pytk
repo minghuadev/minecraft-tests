@@ -40,3 +40,14 @@ Python Doc Chapter
 https://docs.python.org/2/library/tkinter.html
 
 
+
+Code Snippet
+==============================
+
+change title icon: (you-icon can be a .png or .jpg file)
+
+    root = Tk()
+    img = PhotoImage(file='your-icon')
+    root.tk.call('wm', 'iconphoto', root._w, img)
+
+
