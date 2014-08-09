@@ -11,7 +11,6 @@ from PIL import Image, ImageTk
 
 toproot = Tw.Tk()
 def toproot_init():
-    global toproot
     toproot.tk.call('wm', 'iconphoto', toproot._w, ImageTk.PhotoImage(file="lens-icon.png"))
     top_winfo_w = toproot.winfo_screenwidth()
     top_winfo_h = toproot.winfo_screenheight()
@@ -22,18 +21,18 @@ def toproot_init():
 toproot_init()
 
 # pane left
-paneleft = Tw.Frame(toproot)
-paneleft.grid(row=0,column=0, sticky=Tw.E)
+paneleft = Tw.Frame(toproot, relief=Tw.RAISED, border=5)
+paneleft.grid(row=0,column=0, sticky=Tw.E, padx=2, pady=2)
 
 myshow = Tw.Label(paneleft, text="my left pane", relief=Tw.RAISED, padx=16, pady=16)
 myshow.pack()
 
 # pane right
-paneright = Tw.Frame(toproot)
-paneright.grid(row=0,column=1, sticky=Tw.N+Tw.E+Tw.S+Tw.W, padx=10, pady=10, ipadx=10, ipady=10)
+paneright = Tw.Frame(toproot, relief=Tw.RAISED, border=5)
+paneright.grid(row=0,column=1, sticky=Tw.N+Tw.E+Tw.S+Tw.W, padx=2, pady=2, ipadx=10, ipady=10)
 
 # pane right frame
-root = Tw.Frame(paneright)
+root = Tw.Frame(paneright, relief=Tw.RAISED, border=5)
 root.pack(expand=1,fill=Tw.BOTH, padx=10, pady=10, ipadx=10, ipady=10)
 
 style = ttk.Style(root)
@@ -47,13 +46,13 @@ mylabel.pack(expand=1,fill=Tw.BOTH, padx=10,pady=10)
 mystatus = Tw.Label(root, text="my status text")
 mystatus.pack(expand=1,fill=Tw.BOTH)
 
-btnholder = Tw.Frame(root, relief=Tw.RAISED, border=1)
+btnholder = Tw.Frame(root, relief=Tw.RAISED, border=5)
 btnholder.pack(side=Tw.LEFT, padx=10, pady=10)
 
-btnholderLine1 = Tw.Frame(btnholder)
-btnholderLine1.grid(row=0, column=0, sticky=Tw.E)
-btnholderLine2 = Tw.Frame(btnholder)
-btnholderLine2.grid(row=1, column=0)
+btnholderLine1 = Tw.Frame(btnholder, relief=Tw.RAISED, border=5)
+btnholderLine1.grid(row=0, column=0, sticky=Tw.E, padx=2, pady=2)
+btnholderLine2 = Tw.Frame(btnholder, relief=Tw.RAISED, border=5)
+btnholderLine2.grid(row=1, column=0, padx=2, pady=2)
 
 callcount = 0
 longstr = "long "
@@ -71,6 +70,25 @@ mybutton2.pack(side=Tw.LEFT, padx=5, pady=5)
 mybutton2 = Tw.Button(btnholderLine2, text="my quit text", command=root.quit)
 mybutton2.pack(padx=5, pady=5)
 
+# menu bar
+def menu_act():
+    toproot.quit()
+def menu_init():
+    menubar = Tw.Menu(toproot)
+    toproot.config(menu=menubar)
+    
+    fileMenu = Tw.Menu(menubar)
+    fileMenu.add_command(label="Exit", command=menu_act)
+    menubar.add_cascade(label="File", menu=fileMenu)
+
+    editMenu = Tw.Menu(menubar)
+    editMenu.add_command(label="Exit", command=menu_act)
+    menubar.add_cascade(label="Edit", menu=editMenu)
+menu_init()
+
 root.mainloop()
+
+if __name__ == '__main__':
+    pass #main()  
 
 
