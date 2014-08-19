@@ -121,6 +121,9 @@ def btnact():
     if callmode == 0:
         filein = choosedir()
         callstr = " open folder with callmode %d " % callmode
+        if os.path.isdir(filein):
+            onlyfiles = [ f for f in os.listdir( filein ) if os.path.isfile(os.path.join(filein,f)) ]
+            print "all files: ", onlyfiles
     else:
         filein = choosefile()
         callstr = " open file with callmode %d " % callmode
