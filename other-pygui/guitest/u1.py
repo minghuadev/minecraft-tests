@@ -3,9 +3,10 @@
 #
 
 import Tkinter as Tw
-import ttk
+##import ttk
+import tkFileDialog
 
-import sys
+import os, sys
 #sys.path.append("C:/python27/Lib/site-packages") # for PIL package installed differently
 from PIL import Image, ImageTk
 
@@ -35,8 +36,8 @@ paneright.grid(row=0,column=1, sticky=Tw.N+Tw.E+Tw.S+Tw.W, padx=2, pady=2, ipadx
 root = Tw.Frame(paneright, relief=Tw.RAISED, border=5)
 root.pack(expand=1,fill=Tw.BOTH, padx=10, pady=10, ipadx=10, ipady=10)
 
-style = ttk.Style(root)
-style.configure("TFrame", background="#ff33")
+##style = ttk.Style(root)
+##style.configure("TFrame", background="#ff33")
 
 image = Image.open("lens-page.jpg")
 photo = ImageTk.PhotoImage(image)
@@ -54,14 +55,99 @@ btnholderLine1.grid(row=0, column=0, sticky=Tw.E, padx=2, pady=2)
 btnholderLine2 = Tw.Frame(btnholder, relief=Tw.RAISED, border=5)
 btnholderLine2.grid(row=1, column=0, padx=2, pady=2)
 
+
+def choosedir():
+    options = {}
+    options['initialdir'] = 'C:\\'
+    options['mustexist'] = True
+    options['parent'] = root
+    options['title'] = 'This is a title but choose a folder with your image files in it...'
+    return tkFileDialog.askdirectory(**options)
+
+def chooseopenfile():
+    options = {}
+    options['defaultextension'] = '.jpg'
+    options['filetypes'] = [('jpeg files', '.jpg'), ('text files', '.txt'), ('all files', '.*')]
+    options['initialdir'] = 'C:\\'
+    options['initialfile'] = 'myfile.txt'
+    options['parent'] = root
+    options['title'] = 'This is a title but choose a jpg file...'
+    return tkFileDialog.askopenfile(mode='rb', **options)
+
+def choosefile():
+    options = {}
+    options['defaultextension'] = '.jpg'
+    options['filetypes'] = [('jpeg files', '.jpg'), ('text files', '.txt'), ('all files', '.*')]
+    options['initialdir'] = 'C:\\'
+    options['initialfile'] = 'myfile.txt'
+    options['parent'] = root
+    options['title'] = 'This is a title but choose a jpg file...'
+    return tkFileDialog.askopenfilenames(**options)
+
+def createthumb(infile):
+        size = 128, 128
+        outfile = os.path.splitext(infile)[0] + ".thumbnail.jpg"
+        if infile != outfile:
+            try:
+                im = Image.open(infile)
+                im.thumbnail(size)
+                im.save(outfile, "JPEG")
+            except IOError:
+                print "cannot create thumbnail for", infile
+        return outfile
+
+def createthumblist(infilelist):
+        for infile in infilelist:
+            try:
+                im = Image.open(infile)
+                print infile, im.format, "%dx%d" % im.size, im.mode
+            except IOError:
+                pass
+
 callcount = 0
 longstr = "long "
+callstr = ""
 def btnact():
     global callcount
     callcount = callcount + 1
     global longstr
     longstr = longstr + "long "
-    mystatus.config(text="status update call count %d of a %s line." % (callcount,longstr))
+    disp = "status update call count %d of a %s line." % (callcount,longstr)
+    mystatus.config(text=disp)
+    global callstr
+    callmode = (callcount & 1)
+    isfile = False
+    isfilelen = 0
+    if callmode == 0:
+        filein = choosedir()
+        callstr = " open folder with callmode %d " % callmode
+    else:
+        filein = choosefile()
+        callstr = " open file with callmode %d " % callmode
+        isfile = True
+    if isfile:
+        print "type of filein %s " % type(filein)
+        if isinstance(filein, tuple):  # tuple of (default,select)
+            print " is tuple %s " % str(filein)
+            x,filein = filein
+        print "type of filein %s " % type(filein)
+        try:
+            f = open(filein, "rb")
+            img = f.read()
+            isfilelen = len(img)
+            f.close()
+            ofile = createthumb(filein)
+            createthumblist([filein, ofile])
+
+            image22 = Image.open(ofile)
+            photo22 = ImageTk.PhotoImage(image22)
+            mylabel.config(image=photo22, border=14)
+            mylabel.photo = photo22
+        except:
+            pass
+    disp2 = " call count %d filein %s callstr %s file len %d" % (callcount, filein, callstr, isfilelen)
+    mystatus.config(text=disp+disp2)
+
 mybutton1 = Tw.Button(btnholderLine1, text="my button text", command=btnact)
 mybutton1.pack(side=Tw.LEFT, padx=5, pady=5)
 mybutton2 = Tw.Button(btnholderLine1, text="my button2 text dummy")
@@ -90,5 +176,8 @@ root.mainloop()
 
 if __name__ == '__main__':
     pass #main()  
+
+
+#http://effbot.org/imagingbook/introduction.htm
 
 
