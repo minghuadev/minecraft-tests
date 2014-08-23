@@ -1,0 +1,75 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+style for pages, rather than papers
+Uses mostly sans-serif fonts for screen readability.
+revised 2009-05-14
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+html {
+	font-family: sans-serif;
+	color: rgb(56,56,56);
+	background-color: rgb(230,230,230);
+}
+
+body {
+font-family:
+FreeSans /* for Linux browsers */
+,"Lucida Sans Unicode"
+,Verdana
+,Tahoma
+,Georgia
+,Helvetica
+,Times
+,sans-serif
+,proportional;
+background-color: rgb(230,230,230);
+/* background-image:url('img/background1.gif')*/
+/* background-color:Wheat */
+}
+
+h1 {  font-family:
+FreeSans    /* for Linux browsers  */
+, "Lucida Sans Unicode"
+, helvetica
+, arial
+, sans-serif 
+; text-align: center
+}
+
+h2, h3, h4, h5 {  font-family:
+FreeSans    /* for Linux browsers  */
+, "Lucida Sans Unicode"
+, helvetica
+, arial
+, sans-serif 
+; text-align: left
+}
+
+ 
+
+
+/*--------------------------------------------------------------------------*/
+/* horizontal rules */
+/*--------------------------------------------------------------------------*/
+hr {width: 100%;  height: 3px;  background-color: #D2B48C; border-style: none;  }
+
+.subtitle {text-align:center;}
+.occult {display:none;}
+
+note    {font-size: small}
+
+table.layout  {
+	/*cellspacing: 1em;*/
+	border:0;
+	margin:2em;
+}
+
+table.layout.td  {
+	margin: 1em;
+	vertical-align:top;
+}
+
+
+td.heading {text-align:center}
+td         {vertical-align:top}
+th         {vertical-align:top}
+
+
