@@ -1,0 +1,768 @@
+
+
+    dbus example profiling array timing
+ .../dbus-example.c             |  325 +++++++++++++++++++-
+
+    dbus example timing profiling
+ .../dbus-example.c             |  109 +++++++++++++++++++-
+
+    repeat dbus test with aligned parameters
+ .../dbus-example.c             |   70 ++++++++++++--------
+
+    repeat dbus test
+ .../dbus-example.c             |  123 ++++++++++++++------
+
+    dbus examples
+ .../dbus-example.c             |  391 ++++++++++++++++++++
+
+
+--- a/dbus-example.c
++++ b/dbus-example.c
+@@ -5,6 +5,68 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ 
++#define TEST_TIMEOUT (0)
++#define LISTENER_NO_PRINT_ARGS (1)  /* 1 to disable listener printer */
++
++#define TEST_ARRAY (1)
++#define TEST_ARRAY_LENGTH (1000)
++
++/* ======================================================== */
++#if defined(TEST_TIMEOUT) && (TEST_TIMEOUT)
++
++#define TEST_TIMEOUT_HOLD_REPLY (0) /* 0 to disable slow reply */
++
++#define NEED_CALC_TM_DIFF (1)
++
++#include <stdint.h>
++#include <sys/time.h> /* for timeval */
++
++/* -------------------------------------------------------- */
++/* static time keeping utilities */
++#if defined(NEED_CALC_TM_DIFF) && (NEED_CALC_TM_DIFF == 1)
++/* static: */
++struct timeval;
++static int64_t calcTmDiff(struct timeval * t1, struct timeval * t2)
++{
++    int64_t tm1 = 0, tm2 = 0;
++    if ( t1 == NULL || t2 == NULL ) {
++        return (int64_t)0;
++    }
++    tm1 = t1->tv_sec; tm1 *= 1000000; tm1 += t1->tv_usec;
++    tm2 = t2->tv_sec; tm2 *= 1000000; tm2 += t2->tv_usec;
++    int64_t tdif = tm2 - tm1;
++    if ( tdif < 0 ) { 
++        return -1;
++    } else if ( tdif < 0x7ffffffeUL ) {
++        return (uint32_t)(tdif & 0x7fffffffUL);
++    }
++    return 0x7ffffffe;
++}
++static uint32_t calcMsTm(struct timeval * t1)
++{
++    int64_t tm1 = 0;
++    if ( t1 == NULL ) {
++        return 0;
++    }
++    tm1 = t1->tv_sec; tm1 *= 1000000; tm1 += t1->tv_usec;
++    tm1 /= 1000;
++    return (uint32_t)(tm1 & 0xffffffffUL);
++}
++static uint32_t calcMsTmDiff(uint32_t t1, uint32_t t2)
++{
++    return t2 - t1;
++}
++
++#define TIME_STAMP(x) struct timeval x = {0}; gettimeofday(&x, NULL)
++#endif
++#endif
++/* ======================================================== */
++
++#define errexit(p)  do{printf("\nError exit: %s %d\n",__func__,__LINE__);\
++                        exit(p);}while(0)
++//#define logs(x...)  do{printf("\nLogs: %s %d : ",__func__,__LINE__);\
++//                        printf(" " x);printf("\n");usleep(200000);}while(0)
++
+ /**
+  * Connect to the DBUS bus and send a broadcast signal
+  */
+@@ -70,13 +132,13 @@ void sendsignal(char* sigvalue)
+    
+    // free the message and close the connection
+    dbus_message_unref(msg);
+-   dbus_connection_close(conn);
+ }
+ 
+ /**
+  * Call a method on a remote object
+  */
+-void query(char* param) 
++static DBusConnection* connquery = NULL; /* static conn reduces time by 2/5 */
++void query(char* param, int debugprint) 
+ {
+    DBusMessage* msg;
+    DBusMessageIter args;
+@@ -87,11 +149,13 @@ void query(char* param)
+    bool stat;
+    dbus_uint32_t level;
+ 
+-   printf("Calling remote method with %s\n", param);
++    if ( debugprint )
++        printf("Calling remote method with %s\n", param);
+ 
+    // initialiset the errors
+    dbus_error_init(&err);
+ 
++  if ( connquery == NULL ) {
+    // connect to the system bus and check for errors
+    conn = dbus_bus_get(DBUS_BUS_SESSION, &err);
+    if (dbus_error_is_set(&err)) { 
+@@ -99,7 +163,8 @@ void query(char* param)
+       dbus_error_free(&err);
+    }
+    if (NULL == conn) { 
+-      exit(1); 
++        fprintf(stderr, "Error exit: null conn\n"); 
++        errexit(1); 
+    }
+ 
+    // request our name on the bus
+@@ -109,8 +174,15 @@ void query(char* param)
+       dbus_error_free(&err);
+    }
+    if (DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER != ret) { 
+-      exit(1);
++        if ( debugprint ) {
++            fprintf(stderr, "Primary Owner Error\n"); 
++            errexit(1);
++        }
+    }
++   connquery = conn;
++  } else {
++      conn = connquery;
++  }
+ 
+    // create a new method call and check for errors
+    msg = dbus_message_new_method_call("test.method.server", // target for the method call
+@@ -119,7 +191,7 @@ void query(char* param)
+                                       "Method"); // method name
+    if (NULL == msg) { 
+       fprintf(stderr, "Message Null\n");
+-      exit(1);
++      errexit(1);
+    }
+ 
+    // append arguments
+@@ -128,56 +200,333 @@ void query(char* param)
+       fprintf(stderr, "Out Of Memory!\n"); 
+       exit(1);
+    }
++    dbus_uint32_t var = 3355;
++    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &var)) {
++        fprintf(stderr, "Out Of Memory!\n"); 
++        exit(1);
++    }
+    
+    // send message and get a handle for a reply
+-   if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
++   if (!dbus_connection_send_with_reply (conn, msg, &pending, 
++                                            100)) { // -1 is default timeout
++      fprintf(stderr, "Out Of Memory!\n"); 
++      errexit(1);
++   }
++   if (NULL == pending) { 
++      fprintf(stderr, "Pending Call Null\n"); 
++      errexit(1); 
++   }
++   dbus_connection_flush(conn);
++   
++    if ( debugprint )
++        printf("Request Sent\n");
++   
++   // free message
++   dbus_message_unref(msg);
++   
++   // block until we recieve a reply
++#if defined(TEST_TIMEOUT) && (TEST_TIMEOUT)
++  #if defined(TEST_TIMEOUT_HOLD_REPLY) && (TEST_TIMEOUT_HOLD_REPLY)
++    printf("Test Timeout blocking on pending call\n");
++    usleep(50000); /*sleep 1/2 timeout duration then check consumed for reply*/
++  #endif
++    TIME_STAMP(x1);
++#endif
++   dbus_pending_call_block(pending);
++#if defined(TEST_TIMEOUT) && (TEST_TIMEOUT)
++    TIME_STAMP(x2);
++    uint32_t tdf = calcMsTmDiff(calcMsTm(&x1),calcMsTm(&x2));
++    printf("Test Timeout blocking on pending call done. consumed ms %u\n",tdf);
++#endif
++    if ( ! dbus_pending_call_get_completed(pending) ) {
++        dbus_pending_call_unref(pending);
++        fprintf(stderr, "Reply timeout\n"); 
++        errexit(1); 
++    }
++    /* timeout notes: 
++     *   it always reaches here, _completed() always return true. 
++     *   if destination name does not exist, it consumes 0 time and returns 
++     *           a string indicating the possible error. 
++     *   if destination replies late, it consumes full timeout duration and 
++     *           returns a string about the possible error. 
++     */
++
++   // get the reply message
++   msg = dbus_pending_call_steal_reply(pending);
++   if (NULL == msg) {
++       dbus_pending_call_unref(pending);
++      fprintf(stderr, "Reply Null\n"); 
++      errexit(1); 
++   }
++   // free the pending message handle
++   dbus_pending_call_unref(pending);
++
++    // read the parameters
++    do {
++        dbus_uint32_t var1 = 0;
++        if (!dbus_message_iter_init(msg, &args)) {
++            fprintf(stderr, "Message has no arguments!\n"); 
++            break;
++        }
++        /* on arm 926 unaligned access consumes huge amount of time. 
++         * do not use bool type on the bus.
++        //if (DBUS_TYPE_BOOLEAN != dbus_message_iter_get_arg_type(&args)) {
++        //    fprintf(stderr, "Argument is not boolean!\n"); 
++        //    break;
++        //}
++         */
++        int rc = dbus_message_iter_get_arg_type(&args);
++        if (DBUS_TYPE_UINT32 != rc) {
++            fprintf(stderr, "Argument is not uint32! rc %d %c\n", rc, rc); 
++            if (DBUS_TYPE_STRING == rc ) {
++                char * rs = "<init-unknown>";
++                dbus_message_iter_get_basic(&args, &rs);
++                if ( rs != NULL ) {
++                    printf("Argument is not uint32! A string %s\n", rs);
++                }
++            }
++            break;
++        }
++        dbus_message_iter_get_basic(&args, &var1);
++        
++        if (!dbus_message_iter_next(&args)) {
++            fprintf(stderr, "Message has too few arguments!\n"); 
++            break;
++        }
++        if (DBUS_TYPE_UINT32 != dbus_message_iter_get_arg_type(&args)) {
++            fprintf(stderr, "Argument is not int!\n"); 
++            break;
++        }
++        dbus_message_iter_get_basic(&args, &level);
++
++        if ( debugprint )
++            //printf("Got Reply: %d, %d\n", stat, level);
++            printf("Got Reply: %d, %d\n", var1, level);
++    } while(0);
++   
++   // free reply and close connection
++   dbus_message_unref(msg);   
++}
++
++#if defined(TEST_ARRAY) && (TEST_ARRAY)
++static unsigned char qarray_bytes[18000] = {0};
++void qarray(char* param, int paralen, int idx, int debugprint) 
++{
++   DBusMessage* msg;
++   DBusMessageIter args;
++   DBusMessageIter elms; //array elements iter
++   DBusConnection* conn;
++   DBusError err;
++   DBusPendingCall* pending;
++   int ret;
++   bool stat;
++   dbus_uint32_t level;
++
++    if ( debugprint )
++        printf("Calling remote method with %s\n", param);
++
++   // initialiset the errors
++   dbus_error_init(&err);
++
++  if ( connquery == NULL ) {
++   // connect to the system bus and check for errors
++   conn = dbus_bus_get(DBUS_BUS_SESSION, &err);
++   if (dbus_error_is_set(&err)) { 
++      fprintf(stderr, "Connection Error (%s)\n", err.message); 
++      dbus_error_free(&err);
++   }
++   if (NULL == conn) { 
++        fprintf(stderr, "Error exit: null conn\n"); 
++        errexit(1); 
++   }
++
++   // request our name on the bus
++   ret = dbus_bus_request_name(conn, "test.method.caller", DBUS_NAME_FLAG_REPLACE_EXISTING , &err);
++   if (dbus_error_is_set(&err)) { 
++      fprintf(stderr, "Name Error (%s)\n", err.message); 
++      dbus_error_free(&err);
++   }
++   if (DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER != ret) { 
++        if ( debugprint ) {
++            fprintf(stderr, "Primary Owner Error\n"); 
++            errexit(1);
++        }
++   }
++   connquery = conn;
++  } else {
++      conn = connquery;
++  }
++
++   // create a new method call and check for errors
++   msg = dbus_message_new_method_call("test.method.server", // target for the method call
++                                      "/test/method/Object", // object to call on
++                                      "test.method.Type", // interface to call on
++                                      "Method"); // method name
++   if (NULL == msg) { 
++      fprintf(stderr, "Message Null\n");
++      errexit(1);
++   }
++
++   // append arguments
++   dbus_message_iter_init_append(msg, &args);
++   if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_STRING, &param)) {
+       fprintf(stderr, "Out Of Memory!\n"); 
+       exit(1);
+    }
++    dbus_uint32_t var = idx;
++    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &var)) {
++        fprintf(stderr, "Out Of Memory!\n"); 
++        exit(1);
++    }
++    /* array ... */
++#if 0 /* use fixed array */
++    {
++        /* create container with an element iter */
++	char sig[2];
++	sig[0] = DBUS_TYPE_BYTE;
++	sig[1] = '\0';
++	dbus_message_iter_open_container (&args,
++					  DBUS_TYPE_ARRAY /* container_type */,
++					  sig,
++					  &elms);
++	/* fill in the elements */
++        char val = '1';
++        int i = 0;
++        if ( paralen > 4096 ) {
++            paralen = 4096;
++        }
++        for (i=0; i<paralen; i++) {
++            dbus_message_iter_append_basic (&elms, DBUS_TYPE_BYTE, &val);
++        }
++	/* close the container */
++	dbus_message_iter_close_container (&args,&elms);
++    }
++#else
++    {
++        /* create container with an element iter */
++	char sig[2];
++        unsigned char *v_bytes = qarray_bytes;
++	sig[0] = DBUS_TYPE_BYTE;
++	sig[1] = '\0';
++        
++	dbus_message_iter_open_container (&args,
++					  DBUS_TYPE_ARRAY /* container_type */,
++					  sig,
++					  &elms);
++        dbus_bool_t rc = dbus_message_iter_append_fixed_array (&elms, 
++                                                                DBUS_TYPE_BYTE,
++                                                                &v_bytes,
++                                                                paralen);
++        if (!rc) {
++            fprintf(stderr, "Out Of Memory!\n"); 
++            errexit(1);
++        }
++	dbus_message_iter_close_container (&args,&elms);
++    }
++#endif
++   
++   // send message and get a handle for a reply
++   if (!dbus_connection_send_with_reply (conn, msg, &pending, 
++                                            100)) { // -1 is default timeout
++      fprintf(stderr, "Out Of Memory!\n"); 
++      errexit(1);
++   }
+    if (NULL == pending) { 
+       fprintf(stderr, "Pending Call Null\n"); 
+-      exit(1); 
++      errexit(1); 
+    }
+    dbus_connection_flush(conn);
+    
+-   printf("Request Sent\n");
++    if ( debugprint )
++        printf("Request Sent\n");
+    
+    // free message
+    dbus_message_unref(msg);
+    
+    // block until we recieve a reply
++#if defined(TEST_TIMEOUT) && (TEST_TIMEOUT)
++  #if defined(TEST_TIMEOUT_HOLD_REPLY) && (TEST_TIMEOUT_HOLD_REPLY)
++    printf("Test Timeout blocking on pending call\n");
++    usleep(50000); /*sleep 1/2 timeout duration then check consumed for reply*/
++  #endif
++    TIME_STAMP(x1);
++#endif
+    dbus_pending_call_block(pending);
++#if defined(TEST_TIMEOUT) && (TEST_TIMEOUT)
++    TIME_STAMP(x2);
++    uint32_t tdf = calcMsTmDiff(calcMsTm(&x1),calcMsTm(&x2));
++    printf("Test Timeout blocking on pending call done. consumed ms %u\n",tdf);
++#endif
++    if ( ! dbus_pending_call_get_completed(pending) ) {
++        dbus_pending_call_unref(pending);
++        fprintf(stderr, "Reply timeout\n"); 
++        errexit(1); 
++    }
++    /* timeout notes: 
++     *   it always reaches here, _completed() always return true. 
++     *   if destination name does not exist, it consumes 0 time and returns 
++     *           a string indicating the possible error. 
++     *   if destination replies late, it consumes full timeout duration and 
++     *           returns a string about the possible error. 
++     */
+ 
+    // get the reply message
+    msg = dbus_pending_call_steal_reply(pending);
+    if (NULL == msg) {
++       dbus_pending_call_unref(pending);
+       fprintf(stderr, "Reply Null\n"); 
+-      exit(1); 
++      errexit(1); 
+    }
+    // free the pending message handle
+    dbus_pending_call_unref(pending);
+ 
+-   // read the parameters
+-   if (!dbus_message_iter_init(msg, &args))
+-      fprintf(stderr, "Message has no arguments!\n"); 
+-   else if (DBUS_TYPE_BOOLEAN != dbus_message_iter_get_arg_type(&args)) 
+-      fprintf(stderr, "Argument is not boolean!\n"); 
+-   else
+-      dbus_message_iter_get_basic(&args, &stat);
+-
+-   if (!dbus_message_iter_next(&args))
+-      fprintf(stderr, "Message has too few arguments!\n"); 
+-   else if (DBUS_TYPE_UINT32 != dbus_message_iter_get_arg_type(&args)) 
+-      fprintf(stderr, "Argument is not int!\n"); 
+-   else
+-      dbus_message_iter_get_basic(&args, &level);
+-
+-   printf("Got Reply: %d, %d\n", stat, level);
++    // read the parameters
++    do {
++        dbus_uint32_t var1 = 0;
++        if (!dbus_message_iter_init(msg, &args)) {
++            fprintf(stderr, "Message has no arguments!\n"); 
++            break;
++        }
++        /* on arm 926 unaligned access consumes huge amount of time. 
++         * do not use bool type on the bus.
++        //if (DBUS_TYPE_BOOLEAN != dbus_message_iter_get_arg_type(&args)) {
++        //    fprintf(stderr, "Argument is not boolean!\n"); 
++        //    break;
++        //}
++         */
++        int rc = dbus_message_iter_get_arg_type(&args);
++        if (DBUS_TYPE_UINT32 != rc) {
++            fprintf(stderr, "Argument is not uint32! rc %d %c\n", rc, rc); 
++            if (DBUS_TYPE_STRING == rc ) {
++                char * rs = "<init-unknown>";
++                dbus_message_iter_get_basic(&args, &rs);
++                if ( rs != NULL ) {
++                    printf("Argument is not uint32! A string %s\n", rs);
++                }
++            }
++            break;
++        }
++        dbus_message_iter_get_basic(&args, &var1);
++        
++        if (!dbus_message_iter_next(&args)) {
++            fprintf(stderr, "Message has too few arguments!\n"); 
++            break;
++        }
++        if (DBUS_TYPE_UINT32 != dbus_message_iter_get_arg_type(&args)) {
++            fprintf(stderr, "Argument is not int!\n"); 
++            break;
++        }
++        dbus_message_iter_get_basic(&args, &level);
++
++        if ( debugprint )
++            //printf("Got Reply: %d, %d\n", stat, level);
++            printf("Got Reply: %d, %d\n", var1, level);
++    } while(0);
+    
+    // free reply and close connection
+    dbus_message_unref(msg);   
+-   dbus_connection_close(conn);
+ }
++#endif /*defined(TEST_ARRAY) && (TEST_ARRAY)*/
+ 
+ void reply_to_method_call(DBusMessage* msg, DBusConnection* conn)
+ {
+@@ -185,37 +534,138 @@ void reply_to_method_call(DBusMessage* msg, DBusConnection* conn)
+    DBusMessageIter args;
+    bool stat = true;
+    dbus_uint32_t level = 21614;
++   dbus_uint32_t level2 = 21614;
+    dbus_uint32_t serial = 0;
+    char* param = "";
+ 
+-   // read the arguments
+-   if (!dbus_message_iter_init(msg, &args))
+-      fprintf(stderr, "Message has no arguments!\n"); 
+-   else if (DBUS_TYPE_STRING != dbus_message_iter_get_arg_type(&args)) 
+-      fprintf(stderr, "Argument is not string!\n"); 
+-   else 
+-      dbus_message_iter_get_basic(&args, &param);
+-
++    // read the arguments
++    do {
++        bool boolval = true;
++        char *strval = "";
++        dbus_uint32_t var = 0;
++        
++        if (!dbus_message_iter_init(msg, &args)) {
++            fprintf(stderr, "Message has no arguments!\n"); 
++            break;
++        }
++        
++        do {
++            if (DBUS_TYPE_BOOLEAN == dbus_message_iter_get_arg_type(&args)) {
++                dbus_message_iter_get_basic(&args, &boolval);
++                printf(" arg bool: %s\n", 
++                        (boolval==true?"true":
++                            (boolval==false?"false":"no-true-no-false")));
++            }else if(DBUS_TYPE_STRING == dbus_message_iter_get_arg_type(&args)){
++                dbus_message_iter_get_basic(&args, &strval);
++#if !(defined(LISTENER_NO_PRINT_ARGS) && ((LISTENER_NO_PRINT_ARGS)))
++                printf(" arg str : %s\n", strval);
++#endif
++            }else if(DBUS_TYPE_UINT32 == dbus_message_iter_get_arg_type(&args)){
++                dbus_message_iter_get_basic(&args, &var);
++#if !(defined(LISTENER_NO_PRINT_ARGS) && ((LISTENER_NO_PRINT_ARGS)))
++                printf(" arg u32 : 0x%04x %u\n", var, var);
++#endif
++                level2 += var;
++#if defined(TEST_ARRAY) && (TEST_ARRAY)
++            }else if(DBUS_TYPE_ARRAY == dbus_message_iter_get_arg_type(&args)){
++                int current_type = DBUS_TYPE_INVALID;
++                DBusMessageIter subiter;
++                int rlen = 0;
++
++                dbus_message_iter_recurse (&args, &subiter);
++                
++#if 1
++                //??dbus_type_is_fixed()??
++                unsigned char *v_bytes = qarray_bytes;
++                int nelems = 200;
++                dbus_message_iter_get_fixed_array(&subiter, &v_bytes, &nelems);
++                printf("\nrx fixed array length %d\n", nelems);
++#else
++                #if !(defined(LISTENER_NO_PRINT_ARGS) && ((LISTENER_NO_PRINT_ARGS)))
++                printf(" arg array [ ");
++                #endif
++                current_type = dbus_message_iter_get_arg_type (&subiter);
++                while (current_type == DBUS_TYPE_BYTE) {
++                    char c1 = 0, cval = 0, c3 = 0, c4 = 0;
++                    dbus_message_iter_get_basic(&subiter, &cval);
++                    #if !(defined(LISTENER_NO_PRINT_ARGS) && ((LISTENER_NO_PRINT_ARGS)))
++                    printf("0x%02x", cval);
++                    #endif
++                    rlen ++;
++                    
++                    dbus_bool_t rt = dbus_message_iter_next (&subiter);
++                    if ( rt != TRUE ) {
++                        break;
++                    }
++                    
++                    current_type = dbus_message_iter_get_arg_type (&subiter);
++                    if (current_type == DBUS_TYPE_BYTE) {
++                        #if !(defined(LISTENER_NO_PRINT_ARGS) && ((LISTENER_NO_PRINT_ARGS)))
++                        printf (",");
++                        #endif
++                    } else if (current_type == DBUS_TYPE_INVALID) {
++                        printf (",<invalid-type>");
++                    } else {
++                        printf (",<unknown-type>");
++                    }
++                }
++                #if !(defined(LISTENER_NO_PRINT_ARGS) && ((LISTENER_NO_PRINT_ARGS)))
++                printf("]\n");
++                printf("    received array of length %d bytes\n", rlen);
++                #endif
++                if ( TEST_ARRAY_LENGTH != rlen ) {
++                    fprintf(stderr, "Error: Array length %d\n", rlen); 
++                    errexit(1);
++                }
++#endif
++#endif /* defined(TEST_ARRAY) && (TEST_ARRAY) */
++            } else {
++                fprintf(stderr, "Argument is not supported!\n"); 
++                break;
++            }
++            
++            if (!dbus_message_iter_next(&args)) {
++#if !(defined(LISTENER_NO_PRINT_ARGS) && ((LISTENER_NO_PRINT_ARGS)))
++                fprintf(stderr, " args done.\n"); 
++#endif
++                break;
++            }
++        } while(1);
++    } while(0); 
++
++#if !(defined(LISTENER_NO_PRINT_ARGS) && ((LISTENER_NO_PRINT_ARGS)))
+    printf("Method called with %s\n", param);
++#endif
+ 
+    // create a reply from the message
+    reply = dbus_message_new_method_return(msg);
+ 
+    // add the arguments to the reply
+    dbus_message_iter_init_append(reply, &args);
+-   if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_BOOLEAN, &stat)) { 
+-      fprintf(stderr, "Out Of Memory!\n"); 
+-      exit(1);
+-   }
++   //if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_BOOLEAN, &stat)) { 
+    if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &level)) { 
+       fprintf(stderr, "Out Of Memory!\n"); 
+-      exit(1);
++      errexit(1);
+    }
++   if (!dbus_message_iter_append_basic(&args, DBUS_TYPE_UINT32, &level2)) { 
++      fprintf(stderr, "Out Of Memory!\n"); 
++      errexit(1);
++   }
++#if defined(TEST_TIMEOUT) && (TEST_TIMEOUT)
++  #if defined(TEST_TIMEOUT_HOLD_REPLY) && (TEST_TIMEOUT_HOLD_REPLY)
++    printf("Test Timeout, hold off reply\n");
++    TIME_STAMP(x1);
++    usleep(2000000);
++    TIME_STAMP(x2);
++    uint32_t tmdif = calcMsTmDiff(calcMsTm(&x1),calcMsTm(&x2));
++    printf("Test Timeout, held off reply done. consumed ms %u\n", tmdif);
++  #endif
++#endif
+ 
+    // send the reply && flush the connection
+    if (!dbus_connection_send(conn, reply, &serial)) {
+       fprintf(stderr, "Out Of Memory!\n"); 
+-      exit(1);
++      errexit(1);
+    }
+    dbus_connection_flush(conn);
+ 
+@@ -249,7 +699,7 @@ void listen()
+    }
+    if (NULL == conn) {
+       fprintf(stderr, "Connection Null\n"); 
+-      exit(1); 
++      errexit(1); 
+    }
+    
+    // request our name on the bus and check for errors
+@@ -260,18 +710,18 @@ void listen()
+    }
+    if (DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER != ret) { 
+       fprintf(stderr, "Not Primary Owner (%d)\n", ret);
+-      exit(1); 
++      errexit(1); 
+    }
+ 
+    // loop, testing for new messages
+    while (true) {
+       // non blocking read of the next available message
+-      dbus_connection_read_write(conn, 0);
++      dbus_connection_read_write(conn, 10);
+       msg = dbus_connection_pop_message(conn);
+ 
+       // loop again if we haven't got a message
+       if (NULL == msg) { 
+-         sleep(1); 
++         //usleep(1000); 
+          continue; 
+       }
+       
+@@ -282,9 +732,6 @@ void listen()
+       // free the message
+       dbus_message_unref(msg);
+    }
+-
+-   // close the connection
+-   dbus_connection_close(conn);
+ }
+ 
+ /**
+@@ -342,7 +789,7 @@ void receive()
+ 
+       // loop again if we haven't read a message
+       if (NULL == msg) { 
+-         sleep(1);
++         usleep(10000); 
+          continue;
+       }
+ 
+@@ -363,8 +810,6 @@ void receive()
+       // free the message
+       dbus_message_unref(msg);
+    }
+-   // close the connection
+-   dbus_connection_close(conn);
+ }
+ 
+ int main(int argc, char** argv)
+@@ -382,7 +827,43 @@ int main(int argc, char** argv)
+    else if (0 == strcmp(argv[1], "listen"))
+       listen();
+    else if (0 == strcmp(argv[1], "query"))
+-      query(param);
++      query(param, 1);
++    else if (0 == strcmp(argv[1], "repeat")) {
++        int i=0;
++        int n=500;
++        printf("\nQuery %d times ... \n", n);
++        for (i=1; i<n; i++) {
++            ////printf("\nQuery %d ... \n", i);
++            query(param, 0);
++        }
++        printf("\nQuery %d times ... done\n", n);
++                        /* result: 3 seconds / 500 repeats */
++    }
++    #if defined(TEST_ARRAY) && (TEST_ARRAY)
++    else if (0 == strcmp(argv[1], "array")) {
++        int len = TEST_ARRAY_LENGTH;
++        printf("\nQuery sending array with length %d ... \n", len);
++        qarray(param, len, 22, 1);
++    }
++    else if (0 == strcmp(argv[1], "rarray")) {
++        int len = TEST_ARRAY_LENGTH;
++        int i=0;
++        int n=500;
++        printf("\nQuery array %d times ... \n", n);
++        printf("\nQuery sending array with length %d ... \n", len);
++        for (i=1; i<n; i++) {
++            qarray(param, len, i, 0);
++        }
++        printf("\nQuery array %d times ... done\n", n);
++                        /* results 500 repeats: 
++                         *      4.0 seconds, fixed-length array
++                         *      9.0 seconds, recursive iterated array
++                         *      6.5 seconds, fixed-length array sending 
++                         *                   and recursive receiving
++                         * 
++                         */
++    }
++    #endif
+    else {
+       printf ("Syntax: dbus-example [send|receive|listen|query] [<param>]\n");
+       return 1;
