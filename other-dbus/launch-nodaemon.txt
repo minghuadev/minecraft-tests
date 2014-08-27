@@ -82,6 +82,13 @@ Recent versions of D-Bus will enable AppArmor mediation on systems where it's
 available, so you may also need to add <apparmor mode="disabled"/> 
 to session.conf/system.conf for these instructions to work.
 
+Another guy says use: 
+
+    tcp:host=localhost,bind=0.0.0.0,port=55884
+
+Note the "bind=0.0.0.0" - the "bind=*" didn't work for me, and I left out the 
+"family=ipv4" part. I'm on Ubuntu 12.04. 
+
 From:
 http://stackoverflow.com/questions/10158684/connecting-to-dbus-over-tcp
 
