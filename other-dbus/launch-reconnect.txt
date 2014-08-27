@@ -1,0 +1,35 @@
+
+Re-connect to a new dbus daemon:
+
+[1] When a dbus daemon is launched, the dbus address is stored 
+    in the message printed by 'dbus-launch' command. 
+    Save this output to a well-known file. 
+
+[2] In the main function of an application, open the file and 
+    read in the env var name and value pair. Use _'setenv(...)'_ 
+    to set up the env for dbus address. By default the session bus 
+    uses _'DBUS_SESSION_BUS_ADDRES=...'_.  
+
+[3] After calling _'dbus_bus_get(...)'_, by default the application 
+    will exit if there is an error on the dbus connection. 
+    Use _'dbus_connection_set_exit_on_disconnect(conn,FALSE)'_ 
+    to disable it so that even if the dbus daemon is down the 
+    application can still run. 
+
+[4] Set up a signal filter and listen on dbus for a dummy type 
+    of signals. And run the non-blocking signal receiving by 
+    calling _'dbus_connection_read_write(conn,0)'_. If it returns 
+    a FALSE, the connection has been closed. Despite the connection 
+    is closed, the application needs to drain the message queue 
+    by calling 'dbus_connection_pop_message(conn)'. 
+
+[5] If the connection is not closed, then the application is in 
+    normal receiving and sending mode. 
+
+[6] If the connection has been closed, call _'dbus_connection_unref(conn)'_, 
+    and then _'dbus_shutdown()'_. After shutdown, go back to [2]. 
+    It will go back to normal mode when a new dbus daemon is started 
+    and the new env is put into the well-known file as in [1]. 
+    The application will keep trying if a new dbus daemon is not 
+    available yet. 
+
