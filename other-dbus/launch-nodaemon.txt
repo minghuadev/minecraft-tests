@@ -1,0 +1,93 @@
+
+[1] 
+Using c-api, two applications can communicate via dbus bypassing daemon, 
+by specifying the name of the client to which you want to send the signal/method 
+(the DBus standard allows it). The relevant api is here 
+http://dbus.freedesktop.org/doc/api/html/group__DBusBus.html
+
+Above from:
+http://stackoverflow.com/questions/11609794/is-a-bus-always-necessary-for-dbus
+
+
+
+[2]
+it is possible to set the DESTINATION field in the header of the dbus message, 
+using a function that is available in the dbus interface (dbus-message.h):
+
+dbus_bool_t dbus_message_set_destination (DBusMessage  *message, const char *destination)
+
+Above from:
+http://stackoverflow.com/questions/11019048/selective-d-bus-signal-emitting-from-observer-unicast-signal
+
+
+[3]
+Send to another machine:
+
+    DBUS_SESSION_BUS_ADDRESS=tcp:host=server.example.org,port=77777 dbus-send ...
+
+Note that the buses running by default do not listen on TCP. You have to run your own bus instance for that.
+
+From:
+http://stackoverflow.com/questions/3944458/dbus-send-to-remote-machine
+
+
+
+[4]
+order matters for the <listen> elements in session.conf. 
+
+Also, prepending the TCP <listen> tag is necessary, but not sufficient. To make 
+remote D-Bus connections via TCP work, you need to do three things:
+
+  * Add a <listen> tag above the UNIX one, similar to this:
+
+    <listen>tcp:host=localhost,bind=*,port=55556,family=ipv4</listen>
+    <listen>unix:tmpdir=/tmp</listen>
+
+  * Add a line (right below the <listen> tags is fine) that says:
+
+    <auth>ANONYMOUS</auth>
+
+  * Add another line below these that says:
+
+    <allow_anonymous/>
+
+The <auth> tag should be added in addition to any other <auth> tags that may 
+be contained in your session.conf. 
+
+In summary, your session.conf should contain a snippet that looks like this:
+
+    <listen>tcp:host=localhost,bind=*,port=55556,family=ipv4</listen>
+    <listen>unix:tmpdir=/tmp</listen>
+    
+    <auth>ANONYMOUS</auth>
+    <allow_anonymous/>
+
+If you want to send to a remote machine using dbus-send, you need to set 
+DBUS_SESSION_BUS_ADDRESS accordingly, e.g., to something like:
+
+    export DBUS_SESSION_BUS_ADDRESS=tcp:host=localhost,bind=*,port=55556,family=ipv4
+
+This works even if the bus you want to send to is actually the system bus of 
+the remote machine, as long as the setting matches the TCP <listen> tag in 
+/etc/dbus-1/system.conf on the target. 
+
+If you're using systemd, you might also need to add a line saying ListenStream=6668 
+to /lib/systemd/system/dbus.socket, like so:
+
+    [Socket]
+    ListenStream=/var/run/dbus/system_bus_socket
+    ListenStream=55556  # <-- Add this line
+
+Recent versions of D-Bus will enable AppArmor mediation on systems where it's 
+available, so you may also need to add <apparmor mode="disabled"/> 
+to session.conf/system.conf for these instructions to work.
+
+From:
+http://stackoverflow.com/questions/10158684/connecting-to-dbus-over-tcp
+
+
+
+
+
+
+
