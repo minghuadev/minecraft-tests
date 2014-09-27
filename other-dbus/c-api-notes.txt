@@ -10,3 +10,8 @@ http://maemo.org/maemo_training_material/maemo4.x/html/maemo_Platform_Developmen
   c-api-example2/
 
 
+http://maemo.org/maemo_training_material/maemo4.x/html/maemo_Platform_Development_Chinook/Chapter_03_Using_the_GLib_wrappers_for_DBus.html
+
+  DbusMaemoGlibWrappers/  -- a web page dump
+
+

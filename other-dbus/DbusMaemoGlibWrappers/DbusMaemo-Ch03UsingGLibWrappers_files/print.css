@@ -1,0 +1,30 @@
+.Header      { color: #cd853f;
+               font-family: arial, helvetica, sans-serif;
+	       font-size: 12pt; 
+               font-weight: bold }
+.Header2     { color: #000000;
+               font-family: arial, helvetica, sans-serif;
+	       font-size: 12pt; 
+               font-weight: bold }
+.Paragraph   { font-family: arial, helvetica, sans-serif;
+               font-size: 11pt;
+	       line-height: 16pt; }
+.Code        { font-family: Courier;
+               font-size: 11pt }
+.LinkList    { color: #4e571e;
+               font-family: arial, helvetica, sans-serif;
+	       font-size: 11pt }
+.List        { font-family: arial, helvetica, sans-serif;
+               font-size: 11pt }
+.ColoredTableCell { font-family: arial, helvetica, sans-serif;
+                    font-size: 11pt;
+		    background-color: #F2F2E8 }
+a:hover      { color: #4e571e;
+               font-family: arial, helvetica, sans-serif;
+	       font-size: 11pt }
+a:link       { color: #4e571e;
+               font-family: arial, helvetica, sans-serif;
+	       font-size: 11pt }
+a:visited    { color: #4e571e;
+               font-family: arial, helvetica, sans-serif;
+	       font-size: 11pt }

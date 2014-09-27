@@ -1,0 +1,1412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <link href="DbusMaemo-Ch03UsingGLibWrappers_files/screen.css" rel="stylesheet" type="text/css">
+<link href="DbusMaemo-Ch03UsingGLibWrappers_files/print.css" rel="stylesheet" type="text/css" media="print"><title>Chapter 03 - Using the GLib wrappers for D-Bus</title></head>
+<body style="background-color: rgb(255, 255, 255);">
+<h2>Chapter contents:</h2>
+<p></p><ul>
+<li><a href="#IntroductiontoGObjects">Introduction to GObjects</a>
+</li><li><a href="#DBusinterfacedefinitionusingXML">D-Bus interface definition using XML</a>
+</li><li><a href="#Generatingautomaticstubcode">Generating automatic stub code</a>
+</li><li><a href="#CreatingasimpleGObjectforDBus">Creating a simple GObject for D-Bus</a>
+</li><li><a href="#PublishingaGTypeontheDBus">Publishing a GType on the D-Bus</a>
+</li><li><a href="#UsingtheGLibDBuswrapperfromaclient">Using the GLib/D-Bus wrapper from a client</a>
+</li><li><a href="#DBusintrospection">D-Bus introspection</a>
+</li></ul><p></p>
+<a name="IntroductiontoGObjects"></a><br>
+<h1>Introduction to GObjects</h1>
+
+<p>In order to support runtime binding of <span class="caps">GTK</span>+
+ widgets to interpreted languages, an somewhat complicated system for 
+implementing object oriented machinery for C was developed. Depending on
+ your particular viewpoint, this system is either called GObject or 
+GType. GType is the low-level runtime type system which is used to 
+implement GObjects and GObjects are the implementations of objects using
+ the GType framework. For an short introduction about GObjects, please 
+see the <a href="http://en.wikipedia.org/wiki/GType">Wikipedia entry on GType</a>.
+ GObject/GType is part of GLib, but one might note that most of GLib is 
+useable without the GType part of the library. In fact, the 
+GObject/GType functionality is separated into its own library (<code>libgobject</code>).</p>
+
+<p>We will be interested in the GType in order to implement a very 
+simple object that will be published over the D-Bus. This also means 
+that we can forego some of the inherent complexity involved in 
+implementing a fully fledged GObject. For this reason, while our object 
+will be usable over the D-Bus, it might not have all the support 
+required to use it directly as a GObject (full dynamic type registration
+ and properties are missing).</p>
+
+<p>Our implementation will be a simple non-inheriting stand-alone class,
+ implementing an interface to access and modify two private members: <code>value1</code> and <code>value2</code>, first of which is an 32-bit signed integer, and the second a <code>gdouble</code>.</p>
+
+<p>We'll need to implement the per-class constructor as well as the 
+per-object constructor. Both of these will be quite short for the first 
+version of the implementation.</p>
+
+<a name="DBusinterfacedefinitionusingXML"></a><br>
+<h1>D-Bus interface definition using <span class="caps">XML</span></h1>
+
+<p>Since our primary objective is to make the object available over 
+D-Bus, we'll start by covering one of the easiest way of achieving this:
+ the <code>dbus-bindings-tool</code>. The tool will generate a lot of the bindings code for both client and server side. As its input, it uses an <span class="caps">XML </span>file describing the interface for the service that we're implementing.</p>
+
+<p>We'll start by describing one method in <span class="caps">XML.</span> Each method is described with a separate <code>method</code> element, whose <code>name</code>
+ attribute is the name of the method to be generated (this name will be 
+copied into the generated stub code automatically by the tool). The 
+first method is <code>setvalue1</code>, which will get one argument, <code>new_value</code>, which is an 32-bit signed integer:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt>    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- setvalue1(int newValue): sets value1 --&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;method</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"setvalue1"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+      <span style="font-weight: bold"><span style="color: #0000FF">&lt;arg</span></span> <span style="color: #009900">type</span><span style="color: #990000">=</span><span style="color: #FF0000">"i"</span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"new_value"</span> <span style="color: #009900">direction</span><span style="color: #990000">=</span><span style="color: #FF0000">"in"</span><span style="font-weight: bold"><span style="color: #0000FF">/&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;/method&gt;</span></span>
+</tt></pre>
+<p></p>
+
+<p>[ A single D-Bus method definition (glib-dbus-sync/value-dbus-interface.xml) ]</p>
+
+<p>Each argument needs to be defined explicitly with the <code>arg</code> element. The <code>type</code>
+ attribute is required, since it will define the data type for the 
+argument. Arguments are sometimes called parameters when used with D-Bus
+ methods. Each argument needs to specify the "direction" of the 
+argument. Parameters for method calls are "going into" the service, 
+hence the correct content for the <code>direction</code> attribute is <code>in</code>. Return values from method calls are "coming out" of the service. Hence their direction will be <code>out</code>. If a method call doesn't return any value (returns <code>void</code>), then no argument with the direction <code>out</code> needs to be specified.</p>
+
+<p>Also note that D-Bus by itself, does not limit the number of return 
+arguments. C language supports only one return value from a function, 
+but a lot of the higher level languages do not have this restriction.</p>
+
+<p>The following argument types are supported for D-Bus methods (with respective closest types in GLib):</p>
+
+<ul>
+<li><code>b</code>: boolean (<code>gboolean</code>)</li>
+<li><code>y</code>: 8-bit unsigned integer (<code>guint8</code>)</li>
+<li><code>q/n</code>: 16-bit unsigned/signed integer (<code>guint16</code>/<code>gint16</code>)</li>
+<li><code>u/i</code>: 32-bit unsigned/signed integer (<code>guint32</code>/<code>gint32</code>)</li>
+<li><code>t/x</code>: 64-bit unsigned/signed integer (<code>guint64</code>/<code>gint64</code>)</li>
+<li><code>d</code>: <span class="caps">IEEE</span> 754 double precision floating point number (<code>gdouble</code>)</li>
+<li><code>s</code>: <span class="caps">UTF</span>-8 encoded text string with <span class="caps">NUL </span>termination (only one <span class="caps">NUL </span>allowed) (<code>gchar*</code> with additional restrictions)</li>
+<li><code>a</code>: Array of the following type specification (case-dependent)</li>
+<li><code>o/g/r/(/)/v/e/{/}</code>: Complex types, please see the <a href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-signatures">official D-Bus documentation on type signatures</a>.</li>
+</ul>
+
+<p>From the above list we see that <code>setvalue1</code> will accept one 32-bit signed integer argument (<code>new_value</code>).
+ The name of the argument will affect the generated stub code prototypes
+ (not the implementation) but is quite useful for documentation and also
+ for D-Bus introspection (which will be covered later).</p>
+
+<p>We next have the interface specification of another method: <code>getvalue1</code>, which will return the current integer value of the object. It has no method call parameters (no arguments with direction="<code>in</code>") and only returns one 32-bit signed integer:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt>    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- getvalue1(): returns the first value (int) --&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;method</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"getvalue1"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+      <span style="font-weight: bold"><span style="color: #0000FF">&lt;arg</span></span> <span style="color: #009900">type</span><span style="color: #990000">=</span><span style="color: #FF0000">"i"</span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"cur_value"</span> <span style="color: #009900">direction</span><span style="color: #990000">=</span><span style="color: #FF0000">"out"</span><span style="font-weight: bold"><span style="color: #0000FF">/&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;/method&gt;</span></span>
+</tt></pre>
+<p></p>
+
+<p>[ A method that returns data (glib-dbus-sync/value-dbus-interface.xml) ]</p>
+
+<p>Naming of the return arguments is also supported in D-Bus (as above).
+ This will not influence the generated stub code, but serves as 
+additional documentation.</p>
+
+<p>We'll need to bind the methods to a specific (D-Bus) interface, and this is achieved by placing the <code>method</code> elements within an <code>interface</code> element. The interface <code>name</code>
+ -attribute is optional, but very much recommended (otherwise the 
+interface becomes unnamed and provides less useful information on 
+introspection).</p>
+
+<p>You can implement multiple interfaces in the same object, and if this would be the case, you'd then list multiple <code>interface</code> elements within the <code>node</code> element. The <code>node</code>
+ element is the "top-level" element in any case. In our case, we only 
+implement one explicit interface (the binding tools will add the 
+introspection interfaces automatically, so specifying them is not 
+necessary in the <span class="caps">XML</span>). And so, we end up with the minimum required interface <span class="caps">XML </span>file:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-weight: bold"><span style="color: #000080">&lt;?xml</span></span> version=<span style="color: #FF0000">"1.0"</span> encoding=<span style="color: #FF0000">"UTF-8"</span> <span style="font-weight: bold"><span style="color: #000080">?&gt;</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">&lt;node&gt;</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">&lt;interface</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"org.maemo.Value"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- getvalue1(): returns the first value (int) --&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;method</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"getvalue1"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+      <span style="font-weight: bold"><span style="color: #0000FF">&lt;arg</span></span> <span style="color: #009900">type</span><span style="color: #990000">=</span><span style="color: #FF0000">"i"</span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"cur_value"</span> <span style="color: #009900">direction</span><span style="color: #990000">=</span><span style="color: #FF0000">"out"</span><span style="font-weight: bold"><span style="color: #0000FF">/&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;/method&gt;</span></span>
+    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- setvalue1(int newValue): sets value1 --&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;method</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"setvalue1"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+      <span style="font-weight: bold"><span style="color: #0000FF">&lt;arg</span></span> <span style="color: #009900">type</span><span style="color: #990000">=</span><span style="color: #FF0000">"i"</span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"new_value"</span> <span style="color: #009900">direction</span><span style="color: #990000">=</span><span style="color: #FF0000">"in"</span><span style="font-weight: bold"><span style="color: #0000FF">/&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;/method&gt;</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">&lt;/interface&gt;</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">&lt;/node&gt;</span></span>
+</tt></pre>
+<p></p>
+
+<p>[ Minimal valid interface specification for the two methods ]</p>
+
+<p>The minimal interface specification is then extended by adding the correct reference to the proper <span class="caps">DTD.</span> This will allow validation tools to work automatically with the <span class="caps">XML </span>file.
+ We also add methods to manipulate the second value. The full interface 
+file will now contain comments, describing the purpose of the interface 
+and the methods. This is highly recommended if you plan to publish your 
+interface at some point, as the bare <span class="caps">XML </span>does not carry semantic information.</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-weight: bold"><span style="color: #000080">&lt;?xml</span></span> version=<span style="color: #FF0000">"1.0"</span> encoding=<span style="color: #FF0000">"UTF-8"</span> <span style="font-weight: bold"><span style="color: #000080">?&gt;</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">&lt;!-- This maemo code example is licensed under a MIT-style license,</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     that can be found in the file called "License" in the same</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     directory as this file.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     Copyright (c) 2007 Nokia Corporation. All rights reserved. --&gt;</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">&lt;!-- If you keep the following DOCTYPE tag in your interface</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     specification, xmllint can fetch the DTD over the Internet</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     for validation automatically. --&gt;</span></span>
+&lt;!DOCTYPE node PUBLIC
+  "-//freedesktop//DTD D-Bus Object Introspection 1.0//EN"
+  "http://standards.freedesktop.org/dbus/1.0/introspect.dtd"&gt;
+
+<span style="font-style: italic"><span style="color: #9A1900">&lt;!-- This file defines the D-Bus interface for a simple object, that</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     will hold a simple state consisting of two values (one a 32-bit</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     integer, the other a double).</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">     The interface name is "org.maemo.Value".</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     One known reference implementation is provided for it by the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     "/GlobalValue" object found via a well-known name of</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     "org.maemo.Platdev_ex". --&gt;</span></span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">&lt;node&gt;</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">&lt;interface</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"org.maemo.Value"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+
+    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- Method definitions --&gt;</span></span>
+
+    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- getvalue1(): returns the first value (int) --&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;method</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"getvalue1"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+      <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- NOTE Naming arguments is not mandatory, but is recommended</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                so that D-Bus introspection tools are more useful.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                Otherwise the arguments will be automatically named</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                "arg0", "arg1" and so on. --&gt;</span></span>
+      <span style="font-weight: bold"><span style="color: #0000FF">&lt;arg</span></span> <span style="color: #009900">type</span><span style="color: #990000">=</span><span style="color: #FF0000">"i"</span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"cur_value"</span> <span style="color: #009900">direction</span><span style="color: #990000">=</span><span style="color: #FF0000">"out"</span><span style="font-weight: bold"><span style="color: #0000FF">/&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;/method&gt;</span></span>
+
+    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- getvalue2(): returns the second value (double) --&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;method</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"getvalue2"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+      <span style="font-weight: bold"><span style="color: #0000FF">&lt;arg</span></span> <span style="color: #009900">type</span><span style="color: #990000">=</span><span style="color: #FF0000">"d"</span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"cur_value"</span> <span style="color: #009900">direction</span><span style="color: #990000">=</span><span style="color: #FF0000">"out"</span><span style="font-weight: bold"><span style="color: #0000FF">/&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;/method&gt;</span></span>
+
+    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- setvalue1(int newValue): sets value1 --&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;method</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"setvalue1"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+      <span style="font-weight: bold"><span style="color: #0000FF">&lt;arg</span></span> <span style="color: #009900">type</span><span style="color: #990000">=</span><span style="color: #FF0000">"i"</span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"new_value"</span> <span style="color: #009900">direction</span><span style="color: #990000">=</span><span style="color: #FF0000">"in"</span><span style="font-weight: bold"><span style="color: #0000FF">/&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;/method&gt;</span></span>
+
+    <span style="font-style: italic"><span style="color: #9A1900">&lt;!-- setvalue2(double newValue): sets value2 --&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;method</span></span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"setvalue2"</span><span style="font-weight: bold"><span style="color: #0000FF">&gt;</span></span>
+      <span style="font-weight: bold"><span style="color: #0000FF">&lt;arg</span></span> <span style="color: #009900">type</span><span style="color: #990000">=</span><span style="color: #FF0000">"d"</span> <span style="color: #009900">name</span><span style="color: #990000">=</span><span style="color: #FF0000">"new_value"</span> <span style="color: #009900">direction</span><span style="color: #990000">=</span><span style="color: #FF0000">"in"</span><span style="font-weight: bold"><span style="color: #0000FF">/&gt;</span></span>
+    <span style="font-weight: bold"><span style="color: #0000FF">&lt;/method&gt;</span></span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">&lt;/interface&gt;</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">&lt;/node&gt;</span></span>
+</tt></pre>
+<p></p>
+
+<p>[ The interface definition for the simplistic dual-value service (glib-dbus-sync/value-dbus-interface.xml) ]</p>
+
+<p>When dealing with automatic code generation, it is quite useful to 
+also automate testing of the "source files" (XML in this case). One 
+important validation technique for <span class="caps">XML </span>is verifying for well-formedness (all <span class="caps">XML </span>files need to satisfy the rules in <span class="caps">XML </span>spec 1.0). Another is validating the structure of <span class="caps">XML </span>(elements
+ are nested correctly, that only correct elements are present and that 
+element attributes and data is legal). Structural validation rules are 
+described by a <span class="caps">DTD </span>(Document Type Definition) document for the <span class="caps">XML </span>format that your file is supposed to adhere to. The <span class="caps">DTD </span>is specified in the <span class="caps">XML,</span>within the <code>DOCTYPE</code> processing directive.</p>
+
+<p>This is still not perfect, as <span class="caps">DTD </span>validation can only check for syntax and structure, but not meaning/semantics.</p>
+
+<p>We'll add a target called <code>checkxml</code> to the <b>Makefile</b> so that it can be run whenever we want to check the validity of our interface <span class="caps">XML.</span></p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900"># One extra target (which requires xmllint, from package libxml2-utils)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># is available to verify the well-formedness and the structure of the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># interface definition xml file.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Use the 'checkxml' target to run the interface XML through xmllint</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># verification. You'll need to be connected to the Internet in order</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># for xmllint to retrieve the DTD from fd.o (unless you setup local</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># catalogs, which are not covered here).</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># ... Listing cut for brevity ...</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># Interface XML name (used in multiple targets)</span></span>
+<span style="color: #990000">interface_xml :=</span> value-dbus-interface.xml
+
+<span style="font-style: italic"><span style="color: #9A1900"># ... Listing cut for brevity ...</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># Special target to run DTD validation on the interface XML. Not run</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># automatically (since xmllint isn't always available and also needs</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Internet connectivity).</span></span>
+<span style="color: #990000">checkxml:</span> <span style="color: #009900">$(interface_xml)</span>
+	@xmllint --valid --noout <span style="color: #009900">$&lt;</span>
+	@echo <span style="color: #009900">$&lt;</span> checks out ok
+</tt></pre>
+<p></p>
+
+<p>[ Integrating <code>xmllint</code> into makefiles (glib-dbus-sync/Makefile) ]</p>
+
+
+
+<pre>[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>make checkxml</b>
+value-dbus-interface.xml checks out ok
+</pre>
+
+
+
+<p>[ Running the validation target on a valid interface specification ]</p>
+
+<p>Just to demonstrate what kind of error messages to expect when there are problems in the <span class="caps">XML, </span>we modify the valid interface specification slightly by adding one invalid element (<code>invalidElement</code>) and by removing one starting tag (<code>method</code>).</p>
+
+
+
+<pre>[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>make checkxml</b>
+value-dbus-interface.xml:36: element invalidElement: validity error :
+  No declaration for element invalidElement
+    &lt;/invalidElement&gt;
+              ^
+value-dbus-interface.xml:53: parser error :
+  Opening and ending tag mismatch: method line 39 and interface
+  &lt;/interface&gt;
+              ^
+value-dbus-interface.xml:54: parser error :
+  Opening and ending tag mismatch: interface line 22 and node
+&lt;/node&gt;
+       ^
+value-dbus-interface.xml:55: parser error :
+  Premature end of data in tag node line 21
+
+^
+make: *** [checkxml] Error 1
+</pre>
+
+
+
+<p>The first error (<code>validity error</code>) is detected because the file doesn't adhere to the <span class="caps">DTD.</span> The other errors (<code>parser error</code>s) are detected because the file is no longer a well-formed <span class="caps">XML </span>document.</p>
+
+<p>If you'd have your makefile targets depend on <code>checkxml</code>, 
+you could integrate the validation into the process of your build. 
+However, as was noted before, it might not be always the best solution.</p>
+
+<a name="Generatingautomaticstubcode"></a><br>
+<h1>Generating automatic stub code</h1>
+
+<p>We can now proceed to generate the "glue" code that will implement 
+the mapping from GLib into D-Bus. We will use the generated code later 
+on, but it is instructive to see what the <code>dbus-binding-tool</code> program generates.</p>
+
+<p>We'll expand the <b>Makefile</b> to invoke the tool whenever the interface <span class="caps">XML </span>changes and store the resulting glue code separately for both client and server.</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900"># Define a list of generated files so that they can be cleaned as well</span></span>
+<span style="color: #990000">cleanfiles :=</span> value-client-stub.h <span style="color: #990000">\</span>
+              value-server-stub.h
+
+<span style="font-style: italic"><span style="color: #9A1900"># ... Listing cut for brevity ...</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># If the interface XML changes, the respective stub interfaces will be</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># automatically regenerated. Normally this would also mean that your</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># builds would fail after this since you'd be missing implementation</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># code.</span></span>
+<span style="color: #990000">value-server-stub.h:</span> <span style="color: #009900">$(interface_xml)</span>
+	dbus-binding-tool --prefix<span style="color: #990000">=</span>value_object --mode<span style="color: #990000">=</span>glib-server <span style="color: #990000">\</span>
+	  <span style="color: #009900">$&lt;</span> <span style="color: #990000">&gt;</span> <span style="color: #009900">$@</span>
+
+<span style="color: #990000">value-client-stub.h:</span> <span style="color: #009900">$(interface_xml)</span>
+	dbus-binding-tool --prefix<span style="color: #990000">=</span>value_object --mode<span style="color: #990000">=</span>glib-client <span style="color: #990000">\</span>
+	  <span style="color: #009900">$&lt;</span> <span style="color: #990000">&gt;</span> <span style="color: #009900">$@</span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># ... Listing cut for brevity ...</span></span>
+
+<span style="color: #990000">clean:</span>
+	<span style="color: #009900">$(RM)</span> <span style="color: #009900">$(targets)</span> <span style="color: #009900">$(cleanfiles)</span> <span style="color: #990000">*</span>.o
+</tt></pre>
+<p></p>
+
+<p>[ <code>dbus-binding-tool</code> support for make (glib-dbus-sync/Makefile) ]</p>
+
+<p>We pass two parameters for the <code>dbus-binding-tool</code> program. The <code>--prefix</code>
+ parameter is used to tell what text should be prefixed to all generated
+ structure and function names. This will help avoid name-space 
+collisions when we pull the generated glue files back into our programs.
+ We'll use <code>value_object</code> since it seems like a logical 
+prefix for our project. You will probably want to use a prefix that 
+isn't used in your code (even in the object implementation in server). 
+This way you don't risk reusing the same names that are generated with 
+the tool.</p>
+
+<p>The second parameter will select what kind of output the tool will 
+generate. At the moment, the tool only supports generating GLib/D-Bus 
+bindings, but this might change in the future. Also, we need to select 
+which "side" of the D-Bus we're generating the bindings for. The <code>-client</code> side is for code that wishes to use GLib to access the Value object implementation over D-Bus. The <code>-server</code> side is respectively for the implementation of the Value object.</p>
+
+<p>Running the tool will result in the two header files:</p>
+
+
+
+<pre>[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>make value-server-stub.h value-client-stub.h</b>
+dbus-binding-tool --prefix=value_object --mode=glib-server \
+  value-dbus-interface.xml &gt; value-server-stub.h
+dbus-binding-tool --prefix=value_object --mode=glib-client \
+  value-dbus-interface.xml &gt; value-client-stub.h
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>ls -la value*stub.h</b>
+-rw-rw-r-- 1 user user  5184 Nov 21 14:02 value-client-stub.h
+-rw-rw-r-- 1 user user 10603 Nov 21 14:02 value-server-stub.h
+</pre>
+
+
+
+<p>[ Creating the glue code files ]</p>
+
+<p>We'll start from the object implementation in a bit, but first let's 
+see what the tool left us with, starting with the server stub file:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/* Generated by dbus-binding-tool; do not edit! */</span></span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/*... Listing cut for brevity ...*/</span></span>
+
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">&lt;dbus/dbus-glib.h&gt;</span>
+<span style="font-weight: bold"><span style="color: #0000FF">static</span></span> <span style="font-weight: bold"><span style="color: #0000FF">const</span></span> DBusGMethodInfo dbus_glib_value_object_methods<span style="color: #990000">[]</span> <span style="color: #990000">=</span> <span style="color: #FF0000">{</span>
+  <span style="color: #FF0000">{</span> <span style="color: #990000">(</span>GCallback<span style="color: #990000">)</span> value_object_getvalue1<span style="color: #990000">,</span>
+    dbus_glib_marshal_value_object_BOOLEAN__POINTER_POINTER<span style="color: #990000">,</span> <span style="color: #993399">0</span> <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+  <span style="color: #FF0000">{</span> <span style="color: #990000">(</span>GCallback<span style="color: #990000">)</span> value_object_getvalue2<span style="color: #990000">,</span>
+    dbus_glib_marshal_value_object_BOOLEAN__POINTER_POINTER<span style="color: #990000">,</span> <span style="color: #993399">47</span> <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+  <span style="color: #FF0000">{</span> <span style="color: #990000">(</span>GCallback<span style="color: #990000">)</span> value_object_setvalue1<span style="color: #990000">,</span>
+    dbus_glib_marshal_value_object_BOOLEAN__INT_POINTER<span style="color: #990000">,</span> <span style="color: #993399">94</span> <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+  <span style="color: #FF0000">{</span> <span style="color: #990000">(</span>GCallback<span style="color: #990000">)</span> value_object_setvalue2<span style="color: #990000">,</span>
+    dbus_glib_marshal_value_object_BOOLEAN__DOUBLE_POINTER<span style="color: #990000">,</span> <span style="color: #993399">137</span> <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">const</span></span> DBusGObjectInfo dbus_glib_value_object_object_info <span style="color: #990000">=</span> <span style="color: #FF0000">{</span>
+  <span style="color: #993399">0</span><span style="color: #990000">,</span>
+  dbus_glib_value_object_methods<span style="color: #990000">,</span>
+  <span style="color: #993399">4</span><span style="color: #990000">,</span>
+<span style="color: #FF0000">"org.maemo.Value</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">getvalue1</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">S</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">cur_value</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">O</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">F</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">N</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">i</span><span style="color: #CC33CC">\0\0</span><span style="color: #FF0000">"</span>
+<span style="color: #FF0000">"org.maemo.Value</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">getvalue2</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">S</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">cur_value</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">O</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">F</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">N</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">d</span><span style="color: #CC33CC">\0\0</span><span style="color: #FF0000">"</span>
+<span style="color: #FF0000">"org.maemo.Value</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">setvalue1</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">S</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">new_value</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">I</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">i</span><span style="color: #CC33CC">\0\0</span><span style="color: #FF0000">"</span>
+<span style="color: #FF0000">"org.maemo.Value</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">setvalue2</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">S</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">new_value</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">I</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">d</span><span style="color: #CC33CC">\0\0\0</span><span style="color: #FF0000">"</span><span style="color: #990000">,</span>
+<span style="color: #FF0000">"</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">"</span><span style="color: #990000">,</span>
+<span style="color: #FF0000">"</span><span style="color: #CC33CC">\0</span><span style="color: #FF0000">"</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+</tt></pre>
+<p></p>
+
+<p>[ The method table and object introspection data (glib-dbus-sync/value-server-stub.h) ]</p>
+
+<p>We're interested in the method table mainly because it lists the names of the functions that we need to implement: <code>value_object_getvalue1</code>, <code>value_object_getvalue2</code>, <code>value_object_setvalue1</code> and <code>value_object_setvalue2</code>.
+ Each entry in the table consists of a function address, and the 
+function to use to marshal data from/to GLib/D-Bus (the functions that 
+start with <code>dbus_glib_marshal_*</code>). The marshaling functions are defined in the same file, but were omitted from the listing above.</p>
+
+<p>Marshaling in its most generic form means the conversion of 
+parameters or arguments from one format to another, in order to make two
+ different parameter passing conventions compatible. It is a common 
+feature found in almost all <span class="caps">RPC </span>mechanisms. 
+Since GLib has its own type system (which we'll see shortly) and D-Bus 
+its own, it would be very tedious to write the conversion code manually.
+ This is where the binding generation tool really helps.</p>
+
+<p>The other interesting feature of the above listing is the <code>_object_info</code>
+ structure. It will be passed to the D-Bus daemon when we're ready with 
+our object and wish to publish it on the bus (so that clients may invoke
+ methods on it). The very long string (that contains binary zeroes) is 
+the compact format of the interface specification. You will see 
+similarities with the names in the string with the names of the 
+interface, methods and arguments that we declared in the <span class="caps">XML.</span> It is also an important part of the D-Bus introspection mechanism which we'll cover at the end of this chapter.</p>
+
+<p>As the snippet says at the very first line, it should never be edited manually. This holds true while you use the <span class="caps">XML </span>file as the source of your interface. It is also possible to use the <span class="caps">XML </span>only once, when you start your project, and then just start copy-pasting the generated glue code around while discarding the <span class="caps">XML </span>file and <code>dbus-binding-tool</code>.
+ Needless to say, this makes maintenance of the interface much more 
+difficult and isn't really recommended. We will not edit the generated 
+stub code in this material.</p>
+
+<p>We'll next continue with the server implementation for the functions that are called via the method table.</p>
+
+<a name="CreatingasimpleGObjectforDBus"></a><br>
+<h1>Creating a simple GObject for D-Bus</h1>
+
+<p>We start with the per-instance and per-class state structures for our
+ object. The per-class structure contains only the bare minimum contents
+ which is required from all classes in GObject. The per-instance 
+structure also contains the required "parent object" state (<code>GObject</code>) but also includes the two internal values (<code>value1</code> and <code>value2</code>) with which we'll be working for the rest of this example:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/* This defines the per-instance state.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">   Each GObject must start with the 'parent' definition so that common</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   operations that all GObjects support can be called on it. */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">typedef</span></span> <span style="font-weight: bold"><span style="color: #0000FF">struct</span></span> <span style="color: #FF0000">{</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* The parent class object state. */</span></span>
+  GObject parent<span style="color: #990000">;</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* Our first per-object state variable. */</span></span>
+  gint value1<span style="color: #990000">;</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* Our second per-object state variable. */</span></span>
+  gdouble value2<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span> ValueObject<span style="color: #990000">;</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/* Per class state.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">   For the first Value implementation we only have the bare minimum,</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   that is, the common implementation for any GObject class. */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">typedef</span></span> <span style="font-weight: bold"><span style="color: #0000FF">struct</span></span> <span style="color: #FF0000">{</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* The parent class state. */</span></span>
+  GObjectClass parent<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span> ValueObjectClass<span style="color: #990000">;</span>
+</tt></pre>
+<p></p>
+
+<p>[ Per class and per instance state structures for the Value (glib-dbus-sync/server.c) ]</p>
+
+<p>We then continue by defining convenience macros in a way expected for all GTypes. The <code>G_TYPE_</code>-macros
+ are defined in GType and include the magic by which our object 
+implementation doesn't need to know the internal specifics of GType so 
+much. The GType macros are described in the GObject <span class="caps">API </span>reference for GType at <a href="http://maemo.org/api_refs/4.0/gobject/index.html">http://maemo.org/api_refs/4.0/gobject/index.html</a>.</p>
+
+<p>We'll be using some of the macros internally in our implementation later on.</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/* Forward declaration of the function that will return the GType of</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   the Value implementation. Not used in this program since we only</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   need to push this over the D-Bus. */</span></span>
+GType <span style="font-weight: bold"><span style="color: #000000">value_object_get_type</span></span><span style="color: #990000">(</span><span style="color: #009900">void</span><span style="color: #990000">);</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/* Macro for the above. It is common to define macros using the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   naming convention (seen below) for all GType implementations,</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   and that's why we're going to do that here as well. */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> <span style="font-weight: bold"><span style="color: #000000">VALUE_TYPE_OBJECT </span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">value_object_get_type</span></span><span style="color: #990000">())</span>
+
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> <span style="font-weight: bold"><span style="color: #000000">VALUE_OBJECT</span></span><span style="color: #990000">(</span>object<span style="color: #990000">)</span> <span style="color: #990000">\</span>
+        <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">G_TYPE_CHECK_INSTANCE_CAST</span></span><span style="color: #990000">((</span>object<span style="color: #990000">),</span> <span style="color: #990000">\</span>
+         VALUE_TYPE_OBJECT<span style="color: #990000">,</span> ValueObject<span style="color: #990000">))</span>
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> <span style="font-weight: bold"><span style="color: #000000">VALUE_OBJECT_CLASS</span></span><span style="color: #990000">(</span>klass<span style="color: #990000">)</span> <span style="color: #990000">\</span>
+        <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">G_TYPE_CHECK_CLASS_CAST</span></span><span style="color: #990000">((</span>klass<span style="color: #990000">),</span> <span style="color: #990000">\</span>
+         VALUE_TYPE_OBJECT<span style="color: #990000">,</span> ValueObjectClass<span style="color: #990000">))</span>
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> <span style="font-weight: bold"><span style="color: #000000">VALUE_IS_OBJECT</span></span><span style="color: #990000">(</span>object<span style="color: #990000">)</span> <span style="color: #990000">\</span>
+        <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">G_TYPE_CHECK_INSTANCE_TYPE</span></span><span style="color: #990000">((</span>object<span style="color: #990000">),</span> <span style="color: #990000">\</span>
+         VALUE_TYPE_OBJECT<span style="color: #990000">))</span>
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> <span style="font-weight: bold"><span style="color: #000000">VALUE_IS_OBJECT_CLASS</span></span><span style="color: #990000">(</span>klass<span style="color: #990000">)</span> <span style="color: #990000">\</span>
+        <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">G_TYPE_CHECK_CLASS_TYPE</span></span><span style="color: #990000">((</span>klass<span style="color: #990000">),</span> <span style="color: #990000">\</span>
+         VALUE_TYPE_OBJECT<span style="color: #990000">))</span>
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> <span style="font-weight: bold"><span style="color: #000000">VALUE_OBJECT_GET_CLASS</span></span><span style="color: #990000">(</span>obj<span style="color: #990000">)</span> <span style="color: #990000">\</span>
+        <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">G_TYPE_INSTANCE_GET_CLASS</span></span><span style="color: #990000">((</span>obj<span style="color: #990000">),</span> <span style="color: #990000">\</span>
+         VALUE_TYPE_OBJECT<span style="color: #990000">,</span> ValueObjectClass<span style="color: #990000">))</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/* Utility macro to define the value_object GType structure. */</span></span>
+<span style="font-weight: bold"><span style="color: #000000">G_DEFINE_TYPE</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">,</span> value_object<span style="color: #990000">,</span> G_TYPE_OBJECT<span style="color: #990000">)</span>
+</tt></pre>
+<p></p>
+
+<p>[ Macros for the Value object (and class) for convenience (glib-dbus-sync/server.c) ]</p>
+
+<p>After the macros, we come to the instance initialization and class 
+initialization functions, of which the class initialization function 
+contains the integration call into GLib/D-Bus:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Since the stub generator will reference the functions from a call</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * table, the functions must be declared before the stub is included.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+gboolean <span style="font-weight: bold"><span style="color: #000000">value_object_getvalue1</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">,</span> gint<span style="color: #990000">*</span> value_out<span style="color: #990000">,</span>
+                                                  GError<span style="color: #990000">**</span> error<span style="color: #990000">);</span>
+gboolean <span style="font-weight: bold"><span style="color: #000000">value_object_getvalue2</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">,</span> gdouble<span style="color: #990000">*</span> value_out<span style="color: #990000">,</span>
+                                                  GError<span style="color: #990000">**</span> error<span style="color: #990000">);</span>
+gboolean <span style="font-weight: bold"><span style="color: #000000">value_object_setvalue1</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">,</span> gint value_in<span style="color: #990000">,</span>
+                                                  GError<span style="color: #990000">**</span> error<span style="color: #990000">);</span>
+gboolean <span style="font-weight: bold"><span style="color: #000000">value_object_setvalue2</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">,</span> gdouble value_in<span style="color: #990000">,</span>
+                                                  GError<span style="color: #990000">**</span> error<span style="color: #990000">);</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Pull in the stub for the server side.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">"value-server-stub.h"</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/*... Listing cut for brevity ...*/</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Per object initializer</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Only sets up internal state (both values set to zero)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">static</span></span> <span style="color: #009900">void</span> <span style="font-weight: bold"><span style="color: #000000">value_object_init</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #000000">dbg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Called"</span><span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_assert</span></span><span style="color: #990000">(</span>obj <span style="color: #990000">!=</span> NULL<span style="color: #990000">);</span>
+
+  obj<span style="color: #990000">-&gt;</span>value1 <span style="color: #990000">=</span> <span style="color: #993399">0</span><span style="color: #990000">;</span>
+  obj<span style="color: #990000">-&gt;</span>value2 <span style="color: #990000">=</span> <span style="color: #993399">0.0</span><span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Per class initializer</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Registers the type into the GLib/D-Bus wrapper so that it may add</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * its own magic.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">static</span></span> <span style="color: #009900">void</span> <span style="font-weight: bold"><span style="color: #000000">value_object_class_init</span></span><span style="color: #990000">(</span>ValueObjectClass<span style="color: #990000">*</span> klass<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">dbg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Called"</span><span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_assert</span></span><span style="color: #990000">(</span>klass <span style="color: #990000">!=</span> NULL<span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">dbg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Binding to GLib/D-Bus"</span><span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Time to bind this GType into the GLib/D-Bus wrappers.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     NOTE: This is not yet "publishing" the object on the D-Bus, but</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           since it is only allowed to do this once per class</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           creation, the safest place to put it is in the class</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           initializer.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           Specifically, this function adds "method introspection</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           data" to the class so that methods can be called over</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           the D-Bus. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">dbus_g_object_type_install_info</span></span><span style="color: #990000">(</span>VALUE_TYPE_OBJECT<span style="color: #990000">,</span>
+                                 <span style="color: #990000">&amp;</span>dbus_glib_value_object_object_info<span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">dbg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Done"</span><span style="color: #990000">);</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* All done. Class is ready to be used for instantiating objects */</span></span>
+<span style="color: #FF0000">}</span>
+</tt></pre>
+<p></p>
+
+<p>[ Per-instance and per-class initialization for Value (glib-dbus-sync/server.c) ]</p>
+
+<p>The <code>dbus_g_object_type_install_info</code> will take a pointer to the structure describing the D-Bus integration (<code>dbus_glib_value_object_object_info</code>), which is generated by <code>dbus-bindings-tool</code>.
+ This function will create all the necessary runtime information for our
+ GType, so we don't need to worry about the details. It will also attach
+ the introspection data to our GType so that D-Bus introspection may 
+return information on the interface that the object will implement.</p>
+
+<p>We next implement the get and set functions, which allows us to 
+inspect the interface as well. Note that the names of the functions and 
+their prototypes is ultimately dictated by <code>dbus-bindings-tool</code> generated stub header files. This means that if you change your interface <span class="caps">XML </span>sufficiently, your code will fail to build (since the generated stubs will yield different prototypes):</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Function that gets called when someone tries to execute "setvalue1"</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * over the D-Bus. (Actually the marshaling code from the stubs gets</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * executed first, but they will eventually execute this function.)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * NOTE: If you change the name of this function, the generated</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *       stubs will no longer find it! On the other hand, if you</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *       decide to modify the interface XML, this is one of the places</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *       that you'll have to modify as well.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *       This applies to the next four functions (including this one).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+gboolean <span style="font-weight: bold"><span style="color: #000000">value_object_setvalue1</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">,</span> gint valueIn<span style="color: #990000">,</span>
+                                                  GError<span style="color: #990000">**</span> error<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">dbg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Called (valueIn=%d)"</span><span style="color: #990000">,</span> valueIn<span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_assert</span></span><span style="color: #990000">(</span>obj <span style="color: #990000">!=</span> NULL<span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Change the value. */</span></span>
+  obj<span style="color: #990000">-&gt;</span>value1 <span style="color: #990000">=</span> valueIn<span style="color: #990000">;</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Return success to GLib/D-Bus wrappers. In this case we don't need</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     to touch the supplied error pointer-pointer. */</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> TRUE<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Function that gets executed on "setvalue2".</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Other than this function operating with different type input</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * parameter (and different internal value), all the comments from</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * set_value1 apply here as well.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+gboolean <span style="font-weight: bold"><span style="color: #000000">value_object_setvalue2</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">,</span> gdouble valueIn<span style="color: #990000">,</span>
+                                                  GError<span style="color: #990000">**</span> error<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">dbg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Called (valueIn=%.3f)"</span><span style="color: #990000">,</span> valueIn<span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_assert</span></span><span style="color: #990000">(</span>obj <span style="color: #990000">!=</span> NULL<span style="color: #990000">);</span>
+
+  obj<span style="color: #990000">-&gt;</span>value2 <span style="color: #990000">=</span> valueIn<span style="color: #990000">;</span>
+
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> TRUE<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Function that gets executed on "getvalue1".</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+gboolean <span style="font-weight: bold"><span style="color: #000000">value_object_getvalue1</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">,</span> gint<span style="color: #990000">*</span> valueOut<span style="color: #990000">,</span>
+                                                  GError<span style="color: #990000">**</span> error<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">dbg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Called (internal value1 is %d)"</span><span style="color: #990000">,</span> obj<span style="color: #990000">-&gt;</span>value1<span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_assert</span></span><span style="color: #990000">(</span>obj <span style="color: #990000">!=</span> NULL<span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Check that the target pointer is not NULL.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     Even is the only caller for this will be the GLib-wrapper code,</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     we cannot trust the stub generated code and should handle the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     situation. We will terminate with an error in this case.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">     Another option would be to create a new GError, and store</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     the error condition there. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">g_assert</span></span><span style="color: #990000">(</span>valueOut <span style="color: #990000">!=</span> NULL<span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Copy the current first value to caller specified memory. */</span></span>
+  <span style="color: #990000">*</span>valueOut <span style="color: #990000">=</span> obj<span style="color: #990000">-&gt;</span>value1<span style="color: #990000">;</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Return success. */</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> TRUE<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * Function that gets executed on "getvalue2".</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * (Again, similar to "getvalue1").</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+gboolean <span style="font-weight: bold"><span style="color: #000000">value_object_getvalue2</span></span><span style="color: #990000">(</span>ValueObject<span style="color: #990000">*</span> obj<span style="color: #990000">,</span> gdouble<span style="color: #990000">*</span> valueOut<span style="color: #990000">,</span>
+                                                  GError<span style="color: #990000">**</span> error<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">dbg</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Called (internal value2 is %.3f)"</span><span style="color: #990000">,</span> obj<span style="color: #990000">-&gt;</span>value2<span style="color: #990000">);</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_assert</span></span><span style="color: #990000">(</span>obj <span style="color: #990000">!=</span> NULL<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #000000">g_assert</span></span><span style="color: #990000">(</span>valueOut <span style="color: #990000">!=</span> NULL<span style="color: #990000">);</span>
+
+  <span style="color: #990000">*</span>valueOut <span style="color: #990000">=</span> obj<span style="color: #990000">-&gt;</span>value2<span style="color: #990000">;</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> TRUE<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+</tt></pre>
+<p></p>
+
+<p>[ Implementation for the get and set methods (glib-dbus-sync/server.c) ]</p>
+
+<p>The GLib/D-Bus wrapper logic will implement all of the parameter 
+conversion necessary from D-Bus into your functions, so you'll only need
+ to handle the GLib corresponding types (<code>gint</code> and <code>gdouble</code>).
+ The method implementations will always receive an object reference to 
+the object as their first parameter and a pointer to a place where to 
+store new GError objects if your method decides an error should be 
+created. This error would then be propagated back to the caller of the 
+D-Bus method. Our simple get/set examples will never set errors, so 
+we're free to ignore the last parameter.</p>
+
+<p>Note that returning values is not done via the conventional C way (by using <code>return someVal</code>), but instead return values are written via the given pointers. The return value of the method is always a <code>gboolean</code> signifying success or failure. If you decide to return failure (<code>FALSE</code>), you'll also need to create and setup an GError object and store its address to the <code>error</code> location.</p>
+
+<a name="PublishingaGTypeontheDBus"></a><br>
+<h1>Publishing a GType on the D-Bus</h1>
+
+<p>Once our implementation is complete, we'll need to publish an 
+instance of the class on to the D-Bus. This will be done inside the <code>main</code> of the server example and involves doing a D-Bus method call on the bus.</p>
+
+<p>So that we don't need to change both the server and client if we 
+decide to change the object or well-known names later, we put them into a
+ common header file that will be used by both:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/* Well-known name for this service. */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> VALUE_SERVICE_NAME        <span style="color: #FF0000">"org.maemo.Platdev_ex"</span>
+<span style="font-style: italic"><span style="color: #9A1900">/* Object path to the provided object. */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> VALUE_SERVICE_OBJECT_PATH <span style="color: #FF0000">"/GlobalValue"</span>
+<span style="font-style: italic"><span style="color: #9A1900">/* And we're interested in using it through this interface.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   This must match the entry in the interface definition XML. */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#define</span></span> VALUE_SERVICE_INTERFACE   <span style="color: #FF0000">"org.maemo.Value"</span>
+</tt></pre>
+<p></p>
+
+<p>[ Symbolic constants that both server and client will use for name space related parameters (glib-dbus-sync/common-defs.h) ]</p>
+
+<p>The decision to use <code>/GlobalValue</code> as the object path is based on clarity only. Most of the time you'd use something like <code>/org/maemo/Value</code> instead.</p>
+
+<p>Before using any of the GType functions, we'll need to initialize the runtime system by calling <code>g_type_init</code>. This will create the built in types and setup all the machinery necessary for creating custom types as well. If you're using <span class="caps">GTK</span>+, then the function is called for you automatically when you initialize <span class="caps">GTK</span>+. Since we're only using GLib, we need to call the function manually.</p>
+
+<p>After initializing the GType system, we then proceed by opening a 
+connection to the session bus, which we'll use for the remainder of the 
+publishing sequence:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/* Pull symbolic constants that are shared (in this example) between</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   the client and the server. */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">"common-defs.h"</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/*... Listing cut for brevity ...*/</span></span>
+
+<span style="color: #009900">int</span> <span style="font-weight: bold"><span style="color: #000000">main</span></span><span style="color: #990000">(</span><span style="color: #009900">int</span> argc<span style="color: #990000">,</span> <span style="color: #009900">char</span><span style="color: #990000">**</span> argv<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/*... Listing cut for brevity ...*/</span></span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Initialize the GType/GObject system. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">g_type_init</span></span><span style="color: #990000">();</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/*... Listing cut for brevity ...*/</span></span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main Connecting to the Session D-Bus.</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">);</span>
+  bus <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">dbus_g_bus_get</span></span><span style="color: #990000">(</span>DBUS_BUS_SESSION<span style="color: #990000">,</span> <span style="color: #990000">&amp;</span>error<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>error <span style="color: #990000">!=</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-style: italic"><span style="color: #9A1900">/* Print error and terminate. */</span></span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Couldn't connect to session bus"</span><span style="color: #990000">,</span> error<span style="color: #990000">-&gt;</span>message<span style="color: #990000">,</span> TRUE<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+</tt></pre>
+<p></p>
+
+<p>[ Initializing GType and connecting to the session bus (glib-dbus-sync/server.c) ]</p>
+
+<p>In order for prospective clients to find the object on the session 
+bus, we'll need to attach the server to a well-known name. This is done 
+with the <code>RequestName</code> method call on the D-Bus server (over 
+D-Bus). In order to target the server, we'll need to create a GLib/D-Bus
+ proxy object first:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt>  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main Registering the well-known name (%s)</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">,</span>
+          VALUE_SERVICE_NAME<span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* In order to register a well-known name, we need to use the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     "RequestMethod" of the /org/freedesktop/DBus interface. Each</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     bus provides an object that will implement this interface.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">     In order to do the call, we need a proxy object first.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     DBUS_SERVICE_DBUS = "org.freedesktop.DBus"</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     DBUS_PATH_DBUS = "/org/freedesktop/DBus"</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     DBUS_INTERFACE_DBUS = "org.freedesktop.DBus" */</span></span>
+  busProxy <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">dbus_g_proxy_new_for_name</span></span><span style="color: #990000">(</span>bus<span style="color: #990000">,</span>
+                                       DBUS_SERVICE_DBUS<span style="color: #990000">,</span>
+                                       DBUS_PATH_DBUS<span style="color: #990000">,</span>
+                                       DBUS_INTERFACE_DBUS<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>busProxy <span style="color: #990000">==</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Failed to get a proxy for D-Bus"</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">"Unknown(dbus_g_proxy_new_for_name)"</span><span style="color: #990000">,</span> TRUE<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Attempt to register the well-known name.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     The RPC call requires two parameters:</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     - arg0: (D-Bus STRING): name to request</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     - arg1: (D-Bus UINT32): flags for registration.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       (please see "org.freedesktop.DBus.RequestName" in</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        </span></span><span style="text-decoration: underline"><span style="color: #0000FF">http://dbus.freedesktop.org/doc/dbus-specification.html</span></span><span style="font-style: italic"><span style="color: #9A1900">)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     Will return one uint32 giving the result of the RPC call.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     We're interested in 1 (we're now the primary owner of the name)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     or 4 (we were already the owner of the name, however in this</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     application it wouldn't make much sense).</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">     The function will return FALSE if it sets the GError. */</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span><span style="font-weight: bold"><span style="color: #000000">dbus_g_proxy_call</span></span><span style="color: #990000">(</span>busProxy<span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Method name to call. */</span></span>
+                         <span style="color: #FF0000">"RequestName"</span><span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Where to store the GError. */</span></span>
+                         <span style="color: #990000">&amp;</span>error<span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Parameter type of argument 0. Note that</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            since we're dealing with GLib/D-Bus</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            wrappers, you will need to find a suitable</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            GType instead of using the "native" D-Bus</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            type codes. */</span></span>
+                         G_TYPE_STRING<span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Data of argument 0. In our case, this is</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            the well-known name for our server</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            example ("org.maemo.Platdev_ex"). */</span></span>
+                         VALUE_SERVICE_NAME<span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Parameter type of argument 1. */</span></span>
+                         G_TYPE_UINT<span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Data of argument 0. This is the "flags"</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            argument of the "RequestName" method which</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            can be use to specify what the bus service</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            should do when the name already exists on</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            the bus. We'll go with defaults. */</span></span>
+                         <span style="color: #993399">0</span><span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Input arguments are terminated with a</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            special GType marker. */</span></span>
+                         G_TYPE_INVALID<span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Parameter type of return value 0.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            For "RequestName" it is UINT32 so we pick</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            the GType that maps into UINT32 in the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            wrappers. */</span></span>
+                         G_TYPE_UINT<span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Data of return value 0. These will always</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            be pointers to the locations where the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                            proxy can copy the results. */</span></span>
+                         <span style="color: #990000">&amp;</span>result<span style="color: #990000">,</span>
+                         <span style="font-style: italic"><span style="color: #9A1900">/* Terminate list of return values. */</span></span>
+                         G_TYPE_INVALID<span style="color: #990000">))</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"D-Bus.RequestName RPC failed"</span><span style="color: #990000">,</span> error<span style="color: #990000">-&gt;</span>message<span style="color: #990000">,</span>
+                                                TRUE<span style="color: #990000">);</span>
+    <span style="font-style: italic"><span style="color: #9A1900">/* Note that the whole call failed, not "just" the name</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       registration (we deal with that below). This means that</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       something bad probably has happened and there's not much we can</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       do (hence program termination). */</span></span>
+  <span style="color: #FF0000">}</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* Check the result code of the registration RPC. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main RequestName returned %d.</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">,</span> result<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>result <span style="color: #990000">!=</span> <span style="color: #993399">1</span><span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Failed to get the primary well-known name."</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">"RequestName result != 1"</span><span style="color: #990000">,</span> TRUE<span style="color: #990000">);</span>
+    <span style="font-style: italic"><span style="color: #9A1900">/* In this case we could also continue instead of terminating.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       We could retry the RPC later. Or "lurk" on the bus waiting for</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       someone to tell us what to do. If we would be publishing</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       multiple services and/or interfaces, it even might make sense</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       to continue with the rest anyway.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">       In our simple program, we terminate. Not much left to do for</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       this poor program if the clients won't be able to find the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       Value object using the well-known name. */</span></span>
+  <span style="color: #FF0000">}</span>
+</tt></pre>
+<p></p>
+
+<p>[ Publishing one Value object onto the D-Bus (glib-dbus-sync/server.c) ]</p>
+
+<p>The <code>dbus_g_proxy_call</code> function is used to do synchronous method calls in GLib/D-Bus wrappers, and in our case, we'll use it to run the two argument <code>RequestName</code> method call. The method returns one value (and <code>uint32</code>) which encodes the result of the well-known name registration.</p>
+
+<p>One needs to be careful with the order and correctness of the 
+parameters to the function call, as it is easy to get something wrong 
+and the C compiler cannot really check for parameter type validity here.</p>
+
+<p>After the successful name registration, we're finally now ready to 
+create an instance of the ValueObject and publish it on the D-Bus:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt>  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main Creating one Value object.</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">);</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* The NULL at the end means that we have stopped listing the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     property names and their values that would have been used to</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     set the properties to initial values. Our simple Value</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     implementation does not support GObject properties, and also</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     doesn't inherit anything interesting from GObject directly, so</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     there are no properties to set. For more examples on properties</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     see the first GTK+ example programs from the maemo Application</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     Development material.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">     NOTE: You need to keep at least one reference to the published</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           object at all times, unless you want it to disappear from</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           the D-Bus (implied by API reference for</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">           dbus_g_connection_register_g_object(). */</span></span>
+  valueObj <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">g_object_new</span></span><span style="color: #990000">(</span>VALUE_TYPE_OBJECT<span style="color: #990000">,</span> NULL<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>valueObj <span style="color: #990000">==</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Failed to create one Value instance."</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">"Unknown(OOM?)"</span><span style="color: #990000">,</span> TRUE<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main Registering it on the D-Bus.</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">);</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* The function does not return any status, so can't check for</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     errors here. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">dbus_g_connection_register_g_object</span></span><span style="color: #990000">(</span>bus<span style="color: #990000">,</span>
+                                      VALUE_SERVICE_OBJECT_PATH<span style="color: #990000">,</span>
+                                      <span style="font-weight: bold"><span style="color: #000000">G_OBJECT</span></span><span style="color: #990000">(</span>valueObj<span style="color: #990000">));</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main Ready to serve requests (daemonizing).</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/*... Listing cut for brevity ...*/</span></span>
+
+<span style="color: #FF0000">}</span>
+</tt></pre>
+<p></p>
+
+<p>[ Publishing one Value object onto the D-Bus (glib-dbus-sync/server.c) ]</p>
+
+<p>And after this, <code>main</code> will enter into the main loop, and 
+will serve client requests coming over the D-Bus until the server is 
+terminated. Note that all the callback registration is done 
+automatically by the GLib/D-Bus wrappers on object publication, so you 
+don't need to worry about them.</p>
+
+<p>Implementing the dependencies and rules for the server and the generated stub code will give this snippet:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="color: #990000">server:</span> server.o
+	<span style="color: #009900">$(CC)</span> <span style="color: #009900">$^</span> -o <span style="color: #009900">$@</span> <span style="color: #009900">$(LDFLAGS)</span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># ... Listing cut for brevity ...</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># The server and client depend on the respective implementation source</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># files, but also on the common interface as well as the generated</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># stub interfaces.</span></span>
+<span style="color: #990000">server.o:</span> server.c common-defs.h value-server-stub.h
+	<span style="color: #009900">$(CC)</span> <span style="color: #009900">$(CFLAGS)</span> -DPROGNAME<span style="color: #990000">=</span>\"<span style="color: #009900">$(</span>basename <span style="color: #009900">$@</span><span style="color: #990000">)</span>\" -c <span style="color: #009900">$&lt;</span> -o <span style="color: #009900">$@</span>
+</tt></pre>
+<p></p>
+
+<p>When implementing makefiles that separate compilation from linking, 
+it's not possible to pass the target name (automatic variable <code>$@</code>) directly as the <code>PROGNAME</code>-define (since that would expand into <code>server.o</code> and would look slightly silly when we prefix all our messages with the name). Instead, we use a <span class="caps">GNU </span>make function (<code>basename</code>) that will strip out any prefix and suffix out of the parameter. This way our <code>PROGNAME</code> will be set to <code>server</code>.</p>
+
+<p>We then build the server and start it:</p>
+
+
+
+<pre>[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>make server</b>
+dbus-binding-tool --prefix=value_object --mode=glib-server \
+  value-dbus-interface.xml &gt; value-server-stub.h
+cc -I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include
+   -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -Wall
+   -DG_DISABLE_DEPRECATED -DNO_DAEMON  -DPROGNAME=\"server\"
+   -c server.c -o server.o
+cc server.o -o server -ldbus-glib-1 -ldbus-1 -lgobject-2.0 -lglib-2.0
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>run-standalone.sh ./server</b>
+server:main Connecting to the Session D-Bus.
+server:main Registering the well-known name (org.maemo.Platdev_ex)
+server:main RequestName returned 1.
+server:main Creating one Value object.
+server:value_object_class_init: Called
+server:value_object_class_init: Binding to GLib/D-Bus
+server:value_object_class_init: Done
+server:value_object_init: Called
+server:main Registering it on the D-Bus.
+server:main Ready to serve requests (daemonizing).
+server: Not daemonizing (built with NO_DAEMON-build define)
+</pre>
+
+
+
+<p>We then use <code>dbus-send</code> to test out the implementation 
+details from the server. This is done in the same session (for 
+simplicity) by first suspending the server with <code>Ctrl+z</code> and then continuing running it with the <code>bg</code> shell built-in command. This is done so that you can more easily see the reaction of the server to each <code>dbus-send</code> command.</p>
+
+<p>We start by testing the <code>getvalue1</code> and <code>setvalue1</code> methods:</p>
+
+
+
+<pre><b>[Ctrl+z]</b>
+[1]+  Stopped                 run-standalone.sh ./server
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>bg</b>
+[1]+ run-standalone.sh ./server &amp;
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>run-standalone.sh dbus-send</b> \
+ <b>--type=method_call --print-reply --dest=org.maemo.Platdev_ex</b> \
+ <b>/GlobalValue org.maemo.Value.getvalue1</b>
+server:value_object_getvalue1: Called (internal value1 is 0)
+method return sender=:1.15 -&gt; dest=:1.20
+ int32 0
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>run-standalone.sh dbus-send</b> \
+ <b>--type=method_call --print-reply --dest=org.maemo.Platdev_ex</b> \
+ <b>/GlobalValue org.maemo.Value.setvalue1 int32:5</b>
+server:value_object_setvalue1: Called (valueIn=5)
+method return sender=:1.15 -&gt; dest=:1.21
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>run-standalone.sh dbus-send</b> \
+ <b>--type=method_call --print-reply --dest=org.maemo.Platdev_ex</b> \
+ <b>/GlobalValue org.maemo.Value.getvalue1</b>
+server:value_object_getvalue1: Called (internal value1 is 5)
+method return sender=:1.15 -&gt; dest=:1.22
+ int32 5
+</pre>
+
+
+
+<p>[ Testing <code>value1</code> (32-bit integer) ]</p>
+
+<p>And continue by testing the double state variable with <code>getvalue2</code> and <code>setvalue2</code> methods:</p>
+
+
+
+<pre>[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>run-standalone.sh dbus-send</b> \
+ <b>--type=method_call --print-reply --dest=org.maemo.Platdev_ex</b> \
+ <b>/GlobalValue org.maemo.Value.getvalue2</b>
+server:value_object_getvalue2: Called (internal value2 is 0.000)
+method return sender=:1.15 -&gt; dest=:1.23
+ double 0
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>run-standalone.sh dbus-send</b> \
+ <b>--type=method_call --print-reply --dest=org.maemo.Platdev_ex</b> \
+ <b>/GlobalValue org.maemo.Value.setvalue2 double:42.0</b>
+server:value_object_setvalue2: Called (valueIn=42.000)
+method return sender=:1.15 -&gt; dest=:1.24
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>run-standalone.sh dbus-send</b> \
+ <b>--type=method_call --print-reply --dest=org.maemo.Platdev_ex</b> \
+ <b>/GlobalValue org.maemo.Value.getvalue2</b>
+server:value_object_getvalue2: Called (internal value2 is 42.000)
+method return sender=:1.15 -&gt; dest=:1.25
+ double 42
+</pre>
+
+
+
+<p>[ Testing <code>value2</code> (double) ]</p>
+
+<p>We now have a fully functional D-Bus service implementation (albeit a very simple one).</p>
+
+<p>We'll next proceed to utilize the service from a client.</p>
+
+<a name="UsingtheGLibDBuswrapperfromaclient"></a><br>
+<h1>Using the GLib/D-Bus wrapper from a client</h1>
+
+<p>By using the generated client stub file, it's now possible to write 
+the client that will invoke the methods on the Value object. The D-Bus 
+method calls could also be done "manually" (either with GLib/D-Bus 
+functions, or even by using libdbus directly, but latter is 
+discouraged).</p>
+
+<p>The <code>dbus-bindings-tool</code> (when run with the <code>--mode=glib-client</code>
+ parameter) will generate functions for each of the interface methods, 
+and the functions will handle data marshaling operations internally.</p>
+
+<p>Two generated stub functions are presented below (we'll be using them shortly):</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/* Generated by dbus-binding-tool; do not edit! */</span></span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/*... Listing cut for brevity ...*/</span></span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">static</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#ifdef</span></span> G_HAVE_INLINE
+<span style="font-weight: bold"><span style="color: #0000FF">inline</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#endif</span></span>
+gboolean
+<span style="font-weight: bold"><span style="color: #000000">org_maemo_Value_getvalue1 </span></span><span style="color: #990000">(</span>DBusGProxy <span style="color: #990000">*</span>proxy<span style="color: #990000">,</span> gint<span style="color: #990000">*</span> OUT_cur_value<span style="color: #990000">,</span>
+                                              GError <span style="color: #990000">**</span>error<span style="color: #990000">)</span>
+
+<span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #000000">dbus_g_proxy_call </span></span><span style="color: #990000">(</span>proxy<span style="color: #990000">,</span> <span style="color: #FF0000">"getvalue1"</span><span style="color: #990000">,</span> error<span style="color: #990000">,</span> G_TYPE_INVALID<span style="color: #990000">,</span>
+                            G_TYPE_INT<span style="color: #990000">,</span> OUT_cur_value<span style="color: #990000">,</span> G_TYPE_INVALID<span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/*... Listing cut for brevity ...*/</span></span>
+
+<span style="font-weight: bold"><span style="color: #0000FF">static</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#ifdef</span></span> G_HAVE_INLINE
+<span style="font-weight: bold"><span style="color: #0000FF">inline</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#endif</span></span>
+gboolean
+<span style="font-weight: bold"><span style="color: #000000">org_maemo_Value_setvalue1 </span></span><span style="color: #990000">(</span>DBusGProxy <span style="color: #990000">*</span>proxy<span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #0000FF">const</span></span> gint IN_new_value<span style="color: #990000">,</span>
+                                              GError <span style="color: #990000">**</span>error<span style="color: #990000">)</span>
+
+<span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #000000">dbus_g_proxy_call </span></span><span style="color: #990000">(</span>proxy<span style="color: #990000">,</span> <span style="color: #FF0000">"setvalue1"</span><span style="color: #990000">,</span> error<span style="color: #990000">,</span> G_TYPE_INT<span style="color: #990000">,</span>
+                            IN_new_value<span style="color: #990000">,</span> G_TYPE_INVALID<span style="color: #990000">,</span>
+                            G_TYPE_INVALID<span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span>
+</tt></pre>
+<p></p>
+
+<p>[ Generated wrapper functions for <code>setvalue1</code> and <code>getvalue1</code> (glib-dbus-sync/value-client-stub.h) ]</p>
+
+<p>The two functions presented above are both <strong>blocking</strong> 
+which means that they will wait for the result to arrive over the D-Bus 
+and only then return to the caller. The generated stub code also 
+includes <strong>asynchronous</strong> functions (their names end with <code>_async</code>), but we'll cover using them later on.</p>
+
+<p>For now, it's important to notice how the prototypes of the functions
+ are named and what are the parameters that they expect one to pass to 
+them.</p>
+
+<p>The <code>org_maemo_Value</code> -prefix is taken from the interface <span class="caps">XML </span>file, from the <code>name</code> attribute of the <code>interface</code>
+ element. All dots will be converted into underscores (since C reserves 
+the dot character for other uses), but otherwise the name will be 
+preserved (barring dashes in the name).</p>
+
+<p>The rest of the function name will be the method name for each method defined in the interface <span class="caps">XML </span>file.</p>
+
+<p>The first parameter for all the generated stub functions will always be a pointer to a <code>DBusProxy</code>
+ object, which we'll need to use with the GLib/D-Bus wrapper functions. 
+After the proxy, a list of method parameters is passed. The binding tool
+ will prefix the parameter names with either <code>IN_</code> or <code>OUT_</code> depending on the "direction" of the parameter. Rest of the parameter name is taken from the <code>name</code> attributed of the <code>arg</code> element for the method, or if not given, will be automatically generated as <code>arg0</code>, <code>arg1</code>
+ and so forth. Input parameters will be passed as values (unless they're
+ complex or strings, in which case they'll be passed as pointers). 
+Output parameters are always passed as pointers.</p>
+
+<p>The functions will always return a <code>gboolean</code>, indicating failure or success, and if they fail, they will also create and set the <code>error</code> pointer to an <code>GError</code> -object which can then be checked for the reason for the error (unless the caller passed a <span class="caps">NULL </span>pointer for <code>error</code>, in which case the error object won't be created).</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">&lt;glib.h&gt;</span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">&lt;dbus/dbus-glib.h&gt;</span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">&lt;stdlib.h&gt;</span> <span style="font-style: italic"><span style="color: #9A1900">/* exit, EXIT_FAILURE */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">&lt;string.h&gt;</span> <span style="font-style: italic"><span style="color: #9A1900">/* strcmp */</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/* Pull the common symbolic defines. */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">"common-defs.h"</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/* Pull in the client stubs that were generated with</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">   dbus-binding-tool */</span></span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">"value-client-stub.h"</span>
+</tt></pre>
+<p></p>
+
+<p>[ The generated stub code is pulled into the client (glib-dbus-sync/client.c) ]</p>
+
+<p>This will allow our client code to use the stub code directly as follows:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * This function will be called repeatedly from within the mainloop</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * timer launch code.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * The function will start with two statically initialized variables</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * (int and double) which will be incremented after each time this</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * function runs and will use the setvalue* remote methods to set the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * new values. If the set methods fail, program is not aborted, but an</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * message will be issued to the user describing the error.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">static</span></span> gboolean <span style="font-weight: bold"><span style="color: #000000">timerCallback</span></span><span style="color: #990000">(</span>DBusGProxy<span style="color: #990000">*</span> remoteobj<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Local values that we'll start updating to the remote object. */</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">static</span></span> gint localValue1 <span style="color: #990000">=</span> <span style="color: #990000">-</span><span style="color: #993399">80</span><span style="color: #990000">;</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">static</span></span> gdouble localValue2 <span style="color: #990000">=</span> <span style="color: #990000">-</span><span style="color: #993399">120.0</span><span style="color: #990000">;</span>
+
+  GError<span style="color: #990000">*</span> error <span style="color: #990000">=</span> NULL<span style="color: #990000">;</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Set the first value. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">org_maemo_Value_setvalue1</span></span><span style="color: #990000">(</span>remoteobj<span style="color: #990000">,</span> localValue1<span style="color: #990000">,</span> <span style="color: #990000">&amp;</span>error<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>error <span style="color: #990000">!=</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Failed to set value1"</span><span style="color: #990000">,</span> error<span style="color: #990000">-&gt;</span>message<span style="color: #990000">,</span> FALSE<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":timerCallback Set value1 to %d</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">,</span> localValue1<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* If there was an error with the first, release the error, and</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     don't attempt the second time. Also, don't add to the local</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     values. We assume that errors from the first set are caused by</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     server going off the D-Bus, but are hopeful that it will come</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     back, and hence keep trying (returning TRUE). */</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>error <span style="color: #990000">!=</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">g_clear_error</span></span><span style="color: #990000">(&amp;</span>error<span style="color: #990000">);</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> TRUE<span style="color: #990000">;</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Now try to set the second value as well. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">org_maemo_Value_setvalue2</span></span><span style="color: #990000">(</span>remoteobj<span style="color: #990000">,</span> localValue2<span style="color: #990000">,</span> <span style="color: #990000">&amp;</span>error<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>error <span style="color: #990000">!=</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Failed to set value2"</span><span style="color: #990000">,</span> error<span style="color: #990000">-&gt;</span>message<span style="color: #990000">,</span> FALSE<span style="color: #990000">);</span>
+    <span style="font-weight: bold"><span style="color: #000000">g_clear_error</span></span><span style="color: #990000">(&amp;</span>error<span style="color: #990000">);</span> <span style="font-style: italic"><span style="color: #9A1900">/* Or g_error_free in this case. */</span></span>
+  <span style="color: #FF0000">}</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":timerCallback Set value2 to %.3lf</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">,</span> localValue2<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Step the local values forward. */</span></span>
+  localValue1 <span style="color: #990000">+=</span> <span style="color: #993399">10</span><span style="color: #990000">;</span>
+  localValue2 <span style="color: #990000">+=</span> <span style="color: #993399">10.0</span><span style="color: #990000">;</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Tell the timer launcher that we want to remain on the timer</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     call list in the future as well. Returning FALSE here would</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     stop the launch of this timer callback. */</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> TRUE<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+</tt></pre>
+<p></p>
+
+<p>[ Using the stubs in client code (glib-dbus-sync/client.c) ]</p>
+
+<p>What is left is connecting to the correct D-Bus, creating a GProxy object which we'll do in our test program:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="font-style: italic"><span style="color: #9A1900">/**</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * The test program itself.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> *</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * 1) Setup GType/GSignal</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * 2) Create GMainLoop object</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * 3) Connect to the Session D-Bus</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * 4) Create a proxy GObject for the remote Value object</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * 5) Start a timer that will launch timerCallback once per second.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> * 6) Run main-loop (forever)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> */</span></span>
+<span style="color: #009900">int</span> <span style="font-weight: bold"><span style="color: #000000">main</span></span><span style="color: #990000">(</span><span style="color: #009900">int</span> argc<span style="color: #990000">,</span> <span style="color: #009900">char</span><span style="color: #990000">**</span> argv<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* The D-Bus connection object. Provided by GLib/D-Bus wrappers. */</span></span>
+  DBusGConnection<span style="color: #990000">*</span> bus<span style="color: #990000">;</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* This will represent the Value object locally (acting as a proxy</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     for all method calls and signal delivery. */</span></span>
+  DBusGProxy<span style="color: #990000">*</span> remoteValue<span style="color: #990000">;</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* This will refer to the GMainLoop object */</span></span>
+  GMainLoop<span style="color: #990000">*</span> mainloop<span style="color: #990000">;</span>
+  GError<span style="color: #990000">*</span> error <span style="color: #990000">=</span> NULL<span style="color: #990000">;</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Initialize the GType/GObject system. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">g_type_init</span></span><span style="color: #990000">();</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Create a new GMainLoop with default context (NULL) and initial</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     state of "not running" (FALSE). */</span></span>
+  mainloop <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">g_main_loop_new</span></span><span style="color: #990000">(</span>NULL<span style="color: #990000">,</span> FALSE<span style="color: #990000">);</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* Failure to create the main loop is fatal (for us). */</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>mainloop <span style="color: #990000">==</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Failed to create the mainloop"</span><span style="color: #990000">,</span> <span style="color: #FF0000">"Unknown (OOM?)"</span><span style="color: #990000">,</span>
+                TRUE<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main Connecting to Session D-Bus.</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">);</span>
+  bus <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">dbus_g_bus_get</span></span><span style="color: #990000">(</span>DBUS_BUS_SESSION<span style="color: #990000">,</span> <span style="color: #990000">&amp;</span>error<span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>error <span style="color: #990000">!=</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Couldn't connect to the Session bus"</span><span style="color: #990000">,</span> error<span style="color: #990000">-&gt;</span>message<span style="color: #990000">,</span>
+                TRUE<span style="color: #990000">);</span>
+    <span style="font-style: italic"><span style="color: #9A1900">/* Normally you'd have to also g_error_free() the error object</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       but since the program will terminate within handleError,</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">       it is not necessary here. */</span></span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main Creating a GLib proxy object for Value.</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Create the proxy object that we'll be using to access the object</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     on the server. If you would use dbus_g_proxy_for_name_owner(),</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     you would be also notified when the server that implements the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     object is removed (or rather, the interface is removed). Since</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     we don't care who actually implements the interface, we'll use the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     more common function. See the API documentation at</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     </span></span><span style="text-decoration: underline"><span style="color: #0000FF">http://maemo.org/api_refs/4.0/dbus/</span></span><span style="font-style: italic"><span style="color: #9A1900"> for more details. */</span></span>
+  remoteValue <span style="color: #990000">=</span>
+    <span style="font-weight: bold"><span style="color: #000000">dbus_g_proxy_new_for_name</span></span><span style="color: #990000">(</span>bus<span style="color: #990000">,</span>
+                              VALUE_SERVICE_NAME<span style="color: #990000">,</span> <span style="font-style: italic"><span style="color: #9A1900">/* name */</span></span>
+                              VALUE_SERVICE_OBJECT_PATH<span style="color: #990000">,</span> <span style="font-style: italic"><span style="color: #9A1900">/* obj path */</span></span>
+                              VALUE_SERVICE_INTERFACE <span style="font-style: italic"><span style="color: #9A1900">/* interface */</span></span><span style="color: #990000">);</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(</span>remoteValue <span style="color: #990000">==</span> NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+    <span style="font-weight: bold"><span style="color: #000000">handleError</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Couldn't create the proxy object"</span><span style="color: #990000">,</span>
+                <span style="color: #FF0000">"Unknown(dbus_g_proxy_new_for_name)"</span><span style="color: #990000">,</span> TRUE<span style="color: #990000">);</span>
+  <span style="color: #FF0000">}</span>
+
+  <span style="font-weight: bold"><span style="color: #000000">g_print</span></span><span style="color: #990000">(</span>PROGNAME <span style="color: #FF0000">":main Starting main loop (first timer in 1s).</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Register a timer callback that will do RPC sets on the values.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     The userdata pointer is used to pass the proxy object to the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     callback so that it can launch modifications to the object. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">g_timeout_add</span></span><span style="color: #990000">(</span><span style="color: #993399">1000</span><span style="color: #990000">,</span> <span style="color: #990000">(</span>GSourceFunc<span style="color: #990000">)</span>timerCallback<span style="color: #990000">,</span> remoteValue<span style="color: #990000">);</span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* Run the program. */</span></span>
+  <span style="font-weight: bold"><span style="color: #000000">g_main_loop_run</span></span><span style="color: #990000">(</span>mainloop<span style="color: #990000">);</span>
+  <span style="font-style: italic"><span style="color: #9A1900">/* Since the main loop is not stopped (by this code), we shouldn't</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">     ever get here. The program might abort() for other reasons. */</span></span>
+
+  <span style="font-style: italic"><span style="color: #9A1900">/* If it does, return failure as exit code. */</span></span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> EXIT_FAILURE<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+</tt></pre>
+<p></p>
+
+<p>[ Connecting to the bus, creating a proxy and starting the mainloop (glib-dbus-sync/client.c) ]</p>
+
+<p>Integrating the client into the <b>Makefile</b> is done the same way as we did for the server before:</p>
+
+<p><!-- Generator: GNU source-highlight 2.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+</p><pre><tt><span style="color: #990000">client:</span> client.o
+	<span style="color: #009900">$(CC)</span> <span style="color: #009900">$^</span> -o <span style="color: #009900">$@</span> <span style="color: #009900">$(LDFLAGS)</span>
+
+<span style="font-style: italic"><span style="color: #9A1900"># ... Listing cut for brevity ...</span></span>
+
+<span style="color: #990000">client.o:</span> client.c common-defs.h value-client-stub.h
+	<span style="color: #009900">$(CC)</span> <span style="color: #009900">$(CFLAGS)</span> -DPROGNAME<span style="color: #990000">=</span>\"<span style="color: #009900">$(</span>basename <span style="color: #009900">$@</span><span style="color: #990000">)</span>\" -c <span style="color: #009900">$&lt;</span> -o <span style="color: #009900">$@</span>
+</tt></pre>
+<p></p>
+
+<p>[ Integrating the client into the <b>Makefile</b> (glib-dbus-sync/Makefile) ]</p>
+
+<p>After building the client, we then start it and let it execute in the
+ same terminal session where we still have the server running:</p>
+
+
+
+<pre>[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>make client</b>
+dbus-binding-tool --prefix=value_object --mode=glib-client \
+ value-dbus-interface.xml &gt; value-client-stub.h
+cc -I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include \
+ -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -g -Wall \
+ -DG_DISABLE_DEPRECATED -DNO_DAEMON -DPROGNAME=\"client\" \
+ -c client.c -o client.o
+cc client.o -o client -ldbus-glib-1 -ldbus-1 -lgobject-2.0 -lglib-2.0
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>run-standalone.sh ./client</b>
+client:main Connecting to Session D-Bus.
+client:main Creating a GLib proxy object for Value.
+client:main Starting main loop (first timer in 1s).
+server:value_object_setvalue1: Called (valueIn=-80)
+client:timerCallback Set value1 to -80
+server:value_object_setvalue2: Called (valueIn=-120.000)
+client:timerCallback Set value2 to -120.000
+server:value_object_setvalue1: Called (valueIn=-70)
+client:timerCallback Set value1 to -70
+server:value_object_setvalue2: Called (valueIn=-110.000)
+client:timerCallback Set value2 to -110.000
+server:value_object_setvalue1: Called (valueIn=-60)
+client:timerCallback Set value1 to -60
+...
+<b>[Ctrl+c]</b>
+[sbox-CHINOOK_X86: ~/glib-dbus-sync] &gt; <b>fg</b>
+run-standalone.sh ./server
+<b>[Ctrl+c]</b>
+</pre>
+
+
+
+<p>[ Building and running the client. The client will print the status message after doing the <span class="caps">RPC. </span>]</p>
+
+<p>Since the client will normally run forever, we terminate it, and then
+ move the server to the foreground so that it can also be terminated. 
+This concludes our first GLib/D-Bus example, but for more information 
+about the GLib D-Bus wrappers, please consult <a href="http://maemo.org/api_refs/4.0/dbus-glib/index.html">http://maemo.org/api_refs/4.0/dbus-glib/index.html</a>.</p>
+
+<a name="DBusintrospection"></a><br>
+<h1>D-Bus introspection</h1>
+
+<p>D-Bus supports a mechanism by which programs can interrogate the bus 
+for existing well-known names, and then get the interfaces implemented 
+by the objects available behind the well-known names. This mechanism is 
+called <em>introspection</em> in D-Bus terminology.</p>
+
+<p>The main goal of supporting introspection in D-Bus is allowing 
+dynamic bindings to be made with high-level programming languages. This 
+way the language wrappers for D-Bus can be more intelligent 
+automatically (assuming they utilize the introspection interface). The 
+GLib-wrappers do not use the introspection interface.</p>
+
+<p>Introspection is achieved with three D-Bus methods: <code>ListNames</code>, <code>GetNameOwner</code> and <code>Introspect</code>. The destination object must support the introspection interface in order to provide this information. If you use the <code>dbus-bindings-tool</code>, and register your GObject correctly, your service will automatically support introspection.</p>
+
+<p>D-Bus (at this moment) does not come with introspection utilities, 
+but some are available from other sources. One simple program is the 
+"DBus Inspector", which is written in Python and uses the Python D-Bus 
+bindings and <span class="caps">GTK</span>+. If you plan to write your own tool, you need to prepare to parse <span class="caps">XML </span>data, since that is the format of results that the <code>Introspect</code> method returns.</p>
+
+<p><img src="DbusMaemo-Ch03UsingGLibWrappers_files/dbus-inspector-on-globalvalue-with-names.png" alt=""></p>
+
+<p>[ Using <span class="caps">DBUS</span> Inspector on GlobalValue on a 
+desktop system. Note that the version of GlobalValue used here also 
+implements signals, which we'll cover next. ]</p>
+
+<p>Introspection can also be useful when trying to find out what are the
+ different interfaces and methods available for use on a system. You'll 
+just have to remember that not all D-Bus services actually implement the
+ introspection interface. You can still get their well-known names, but 
+their interface descriptions will come up empty when using <code>Introspect</code>.</p><hr>
+<p class="Paragraph"><font size="2">Copyright © 2007-2008 Nokia Corporation. All rights 
+reserved.</font></p><font size="2">
+
+</font></body></html>
