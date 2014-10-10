@@ -1,0 +1,15 @@
+
+Daemon Threads
+===========================
+
+Set daemonic flag to indicate a thread is non-important so the main thread 
+can exit without waiting for it to finish. 
+
+
+thread.daemon=True  # set this before starting the thread
+
+
+
+
+
+

@@ -1,0 +1,52 @@
+
+Global Interpreter Lock
+==================================
+Page 160
+
+The Python virtual machine executes in the following manner in a MT environment:
+
+ 1. Set the GIL
+ 2. Switch in a thread to run
+ 3. Execute either 
+    3.1. for a specified number of bytecode instructions, or 
+    3.2. if the thread voluntarily yields control (e.g. thime.sleep(0))
+ 4. Put the thread back to sleep (switch out thread)
+ 5. Unlock the GIL
+ 6. Do it all over again (lather, rinse, repeat)
+
+
+When a call is made to external code - that is, any C/C++ extension built-in 
+function - the GIL will be locked until it has completed (because there are no 
+python bytecodes to count as the interval). Extension programmers do have 
+the ability to unlock the GIL, however, so as the python developer, you 
+shouldn't have to worry about your python code locking up in those situations. 
+
+As an example, for any python I/O-oriented routines (which invoke built-in 
+operating system C code), the GIL is released before the I/O call is made, 
+allowing other threads to run while the I/O is being performed. Code that 
+doesn't have much I/O will tend to keep the processor (and GIL) for the 
+full interval a thread is allowed before it yields. In other words, 
+I/O-bound python programs stand a much better chance of being able to 
+take advantage of a multithreaded environment than CPU-bound code. 
+
+Refer to python/ceval.c file. 
+
+
+
+Exiting Threads
+==================================
+
+Threads exits when 
+
+ 1. Completing execution the function it is created for. 
+ 2. Calling such as thread.exit(), sys.exit(), or raising SystemExit exception.
+
+The thread module when the main thread exists, all other threads die without cleanup. 
+
+The threading module ensures that the whole process stays alive until all "important" 
+child threads have exited 
+
+
+
+
+
