@@ -1,0 +1,58 @@
+
+corepython.com
+
+
+Core PYTHON Applications Programming, Third Edition, Wesley J. Chun
+
+
+CONTENTS
+
+Preface
+Acknowledgments
+About the Author
+
+Part I General Application Topics
+
+Chapter 1 Regular Expressions
+Introduction/Motivation
+Special Symbols and Characters
+Regexes and Python
+Some Regex Examples
+A Longer Regex Example
+Exercises
+
+Chapter 2 Network Programming
+Introduction
+What Is Client/Server Architecture?
+Sockets: Communication Endpoints
+Network Programming in Python
+*The SocketServer Module
+*Introduction to the Twisted Framework
+Related Modules
+Exercises
+
+Chapter 3 Internet Client Programming
+Chapter 4 Multithreaded Programming
+Chapter 5 GUI Programming
+Chapter 6 Database Programming
+Chapter 7 *Programming Microsoft Office
+Chapter 8 Extending Python
+
+Part II Web Development
+Chapter 9  Web Clients and Servers
+Chapter 10 Web Programming: CGI and WSGI
+Chapter 11 Web Frameworks: Django
+Chapter 12 Cloud Computing: Google App Engine
+Chapter 13 Web Services
+
+Part III Supplemental/Experimental
+Chapter 14 Text Processing
+Chapter 15 Miscellaneous
+
+Appendix A Answers to Selected Exercises
+Appendix B Reference Tables
+Appendix C Python 3: The Evolution of a Programming Language
+Appendix D Python 3 Migration with 2.6+
+Index
+
+
