@@ -3,10 +3,13 @@ other-jdk7/notes
 2014-10-19 sun
 
 
+prerequisite
+===============
 install git-hg 
 
 
 check out
+===============
 
     git clone hg::http://hg.openjdk.java.net/jdk7/jdk7/
     git clone hg::http://hg.openjdk.java.net/jdk7/jdk7/corba/
@@ -19,19 +22,20 @@ check out
 
 sizes
 
-         change sets   files    du -sh
+         change sets   files    du -sh      push to github
     jdk7        348     33       3.1 M
     corba       288     1377     28 M
-    hotspot     2561    4103     275 M
+    hotspot     2561    4103     275 M      180 M
     jaxp        233     1984     19 M
     jaxws       228     3002     28 M
-    jdk         4339    20486    640 M
-    langtools   1037    4704     90 M
+    jdk         4339    20486    640 M      200 M
+    langtools   1037    4704     90 M       30 M
     total                        1.1 G
 
 
 
 git-hg ref: 
+===============
 
   http://stackoverflow.com/questions/2526593/git-as-mercurial-client-why-no-git-hg
   https://github.com/msysgit/msysgit/wiki/Guide-to-git-remote-hg
