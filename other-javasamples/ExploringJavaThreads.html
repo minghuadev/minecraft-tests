@@ -1,0 +1,1511 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- base href="http://oreilly.com/catalog/expjava/excerpt/" --></head><body bgcolor="#ffffff"><div style="background:#fff;border:1px solid #999;margin:-1px -1px 0;padding:0;"><div style="background:#ddd;border:1px solid #999;color:#000;font:13px arial,sans-serif;font-weight:normal;margin:12px;padding:8px;text-align:left">This is Google's cache of <a href="http://oreilly.com/catalog/expjava/excerpt/" style="text-decoration:underline;color:#00c">http://oreilly.com/catalog/expjava/excerpt/</a>. It is a snapshot of the page as it appeared on 20 Oct 2014 18:35:50 GMT. The <a href="http://oreilly.com/catalog/expjava/excerpt/" style="text-decoration:underline;color:#00c">current page</a> could have changed in the meantime. <a href="http://support.google.com/websearch/bin/answer.py?hl=en&amp;p=cached&amp;answer=1687222" style="text-decoration:underline;color:#00c">Learn more</a><br>Tip: To quickly find your search term on this page, press <b>Ctrl+F</b> or <b>⌘-F</b> (Mac) and use the find bar.<br><br><div style="float:right"><a href="http://webcache.googleusercontent.com/search?q=cache:FPvDKae2xr4J:oreilly.com/catalog/expjava/excerpt/&amp;hl=en&amp;gl=ca&amp;strip=1" style="text-decoration:underline;color:#00c">Text-only version</a></div>
+<div>&nbsp;</div></div></div><div style="position:relative">
+
+
+<title>Exploring Java: Threads</title>
+
+
+<h1><a name="EXJ-CH-6">Exploring Java: <br>Chapter 6, Threads</a></h1>
+
+<b>Contents:</b><br>
+<a href="#EXJ-CH-6-SECT-1">Introducing Threads</a><br>
+<a href="#EXJ-CH-6-SECT-2">Threading Applets</a><br>
+<a href="#EXJ-CH-6-SECT-3">Synchronization</a><br>
+<a href="#EXJ-CH-6-SECT-4">Scheduling and Priority</a><br>
+
+<p>
+Threads have been around for some time, but few programmers have
+actually worked with them. There is even some debate over whether or
+not the average programmer can use threads effectively. In Java,
+working with threads can be easy and productive. In fact, threads
+provide the only way to effectively handle a number of tasks. So
+it's important that you become familiar with threads early in
+your exploration of Java.
+
+</p><p>
+Threads are integral to the way Java works. We've already seen
+that an applet's <tt>paint()</tt> method isn't
+called by the applet itself, but by another thread within the
+interpreter. At any given time, there may be many such background
+threads, performing activities in parallel with your application. In
+fact, it's easy to get a half dozen or more threads running in
+an applet without even trying, simply by requesting images, updating
+the screen, playing audio, and so on. But these things happen behind
+the scenes; you don't normally have to worry about them. In this
+chapter, we'll talk about writing applications that create and
+use their own threads explicitly.
+
+</p><h2><a name="EXJ-CH-6-SECT-1">Introducing Threads</a></h2>
+
+<p>
+Conceptually, a thread is a flow of control within a program. A thread
+is similar to the more familiar notion of a process, except that
+multiple threads within the same application share much of the same
+state--in particular, they run in the same address
+space. It's not unlike a golf course, which can be used by many
+players at the same time. Sharing the same address space means that
+threads share instance variables, but not local variables, just like
+players share the golf course, but not personal things like clubs and
+balls.
+
+</p><p>
+Multiple threads in an application have the same problems as the
+players sharing a golf course: in a word, synchronization. Just as you
+can't have two sets of players blindly playing the same green at
+the same time, you can't have several threads trying to access
+the same variables without some kind of coordination. Someone is
+bound to get hurt. A thread can reserve the right to use an object
+until it's finished with its task, just as a golf party gets
+exclusive rights to the green until it's done. And a thread that
+is more important can raise its priority, asserting its right to play
+through.
+
+</p><p>
+The devil is in the details, or course, and those details have
+historically made threads difficult to use. Java makes creating,
+controlling, and coordinating threads simple. When creating a new
+thread is the best way to accomplish some task, it should be as easy
+as adding a new component to your application.
+
+</p><p>
+It is common to stumble over threads when you first look at them,
+because creating a thread exercises many of your new Java skills all
+at once. You can avoid confusion by remembering there are always
+two players involved in running a thread: a Java language object that
+represents the thread itself and an arbitrary target object that
+contains the method the thread is to execute. Later, you will see that
+it is possible to play some sleight of hand and combine these two
+roles, but that special case just changes the packaging, not the
+relationship.
+
+</p><h3><a name="EXJ-CH-6-SECT-1.1">The Thread Class and the Runnable
+Interface</a></h3>
+
+<p>
+A new thread is born when we create an instance of the
+<tt>java.lang.Thread</tt> class. The
+<tt>Thread</tt> object represents a real thread in the Java
+interpreter and serves as a handle for controlling and synchronizing
+its execution. With it, we can start the thread, stop the thread, or
+suspend it temporarily. The constructor for the
+<tt>Thread</tt> class accepts information about where the
+thread should begin its execution. Conceptually, we would like to
+simply tell it what method to run, but since there are no pointers to
+methods in Java, we can't specify one directly. Instead, we have
+to take a short detour and use the <tt>Runnable</tt>
+interface to create an object that contains a "runnable"
+method.
+
+</p><p>
+An object that wants to serve as the target of a
+<tt>Thread</tt> can declare that it has an appropriate
+executable method by implementing the
+<tt>java.lang.Runnable</tt>
+interface. <tt>Runnable</tt> defines a single,
+general-purpose method:
+
+</p><p>
+</p><pre>public interface Runnable { 
+  abstract public void run(); 
+} 
+</pre>
+
+<p>
+Every thread begins its life by executing a <tt>run()</tt>
+method in a particular object. <tt>run()</tt> is a rather
+mundane method that can hold an arbitrary body of code. It is
+<tt>public</tt>, takes no arguments, has no return value,
+and is not allowed to throw any exceptions.
+
+</p><p>
+Any class can contain an appropriate <tt>run()</tt> method,
+simply by declaring that it implements the <tt>Runnable</tt>
+interface. An instance of this class is then a runnable object that
+can serve as the target of a new <tt>Thread</tt>. In this
+way, we can effectively run a method in any object we want.
+
+</p><h4><a name="EXJ-CH-6-SECT-1.1.1">Creating and starting threads</a></h4>
+
+<p>
+A newly born <tt>Thread</tt> remains idle until we give it a
+figurative slap on the bottom by calling its
+<tt>start()</tt> method. The thread then wakes up and
+proceeds to execute the <tt>run()</tt> method of its target
+object. <tt>start()</tt> can be called only once in the
+lifetime of a <tt>Thread</tt>. Once a thread starts, it
+continues running until the target object's
+<tt>run()</tt> method completes, or we call the
+thread's <tt>stop()</tt> method to kill the thread
+permanently. A little later, we will look at some other methods
+you can use to control the thread's progress while it is running.
+
+</p><p>
+Now let's look at an example. The following class,
+<tt>Animation</tt>, implements a <tt>run()</tt>
+method to drive its drawing loop:
+
+</p><p>
+</p><pre>class Animation implements Runnable { 
+   ... 
+   public void run() { 
+ 
+       while ( true ) { 
+           // Draw Frames 
+           ... 
+           repaint(); 
+       } 
+   } 
+} 
+</pre>
+
+<p>
+To use it, we create a <tt>Thread</tt> object with an
+instance of <tt>Animation</tt> as its target object, and
+invoke its <tt>start()</tt> method. We can perform these
+steps explicitly, as in the following:
+
+</p><p>
+</p><pre>Animation happy = new Animation("Mr. Happy"); 
+Thread myThread = new Thread( happy ); 
+myThread.start(); 
+... 
+</pre>
+
+<p>
+Here we have created an instance of our <tt>Animation</tt>
+class and passed it as the argument to the constructor for
+<tt>myThread</tt>. When we call the
+<tt>start()</tt> method, <tt>myThread</tt> begins
+to execute <tt>Animation</tt>'s
+<tt>run()</tt> method. Let the show begin!
+
+</p><p>
+The above situation is not terribly object oriented. More often, we
+want an object to handle its own thread, as shown in <a href="#EXJ-CH-6-FIG-1">Figure 6-1</a>.
+
+</p><h4><a name="EXJ-CH-6-FIG-1">Figure 6-1: Interaction between Animation and its Thread</a></h4>
+
+<p>
+<img src="ExploringJavaThreads_files/je0601.html" alt="[Graphic: Figure 6-1]" align="middle">
+
+</p><p>
+<a href="#EXJ-CH-6-FIG-1">Figure 6-1</a> depicts a <tt>Runnable</tt>
+object that creates and starts its own <tt>Thread</tt>. We
+can have our <tt>Animation</tt> class perform these actions
+in its constructor:
+
+</p><p>
+</p><pre>class Animation implements Runnable { 
+ 
+    Thread myThread; 
+ 
+    Animation (String name) { 
+        myThread = new Thread( this ); 
+        myThread.start(); 
+    }  
+    ... 
+</pre>
+
+<p>
+In this case, the argument we pass to the <tt>Thread</tt>
+constructor is <tt>this</tt>, the current object
+instance. We keep the <tt>Thread</tt> reference in the
+instance variable <tt>myThread</tt>, in case we want to stop
+the show, or exercise some other kind of control.
+
+</p><h4><a name="EXJ-CH-6-SECT-1.1.2">A natural born thread</a></h4>
+
+
+<p>
+The <tt>Runnable</tt> interface lets us make an arbitrary
+object the target of a thread, as we did above.  This is the most
+important, general usage of the <tt>Thread</tt> class. In
+most situations where you need to use threads, you'll create a
+class that implements the <tt>Runnable</tt>
+interface. I'd be remiss, however, if I didn't show you
+the other technique for creating a thread. Another design option is to
+make our target class a subclass of a type that is already
+runnable. The <tt>Thread</tt> class itself implements the
+<tt>Runnable</tt> interface; it has its own
+<tt>run()</tt> method we can override to make it do
+something useful:
+
+</p><p>
+</p><pre>class Animation extends Thread { 
+    ... 
+         
+    public void run() { 
+        while (true ) { 
+            // Draw Frames 
+            ... 
+            repaint(); 
+        } 
+    } 
+} 
+</pre>
+
+<p>
+The skeleton of our <tt>Animation</tt> class above looks
+much the same as before, except that our class is now a kind of
+<tt>Thread</tt>. To go along with this scheme, the default
+(empty) constructor of the <tt>Thread</tt> class makes
+itself the default target. That is, by default, the
+<tt>Thread</tt> executes its own <tt>run()</tt>
+method when we call the <tt>start()</tt> method, as shown in
+<a href="#EXJ-CH-6-FIG-2">Figure 6-2</a>. Note that our subclass must override
+the <tt>run()</tt> method in the <tt>Thread</tt>
+class because <tt>Thread</tt> simply defines an empty
+<tt>run()</tt> method.
+
+</p><h4><a name="EXJ-CH-6-FIG-2">Figure 6-2: Animation as a subclass of Thread</a></h4>
+
+
+
+<p>
+<img src="ExploringJavaThreads_files/je0602.html" alt="[Graphic: Figure 6-2]" align="middle">
+
+</p><p>
+Now we create an instance of <tt>Animation</tt> 
+and call its <tt>start()</tt> method:
+
+</p><p>
+</p><pre>Animation bouncy = new Animation("Bouncy"); 
+bouncy.start(); 
+</pre>
+
+<p>
+Alternatively, we can have the <tt>Animation</tt> 
+object start itself when it is created, as before:
+
+</p><p>
+</p><pre>class Animation extends Thread { 
+ 
+    Animation (String name) { 
+        start(); 
+    } 
+    ... 
+</pre>
+
+<p>
+Here our <tt>Animation</tt> object just calls its own
+<tt>start()</tt> method when it is created.
+
+</p><p>
+Subclassing <tt>Thread</tt> probably seems like a convenient
+way to bundle a <tt>Thread</tt> and its target
+<tt>run()</tt> method. However, as always, you should let
+good object-oriented design dictate how you structure your classes. In
+most cases, a specific <tt>run()</tt> method is probably
+closely related to the functionality of a particular class in your
+application, so you should implement <tt>run()</tt> in that
+class. This technique has the added advantage of allowing
+<tt>run()</tt> to access any <tt>private</tt>
+variables and methods it might need in the class.
+
+</p><p>
+If you subclass <tt>Thread</tt> to implement a thread, you
+are saying you need a new type of object that is a kind of
+<tt>Thread</tt>. While there is something unnaturally
+satisfying about making an object primarily concerned with
+performing a single task (like animation), the actual situations where
+you'll want to create a subclass of <tt>Thread</tt>
+should be rather rare. If you find you're subclassing
+<tt>Thread</tt> left and right, you may want to examine
+whether you are falling into the design trap of making objects that
+are simply glorified functions.
+
+</p><h3><a name="EXJ-CH-6-SECT-1.2">Controlling Threads</a></h3>
+
+
+<p>
+We have seen the <tt>start()</tt> method used to bring a
+newly created <tt>Thread</tt> to life. Three other methods
+let us control a <tt>Thread</tt>'s execution:
+<tt>stop()</tt>, <tt>suspend()</tt>, and
+<tt>resume()</tt>. None of these methods take any arguments;
+they all operate on the current thread object. The
+<tt>stop()</tt> method complements
+<tt>start()</tt>; it destroys the
+thread. <tt>start()</tt> and <tt>stop()</tt> can
+be called only once in the life of a <tt>Thread</tt>. By
+contrast, the <tt>suspend()</tt> and
+<tt>resume()</tt> methods can be used to arbitrarily pause
+and then restart the execution of a <tt>Thread</tt>.
+
+</p><p>
+Often, for simple tasks, it is easy enough to throw away a thread when
+we want to stop it and simply create a new one when want to proceed
+again. <tt>suspend()</tt> and <tt>resume()</tt>
+can be used in situations where the <tt>Thread</tt>'s
+setup is very expensive. For example, if creating the thread involves
+opening a socket and setting up some elaborate communication, it
+probably makes more sense to use <tt>suspend()</tt> and
+<tt>resume()</tt> with this thread.
+
+</p><p>
+Another common need is to put a thread to sleep for some period of
+time. <tt>Thread.sleep()</tt> is a static method of the
+<tt>Thread</tt> class that causes the currently executing
+thread to delay for a specified number of milliseconds:
+
+</p><p>
+</p><pre>try { 
+    Thread.sleep ( 1000 ); 
+}  
+catch ( InterruptedException e ) { 
+} 
+</pre>
+
+<p>
+<tt>Thread.sleep()</tt> throws an
+<tt>InterruptedException</tt> if it is interrupted by
+another <tt>Thread</tt>.[1] 
+When a thread is asleep, or otherwise blocked on input of some kind,
+it doesn't consume 
+CPU time or compete with other
+threads for processing. We'll talk more about thread priority
+and scheduling later.
+
+</p><blockquote>
+
+<p>[1] 
+
+The <tt>Thread</tt> class contains an
+<tt>interrupt()</tt> method to allow one thread to
+interrupt another thread, but this functionality is not implemented in
+Java 1.0.
+</p></blockquote>
+
+<h3><a name="EXJ-CH-6-SECT-1.3">A Thread's Life</a></h3>
+
+
+<p>
+A <tt>Thread</tt> continues to execute until one of the
+following things happens:
+
+</p><p>
+</p><ul>
+<li>It returns from its target <tt>run()</tt> method
+</li><li>It's interrupted by an uncaught exception
+</li><li>Its <tt>stop()</tt> method is called
+</li></ul>
+
+<p>
+So what happens if the <tt>run()</tt> method for a thread
+never terminates, and the application that started the thread never
+calls its <tt>stop()</tt> method? The answer is that the
+thread lives on, even after the application that created it has
+finished. This means we have to be aware of how our threads eventually
+terminate, or an application can end up leaving orphaned threads that
+unnecessarily consume resources.
+
+</p><p>
+In many cases, what we really want is to create background threads
+that do simple, periodic tasks in an application. The
+<tt>setDaemon()</tt> method can be used to mark a
+<tt>Thread</tt> as a daemon thread that should be killed and
+discarded when no other application threads remain. Normally, the Java
+interpreter continues to run until all threads have completed.  But
+when daemon threads are the only threads still alive, the interpreter
+will exit.
+
+</p><p>
+Here's a devilish example of using daemon 
+threads:
+
+</p><p>
+</p><pre>class Devil extends Thread { 
+ 
+    Devil() { 
+        setDaemon( true ); 
+        start(); 
+    } 
+         
+    public void run() { 
+        // Perform evil tasks 
+        ... 
+    } 
+} 
+</pre>
+
+<p>
+In the above example, the <tt>Devil</tt> 
+thread sets its daemon status when it is created. If any <tt>Devil</tt> 
+threads remain when our application is otherwise complete, Java kills them 
+for us. We don't have to worry about cleaning them up.
+
+</p><p>
+Daemon threads are primarily useful in standalone Java applications
+and in the implementation of the Java system itself, but not in
+applets. Since an applet runs inside of another Java application, any
+daemon threads it creates will continue to live until the controlling
+application exits--probably not the desired effect.
+
+</p><h2><a name="EXJ-CH-6-SECT-2">Threading Applets</a></h2>
+
+<p>
+Applets are embeddable Java applications that are expected to be able
+to start and stop themselves on command. Unlike threads, applets can
+be started and stopped any number of times. A Java-enabled Web browser
+normally starts an applet when the applet is displayed and stops it
+when the user moves to another page or scrolls the applet out of
+view. In general, we would like an applet to cease its nonessential
+activity when it is stopped, and resume it when started
+again. (See Chapter 10, <i>The Abstract Windowing Toolkit</i> for a complete discussion of
+applets).
+
+</p><p>
+In this section, we will build <tt>UpdateApplet</tt>, a
+simple base class for an <tt>Applet</tt> that maintains a
+<tt>Thread</tt> to automatically update its display at
+regular intervals. <tt>UpdateApplet</tt> handles the basic
+starting and stopping behavior for us, as shown below.
+
+</p><p>
+</p><pre>public class UpdateApplet extends java.applet.Applet 
+    implements Runnable { 
+    
+    private Thread updateThread; 
+    int updateInterval = 1000; 
+ 
+    public void run() { 
+        while ( true ) { 
+            try {   
+                Thread.sleep( updateInterval );  
+            }  
+            catch (InterruptedException e ) { } 
+ 
+            repaint(); 
+        } 
+    } 
+ 
+    public void start() { 
+        if ( updateThread == null ) { 
+            updateThread = new Thread(this); 
+            updateThread.start(); 
+        } 
+    } 
+ 
+    public void stop() { 
+        if ( updateThread != null ) { 
+            updateThread.stop(); 
+            updateThread = null; 
+        } 
+    } 
+} 
+</pre>
+
+<p>
+<tt>UpdateApplet</tt> is a <tt>Runnable</tt>
+object that alternately sleeps and calls its
+<tt>repaint()</tt> method. It has two other public methods:
+<tt>start()</tt> and <tt>stop()</tt>. These are
+methods of the <tt>Applet</tt> class we are overriding;
+do not confuse them with the similarly named methods of the
+<tt>Thread</tt> class. These <tt>start()</tt> and
+<tt>stop()</tt> methods are called by the Java environment
+to tell the applet when it should and should not be running.
+
+</p><p>
+<tt>UpdateApplet</tt> illustrates an environmentally
+friendly way to deal with threads in a simple
+applet. <tt>UpdateApplet</tt> kills its thread each time the
+applet is stopped and recreates it if the applet is restarted. When
+<tt>UpdateApplet</tt>'s <tt>start()</tt>
+method is called, we first check to make sure there is no
+currently executing <tt>updateThread</tt>. We then create
+one to begin our execution. When our applet is subsequently stopped,
+we kill the thread by invoking its <tt>stop()</tt> method
+and throw away the reference by setting it to <tt>null</tt>.
+
+Setting <tt>updateThread</tt> 
+to <tt>null</tt> serves both to allow the garbage collector to 
+clean up the dead <tt>Thread</tt> object, and to indicate to 
+<tt>UpdateApplet</tt>'s <tt>start()</tt> method 
+that the thread is gone.
+
+</p><p>
+In truth, an <tt>Applet</tt>'s
+<tt>start()</tt> and <tt>stop()</tt> methods are
+guaranteed to be called in sequence. As a result, we
+shouldn't have to check for the existence of
+<tt>updateThread</tt> in <tt>start()</tt> (it
+should always be <tt>null</tt>). However, it's good
+programming practice to perform the test. If we didn't, and for
+some reason <tt>stop()</tt> were to fail at its job, we
+might inadvertently start a lot of threads.
+
+</p><p>
+With <tt>UpdateApplet</tt> 
+doing all of the work for us, we can now create the world's simplest 
+clock applet with just a few lines of code. 
+<a href="#EXJ-CH-6-FIG-3">Figure 6-3</a> shows our <tt>Clock</tt>. 
+(This might be a good one to run on your Java wrist watch.).
+
+</p><p>
+</p><pre>public class Clock extends UpdateApplet { 
+    public void paint( java.awt.Graphics g ) { 
+        g.drawString( new java.util.Date().toString(), 10, 25 ); 
+    } 
+} 
+</pre>
+
+<h4><a name="EXJ-CH-6-FIG-3">Figure 6-3: The clock applet</a></h4>
+
+
+
+<p>
+<img src="ExploringJavaThreads_files/je0603.html" alt="[Graphic: Figure 6-3]" align="middle">
+
+</p><p>
+The <tt>java.util.Date().toString()</tt> sequence 
+simply creates a string that contains the current time; we'll see 
+where this code comes from in Chapter 7, <i>Basic Utility Classes</i>.
+
+</p><p>
+Our <tt>Clock</tt> applet provides a good example of a
+simple thread; we don't mind throwing it away and subsequently
+rebuilding it if the user should happen to wander on and off of our
+Web page a few times. But what if the task that our thread handles
+isn't so simple? What if, for instance, we have to open a socket
+and establish a connection with another system? One solution is to use
+<tt>Thread</tt>'s <tt>suspend()</tt> and
+<tt>resume()</tt> methods, as I'll show you
+momentarily.
+
+</p><p>
+ 
+ 
+Now if you've been wondering why we've been using
+<tt>stop()</tt> to kill the thread, rather than using the
+<tt>suspend()</tt> and <tt>resume()</tt> methods
+all along, here's the explanation you've been waiting
+for. The problem with applets is that we have no control over how a
+user navigates Web pages. For example, say a user scrolls our applet
+out of view, and we use <tt>suspend()</tt> to suspend the
+applet. Now we have no way of ensuring that the user will bring the
+applet back into view before moving on to another page. And actually,
+the same situation would occur if the user simply moves on to another
+page and never comes back.
+
+</p><p>
+If we call <tt>suspend()</tt>, we'd really like to
+make sure we call <tt>resume()</tt> at a later date, or
+we'll end up leaving the thread hanging in permanent
+suspense. But we have no way of knowing if the applet will ever be
+restarted, so just putting a call to <tt>resume()</tt> in
+the applet's <tt>start()</tt> method won't
+work. Leaving the suspended thread around forever might not hurt us,
+but it's not good programming practice to be wasteful.  What we
+need is a way to guarantee we can clean up our mess if the applet
+is never used again. What to do?
+
+</p><p>
+There is a solution for this dilemma, but in many cases, like with our
+simple <tt>Clock</tt>, it's just easier to use
+<tt>stop()</tt>, with a subsequent call to
+<tt>start()</tt> if necessary. In cases where it is
+expensive to set up and tear down a thread, we could make the
+following modifications to <tt>UpdateApplet</tt>:
+
+</p><p>
+</p><pre>public void start() { 
+    if ( updateThread == null ) { 
+        updateThread = new Thread(this); 
+        updateThread.start(); 
+    } 
+    else 
+        updateThread.resume(); 
+} 
+ 
+public void stop() { 
+    updateThread.suspend(); 
+ 
+public void destroy() { 
+    if ( updateThread != null ) { 
+        updateThread.stop(); 
+        updateThread = null; 
+    } 
+} 
+</pre>
+
+<p>
+These modifications change <tt>UpdateApplet</tt> so that it
+suspends and restarts its <tt>updateThread</tt>, rather than
+killing and recreating it. The new <tt>start()</tt> method
+creates the thread and calls <tt>start()</tt> if
+<tt>updateThread</tt> is <tt>null</tt>; otherwise
+it assumes that the thread has been suspended, so it calls
+<tt>resume()</tt>. The applet's
+<tt>stop()</tt> method simply suspends the thread by calling
+<tt>suspend()</tt>.
+
+</p><p>
+What's new here is the <tt>destroy()</tt> method. This
+is another method that <tt>UpdateApplet</tt> inherits from
+the <tt>Applet</tt> class. The method is called by the Java
+environment when the applet is going to be removed (often from a
+cache). It provides a place where we can free up any resources
+the applet is holding. This is the perfect place to cut the suspense
+and clean up after our thread. In our <tt>destroy()</tt>
+method, we check to see that the thread exists, and if it does, we
+call <tt>stop()</tt> to kill it and set its reference to
+<tt>null</tt>.
+
+</p><h2><a name="EXJ-CH-6-SECT-3">Synchronization</a></h2>
+
+<p>
+Every thread has a life of its own. Normally, a thread goes about its
+business without any regard for what other threads in the application
+are doing. Threads may be time-sliced, which means they can run in
+arbitrary spurts and bursts as directed by the operating system.  On a
+multiprocessor system, it is even possible for many different threads
+to be running simultaneously on different
+CPUs. This section is about coordinating the
+activities of two or more threads, so they can work together and not
+collide in their use of the same address space.
+
+</p><p>
+Java provides a few simple structures for synchronizing the activities
+of threads. They are all based on the concept of
+<i>monitors</i>, a widely used synchronization scheme
+developed by C.A.R. Hoare. You don't have to know the details
+about how monitors work to be able to use them, but it may help you to
+have a picture in mind.
+
+</p><p>
+A monitor is essentially a lock. The lock is attached to a resource
+that many threads may need to access, but that should be accessed
+by only one thread at a time. It's not unlike a public restroom at a
+gas station. If the resource is not being used, the thread can acquire
+the lock and access the resource. By the same token, if the restroom
+is unlocked, you can enter and lock the door. When the thread is done,
+it relinquishes the lock, just as you unlock the door and leave it
+open for the next person. However, if another thread already has the
+lock for the resource, all other threads have to wait until the
+current thread finishes and releases the lock, just as if the restroom
+is locked when you arrive, you have to wait until the current occupant
+is done and unlocks the door.
+
+</p><p>
+Fortunately, Java makes the process of synchronizing access to
+resources quite easy. The language handles setting up and acquiring
+locks; all you have to do is specify which resources require locks.
+
+</p><h3><a name="EXJ-CH-6-SECT-3.1">Serializing Methods</a></h3>
+
+
+<p>
+The most common need for synchronization among threads in Java is to
+serialize their access to some resource, namely an object.  In other
+words, synchronization makes sure only one thread at a time can
+perform certain activities that manipulate an object. In Java, every
+object has a lock associated with it. To be more specific, every class
+and every instance of a class has its own lock. The
+<tt>synchronized</tt> keyword marks places where a thread
+must acquire the lock before proceeding.
+
+</p><p>
+For example, say we implemented a <tt>SpeechSynthesizer</tt> 
+class that contains a <tt>say()</tt> method. We don't want 
+multiple threads calling <tt>say()</tt> at the same time or we 
+wouldn't be able to understand anything being said. So we 
+mark the <tt>say()</tt> method as synchronized, which means that 
+a thread has to acquire the lock on the <tt>SpeechSynthesizer</tt> 
+object before it can speak:
+
+</p><p>
+</p><pre>class SpeechSynthesizer { 
+ 
+    synchronized void say( String words ) { 
+        // Speak 
+    } 
+} 
+</pre>
+
+<p>
+Because <tt>say()</tt> is an instance method, a thread has
+to acquire the lock on the particular
+<tt>SpeechSynthesizer</tt> instance it is using before it
+can invoke the <tt>say()</tt> method. When
+<tt>say()</tt> has completed, it gives up the lock, which
+allows the next waiting thread to acquire the lock and run the method.
+Note that it doesn't matter whether the thread is owned by the
+<tt>SpeechSynthesizer</tt> itself or some other object;
+every thread has to acquire the same lock, that of the
+<tt>SpeechSynthesizer</tt> instance. If
+<tt>say()</tt> were a class (static) method instead of an
+instance method, we could still mark it as synchronized. But in this
+case as there is no instance object involved, the lock would be on
+the class object itself.
+
+</p><p>
+Often, you want to synchronize multiple methods of the same class, so that 
+only one of the methods modifies or examines parts of the class at a time. 
+All static synchronized methods in a class use the same class object 
+lock. By the same token, all instance methods in a class use the 
+same instance object lock. In this way, Java can guarantee that only one 
+of a set of synchronized methods is running at a time. For example, 
+a <tt>SpreadSheet</tt> class might contain a number of instance 
+variables that represent cell values, as well as some methods that manipulate 
+the cells in a row:
+
+</p><p>
+</p><pre>class SpreadSheet { 
+ 
+    int cellA1, cellA2, cellA3; 
+ 
+    synchronized int sumRow() { 
+        return cellA1 + cellA2 + cellA3; 
+    } 
+ 
+    synchronized void setRow( int a1, int a2, int a3 ) { 
+        cellA1 = a1; 
+        cellA2 = a2; 
+        cellA3 = a3; 
+    } 
+... 
+} 
+</pre>
+
+<p>
+In this example, both methods <tt>setRow()</tt> and
+<tt>sumRow()</tt> access the cell values. You can see that
+problems might arise if one thread were changing the values of the
+variables in <tt>setRow()</tt> at the same moment another
+thread was reading the values in <tt>sumRow()</tt>. To
+prevent this, we have marked both methods as synchronized. When
+threads are synchronized, only one will be run at a time. If a thread
+is in the middle of executing <tt>setRow()</tt> when another
+thread calls <tt>sumRow()</tt>, the second thread waits
+until the first one is done executing <tt>setRow()</tt>
+before it gets to run <tt>sumRow()</tt>. This
+synchronization allows us to preserve the consistency of the
+<tt>SpreadSheet</tt>. And the best part is that all of this
+locking and waiting is handled by Java; it's transparent to the
+programmer.
+
+</p><p>
+In addition to synchronizing entire methods, the
+<tt>synchronized</tt> keyword can be used in a special
+construct to guard arbitrary blocks of code. In this form it also
+takes an explicit argument that specifies the object for which it is
+to acquire a lock:
+
+</p><p>
+</p><pre>synchronized ( myObject ) { 
+    // Functionality that needs to be synced 
+    ... 
+    } 
+</pre>
+
+<p>
+The code block above can appear in any method.  When it is reached,
+the thread has to acquire the lock on <tt>myObject</tt>
+before proceeding. In this way, we can have methods (or parts of
+methods) in different classes synchronized the same as methods
+in the same class.
+
+</p><p>
+A synchronized method is, therefore, equivalent to 
+a method with its statements synchronized on the current object. Thus:
+
+</p><p>
+</p><pre>synchronized void myMethod () { 
+    ... 
+} 
+</pre>
+
+<p>
+is equivalent to:
+
+</p><p>
+</p><pre>void myMethod () { 
+    synchronized ( this ) { 
+        ... 
+    } 
+} 
+</pre>
+
+<h3><a name="EXJ-CH-6-SECT-3.2">wait() and notify()</a></h3>
+
+<p>
+With the <tt>synchronized</tt> keyword, we can serialize the
+execution of complete methods and blocks of code. The
+<tt>wait()</tt> and <tt>notify()</tt> methods of
+the <tt>Object</tt> class extend this capability. Every
+object in Java is a subclass of <tt>Object</tt>, so every
+object inherits these methods. By using <tt>wait()</tt> and
+<tt>notify()</tt>, a thread can give up its hold on a lock
+at an arbitrary point, and then wait for another thread to give it
+back before continuing. All of the coordinated activity still happens
+inside of synchronized blocks, and still only one thread is executing
+at a given time.
+
+</p><p>
+By executing <tt>wait()</tt> from a synchronized block, a
+thread gives up its hold on the lock and goes to sleep. A thread might
+do this if it needs to wait for something to happen in another part of
+the application, as you'll see shortly. Later, when the
+necessary event happens, the thread that is running it calls
+<tt>notify()</tt> from a block synchronized on the same
+object. Now the first thread wakes up and begins trying to acquire the
+lock again.
+
+</p><p>
+When the first thread manages to reacquire the lock, it continues
+from the point it left off. However, the thread that waited may
+not get the lock immediately (or perhaps ever). It depends on when the
+second thread eventually releases the lock, and which thread manages
+to snag it next. Note also, that the first thread won't wake up
+from the <tt>wait()</tt> unless another thread calls
+<tt>notify()</tt>. There is an overloaded version of
+<tt>wait()</tt>, however, that allows us to specify a
+timeout period. If another thread doesn't call
+<tt>notify()</tt> in the specified period, the waiting
+thread automatically wakes up.
+
+</p><p>
+Let's look at a simple scenario to see what's going on. In
+the following example, we'll assume there are three
+threads--one waiting to execute each of the three synchronized
+methods of the <tt>MyThing</tt> class. We'll call them
+the <tt>waiter</tt>, <tt>notifier</tt>, and
+<tt>related</tt> threads, respectively. Here's a code
+fragment to illustrate:
+
+</p><p>
+</p><pre>class MyThing { 
+ 
+    synchronized void waiterMethod() { 
+        // Do some stuff 
+ 
+        // Now we need to wait for notifier to do something 
+        wait(); 
+ 
+        // Continue where we left off 
+    } 
+ 
+    synchronized void notifierMethod() { 
+        // Do some stuff  
+ 
+        // Notify waiter that we've done it 
+        notify(); 
+ 
+        // Do more things 
+    } 
+ 
+    synchronized void relatedMethod() { 
+        // Do some related stuff 
+    } 
+</pre>
+
+<p>
+Let's assume <tt>waiter</tt> gets through the gate
+first and begins executing <tt>waiterMethod()</tt>.  The two
+other threads are initially blocked, trying to acquire the lock for
+the <tt>MyThing</tt> object. When <tt>waiter</tt>
+executes the <tt>wait()</tt> method, it relinquishes its
+hold on the lock and goes to sleep. Now there are now two viable
+threads waiting for the lock. Which thread gets it depends on
+several factors, including chance and the priorities of the
+threads. (We'll discuss thread scheduling in the next section).
+
+</p><p>
+Let's say that <tt>notifier</tt> is the next thread to
+acquire the lock, so it begins to run. <tt>waiter</tt>
+continues to sleep and <tt>related</tt> languishes, waiting
+for its turn. When <tt>notifier</tt> executes the call to
+<tt>notify()</tt>, Java prods the <tt>waiter</tt>
+thread, effectively telling it something has
+changed. <tt>waiter</tt> then wakes up and rejoins
+<tt>related</tt> in vying for the <tt>MyThing</tt>
+lock. Note that it doesn't actually receive the lock; it just
+changes from saying "leave me alone" to "I want the
+lock."
+
+</p><p>
+At this point, <tt>notifier</tt> still owns the lock and
+continues to hold it until it leaves its synchronized method (or
+perhaps executes a <tt>wait()</tt> itself). When it
+finally completes, the other two methods get to fight over the
+lock. <tt>waiter</tt> would like to continue executing
+<tt>waiterMethod()</tt> from the point it left off,
+while <tt>unrelated</tt>, which has been patient, would like
+to get started. We'll let you choose your own ending for the
+story.
+
+</p><p>
+For each call to <tt>notify()</tt>, Java wakes up just one
+method that is asleep in a <tt>wait()</tt> call. If there
+are multiple threads waiting, Java picks the first thread on a
+first-in, first-out basis. The <tt>Object</tt> class also
+provides a <tt>notifyAll()</tt> call to wake up all waiting
+threads. In most cases, you'll probably want to use
+<tt>notifyAll()</tt> rather than
+<tt>notify()</tt>.  Keep in mind that <tt>notify()</tt> really means "Hey, something related to this object
+has changed. The condition you are waiting for may have changed, so
+check it again." In general, there is no reason to assume
+only one thread at a time is interested in the change or able to act
+upon it. Different threads might look upon whatever has changed in
+different ways.
+
+</p><p>
+Often, our <tt>waiter</tt> thread is waiting 
+for a particular condition to change and we will want to sit in a loop 
+like the following:
+
+</p><p>
+</p><pre>... 
+while ( condition != true ) 
+    wait(); 
+... 
+</pre>
+
+<p>
+Other synchronized threads call <tt>notify()</tt> or
+<tt>notifyAll()</tt> when they have modified the environment
+so that <tt>waiter</tt> can check the condition again. This
+is the civilized alternative to polling and sleeping, as you'll
+see the following example.
+
+</p><h3><a name="EXJ-CH-6-SECT-3.3">The Message Passer</a></h3>
+
+
+<p>
+Now we'll illustrate a classic interaction between two threads:
+a <tt>Producer</tt> and a <tt>Consumer</tt>.  A
+producer thread creates messages and places them into a queue, while a
+consumer reads them out and displays them. To be realistic,
+we'll give the queue a maximum depth. And to make things really
+interesting, we'll have our consumer thread be lazy and run much
+slower than the producer. This means that <tt>Producer</tt>
+occasionally has to stop and wait for <tt>Consumer</tt> to
+catch up. The example below shows the <tt>Producer</tt> and
+<tt>Consumer</tt> classes.
+
+</p><p>
+</p><pre>import java.util.Vector; 
+ 
+class Producer extends Thread { 
+    static final int MAXQUEUE = 5; 
+    private Vector messages = new Vector(); 
+  
+    public void run() { 
+        try { 
+            while ( true ) { 
+                putMessage(); 
+                sleep( 1000 ); 
+            } 
+        }  
+        catch( InterruptedException e ) { } 
+    } 
+ 
+    private synchronized void putMessage() 
+        throws InterruptedException { 
+        
+        while ( messages.size() == MAXQUEUE ) 
+            wait(); 
+        messages.addElement( new java.util.Date().toString() ); 
+        notify(); 
+    } 
+ 
+    // Called by Consumer 
+    public synchronized String getMessage() 
+        throws InterruptedException { 
+        notify(); 
+        while ( messages.size() == 0 ) 
+            wait(); 
+        String message = (String)messages.firstElement(); 
+        messages.removeElement( message ); 
+        return message; 
+    } 
+} 
+ 
+class Consumer extends Thread { 
+    Producer producer; 
+     
+    Consumer(Producer p) { 
+        producer = p; 
+    } 
+  
+    public void run() { 
+        try { 
+            while ( true ) { 
+                String message = producer.getMessage(); 
+                System.out.println("Got message: " + message); 
+                sleep( 2000 ); 
+            } 
+        }  
+        catch( InterruptedException e ) { } 
+    } 
+  
+    public static void main(String args[]) { 
+        Producer producer = new Producer(); 
+        producer.start(); 
+        new Consumer( producer ).start(); 
+    } 
+} 
+</pre>
+
+<p>
+For convenience, we have included a <tt>main()</tt> method
+that runs the complete example in the <tt>Consumer</tt>
+class. It creates a <tt>Consumer</tt> that is tied to a
+<tt>Producer</tt> and starts the two classes.  You can run
+the example as follows:
+
+</p><p>
+</p><pre>% java Consumer
+</pre>
+
+<p>
+The output is the time-stamp messages created by the
+<tt>Producer</tt>:
+
+</p><p>
+</p><pre>Got message: Sun Dec 19 03:35:55 CST 1996 
+Got message: Sun Dec 19 03:35:56 CST 1996 
+Got message: Sun Dec 19 03:35:57 CST 1996 
+... 
+</pre>
+
+<p>
+The time stamps initially show a spacing of one second, although they
+appear every two seconds. Our <tt>Producer</tt> runs faster
+than our <tt>Consumer</tt>. <tt>Producer</tt>
+would like to generate a new message every second, while
+<tt>Consumer</tt> gets around to reading and displaying
+a message only every two seconds. Can you see how long it will take the
+message queue to fill up? What will happen when it does?
+
+</p><p>
+Let's look at the code. We are using a few new tools
+here. <tt>Producer</tt> and <tt>Consumer</tt> are
+subclasses of <tt>Thread</tt>. It would have been a better
+design decision to have <tt>Producer</tt> and
+<tt>Consumer</tt> implement the <tt>Runnable</tt>
+interface, but we took the slightly easier path and subclassed
+<tt>Thread</tt>. You should find it fairly simple to use
+the other technique; you might try it as an exercise.
+
+</p><p>
+The <tt>Producer</tt> and <tt>Consumer</tt>
+classes pass messages through an instance of a
+<tt>java.util.Vector</tt> object. We haven't discussed
+the <tt>Vector</tt> class yet, but you can think of
+this one as a queue where we add and remove elements in first-in,
+first-out order. See Chapter 7 for more information
+about the <tt>Vector</tt> class.
+
+</p><p>
+The important activity is in the synchronized methods:
+<tt>putMessage()</tt> and
+<tt>getMessage()</tt>. Although one of the methods is used
+by the <tt>Producer</tt> thread and the other by the
+<tt>Consumer</tt> thread, they both live in the
+<tt>Producer</tt> class because they have to be synchronized
+on the same object to work together. Here they both implicitly use the
+<tt>Producer</tt> object's lock. If the queue is
+empty, the <tt>Consumer</tt> blocks in a call in the
+<tt>Producer</tt>, waiting for another message.
+
+</p><p>
+Another design option would implement the
+<tt>getMessage()</tt> method in the
+<tt>Consumer</tt> class and use a synchronized code block to
+explicitly synchronize on the <tt>Producer</tt> object. In
+either case, synchronizing on the <tt>Producer</tt> is
+important because it allows us to have multiple
+<tt>Consumer</tt> objects that feed on the same
+<tt>Producer</tt>.
+
+</p><p>
+<tt>putMessage()</tt>'s job is to add a new message to
+the queue. It can't do this if the queue is already
+full, so it first checks the number of elements in
+<tt>messages</tt>. If there is room, it stuffs in another
+time stamp. If the queue is at its limit however,
+<tt>putMessage()</tt> has to wait until there's
+space. In this situation, <tt>putMessage()</tt> executes a
+<tt>wait()</tt> and relies on the consumer to call
+<tt>notify()</tt> to wake it up after a message has been
+read. Here we have <tt>putMessage()</tt> testing the
+condition in a loop. In this simple example, the test probably
+isn't necessary; we could assume that when
+<tt>putMessage()</tt> wakes up, there is a free
+spot. However, this test is another example of good programming
+practice. Before it finishes, <tt>putMessage()</tt> calls
+<tt>notify()</tt> itself to prod any
+<tt>Consumer</tt> that might be waiting on an empty
+queue.
+
+</p><p>
+<tt>getMessage()</tt> retrieves a message for the
+<tt>Consumer</tt>.  It enters a loop like the
+<tt>Producer</tt>'s, waiting for the queue to have at
+least one element before proceeding. If the queue is empty, it
+executes a <tt>wait()</tt> and expects the producer to call
+<tt>notify()</tt> when more items are available. Notice that
+<tt>getMessage()</tt> makes its own unconditional call to
+<tt>notify()</tt>. This is a somewhat lazy way of keeping
+the <tt>Producer</tt> on its toes, so that the queue should
+generally be full. Alternatively, <tt>getMessage()</tt>
+might test to see if the queue had fallen below a low water mark
+before waking up the producer.
+
+</p><p>
+Now let's add another <tt>Consumer</tt> to the
+scenario, just to make things really interesting. Most of the
+necessary changes are in the <tt>Consumer</tt> class; the
+example below shows the code for the modified class.
+
+</p><p>
+</p><pre>class Consumer extends Thread { 
+    Producer producer; 
+        String name; 
+	 
+    Consumer(String name, Producer producer) { 
+        this.producer = producer; 
+        this.name = name; 
+    } 
+  
+    public void run() { 
+        try { 
+            while ( true ) { 
+                String message = producer.getMessage(); 
+                System.out.println(name + " got message: " + message); 
+                sleep( 2000 ); 
+            } 
+        }  
+        catch( InterruptedException e ) { } 
+    } 
+  
+    public static void main(String args[]) { 
+        Producer producer = new Producer(); 
+        producer.start(); 
+		 
+        // Start two this time 
+        new Consumer( "One", producer ).start(); 
+        new Consumer( "Two", producer ).start(); 
+    } 
+} 
+</pre>
+
+<p>
+The <tt>Consumer</tt> constructor now takes a string name,
+to identify each consumer. The <tt>run()</tt> method uses
+this name in the call to <tt>println()</tt> to identify
+which consumer received the message.
+
+</p><p>
+The only modification to make in the
+<tt>Producer</tt> code is to change the call to
+<tt>notify()</tt> in <tt>putMessage()</tt> to a
+call to <tt>notifyAll()</tt>. Now, instead of the consumer
+and producer playing tag with the queue, we can have many players
+waiting on the condition of the queue to change. We might have a
+number of consumers waiting for a message, or we might have the
+producer waiting for a consumer to take a message. Whenever the
+condition of the queue changes, we prod all of the waiting methods to
+reevaluate the situation by calling <tt>notifyAll()</tt>.
+Note, however, that we don't need to change the call to
+<tt>notify()</tt> in <tt>getMessage()</tt>. If a
+<tt>Consumer</tt> thread is waiting for a message to appear
+in the queue, it's not possible for the
+<tt>Producer</tt> to be simultaneously waiting because the
+queue is full.
+
+</p><p>
+Here is some sample output when there are two consumers running, as in
+the <tt>main()</tt> method shown above:
+
+</p><p>
+</p><pre>One got message: Wed Mar 20 20:00:01 CST 1996 
+Two got message: Wed Mar 20 20:00:02 CST 1996 
+One got message: Wed Mar 20 20:00:03 CST 1996 
+Two got message: Wed Mar 20 20:00:04 CST 1996 
+One got message: Wed Mar 20 20:00:05 CST 1996 
+Two got message: Wed Mar 20 20:00:06 CST 1996 
+One got message: Wed Mar 20 20:00:07 CST 1996 
+Two got message: Wed Mar 20 20:00:08 CST 1996 
+... 
+</pre>
+
+<p>
+We see nice, orderly alternation between the two 
+consumers, as a result of the calls to <tt>sleep()</tt> in the 
+various methods. Interesting things would happen, however, if we were to 
+remove all of the calls to <tt>sleep()</tt> and let things run 
+at full speed. The threads would compete and their behavior would depend 
+on whether or not the system is using time slicing. On a time-sliced system, 
+there should be a fairly random distribution between the two consumers, 
+while on a non-time-sliced system, a single consumer could monopolize the 
+messages. And since you're probably wondering about time slicing, let's talk about thread priority 
+and scheduling.
+
+</p><h2><a name="EXJ-CH-6-SECT-4">Scheduling and Priority</a></h2>
+
+<p>
+Java makes certain guarantees as to how its threads are
+scheduled. Every thread has a priority value. If, at any time, a
+thread of a higher priority than the current thread becomes runnable,
+it preempts the lower priority thread and begins executing. By
+default, threads at the same priority are scheduled round robin, which
+means once a thread starts to run, it continues until it
+does one of the following:
+
+</p><p>
+
+</p><dl>
+<dt><i>Sleeps</i></dt><dd>
+<p>
+Calls <tt> Thread.sleep() </tt> or <tt> wait()</tt>
+
+</p><p>
+</p></dd><dt><i>Waits for lock</i></dt><dd>
+
+<p>
+Waits for a lock in order to run a synchronized method
+
+</p><p>
+</p></dd><dt><i>Blocks on I/O</i></dt><dd>
+
+<p>
+Blocks, for example, in a <tt>xread()</tt> or an
+<tt>accept()</tt> call
+
+</p><p>
+</p></dd><dt><i>Explicitly yields control</i></dt><dd>
+
+<p>
+Calls <tt>yield()</tt>
+
+</p><p>
+</p></dd><dt><i>Terminates</i></dt><dd>
+
+<p>
+Completes its target method or is terminated by a
+<tt>stop()</tt> call</p></dd></dl><p>
+
+</p><p>
+This situation looks something like what's shown in <a href="#EXJ-CH-6-FIG-4">Figure 6-4</a>.
+
+</p><h4><a name="EXJ-CH-6-FIG-4">Figure 6-4: Priority preemptive, round robin scheduling</a></h4>
+
+
+
+<p>
+<img src="ExploringJavaThreads_files/je0604.html" alt="[Graphic: Figure 6-4]" align="middle">
+
+</p><p>
+Java leaves certain aspects of scheduling up to the
+implementation.[2]
+The main point here is that some, but not all, implementations 
+of Java use time slicing on threads of the same priority.[3]
+ In a time-sliced system, thread processing is chopped up, so that each 
+thread runs for a short period of time before the context is switched to 
+the next thread, as shown in <a href="#EXJ-CH-6-FIG-5">Figure 6-5</a>.
+
+</p><blockquote>
+
+<p>[3] 
+As of Java Release 1.0, Sun's Java Interpreter for the Windows 95 and
+Windows NT platforms uses time slicing, as does the Netscape Navigator
+Java environment. Sun's Java 1.0 for the Solaris
+UNIX platforms doesn't.
+</p><blockquote>
+<p>[2] 
+This implementation-dependent aspect of Java isn't a big deal,
+since it doesn't hurt for an implementation to add time slicing
+on top of the default round-robin scheduling. It's actually not
+hard to create a time-slicing effect by simply having a high-priority
+thread sleeping for a specified time interval. Every time it wakes up,
+it interrupts a lower-priority thread and causes processing to shift
+round robin to the next thread.
+</p></blockquote>
+</blockquote>
+
+<p>
+Higher priority threads still preempt lower priority threads 
+in this scheme. The addition of time slicing mixes up the processing 
+among threads of the same priority; on a multiprocessor machine, threads 
+may even be run simultaneously. Unfortunately, this feature can lead to
+differences in your application's behavior.
+
+</p><h4><a name="EXJ-CH-6-FIG-5">Figure 6-5: Priority preemptive, time-sliced scheduling</a></h4>
+
+
+
+<p>
+<img src="ExploringJavaThreads_files/je0605.html" alt="[Graphic: Figure 6-5]" align="middle">
+
+</p><p>
+Since Java doesn't guarantee time slicing, you shouldn't write code
+that relies on this type of scheduling; any software you write needs
+to function under the default round-robin scheduling. But if
+you're wondering what your particular flavor of Java does, try
+the following experiment:
+
+</p><p>
+</p><pre>class Thready { 
+    public static void main( String args [] ) { 
+        new MyThread("Foo").start(); 
+        new MyThread("Bar").start(); 
+    } 
+} 
+ 
+class MyThread extends Thread { 
+    String message; 
+ 
+    MyThread ( String message ) { 
+        this.message = message; 
+    } 
+ 
+    public void run() { 
+        while ( true )  
+            System.out.println( message ); 
+    } 
+} 
+</pre>
+
+<p>
+The <tt>Thready</tt> class starts up two
+<tt>MyThread</tt> objects. <tt>Thready</tt> is a
+thread that goes into a hard loop (very bad form) and prints its
+message. Since we don't specify a priority for either thread,
+they both inherit the priority of their creator, so they have the same
+priority.  When you run this example, you will see how your Java
+implementation does it scheduling. Under a round-robin scheme, only
+"Foo" should be printed; "Bar" never
+appears. In a time-slicing implementation, you should occasionally see the
+"Foo" and "Bar" messages alternate.
+
+</p><h3><a name="EXJ-CH-6-SECT-4.1">Priorities</a></h3>
+
+
+<p>
+Now let's change the priority of the second thread:
+
+</p><p>
+</p><pre>class Thready { 
+    public static void main( String args [] ) { 
+        new MyThread("Foo").start(); 
+        Thread bar = new MyThread("Bar"); 
+        bar.setPriority( Thread.NORM_PRIORITY + 1 ); 
+        bar.start(); 
+    } 
+} 
+</pre>
+
+<p>
+As you might expect, this changes how our example behaves. Now you may
+see a few "Foo" messages, but "Bar" should
+quickly take over and not relinquish control, regardless of the
+scheduling policy.
+
+</p><p>
+Here we have used the <tt>setPriority()</tt> method of the
+<tt>Thread</tt> class to adjust our thread's
+priority. The <tt>Thread</tt> class defines three standard
+priority values, as shown in <a href="#EXJ-CH-6-TAB-1">Table 6-1</a>.
+
+</p><p>
+<table border="">
+<caption><a name="EXJ-CH-6-TAB-1"><b>Table 6-1: Thread Priority 
+Values</b></a></caption>
+<tbody><tr>
+<th align="LEFT" valign="TOP"><p>
+Value</p></th><th align="LEFT" valign="TOP"><p>
+Definition</p></th></tr>
+<tr>
+<td align="LEFT" valign="TOP"><p>
+<tt>MIN_PRIORITY</tt></p></td>
+<td align="LEFT" valign="TOP"><p>
+Minimum priority</p></td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP"><p>
+<tt>NORM_PRIORITY</tt></p></td>
+<td align="LEFT" valign="TOP"><p>
+Normal priority</p></td>
+</tr>
+<tr>
+<td align="LEFT" valign="TOP"><p>
+<tt>MAX_PRIORITY</tt></p></td>
+<td align="LEFT" valign="TOP"><p>
+Maximum priority</p></td>
+</tr>
+</tbody></table>
+
+
+</p><p>
+If you need to change the priority of a thread, you should use one of
+these values or a close relative value. But let me warn you against
+using <tt>MAX_PRIORITY</tt> or a close relative value; if
+you elevate many threads to this priority level, priority will quickly
+become meaningless. A slight increase in priority should be enough for
+most needs. For example, specifying <tt>NORM_PRIORITY + 1</tt> in
+our example is enough to beat out our other thread.
+
+</p><h3><a name="EXJ-CH-6-SECT-4.2">Yielding</a></h3>
+
+
+<p>
+As I said earlier, whenever a thread sleeps, waits, or blocks on I/O,
+it gives up its time slot, and another thread is scheduled.  So as
+long as you don't write methods that use hard loops, all threads
+should get their due. However, a <tt>Thread</tt> can also
+give up its time voluntarily with the <tt>yield()</tt>
+call. We can change our previous example to include a
+<tt>yield()</tt> on each iteration:
+
+</p><p>
+</p><pre>class MyThread extends Thread { 
+    ... 
+ 
+    public void run() { 
+        while ( true ) { 
+            System.out.println( message ); 
+            yield(); 
+        } 
+    } 
+} 
+</pre>
+
+<p>
+Now you should see "Foo" and "Bar" 
+messages alternating one for one. If you have threads that perform very intensive calculations, or
+otherwise eat a lot of CPU time, you might want to
+find an appropriate place for them to yield control occasionally.
+Alternatively, you might want to drop the priority of your intensive
+thread, so that more important processing can proceed around it.
+
+</p><p>
+</p><hr>
+<p>
+
+Copyright © 2001 O'Reilly &amp; Associates, Inc.<br>
+All Rights Reserved
+
+</p><p>
+
+Return to the <a href="http://www.oreilly.com/pub/topic/java">O'Reilly Java Homepage</a><br>
+
+
+
+<!-- O'Reilly Footer Begins Here -->
+
+</p><center>
+
+<a href="http://oreilly.com/www/index.html">
+<img alt="[O'Reilly Home]" src="ExploringJavaThreads_files/ora-nav.html"></a>
+</center>
+
+<!-- O'Reilly Footer Ends Here -->
+
+
+
+
+</div></body></html>
