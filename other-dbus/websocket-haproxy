@@ -1,0 +1,75 @@
+
+
+http://stackoverflow.com/questions/10947298/redirecting-websocket-traffic-on-port-80-with-lighttpd?rq=1
+http://jfarcand.wordpress.com/2011/10/06/configuring-haproxy-for-websocket/
+
+
+Home > Atmosphere, Comet, Websocket	> Configuring HAProxy for WebSocket
+Configuring HAProxy for WebSocket
+October 6, 2011 Jeanfrancois Arcand
+
+A lot of peoples (including myself at Wordnik) needed to configure HAProxy 
+in order to make WebSocket working. For my Atmosphere Framework project, 
+I’m using:
+
+
+$ cat /etc/haproxy/haproxy.cfg
+global
+    maxconn     4096 # Total Max Connections. This is dependent on ulimit
+    nbproc      1
+
+defaults
+    mode        http
+
+frontend all 0.0.0.0:80
+    timeout client 86400000
+    default_backend www_backend
+    acl is_websocket hdr(Upgrade) -i WebSocket
+    acl is_websocket hdr_beg(Host) -i ws
+
+    use_backend socket_backend if is_websocket
+
+backend www_backend
+    balance roundrobin
+    option forwardfor # This sets X-Forwarded-For
+    timeout server 30000
+    timeout connect 4000
+    server apiserver 127.0.0.1:8080 weight 1 maxconn 1024 check
+
+backend socket_backend
+    balance roundrobin
+    option forwardfor # This sets X-Forwarded-For
+    timeout queue 5000
+    timeout server 86400000
+    timeout connect 86400000
+    server apiserver targetserver:7777 weight 1 maxconn 1024 check
+
+Thanks to Matthias L. Jugel for sharing … see his use of Atmosphere at twimpact.com.
+
+For any questions or to download Atmosphere Client and Server Framework, go to 
+our main site, use our Google Group forum, follow the team or myself and tweet 
+your questions there! You can also checkout the code on Github.
+
+
+
+February 23, 2013 at 5:16 pm
+
+Just as a reference for anyone else who finds this as a way to get 
+Atmosphere/Nettosphere working behind a HAproxy load balancer, this 
+HAproxy config only works with HAproxy versions before 1.5. I tried 
+to get this working with HAproxy 1.5 (dev17) to no avail. Nettosphere 
+by itself works great, but as soon as you turn on HAproxy (pointing 
+at the Nettosphere instance as a “backend”, Nettosphere starts spewing 
+a continuous stream of exceptions like this:
+....
+
+But as soon as downgrade HAproxy to latest version of 1.3 
+(haven’t tried 1.4 yet), all is fine. No more exceptions. Nettosphere 
+works as expected behind HAproxy. So something that was changed 
+in HAproxy 1.5 is causing this.
+
+Anyways, I hope this helps somebody else who also finds this as 
+an example of getting Nettosphere working behind HAproxy. Stick to 
+HAproxy 1.3 and you’ll be fine.
+
+
