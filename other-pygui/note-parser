@@ -15,7 +15,23 @@ http://www.onlamp.com/pub/a/python/2006/01/26/pyparsing.html
 
 https://wiki.python.org/moin/LanguageParsing
 
+
 http://pyparsing.wikispaces.com/
 http://pyparsing.wikispaces.com/Documentation
+
+
+
+coroutine:
+http://juliank.wordpress.com/2013/01/11/recursive-descent-in-python-using-generators/
+
+
+
+pyparsing
+=============
+http://pyparsing.wikispaces.com/
+
+20 July 2013 - NOTE - Pyparsing 2.0.1 was just released, and supports Python 
+versions 2.6 and later. If you are using Python 2.5 or older, you must 
+specifcally install version 1.5.7.
 
 
