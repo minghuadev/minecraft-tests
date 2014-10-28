@@ -35,3 +35,20 @@ versions 2.6 and later. If you are using Python 2.5 or older, you must
 specifcally install version 1.5.7.
 
 
+install and test
+--------------------
+
+mkdir ~/pypar
+cd ~/pypar
+tar zxf ~/download/virtualenv-1.11.4.tgz
+cd virtualenv-1.11.4
+python virtualenv.py ~/pypar/pt
+
+cd ~/pypar
+tar zxf ~/download/pyparsing-2.0.2.tar.gz
+./pt/bin/pip install ./pyparsing-2.0.2
+cd pyparsing-2.0.2/examples
+../../pt/bin/python cpp_enum_parser.py
+
+
+
