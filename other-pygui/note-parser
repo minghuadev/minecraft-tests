@@ -52,3 +52,11 @@ cd pyparsing-2.0.2/examples
 
 
 
+pyparsing doc
+================
+
+http://infohost.nmt.edu/tcc/help/pubs/pyparsing/pyparsing.pdf
+
+wget -r -np http://infohost.nmt.edu/tcc/help/pubs/pyparsing/web/index.html
+
+
