@@ -1,0 +1,24 @@
+
+https://www.virtualbox.org/ticket/12941
+
+3D not working on Ubuntu 14.04 -> fixed as of 27 May 2014 in VirtualBox 4.3.x and later releases after 27 May 2014
+
+
+ It was caused by a small change in Mesa authentication against the X server<1> triggering a hidden problem in our driver. The commit which fixes it is not yet publicly visible in our time line<2>; when it appears (probably on Monday), the commit message will be: "Additions/x11/vboxvideo: properly report the file descriptor for the kernel driver to allow authentication to work."
+
+Thanks for the helpful work identifying the problem.
+
+General note to everyone commenting on this ticket. If 3D is working in your guest then the output of "glxinfo" should include:
+
+OpenGL vendor string: Humper
+OpenGL renderer string: Chromium
+
+The following warnings will always appear, even when 3D is working, due to a problem in the way our driver is implemented which is not simple to fix:
+
+
+<1>  http://cgit.freedesktop.org/mesa/mesa/commit/?id=5198981
+
+<2> https://www.virtualbox.org/timeline
+
+
+
