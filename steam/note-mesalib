@@ -57,3 +57,47 @@ To use it set the LD_LIBRARY_PATH environment variable accordingly.
 For performance evaluation pass build=release to scons, and use the corresponding lib directory without the "-debug" suffix.
 
 
+
+trusty build installs
+==============================
+
+105 sudo apt-get install llvm-dev
+107 sudo apt-get install llvm-3.3-dev
+108 sudo apt-get install llvm-3.3
+109 sudo apt-get install llvm-3.3-runtime llvm-3.3
+110 sudo apt-get install llvm-3.3-runtime llvm-3.3 binfmt-support
+113 sudo apt-get install llvm-3.3-runtime llvm-3.3
+115 sudo apt-get install llvm-3.3-dev
+118 sudo apt-get install llvm-3.3-dev
+134 sudo apt-get install scons
+143 sudo apt-get install pkg-config
+147 sudo apt-get install x11proto-gl-dev
+153 sudo apt-get install libdrm-dev
+157 sudo apt-get install x11proto-dri2-dev
+162 sudo apt-get install x11proto-present-dev
+168 sudo apt-get install x11proto-core-dev
+177 sudo apt-get install libx11-dev libxext-dev libxdamage-dev libxfixes-dev
+181 sudo apt-get install libx11-xcb-dev libxcb-glx0-dev
+184 sudo apt-get install libxcb-dri2-0-dev
+185 sudo apt-get install libxcb-dri3-0-dev
+186 sudo apt-get install libxcb-dri3-dev
+191 sudo apt-get install libxcb-present-dev
+194 sudo apt-get install libxshmfence-dev
+196 sudo apt-get install libudev-dev
+200 sudo apt-get install llvm-3.5
+202 sudo apt-get install llvm-3.5-dev
+204 sudo apt-get install llvm-config
+205 sudo apt-get install llvm-3.5
+207 sudo apt-get install llvm-3.5=tools
+208 sudo apt-get install llvm-3.5-tools
+212 sudo apt-get install llvm
+228 sudo apt-get install automake
+231 sudo apt-get install libtool
+236 sudo apt-get install g++
+238 sudo apt-get install yacc
+239 sudo apt-get install bison
+241 sudo apt-get install flex
+244 sudo apt-get install ruby-gettext
+248 sudo apt-get install gettext
+250 sudo apt-get install libexpat-dev
+
