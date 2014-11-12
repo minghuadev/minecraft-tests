@@ -1,0 +1,78 @@
+
+search: linux civilization opengl required
+
+http://webcache.googleusercontent.com/search?q=cache:oMhys_Sd8ccJ:steamcommunity.com/app/8930/discussions/1/540744299927655197/%3FinsideModal%3D1+&cd=3&hl=en&ct=clnk&gl=ca
+MESA_GL_VERSION_OVERRIDE=3.0 MESA_GLSL_VERSION_OVERRIDE=130
+
+http://steamcommunity.com/app/8930/discussions/0/540744299663228739/LIBGL_ALWAYS_SOFTWARE=1 glxinfo
+Right click on game in Steam Library -> Properties.
+Uncheck "Enable Steam Community In-Game".
+Click on "Set launch options" and input "LIBGL_ALWAYS_SOFTWARE=1 %command%" into the form.
+Run game normally, decrease all graphics settings to minimum and set lower resolution.
+
+
+-----------
+
+
+debian 7.7.0 amd64 in virtualbox 4.3.18
+
+steam client application user install. built oct 20 2014, api v017.
+need pkgs: curl libgl1-mesa-dri:i386 libgl1-mesa-glx:i386 libc6:i386
+need libc6 version 2.15
+
+$ ldd /usr/bin/glxinfo
+$ apt-file search /usr/lib/x86_64-linux-gnu/libGL.so.1.2
+libgl1-mesa-glx
+
+$ LIBGL_DEBUG=verbose glxinfo
+
+libGL: screen 0 does not appear to be DRI2 capable
+libGL: XF86DRIGetClientDriverName: 1.0.0 vboxvideo (screen 0)
+libGL: OpenDriver: trying /usr/lib/x86_64-linux-gnu/dri/tls/vboxvideo_dri.so
+libGL: OpenDriver: trying /usr/lib/x86_64-linux-gnu/dri/vboxvideo_dri.so
+
+drmOpenDevice: node name is /dev/dri/card0
+drmOpenByBusid: Interface 1.4 failed, trying 1.1
+
+direct rendering: Yes
+server glx vendor string: Chromium
+server glx version string: 1.3 Chromium
+server glx extensions:
+
+OpenGL vendor string: Humper
+OpenGL renderer string: Chromium
+OpenGL version string: 2.1 Chromium 1.9
+
+$ ls -l x86_64-linux-gnu/dri/
+lrwxrwxrwx Apr 14 2014 vboxvideo_dri.so -> ../../VBoxOGL.so
+
+$ apt-file search /usr/lib/VBoxOGL.so
+virtualbox-dbg: /usr/lib/debug/usr/lib/VBoxOGL.so
+virtualbox-guest-x11: /usr/lib/VBoxOGL.so
+
+$ dpkg -l virtualbox*
+ii virtualbox-guest-dkms 4.1.18-dfsg-2+deb7 all
+ii virtualbox-guest-utils 4.1.18-dfsg-2+deb7 amd64
+ii virtualbox-guest-x11 4.1.18-dfsg-2+deb7 amd64
+ii virtualbox-ose-guest-x11 4.1.18-dfsg-2+deb7 all
+
+$ apt-file list virtualbox-guest-x11
+virtualbox-guest-x11: /etc/X11/Xsession.d/98vboxadd-xclient
+virtualbox-guest-x11: /usr/bin/VBoxClient
+virtualbox-guest-x11: /usr/lib/VBoxOGL.so
+virtualbox-guest-x11: /usr/lib/VBoxOGLarrayspu.so
+virtualbox-guest-x11: /usr/lib/VBoxOGLcrutil.so
+virtualbox-guest-x11: /usr/lib/VBoxOGLerrorspu.so
+virtualbox-guest-x11: /usr/lib/VBoxOGLfeedbackspu.so
+virtualbox-guest-x11: /usr/lib/VBoxOGLpackspu.so
+virtualbox-guest-x11: /usr/lib/VBoxOGLpassthroughspu.so
+virtualbox-guest-x11: /usr/lib/x86_64-linux-gnu/dri/vboxvideo_dri.so
+virtualbox-guest-x11: /usr/lib/xorg/modules/drivers/vboxvideo_drv.so
+virtualbox-guest-x11: /usr/share/doc/virtualbox-guest-x11/README.Debian
+virtualbox-guest-x11: /usr/share/doc/virtualbox-guest-x11/changelog.Debian.gz
+virtualbox-guest-x11: /usr/share/doc/virtualbox-guest-x11/copyright
+virtualbox-guest-x11: /usr/share/lintian/overrides/virtualbox-guest-x11
+virtualbox-guest-x11: /usr/share/man/man1/VBoxClient.1.gz
+virtualbox-guest-x11: /usr/share/virtualbox/x11config.pl
+
+

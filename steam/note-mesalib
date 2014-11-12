@@ -1,0 +1,59 @@
+
+ftp://ftp.freedesktop.org/pub/mesa/10.3.3/
+=============================================
+
+File:MesaLib-10.3.3.tar.bz2      7113 KB  11/08/2014   05:10:00 PM
+File:MesaLib-10.3.3.tar.bz2.sig     1 KB  11/08/2014   05:10:00 PM
+
+
+
+http://www.mesa3d.org/llvmpipe.html
+=============================================
+
+Requirements
+
+* An x86 or amd64 processor; 64-bit mode recommended.
+
+    Support for SSE2 is strongly encouraged. Support for SSSE3 and SSE4.1 will yield the most efficient code. The fewer features the CPU has the more likely is that you run into underperforming, buggy, or incomplete code.
+
+    See /proc/cpuinfo to know what your CPU supports.
+
+
+* LLVM: version 3.4 recommended; 3.3 or later required.
+
+   For Linux, on a recent Debian based distribution do:
+     aptitude install llvm-dev
+
+   For a RPM-based distribution do:
+     yum install llvm-devel
+
+
+Building
+
+* To build everything on Linux invoke scons as:
+
+  scons build=debug libgl-xlib
+
+* Alternatively, you can build it with GNU make, if you prefer, by invoking it as
+
+  make linux-llvm
+
+
+Using
+
+* Linux
+
+On Linux, building will create a drop-in alternative for libGL.so into
+
+  build/foo/gallium/targets/libgl-xlib/libGL.so
+
+or
+
+  lib/gallium/libGL.so
+
+
+To use it set the LD_LIBRARY_PATH environment variable accordingly.
+
+For performance evaluation pass build=release to scons, and use the corresponding lib directory without the "-debug" suffix.
+
+
