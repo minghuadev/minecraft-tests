@@ -1,0 +1,179 @@
+
+http://cgit.freedesktop.org/mesa/mesa/commit/?id=5198981
+
+
+author	Ilia Mirkin <imirkin@alum.mit.edu>	2014-03-17 18:42:12 (GMT)
+committer	Ilia Mirkin <imirkin@alum.mit.edu>	2014-03-19 22:17:40 (GMT)
+commit	51989817e6767d8ef469708c69d7ce38b87e9b6e (patch)
+tree	921fa2c336e3976b3336615f1981303921debc5b
+parent	c049dd4396d1639859810d6124faa863dae61d1b (diff)
+loader: add special logic to distinguish nouveau from nouveau_vieux
+There are a lot of different pci ids supported by nouveau, and more are added all the time. The relevant distinguisher between drivers is the chipset id. Signed-off-by: Ilia Mirkin <imirkin@alum.mit.edu> Reviewed-by: Emil Velikov <emil.l.velikov@gmail.com> Reviewed-by: Eric Anholt <eric@anholt.net> Cc: "10.1" <mesa-stable@lists.freedesktop.org>
+Diffstat
+-rw-r--r--	src/glx/dri2_glx.c	20	
+		
+-rw-r--r--	src/loader/Makefile.sources	3	
+		
+-rw-r--r--	src/loader/loader.c	5	
+		
+-rw-r--r--	src/loader/pci_id_driver_map.c	55	
+		
+-rw-r--r--	src/loader/pci_id_driver_map.h (renamed from include/pci_ids/pci_id_driver_map.h)	6	
+		
+5 files changed, 76 insertions, 13 deletions
+diff --git a/src/glx/dri2_glx.c b/src/glx/dri2_glx.c
+index d425559..79f6ecc 100644
+--- a/src/glx/dri2_glx.c
++++ b/src/glx/dri2_glx.c
+@@ -1201,6 +1201,16 @@ dri2CreateScreen(int screen, struct glx_display * priv)
+goto handle_error;
+}
++ if (drmGetMagic(psc->fd, &magic)) {
++ ErrorMessageF("failed to get magic\n");
++ goto handle_error;
++ }
++
++ if (!DRI2Authenticate(priv->dpy, RootWindow(priv->dpy, screen), magic)) {
++ ErrorMessageF("failed to authenticate magic %d\n", magic);
++ goto handle_error;
++ }
++
+/* If Mesa knows about the appropriate driver for this fd, then trust it.
+* Otherwise, default to the server's value.
+*/
+@@ -1232,16 +1242,6 @@ dri2CreateScreen(int screen, struct glx_display * priv)
+goto handle_error;
+}
+- if (drmGetMagic(psc->fd, &magic)) {
+- ErrorMessageF("failed to get magic\n");
+- goto handle_error;
+- }
+-
+- if (!DRI2Authenticate(priv->dpy, RootWindow(priv->dpy, screen), magic)) {
+- ErrorMessageF("failed to authenticate magic %d\n", magic);
+- goto handle_error;
+- }
+-
+if (psc->dri2->base.version >= 4) {
+psc->driScreen =
+psc->dri2->createNewScreen2(screen, psc->fd,
+diff --git a/src/loader/Makefile.sources b/src/loader/Makefile.sources
+index 51a64ea..1a1345f 100644
+--- a/src/loader/Makefile.sources
++++ b/src/loader/Makefile.sources
+@@ -1,2 +1,3 @@
+LOADER_C_FILES := \
+- loader.c \ No newline at end of file
++ loader.c \
++ pci_id_driver_map.c
+diff --git a/src/loader/loader.c b/src/loader/loader.c
+index 811f8a2..e343f4a 100644
+--- a/src/loader/loader.c
++++ b/src/loader/loader.c
+@@ -78,7 +78,7 @@
+#endif
+#define __IS_LOADER
+-#include "pci_ids/pci_id_driver_map.h"
++#include "pci_id_driver_map.h"
+static void default_logger(int level, const char *fmt, ...)
+{
+@@ -352,6 +352,9 @@ loader_get_driver_for_fd(int fd, unsigned driver_types)
+if (!(driver_types & driver_map[i].driver_types))
+continue;
++ if (driver_map[i].predicate && !driver_map[i].predicate(fd))
++ continue;
++
+if (driver_map[i].num_chips_ids == -1) {
+driver = strdup(driver_map[i].driver);
+goto out;
+diff --git a/src/loader/pci_id_driver_map.c b/src/loader/pci_id_driver_map.c
+new file mode 100644
+index 0000000..cb6f705
+--- /dev/null
++++ b/src/loader/pci_id_driver_map.c
+@@ -0,0 +1,55 @@
++/*
++ * Copyright 2014 Ilia Mirkin
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice (including the next
++ * paragraph) shall be included in all copies or substantial portions of the
++ * Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ */
++
++int is_nouveau_vieux(int fd);
++
++#ifndef __NOT_HAVE_DRM_H
++
++#include <xf86drm.h>
++#include <nouveau_drm.h>
++
++static int
++nouveau_chipset(int fd)
++{
++ struct drm_nouveau_getparam gp = { NOUVEAU_GETPARAM_CHIPSET_ID, 0 };
++ int ret;
++
++ ret = drmCommandWriteRead(fd, DRM_NOUVEAU_GETPARAM, &gp, sizeof(gp));
++ if (ret)
++ return -1;
++
++ return gp.value;
++}
++
++int
++is_nouveau_vieux(int fd)
++{
++ int chipset = nouveau_chipset(fd);
++ return chipset > 0 && chipset < 0x30;
++}
++
++#else
++
++int is_nouveau_vieux(int fd) { return 0; }
++
++#endif
+diff --git a/include/pci_ids/pci_id_driver_map.h b/src/loader/pci_id_driver_map.h
+index db9e07f..11e39d3 100644
+--- a/include/pci_ids/pci_id_driver_map.h
++++ b/src/loader/pci_id_driver_map.h
+@@ -59,12 +59,15 @@ static const int vmwgfx_chip_ids[] = {
+#undef CHIPSET
+};
++int is_nouveau_vieux(int fd);
++
+static const struct {
+int vendor_id;
+const char *driver;
+const int *chip_ids;
+int num_chips_ids;
+unsigned driver_types;
++ int (*predicate)(int fd);
+} driver_map[] = {
+{ 0x8086, "i915", i915_chip_ids, ARRAY_SIZE(i915_chip_ids), _LOADER_DRI | _LOADER_GALLIUM },
+{ 0x8086, "i965", i965_chip_ids, ARRAY_SIZE(i965_chip_ids), _LOADER_DRI | _LOADER_GALLIUM },
+@@ -73,7 +76,8 @@ static const struct {
+{ 0x1002, "r300", r300_chip_ids, ARRAY_SIZE(r300_chip_ids), _LOADER_GALLIUM },
+{ 0x1002, "r600", r600_chip_ids, ARRAY_SIZE(r600_chip_ids), _LOADER_GALLIUM },
+{ 0x1002, "radeonsi", radeonsi_chip_ids, ARRAY_SIZE(radeonsi_chip_ids), _LOADER_GALLIUM},
+- { 0x10de, "nouveau", NULL, -1, _LOADER_GALLIUM },
++ { 0x10de, "nouveau_vieux", NULL, -1, _LOADER_DRI, is_nouveau_vieux },
++ { 0x10de, "nouveau", NULL, -1, _LOADER_GALLIUM },
+{ 0x15ad, "vmwgfx", vmwgfx_chip_ids, ARRAY_SIZE(vmwgfx_chip_ids), _LOADER_GALLIUM },
+{ 0x0000, NULL, NULL, 0 },
+};
+
