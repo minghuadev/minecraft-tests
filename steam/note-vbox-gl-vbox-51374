@@ -1,0 +1,101 @@
+
+
+https://www.virtualbox.org/changeset/51374/vbox
+
+
+Changeset 51374 in vbox
+
+Timestamp:
+    05/23/2014 03:59:13 PM (6 months ago) 
+Author:
+    vboxsync
+Message:
+    Additions/x11/vboxvideo: properly report the file descriptor for the kernel driver to allow authentication to work.
+Location:
+    trunk/src/VBox/Additions/x11/vboxvideo
+Files:
+        3 edited
+        undefined (1 diff)
+        vboxvideo.c (2 diffs)
+        vboxvideo_dri2.c (4 diffs)
+
+
+Index: trunk/src/VBox/Additions/x11/vboxvideo/undefined
+===================================================================
+--- a/trunk/src/VBox/Additions/x11/vboxvideo/undefined
++++ b/trunk/src/VBox/Additions/x11/vboxvideo/undefined
+@@ -36,7 +36,9 @@
+ close
+ drmClose
++drmDropMaster
+ drmFreeVersion
+ drmGetVersion
+ drmIoctl
++drmSetMaster
+ fbPictureInit
+ fbScreenInit
+
+
+Index: trunk/src/VBox/Additions/x11/vboxvideo/vboxvideo.c
+===================================================================
+--- a/trunk/src/VBox/Additions/x11/vboxvideo/vboxvideo.c
++++ b/trunk/src/VBox/Additions/x11/vboxvideo/vboxvideo.c
+@@ -1225,6 +1225,9 @@
+ #elif defined(VBOX_DRI)  /* DRI2 */
+     if (pVBox->drmFD >= 0)
++    {
+         /* Tell the kernel driver, if present, that we are taking over. */
+         drmIoctl(pVBox->drmFD, VBOXVIDEO_IOCTL_DISABLE_HGSMI, NULL);
++        drmSetMaster(pVBox->drmFD);
++    }
+ #endif
+     if (pVBox->fHaveHGSMI)
+@@ -1260,7 +1263,10 @@
+         DRILock(xf86ScrnToScreen(pScrn), 0);
+ #elif defined(VBOX_DRI)  /* DRI2 */
++    if (pVBox->drmFD >= 0)
++        drmDropMaster(pVBox->drmFD);
++    /* Tell the kernel driver, if present, that it can use the framebuffer
++     * driver again.  If not, or if that fails, restore the old mode ourselves.
++     */
+     if (   pVBox->drmFD < 0
+-        /* Tell the kernel driver, if present, that it can use the framebuffer
+-         * driver again. */
+         || drmIoctl(pVBox->drmFD, VBOXVIDEO_IOCTL_ENABLE_HGSMI, NULL) < 0)
+ #endif
+
+
+Index: trunk/src/VBox/Additions/x11/vboxvideo/vboxvideo_dri2.c
+===================================================================
+--- a/trunk/src/VBox/Additions/x11/vboxvideo/vboxvideo_dri2.c
++++ b/trunk/src/VBox/Additions/x11/vboxvideo/vboxvideo_dri2.c
+@@ -62,4 +62,5 @@
+ 
+     memset(&DRI2Info, 0, sizeof(DRI2Info));
++    pVBox->drmFD = -1;
+     for (i = 0; i < RT_ELEMENTS(devicePaths); ++i)
+     {
+@@ -70,5 +71,6 @@
+             if (   pVersion
+                 && pVersion->name_len
+-                && !strcmp(pVersion->name, VBOX_DRM_DRIVER_NAME))
++                && !strcmp(pVersion->name, VBOX_DRM_DRIVER_NAME)
++                && drmSetMaster(fd) == 0)
+             {
+                 TRACE_LOG("Opened drm device %s\n", devicePaths[i]);
+@@ -86,5 +88,5 @@
+         return FALSE;
+     DRI2Info.version = 3;
+-    DRI2Info.fd = -1;
++    DRI2Info.fd = pVBox->drmFD;
+     DRI2Info.driverName = VBOX_DRI_DRIVER_NAME;
+     DRI2Info.CopyRegion = VBOXDRICopyRegion;
+@@ -98,5 +100,5 @@
+ {
+     DRI2CloseScreen(pScreen);
+-    if (pVBox->drmFD)
++    if (pVBox->drmFD >= 0)
+         close(pVBox->drmFD);
+ }
+
+

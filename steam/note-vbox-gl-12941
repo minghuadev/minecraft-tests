@@ -4,21 +4,66 @@ https://www.virtualbox.org/ticket/12941
 3D not working on Ubuntu 14.04 -> fixed as of 27 May 2014 in VirtualBox 4.3.x and later releases after 27 May 2014
 
 
- It was caused by a small change in Mesa authentication against the X server<1> triggering a hidden problem in our driver. The commit which fixes it is not yet publicly visible in our time line<2>; when it appears (probably on Monday), the commit message will be: "Additions/x11/vboxvideo: properly report the file descriptor for the kernel driver to allow authentication to work."
+
+test command
+=================
+/usr/lib/nux/unity_support_test -p
+
+
+
+Errors
+=================
+libGL: OpenDriver: trying /usr/lib/i386-linux-gnu/dri/tls/vboxvideo_dri.so
+libGL: OpenDriver: trying /usr/lib/i386-linux-gnu/dri/vboxvideo_dri.so
+OpenGL Warning: glFlushVertexArrayRangeNV not found in mesa table
+OpenGL Warning: glVertexArrayRangeNV not found in mesa table
+OpenGL Warning: glCombinerInputNV not found in mesa table
+....
+OpenGL Warning: glIsFenceNV not found in mesa table
+OpenGL Warning: glSetFenceNV not found in mesa table
+OpenGL Warning: glTestFenceNV not found in mesa table
+libGL error: core dri or dri2 extension not found
+libGL error: failed to load driver: vboxvideo
+libGL: OpenDriver: trying /usr/lib/i386-linux-gnu/dri/tls/swrast_dri.so
+libGL: OpenDriver: trying /usr/lib/i386-linux-gnu/dri/swrast_dri.so
+libGL: Can't open configuration file /home/anon/.drirc: No such file or directory.
+direct rendering: Yes
+
+
+
+Cause and Fix
+=================
+
+It was caused by a small change in Mesa authentication against the X server<1> 
+triggering a hidden problem in our driver. The commit which fixes it is 
+not yet publicly visible in our time line<2>; when it appears (probably on Monday), 
+the commit message will be: "Additions/x11/vboxvideo: properly report the file 
+descriptor for the kernel driver to allow authentication to work."
 
 Thanks for the helpful work identifying the problem.
 
-General note to everyone commenting on this ticket. If 3D is working in your guest then the output of "glxinfo" should include:
+General note to everyone commenting on this ticket. If 3D is working 
+in your guest then the output of "glxinfo" should include:
 
 OpenGL vendor string: Humper
 OpenGL renderer string: Chromium
 
-The following warnings will always appear, even when 3D is working, due to a problem in the way our driver is implemented which is not simple to fix:
+The following warnings will always appear, even when 3D is working, due to 
+a problem in the way our driver is implemented which is not simple to fix:
 
-
-<1>  http://cgit.freedesktop.org/mesa/mesa/commit/?id=5198981
-
+<1> http://cgit.freedesktop.org/mesa/mesa/commit/?id=5198981
 <2> https://www.virtualbox.org/timeline
+
+By the way, for self-builders the change set for the fix is r51374. 
+VBoxGuestAdditions_4.3.13-93885.iso fixed the 3D support.
+
+
+
+messages to determine 3D ok
+===========================
+OpenGL vendor string:   Humper
+OpenGL renderer string: Chromium
+OpenGL version string:  2.1 Chromium 1.9
 
 
 
