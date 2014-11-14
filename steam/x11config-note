@@ -1,0 +1,7 @@
+
+source extracted from virtualbox-guest-x11_4.3.10-dfsg-1_amd64.deb 
+by "ar vx xyz.deb" then "tar Jxf data.tar.xz". file at:
+
+  usr/share/virtualbox/x11config.pl
+
+
