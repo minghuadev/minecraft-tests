@@ -76,3 +76,14 @@ virtualbox-guest-x11: /usr/share/man/man1/VBoxClient.1.gz
 virtualbox-guest-x11: /usr/share/virtualbox/x11config.pl
 
 
+-----------
+http://chromium.sourceforge.net/doc/index.html
+chromium 1.9 documentation
+
+
+-----------
+change set source files noted by vbox-51374 can be found in 
+virtualbox-4.3.10-dfsg.orig.tar.gz from trusty repo.
+
+
+

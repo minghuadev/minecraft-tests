@@ -1,0 +1,48 @@
+
+
+http://stackoverflow.com/questions/518063/what-is-the-best-way-to-debug-opengl
+
+
+
+In general, use tools like glTrace / glIntercept (to look at OpenGL call trace), 
+gDebugger (to visualize textures, shaders, OGL state etc.) and paper/pencil :). 
+Sometimes it helps to understand how you have setup camera and where it is looking, 
+what is being clipped etc. I have personally relied to last more than previous 
+two approaches. But when I can argue that depth is wrong then it helps to look 
+at trace. gDebugger is also the only tool that can be used effectively 
+for profiling and optimization your OpenGL app.
+
+
+
+GLIntercept is your best bet. From their web page:
+
+    Save all OpenGL function calls to text or XML format with the option 
+    to log individual frames.
+
+    Free camera. Fly around the geometry sent to the graphics card and 
+    enable/disable wireframe/backface-culling/view frustum render
+
+    Save and track display lists. Saving of the OpenGL frame buffer 
+    (color/depth/stencil) pre and post render calls. The ability to save 
+    the "diff" of pre and post images is also available.
+
+
+Apitrace is a relatively new tool from some folks at Valve, but It works great! 
+Give it a try: https://github.com/apitrace/apitrace
+
+
+
+There is also the free glslDevil: http://www.vis.uni-stuttgart.de/glsldevil/
+It allows you to debug glsl shaders extensively. It also shows failed OpenGL calls.
+However it's missing features to inspect textures and off screen buffers.
+
+
+
+The gDebugger is an excellent free tool, but no longer supported. However, 
+AMD has picked up its development, and this debugger is now known as CodeXL. 
+It is available both as a standalone application or as a Visual Studio plugin - 
+works both for native C++ applications, or Java/Python applications using 
+OpenGL bindings, both on NVidia and AMD GPUs. It's one hell of a tool.
+
+
+
