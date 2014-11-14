@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>libGL</title>
+
+<link rel="stylesheet" href="libGL_files/style.css" type="text/css">
+<link rel="stylesheet" href="libGL_files/xorg.css" type="text/css">
+
+<link rel="stylesheet" href="libGL_files/local.css" type="text/css">
+
+
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=libGL&amp;do=edit">
+
+
+
+
+
+</head>
+<body>
+
+<div class="page">
+<div class="pageheader">
+<div class="header">
+<p>http://dri.freedesktop.org/wiki/libGL/</p>
+<span class="logo"><img src="libGL_files/logo.png"></span>
+
+
+<form method="get" action="http://www.google.com/search" id="searchform">
+ <div>
+  <input name="sitesearch" value="http://dri.freedesktop.org/wiki/" type="hidden">
+  <input name="q" id="searchbox" size="16" maxlength="255" type="text">
+ </div>
+</form>
+
+
+<span class="headerpath">
+<span class="parentlinks">
+
+<a href="http://dri.freedesktop.org/wiki/">dri</a>/ 
+
+</span>
+<span class="title">
+libGL
+
+</span>
+</span>
+</div>
+
+
+<span class="actions">
+<ul>
+
+<li><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=libGL&amp;do=edit" rel="nofollow">Edit</a></li>
+
+
+
+<li><a href="https://secure.freedesktop.org/cgit/dri/log/libGL.mdwn">Page History</a></li>
+
+
+<li><a href="https://secure.freedesktop.org/cgit/dri/">Repo Info</a></li>
+
+
+
+
+</ul>
+</span>
+
+
+
+
+
+
+</div>
+
+
+
+<div id="pagebody">
+
+<div id="content">
+<h2 id="libgl">libGL</h2>
+
+<h3 id="whatislibgl">What is libGL?</h3>
+
+<p>OpenGL-based programs must link with the <em>libGL</em> library. <em>libGL</em> implements the GLX interface as well as the main OpenGL API entrypoints. When using indirect rendering, <em>libGL</em> creates GLX protocol messages and sends them to the X server via a socket. When using direct rendering, <em>libGL</em> loads the appropriate 3D DRI driver then dispatches OpenGL library calls directly to that driver. </p>
+
+<p>libGL also has the ability to support heterogeneous, multi-head 
+configurations. That means one could have two or more graphics cards (of
+ different types) in one system and libGL would allow an application 
+program to use all of them simultaneously. </p>
+
+<h3 id="wheredoeslibglreside">Where does libGL reside?</h3>
+
+<p>The GLcore extension source code resides at <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dri/xc/xc/lib/GL/GL/">xc/lib/GL/GL/</a> . </p>
+
+<h3 id="libgl3ddriver">libGL (3D) Driver</h3>
+
+<p>A DRI aware 3D driver currently based on Mesa. </p>
+
+<h4 id="wheredoesthe3ddriverreside">Where does the 3D Driver reside?</h4>
+
+<p>Normally libGL loads 3D DRI drivers from the <code>/usr/X11R6/lib/modules/dri</code> directory but the search patch can be overridden by setting the <code>LIBGL_DRIVERS_PATH</code> environment variable. </p>
+
+<p>The DRI aware 3D driver resides in <code>xc/lib/GL/mesa/src/drv</code> </p>
+
+<h2 id="thedridriverinitializationprocess">The DRI driver initialization process</h2>
+
+<ul>
+<li>The whole process begins when an application calls glXCreateContext (<a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dri/xc/xc/lib/GL/glx/glxcmds.c?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">xc/lib/GL/glx/glxcmds.c</a>). glXCreateContext is just a stub that call <span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=CreateContext&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>CreateContext</span>. The real work begins when <span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=CreateContext&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>CreateContext</span> calls <code>__glXInitialize</code> (<a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dri/xc/xc/lib/GL/glx/glxext.c?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">xc/lib/GL/glx/glxext.c</a>). </li>
+<li>The driver specific initialization process starts with <code>__driCreateScreen</code>.
+ Once the driver is loaded (via dlopen), dlsym is used to get a pointer 
+to this function. The function pointer for each driver is stored in the <em>createScreen</em> array in the <code>__DRIdisplay</code> structure. This initialization is done in driCreateDisplay (<a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dri/xc/xc/lib/GL/dri/dri_glx.c?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">xc/lib/GL/dri/dri_glx.c</a>), which is called by <code>__glXInitialize</code>. Note that <code>__driCreateScreen</code>
+ really is the bootstrap of a DRI driver. It's the only  function in a 
+DRI driver that libGL directly knows about. All the other DRI functions 
+are accessed via the <code>__DRIdisplayRec</code>, <code>__DRIscreenRec</code>, <code>__DRIcontextRec</code> and <code>__DRIdrawableRec</code> structs defined in <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dri/xc/xc/lib/GL/glx/glxclient.h?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">xc/lib/GL/glx/glxclient.h</a>). Those structures are pretty well documented in the file. </li>
+<li>After performing the <code>__glXInitialize</code> step, <span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=CreateContext&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>CreateContext</span>
+ calls the createContext function for the requested screen. Here the 
+driver creates two data structures. The first, GLcontext, contains all 
+of the device independent state, device dependent constants (i.e., 
+texture size limits, light limits, etc.), and device dependent function 
+tables. The driver also allocates a structure that contains all of the 
+device dependent state. The GLcontext structure links to the device 
+dependent structure via the <span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=DriverCtx&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>DriverCtx</span>
+ pointer. The device dependent structure also has a pointer back to the 
+GLcontext structure. The device dependent structure is where the driver 
+will store context specific hardware state (register settings, etc.) for
+ when context (in terms of OpenGL / X context) switches occur. This 
+structure is analogous to the buffers where the OS stores CPU state 
+where a program context switch occurs. The texture images really are 
+stored within Mesa's data structures. Mesa supports about a dozen 
+texture formats which happen to satisfy what all the DRI drivers need. 
+So, the texture format/ packing is dependent on the hardware, but Mesa 
+understands all the common formats. See Mesa/src/texformat.h. Gareth and
+ Brian spent a lot of time on that. </li>
+<li>createScreen (i.e., the driver specific initialization function) is called for each screen from <span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=AllocAndFetchScreenConfigs&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>AllocAndFetchScreenConfigs</span> (<a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dri/xc/xc/lib/GL/glx/glxext.c?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">xc/lib/GL/glx/glxext.c</a>). This is also called from <code>__glXInitialize</code>. </li>
+<li>For all of the existing drivers, the <code>__driCreateScreen</code> function is just a wrapper that calls <code>__driUtilCreateScreen</code> (<a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dri/xc/xc/lib/GL/dri/dri_util.c?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">xc/lib/GL/dri/dri_util.c</a>) with a pointer to the driver's API function table (of type <code>__DriverAPIRec</code>). This creates a <code>__DRIscreenPrivate</code>
+ structure for the display and fills it in (mostly) with the supplied 
+parameters (i.e., screen number, display information, etc.). It also 
+opens and initializes the connection to DRM. This includes opening the 
+DRM device, mapping the frame buffer (note: the DRM documentation says 
+that the function used for this is called drmAddMap, but it is actually 
+called drmMap), and mapping the SAREA. The final step is to call the 
+driver initialization function for the driver (from the <span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=InitDriver&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>InitDriver</span> field in the <code>__DriverAPIRec</code> (DriverAPI field of the <code>__DRIscreenPrivate</code>). </li>
+<li>The <span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=InitDriver&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>InitDriver</span>
+ function does (at least in the Radeon and i810 drivers) two broad 
+things. It first verifies the version of the services (XFree86, DDX, and
+ DRM) that it will use. The driver then creates an internal 
+representation of the screen and stores it (the pointer to the 
+structure) in the private field of the <code>__DRIscreenPrivate</code> 
+structure. The driver-private data may include things such as mappings 
+of MMIO registers, mappings of display and texture memory, information 
+about the layout of video memory, chipset version specific data (feature
+ availability for the specific chip revision, etc.), and other similar 
+data. This is the handle that identifies the specific graphics card to 
+the driver (in case there is more than one card in the system that will 
+use the same driver). </li>
+<li>After performing the <code>__glXInitialize</code> step, <span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=CreateContext&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>CreateContext</span>
+ calls the createContext function for the requested screen. This is 
+where it gets pretty complicated. I have only looked at the Radeon 
+driver. radeonCreateContext (<a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dri/xc/xc/lib/GL/mesa/src/drv/radeon/radeon_context.c?rev=HEAD&amp;content-type=text/vnd.viewcvs-markup">xc/lib/GL/mesa/src/drv/radeon/radeon_context.c</a>) allocates a GLcontext structure (actually <code>struct __GLcontextRec</code> from extras/Mesa/src/mtypes.h). Here it fills in function tables for virtually every OpenGL call. Additionally, the <code>__GLcontextRec</code>
+ has pointers to buffers where the driver will store context specific 
+hardware state (textures, register settings, etc.) for when context (in 
+terms of OpenGL / X context) switches occur. The <code>__GLcontextRec</code>
+ (i.e. GLcontext in Mesa) doesn't have any buffers of hardware-specific 
+data (except texture image data if you want to be picky). All 
+Radeon-specific, per-context data should be hanging off of the struct 
+radeon_context. All the DRI drivers define a hardware-specific context 
+structure (such as structure radeon_context, typedef'd to be 
+radeonContextRec, or structure mga_context_t typedef'd to be 
+mgaContext). radeonContextRec has a pointer back to the Mesa <code>__GLcontextRec</code> and Mesa's <code>__GLcontextRec-&gt;DriverCtx</code> pointer points back to the radeonContextRec. If we were writing all this in C++ (don't laugh) we'd treat Mesa's <code>__GLcontextRec</code>
+ as a base class and create driver-specific derived classes from it. 
+Inheritance like this is actually pretty common in the DRI code, even 
+though it's sometimes hard to spot. These buffers are analogous to the 
+buffers where the OS stores CPU state where a program context switch 
+occurs. Note that we don't do any fancy hardware context switching in 
+our drivers. When we make-current a new context, we basically update all
+ the hardware state with that new context's values. </li>
+<li>When each of the function tables is initialized (see 
+radeonInitSpanFuncs for an example), an internal Mesa function is 
+called. This function (e.g., <em>swrast</em><span class="createlink"><a href="https://secure.freedesktop.org/write/dri/ikiwiki.cgi?page=GetDeviceDriverReference&amp;from=libGLDriver&amp;do=create" rel="nofollow">?</a>GetDeviceDriverReference</span>)
+ both allocates the buffer and fills in the function pointers with the 
+software fallbacks. If a driver were to just call these allocation 
+functions and not replace any of the function pointers, it would be the 
+same as the software renderer. </li>
+<li>The next part seems to start when the createDrawable function in the <code>__DRIscreenRec</code>
+ is called, but I don't see where this happens. createDrawable should be
+ called via glXMakeCurrent since that's the first time we're given an X 
+drawable handle. Somewhere during glXMakeCurrent we use a DRI hash 
+lookup to translate the X Drawable handle into an pointer to a <code>__DRIdrawable</code>. If we get a <code>NULL</code> pointer that means we've never seen that handle before and now have to allocate the <code>__DRIdrawable</code> and initialize it (and put it in the hash table). -- <a href="http://dri.freedesktop.org/wiki/IanRomanick/">IanRomanick</a> and <a href="http://dri.freedesktop.org/wiki/BrianPaul/">BrianPaul</a> </li>
+</ul>
+
+<h3 id="ofwhatuseisthemesacodeinthexctree">Of what use is the Mesa code in the xc tree?</h3>
+
+<p>Mesa is used to build some server side modules/libraries specifically
+ for the benefit of the DRI. The libGL is the client side aspect of Mesa
+ which works closely with the server side components of Mesa. </p>
+
+<p>The GLU and GLUT libraries are entirely client side things, and so they are distributed separately. </p>
+
+<h3 id="isthereanydocumentationaboutthexmesacalls">Is there any documentation about the XMesa* calls?</h3>
+
+<p>There is no documentation for those functions. However, one can point out a few things. </p>
+
+<p>First, despite the prolific use of the word "Mesa" in the client (and
+ server) side DRI code, the DRI is not dependent on Mesa. It's a common 
+misconception that the DRI was designed just for Mesa. It's just that 
+the drivers that we at Precision Insight have done so far have Mesa at 
+their core. Other groups are working on non-Mesa-based DRI drivers. </p>
+
+<p>In the client-side code, you could mentally replace the string 
+"XMesa" with "Driver" or some other generic term. All the code below <code>xc/lib/GL/mesa/</code>
+ could be replaced by alternate code. libGL would still work. libGL has 
+no knowledge whatsoever of Mesa. It's the drivers which it loads that 
+have the Mesa code. </p>
+
+<p>On the server side there's more of the same. The XMesa code used for 
+indirect/software rendering was originally borrowed from stand-alone 
+Mesa and its pseudo GLX implementation. There are some crufty 
+side-effects from that. </p>
+
+<p> that's not really true- there's also the <code>__driRegisterExtensions</code> function that libGL uses to implement glXGetProcAddress. That's another long story. </p>
+
+<h3 id="howdoxmodulesandxapplicationscommunicate">How do X modules and X applications communicate?</h3>
+
+<p>X modules are loaded like kernel modules, with symbol resolution at 
+load time, and can thus call each other functions. For kernel modules, 
+the communication between applications and modules is done via the <em>/dev/*</em> files. </p>
+
+<p>X applications call X libraries function which creates a packet and 
+sends it to the server via sockets which processes it. That's all well 
+documented in the standard X documentation. </p>
+
+<p>There are 3 ways 3D clients can communicate with the server or each other: </p>
+
+<ol>
+<li>Via the X protocol requests. There are DRI extensions. </li>
+<li>Via the SAREA (the shared memory segment) </li>
+<li>Via the kernel driver. </li>
+</ol>
+
+</div>
+
+
+
+
+
+</div>
+
+<div id="footer" class="pagefooter">
+
+<div id="pageinfo">
+
+
+
+
+
+
+
+
+
+
+
+<div class="pagedate">
+Last edited <span class="date">Sat 13 Apr 2013 04:15:48 PM PDT</span>
+<!-- Created <span class="date">Sat 13 Apr 2013 04:15:48 PM PDT</span> -->
+</div>
+
+</div>
+
+
+<!-- from dri -->
+</div>
+
+</div>
+
+
+
+</body></html>
