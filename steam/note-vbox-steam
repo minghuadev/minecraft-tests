@@ -86,4 +86,26 @@ change set source files noted by vbox-51374 can be found in
 virtualbox-4.3.10-dfsg.orig.tar.gz from trusty repo.
 
 
+-----------
+source grep for Chromium:
+src/VBox/GuestHost/OpenGL/state_tracker/state_getstring.c:                      return (const GLubyte *) CR_OPENGL_VERSION_STRING " Chromium " CR_VERSION_STRING;
+
+
+$ grep -r CR_OPENGL_VERSION_STRING *
+src/VBox/GuestHost/OpenGL/include/cr_version.h:# define CR_OPENGL_VERSION_STRING "2.1"
+src/VBox/GuestHost/OpenGL/include/cr_version.h:# define CR_OPENGL_VERSION_STRING "2.0"
+src/VBox/GuestHost/OpenGL/include/cr_version.h:# define CR_OPENGL_VERSION_STRING "1.5"
+src/VBox/GuestHost/OpenGL/state_tracker/state_limits.c: const GLfloat crVersion = crStrToFloat(CR_OPENGL_VERSION_STRING);
+src/VBox/GuestHost/OpenGL/state_tracker/state_getstring.c:                      return (const GLubyte *) CR_OPENGL_VERSION_STRING " Chromium " CR_VERSION_STRING;
+
+
+$ grep -r CR_VERSION_STRING *
+src/VBox/GuestHost/OpenGL/include/cr_version.h:#define CR_VERSION_STRING "1.9"   /* Chromium version, not OpenGL version */
+src/VBox/GuestHost/OpenGL/state_tracker/state_limits.c:                         extensions->version = (const GLubyte *) "1.5 Chromium " CR_VERSION_STRING;
+src/VBox/GuestHost/OpenGL/state_tracker/state_limits.c:                         extensions->version = (const GLubyte *) "1.4 Chromium " CR_VERSION_STRING;
+src/VBox/GuestHost/OpenGL/state_tracker/state_limits.c:                 extensions->version = (const GLubyte *) "1.3 Chromium " CR_VERSION_STRING;
+src/VBox/GuestHost/OpenGL/state_tracker/state_limits.c:         extensions->version = (const GLubyte *) "1.2 Chromium " CR_VERSION_STRING;
+src/VBox/GuestHost/OpenGL/state_tracker/state_getstring.c:                      return (const GLubyte *) CR_OPENGL_VERSION_STRING " Chromium " CR_VERSION_STRING;
+src/VBox/Additions/common/crOpenGL/pack/packspu_getstring.c:                sprintf((char*)ctx->glVersion, "%.1f Chromium %s", version, CR_VERSION_STRING);
+
 
