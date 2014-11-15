@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>
+      Linux build instructions – Oracle VM VirtualBox
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="search" href="https://www.virtualbox.org/search">
+        <link rel="help" href="https://www.virtualbox.org/wiki/TracGuide">
+        <link rel="alternate" href="https://www.virtualbox.org/wiki/Linux%20build%20instructions?format=txt" type="text/x-trac-wiki" title="Plain Text">
+        <link rel="start" href="https://www.virtualbox.org/wiki">
+        <link rel="stylesheet" href="vboxLinuxBuildInstructions_files/trac.css" type="text/css"><link rel="stylesheet" href="vboxLinuxBuildInstructions_files/wiki.css" type="text/css">
+        <link rel="shortcut icon" href="https://www.virtualbox.org/graphics/VirtualBox.ico" type="image/x-icon">
+        <link rel="icon" href="https://www.virtualbox.org/graphics/VirtualBox.ico" type="image/x-icon">
+      <link type="application/opensearchdescription+xml" rel="search" href="https://www.virtualbox.org/search/opensearch" title="Search Oracle VM VirtualBox">
+    <script type="text/javascript" src="vboxLinuxBuildInstructions_files/jquery.js"></script><script type="text/javascript" src="vboxLinuxBuildInstructions_files/babel.js"></script><script type="text/javascript" src="vboxLinuxBuildInstructions_files/trac.js"></script><script type="text/javascript" src="vboxLinuxBuildInstructions_files/search.js"></script><script type="text/javascript" src="vboxLinuxBuildInstructions_files/folding.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("#content").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $("#content").find(".wikianchor").each(function() {
+          $(this).addAnchor(babel.format(_("Link to #%(id)s"), {id: $(this).attr('id')}));
+        });
+        $(".foldable").enableFolding(true, true);
+      });
+    </script>
+  <link rel="stylesheet" type="text/css" href="vboxLinuxBuildInstructions_files/style.css">
+</head>
+  <body>
+  <p><b>https://www.virtualbox.org/wiki/Linux%20build%20instructions</b></p>
+<!-- --
+  <div id="vboxlogo">
+    <a id="innologo-f" href="https://www.virtualbox.org/"><img src="vboxLinuxBuildInstructions_files/vbox_logo2_gradient.png" alt=""></a>
+  </div>
+  <div id="vboxstring">
+    <img src="vboxLinuxBuildInstructions_files/vboxlogodown.png" alt="VirtualBox">
+  </div>
+-- -->
+<!--
+  <div id="vboxstring">
+  <p><b><font size="-1" color="#882222">This server will be down for maintenance from Friday April 27th, 5PM PDT til Monday April 30th, 8AM PDT.<br/>Sorry for any inconveniences!</font></b></p>
+  </div>
+-->
+<!--
+  <div id="vboxstring">
+  <p><b><font size="+2">This server is currently in read-only mode for maintenance!</font></b></p>
+  </div>
+-->
+<!-- --
+  <div class="innoframe" id="innolinks">
+    <a href="https://www.virtualbox.org/wiki/VirtualBox">About</a><br>
+    <a href="https://www.virtualbox.org/wiki/Screenshots">Screenshots</a><br>
+    <a href="https://www.virtualbox.org/wiki/Downloads">Downloads</a><br>
+    <a href="https://www.virtualbox.org/wiki/Documentation">Documentation</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.virtualbox.org/wiki/End-user_documentation">End-user docs</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.virtualbox.org/wiki/Technical_documentation">Technical docs</a><br>
+    <a href="https://www.virtualbox.org/wiki/Contributor_information">Contribute</a><br>
+    <a href="https://www.virtualbox.org/wiki/Community">Community</a><br>
+    </div>
+-- -->
+    <div id="center__modified">
+
+<p> &nbsp; https://www.virtualbox.org/wiki/Build_instructions: <br />
+<ul> <li>  To build, use the kmk command after you have entered our development environment. This is the make command of kBuild, our homegrown build system. (To avoid confusion with an already installed make program, our make has been renamed to kmk). With kBuild, the BUILD_TYPE environment variable determines what type is built and can be release (enable compiler optimizations, strip debug and profiling code), debug (for debugging) or profile (for profiling). The default is release.
+</li> <li>  The default build target is all, which produces all executables in the out/{platform}.{architecture}/{release|profile|debug}/ directories.
+</li> <li>  If you're looking for code documentation, try kmk docs and/or kmk docs.main. 
+</li> </ul> </p>
+<p> &nbsp; svn co http://www.virtualbox.org/svn/vbox/trunk vbox</p>
+
+      <!-- <p style="text-align:right">
+      <a href="/">Home</a> |
+      <a href="/wiki/VirtualBox">About</a>
+      <img style="margin-left:5px; vertical-align:bottom" src="/graphics/vbox40px.png" alt="" /> 
+      </p> -->
+      <form style="text-align: right" action="/search" method="get">
+        <div>
+          <input id="innosearch" name="q" size="10" value="search..." onblur="if(this.value=='') this.value='search...';" onfocus="if(this.value=='search...') this.value='';" type="text">
+          <input name="wiki" value="on" type="hidden">
+          <input name="changeset" value="on" type="hidden">
+          <input name="ticket" value="on" type="hidden">
+        </div>
+      </form>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="https://www.virtualbox.org/"><img src="vboxLinuxBuildInstructions_files/vbox_logo2_gradient.png" alt="Oracle VM VirtualBox"></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input id="proj-search" name="q" size="18" type="text">
+          <input value="Search" type="submit">
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="https://www.virtualbox.org/login">Login</a></li><li class="last"><a href="https://www.virtualbox.org/prefs">Preferences</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="last first"><a href="https://www.virtualbox.org/browser">Browse Source</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="pagepath" class="noprint">
+  <a class="pathentry first" title="View WikiStart" href="https://www.virtualbox.org/wiki">wiki:</a><a class="pathentry" href="https://www.virtualbox.org/wiki/Linux%20build%20instructions" title="View Linux build instructions">Linux build instructions</a>
+</div>
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><a href="https://www.virtualbox.org/wiki/WikiStart">Start Page</a></li><li><a href="https://www.virtualbox.org/wiki/TitleIndex">Index</a></li><li class="last"><a href="https://www.virtualbox.org/wiki/Linux%20build%20instructions?action=history">History</a></li>
+          </ul>
+        <hr>
+      </div>
+    <div id="content" class="wiki">
+      <div class="wikipage searchable">
+        
+          
+          <div class="trac-modifiedby"><a href="https://www.virtualbox.org/wiki/Linux%20build%20instructions?action=diff&amp;version=84" title="Version 84 by klaus: fedora package list, separate headline for 64 bit build info">Last modified</a> <a class="timeline" href="https://www.virtualbox.org/timeline?from=2013-06-03T11%3A42%3A42Z&amp;precision=second" title="2013-06-03T11:42:42Z in Timeline">18 months</a> ago</div>
+          <div id="wikipage"><h1 id="Linuxbuildinstructions">Linux build instructions<a title="Link to this section" href="#Linuxbuildinstructions" class="anchor"> ¶</a></h1>
+<p>
+While we try to not favor any distribution, we only build with certain 
+distributions. This includes Debian, Ubuntu, Gentoo and Red Hat 
+Enterprise Linux. Things should not be much different for other 
+distributions though. If you want to supply specific build instructions 
+(especially package names) for other distributions, please contact <a class="wiki" href="https://www.virtualbox.org/wiki/Community">the VirtualBox team</a>.
+</p>
+<h2 id="Prerequisites">Prerequisites<a title="Link to this section" href="#Prerequisites" class="anchor"> ¶</a></h2>
+<p>
+You need: 
+</p>
+<ul><li><strong>GCC 3.3.3 or later (except for the GCC 4.0.x series).</strong> GCC 4.4.1 is recommended.
+</li><li><strong>as86</strong> (real mode assembler, usually part of the <em>dev86</em> or <em>bin86</em> package.)
+</li><li><strong>bcc</strong> (Bruce Evans C Compiler; often part of the <em>dev86</em> package; only required for VBox &lt; 4.2)
+<br> <em>Note:</em> The bcc compiler contained in openSUSE10.2 as part of dev86-0.16.0-218 is known to generate broken code. Unfortunately, <em>bcc -v</em> is not supported.
+</li><li><strong>IASL</strong> (Intel ACPI compiler)
+</li><li><strong>xsltproc</strong> (libxslt, XML style sheet processor)
+</li><li><strong>libxml2</strong> (required for <em>VBox version &gt;= 1.6</em>, XML file handling)
+</li><li><strong>libxslt1</strong> (required for <em>VBox version &gt;= 1.6</em>, XML file transformation)
+</li><li><strong>libXcursor</strong> (required to support color mouse pointers in the guest)
+</li><li><strong>libxinerama</strong>
+</li><li><strong>librandr</strong>
+</li><li><strong>Qt 4.x.y</strong> (with x &gt;= 4, including the OpenGL part, required for <em>VBox version &gt; 3.0</em>)
+</li><li><strong>libIDL</strong>
+</li><li><strong>libSDL</strong> (SDL frontend)
+</li><li><strong>ALSA</strong> (audio backend)
+</li><li><strong>PulseAudio</strong> (audio backend)
+</li><li><strong>libhal</strong> (detect host floppy/DVD)
+</li><li><strong>libcap</strong> (CAP_NET_RAW for ICMP sockets in NAT)
+</li><li><strong>libdevmapper</strong>
+</li><li><strong>libpam0g</strong> (PAM support for the guest additions, required for <em>VBox version &gt;= 3.2</em>)
+</li><li><strong>python-dev</strong> (Python bindings)
+</li><li><strong>gsoap</strong> (webservice API, version 2.7.9f or higher)
+</li><li><strong>Java SE 6 JDK</strong> (Java API bindings, both webservice and XPCOM)
+</li><li><strong>Xmu</strong> (for OpenGL)
+</li><li><strong>Mesa</strong> (for OpenGL)
+</li><li><strong>cURL</strong> (version 7.16.1 or higher, required for <em>VBox version &gt;= 3.0</em>)
+</li><li><strong>Java JDK</strong> (required to generate the Java bindings)
+</li><li><strong>makeself</strong> (for creating the generic installer package, required for <em>VBox version &gt;= 4.0</em>)
+</li><li><strong>pdflatex</strong> (normally provided by <strong>texlive-latex-base</strong>)
+</li></ul><p>
+On 64-bit systems you need the following packages as well:
+</p>
+<ul><li><strong>ia32-libs</strong> (various libraries needed for compiling the 32-bit guest additions)
+</li><li><strong>libc6-dev-i386</strong> (libc6 i386 development headers)
+</li><li><strong>lib32gcc1</strong> (gcc support for i386)
+</li><li><strong>gcc-multilib</strong> (gcc support for i386)
+</li><li><strong>lib32stdc++6</strong> (libstdc++ for i386)
+</li><li><strong>g++-multilib</strong> (g++ support for i386)
+</li></ul><p>
+On Debian-based systems, the following command should install the required packages:
+</p>
+<pre class="wiki">apt-get install gcc g++ bcc iasl xsltproc uuid-dev zlib1g-dev libidl-dev \
+                libsdl1.2-dev libxcursor-dev libasound2-dev libstdc++5 \
+                libhal-dev libpulse-dev libxml2-dev libxslt1-dev \
+                python-dev libqt4-dev qt4-dev-tools libcap-dev \
+                libxmu-dev mesa-common-dev libglu1-mesa-dev \
+                linux-kernel-headers libcurl4-openssl-dev libpam0g-dev \
+                libxrandr-dev libxinerama-dev libqt4-opengl-dev makeself \
+                libdevmapper-dev default-jdk python-central \
+                texlive-latex-base \
+                texlive-latex-extra texlive-latex-recommended \
+                texlive-fonts-extra texlive-fonts-recommended
+</pre><ul><li>On 64-bit Debian-based systems, the following command should install the required additional packages:
+<pre class="wiki">apt-get install ia32-libs libc6-dev-i386 lib32gcc1 gcc-multilib \
+                lib32stdc++6 g++-multilib
+</pre></li></ul><p>
+On Fedora (tested with 17), the following should do:
+</p>
+<pre class="wiki">yum install gcc-c++ libcap-devel libcurl-devel libIDL-devel libstdc++-static \
+  libxslt-devel libXmu-devel openssl-devel pam-devel pulseaudio-libs-devel \
+  python-devel qt-devel SDL_ttf-devel SDL-static texlive-latex wine-core \
+  device-mapper-devel wget subversion subversion-gnome kernel-devel \
+  glibc-static zlib-static glibc-devel.i686 libstdc++.i686 libpng-devel
+</pre><p>
+To get the beramono.sty LaTeX style which is missing in Fedora (thanks to <a class="ext-link" href="http://forums.virtualbox.org/viewtopic.php?f=31&amp;t=35892"><span class="icon">&nbsp;</span>Perry</a>):
+</p>
+<pre class="wiki">cd /usr/share/texmf/tex/latex/
+mkdir bera
+cd bera/
+wget http://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/bera/beramono.sty
+texhash
+</pre><p>
+On Gentoo, the following should do:
+</p>
+<pre class="wiki">emerge -av sys-devel/bin86 sys-devel/dev86 sys-power/iasl libxslt xerces-c \
+           xalan-c libXcursor =qt-3* libIDL libsdl hal alsa-lib pulseaudio
+</pre><p>
+Note that VirtualBox makes use of YASM as its assembler which is part of
+ the source repository as the currently available releases of YASM 
+contain various bugs. As soon as a working release becomes officially 
+available, we will add YASM to the list of prerequisites.
+</p>
+<h2 id="Specialtweaksfor64bitbinaries">Special tweaks for 64 bit binaries<a title="Link to this section" href="#Specialtweaksfor64bitbinaries" class="anchor"> ¶</a></h2>
+<p>
+Building on a <strong>64bit</strong> host still requires 32bit libraries
+ and build tools as the Guest Additions which are part of the build 
+process are 32bit. Note that on 64bit Ubuntu systems some links to 
+shared libraries are missing. This can be fixed with
+</p>
+<pre class="wiki">ln -s libX11.so.6    /usr/lib32/libX11.so 
+ln -s libXTrap.so.6  /usr/lib32/libXTrap.so 
+ln -s libXt.so.6     /usr/lib32/libXt.so 
+ln -s libXtst.so.6   /usr/lib32/libXtst.so
+ln -s libXmu.so.6    /usr/lib32/libXmu.so
+ln -s libXext.so.6   /usr/lib32/libXext.so
+</pre><h2 id="BuildingVirtualBox">Building VirtualBox<a title="Link to this section" href="#BuildingVirtualBox" class="anchor"> ¶</a></h2>
+<ol><li>Change to the root directory of the sources and execute the configure script:
+<pre class="wiki">./configure --disable-hardening
+</pre>If it finds everything it needs, it will create a file called 
+'AutoConfig.kmk' containing paths to the various tools on your system. 
+Also, it will create an environment setup script called <tt>env.sh</tt>.
+  This step only has to be done once (if something changes in your build
+ tool setup, you might have to repeat it but keep in mind that both 
+output files will be overwritten).
+</li></ol><blockquote>
+<p>
+The switch <em>--disable-hardening</em> should <strong>not</strong> be used for building packages for redistribution or for production use.
+</p>
+</blockquote>
+<ol start="2"><li>Whenever you want to build VirtualBox, you have to 
+open a shell and source the generated environment setup script 'env.sh',
+ i.e. do
+<pre class="wiki">source ./env.sh
+</pre></li></ol><ol start="3"><li>To build a release package, type
+<pre class="wiki">kmk all
+</pre>This produces the required binaries in <tt>out/linux.x86/release/bin/</tt>. If you want to build a debug version, type
+<pre class="wiki">kmk BUILD_TYPE=debug
+</pre>In case you have more than one CPU core, kmk will automatically do a parallel build.
+</li></ol><ol start="4"><li>If you made a <em>hardened</em> build (that is, you omitted the <em>--disable-hardened</em> switch from configure) you have to set some symbolic links manually to be able to start VMs from the bin/ directory:
+<pre class="wiki">cd out/linux.x86/release/bin/components
+ln -s ../VBoxDDU.so .
+ln -s ../VBoxREM.so .
+ln -s ../VBoxRT.so .
+ln -s ../VBoxVMM.so .
+ln -s ../VBoxXPCOM.so .
+</pre></li></ol><h2 id="BuildingVirtualBoxpackagesfordistribution">Building VirtualBox packages for distribution<a title="Link to this section" href="#BuildingVirtualBoxpackagesfordistribution" class="anchor"> ¶</a></h2>
+<p>
+Never disable hardening (see previous section) when creating packages for redistribution.
+</p>
+<p>
+To be more LSB-compliant, change the default pathes which are used by 
+the VirtualBox binaries to find their components. Add the following 
+build variables to LocalConfig.kmk:
+</p><dl class="wiki"><dt><em>VBOX_PATH_APP_PRIVATE_ARCH := /usr/lib/virtualbox</em></dt><dd>
+This is the application's private directory, architecture-dependent.
+</dd><dt><em>VBOX_PATH_SHARED_LIBS := $(VBOX_PATH_APP_PRIVATE_ARCH)</em></dt><dd>
+Where to put the shared libraries, usually the same directory as the 
+private path as the VirtualBox shared libraries are normally not used by
+ any other application.
+</dd><dt><em>VBOX_WITH_ORIGIN :=</em></dt><dd>
+Disable <em>RPATH=$ORIGIN</em> and use a fixed <em>RUNPATH</em>.
+</dd><dt><em>VBOX_WITH_RUNPATH := $(VBOX_PATH_APP_PRIVATE_ARCH)</em></dt><dd>
+Set <em>RUNPATH</em> to the directory where our shared libraries can be found.
+</dd><dt><em>VBOX_PATH_APP_PRIVATE := /usr/share/virtualbox</em></dt><dd>
+This is the applications's private directory, not architecture-dependent.
+</dd><dt><em>VBOX_PATH_APP_DOCS := /usr/share/doc/virtualbox</em></dt><dd>
+Set the directory containing the documentation. The file VirtualBox.chm and UserManual.pdf are searched within this directory.
+</dd><dt><em>VBOX_WITH_TESTCASES :=</em></dt><dd>
+Save compile time by not building the testcases.
+</dd><dt><em>VBOX_WITH_TESTSUITE :=</em></dt><dd>
+Save compile time by not building the testsuite.
+<p></p>
+</dd></dl>
+<h2 id="Runningyourbuild">Running your build<a title="Link to this section" href="#Runningyourbuild" class="anchor"> ¶</a></h2>
+<p>
+You can run VirtualBox directly from the build target directory (<tt>out/linux.x86/release/bin/</tt>).
+ But first of all, you must build and install the VirtualBox kernel 
+module, whose sources will have been copied to the build target 
+directory. 
+</p>
+<p>
+So, issue the following: 
+</p>
+<pre class="wiki">cd out/linux.x86/release/bin/src
+make
+sudo make install
+cd ..
+</pre><p>
+Then it should have been installed to your modules directory and you can load it using <tt>modprobe vboxdrv</tt>. Make sure you give yourself read and write access to <tt>/dev/vboxdrv</tt>.
+</p>
+<p>
+If you made a <em>hardened build</em>, make sure that the setuid stubs have the correct permissions:
+</p>
+<pre class="wiki">for f in VirtualBox VBoxHeadless VBoxSDL VBoxBFE VBoxNetDHCP VBoxNetAdpCtl; do
+  chown root.root $f
+  chmod 4511 $f
+done
+</pre><p>
+Finally, you can start one of the frontends, e.g.
+</p>
+<pre class="wiki">./VirtualBox
+</pre></div>
+        
+        
+      </div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="https://www.virtualbox.org/wiki/Linux%20build%20instructions?format=txt">Plain Text</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    </div><!-- center -->
+    <div class="innoframe" id="innofoot">
+    <p style="text-align:center">
+      <a href="http://www.oracle.com/"><img src="vboxLinuxBuildInstructions_files/logo_oracle_footer.gif" alt="www.oracle.com"></a><br>
+      <a href="http://www.oracle.com/us/technologies/virtualization/061976.html">Contact</a> – <a href="http://www.oracle.com/html/privacy.html">Privacy policy</a> – <a href="http://www.oracle.com/html/terms.html">Terms of Use</a>
+    </p>
+  </div>
+
+</body></html>
