@@ -2,13 +2,22 @@
 search: linux civilization opengl required
 
 http://webcache.googleusercontent.com/search?q=cache:oMhys_Sd8ccJ:steamcommunity.com/app/8930/discussions/1/540744299927655197/%3FinsideModal%3D1+&cd=3&hl=en&ct=clnk&gl=ca
-MESA_GL_VERSION_OVERRIDE=3.0 MESA_GLSL_VERSION_OVERRIDE=130
+  try prepend steam civ command with:
+  MESA_GL_VERSION_OVERRIDE=3.0 MESA_GLSL_VERSION_OVERRIDE=130
 
 http://steamcommunity.com/app/8930/discussions/0/540744299663228739/LIBGL_ALWAYS_SOFTWARE=1 glxinfo
-Right click on game in Steam Library -> Properties.
-Uncheck "Enable Steam Community In-Game".
-Click on "Set launch options" and input "LIBGL_ALWAYS_SOFTWARE=1 %command%" into the form.
-Run game normally, decrease all graphics settings to minimum and set lower resolution.
+  New Mesa and LLVMPipe required, e.g I using Kubuntu 14.04 with Oibaf PPA.
+  My "LIBGL_ALWAYS_SOFTWARE=1 glxinfo" output:
+
+    OpenGL vendor string: VMware, Inc.
+    OpenGL renderer string: Gallium 0.4 on llvmpipe (LLVM 3.4, 256 bits)
+    OpenGL core profile version string: 3.3 (Core Profile) Mesa 10.3.0-devel
+    OpenGL core profile shading language version string: 3.30
+
+  Right click on game in Steam Library -> Properties.
+  Uncheck "Enable Steam Community In-Game".
+  Click on "Set launch options" and input "LIBGL_ALWAYS_SOFTWARE=1 %command%" into the form.
+  Run game normally, decrease all graphics settings to minimum and set lower resolution.
 
 
 -----------
