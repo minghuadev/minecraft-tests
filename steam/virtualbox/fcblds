@@ -1,0 +1,24 @@
+
+
+./configure --disable-hardening  --with-linux=/usr/src/kernels/3.17.2-200.fc20.i686
+ 
+
+
+source ./env.sh
+
+
+
+kmk
+
+
+
+notes: 
+
+ [1] kmk fails in 20 min. use -k to keep going for 25 more min. 
+
+ [2] add the following to configure to reduce build time. with -k it takes 25 min:
+
+  --disable-xpcom --disable-python --disable-java --disable-alsa   \
+  --disable-pulse  --disable-dbus  --disable-docs --disable-libvpx 
+
+

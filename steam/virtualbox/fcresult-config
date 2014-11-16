@@ -1,0 +1,65 @@
+
+bash-4.2$ time ./configure --disable-hardening --with-linux=/usr
+Checking for environment: Determined build machine: linux.x86, target machine: linux.x86, OK.
+Checking for kBuild: found, OK.
+Checking for gcc: found version 4.8.3, OK.
+Checking for Open Watcom: found version 2.0 beta Apr 27 2014 22:15:51 (32-bit), OK.
+Checking for iasl: found version 20140828, OK.
+Checking for xslt: found, OK.
+Checking for mkisofs: found genisoimage 1.1.11 (Linux), OK.
+Checking for pthread: found, OK.
+Checking for libxml2: found version 2.9.1, OK.
+Checking for libIDL: found version 0.8.14, OK.
+Checking for ssl: found version OpenSSL 1.0.1e 11 Feb 2013, OK.
+Checking for libcurl: found version 7.32.0, OK.
+Checking for libvpx: found version 1.3.0, OK.
+Checking for zlib: found version 1.2.8, OK.
+Checking for libpng: found version 1.6.6, OK.
+Checking for SDL: found version 1.2.15, OK.
+Checking for X libraries: found, OK.
+Checking for Xcursor: found, OK.
+Checking for Xinerama: found, OK.
+Checking for Xrandr: found, OK.
+Checking for Xmu: found, OK.
+Checking for Mesa / GLU: libGL error: failed to open drm device: Permission denied
+libGL error: failed to load driver: i965
+libGL error: dlopen /usr/lib/dri/swrast_dri.so failed (/usr/lib/dri/swrast_dri.so: cannot open shared object file: No such file or directory)
+libGL error: unable to load driver: swrast_dri.so
+libGL error: failed to load driver: swrast
+found version 1.4, OK.
+Checking for Qt4: found version 4.8.6, OK.
+Checking for Qt4 devtools: found version 4.8.6, OK.
+Checking for Python support: found version 2.7.5, OK.
+Checking for Java support: OK.
+Checking for PulseAudio: found version 5.0.0 API version 12, OK.
+Checking for static stc++ library: found, OK.
+Checking for Linux kernel sources: found version 3.17.2, OK.
+Checking for ALSA: found version 1.0.27, OK.
+Checking for libdevmapper: found version 1.02.85 (2014-04-10), OK.
+Checking for libcap library: found, OK.
+Checking for compiler.h: compiler.h not found, OK.
+Checking for makeself: found version 2.2.0, OK.
+
+Successfully generated '/home/VirtualBox-4.3.18/AutoConfig.kmk' and '/home/VirtualBox-4.3.18/env.sh'.
+Source '/home/VirtualBox-4.3.18/env.sh' once before you start to build VBox:
+
+  source /home/VirtualBox-4.3.18/env.sh
+  kmk
+
+To compile the kernel modules, do:
+
+  cd ./out/linux.x86/release/bin/src
+  make
+
+
+  +++ WARNING +++ WARNING +++ WARNING +++ WARNING +++ WARNING +++ WARNING +++
+  Hardening is disabled. Please do NOT build packages for distribution with
+  disabled hardening!
+  +++ WARNING +++ WARNING +++ WARNING +++ WARNING +++ WARNING +++ WARNING +++
+
+Enjoy!
+
+real    0m5.337s
+user    0m4.044s
+sys     0m1.091s
+

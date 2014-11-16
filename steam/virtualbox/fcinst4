@@ -1,0 +1,23 @@
+
+yum install acpica-tools.i686
+
+
+
+download:
+ftp://rpmfind.net/linux/mageia/distrib/3/i586/media/core/release/iasl-20130328-1.mga3.i586.rpm
+
+
+files:
+http://rpmfind.net//linux/RPM/mageia/3/i586/media/core/release/iasl-20130328-1.mga3.i586.html
+
+/usr/bin/acpibin
+/usr/bin/acpiexec
+/usr/bin/acpihelp
+/usr/bin/acpinames
+/usr/bin/acpisrc
+/usr/bin/acpixtract
+/usr/bin/iasl
+/usr/share/doc/iasl
+/usr/share/doc/iasl/changes.txt
+
+

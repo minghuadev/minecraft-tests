@@ -1,0 +1,15 @@
+
+kBuild: Linking VBoxPcBios
+Warning! W1080: file /home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios/pcibio32.obj is a 32-bit object file
+Warning! W1080: file /home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios/apm_pm.obj is a 32-bit object file
+Warning! W1080: file /home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios32/VBoxPcBios32.lib is a 32-bit object file
+Error! E2011: file /home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios32/VBoxPcBios32.lib(/home/VirtualBox-4.3.18/src/VBox/Devices/PC/BIOS/pci32.c): invalid object file attribute
+kmk: *** [/home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios/VBoxPcBios.rom] Error 1
+The failing command:
+@/home/VirtualBox-4.3.18/kBuild/bin/linux.x86/kmk_redirect -E 'PATH=/usr/bin/watcom/binl:/usr/bin/watcom/binw:/home/VirtualBox-4.3.18/tools/linux.x86/bin:/home/VirtualBox-4.3.18/kBuild/bin/linux.x86:/usr/bin/watcom/binl:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin' -E 'WATCOM=/usr/bin/watcom' -E 'EDPATH=/usr/bin/watcom/EDDAT' -E 'LIB=' -E 'INCLUDE=' -- /usr/bin/watcom/binl/wlink @/home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios/VBoxPcBios.rsp
+kmk: *** [/home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios/VBoxPcBios.rom] Deleting file `/home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios/VBoxPcBios.map'
+kmk: *** [/home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios/VBoxPcBios.rom] Deleting file `/home/VirtualBox-4.3.18/out/linux.x86/release/obj/VBoxPcBios/VBoxPcBios.rsp'
+kmk: *** Waiting for unfinished jobs....
+kmk: *** Exiting with status 2
+
+

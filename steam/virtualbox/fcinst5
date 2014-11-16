@@ -1,0 +1,7 @@
+
+
+yum install mkisofs
+yum install libvpx-devel
+yum install makeself
+
+

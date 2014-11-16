@@ -1,0 +1,29 @@
+
+
+
+download binary:
+http://sourceforge.net/projects/openwatcom/files/current-build/open-watcom-2_0-c-linux-x86/download
+
+
+
+install to /usr/bin/watcom
+and source env:
+
+    -bash-4.2$ . /usr/bin/watcom/owsetenv.sh 
+
+
+
+
+https://github.com/open-watcom/open-watcom-v2
+
+if you build openwatcom:
+
+Perhaps I'm mistaken, but, if you're running 64-bit Linux, you might have to use DOSBOX instead. Or at least you can use DOSBOX by exporting the OWDOSBOX variable in setvars.sh. @jmalak would be able to say for sure, though.
+Jiří Malák
+Owner
+jmalak commented on Oct 10
+
+I am currently using DOSEMU 1.4.0.0 on 64-bit OpenSuse and it works without problem.
+Anyway @ArmstrongJ is right, you can use DOSBOX if you define the OWDOSBOX environment variable in setvars.sh (details included in setvars.sh).
+
+

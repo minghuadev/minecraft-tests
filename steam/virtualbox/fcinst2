@@ -1,0 +1,9 @@
+#!/bin/bash
+#fcinst2
+
+cd /usr/share/texmf/tex/latex/
+mkdir bera
+cd bera/
+wget http://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/bera/beramono.sty
+texhash
+

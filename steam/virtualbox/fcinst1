@@ -1,0 +1,10 @@
+#!/bin/bash
+#fcinst1
+
+yum install gcc-c++ libcap-devel libcurl-devel libIDL-devel libstdc++-static \
+  libxslt-devel libXmu-devel openssl-devel pam-devel pulseaudio-libs-devel \
+  python-devel qt-devel SDL_ttf-devel SDL-static texlive-latex wine-core \
+  device-mapper-devel wget subversion subversion-gnome kernel-devel \
+  glibc-static zlib-static glibc-devel.i686 libstdc++.i686 libpng-devel
+
+
