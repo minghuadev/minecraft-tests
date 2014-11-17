@@ -5,3 +5,20 @@ by "ar vx xyz.deb" then "tar Jxf data.tar.xz". file at:
   usr/share/virtualbox/x11config.pl
 
 
+
+notes about debian packages
+==============================
+
+search: how to build debian package
+
+https://wiki.debian.org/HowToPackageForDebian
+
+
+the fastest rebuild steps of a package is like:
+
+ $ apt-get source foo
+ $ cd foo-0.0.1
+ $ sudo apt-get build-dep foo
+ $ debuild -i -us -uc -b
+
+
