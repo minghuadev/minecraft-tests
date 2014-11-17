@@ -1,0 +1,73 @@
+
+
+https://launchpad.net/~oibaf/+archive/ubuntu/graphics-drivers
+
+
+=== Introduction ===
+This PPA provides updated X (2D) and mesa (3D) free graphics drivers for radeon, intel and nvidia hardware. Updates packages provide:
+ * OpenGL 3.3+ support and new OpenGL extensions: http://cgit.freedesktop.org/mesa/mesa/plain/docs/GL3.txt
+ * VDPAU, OpenMAX IL Bellagio, VAAPI and XvMC Gallium3D accelerated video drivers (see below)
+ * OpenCL support (mesa-opencl-icd package), including updated libclc
+ * r600 LLVM compiler, enabled with R600_DEBUG=llvm env var
+ * optional GLAMOR acceleration on radeon (>= r300), nouveau and intel drivers
+ * i915 gallium driver replaces by default i915 classic driver
+ * experimental intel ilo gallium driver (see below)
+
+
+=== Using accelerated video ===
+Supported VDPAU drivers: r300, r600, radeonsi, nouveau
+Supported OpenMAX IL Bellagio drivers: r600, radeonsi
+Supported VAAPI drivers: r600, radeonsi
+Supported XvMC drivers: r600, nouveau
+
+* First you need to install mesa-vdpau-drivers package:
+sudo apt-get install mesa-vdpau-drivers
+
+* Then to test the VDPAU driver with mpv use:
+$ mpv --hwdec=vdpau yourvideofile
+
+* To test the XvMC (e.g.) r600 driver edit the file /etc/X11/XvMCConfig and insert:
+/usr/lib/dri/libXvMCr600.so
+
+and restart the X server. Then to test it with mplayer:
+mplayer -vo xvmc yourvideofile
+
+
+=== Using alternative drivers ===
+To use experimental ilo (intel) gallium driver add this in /etc/X11/xorg.conf:
+Section "Device"
+ Identifier "Device0"
+ Driver "Intel"
+ Option "DRI" "ilo"
+EndSection
+
+To run your OpenGL program (in this case glxgears -info) with non default drivers:
+* classic i915 driver:
+$ LIBGL_DRIVERS_PATH=/usr/lib/dri-alternates glxgears -info
+* gallium llvmpipe software render:
+$ LIBGL_ALWAYS_SOFTWARE=1 glxgears -info
+* old non-gallium software render:
+$ LIBGL_ALWAYS_SOFTWARE=1 LIBGL_DRIVERS_PATH=/usr/lib/dri-alternates glxgears -info
+
+
+=== Debugging and reporting problems ===
+If you have some problem with the drivers try running the application from the command line and see if there are graphics related warnings. Also type dmesg to see if there are other related informations here.
+
+If you get crashes install the relevant -dbg pacakges (libgl1-mesa-dri-dbg or libgl1-mesa-dri-experimental-dbg for 3D drivers and xserver-xorg-video-intel-dbg , xserver-xorg-video-nouveau-dbg or xserver-xorg-video-radeon-dbg for X drivers) and reproduce the crash with gdb. Example:
+$ gdb glxgears
+[...make your application crash and then get a backtrace with:]
+(gdb) bt
+
+If X.org crashes look at /var/log/Xorg.0.log (or /var/log/Xorg.0.log.old when a new X session is started after the crash).
+
+With the gathered informations try searching at https://bugs.freedesktop.org/query.cgi (also try with google) if someone already reported a similar bug. If not you may want to report a new bug:
+for 3D drivers bugs: https://bugs.freedesktop.org/enter_bug.cgi?product=Mesa
+for X / 2D driver bugs: https://bugs.freedesktop.org/enter_bug.cgi?product=xorg
+
+
+=== Revert to original drivers ===
+To revert to standard Ubuntu drivers type the following in a prompt shell:
+$ sudo apt-get install ppa-purge
+$ sudo ppa-purge ppa:oibaf/graphics-drivers
+
+
