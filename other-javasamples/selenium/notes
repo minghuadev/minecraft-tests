@@ -1,0 +1,40 @@
+
+
+run a maven project from commmand line
+===========================================
+http://stackoverflow.com/questions/9116577/how-to-run-a-maven-project-main-class-in-netbeans-without-building-first
+
+mvn exec:java -Dexec.mainClass="com.rory.djgx.server.Main"
+
+Just need to ensure this is executed in the root directory of 
+the compiled classes (.class), e.g. com/rory/djgx and that 
+the pom.xml is in this root directory.
+
+If you want to just run the Build / Compile have an option to use all 
+the powers of the Build Phases, as Validate, Build, Test, Package, 
+Integration, Test, Verify, Install or Deploy. To do this you must:
+
+-Right Click on Project -> Custom -> Goals ...
+
+-In the Goals you can choose the more specifically option choice 
+ to build whatever you want, like Compile, Deploy, etc...
+
+
+
+build proj1:
+============================
+http://stackoverflow.com/questions/10057163/cant-run-java-example-for-selenium-webdriver
+
+$ javac -cp ".:/Users/ali/Downloads/selenium-2.20.0/selenium-java-2.20.0.jar:/Users/ali/Downloads/selenium-2.20.0/selenium-java-2.20.0-srcs.jar:/Users/ali/Downloads/selenium-2.20.0/libs/*" Example.java
+
+$ java -cp ".:/Users/ali/Downloads/selenium-2.20.0/selenium-java-2.20.0.jar:/Users/ali/Downloads/selenium-2.20.0/selenium-java-2.20.0-srcs.jar:/Users/ali/Downloads/selenium-2.20.0/libs/*" Example
+
+
+tried this: 
+
+remove package name and name the file to the class name.
+
+javac -cp ".:/path/to/selenium-server-standalone-2.44.0.jar" Example.java
+java -cp  ".:/path/to/selenium-server-standalone-2.44.0.jar" Example
+
+
