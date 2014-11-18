@@ -1,4 +1,18 @@
 
+downloads:
+==========================
+
+ selenium-java-2.44.0.zip
+ selenium-server-standalone-2.44.0.jar
+
+
+
+build maven project:
+==========================
+use the pom.xml
+see command file
+
+
 
 run a maven project from commmand line
 ===========================================
@@ -21,7 +35,7 @@ Integration, Test, Verify, Install or Deploy. To do this you must:
 
 
 
-build proj1:
+build and run proj1:
 ============================
 http://stackoverflow.com/questions/10057163/cant-run-java-example-for-selenium-webdriver
 
