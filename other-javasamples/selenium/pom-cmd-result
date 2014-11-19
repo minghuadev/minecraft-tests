@@ -1,0 +1,1282 @@
+
+pom-cmd-result
+
+
+the result of command: mvn clean install
+==========================================
+
+
+tree -hF --du ~/.m2 
+
+.
+├── [    0]  pom-cmd-result
+├── [ 1.4K]  pom.xml
+└── [  22K]  target/
+    ├── [ 4.0K]  classes/
+    ├── [ 4.1K]  maven-archiver/
+    │   └── [  105]  pom.properties
+    ├── [ 1.5K]  MySel20Proj-1.0.jar
+    ├── [ 4.0K]  surefire/
+    └── [ 4.0K]  test-classes/
+
+   27K used in 5 directories, 4 files
+
+
+tree -hF --du ~/.m2
+
+/home/selenium/.m2/
+└── [  30M]  repository/
+    ├── [ 329K]  cglib/
+    │   └── [ 325K]  cglib-nodep/
+    │       └── [ 321K]  2.1_3/
+    │           ├── [ 317K]  cglib-nodep-2.1_3.jar
+    │           ├── [   40]  cglib-nodep-2.1_3.jar.sha1
+    │           ├── [  214]  cglib-nodep-2.1_3.pom
+    │           ├── [  146]  cglib-nodep-2.1_3.pom.sha1
+    │           └── [  188]  _maven.repositories
+    ├── [  23K]  classworlds/
+    │   └── [  19K]  classworlds/
+    │       ├── [ 7.4K]  1.1/
+    │       │   ├── [ 3.2K]  classworlds-1.1.pom
+    │       │   ├── [   40]  classworlds-1.1.pom.sha1
+    │       │   └── [  155]  _maven.repositories
+    │       └── [ 7.4K]  1.1-alpha-2/
+    │           ├── [ 3.1K]  classworlds-1.1-alpha-2.pom
+    │           ├── [  164]  classworlds-1.1-alpha-2.pom.sha1
+    │           └── [  163]  _maven.repositories
+    ├── [ 6.8M]  com/
+    │   ├── [ 2.8M]  google/
+    │   │   ├── [ 240K]  code/
+    │   │   │   ├── [  13K]  findbugs/
+    │   │   │   │   └── [ 9.1K]  jsr305/
+    │   │   │   │       └── [ 5.1K]  1.3.9/
+    │   │   │   │           ├── [  965]  jsr305-1.3.9.pom
+    │   │   │   │           ├── [   41]  jsr305-1.3.9.pom.sha1
+    │   │   │   │           └── [  152]  _maven.repositories
+    │   │   │   └── [ 223K]  gson/
+    │   │   │       └── [ 219K]  gson/
+    │   │   │           └── [ 215K]  2.3/
+    │   │   │               ├── [ 202K]  gson-2.3.jar
+    │   │   │               ├── [   40]  gson-2.3.jar.sha1
+    │   │   │               ├── [ 8.8K]  gson-2.3.pom
+    │   │   │               ├── [   40]  gson-2.3.pom.sha1
+    │   │   │               └── [  170]  _maven.repositories
+    │   │   ├── [ 9.7K]  google/
+    │   │   │   └── [ 5.7K]  1/
+    │   │   │       ├── [ 1.5K]  google-1.pom
+    │   │   │       ├── [   41]  google-1.pom.sha1
+    │   │   │       └── [  148]  _maven.repositories
+    │   │   ├── [ 2.2M]  guava/
+    │   │   │   ├── [ 2.1M]  guava/
+    │   │   │   │   ├── [ 9.4K]  12.0.1/
+    │   │   │   │   │   ├── [ 5.2K]  guava-12.0.1.pom
+    │   │   │   │   │   ├── [   40]  guava-12.0.1.pom.sha1
+    │   │   │   │   │   └── [  152]  _maven.repositories
+    │   │   │   │   ├── [ 2.1M]  14.0/
+    │   │   │   │   │   ├── [ 2.1M]  guava-14.0.jar
+    │   │   │   │   │   ├── [   40]  guava-14.0.jar.sha1
+    │   │   │   │   │   ├── [ 5.2K]  guava-14.0.pom
+    │   │   │   │   │   ├── [   40]  guava-14.0.pom.sha1
+    │   │   │   │   │   └── [  174]  _maven.repositories
+    │   │   │   │   └── [ 9.7K]  18.0/
+    │   │   │   │       ├── [ 5.5K]  guava-18.0.pom
+    │   │   │   │       ├── [   40]  guava-18.0.pom.sha1
+    │   │   │   │       └── [  150]  _maven.repositories
+    │   │   │   └── [  29K]  guava-parent/
+    │   │   │       ├── [ 6.6K]  12.0.1/
+    │   │   │       │   ├── [ 2.4K]  guava-parent-12.0.1.pom
+    │   │   │       │   ├── [   40]  guava-parent-12.0.1.pom.sha1
+    │   │   │       │   └── [  159]  _maven.repositories
+    │   │   │       ├── [ 6.7K]  14.0/
+    │   │   │       │   ├── [ 2.5K]  guava-parent-14.0.pom
+    │   │   │       │   ├── [   40]  guava-parent-14.0.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       └── [  12K]  18.0/
+    │   │   │           ├── [ 7.5K]  guava-parent-18.0.pom
+    │   │   │           ├── [   40]  guava-parent-18.0.pom.sha1
+    │   │   │           └── [  157]  _maven.repositories
+    │   │   └── [ 459K]  protobuf/
+    │   │       └── [ 455K]  protobuf-java/
+    │   │           └── [ 451K]  2.4.1/
+    │   │               ├── [  192]  _maven.repositories
+    │   │               ├── [ 440K]  protobuf-java-2.4.1.jar
+    │   │               ├── [   40]  protobuf-java-2.4.1.jar.sha1
+    │   │               ├── [ 7.1K]  protobuf-java-2.4.1.pom
+    │   │               └── [   40]  protobuf-java-2.4.1.pom.sha1
+    │   └── [ 3.9M]  opera/
+    │       ├── [ 2.5M]  operadriver/
+    │       │   └── [ 2.5M]  1.5/
+    │       │       ├── [  184]  _maven.repositories
+    │       │       ├── [ 2.5M]  operadriver-1.5.jar
+    │       │       ├── [   40]  operadriver-1.5.jar.sha1
+    │       │       ├── [ 4.8K]  operadriver-1.5.pom
+    │       │       └── [   40]  operadriver-1.5.pom.sha1
+    │       └── [ 1.4M]  operalaunchers/
+    │           └── [ 1.4M]  1.1/
+    │               ├── [  190]  _maven.repositories
+    │               ├── [ 1.4M]  operalaunchers-1.1.jar
+    │               ├── [   40]  operalaunchers-1.1.jar.sha1
+    │               ├── [ 4.0K]  operalaunchers-1.1.pom
+    │               └── [   40]  operalaunchers-1.1.pom.sha1
+    ├── [  44K]  commons-cli/
+    │   └── [  40K]  commons-cli/
+    │       └── [  36K]  1.0/
+    │           ├── [  29K]  commons-cli-1.0.jar
+    │           ├── [   40]  commons-cli-1.0.jar.sha1
+    │           ├── [ 2.1K]  commons-cli-1.0.pom
+    │           ├── [  148]  commons-cli-1.0.pom.sha1
+    │           └── [  184]  _maven.repositories
+    ├── [ 311K]  commons-codec/
+    │   └── [ 307K]  commons-codec/
+    │       ├── [  15K]  1.6/
+    │       │   ├── [  11K]  commons-codec-1.6.pom
+    │       │   ├── [   40]  commons-codec-1.6.pom.sha1
+    │       │   └── [  157]  _maven.repositories
+    │       ├── [  14K]  1.7/
+    │       │   ├── [  10K]  commons-codec-1.7.pom
+    │       │   ├── [   40]  commons-codec-1.7.pom.sha1
+    │       │   └── [  157]  _maven.repositories
+    │       └── [ 273K]  1.9/
+    │           ├── [ 258K]  commons-codec-1.9.jar
+    │           ├── [   40]  commons-codec-1.9.jar.sha1
+    │           ├── [  11K]  commons-codec-1.9.pom
+    │           ├── [   40]  commons-codec-1.9.pom.sha1
+    │           └── [  188]  _maven.repositories
+    ├── [ 586K]  commons-collections/
+    │   └── [ 582K]  commons-collections/
+    │       └── [ 578K]  3.2.1/
+    │           ├── [ 562K]  commons-collections-3.2.1.jar
+    │           ├── [   41]  commons-collections-3.2.1.jar.sha1
+    │           ├── [  12K]  commons-collections-3.2.1.pom
+    │           ├── [   41]  commons-collections-3.2.1.pom.sha1
+    │           └── [  204]  _maven.repositories
+    ├── [ 218K]  commons-io/
+    │   └── [ 214K]  commons-io/
+    │       ├── [  15K]  2.2/
+    │       │   ├── [  11K]  commons-io-2.2.pom
+    │       │   ├── [   40]  commons-io-2.2.pom.sha1
+    │       │   └── [  154]  _maven.repositories
+    │       └── [ 195K]  2.4/
+    │           ├── [ 181K]  commons-io-2.4.jar
+    │           ├── [   63]  commons-io-2.4.jar.sha1
+    │           ├── [ 9.9K]  commons-io-2.4.pom
+    │           ├── [   63]  commons-io-2.4.pom.sha1
+    │           └── [  182]  _maven.repositories
+    ├── [ 314K]  commons-jxpath/
+    │   └── [ 310K]  commons-jxpath/
+    │       └── [ 306K]  1.3/
+    │           ├── [ 293K]  commons-jxpath-1.3.jar
+    │           ├── [   40]  commons-jxpath-1.3.jar.sha1
+    │           ├── [ 9.0K]  commons-jxpath-1.3.pom
+    │           ├── [   40]  commons-jxpath-1.3.pom.sha1
+    │           └── [  190]  _maven.repositories
+    ├── [ 225K]  commons-lang/
+    │   └── [ 221K]  commons-lang/
+    │       └── [ 217K]  2.1/
+    │           ├── [ 203K]  commons-lang-2.1.jar
+    │           ├── [   40]  commons-lang-2.1.jar.sha1
+    │           ├── [ 9.7K]  commons-lang-2.1.pom
+    │           ├── [  151]  commons-lang-2.1.pom.sha1
+    │           └── [  186]  _maven.repositories
+    ├── [ 113K]  commons-logging/
+    │   └── [ 109K]  commons-logging/
+    │       ├── [  22K]  1.1.1/
+    │       │   ├── [  18K]  commons-logging-1.1.1.pom
+    │       │   ├── [   40]  commons-logging-1.1.1.pom.sha1
+    │       │   └── [  161]  _maven.repositories
+    │       └── [  83K]  1.1.3/
+    │           ├── [  61K]  commons-logging-1.1.3.jar
+    │           ├── [   40]  commons-logging-1.1.3.jar.sha1
+    │           ├── [  18K]  commons-logging-1.1.3.pom
+    │           ├── [   40]  commons-logging-1.1.3.pom.sha1
+    │           └── [  196]  _maven.repositories
+    ├── [ 1.1M]  io/
+    │   └── [ 1.1M]  netty/
+    │       └── [ 1.1M]  netty/
+    │           └── [ 1.1M]  3.5.2.Final/
+    │               ├── [  188]  _maven.repositories
+    │               ├── [ 1.1M]  netty-3.5.2.Final.jar
+    │               ├── [   40]  netty-3.5.2.Final.jar.sha1
+    │               ├── [  25K]  netty-3.5.2.Final.pom
+    │               └── [   40]  netty-3.5.2.Final.pom.sha1
+    ├── [ 131K]  junit/
+    │   └── [ 127K]  junit/
+    │       └── [ 123K]  3.8.1/
+    │           ├── [ 118K]  junit-3.8.1.jar
+    │           ├── [   40]  junit-3.8.1.jar.sha1
+    │           ├── [  998]  junit-3.8.1.pom
+    │           ├── [   58]  junit-3.8.1.pom.sha1
+    │           └── [  176]  _maven.repositories
+    ├── [  15K]  MySel20Proj/
+    │   └── [  11K]  MySel20Proj/
+    │       ├── [ 7.1K]  1.0/
+    │       │   ├── [  170]  _maven.repositories
+    │       │   ├── [ 1.5K]  MySel20Proj-1.0.jar
+    │       │   └── [ 1.4K]  MySel20Proj-1.0.pom
+    │       └── [  298]  maven-metadata-local.xml
+    ├── [ 4.8M]  net/
+    │   ├── [ 1.9M]  java/
+    │   │   └── [ 1.9M]  dev/
+    │   │       └── [ 1.9M]  jna/
+    │   │           ├── [ 995K]  jna/
+    │   │           │   └── [ 991K]  3.4.0/
+    │   │           │       ├── [ 985K]  jna-3.4.0.jar
+    │   │           │       ├── [   40]  jna-3.4.0.jar.sha1
+    │   │           │       ├── [ 2.1K]  jna-3.4.0.pom
+    │   │           │       ├── [   40]  jna-3.4.0.pom.sha1
+    │   │           │       └── [  172]  _maven.repositories
+    │   │           └── [ 903K]  platform/
+    │   │               └── [ 899K]  3.4.0/
+    │   │                   ├── [  182]  _maven.repositories
+    │   │                   ├── [ 892K]  platform-3.4.0.jar
+    │   │                   ├── [   40]  platform-3.4.0.jar.sha1
+    │   │                   ├── [ 2.4K]  platform-3.4.0.pom
+    │   │                   └── [   40]  platform-3.4.0.pom.sha1
+    │   └── [ 3.0M]  sourceforge/
+    │       ├── [ 384K]  cssparser/
+    │       │   └── [ 380K]  cssparser/
+    │       │       ├── [ 362K]  0.9.14/
+    │       │       │   ├── [ 346K]  cssparser-0.9.14.jar
+    │       │       │   ├── [   40]  cssparser-0.9.14.jar.sha1
+    │       │       │   ├── [  12K]  cssparser-0.9.14.pom
+    │       │       │   ├── [   40]  cssparser-0.9.14.pom.sha1
+    │       │       │   └── [  186]  _maven.repositories
+    │       │       └── [  14K]  0.9.9/
+    │       │           ├── [ 9.9K]  cssparser-0.9.9.pom
+    │       │           ├── [   40]  cssparser-0.9.9.pom.sha1
+    │       │           └── [  155]  _maven.repositories
+    │       ├── [ 2.5M]  htmlunit/
+    │       │   ├── [ 1.5M]  htmlunit/
+    │       │   │   ├── [  39K]  2.12/
+    │       │   │   │   ├── [  35K]  htmlunit-2.12.pom
+    │       │   │   │   ├── [   40]  htmlunit-2.12.pom.sha1
+    │       │   │   │   └── [  153]  _maven.repositories
+    │       │   │   └── [ 1.4M]  2.15/
+    │       │   │       ├── [ 1.4M]  htmlunit-2.15.jar
+    │       │   │       ├── [   40]  htmlunit-2.15.jar.sha1
+    │       │   │       ├── [  36K]  htmlunit-2.15.pom
+    │       │   │       ├── [   40]  htmlunit-2.15.pom.sha1
+    │       │   │       └── [  180]  _maven.repositories
+    │       │   └── [1018K]  htmlunit-core-js/
+    │       │       ├── [ 5.6K]  2.12/
+    │       │       │   ├── [ 1.4K]  htmlunit-core-js-2.12.pom
+    │       │       │   ├── [   40]  htmlunit-core-js-2.12.pom.sha1
+    │       │       │   └── [  161]  _maven.repositories
+    │       │       └── [1008K]  2.15/
+    │       │           ├── [1002K]  htmlunit-core-js-2.15.jar
+    │       │           ├── [   40]  htmlunit-core-js-2.15.jar.sha1
+    │       │           ├── [ 1.4K]  htmlunit-core-js-2.15.pom
+    │       │           ├── [   40]  htmlunit-core-js-2.15.pom.sha1
+    │       │           └── [  196]  _maven.repositories
+    │       └── [ 141K]  nekohtml/
+    │           └── [ 137K]  nekohtml/
+    │               ├── [ 5.6K]  1.9.18/
+    │               │   ├── [  155]  _maven.repositories
+    │               │   ├── [ 1.4K]  nekohtml-1.9.18.pom
+    │               │   └── [   40]  nekohtml-1.9.18.pom.sha1
+    │               └── [ 128K]  1.9.21/
+    │                   ├── [  184]  _maven.repositories
+    │                   ├── [ 122K]  nekohtml-1.9.21.jar
+    │                   ├── [   40]  nekohtml-1.9.21.jar.sha1
+    │                   ├── [ 1.4K]  nekohtml-1.9.21.pom
+    │                   └── [   40]  nekohtml-1.9.21.pom.sha1
+    ├── [  10M]  org/
+    │   ├── [ 3.7M]  apache/
+    │   │   ├── [  92K]  apache/
+    │   │   │   ├── [  18K]  13/
+    │   │   │   │   ├── [  14K]  apache-13.pom
+    │   │   │   │   ├── [   40]  apache-13.pom.sha1
+    │   │   │   │   └── [  149]  _maven.repositories
+    │   │   │   ├── [ 7.5K]  3/
+    │   │   │   │   ├── [ 3.3K]  apache-3.pom
+    │   │   │   │   ├── [   57]  apache-3.pom.sha1
+    │   │   │   │   └── [  148]  _maven.repositories
+    │   │   │   ├── [ 8.6K]  4/
+    │   │   │   │   ├── [ 4.4K]  apache-4.pom
+    │   │   │   │   ├── [   40]  apache-4.pom.sha1
+    │   │   │   │   └── [  148]  _maven.repositories
+    │   │   │   ├── [  17K]  6/
+    │   │   │   │   ├── [  12K]  apache-6.pom
+    │   │   │   │   ├── [   40]  apache-6.pom.sha1
+    │   │   │   │   └── [  148]  _maven.repositories
+    │   │   │   ├── [  18K]  7/
+    │   │   │   │   ├── [  14K]  apache-7.pom
+    │   │   │   │   ├── [   40]  apache-7.pom.sha1
+    │   │   │   │   └── [  148]  _maven.repositories
+    │   │   │   └── [  19K]  9/
+    │   │   │       ├── [  15K]  apache-9.pom
+    │   │   │       ├── [   40]  apache-9.pom.sha1
+    │   │   │       └── [  148]  _maven.repositories
+    │   │   ├── [1002K]  commons/
+    │   │   │   ├── [  71K]  commons-exec/
+    │   │   │   │   └── [  67K]  1.1/
+    │   │   │   │       ├── [  51K]  commons-exec-1.1.jar
+    │   │   │   │       ├── [   40]  commons-exec-1.1.jar.sha1
+    │   │   │   │       ├── [  11K]  commons-exec-1.1.pom
+    │   │   │   │       ├── [   40]  commons-exec-1.1.pom.sha1
+    │   │   │   │       └── [  186]  _maven.repositories
+    │   │   │   ├── [ 452K]  commons-lang3/
+    │   │   │   │   ├── [  21K]  3.1/
+    │   │   │   │   │   ├── [  16K]  commons-lang3-3.1.pom
+    │   │   │   │   │   ├── [   40]  commons-lang3-3.1.pom.sha1
+    │   │   │   │   │   └── [  157]  _maven.repositories
+    │   │   │   │   └── [ 427K]  3.3.2/
+    │   │   │   │       ├── [ 403K]  commons-lang3-3.3.2.jar
+    │   │   │   │       ├── [   40]  commons-lang3-3.3.2.jar.sha1
+    │   │   │   │       ├── [  20K]  commons-lang3-3.3.2.pom
+    │   │   │   │       ├── [   40]  commons-lang3-3.3.2.pom.sha1
+    │   │   │   │       └── [  192]  _maven.repositories
+    │   │   │   └── [ 475K]  commons-parent/
+    │   │   │       ├── [  28K]  11/
+    │   │   │       │   ├── [  24K]  commons-parent-11.pom
+    │   │   │       │   ├── [   40]  commons-parent-11.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  35K]  17/
+    │   │   │       │   ├── [  30K]  commons-parent-17.pom
+    │   │   │       │   ├── [   40]  commons-parent-17.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  45K]  22/
+    │   │   │       │   ├── [  41K]  commons-parent-22.pom
+    │   │   │       │   ├── [   40]  commons-parent-22.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  50K]  24/
+    │   │   │       │   ├── [  46K]  commons-parent-24.pom
+    │   │   │       │   ├── [   40]  commons-parent-24.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  51K]  25/
+    │   │   │       │   ├── [  47K]  commons-parent-25.pom
+    │   │   │       │   ├── [   40]  commons-parent-25.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  51K]  26/
+    │   │   │       │   ├── [  47K]  commons-parent-26.pom
+    │   │   │       │   ├── [   40]  commons-parent-26.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  53K]  28/
+    │   │   │       │   ├── [  49K]  commons-parent-28.pom
+    │   │   │       │   ├── [   40]  commons-parent-28.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  56K]  32/
+    │   │   │       │   ├── [  52K]  commons-parent-32.pom
+    │   │   │       │   ├── [   40]  commons-parent-32.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  56K]  33/
+    │   │   │       │   ├── [  52K]  commons-parent-33.pom
+    │   │   │       │   ├── [   40]  commons-parent-33.pom.sha1
+    │   │   │       │   └── [  157]  _maven.repositories
+    │   │   │       ├── [  20K]  5/
+    │   │   │       │   ├── [  16K]  commons-parent-5.pom
+    │   │   │       │   ├── [   40]  commons-parent-5.pom.sha1
+    │   │   │       │   └── [  156]  _maven.repositories
+    │   │   │       └── [  26K]  9/
+    │   │   │           ├── [  21K]  commons-parent-9.pom
+    │   │   │           ├── [   40]  commons-parent-9.pom.sha1
+    │   │   │           └── [  156]  _maven.repositories
+    │   │   ├── [ 1.2M]  httpcomponents/
+    │   │   │   ├── [ 619K]  httpclient/
+    │   │   │   │   ├── [10.0K]  4.2.1/
+    │   │   │   │   │   ├── [ 5.8K]  httpclient-4.2.1.pom
+    │   │   │   │   │   ├── [   40]  httpclient-4.2.1.pom.sha1
+    │   │   │   │   │   └── [  156]  _maven.repositories
+    │   │   │   │   ├── [10.0K]  4.2.3/
+    │   │   │   │   │   ├── [ 5.8K]  httpclient-4.2.3.pom
+    │   │   │   │   │   ├── [   40]  httpclient-4.2.3.pom.sha1
+    │   │   │   │   │   └── [  156]  _maven.repositories
+    │   │   │   │   ├── [ 9.4K]  4.3.3/
+    │   │   │   │   │   ├── [ 5.2K]  httpclient-4.3.3.pom
+    │   │   │   │   │   ├── [   40]  httpclient-4.3.3.pom.sha1
+    │   │   │   │   │   └── [  156]  _maven.repositories
+    │   │   │   │   └── [ 586K]  4.3.4/
+    │   │   │   │       ├── [ 576K]  httpclient-4.3.4.jar
+    │   │   │   │       ├── [   40]  httpclient-4.3.4.jar.sha1
+    │   │   │   │       ├── [ 5.1K]  httpclient-4.3.4.pom
+    │   │   │   │       ├── [   40]  httpclient-4.3.4.pom.sha1
+    │   │   │   │       └── [  186]  _maven.repositories
+    │   │   │   ├── [  80K]  httpcomponents-client/
+    │   │   │   │   ├── [  18K]  4.2.1/
+    │   │   │   │   │   ├── [  14K]  httpcomponents-client-4.2.1.pom
+    │   │   │   │   │   ├── [   40]  httpcomponents-client-4.2.1.pom.sha1
+    │   │   │   │   │   └── [  167]  _maven.repositories
+    │   │   │   │   ├── [  18K]  4.2.3/
+    │   │   │   │   │   ├── [  14K]  httpcomponents-client-4.2.3.pom
+    │   │   │   │   │   ├── [   40]  httpcomponents-client-4.2.3.pom.sha1
+    │   │   │   │   │   └── [  167]  _maven.repositories
+    │   │   │   │   ├── [  20K]  4.3.3/
+    │   │   │   │   │   ├── [  15K]  httpcomponents-client-4.3.3.pom
+    │   │   │   │   │   ├── [   40]  httpcomponents-client-4.3.3.pom.sha1
+    │   │   │   │   │   └── [  167]  _maven.repositories
+    │   │   │   │   └── [  19K]  4.3.4/
+    │   │   │   │       ├── [  15K]  httpcomponents-client-4.3.4.pom
+    │   │   │   │       ├── [   40]  httpcomponents-client-4.3.4.pom.sha1
+    │   │   │   │       └── [  167]  _maven.repositories
+    │   │   │   ├── [  51K]  httpcomponents-core/
+    │   │   │   │   ├── [  15K]  4.2.1/
+    │   │   │   │   │   ├── [  11K]  httpcomponents-core-4.2.1.pom
+    │   │   │   │   │   ├── [   40]  httpcomponents-core-4.2.1.pom.sha1
+    │   │   │   │   │   └── [  165]  _maven.repositories
+    │   │   │   │   ├── [  15K]  4.2.2/
+    │   │   │   │   │   ├── [  11K]  httpcomponents-core-4.2.2.pom
+    │   │   │   │   │   ├── [   40]  httpcomponents-core-4.2.2.pom.sha1
+    │   │   │   │   │   └── [  165]  _maven.repositories
+    │   │   │   │   └── [  16K]  4.3.2/
+    │   │   │   │       ├── [  12K]  httpcomponents-core-4.3.2.pom
+    │   │   │   │       ├── [   40]  httpcomponents-core-4.3.2.pom.sha1
+    │   │   │   │       └── [  165]  _maven.repositories
+    │   │   │   ├── [ 308K]  httpcore/
+    │   │   │   │   ├── [ 9.7K]  4.2.1/
+    │   │   │   │   │   ├── [ 5.6K]  httpcore-4.2.1.pom
+    │   │   │   │   │   ├── [   40]  httpcore-4.2.1.pom.sha1
+    │   │   │   │   │   └── [  154]  _maven.repositories
+    │   │   │   │   ├── [ 9.7K]  4.2.2/
+    │   │   │   │   │   ├── [ 5.6K]  httpcore-4.2.2.pom
+    │   │   │   │   │   ├── [   40]  httpcore-4.2.2.pom.sha1
+    │   │   │   │   │   └── [  154]  _maven.repositories
+    │   │   │   │   └── [ 284K]  4.3.2/
+    │   │   │   │       ├── [ 276K]  httpcore-4.3.2.jar
+    │   │   │   │       ├── [   40]  httpcore-4.3.2.jar.sha1
+    │   │   │   │       ├── [ 4.5K]  httpcore-4.3.2.pom
+    │   │   │   │       ├── [   40]  httpcore-4.3.2.pom.sha1
+    │   │   │   │       └── [  182]  _maven.repositories
+    │   │   │   ├── [  59K]  httpmime/
+    │   │   │   │   ├── [ 9.5K]  4.2.3/
+    │   │   │   │   │   ├── [ 5.3K]  httpmime-4.2.3.pom
+    │   │   │   │   │   ├── [   40]  httpmime-4.2.3.pom.sha1
+    │   │   │   │   │   └── [  154]  _maven.repositories
+    │   │   │   │   └── [  45K]  4.3.3/
+    │   │   │   │       ├── [  36K]  httpmime-4.3.3.jar
+    │   │   │   │       ├── [   40]  httpmime-4.3.3.jar.sha1
+    │   │   │   │       ├── [ 4.8K]  httpmime-4.3.3.pom
+    │   │   │   │       ├── [   40]  httpmime-4.3.3.pom.sha1
+    │   │   │   │       └── [  182]  _maven.repositories
+    │   │   │   └── [  62K]  project/
+    │   │   │       ├── [  28K]  6/
+    │   │   │       │   ├── [  149]  _maven.repositories
+    │   │   │       │   ├── [  23K]  project-6.pom
+    │   │   │       │   └── [   40]  project-6.pom.sha1
+    │   │   │       └── [  31K]  7/
+    │   │   │           ├── [  149]  _maven.repositories
+    │   │   │           ├── [  27K]  project-7.pom
+    │   │   │           └── [   40]  project-7.pom.sha1
+    │   │   └── [ 1.5M]  maven/
+    │   │       ├── [  31K]  doxia/
+    │   │       │   ├── [  12K]  doxia/
+    │   │       │   │   └── [ 8.0K]  1.0-alpha-7/
+    │   │       │   │       ├── [ 3.8K]  doxia-1.0-alpha-7.pom
+    │   │       │   │       ├── [   40]  doxia-1.0-alpha-7.pom.sha1
+    │   │       │   │       └── [  157]  _maven.repositories
+    │   │       │   └── [  14K]  doxia-sink-api/
+    │   │       │       └── [  10K]  1.0-alpha-7/
+    │   │       │           ├── [ 5.8K]  doxia-sink-api-1.0-alpha-7.jar
+    │   │       │           ├── [   40]  doxia-sink-api-1.0-alpha-7.jar.sha1
+    │   │       │           ├── [  424]  doxia-sink-api-1.0-alpha-7.pom
+    │   │       │           ├── [   40]  doxia-sink-api-1.0-alpha-7.pom.sha1
+    │   │       │           └── [  206]  _maven.repositories
+    │   │       ├── [  40K]  maven/
+    │   │       │   ├── [  13K]  2.0.6/
+    │   │       │   │   ├── [ 8.8K]  maven-2.0.6.pom
+    │   │       │   │   ├── [   58]  maven-2.0.6.pom.sha1
+    │   │       │   │   └── [  151]  _maven.repositories
+    │   │       │   └── [  23K]  2.0.9/
+    │   │       │       ├── [  18K]  maven-2.0.9.pom
+    │   │       │       ├── [   40]  maven-2.0.9.pom.sha1
+    │   │       │       └── [  151]  _maven.repositories
+    │   │       ├── [  32K]  maven-archiver/
+    │   │       │   └── [  28K]  2.4.2/
+    │   │       │       ├── [  20K]  maven-archiver-2.4.2.jar
+    │   │       │       ├── [   40]  maven-archiver-2.4.2.jar.sha1
+    │   │       │       ├── [ 3.9K]  maven-archiver-2.4.2.pom
+    │   │       │       ├── [   40]  maven-archiver-2.4.2.pom.sha1
+    │   │       │       └── [  194]  _maven.repositories
+    │   │       ├── [  16K]  maven-artifact/
+    │   │       │   ├── [ 5.7K]  2.0.6/
+    │   │       │   │   ├── [ 1.5K]  maven-artifact-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-artifact-2.0.6.pom.sha1
+    │   │       │   │   └── [  160]  _maven.repositories
+    │   │       │   └── [ 5.8K]  2.0.9/
+    │   │       │       ├── [ 1.6K]  maven-artifact-2.0.9.pom
+    │   │       │       ├── [   40]  maven-artifact-2.0.9.pom.sha1
+    │   │       │       └── [  160]  _maven.repositories
+    │   │       ├── [  18K]  maven-artifact-manager/
+    │   │       │   ├── [ 6.8K]  2.0.6/
+    │   │       │   │   ├── [ 2.6K]  maven-artifact-manager-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-artifact-manager-2.0.6.pom.sha1
+    │   │       │   │   └── [  168]  _maven.repositories
+    │   │       │   └── [ 6.8K]  2.0.9/
+    │   │       │       ├── [ 2.6K]  maven-artifact-manager-2.0.9.pom
+    │   │       │       ├── [   40]  maven-artifact-manager-2.0.9.pom.sha1
+    │   │       │       └── [  168]  _maven.repositories
+    │   │       ├── [  27K]  maven-core/
+    │   │       │   ├── [  11K]  2.0.6/
+    │   │       │   │   ├── [ 6.6K]  maven-core-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-core-2.0.6.pom.sha1
+    │   │       │   │   └── [  156]  _maven.repositories
+    │   │       │   └── [  12K]  2.0.9/
+    │   │       │       ├── [ 7.6K]  maven-core-2.0.9.pom
+    │   │       │       ├── [   40]  maven-core-2.0.9.pom.sha1
+    │   │       │       └── [  156]  _maven.repositories
+    │   │       ├── [  16K]  maven-error-diagnostics/
+    │   │       │   ├── [ 5.9K]  2.0.6/
+    │   │       │   │   ├── [ 1.7K]  maven-error-diagnostics-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-error-diagnostics-2.0.6.pom.sha1
+    │   │       │   │   └── [  169]  _maven.repositories
+    │   │       │   └── [ 5.9K]  2.0.9/
+    │   │       │       ├── [ 1.7K]  maven-error-diagnostics-2.0.9.pom
+    │   │       │       ├── [   40]  maven-error-diagnostics-2.0.9.pom.sha1
+    │   │       │       └── [  169]  _maven.repositories
+    │   │       ├── [  18K]  maven-model/
+    │   │       │   ├── [ 7.2K]  2.0.6/
+    │   │       │   │   ├── [ 3.0K]  maven-model-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-model-2.0.6.pom.sha1
+    │   │       │   │   └── [  157]  _maven.repositories
+    │   │       │   └── [ 7.3K]  2.0.9/
+    │   │       │       ├── [ 3.1K]  maven-model-2.0.9.pom
+    │   │       │       ├── [   40]  maven-model-2.0.9.pom.sha1
+    │   │       │       └── [  157]  _maven.repositories
+    │   │       ├── [  15K]  maven-monitor/
+    │   │       │   ├── [ 5.4K]  2.0.6/
+    │   │       │   │   ├── [ 1.2K]  maven-monitor-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-monitor-2.0.6.pom.sha1
+    │   │       │   │   └── [  159]  _maven.repositories
+    │   │       │   └── [ 5.4K]  2.0.9/
+    │   │       │       ├── [ 1.3K]  maven-monitor-2.0.9.pom
+    │   │       │       ├── [   40]  maven-monitor-2.0.9.pom.sha1
+    │   │       │       └── [  159]  _maven.repositories
+    │   │       ├── [ 161K]  maven-parent/
+    │   │       │   ├── [  26K]  13/
+    │   │       │   │   ├── [  22K]  maven-parent-13.pom
+    │   │       │   │   ├── [   40]  maven-parent-13.pom.sha1
+    │   │       │   │   └── [  155]  _maven.repositories
+    │   │       │   ├── [  27K]  16/
+    │   │       │   │   ├── [  23K]  maven-parent-16.pom
+    │   │       │   │   ├── [   40]  maven-parent-16.pom.sha1
+    │   │       │   │   └── [  155]  _maven.repositories
+    │   │       │   ├── [  29K]  19/
+    │   │       │   │   ├── [  24K]  maven-parent-19.pom
+    │   │       │   │   ├── [   40]  maven-parent-19.pom.sha1
+    │   │       │   │   └── [  155]  _maven.repositories
+    │   │       │   ├── [  28K]  20/
+    │   │       │   │   ├── [  24K]  maven-parent-20.pom
+    │   │       │   │   ├── [   40]  maven-parent-20.pom.sha1
+    │   │       │   │   └── [  155]  _maven.repositories
+    │   │       │   ├── [  19K]  5/
+    │   │       │   │   ├── [  15K]  maven-parent-5.pom
+    │   │       │   │   ├── [   40]  maven-parent-5.pom.sha1
+    │   │       │   │   └── [  154]  _maven.repositories
+    │   │       │   └── [  28K]  8/
+    │   │       │       ├── [  24K]  maven-parent-8.pom
+    │   │       │       ├── [   40]  maven-parent-8.pom.sha1
+    │   │       │       └── [  154]  _maven.repositories
+    │   │       ├── [  15K]  maven-plugin-api/
+    │   │       │   ├── [ 5.6K]  2.0.6/
+    │   │       │   │   ├── [ 1.4K]  maven-plugin-api-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-plugin-api-2.0.6.pom.sha1
+    │   │       │   │   └── [  162]  _maven.repositories
+    │   │       │   └── [ 5.7K]  2.0.9/
+    │   │       │       ├── [ 1.5K]  maven-plugin-api-2.0.9.pom
+    │   │       │       ├── [   40]  maven-plugin-api-2.0.9.pom.sha1
+    │   │       │       └── [  162]  _maven.repositories
+    │   │       ├── [  16K]  maven-plugin-descriptor/
+    │   │       │   ├── [ 6.2K]  2.0.6/
+    │   │       │   │   ├── [ 2.0K]  maven-plugin-descriptor-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-plugin-descriptor-2.0.6.pom.sha1
+    │   │       │   │   └── [  169]  _maven.repositories
+    │   │       │   └── [ 6.2K]  2.0.9/
+    │   │       │       ├── [ 2.0K]  maven-plugin-descriptor-2.0.9.pom
+    │   │       │       ├── [   40]  maven-plugin-descriptor-2.0.9.pom.sha1
+    │   │       │       └── [  169]  _maven.repositories
+    │   │       ├── [  16K]  maven-plugin-parameter-documenter/
+    │   │       │   ├── [ 6.1K]  2.0.6/
+    │   │       │   │   ├── [ 1.9K]  maven-plugin-parameter-documenter-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-plugin-parameter-documenter-2.0.6.pom.sha1
+    │   │       │   │   └── [  179]  _maven.repositories
+    │   │       │   └── [ 6.1K]  2.0.9/
+    │   │       │       ├── [ 1.9K]  maven-plugin-parameter-documenter-2.0.9.pom
+    │   │       │       ├── [   40]  maven-plugin-parameter-documenter-2.0.9.pom.sha1
+    │   │       │       └── [  179]  _maven.repositories
+    │   │       ├── [  16K]  maven-plugin-registry/
+    │   │       │   ├── [ 6.1K]  2.0.6/
+    │   │       │   │   ├── [ 1.9K]  maven-plugin-registry-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-plugin-registry-2.0.6.pom.sha1
+    │   │       │   │   └── [  167]  _maven.repositories
+    │   │       │   └── [ 6.1K]  2.0.9/
+    │   │       │       ├── [ 1.9K]  maven-plugin-registry-2.0.9.pom
+    │   │       │       ├── [   40]  maven-plugin-registry-2.0.9.pom.sha1
+    │   │       │       └── [  167]  _maven.repositories
+    │   │       ├── [  16K]  maven-profile/
+    │   │       │   ├── [ 6.1K]  2.0.6/
+    │   │       │   │   ├── [ 1.9K]  maven-profile-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-profile-2.0.6.pom.sha1
+    │   │       │   │   └── [  159]  _maven.repositories
+    │   │       │   └── [ 6.2K]  2.0.9/
+    │   │       │       ├── [ 2.0K]  maven-profile-2.0.9.pom
+    │   │       │       ├── [   40]  maven-profile-2.0.9.pom.sha1
+    │   │       │       └── [  159]  _maven.repositories
+    │   │       ├── [  18K]  maven-project/
+    │   │       │   ├── [ 6.8K]  2.0.6/
+    │   │       │   │   ├── [ 2.6K]  maven-project-2.0.6.pom
+    │   │       │   │   ├── [   40]  maven-project-2.0.6.pom.sha1
+    │   │       │   │   └── [  159]  _maven.repositories
+    │   │       │   └── [ 6.8K]  2.0.9/
+    │   │       │       ├── [ 2.6K]  maven-project-2.0.9.pom
+    │   │       │       ├── [   40]  maven-project-2.0.9.pom.sha1
+    │   │       │       └── [  159]  _maven.repositories
+    │   │       ├── [  16K]  maven-repository-metadata/
+    │   │       │   ├── [ 6.0K]  2.0.6/
+    │   │       │   │   ├── [  171]  _maven.repositories
+    │   │       │   │   ├── [ 1.8K]  maven-repository-metadata-2.0.6.pom
+    │   │       │   │   └── [   40]  maven-repository-metadata-2.0.6.pom.sha1
+    │   │       │   └── [ 6.1K]  2.0.9/
+    │   │       │       ├── [  171]  _maven.repositories
+    │   │       │       ├── [ 1.9K]  maven-repository-metadata-2.0.9.pom
+    │   │       │       └── [   40]  maven-repository-metadata-2.0.9.pom.sha1
+    │   │       ├── [  16K]  maven-settings/
+    │   │       │   ├── [ 6.1K]  2.0.6/
+    │   │       │   │   ├── [  160]  _maven.repositories
+    │   │       │   │   ├── [ 2.0K]  maven-settings-2.0.6.pom
+    │   │       │   │   └── [   40]  maven-settings-2.0.6.pom.sha1
+    │   │       │   └── [ 6.2K]  2.0.9/
+    │   │       │       ├── [  160]  _maven.repositories
+    │   │       │       ├── [ 2.0K]  maven-settings-2.0.9.pom
+    │   │       │       └── [   40]  maven-settings-2.0.9.pom.sha1
+    │   │       ├── [  19K]  maven-toolchain/
+    │   │       │   ├── [ 7.5K]  1.0/
+    │   │       │   │   ├── [  159]  _maven.repositories
+    │   │       │   │   ├── [ 3.3K]  maven-toolchain-1.0.pom
+    │   │       │   │   └── [   40]  maven-toolchain-1.0.pom.sha1
+    │   │       │   └── [ 7.6K]  2.0.9/
+    │   │       │       ├── [  161]  _maven.repositories
+    │   │       │       ├── [ 3.4K]  maven-toolchain-2.0.9.pom
+    │   │       │       └── [   40]  maven-toolchain-2.0.9.pom.sha1
+    │   │       ├── [ 459K]  plugins/
+    │   │       │   ├── [  35K]  maven-clean-plugin/
+    │   │       │   │   └── [  31K]  2.4.1/
+    │   │       │   │       ├── [  23K]  maven-clean-plugin-2.4.1.jar
+    │   │       │   │       ├── [   40]  maven-clean-plugin-2.4.1.jar.sha1
+    │   │       │   │       ├── [ 4.1K]  maven-clean-plugin-2.4.1.pom
+    │   │       │   │       ├── [   40]  maven-clean-plugin-2.4.1.pom.sha1
+    │   │       │   │       └── [  202]  _maven.repositories
+    │   │       │   ├── [  44K]  maven-compiler-plugin/
+    │   │       │   │   └── [  40K]  2.3.2/
+    │   │       │   │       ├── [  28K]  maven-compiler-plugin-2.3.2.jar
+    │   │       │   │       ├── [   40]  maven-compiler-plugin-2.3.2.jar.sha1
+    │   │       │   │       ├── [ 7.2K]  maven-compiler-plugin-2.3.2.pom
+    │   │       │   │       ├── [   40]  maven-compiler-plugin-2.3.2.pom.sha1
+    │   │       │   │       └── [  208]  _maven.repositories
+    │   │       │   ├── [  34K]  maven-deploy-plugin/
+    │   │       │   │   └── [  30K]  2.7/
+    │   │       │   │       ├── [  26K]  maven-deploy-plugin-2.7.jar
+    │   │       │   │       └── [   40]  maven-deploy-plugin-2.7.jar.sha1
+    │   │       │   ├── [  35K]  maven-install-plugin/
+    │   │       │   │   └── [  31K]  2.3.1/
+    │   │       │   │       ├── [  22K]  maven-install-plugin-2.3.1.jar
+    │   │       │   │       ├── [   40]  maven-install-plugin-2.3.1.jar.sha1
+    │   │       │   │       ├── [ 4.8K]  maven-install-plugin-2.3.1.pom
+    │   │       │   │       ├── [   40]  maven-install-plugin-2.3.1.pom.sha1
+    │   │       │   │       └── [  206]  _maven.repositories
+    │   │       │   ├── [  46K]  maven-jar-plugin/
+    │   │       │   │   └── [  42K]  2.3.2/
+    │   │       │   │       ├── [  32K]  maven-jar-plugin-2.3.2.jar
+    │   │       │   │       ├── [   40]  maven-jar-plugin-2.3.2.jar.sha1
+    │   │       │   │       ├── [ 5.7K]  maven-jar-plugin-2.3.2.pom
+    │   │       │   │       ├── [   40]  maven-jar-plugin-2.3.2.pom.sha1
+    │   │       │   │       └── [  198]  _maven.repositories
+    │   │       │   ├── [  52K]  maven-plugins/
+    │   │       │   │   ├── [  17K]  18/
+    │   │       │   │   │   ├── [  13K]  maven-plugins-18.pom
+    │   │       │   │   │   ├── [   40]  maven-plugins-18.pom.sha1
+    │   │       │   │   │   └── [  156]  _maven.repositories
+    │   │       │   │   ├── [  15K]  19/
+    │   │       │   │   │   ├── [  11K]  maven-plugins-19.pom
+    │   │       │   │   │   ├── [   40]  maven-plugins-19.pom.sha1
+    │   │       │   │   │   └── [  156]  _maven.repositories
+    │   │       │   │   └── [  16K]  21/
+    │   │       │   │       ├── [  12K]  maven-plugins-21.pom
+    │   │       │   │       ├── [   40]  maven-plugins-21.pom.sha1
+    │   │       │   │       └── [  156]  _maven.repositories
+    │   │       │   ├── [  41K]  maven-resources-plugin/
+    │   │       │   │   └── [  37K]  2.5/
+    │   │       │   │       ├── [  206]  _maven.repositories
+    │   │       │   │       ├── [  26K]  maven-resources-plugin-2.5.jar
+    │   │       │   │       ├── [   40]  maven-resources-plugin-2.5.jar.sha1
+    │   │       │   │       ├── [ 6.9K]  maven-resources-plugin-2.5.pom
+    │   │       │   │       └── [   40]  maven-resources-plugin-2.5.pom.sha1
+    │   │       │   ├── [ 119K]  maven-site-plugin/
+    │   │       │   │   └── [ 115K]  3.0/
+    │   │       │   │       ├── [ 111K]  maven-site-plugin-3.0.jar
+    │   │       │   │       └── [   40]  maven-site-plugin-3.0.jar.sha1
+    │   │       │   └── [  48K]  maven-surefire-plugin/
+    │   │       │       └── [  44K]  2.10/
+    │   │       │           ├── [  206]  _maven.repositories
+    │   │       │           ├── [  29K]  maven-surefire-plugin-2.10.jar
+    │   │       │           ├── [   40]  maven-surefire-plugin-2.10.jar.sha1
+    │   │       │           ├── [  11K]  maven-surefire-plugin-2.10.pom
+    │   │       │           └── [   40]  maven-surefire-plugin-2.10.pom.sha1
+    │   │       ├── [  55K]  reporting/
+    │   │       │   ├── [  15K]  maven-reporting/
+    │   │       │   │   ├── [ 5.6K]  2.0.6/
+    │   │       │   │   │   ├── [ 1.4K]  maven-reporting-2.0.6.pom
+    │   │       │   │   │   ├── [   40]  maven-reporting-2.0.6.pom.sha1
+    │   │       │   │   │   └── [  161]  _maven.repositories
+    │   │       │   │   └── [ 5.6K]  2.0.9/
+    │   │       │   │       ├── [ 1.4K]  maven-reporting-2.0.9.pom
+    │   │       │   │       ├── [   40]  maven-reporting-2.0.9.pom.sha1
+    │   │       │   │       └── [  161]  _maven.repositories
+    │   │       │   └── [  36K]  maven-reporting-api/
+    │   │       │       ├── [  16K]  2.0.6/
+    │   │       │       │   ├── [ 9.7K]  maven-reporting-api-2.0.6.jar
+    │   │       │       │   ├── [   40]  maven-reporting-api-2.0.6.jar.sha1
+    │   │       │       │   ├── [ 1.7K]  maven-reporting-api-2.0.6.pom
+    │   │       │       │   ├── [   40]  maven-reporting-api-2.0.6.pom.sha1
+    │   │       │       │   └── [  204]  _maven.repositories
+    │   │       │       └── [  16K]  2.0.9/
+    │   │       │           ├── [ 9.9K]  maven-reporting-api-2.0.9.jar
+    │   │       │           ├── [   40]  maven-reporting-api-2.0.9.jar.sha1
+    │   │       │           ├── [ 1.8K]  maven-reporting-api-2.0.9.pom
+    │   │       │           ├── [   40]  maven-reporting-api-2.0.9.pom.sha1
+    │   │       │           └── [  204]  _maven.repositories
+    │   │       ├── [ 133K]  shared/
+    │   │       │   ├── [  42K]  maven-common-artifact-filters/
+    │   │       │   │   └── [  38K]  1.3/
+    │   │       │   │       ├── [  30K]  maven-common-artifact-filters-1.3.jar
+    │   │       │   │       ├── [   40]  maven-common-artifact-filters-1.3.jar.sha1
+    │   │       │   │       ├── [ 3.6K]  maven-common-artifact-filters-1.3.pom
+    │   │       │   │       ├── [   40]  maven-common-artifact-filters-1.3.pom.sha1
+    │   │       │   │       └── [  220]  _maven.repositories
+    │   │       │   ├── [  56K]  maven-filtering/
+    │   │       │   │   └── [  52K]  1.0/
+    │   │       │   │       ├── [  42K]  maven-filtering-1.0.jar
+    │   │       │   │       ├── [   40]  maven-filtering-1.0.jar.sha1
+    │   │       │   │       ├── [ 5.6K]  maven-filtering-1.0.pom
+    │   │       │   │       ├── [   40]  maven-filtering-1.0.pom.sha1
+    │   │       │   │       └── [  192]  _maven.repositories
+    │   │       │   └── [  30K]  maven-shared-components/
+    │   │       │       ├── [  13K]  12/
+    │   │       │       │   ├── [  166]  _maven.repositories
+    │   │       │       │   ├── [ 9.1K]  maven-shared-components-12.pom
+    │   │       │       │   └── [   40]  maven-shared-components-12.pom.sha1
+    │   │       │       └── [  13K]  16/
+    │   │       │           ├── [  166]  _maven.repositories
+    │   │       │           ├── [ 8.9K]  maven-shared-components-16.pom
+    │   │       │           └── [   40]  maven-shared-components-16.pom.sha1
+    │   │       └── [ 354K]  surefire/
+    │   │           ├── [  72K]  maven-surefire-common/
+    │   │           │   └── [  68K]  2.10/
+    │   │           │       ├── [  206]  _maven.repositories
+    │   │           │       ├── [  60K]  maven-surefire-common-2.10.jar
+    │   │           │       ├── [   40]  maven-surefire-common-2.10.jar.sha1
+    │   │           │       ├── [ 3.9K]  maven-surefire-common-2.10.pom
+    │   │           │       └── [   40]  maven-surefire-common-2.10.pom.sha1
+    │   │           ├── [  20K]  surefire/
+    │   │           │   └── [  16K]  2.10/
+    │   │           │       ├── [  153]  _maven.repositories
+    │   │           │       ├── [  12K]  surefire-2.10.pom
+    │   │           │       └── [   40]  surefire-2.10.pom.sha1
+    │   │           ├── [ 168K]  surefire-api/
+    │   │           │   └── [ 164K]  2.10/
+    │   │           │       ├── [  188]  _maven.repositories
+    │   │           │       ├── [ 158K]  surefire-api-2.10.jar
+    │   │           │       ├── [   40]  surefire-api-2.10.jar.sha1
+    │   │           │       ├── [ 2.2K]  surefire-api-2.10.pom
+    │   │           │       └── [   40]  surefire-api-2.10.pom.sha1
+    │   │           ├── [  44K]  surefire-booter/
+    │   │           │   └── [  40K]  2.10/
+    │   │           │       ├── [  194]  _maven.repositories
+    │   │           │       ├── [  33K]  surefire-booter-2.10.jar
+    │   │           │       ├── [   40]  surefire-booter-2.10.jar.sha1
+    │   │           │       ├── [ 3.0K]  surefire-booter-2.10.pom
+    │   │           │       └── [   40]  surefire-booter-2.10.pom.sha1
+    │   │           ├── [  35K]  surefire-junit3/
+    │   │           │   └── [  31K]  2.10/
+    │   │           │       ├── [  194]  _maven.repositories
+    │   │           │       ├── [  26K]  surefire-junit3-2.10.jar
+    │   │           │       ├── [   40]  surefire-junit3-2.10.jar.sha1
+    │   │           │       ├── [ 1.7K]  surefire-junit3-2.10.pom
+    │   │           │       └── [   40]  surefire-junit3-2.10.pom.sha1
+    │   │           └── [  10K]  surefire-providers/
+    │   │               └── [ 6.4K]  2.10/
+    │   │                   ├── [  163]  _maven.repositories
+    │   │                   ├── [ 2.2K]  surefire-providers-2.10.pom
+    │   │                   └── [   40]  surefire-providers-2.10.pom.sha1
+    │   ├── [ 1.4M]  codehaus/
+    │   │   └── [ 1.4M]  plexus/
+    │   │       ├── [ 137K]  plexus/
+    │   │       │   ├── [  13K]  1.0.11/
+    │   │       │   │   ├── [  153]  _maven.repositories
+    │   │       │   │   ├── [ 8.8K]  plexus-1.0.11.pom
+    │   │       │   │   └── [   40]  plexus-1.0.11.pom.sha1
+    │   │       │   ├── [ 9.9K]  1.0.4/
+    │   │       │   │   ├── [  152]  _maven.repositories
+    │   │       │   │   ├── [ 5.6K]  plexus-1.0.4.pom
+    │   │       │   │   └── [  150]  plexus-1.0.4.pom.sha1
+    │   │       │   ├── [  11K]  1.0.8/
+    │   │       │   │   ├── [  152]  _maven.repositories
+    │   │       │   │   ├── [ 7.1K]  plexus-1.0.8.pom
+    │   │       │   │   └── [   40]  plexus-1.0.8.pom.sha1
+    │   │       │   ├── [  16K]  2.0.2/
+    │   │       │   │   ├── [  152]  _maven.repositories
+    │   │       │   │   ├── [  11K]  plexus-2.0.2.pom
+    │   │       │   │   └── [   40]  plexus-2.0.2.pom.sha1
+    │   │       │   ├── [  19K]  2.0.3/
+    │   │       │   │   ├── [  152]  _maven.repositories
+    │   │       │   │   ├── [  15K]  plexus-2.0.3.pom
+    │   │       │   │   └── [   40]  plexus-2.0.3.pom.sha1
+    │   │       │   ├── [  21K]  2.0.6/
+    │   │       │   │   ├── [  152]  _maven.repositories
+    │   │       │   │   ├── [  16K]  plexus-2.0.6.pom
+    │   │       │   │   └── [   40]  plexus-2.0.6.pom.sha1
+    │   │       │   ├── [  21K]  2.0.7/
+    │   │       │   │   ├── [  152]  _maven.repositories
+    │   │       │   │   ├── [  17K]  plexus-2.0.7.pom
+    │   │       │   │   └── [   40]  plexus-2.0.7.pom.sha1
+    │   │       │   └── [  22K]  3.0.1/
+    │   │       │       ├── [  152]  _maven.repositories
+    │   │       │       ├── [  18K]  plexus-3.0.1.pom
+    │   │       │       └── [   40]  plexus-3.0.1.pom.sha1
+    │   │       ├── [ 187K]  plexus-archiver/
+    │   │       │   └── [ 183K]  2.0.1/
+    │   │       │       ├── [  196]  _maven.repositories
+    │   │       │       ├── [ 176K]  plexus-archiver-2.0.1.jar
+    │   │       │       ├── [   40]  plexus-archiver-2.0.1.jar.sha1
+    │   │       │       ├── [ 2.7K]  plexus-archiver-2.0.1.pom
+    │   │       │       └── [   40]  plexus-archiver-2.0.1.pom.sha1
+    │   │       ├── [  12K]  plexus-compiler/
+    │   │       │   └── [ 7.6K]  1.8.1/
+    │   │       │       ├── [  161]  _maven.repositories
+    │   │       │       ├── [ 3.4K]  plexus-compiler-1.8.1.pom
+    │   │       │       └── [   40]  plexus-compiler-1.8.1.pom.sha1
+    │   │       ├── [  29K]  plexus-compiler-api/
+    │   │       │   └── [  25K]  1.8.1/
+    │   │       │       ├── [  204]  _maven.repositories
+    │   │       │       ├── [  19K]  plexus-compiler-api-1.8.1.jar
+    │   │       │       ├── [   40]  plexus-compiler-api-1.8.1.jar.sha1
+    │   │       │       ├── [  805]  plexus-compiler-api-1.8.1.pom
+    │   │       │       └── [   40]  plexus-compiler-api-1.8.1.pom.sha1
+    │   │       ├── [  21K]  plexus-compiler-javac/
+    │   │       │   └── [  17K]  1.8.1/
+    │   │       │       ├── [  208]  _maven.repositories
+    │   │       │       ├── [  12K]  plexus-compiler-javac-1.8.1.jar
+    │   │       │       ├── [   40]  plexus-compiler-javac-1.8.1.jar.sha1
+    │   │       │       ├── [  710]  plexus-compiler-javac-1.8.1.pom
+    │   │       │       └── [   40]  plexus-compiler-javac-1.8.1.pom.sha1
+    │   │       ├── [  14K]  plexus-compiler-manager/
+    │   │       │   └── [  10K]  1.8.1/
+    │   │       │       ├── [  212]  _maven.repositories
+    │   │       │       ├── [ 5.2K]  plexus-compiler-manager-1.8.1.jar
+    │   │       │       ├── [   40]  plexus-compiler-manager-1.8.1.jar.sha1
+    │   │       │       ├── [  713]  plexus-compiler-manager-1.8.1.pom
+    │   │       │       └── [   40]  plexus-compiler-manager-1.8.1.pom.sha1
+    │   │       ├── [ 9.5K]  plexus-compilers/
+    │   │       │   └── [ 5.5K]  1.8.1/
+    │   │       │       ├── [  162]  _maven.repositories
+    │   │       │       ├── [ 1.3K]  plexus-compilers-1.8.1.pom
+    │   │       │       └── [   40]  plexus-compilers-1.8.1.pom.sha1
+    │   │       ├── [  46K]  plexus-components/
+    │   │       │   ├── [ 9.9K]  1.1.14/
+    │   │       │   │   ├── [  164]  _maven.repositories
+    │   │       │   │   ├── [ 5.7K]  plexus-components-1.1.14.pom
+    │   │       │   │   └── [   40]  plexus-components-1.1.14.pom.sha1
+    │   │       │   ├── [ 7.0K]  1.1.15/
+    │   │       │   │   ├── [  164]  _maven.repositories
+    │   │       │   │   ├── [ 2.8K]  plexus-components-1.1.15.pom
+    │   │       │   │   └── [   40]  plexus-components-1.1.15.pom.sha1
+    │   │       │   ├── [ 9.4K]  1.1.18/
+    │   │       │   │   ├── [  164]  _maven.repositories
+    │   │       │   │   ├── [ 5.2K]  plexus-components-1.1.18.pom
+    │   │       │   │   └── [   40]  plexus-components-1.1.18.pom.sha1
+    │   │       │   ├── [ 6.8K]  1.1.19/
+    │   │       │   │   ├── [  164]  _maven.repositories
+    │   │       │   │   ├── [ 2.6K]  plexus-components-1.1.19.pom
+    │   │       │   │   └── [   40]  plexus-components-1.1.19.pom.sha1
+    │   │       │   └── [ 9.1K]  1.1.7/
+    │   │       │       ├── [  163]  _maven.repositories
+    │   │       │       ├── [ 4.9K]  plexus-components-1.1.7.pom
+    │   │       │       └── [   40]  plexus-components-1.1.7.pom.sha1
+    │   │       ├── [  29K]  plexus-container-default/
+    │   │       │   ├── [  11K]  1.0-alpha-8/
+    │   │       │   │   ├── [  176]  _maven.repositories
+    │   │       │   │   ├── [ 7.1K]  plexus-container-default-1.0-alpha-8.pom
+    │   │       │   │   └── [  198]  plexus-container-default-1.0-alpha-8.pom.sha1
+    │   │       │   ├── [ 5.4K]  1.0-alpha-9/
+    │   │       │   │   ├── [  176]  _maven.repositories
+    │   │       │   │   ├── [ 1.2K]  plexus-container-default-1.0-alpha-9.pom
+    │   │       │   │   └── [   40]  plexus-container-default-1.0-alpha-9.pom.sha1
+    │   │       │   └── [ 8.1K]  1.0-alpha-9-stable-1/
+    │   │       │       ├── [  185]  _maven.repositories
+    │   │       │       ├── [ 3.9K]  plexus-container-default-1.0-alpha-9-stable-1.pom
+    │   │       │       └── [   40]  plexus-container-default-1.0-alpha-9-stable-1.pom.sha1
+    │   │       ├── [ 8.8K]  plexus-containers/
+    │   │       │   └── [ 4.8K]  1.0.3/
+    │   │       │       ├── [  163]  _maven.repositories
+    │   │       │       ├── [  492]  plexus-containers-1.0.3.pom
+    │   │       │       └── [  172]  plexus-containers-1.0.3.pom.sha1
+    │   │       ├── [  21K]  plexus-digest/
+    │   │       │   └── [  17K]  1.0/
+    │   │       │       ├── [  188]  _maven.repositories
+    │   │       │       ├── [  12K]  plexus-digest-1.0.jar
+    │   │       │       ├── [   40]  plexus-digest-1.0.jar.sha1
+    │   │       │       ├── [ 1.0K]  plexus-digest-1.0.pom
+    │   │       │       └── [   40]  plexus-digest-1.0.pom.sha1
+    │   │       ├── [  28K]  plexus-interactivity-api/
+    │   │       │   └── [  24K]  1.0-alpha-4/
+    │   │       │       ├── [  226]  _maven.repositories
+    │   │       │       ├── [  13K]  plexus-interactivity-api-1.0-alpha-4.jar
+    │   │       │       ├── [   40]  plexus-interactivity-api-1.0-alpha-4.jar.sha1
+    │   │       │       ├── [ 6.9K]  plexus-interactivity-api-1.0-alpha-4.pom
+    │   │       │       └── [  198]  plexus-interactivity-api-1.0-alpha-4.pom.sha1
+    │   │       ├── [  74K]  plexus-interpolation/
+    │   │       │   ├── [ 5.1K]  1.12/
+    │   │       │   │   ├── [  165]  _maven.repositories
+    │   │       │   │   ├── [  889]  plexus-interpolation-1.12.pom
+    │   │       │   │   └── [   40]  plexus-interpolation-1.12.pom.sha1
+    │   │       │   └── [  65K]  1.13/
+    │   │       │       ├── [  204]  _maven.repositories
+    │   │       │       ├── [  60K]  plexus-interpolation-1.13.jar
+    │   │       │       ├── [   40]  plexus-interpolation-1.13.jar.sha1
+    │   │       │       ├── [  890]  plexus-interpolation-1.13.pom
+    │   │       │       └── [   40]  plexus-interpolation-1.13.pom.sha1
+    │   │       ├── [  67K]  plexus-io/
+    │   │       │   └── [  63K]  2.0.1/
+    │   │       │       ├── [  184]  _maven.repositories
+    │   │       │       ├── [  57K]  plexus-io-2.0.1.jar
+    │   │       │       ├── [   40]  plexus-io-2.0.1.jar.sha1
+    │   │       │       ├── [ 1.7K]  plexus-io-2.0.1.pom
+    │   │       │       └── [   40]  plexus-io-2.0.1.pom.sha1
+    │   │       └── [ 735K]  plexus-utils/
+    │   │           ├── [  11K]  1.0.4/
+    │   │           │   ├── [  158]  _maven.repositories
+    │   │           │   ├── [ 6.7K]  plexus-utils-1.0.4.pom
+    │   │           │   └── [  162]  plexus-utils-1.0.4.pom.sha1
+    │   │           ├── [ 6.1K]  1.4.1/
+    │   │           │   ├── [  158]  _maven.repositories
+    │   │           │   ├── [ 1.9K]  plexus-utils-1.4.1.pom
+    │   │           │   └── [   40]  plexus-utils-1.4.1.pom.sha1
+    │   │           ├── [  11K]  1.5.15/
+    │   │           │   ├── [  159]  _maven.repositories
+    │   │           │   ├── [ 6.7K]  plexus-utils-1.5.15.pom
+    │   │           │   └── [   40]  plexus-utils-1.5.15.pom.sha1
+    │   │           ├── [ 9.2K]  1.5.5/
+    │   │           │   ├── [  158]  _maven.repositories
+    │   │           │   ├── [ 5.0K]  plexus-utils-1.5.5.pom
+    │   │           │   └── [   40]  plexus-utils-1.5.5.pom.sha1
+    │   │           ├── [  12K]  1.5.8/
+    │   │           │   ├── [  158]  _maven.repositories
+    │   │           │   ├── [ 7.9K]  plexus-utils-1.5.8.pom
+    │   │           │   └── [   40]  plexus-utils-1.5.8.pom.sha1
+    │   │           ├── [ 225K]  2.0.5/
+    │   │           │   ├── [  190]  _maven.repositories
+    │   │           │   ├── [ 218K]  plexus-utils-2.0.5.jar
+    │   │           │   ├── [   40]  plexus-utils-2.0.5.jar.sha1
+    │   │           │   ├── [ 3.3K]  plexus-utils-2.0.5.pom
+    │   │           │   └── [   40]  plexus-utils-2.0.5.pom.sha1
+    │   │           ├── [ 227K]  2.1/
+    │   │           │   ├── [  186]  _maven.repositories
+    │   │           │   ├── [ 219K]  plexus-utils-2.1.jar
+    │   │           │   ├── [   40]  plexus-utils-2.1.jar.sha1
+    │   │           │   ├── [ 3.9K]  plexus-utils-2.1.pom
+    │   │           │   └── [   40]  plexus-utils-2.1.pom.sha1
+    │   │           └── [ 229K]  3.0/
+    │   │               ├── [  186]  _maven.repositories
+    │   │               ├── [ 221K]  plexus-utils-3.0.jar
+    │   │               ├── [   40]  plexus-utils-3.0.jar.sha1
+    │   │               ├── [ 4.0K]  plexus-utils-3.0.pom
+    │   │               └── [   40]  plexus-utils-3.0.pom.sha1
+    │   ├── [ 781K]  eclipse/
+    │   │   └── [ 777K]  jetty/
+    │   │       ├── [ 112K]  jetty-http/
+    │   │       │   ├── [ 101K]  8.1.15.v20140411/
+    │   │       │   │   ├── [  94K]  jetty-http-8.1.15.v20140411.jar
+    │   │       │   │   ├── [   40]  jetty-http-8.1.15.v20140411.jar.sha1
+    │   │       │   │   ├── [ 2.6K]  jetty-http-8.1.15.v20140411.pom
+    │   │       │   │   ├── [   40]  jetty-http-8.1.15.v20140411.pom.sha1
+    │   │       │   │   └── [  208]  _maven.repositories
+    │   │       │   └── [ 6.7K]  8.1.9.v20130131/
+    │   │       │       ├── [ 2.5K]  jetty-http-8.1.9.v20130131.pom
+    │   │       │       ├── [   40]  jetty-http-8.1.9.v20130131.pom.sha1
+    │   │       │       └── [  166]  _maven.repositories
+    │   │       ├── [ 120K]  jetty-io/
+    │   │       │   ├── [ 110K]  8.1.15.v20140411/
+    │   │       │   │   ├── [ 103K]  jetty-io-8.1.15.v20140411.jar
+    │   │       │   │   ├── [   40]  jetty-io-8.1.15.v20140411.jar.sha1
+    │   │       │   │   ├── [ 2.1K]  jetty-io-8.1.15.v20140411.pom
+    │   │       │   │   ├── [   40]  jetty-io-8.1.15.v20140411.pom.sha1
+    │   │       │   │   └── [  204]  _maven.repositories
+    │   │       │   └── [ 6.3K]  8.1.9.v20130131/
+    │   │       │       ├── [ 2.1K]  jetty-io-8.1.9.v20130131.pom
+    │   │       │       ├── [   40]  jetty-io-8.1.9.v20130131.pom.sha1
+    │   │       │       └── [  164]  _maven.repositories
+    │   │       ├── [  29K]  jetty-parent/
+    │   │       │   └── [  25K]  20/
+    │   │       │       ├── [  21K]  jetty-parent-20.pom
+    │   │       │       ├── [   40]  jetty-parent-20.pom.sha1
+    │   │       │       └── [  155]  _maven.repositories
+    │   │       ├── [  67K]  jetty-project/
+    │   │       │   ├── [  32K]  8.1.15.v20140411/
+    │   │       │   │   ├── [  27K]  jetty-project-8.1.15.v20140411.pom
+    │   │       │   │   ├── [   40]  jetty-project-8.1.15.v20140411.pom.sha1
+    │   │       │   │   └── [  170]  _maven.repositories
+    │   │       │   └── [  31K]  8.1.9.v20130131/
+    │   │       │       ├── [  27K]  jetty-project-8.1.9.v20130131.pom
+    │   │       │       ├── [   40]  jetty-project-8.1.9.v20130131.pom.sha1
+    │   │       │       └── [  169]  _maven.repositories
+    │   │       ├── [ 300K]  jetty-util/
+    │   │       │   ├── [ 289K]  8.1.15.v20140411/
+    │   │       │   │   ├── [ 281K]  jetty-util-8.1.15.v20140411.jar
+    │   │       │   │   ├── [   40]  jetty-util-8.1.15.v20140411.jar.sha1
+    │   │       │   │   ├── [ 3.4K]  jetty-util-8.1.15.v20140411.pom
+    │   │       │   │   ├── [   40]  jetty-util-8.1.15.v20140411.pom.sha1
+    │   │       │   │   └── [  208]  _maven.repositories
+    │   │       │   └── [ 7.5K]  8.1.9.v20130131/
+    │   │       │       ├── [ 3.3K]  jetty-util-8.1.9.v20130131.pom
+    │   │       │       ├── [   40]  jetty-util-8.1.9.v20130131.pom.sha1
+    │   │       │       └── [  166]  _maven.repositories
+    │   │       └── [ 145K]  jetty-websocket/
+    │   │           ├── [ 133K]  8.1.15.v20140411/
+    │   │           │   ├── [ 125K]  jetty-websocket-8.1.15.v20140411.jar
+    │   │           │   ├── [   40]  jetty-websocket-8.1.15.v20140411.jar.sha1
+    │   │           │   ├── [ 4.0K]  jetty-websocket-8.1.15.v20140411.pom
+    │   │           │   ├── [   40]  jetty-websocket-8.1.15.v20140411.pom.sha1
+    │   │           │   └── [  218]  _maven.repositories
+    │   │           └── [ 8.2K]  8.1.9.v20130131/
+    │   │               ├── [ 4.0K]  jetty-websocket-8.1.9.v20130131.pom
+    │   │               ├── [   40]  jetty-websocket-8.1.9.v20130131.pom.sha1
+    │   │               └── [  171]  _maven.repositories
+    │   ├── [ 144K]  ini4j/
+    │   │   └── [ 140K]  ini4j/
+    │   │       └── [ 136K]  0.5.2/
+    │   │           ├── [  99K]  ini4j-0.5.2.jar
+    │   │           ├── [   40]  ini4j-0.5.2.jar.sha1
+    │   │           ├── [  32K]  ini4j-0.5.2.pom
+    │   │           ├── [   40]  ini4j-0.5.2.pom.sha1
+    │   │           └── [  176]  _maven.repositories
+    │   ├── [  14K]  json/
+    │   │   └── [ 9.9K]  json/
+    │   │       └── [ 5.9K]  20080701/
+    │   │           ├── [ 1.6K]  json-20080701.pom
+    │   │           ├── [  132]  json-20080701.pom.sha1
+    │   │           └── [  153]  _maven.repositories
+    │   ├── [ 3.9M]  seleniumhq/
+    │   │   └── [ 3.9M]  selenium/
+    │   │       ├── [  10K]  selenium-android-driver/
+    │   │       │   └── [ 6.3K]  2.35.0/
+    │   │       │       ├── [  170]  _maven.repositories
+    │   │       │       ├── [ 2.1K]  selenium-android-driver-2.35.0.pom
+    │   │       │       └── [   40]  selenium-android-driver-2.35.0.pom.sha1
+    │   │       ├── [ 153K]  selenium-api/
+    │   │       │   ├── [ 9.2K]  2.35.0/
+    │   │       │   │   ├── [  159]  _maven.repositories
+    │   │       │   │   ├── [ 5.0K]  selenium-api-2.35.0.pom
+    │   │       │   │   └── [   40]  selenium-api-2.35.0.pom.sha1
+    │   │       │   └── [ 140K]  2.44.0/
+    │   │       │       ├── [  192]  _maven.repositories
+    │   │       │       ├── [ 130K]  selenium-api-2.44.0.jar
+    │   │       │       ├── [   40]  selenium-api-2.44.0.jar.sha1
+    │   │       │       ├── [ 5.0K]  selenium-api-2.44.0.pom
+    │   │       │       └── [   40]  selenium-api-2.44.0.pom.sha1
+    │   │       ├── [  29K]  selenium-chrome-driver/
+    │   │       │   ├── [ 7.1K]  2.35.0/
+    │   │       │   │   ├── [  169]  _maven.repositories
+    │   │       │   │   ├── [ 2.9K]  selenium-chrome-driver-2.35.0.pom
+    │   │       │   │   └── [   40]  selenium-chrome-driver-2.35.0.pom.sha1
+    │   │       │   └── [  18K]  2.44.0/
+    │   │       │       ├── [  212]  _maven.repositories
+    │   │       │       ├── [  11K]  selenium-chrome-driver-2.44.0.jar
+    │   │       │       ├── [   40]  selenium-chrome-driver-2.44.0.jar.sha1
+    │   │       │       ├── [ 2.9K]  selenium-chrome-driver-2.44.0.pom
+    │   │       │       └── [   40]  selenium-chrome-driver-2.44.0.pom.sha1
+    │   │       ├── [ 2.5M]  selenium-firefox-driver/
+    │   │       │   ├── [ 7.4K]  2.35.0/
+    │   │       │   │   ├── [  170]  _maven.repositories
+    │   │       │   │   ├── [ 3.2K]  selenium-firefox-driver-2.35.0.pom
+    │   │       │   │   └── [   40]  selenium-firefox-driver-2.35.0.pom.sha1
+    │   │       │   └── [ 2.5M]  2.44.0/
+    │   │       │       ├── [  214]  _maven.repositories
+    │   │       │       ├── [ 2.5M]  selenium-firefox-driver-2.44.0.jar
+    │   │       │       ├── [   40]  selenium-firefox-driver-2.44.0.jar.sha1
+    │   │       │       ├── [ 3.2K]  selenium-firefox-driver-2.44.0.pom
+    │   │       │       └── [   40]  selenium-firefox-driver-2.44.0.pom.sha1
+    │   │       ├── [  75K]  selenium-htmlunit-driver/
+    │   │       │   ├── [ 6.4K]  2.35.0/
+    │   │       │   │   ├── [  171]  _maven.repositories
+    │   │       │   │   ├── [ 2.2K]  selenium-htmlunit-driver-2.35.0.pom
+    │   │       │   │   └── [   40]  selenium-htmlunit-driver-2.35.0.pom.sha1
+    │   │       │   └── [  64K]  2.44.0/
+    │   │       │       ├── [  216]  _maven.repositories
+    │   │       │       ├── [  58K]  selenium-htmlunit-driver-2.44.0.jar
+    │   │       │       ├── [   40]  selenium-htmlunit-driver-2.44.0.jar.sha1
+    │   │       │       ├── [ 2.2K]  selenium-htmlunit-driver-2.44.0.pom
+    │   │       │       └── [   40]  selenium-htmlunit-driver-2.44.0.pom.sha1
+    │   │       ├── [  30K]  selenium-ie-driver/
+    │   │       │   ├── [ 7.3K]  2.35.0/
+    │   │       │   │   ├── [  165]  _maven.repositories
+    │   │       │   │   ├── [ 3.1K]  selenium-ie-driver-2.35.0.pom
+    │   │       │   │   └── [   40]  selenium-ie-driver-2.35.0.pom.sha1
+    │   │       │   └── [  19K]  2.44.0/
+    │   │       │       ├── [  204]  _maven.repositories
+    │   │       │       ├── [  12K]  selenium-ie-driver-2.44.0.jar
+    │   │       │       ├── [   40]  selenium-ie-driver-2.44.0.jar.sha1
+    │   │       │       ├── [ 3.1K]  selenium-ie-driver-2.44.0.pom
+    │   │       │       └── [   40]  selenium-ie-driver-2.44.0.pom.sha1
+    │   │       ├── [  10K]  selenium-iphone-driver/
+    │   │       │   └── [ 6.1K]  2.35.0/
+    │   │       │       ├── [  169]  _maven.repositories
+    │   │       │       ├── [ 1.9K]  selenium-iphone-driver-2.35.0.pom
+    │   │       │       └── [   40]  selenium-iphone-driver-2.35.0.pom.sha1
+    │   │       ├── [ 413K]  selenium-java/
+    │   │       │   ├── [  11K]  2.35.0/
+    │   │       │   │   ├── [  160]  _maven.repositories
+    │   │       │   │   ├── [ 6.4K]  selenium-java-2.35.0.pom
+    │   │       │   │   └── [   40]  selenium-java-2.35.0.pom.sha1
+    │   │       │   └── [ 398K]  2.44.0/
+    │   │       │       ├── [  194]  _maven.repositories
+    │   │       │       ├── [ 388K]  selenium-java-2.44.0.jar
+    │   │       │       ├── [   40]  selenium-java-2.44.0.jar.sha1
+    │   │       │       ├── [ 5.8K]  selenium-java-2.44.0.pom
+    │   │       │       └── [   40]  selenium-java-2.44.0.pom.sha1
+    │   │       ├── [  31K]  selenium-parent/
+    │   │       │   ├── [  14K]  2.35.0/
+    │   │       │   │   ├── [  162]  _maven.repositories
+    │   │       │   │   ├── [ 9.6K]  selenium-parent-2.35.0.pom
+    │   │       │   │   └── [   40]  selenium-parent-2.35.0.pom.sha1
+    │   │       │   └── [  14K]  2.44.0/
+    │   │       │       ├── [  162]  _maven.repositories
+    │   │       │       ├── [ 9.5K]  selenium-parent-2.44.0.pom
+    │   │       │       └── [   40]  selenium-parent-2.44.0.pom.sha1
+    │   │       ├── [ 233K]  selenium-remote-driver/
+    │   │       │   └── [ 229K]  2.44.0/
+    │   │       │       ├── [  212]  _maven.repositories
+    │   │       │       ├── [ 221K]  selenium-remote-driver-2.44.0.jar
+    │   │       │       ├── [   40]  selenium-remote-driver-2.44.0.jar.sha1
+    │   │       │       ├── [ 3.5K]  selenium-remote-driver-2.44.0.pom
+    │   │       │       └── [   40]  selenium-remote-driver-2.44.0.pom.sha1
+    │   │       ├── [ 296K]  selenium-safari-driver/
+    │   │       │   ├── [ 7.2K]  2.35.0/
+    │   │       │   │   ├── [  169]  _maven.repositories
+    │   │       │   │   ├── [ 3.0K]  selenium-safari-driver-2.35.0.pom
+    │   │       │   │   └── [   40]  selenium-safari-driver-2.35.0.pom.sha1
+    │   │       │   └── [ 285K]  2.44.0/
+    │   │       │       ├── [  212]  _maven.repositories
+    │   │       │       ├── [ 278K]  selenium-safari-driver-2.44.0.jar
+    │   │       │       ├── [   40]  selenium-safari-driver-2.44.0.jar.sha1
+    │   │       │       ├── [ 3.0K]  selenium-safari-driver-2.44.0.pom
+    │   │       │       └── [   40]  selenium-safari-driver-2.44.0.pom.sha1
+    │   │       └── [ 150K]  selenium-support/
+    │   │           ├── [ 6.6K]  2.35.0/
+    │   │           │   ├── [  163]  _maven.repositories
+    │   │           │   ├── [ 2.4K]  selenium-support-2.35.0.pom
+    │   │           │   └── [   40]  selenium-support-2.35.0.pom.sha1
+    │   │           └── [ 140K]  2.44.0/
+    │   │               ├── [  200]  _maven.repositories
+    │   │               ├── [ 133K]  selenium-support-2.44.0.jar
+    │   │               ├── [   40]  selenium-support-2.44.0.jar.sha1
+    │   │               ├── [ 2.4K]  selenium-support-2.44.0.pom
+    │   │               └── [   40]  selenium-support-2.44.0.pom.sha1
+    │   ├── [ 147K]  sonatype/
+    │   │   ├── [  47K]  forge/
+    │   │   │   └── [  43K]  forge-parent/
+    │   │   │       ├── [  17K]  10/
+    │   │   │       │   ├── [  13K]  forge-parent-10.pom
+    │   │   │       │   ├── [   40]  forge-parent-10.pom.sha1
+    │   │   │       │   └── [  155]  _maven.repositories
+    │   │   │       ├── [ 9.1K]  3/
+    │   │   │       │   ├── [ 4.9K]  forge-parent-3.pom
+    │   │   │       │   ├── [   40]  forge-parent-3.pom.sha1
+    │   │   │       │   └── [  154]  _maven.repositories
+    │   │   │       └── [  12K]  5/
+    │   │   │           ├── [ 8.2K]  forge-parent-5.pom
+    │   │   │           ├── [   40]  forge-parent-5.pom.sha1
+    │   │   │           └── [  154]  _maven.repositories
+    │   │   ├── [  36K]  oss/
+    │   │   │   └── [  32K]  oss-parent/
+    │   │   │       ├── [ 8.9K]  6/
+    │   │   │       │   ├── [  152]  _maven.repositories
+    │   │   │       │   ├── [ 4.7K]  oss-parent-6.pom
+    │   │   │       │   └── [   40]  oss-parent-6.pom.sha1
+    │   │   │       ├── [ 8.9K]  7/
+    │   │   │       │   ├── [  152]  _maven.repositories
+    │   │   │       │   ├── [ 4.7K]  oss-parent-7.pom
+    │   │   │       │   └── [   40]  oss-parent-7.pom.sha1
+    │   │   │       └── [  11K]  9/
+    │   │   │           ├── [  152]  _maven.repositories
+    │   │   │           ├── [ 6.4K]  oss-parent-9.pom
+    │   │   │           └── [   40]  oss-parent-9.pom.sha1
+    │   │   ├── [  22K]  plexus/
+    │   │   │   └── [  18K]  plexus-build-api/
+    │   │   │       └── [  14K]  0.0.4/
+    │   │   │           ├── [  198]  _maven.repositories
+    │   │   │           ├── [ 6.6K]  plexus-build-api-0.0.4.jar
+    │   │   │           ├── [   40]  plexus-build-api-0.0.4.jar.sha1
+    │   │   │           ├── [ 2.8K]  plexus-build-api-0.0.4.pom
+    │   │   │           └── [   40]  plexus-build-api-0.0.4.pom.sha1
+    │   │   └── [  38K]  spice/
+    │   │       └── [  34K]  spice-parent/
+    │   │           ├── [ 7.1K]  10/
+    │   │           │   ├── [  155]  _maven.repositories
+    │   │           │   ├── [ 2.9K]  spice-parent-10.pom
+    │   │           │   └── [   40]  spice-parent-10.pom.sha1
+    │   │           ├── [  12K]  16/
+    │   │           │   ├── [  155]  _maven.repositories
+    │   │           │   ├── [ 8.2K]  spice-parent-16.pom
+    │   │           │   └── [   40]  spice-parent-16.pom.sha1
+    │   │           └── [  11K]  17/
+    │   │               ├── [  155]  _maven.repositories
+    │   │               ├── [ 6.6K]  spice-parent-17.pom
+    │   │               └── [   40]  spice-parent-17.pom.sha1
+    │   ├── [  33K]  w3c/
+    │   │   └── [  29K]  css/
+    │   │       └── [  25K]  sac/
+    │   │           └── [  21K]  1.3/
+    │   │               ├── [  168]  _maven.repositories
+    │   │               ├── [  15K]  sac-1.3.jar
+    │   │               ├── [  123]  sac-1.3.jar.sha1
+    │   │               ├── [ 1.1K]  sac-1.3.pom
+    │   │               └── [  123]  sac-1.3.pom.sha1
+    │   └── [ 178K]  webbitserver/
+    │       └── [ 174K]  webbit/
+    │           └── [ 170K]  0.4.14/
+    │               ├── [  180]  _maven.repositories
+    │               ├── [ 161K]  webbit-0.4.14.jar
+    │               ├── [   40]  webbit-0.4.14.jar.sha1
+    │               ├── [ 4.9K]  webbit-0.4.14.pom
+    │               └── [   40]  webbit-0.4.14.pom.sha1
+    ├── [ 3.3M]  xalan/
+    │   ├── [ 281K]  serializer/
+    │   │   └── [ 277K]  2.7.1/
+    │   │       ├── [  186]  _maven.repositories
+    │   │       ├── [ 272K]  serializer-2.7.1.jar
+    │   │       ├── [   41]  serializer-2.7.1.jar.sha1
+    │   │       ├── [ 1.1K]  serializer-2.7.1.pom
+    │   │       └── [   41]  serializer-2.7.1.pom.sha1
+    │   └── [ 3.0M]  xalan/
+    │       └── [ 3.0M]  2.7.1/
+    │           ├── [  176]  _maven.repositories
+    │           ├── [ 3.0M]  xalan-2.7.1.jar
+    │           ├── [   41]  xalan-2.7.1.jar.sha1
+    │           ├── [ 1.2K]  xalan-2.7.1.pom
+    │           └── [   41]  xalan-2.7.1.pom.sha1
+    ├── [ 1.3M]  xerces/
+    │   └── [ 1.3M]  xercesImpl/
+    │       ├── [ 7.3K]  2.10.0/
+    │       │   ├── [  157]  _maven.repositories
+    │       │   ├── [ 3.1K]  xercesImpl-2.10.0.pom
+    │       │   └── [   40]  xercesImpl-2.10.0.pom.sha1
+    │       └── [ 1.3M]  2.11.0/
+    │           ├── [  188]  _maven.repositories
+    │           ├── [ 1.3M]  xercesImpl-2.11.0.jar
+    │           ├── [   40]  xercesImpl-2.11.0.jar.sha1
+    │           ├── [ 3.3K]  xercesImpl-2.11.0.pom
+    │           └── [   40]  xercesImpl-2.11.0.pom.sha1
+    └── [ 236K]  xml-apis/
+        └── [ 232K]  xml-apis/
+            ├── [ 6.0K]  1.3.04/
+            │   ├── [  155]  _maven.repositories
+            │   ├── [ 1.8K]  xml-apis-1.3.04.pom
+            │   └── [   89]  xml-apis-1.3.04.pom.sha1
+            └── [ 222K]  1.4.01/
+                ├── [  184]  _maven.repositories
+                ├── [ 215K]  xml-apis-1.4.01.jar
+                ├── [   40]  xml-apis-1.4.01.jar.sha1
+                ├── [ 2.6K]  xml-apis-1.4.01.pom
+                └── [   40]  xml-apis-1.4.01.pom.sha1
+
+   30M used in 411 directories, 840 files
+
+
