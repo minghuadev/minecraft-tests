@@ -52,3 +52,10 @@ javac -cp ".:/path/to/selenium-server-standalone-2.44.0.jar" Example.java
 java -cp  ".:/path/to/selenium-server-standalone-2.44.0.jar" Example
 
 
+build and run proj2:
+============================
+create a normal java project. add solenimu-server-standalong jar to the library. 
+install a firefox, and run proj as normal.
+
+
+
