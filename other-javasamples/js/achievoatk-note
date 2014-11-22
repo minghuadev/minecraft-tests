@@ -1,0 +1,25 @@
+
+http://www.sourcexref.com/xref/achievoatk/nav.html?index.html
+
+http://www.achievo.org/wiki/ATK
+
+
+ftp://ftp.tu-clausthal.de/pub/mirror/gnu/www/directory/achievoATK.html
+
+Achievo ATK - Web application development framework
+Achievo ATK is an object oriented Web-application Framework, written in PHP. It is targeted at developers who wish to focus on business logic, instead of coding HTML. Where other application frameworks mainly provide a large set of utility classes, ATK provides a complete framework that requires only small amounts of code to get usable applications, while maintaining full flexibility.
+
+It is currently the back-end software for the 'achievo' project management/project tracking tool.
+
+Obtaining
+
+Web page	http://www.achievo.org/atk
+Source tarball	http://www.achievo.org/platform/redir.php?url=http%3A%2F%2Fdownload.achievo.org%2Fpub%2Fatk%2Fatk-5.0.2.tar.gz
+Source information	http://www.achievo.org/atk/download
+	
+Version 5.0.2 (stable) released on 2004-06-08
+Licensed under ATK License http://www.achievo.
+This is not a GNU package.
+
+
+
