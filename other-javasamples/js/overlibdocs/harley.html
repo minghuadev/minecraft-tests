@@ -1,0 +1,936 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, sound, audio, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrations of sound handling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Associating audio with overlibmws popups</title>
+
+<!--**********************************************************
+     Import the overlibmws core and any needed plugin modules
+    **********************************************************-->
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_scroll.js"></script>
+
+<!--*************************************************
+     Import the javascript for our audio (harley.js)
+    *************************************************-->
+<script type="text/javascript" src="harley.js"></script>
+<!--
+***************************************************
+ START: javascript imported via the harley.js file
+***************************************************
+// For HarleySound.wav
+var harley = OLop95?
+ '<object'
++' name="theHarley" id="theHarley"'
++' width="1" height="1"'
++' type="audio/wav"'
++' data="http://www.macridesweb.com/audio/misc/HarleySound.wav">'
++' <param name="hidden" value="true">'
++' <param name="autostart" value="true">'
++' <param name="loop" value="true">'
++'<\/object>':
+ '<embed'
++' name="theHarley" id="theHarley"'
++' width="1" height="1"'
++' type="audio/wav"'
++' src="http://www.macridesweb.com/audio/misc/HarleySound.wav"'
++' hidden="true"'
++' autostart="true"'
++' loop="true">'
++'<\/embed>';
+
+// For MeepMeep.wav
+var MeepMeep = OLop95?
+ '<object'
++' name="theMeepMeep" id="theMeepMeep"'
++' width="1" height="1"'
++' type="audio/wav"'
++' data="http://www.macridesweb.com/audio/misc/MeepMeep.wav">'
++' <param name="hidden" value="true">'
++' <param name="autostart" value="true">'
++' <param name="loop" value="false">'
++'<\/object>':
+ '<embed'
++' name="theMeepMeep" id="theMeepMeep"'
++' width="1" height="1"'
++' type="audio/wav"'
++' src="http://www.macridesweb.com/audio/misc/MeepMeep.wav"'
++' hidden="true"'
++' autostart="true"'
++' loop="false">'
++'<\/embed>';
+
+// Playlist for the flash-based mp3 player 
+var flashMp3s01 = '../audio/misc/songlist01.txt';
+
+// For the flash-based mp3 player (see http://www.flash-here.com/downloads/mp3_player.html)
+function flashMp3(list, loop, shfl, vol) {
+ var flashMp3str =
+  '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"'
+ +' codebase='
+ +'"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"'
+ +' width="1" height="1" id="mp3_player" align="">'
+ +'<param name="movie" value="../flash/mp3_player.swf'
+ +'?sl='+list+'&l='+loop+'&sh='+shfl+'&v='+vol+'">'
+ +'<param name="quality" value="high">'
+ +'<param name="bgcolor" value="#dddbff">'
+ +'<embed src="../flash/mp3_player.swf?sl='+list+'&l='+loop+'&sh='+shfl+'&v='+vol+'"'
+ +' type="application/x-shockwave-flash"'
+ +' pluginspage="http://www.macromedia.com/go/getflashplayer"'
+ +' width="1" height="1" name="mp3_player" align=""'
+ +' quality="high"'
+ +' bgcolor="#dddbff">'
+ +'<\/embed>'
+ +'<\/object>';
+ return flashMp3str;
+}
+
+// For playing audio
+function playIt(whichsound, a1, a2, a3, a4) {
+ if(OLloaded && OLgateOK && !OLns4){
+  var o=OLgetRef('audioDiv');
+  if (o) {
+   cClick();
+   o.innerHTML=(a1)?whichsound(a1, a2, a3, a4):whichsound;
+   o.style.visibility='visible';
+  }
+ }
+ return false;
+}
+
+// For stopping audio
+function stopIt() {
+ if(OLloaded && OLgateOK && !OLns4){
+  var o=OLgetRef('audioDiv');
+  if (o) {
+   o.innerHTML='';
+   o.style.visibility='hidden';
+  }
+ }
+ return false;
+}
+
+// For daisy-chaining with the core's cClick
+var cClickOld=cClick;
+
+function cClickNew(){
+ if(OLloaded && OLgateOK){
+  if(over && OLshowingsticky)stopIt();
+  cClickOld();
+ }
+ return false;
+}
+
+cClick=cClickNew;
+
+// For automatic use of overlib2 and nd2 calls if a STICKY primary
+// is being displayed, and might be associated with audio, so that
+// we don't force it to close.  Not useful if the document has
+// STICKY secondary popups (which this document does not).
+function myO(){
+ return (OLshowingsticky)?overlib2:overlib;
+}
+
+function myN(){
+ return (OLshowingsticky)?nd2:nd;
+}
+*************************************************
+ END: javascript imported via the harley.js file
+*************************************************
+-->
+
+<!--**********************************************************
+     The style sheet would better be imported via a .css file
+    **********************************************************-->
+<style type="text/css">
+table.olcg {background-color:#338855;}
+td.olcg {text-align:center;}
+.olfg {background-color:#bbffdd;text-align:justify;padding-left:8px;padding-right:8px}
+.olcap {font-family:Verdana;font-size:10px;font-weight:bold;color:#ffffff;}
+.oltxt12 {font-family:Verdana;font-size:12px;color:#885522;}
+.oltxt16 {font-family:Verdana;font-size:16px;color:#885522;}
+
+.text12 {font-family:Verdana,Arial,sans-serif;font-size:12px;color:#330033;}
+.text14 {font-family:Verdana,Arial,sans-serif;font-size:14px;color:#330033;}
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff;}
+
+.myHeader {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;}
+.mySubHead {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;}
+.mySpacer {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.red {color:#cc0000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+</style>
+
+<script type="text/javascript">
+<!--
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+//-->
+</script>
+</head> 
+
+<!--************************************************************************
+     Include onunload and onresize calls to the replacement cClick function
+    ************************************************************************-->
+<body text="#000000" bgcolor="#ddeeff" onunload="cClick();" onresize="cClick();">
+
+<!--**************************************************************
+     For our audio (we let the overlibmws library create overDiv)
+    **************************************************************-->
+<div id="audioDiv" style="position:absolute; visibility:hidden; z-index:0;"></div>
+
+<!--******************************************************
+     Pre-load the .wav files into 1 px divs at upper left
+    ******************************************************-->
+<div id="harleyDiv" style="position:absolute; visibility:visible; z-index:0;
+ top:0px; left:0px; width:1px; height:1px;">
+ <script type="text/javascript">
+ <!--
+  document.write(OLop95?
+   '<object'
+  +' name="myHarley" id="myHarley"'
+  +' width="1" height="1"'
+  +' type="audio/wav"'
+  +' data="http://www.macridesweb.com/audio/misc/HarleySound.wav">'
+  +' <param name="hidden" value="true">'
+  +' <param name="autostart" value="false">'
+  +' <param name="loop" value="true">'
+  +'<\/object>':
+   '<embed'
+  +' name="myHarley" id="myHarley"'
+  +' width="1" height="1"'
+  +' type="audio/wav"'
+  +' src="http://www.macridesweb.com/audio/misc/HarleySound.wav"'
+  +' hidden="true"'
+  +' autostart="false"'
+  +' loop="true">'
+  +'<\/embed>');
+ //-->
+ </script>
+</div>
+
+<div id="MeepMeepDiv" style="position:absolute; visibility:visible; z-index:0;
+ top:0px; left:0px; width:1px; height:1px;">
+ <script type="text/javascript">
+ <!--
+  document.write(OLop95?
+   '<object'
+  +' name="myMeepMeep" id="myMeepMeep"'
+  +' width="1" height="1"'
+  +' type="audio/wav"'
+  +' data="http://www.macridesweb.com/audio/misc/MeepMeep.wav">'
+  +' <param name="hidden" value="true">'
+  +' <param name="autostart" value="false">'
+  +' <param name="loop" value="false">'
+  +'<\/object>':
+   '<embed'
+  +' name="myMeepMeep" id="myMeepMeep"'
+  +' width="1" height="1"'
+  +' type="audio/wav"'
+  +' src="http://www.macridesweb.com/audio/misc/MeepMeep.wav"'
+  +' hidden="true"'
+  +' autostart="false"'
+  +' loop="false">'
+  +'<\/embed>');
+ //-->
+ </script>
+</div>
+
+<!--*******************************
+     Then pre-load the popup image
+    *******************************-->
+<script type="text/javascript">
+//<!--
+dance = new Image();
+dance.src = "../image/dance.gif"
+//-->
+</script>
+
+<!--***********************
+     Page formatting table
+    ***********************-->
+<table align="center" width="630" cellpadding="5" cellspacing="0" border="0"> 
+ <!--****************
+      Header section
+     ****************-->
+ <tr>
+  <td align="center" class="text12">
+   <span class="myHeader"><strong>Examples of Popups with Audio</strong></span>
+   <span class="mySubHead"><strong><em>via the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="var o=myO(); return o('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#cceeff',
+     WRAP, BASE,2, OFFSETX,-10, OFFSETY,20, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="var n=myN(); n();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="var o=myO(); return o('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', FGCOLOR,'#cceeff',
+     TEXTPADDING,6, WRAP, BASE,2, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20,
+     STATUS,'Click to send form-based e-mail to Fote.');"
+    onmouseout="var n=myN(); n();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="var o=myO(); return o('Link to Macrides Web Services homepage.', FGCOLOR,'#cceeff',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="var n=myN(); n();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for audio support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="var o=myO(); return o('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#cceeff',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="var n=myN(); n();">Support Group</a>.</strong>
+   <br><a name="exa">&nbsp;</a><br>
+   <em>These examples work best on broadband, but do work on dialup,<br>
+   and not badly once the audio files are in cache.</em>
+  </td>
+ </tr>
+ <!--*************************************
+      Three examples of popups with audio
+     *************************************-->
+ <tr> 
+  <td align="center" valign="middle" class="text12">
+   <br>
+   <!--***************
+        FIRST EXAMPLE
+       ***************-->
+   <b>I love my 
+   <a
+    href="javascript:void(0);"
+    onmouseover="playIt(harley);
+     return overlib('Keep your mouse on this link to keep hearing my '
+     +'wonderful Harley Davidson motorcyle.&lt;br&gt;&lt;br&gt;'
+     +'If you don\'t hear the sound or it is choppy, then the audio '
+     +'file may still be loading, so hover over this link again later.',
+     CAPTION,'I Love My Harley', CGCLASS,'olcg', CAPTIONFONTCLASS,'olcap',
+     FGCLASS,'olfg', TEXTFONTCLASS,'oltxt12', BORDER,2, BGCOLOR,'#00ff00',
+     WIDTH,210, BASE,3, HAUTO, STATUS,'Sound of My Harley');"
+    onmouseout="stopIt();nd();">Harley</a>.
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <!--****************
+        SECOND EXAMPLE
+       ****************-->
+   <a
+    href="javascript:void(0);"
+    onmouseover="playIt(MeepMeep);
+     return overlib('What Fun!!!!',
+     FGCLASS,'olfg', TEXTFONTCLASS,'oltxt16', BORDER,2, BGCOLOR,'#00ff00',
+     WRAP, BASE,2, HAUTO, STATUS,'What Fun!!!!');"
+    onmouseout="stopIt();nd();">Meep</a> me.
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <!--***************
+        THIRD EXAMPLE
+       ***************-->
+   Greek <a
+    href="javascript:void(0);"
+    onmouseover="playIt(flashMp3, flashMp3s01, 1, 1, 100);
+     return overlib('&lt;img '
+     +'src=\'../image/dance.gif\' alt=\'\' width=\'107\' height=\'193\'&gt;',
+     CAPTION,'Opa opa!!!', CGCLASS,'olcg', CAPTIONFONTCLASS,'olcap', STICKY, 
+     FGCLASS,'olfg', BORDER,2, BGCOLOR,'#00ff00', SCROLL,
+     WRAP, BASE,2, RELX,-10, RELY,10, STATUS,'Greek dances');">dances</a>.</b>
+  </td>
+ </tr>
+ <!--********************************************************
+      [Read everything below here rendered via your browser]
+      Comments about the examples
+     ********************************************************-->
+ <tr>
+  <td class="text12">
+   <br>
+   The <b>first example</b> plays an audio file with looping while the user hovers
+   over the link, whereas the <b>second example</b> plays an audio file once (i.e.,
+   without looping) per hover (onmouseover).&nbsp; The <b>third example</b> uses a
+   playlist, with looping through the list, and random shuffling of the choices from
+   the list on successive hovers over the link.&nbsp; The first two examples use
+   procedures suited for relatively small audio files in one of the "old-fashioned"
+   formats, e.g., <b>.wav</b> files as in these two examples, or <b>.mid</b> files.&nbsp;
+   The third uses a freeware <a
+    href="http://www.flash-here.com/downloads/mp3_player.html"
+    onmouseover="var o=myO(); return o(
+     'Information and download site for flash-based mp3 player',
+     FGCOLOR,'#cceeff', WRAP, HAUTO, VAUTO, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="var n=myN(); n();"
+    onclick="cClick(); return true;"
+    target="_blank">flash-based player</a>
+   for <b>.mp3</b> files.&nbsp; Although it is geared toward sets of large files that can
+   be problematic without broadband, such as the dance files in the third example, it also
+   <em>can be used with single, relatively small</em> <b>.mp3</b> <em>files which "<b>speak</b>"
+   the content of displayed DHTML popups, to increase their <b>accessibility</b> beyond the
+   means disussed in the support document on</em> <a
+    href="ONFOCUS.html"
+    onmouseover="var o=myO(); return o(
+     'Keyboard-invoked popup support', FGCOLOR,'#cceeff',
+     WRAP, HAUTO, VAUTO, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="var n=myN(); n();"
+    onclick="cClick(); return true;">keyboard</a><em>-invoked popups.</em><br>
+   [<strong>Opera v9.5+</strong> users <em>see <a
+    onmouseover="var o=myO(); return o(
+     'Jump to the section about <b>Opera v9.5+</b> issues for <b>embed</b> <i>versus</i> '
+     +'<b>object</b> elements', FGCOLOR,'#cceeff', WRAP, CENTER, OFFSETX,105, OFFSETY,18,
+     VAUTO, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="var n=myN(); n();"
+    onclick="cClick(); return true;"
+    href="#opera95issues">below</a></em>]
+  </td>
+ </tr>
+ <!--***************************************************************
+      Start of section which shows the relevant javascript and HTML
+     ***************************************************************-->
+ <tr>
+  <td class="text12" align="center">
+   <br>
+   <b>Here is the relevant javascript code and HTML markup:</b>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   <br>
+   As a supplement to the <b>overDiv</b> positioned div for the visual display of popups, we
+   declare an <b>audioDiv</b> positioned div for the concomittant audio presentations: 
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>&lt;div id="<b>audioDiv</b>" style="position:absolute; visibility:hidden;
+   z-index:0;"&gt;&lt;/div&gt;</code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   It should be a direct child of the <b>body</b> (i.e., following the body start tag and not
+   encased in any other container element).
+   <br><br>
+   We then include markup which helps to "pre-load" our two <b>.wav</b> audio files and the
+   image for the popup of the third example: 
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>&lt;div id="<b>harleyDiv</b>" style="position:absolute; visibility:visible; z-index:0;<br>
+   &nbsp;top:0px; left:0px; width:1px; height:1px;"&gt;<br>
+   &nbsp;&lt;script type="text/javascript"&gt;<br>
+   &nbsp;&lt;!--<br>
+   &nbsp;&nbsp;document.write(OLop95?<br>
+   &nbsp;&nbsp; '&lt;<b>object</b>'<br>
+   &nbsp;&nbsp;+' name="<b>myHarley</b>" id="<b>myHarley</b>"'<br>
+   &nbsp;&nbsp;+' width="1" height="1"'<br>
+   &nbsp;&nbsp;+' type="audio/wav"'<br>
+   &nbsp;&nbsp;+' data="HarleySound.wav"'&gt;<br>
+   &nbsp;&nbsp;+' &lt;param name="hidden" value="true"&gt;'<br>
+   &nbsp;&nbsp;+' &lt;param name="autostart" value="<b>false</b>"&gt;'<br>
+   &nbsp;&nbsp;+' &lt;param name="loop" value="<b>true</b>"&gt;'<br>
+   &nbsp;&nbsp;+'&lt;<b>\/object</b>&gt;':<br>
+   &nbsp;&nbsp; '&lt;<b>embed</b>'<br>
+   &nbsp;&nbsp;+' name="<b>myHarley</b>" id="<b>myHarley</b>"'<br>
+   &nbsp;&nbsp;+' width="1" height="1"'<br>
+   &nbsp;&nbsp;+' type="audio/wav"'<br>
+   &nbsp;&nbsp;+' src="HarleySound.wav"'<br>
+   &nbsp;&nbsp;+' hidden="true"'<br>
+   &nbsp;&nbsp;+' autostart="<b>false</b>"'<br>
+   &nbsp;&nbsp;+' loop="<b>true</b>"&gt;'<br>
+   &nbsp;&nbsp;+'&lt;<b>\/embed</b>&gt;');<br>
+   &nbsp;//--&gt;<br>
+   &nbsp;&lt;/script&gt;<br>
+   &lt;/div&gt;</code>
+   <br><br>
+   <code>&lt;div id="<b>MeepMeepDiv</b>" style="position:absolute; visibility:visible; z-index:0;<br>
+   &nbsp;top:0px; left:0px; width:1px; height:1px;"&gt;<br>
+   &nbsp;&lt;script type="text/javascript"&gt;<br>
+   &nbsp;&lt;!--<br>
+   &nbsp;&nbsp;document.write(OLop95?<br>
+   &nbsp;&nbsp; '&lt;<b>object</b>'<br>
+   &nbsp;&nbsp;+' name="<b>myMeepMeep</b>" id="<b>myMeepMeep</b>"'<br>
+   &nbsp;&nbsp;+' width="1" height="1"'<br>
+   &nbsp;&nbsp;+' type="audio/wav"'<br>
+   &nbsp;&nbsp;+' data="MeepMeep.wav"&gt;'<br>
+   &nbsp;&nbsp;+' &lt;param name="hidden" value="true"&gt;'<br>
+   &nbsp;&nbsp;+' &lt;param name="autostart" value="<b>false</b>"&gt;'<br>
+   &nbsp;&nbsp;+' &lt;param name="loop" value="<b>false</b>"&gt;'<br>
+   &nbsp;&nbsp;+'&lt;<b>\/object</b>&gt;':<br>
+   &nbsp;&nbsp; '&lt;<b>embed</b>'<br>
+   &nbsp;&nbsp;+' name="<b>myMeepMeep</b>" id="<b>myMeepMeep</b>"'<br>
+   &nbsp;&nbsp;+' width="1" height="1"'<br>
+   &nbsp;&nbsp;+' type="audio/wav"'<br>
+   &nbsp;&nbsp;+' src="MeepMeep.wav"'<br>
+   &nbsp;&nbsp;+' hidden="true"'<br>
+   &nbsp;&nbsp;+' autostart="<b>false</b>"'<br>
+   &nbsp;&nbsp;+' loop="<b>false</b>"&gt;'<br>
+   &nbsp;&nbsp;+'&lt;<b>\/embed</b>&gt;');<br>
+   &nbsp;//--&gt;<br>
+   &nbsp;&lt;/script&gt;<br>
+   &lt;/div&gt;</code>
+   <br><br>
+   <code>&lt;script type="text/javascript"&gt;<br>
+   //&lt;!--<br>
+   dance = new Image();<br>
+   dance.src = "../image/dance.gif"<br>
+   //--&gt;<br>
+   &lt;/script&gt;</code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+   In the olden days of the original Netscape Navigator and the early Internet Explorer those
+   <b>embed</b> elements would have been sufficient to play the audio files, and to stop them
+   if the <b>loop</b> attritute is set to "<b>true</b>" such that the files do not stop
+   themselves after single plays.&nbsp; For the first <b>embed</b> element we would use:
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>onmouseover="document.myHarley.play(); return overlib(. . .);"<br>
+   onmouseout="document.myHarley.stop(); nd();"</code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   and for the second <b>embed</b> element we would use:
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>onmouseover="document.myMeepMeep.play(); return overlib(. . .);"<br>
+   onmouseout="nd();"</code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   Internet Explorer still supports that simple mechanism, but alas, it has languished in the
+   other browsers, though the HTML5 audio element will provide a simple alternative.&nbsp; Here we
+   use a "back door" strategy of also defining (via an imported <b>.js</b> file) the <b>embed</b>
+   elements (or <b>object</b> elements for <strong>Opera v9.5+</strong>, <em>see <a
+    onmouseover="var o=myO(); return o(
+     'Jump to the section about <b>Opera v9.5+</b> issues for <b>embed</b> <i>versus</i> '
+     +'<b>object</b> elements', FGCOLOR,'#cceeff', WRAP, CENTER, OFFSETX,140, OFFSETY,18,
+     VAUTO, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="var n=myN(); n();"
+    onclick="cClick(); return true;"
+    href="#opera95issues">below</a></em>) as string variables, with new name and id strings so
+   that they remain unique across elements in the document, and with the <b>autostart</b>
+   attribute set to <b>true</b>:
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>var <span class="red">harley</span> = OLop95?<br>
+   &nbsp;'&lt;<b>object</b>'<br>
+   +' name="<b>theHarley</b>" id="<b>theHarley</b>"'<br>
+   +' width="1" height="1"'<br>
+   +' type="audio/wav"'<br>
+   +' data="HarleySound.wav"&gt;'<br>
+   +' &lt;param name="hidden" value="true"&gt;'<br>
+   +' &lt;param name="autostart" value="<b>true</b>"&gt;'<br>
+   +' &lt;param name="loop" value="<b>true</b>"&gt;<br>
+   +'&lt;\<b>/object</b>&gt;':<br>
+   &nbsp;'&lt;<b>embed</b>'<br>
+   +' name="<b>theHarley</b>" id="<b>theHarley</b>"'<br>
+   +' width="1" height="1"'<br>
+   +' type="audio/wav"'<br>
+   +' src="HarleySound.wav"'<br>
+   +' hidden="true"'<br>
+   +' autostart="<b>true</b>"'<br>
+   +' loop="<b>true</b>"&gt;'<br>
+   +'&lt;\<b>/embed</b>&gt;';
+   <br><br>
+   var <span class="red">MeepMeep</span> = OLop95?<br>
+   &nbsp;'&lt;<b>object</b>'<br>
+   +' name="<b>theMeepMeep</b>" id="<b>theMeepMeep</b>"'<br>
+   +' width="1" height="1"'<br>
+   +' type="audio/wav"'<br>
+   +' data="MeepMeep.wav"&gt;'<br>
+   +' &lt;param name="hidden" value="true"&gt;'<br>
+   +' &lt;param name="autostart" value="<b>true</b>"&gt;'<br>
+   +' &lt;param name="loop" value="<b>false</b>"&gt;<br>
+   +'&lt;\<b>/object</b>&gt;':<br>
+   &nbsp;'&lt;<b>embed</b>'<br>
+   +' name="<b>theMeepMeep</b>" id="<b>theMeepMeep</b>"'<br>
+   +' width="1" height="1"'<br>
+   +' type="audio/wav"'<br>
+   +' src="MeepMeep.wav"'<br>
+   +' hidden="true"'<br>
+   +' autostart="<b>true</b>"'<br>
+   +' loop="<b>false</b>"&gt;'<br>
+   +'&lt;\<b>/embed</b>&gt;';</code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   so that we can play an audio file simply by loading the corresponding string variable
+   as HTML into our <b>audioDiv</b> postioned div.&nbsp; For the <b>.mp3</b> file we define
+   a string variable of the form <b>flashMp3s#</b> which points to our play list (or to
+   others, if we had more play lists for this document).&nbsp; We also define a function
+   which accepts that as its first argument, plus three more arguments associated with the <a
+    href="http://www.flash-here.com/downloads/mp3_player.html"
+    onmouseover="var o=myO(); return o(
+     'Information and download site for flash-based mp3 player',
+     FGCOLOR,'#cceeff', WRAP, HAUTO, VAUTO, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="var n=myN(); n();"
+    onclick="cClick(); return true;"
+    target="_blank">flash-based player</a>, and returns a string variable with an <b>object</b>
+    and <b>embed</b> element set up for loading as HTML into our <b>audioDiv</b>: 
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>var <span class="red">flashMp3s01</span> = '../audio/misc/songlist01.txt';
+   <br><br>
+   function <span class="red">flashMp3</span>(<em>list, loop, shfl, vol</em>) {<br>
+   &nbsp;var flashMp3str =<br>
+   &nbsp;&nbsp;'&lt;<b>object</b> classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"'<br>
+   &nbsp;+' codebase="'<br>
+   &nbsp;+'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"'<br>
+   &nbsp;+' width="1" height="1" id="mp3_player" align=""&gt;'<br>
+   &nbsp;+'&lt;param name="movie" value="../flash/mp3_player.swf'<br>
+   &nbsp;+'?sl='+<em>list</em>+'&amp;l='+<em>loop</em>+'&amp;sh='+<em>shfl</em>+'&amp;v='+<em>vol</em>+'"&gt;'<br>
+   &nbsp;+'&lt;param name="quality" value="high"&gt;'<br>
+   &nbsp;+'&lt;param name="bgcolor" value="#dddbff"&gt;'<br>
+   &nbsp;+'&lt;<b>embed</b>
+   src="../flash/mp3_player.swf?sl='+<em>list</em>+'&amp;l='+<em>loop</em>+'&amp;sh='+<em>shfl</em>+'&amp;v='+<em>vol</em>+'"'<br>
+   &nbsp;+' type="application/x-shockwave-flash"'<br>
+   &nbsp;+' pluginspage="http://www.macromedia.com/go/getflashplayer"'<br>
+   &nbsp;+' width="1" height="1" name="mp3_player" align=""'<br>
+   &nbsp;+' quality="high"'<br>
+   &nbsp;+' bgcolor="#dddbff">'<br>
+   &nbsp;+'&lt;\<b>/embed</b>&gt;'<br>
+   &nbsp;+'&lt;\<b>/object</b>&gt;';<br>
+   &nbsp;return flashMp3str;<br>
+   }</code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+   Now we can define a <b>playIt()</b> function which manipulates these strings and loads
+   our <b>audioDiv</b>:
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>function <b>playIt(</b><em>whichsound, a1, a2, a3, a4</em><b>) {</b><br>
+   &nbsp;if (OLloaded && OLgateOK && !OLns4) {<br>
+   &nbsp;&nbsp;var o = OLgetRef('<b>audioDiv</b>');<br>
+   &nbsp;&nbsp;if (o) {<br>
+   &nbsp;&nbsp;&nbsp;cClick();<br>
+   &nbsp;&nbsp;&nbsp;o.innerHTML = (<em>a1</em>)?<em>whichsound</em>(<em>a1, a2, a3,
+   a4</em>):<em>whichsound</em>;<br>
+   &nbsp;&nbsp;&nbsp;o.style.visibility = 'visible';<br>
+   &nbsp;&nbsp;}<br>
+   &nbsp;}<br>
+   &nbsp;return false;<br>
+   <b>}</b></code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   It has a required first argument which is either the name of an <b>embed</b> string
+   variable (in this document, for our <b>.wav</b> audio files) or a function reference
+   (name without parens) which in this document is for our <b>flashMp3</b> function.&nbsp;
+   The optional second through fifth arguments are for the first through fourth arguments
+   of a <b>flashMp3</b> function call, which is performed if at least one optional argument
+   is present.
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+   We also define a <b>stopIt()</b> function:
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>function <b>stopIt(){</b><br>
+   &nbsp;if (OLloaded && OLgateOK && !OLns4) {<br>
+   &nbsp;&nbsp;var o = OLgetRef('<b>audioDiv</b>');<br>
+   &nbsp;&nbsp;if (o) {<br>
+   &nbsp;&nbsp;&nbsp;o.innerHTML = '';<br>
+   &nbsp;&nbsp;&nbsp;o.style.visibility = 'hidden';<br>
+   &nbsp;&nbsp;}<br>
+   &nbsp;}<br>
+   &nbsp;return false;<br>
+   <b>}</b></code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   which we call onmouseout (together with an <b>nd</b> call) if the popup and audio were
+   called onmouseover and the popup is not STICKY.&nbsp; For STICKY popups, which are closed
+   via <b>cClick</b> calls, e.g., by the Close link in the CAPTION, we create a replacement
+   which daisy-chains it to <b>stopIt</b>:
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>var cClickOld = cClick;
+   <br><br>
+   function cClickNew() {<br>
+   &nbsp;if (OLloaded && OLgateOK){<br>
+   &nbsp;&nbsp;if (over && OLshowingsticky) stopIt();<br>
+   &nbsp;&nbsp;cClickOld();<br>
+   &nbsp;}<br>
+   &nbsp;return false;<br>
+   }
+   <br><br>
+   cClick = cClickNew;</code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   Note that we use the replacement <b>cClick</b> in the body start tag:
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>&lt;body onunload="cClick();" onresize="cClick();"&gt;</code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   to ensure that any audio associated with any open STICKY is terminated on leaving or
+   resizing the current document.&nbsp; We still can simply minimize the current window
+   and continue listening to the audio of a STICKY popup while working in another window.
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+   If we had secondary popups with audio, we correspondingly would define and use an
+   <b>audioDiv2</b> positioned div, and a <b>playIt2</b>, a <b>stopIt2</b>, and a
+   replacement <b>cClick2</b> function to use in conjunction with <b>overlib2</b> and
+   <b>nd2</b> calls.
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" align="center">
+   <b>We now are ready to make the calls for our popups with audio:</b>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code><b>I love my </b>&lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="playIt(<span class="red">harley</span>);<br>
+   &nbsp;&nbsp;return overlib('Keep your mouse on this link to keep hearing my '<br>
+   &nbsp;&nbsp;+'wonderful Harley Davidson motorcyle.&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;'<br>
+   &nbsp;&nbsp;+'If you don\'t hear the sound or it is choppy, then the audio '<br>
+   &nbsp;&nbsp;+'file may still be loading, so hover over this link again later.',<br>
+   &nbsp;&nbsp;CAPTION,'I Love My Harley', CGCLASS,'olcg', CAPTIONFONTCLASS,'olcap',<br>
+   &nbsp;&nbsp;FGCLASS,'olfg', TEXTFONTCLASS,'oltxt12', BORDER,2, BGCOLOR,'#00ff00',<br>
+   &nbsp;&nbsp;WIDTH,210, BASE,3, HAUTO, STATUS,'Sound of My Harley');"<br>
+   &nbsp;onmouseout="stopIt(); nd();"&gt;<a
+    href="javascript:void(0);"
+    onmouseover="playIt(harley);
+     return overlib('Keep your mouse on this link to keep hearing my '
+     +'wonderful Harley Davidson motorcyle.&lt;br&gt;&lt;br&gt;'
+     +'If you don\'t hear the sound or it is choppy, then the audio '
+     +'file may still be loading, so hover over this link again later.',
+     CAPTION,'I Love My Harley', CGCLASS,'olcg', CAPTIONFONTCLASS,'olcap',
+     FGCLASS,'olfg', TEXTFONTCLASS,'oltxt12', BORDER,2, BGCOLOR,'#00ff00',
+     WIDTH,210, BASE,3, HAUTO, STATUS,'Sound of My Harley');"
+    onmouseout="stopIt(); nd();">Harley</a>&lt;/a&gt;<b>.</b></code>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code>&lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="playIt(<span class="red">MeepMeep</span>);<br>
+   &nbsp;&nbsp;return overlib('What Fun!!!!',<br>
+   &nbsp;&nbsp;FGCLASS,'olfg', TEXTFONTCLASS,'oltxt16', BORDER,2, BGCOLOR,'#00ff00',<br>
+   &nbsp;&nbsp;WRAP, BASE,2, HAUTO, STATUS,'What Fun!!!!');"<br>
+   &nbsp;onmouseout="stopIt(); nd();"&gt;<a
+    href="javascript:void(0);"
+    onmouseover="playIt(MeepMeep);
+     return overlib('What Fun!!!!',
+     FGCLASS,'olfg', TEXTFONTCLASS,'oltxt16', BORDER,2, BGCOLOR,'#00ff00',
+     WRAP, BASE,2, HAUTO, STATUS,'What Fun!!!!');"
+    onmouseout="stopIt(); nd();">MeepMeep</a>&lt;/a&gt;<b> me.</b></code>
+  </td>
+ </tr> 
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" bgcolor="#ccccdd">
+   <code><b>Greek</b> &lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="playIt(<span class="red">flashMp3</span><b>,</b>
+   <span class="red">flashMp3s01</span><b>, 1, 1, 100</b>);<br>
+   &nbsp;&nbsp;return overlib('&amp;lt;img '<br>
+   &nbsp;&nbsp;+'src=\'../image/dance.gif\' alt=\'\' width=\'107\' height=\'193\'&amp;gt;',<br>
+   &nbsp;&nbsp;CAPTION,'Opa opa!!!', CGCLASS,'olcg', CAPTIONFONTCLASS,'olcap',<br> 
+   &nbsp;&nbsp;FGCLASS,'olfg', BORDER,2, BGCOLOR,'#00ff00', <b>STICKY</b>, <b>SCROLL</b>,<br>
+   &nbsp;&nbsp;WRAP, BASE,2, RELX,-10, RELY,10, STATUS,'Greek dances');"&gt;<a
+   href="javascript:void(0);"
+   onmouseover="playIt(flashMp3, flashMp3s01, 1, 1, 100);
+    return overlib('&lt;img '
+    +'src=\'../image/dance.gif\' alt=\'\' width=\'107\' height=\'193\'&gt;',
+    CAPTION,'Opa opa!!!', CGCLASS,'olcg', CAPTIONFONTCLASS,'olcap',
+    FGCLASS,'olfg', BORDER,2, BGCOLOR,'#00ff00', STICKY, SCROLL,
+    WRAP, BASE,2, RELX,-10, RELY,10, STATUS,'Greek dances');">dances</a>&lt;/a&gt;<b>.</b></code>
+  </td>
+ </tr> 
+ <tr>
+  <td class="text12">
+   <a name="opera95issues">&nbsp;</a><br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   <strong>Opera v9.5+ issues:</strong>
+   <div style="height:4px"><img src="../image/tp.gif" width="1" height="4" alt=""></div>
+   Note that Opera through its version 9.27 handled <strong>embed</strong> elements equivalently
+   to the other browsers, but <strong>Opera v9.5</strong> lost its handling of several attributes
+   for <strong>embed</strong> elements, including <strong>hidden="true"</strong>,
+   <strong>autostart="false"</strong> and <strong>loop="true"</strong>.&nbsp; The first doesn't
+   matter in this context because we set the size to 1px, but <a
+    onmouseover="var o=myO(); return o('Try the simpler version which uses '
+     + '&lt;b&gt;embed&lt;/b&gt; for all browsers', FGCOLOR,'#cceeff', WRAP,
+     CENTER, OFFSETY,18, VAUTO, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="var n=myN(); n();"
+    onclick="cClick(); return true;"
+    href="harley_embedOnly.html">if we used <strong>embed</strong></a>
+   with <strong>Opera v9.5</strong>, both the Harley and MeepMeep sounds would play, inappropriately,
+   on document load, and the Harley sound wouldn't persist on prolonged hover nor stop promply on
+   mouseout.&nbsp; A bug report was sent to the Opera folks, but unfortunately the
+   <strong>Opera v9.6</strong> and subsequent releases have remained lacking in this respect.&nbsp; Also
+   note that the <strong>Google Chrome</strong> and <strong>Safari</strong> browsers, like all the
+   other non-Opera browsers, do handle the <strong>embed</strong> element with these attributes as
+   intended.&nbsp; The <strong>hidden</strong> and <strong>autostart</strong> attributes are handled
+   properly in <strong>object</strong> elements for <strong>Opera v9.5+</strong>, but the <strong>loop</strong>
+   attribute is ignored.&nbsp; As a partial workaround, the procedures have been set up so as to
+   use <strong>object</strong> for <strong>Opera v9.5+</strong>, and otherwise use <strong>embed</strong>
+   elements.&nbsp; The consequence of a disfunctional <strong>loop</strong> attribute for <strong>Opera
+   v9.5+</strong> in the above <a
+    onmouseover="var o=myO(); return o('Jump up to the Harley example', FGCOLOR,'#cceeff', WRAP,
+     CENTER, OFFSETY,18, VAUTO, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="var n=myN(); n();"
+    onclick="cClick(); return true;"
+    href="#exa">Harley</a> example is that the audio does not keep repeating for as long as the
+   mouse hovers over the link, but does for <strong>Opera through v9.27</strong> and for the
+   non-Opera browsers.&nbsp; The HTML5 audio element includes a loop attribute, and should solve this
+   problem when implemented across the supported browsers.
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" align="center">
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the<br>
+   javascript code, HTML markup, and CSS rules directly.</em>
+  </td>
+ </tr> 
+ <tr>
+  <td class="text12">
+   &nbsp;<br>&nbsp;<br>
+  </td>
+ </tr>
+</table>
+<!--********
+     Footer
+    ********-->
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="var o=myO(); return o(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     TEXTPADDING,4,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff',VCENTER,WRAP,BASE,2);"
+    onmouseout="var n=myN(); n();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2011.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="var o=myO(); return o(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',WRAP,BASE,2,TEXTPADDING,8,
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-10,REFY,-10,TEXTFONTCLASS,'text12');"
+    onmouseout="var n=myN(); n();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="var o=myO(); return o('Valid HTML 4.01', VCENTER, LEFT, WRAP, BASE,2,
+     TEXTPADDING,4, TEXTFONTCLASS,'text12', FGCOLOR,'#cceeff');"
+    onmouseout="var n=myN(); n();"
+    href="http://validator.w3.org/check/referer"><img
+    border="0" height="31" width="88" alt="" hspace="6"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='harley.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

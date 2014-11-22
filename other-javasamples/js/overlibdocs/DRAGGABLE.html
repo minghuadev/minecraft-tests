@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, drag, iframe, shim, print, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of the DRAGGABLE command and hiding system controls in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Draggable stickies and iframe shims in overlibmws</title>
+
+<!--
+ Import the CSS file for this document.
+ ======================================
+ -->
+<link rel="stylesheet" type="text/css" href="DRAGGABLE.css">
+
+<!--
+  For convenience, here is the content of the DRAGGABLE.css file.
+  ===============================================================
+table.olcg {background-color:#AA00AA;}
+td.olcg {text-align:center;}
+
+ font-size:8px;font-weight:bold;font-family:verdana;color:#000000;}
+.olcap {font-family:Verdana,Times New Roman;font-size:12px;font-weight:bold;color:#FFEEFF;}
+.semiclearcap {font-family:Arial;font-size:12px;font-weight:bold;line-height:14px;color:#FFFFFF;}
+.whitecap {font-family:Verdana;font-size:12px;font-weight:bold;color:#FFFFFF;}
+.oltxt {font-family:Verdana,Times New Roman;font-size:12px;color:#993366;}
+.olwhite {font-family:Verdana,Times New Roman;font-size:14px;color:#FFFFFF;}
+.semicleartxt {font-family:Arial;font-size:12px;color:#220022;}
+.olfoot {font-family:Verdana,Arial,Helvetica;font-size:12px;color:#000000;}
+.blacktxt {font-family:Verdana;font-size:12px;color:#000000;}
+.footer {font-family:Verdana,Arial,sans-serif;font-size:12px;line-height:16px;}
+.text12 {font-family:Verdana,Arial,sans-serif;font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif;font-size:14px;}
+.text18 {font-family:Verdana,Arial,sans-serif;font-size:18px;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#FF00FF;}
+
+a.white {font-size:14px;color:#DDFFDD;font-weight:bold;}
+a.white:hover {color: #FFDDFF}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.purpleh {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;color:purple;
+ font-weight:bold;font-style:italic;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+ -->
+
+<!--
+ Import the overlibmws core and plugin modules for this document.
+ ================================================================
+ -->
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_draggable.js"></script>
+<script type="text/javascript" src="overlibmws_hide.js"></script>
+<script type="text/javascript" src="overlibmws_iframe.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_print.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+// Preload the images
+// ==================
+myPrint = new Image();
+myPrint.src = "../image/print.gif"
+myExit = new Image();
+myExit.src = "../image/exit.gif"
+overlibbck = new Image();
+overlibbck.src = "../image/overlibbck.gif"
+semitrans = new Image();
+semitrans.src = "../image/semitrans.gif"
+tp = new Image();
+tp.src = "../image/tp.gif"
+paper = new Image();
+paper.src = "../image/paper.jpg"
+
+// Define variables used in overlib calls
+// ======================================
+var printimg =
+  '<img src="../image/print.gif" alt="Click to Print" width="12" height="11" border="0">';
+
+var closeimg =
+  '<img src="../image/exit.gif" alt="Click to Close" width="12" height="11" border="0">';
+
+var dragme =
+  'I am a draggable overlib popup. Drag me to '
+ +'the SELECT block below, and see what happens.<br>'
+ +'And read the <a target="_blank" href="http://www.webreference.com/dhtml/diner/seethru/" '
+ +'onmousemove="if(OLie55)self.status=this.href;" '
+ +'onmouseover="return overlib2(\'Go to the WebReference<br>article in a new window.\', WRAP,'
+ +'BASE,2,FGCOLOR,\'#ffffcc\',TEXTPADDING,4,TEXTFONTCLASS,\'olfoot\',OFFSETX,-5,OFFSETY,20)" '
+ +'onMouseOut="nd2();">WebReference<\/a> article.';
+
+var bckgrnd =
+  '<div align=right><b><a class=white '
+ +'href="javascript:return OLprint();" title="Click to Print" '
+ +'onClick="return OLprint();">Print<\/a>&nbsp; <a class=white '
+ +'href="javascript:return cClick();" title="Click to Close" '
+ +'onClick="return cClick();">Close<\/a><\/b>'
+ +'<\/div><b>I\'m a draggable sticky, too. Drag me around for a while.<\/b>';
+
+var MyTable =
+  '<table cellspacing=0 cellpadding=0 border=1 bordercolor=red><tr><td>'
+ +'<table cellspacing=0 cellpadding=0 border=1 bordercolor="#33ff33"><tr><td>'
+ +'<table width=190 cellspacing=0 cellpadding=4 border=1 bordercolor=blue><tr>'
+ +'<td align=center bgcolor=yellow><span class=olcap><b><a '
+ +'href="javascript:return OLprint();" title="Click to Print" '
+ +'onClick="return OLprint();">Print<\/a>&nbsp; <a '
+ +'href="javascript:return cClick();" title="Click to Close" '
+ +'onClick="return cClick();">Close<\/a><\/b>'
+ +'<\/span><\/td><\/tr><tr><td background="../image/semitrans.gif"><span class=oltxt>'
+ +'<font color="#ffffff"><b>I\'m a draggable sticky, too. Drag me around for a while.'
+ +'<\/b><\/font><\/span><\/td><\/tr>'
+ +'<\/table><\/td><\/tr><\/table><\/td><\/tr><\/table>';
+
+var SemiClear=
+  '<table width="150" cellspacing="0" cellpadding="0" border="0">'
+ +'<tr><td width="140" height="80" colspan=2 rowspan=2 bgcolor="#333399">'
+ +'<table width="138" align="center" cellspacing="0" cellpadding="4" border="0" '
+ +'bgcolor="#CCCCFF"><tr>'
+ +'<td height="18" width="102" align="center" bgcolor="#AA00AA">'
+ +'<span class="semiclearcap">DRAGGABLE<\/span><\/td>'
+ +'<td height="18" width="36" align="right" bgcolor="#AA00AA">'
+ +'<a href="javascript:return OLprint();" title="Click to Print" '
+ +'onClick="return OLprint();">'+printimg+'<\/a><img alt="" src="../image/tp.gif" '
+ +'width="4" height="11"><a href="javascript:return cClick();" '
+ +'title="Click to Close" onClick="return cClick();">'+closeimg+'<\/a><br><\/td><\/tr>'
+ +'<tr><td width="138" height="60" colspan="2">'
+ +'<span class="semicleartxt">This sticky is draggable<br>'
+ +'with a semi-transparent<br>dropshadow.<\/span><\/td><\/tr><\/table><\/td>'
+ +'<td width="10" height="10"><img src="../image/tp.gif" width=10 height=10 border=0 '
+ +'hspace=0 vspace=0><br><\/td><\/tr><tr><td width="10" height="60" '
+ +'background="../image/semitrans.gif"><img src="../image/tp.gif" width=10 height=60 '
+ +'border=0 hspace=0 vspace=0><br><\/td><\/tr><tr><td width="10" height="10">'
+ +'<img src="../image/tp.gif" width=10 height=10 border=0 hspace=0 vspace=0><br><\/td>'
+ +'<td width="130" height="10" background="../image/semitrans.gif">'
+ +'<img src="../image/tp.gif" width=130 height=10 border=0 hspace=0 vspace=0><br><\/td>'
+ +'<td width="10" height="10" background="../image/semitrans.gif">'
+ +'<img src="../image/tp.gif" width=10 height=10 border=0 hspace=0 vspace=0><br><\/td>'
+ +'<\/tr><\/table>';
+
+var nodrag =
+  '<center>Go to <span class="purple14">overlibmws<\/span><br>Download and Test<br>Directory.'
+ +'<br><b>Move on and off to close.<\/b><\/center>';
+
+// Function for an onload message.
+// ===============================
+function OnloadMsg() {
+ var onloadTxt = '<strong><em>Enjoy these DRAGGABLE, iframe shim, PRINT &amp; secondary '
+  +'popup Examples!!!<\/em><\/strong>';
+ overlib(onloadTxt,
+  WRAP, MIDX,0, RELY,15, TIMEOUT,8000,
+  TEXTSIZE,'14px', TEXTPADDING,5, FGCOLOR,'#ffffcc',
+  BASE,2);
+}
+// -->
+</script>
+</head>
+
+<body text="#220022" bgcolor="#ddeeff" onload="OnloadMsg();">
+<!-- Omitting an "overDiv" positioned div declaration; overlibmws will create it -->
+
+<table align="center" width="640">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>DRAGGABLE &amp; iframe shim Examples</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', OFFSETX,-16, OFFSETY,20,
+     SHADOW, SHADOWCOLOR,'#cf33cf',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">overlibmws</a></strong></span>
+   <span class="myHeader"><strong><em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmousemove="if(OLie55)self.status='Click to send form-based e-mail to Fote.';"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, WRAP, BASE,2, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20,
+     SHADOW, SHADOWCOLOR,'#cf33cf',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20,
+     SHADOW, SHADOWCOLOR,'#cf33cf',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for<br>
+   DRAGGABLE support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20,
+     SHADOW, SHADOWCOLOR,'#cf33cf',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   <span class="mySpacer"><br>&nbsp;<br></span>
+   <hr size="3" width="100%">
+   <span class="mySpacer"><br>&nbsp;<br></span>
+  </td>
+ </tr>
+ <tr>
+  <td align="center" class="mySubHead">
+   <b><span class="purple18">overlibmws</span> <em>outwits</em> OS Controls, Applets
+   <em>and</em> Plug-ins</b>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   <br>
+   Read this
+<!--
+ overlib() call with DRAGGABLE, PRINT, PRINTTEXT icon, CLOSETEXT icon, and secondary popup:
+ ==========================================================================================
+ -->
+   <a
+    href="http://www.webreference.com/dhtml/diner/seethru/"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib(dragme, CAPTION,'Drag Me!!!',
+     CAPTIONFONTCLASS,'olcap', TEXTFONTCLASS,'oltxt', TEXTPADDING,6,
+     STICKY, DRAGGABLE, HIDESELECTBOXES,
+     PRINT, PRINTCSSFILE,'DRAGGABLE.css', PRINTTEXT,printimg,
+     CLOSECLICK, CGCLASS,'olcg', CLOSETEXT,closeimg,
+     REF,'full', REFX,-60, REFY,-89, NOJUSTY,
+     SHADOW,SHADOWCOLOR,'#cf33cf',SHADOWX,10,SHADOWY,10,
+     FGBACKGROUND,'../image/paper.jpg', WIDTH,220, BASE,3);"
+    onmouseout="if(OLie55)self.status='';nd();">WebReference article</a> that was originally
+   written in September of 1998 (Note that the link within the primary (Drag Me!!!) popup has
+   a <a
+    href="SHADOW.html#secondary"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Read more about secondary popups.',
+     TEXTPADDING,6, WRAP, BASE,2, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20, VAUTO,
+     SHADOW,SHADOWCOLOR,'#cf33cf',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">secondary&nbsp;popup</a>, and that the caption uses <a
+    href="PRINT.html"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Read more about print links and buttons.',
+     TEXTPADDING,6, WRAP, BASE,2, TEXTFONTCLASS,'myText',
+     LEFT, OFFSETX,-16, OFFSETY,20, VAUTO,
+     SHADOW,SHADOWCOLOR,'#cf33cf',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">print</a> and close icons.).
+   <br><br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text14">
+   <b>The Problem and Solutions</b><br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   <br>
+   The <b>STICKY</b> overlib popups invoked via the above link and the three links in
+   the row below are <b>DRAGGABLE</b>.&nbsp; They have a high <strong>z-index</strong>
+   value, but if you drag them to the select form element below, it may "trump" the popup
+   for some browsers, and stay above.&nbsp; Read the WebReference article for an excellent
+   explanation.<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="center" class="text12">
+   <br>
+<!--
+ overlib() call with DRAGGABLE, PRINT, and BACKGROUND:
+ =====================================================
+ -->
+   <a
+    href="javascript:void(0);"
+    onclick="return false;"
+    onmousemove="if(OLie55)self.status='Example using the BACKGROUND command';"
+    onmouseover="return overlib(bckgrnd, TEXTFONTCLASS,'olwhite',
+     BACKGROUND,'../image/overlibbck.gif', WIDTH,228, HEIGHT,104,
+     PADX,50,18, PADY,12,12,
+     STICKY, DRAGGABLE, HIDESELECTBOXES,
+     PRINT, PRINTCSSFILE,'DRAGGABLE.css',
+     REF,'full', REFX,-65, REFY,-78, NOJUSTY,
+     STATUS,'Example using the BACKGROUND command');"
+    onmouseout="nd();">BACKGROUND command</a>
+   &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--
+ overlib() call with DRAGGABLE, PRINT, and FULLHTML:
+ ===================================================
+ -->
+   <a
+    name="full" id="full"
+    href="javascript:void(0);"
+    onclick="return false;"
+    onmousemove="if(OLie55)self.status='Example using the FULLHTML command';"
+    onmouseover="return overlib(MyTable, FULLHTML,
+     STICKY, DRAGGABLE, HIDESELECTBOXES,
+     PRINT, PRINTCSSFILE,'DRAGGABLE.css',
+     REF,'full', REFX,-50, REFY,-90, NOJUSTY,
+     STATUS,'Example using the FULLHTML command');"
+    onmouseout="nd();">FULLHTML command</a>
+   &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--
+ overlib() call with DRAGGABLE, PRINT, PRINTTEXT icon, CLOSETEXT icon, and FULLHTML:
+ ===================================================================================
+ -->
+   <a
+    href="javascript:void(0);"
+    onclick="return false;"
+    onmousemove=
+     "if(OLie55)self.status='Example using the FULLHTML with markup for a semi-clear dropshadow';"
+    onmouseover="return overlib(SemiClear,FULLHTML,
+     STICKY,DRAGGABLE, HIDESELECTBOXES,
+     PRINT, PRINTCSSFILE,'DRAGGABLE.css',
+     REF,'full', REFX,-25, REFY,-78, NOJUSTY,
+     STATUS,'Example using the FULLHTML with markup for a semi-clear dropshadow');"
+    onmouseout="return nd();">FULLHTML shadow</a>
+   <br><br>
+<!--
+ Form with a select box
+ ======================
+ -->
+   <form name="form1" method="post" enctype="x-www-form-encoded"
+    action="javascript:void(0);">
+    <select name="S1" id="select1" size="3">
+     <option>Select
+     <option>List
+     <option>Displaying
+     <option>Multiple
+     <option>Options
+    </select>
+   </form>
+  </td>
+ </tr>
+ <tr> 
+  <td class="text12">
+   IE through v6.0 normally has the problem with this type of select form element,
+   but we are using the <b>overlibmws_iframe.js</b> plugin module to obviate the problem
+   for IE v5.5 or higher via an <a
+    target="_blank"
+    href="IframeShim.html"
+    onmouseover="return overlib('Go to the iframe shim article in a new window.',
+     WRAP, BASE,2, TEXTFONTCLASS,'olfoot', TEXTPADDING,4, FGCOLOR,'#ffffcc',
+     HIDESELECTBOXES, OFFSETX,-5,OFFSETY,20, VAUTO);"
+    onmouseout="nd();">iframe&nbsp;shim</a> (as opposed to <a
+    href="IFRAME.html"
+    onmouseover="return overlib('See an example of iframe as popup content.',
+     WRAP, BASE,2, TEXTFONTCLASS,'olfoot', TEXTPADDING,4, FGCOLOR,'#ffffcc',
+     HIDESELECTBOXES, OFFSETX,-5,OFFSETY,20, VAUTO);"
+    onmouseout="nd();">iframe&nbsp;content</a>).&nbsp; For earlier versions of IE and
+   for other supported browsers,
+   the <strong>overlibmws_hide.js</strong> plugin module also has been imported and
+   its <b>HIDESELECTBOXES</b> command is used to hide and restore the select box in
+   conjunction with the display and removal of the popup in any regions of overlap,
+   which you can create and eliminate in this example by dragging popups over and then
+   off of the select box.&nbsp; Normally, the DRAGGABLE feature would be used to
+   move the popup away from an obscuring form field if the browser's window
+   conditions caused overlap when the popup was invoked.&nbsp; <strong>Note</strong>
+   that the <b>HIDESELECTBOXES</b> command does not apply to Netscape v4.x, and one
+   normally would use the "hide" plugin module's <b>HIDEBYIDNS4</b> command to hide
+   form fields for that older browser (see an example which does hide a <a
+    href="hide.html"
+    onmouseover="return overlib('Hide form fields with system objects.',
+     TEXTFONTCLASS,'olfoot',TEXTPADDING,4, FGCOLOR,'#ffffcc',
+     WRAP, BASE,2, OFFSETX,-5,OFFSETY,20, VAUTO);"
+    onmouseout="nd();">form</a> for Netscape 4.x as well).
+   <br><br>
+  </td>
+ </tr>
+ <tr valign="top">
+  <td>
+   <table align="center" width="345">
+    <tr valign="top">
+     <td class="footer">
+      <span style="color:#225588;font-weight:bold">
+       Note that you can select text in draggable stickies<br>
+       for copy and paste operations by using Alt+Click<br>
+       (Option+Click on MACs; Ctrl+Click for Opera versions less than v8.01).&nbsp;
+       When the <a
+        href="overflow.html#dragcap"
+        onmouseover="overlib(
+         'Check out the example with &lt;strong&gt;DRAGCAP&lt;/strong&gt;',
+         TEXTFONTCLASS,'olfoot',TEXTPADDING,4, FGCOLOR,'#ffffcc',
+         WRAP, BASE,2, OFFSETX,-110,OFFSETY,20, VAUTO);"
+        onmouseout="nd();">DRAGCAP</a> command is used this enables
+       selection of text in the caption.
+      </span>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12" align="center">
+   <br>
+   See the <b><a
+    href="SHADOW.html"
+    onmouseover="return overlib('use of SHADOW',
+     WRAP,BASE,2,TEXTFONTCLASS,'olfoot',TEXTPADDING,4, FGCOLOR,'#ffffcc');"
+    onmouseout="nd();">SHADOW</a></b> demonstration file for more examples of
+   DRAGGABLE.<br>
+   Also see the example of a DRAGABLE popup with <b><a
+    href="IFRAME.html#draggable"
+    onmouseover="return overlib('See DRAGGABLE popup with iframe content',
+     WRAP,BASE,2,TEXTFONTCLASS,'olfoot',TEXTPADDING,4, FGCOLOR,'#ffffcc', HAUTO);"
+    onmouseout="nd();">iframe</a></b> content.
+   <span class="mySpacer"><br>&nbsp;<br></span>
+   <hr size="3" width="100%">
+   <span class="mySpacer"><br>&nbsp;<br></span>
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to review the markup
+   for these examples.<br>
+   They're <strong>not</strong> too complicated and you
+   <strong>can</strong> do it yourself once you catch on.</em>&nbsp;&nbsp;<img
+    src="../image/smiley14.gif" align="middle" width="14" height="14" border="0"
+    hspace="0" vspace="0" alt="Smile, you're on Candid Camera!!!"
+    title="Smile, you're on Candid Camera!!!">
+   <br><br>
+  </td>
+ </tr>
+</table>
+ 
+<!-- overlibmws footer -->
+<table align="center" width="584" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="myText" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGBACKGROUND,'../image/paper.jpg',
+     WRAP,BASE,2,ABOVE,CENTER,OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', FGBACKGROUND,'../image/paper.jpg',
+     WRAP,BASE,2,ABOVE,CENTER,OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" width="130" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-10,
+     WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'logo',REFX,95,REFY,1,BASE,2,TEXTPADDING,4,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5,WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',WRAP,BASE,2,FGCOLOR,'#cceeff',
+     REF,'w3c',REFP,'UR',REFX,-5,REFY,2,TEXTPADDING,4,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='DRAGGABLE.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

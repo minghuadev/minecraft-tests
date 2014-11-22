@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Instructions for forcing onclick return values in Macrides Web Services open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - onclick return value in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+// Preload images
+var textimage = new Image();
+textimage.src = 'capicon.gif';
+var closeicon = new Image();
+closeicon.src = '../image/exit.gif';
+var myRaisedBlue = new Image();
+myRaisedBlue.src = "raised_blue.gif";
+//-->
+</script>
+
+<style type="text/css">
+<!--
+.olcg {background-color:#333399;text-align:center;}
+.olraisedBlue {text-align:center;
+ background:#33aaff url(raised_blue.gif) repeat-x bottom left;}
+table.olraisedBlue {border-bottom:1px solid #333399;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+.text22 {font-family:Verdana,Arial,sans-serif; font-size:22px;}
+
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff"
+ onload="overlib('Study this information about return values!!!',
+  TEXTFONTCLASS,'text12', TEXTPADDING,2, FGCOLOR,'#ffffcc', TIMEOUT,8000,
+  MIDX,0, RELY,2, WRAP, BASE,2, AUTOSTATUS);">
+
+<table width="80%" cellpadding="5" align="center">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Return Values</strong></span>
+   <span class="mySubHead"><strong><em>for</em></strong></span>
+   <span class="myHeader"><strong>onclick-Invoked</strong></span>
+   <span class="mySubHead"><strong><em>popups<br>via the</em></strong></span>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     WRAP,BASE,2,CENTER,VAUTO,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText',
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20, FGCOLOR,'#bbddff',
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for onclick support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle" class="text22">
+   <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('Click to see the Mystery Door!!!',
+     TEXTFONTCLASS,'text12', TEXTPADDING,4, FGCOLOR,'#cceeff',
+     VAUTO, HAUTO, WRAP, BASE,2, AUTOSTATUS);"
+    onmouseout="nd();"
+    onclick="overlib('&lt;img src=&quot;capicon.gif&quot; '
+     +'width=140 height=235 alt=&quot;This is the Mystery Door.&quot; border=0&gt;',
+     CLOSETEXT,'&lt;img src=\'../image/exit.gif\' alt=\'Click to Close.\' border=\'0\'&gt;',
+     CLOSECLICK, CAPTION,'Mystery Door', CAPTIONSIZE,'11px', CAPBELOW, CGCLASS,'olcg',
+     STICKY, MIDX,0, RELY,20, STATUS,'Enter at your own risk!!!',
+     WIDTH,140); event.returnValue=false; return false;">Click Me!!!</a>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text14">
+   For invoking overlib popups one normally specifies <strong>"return overlib(...);"</strong>
+   in the values of event attributes (e.g., <strong>onmouseover</strong>), so that overlib's
+   internal code determines the return value.&nbsp; However, when an overlib popup is invoked
+   via the <strong>onclick</strong> event attribute and that popup will contain an image, or
+   an imported document for an iframe or object, or the parent document has an active process
+   such as an embedded audio or video, one should force a return value of false:
+   <p align="center" class="text14">
+    <strong>onclick="overlib(...); event.returnValue=false; return false;"</strong>
+   </p>
+   to ensure that loading of the image or imported document or the playing of the embedded
+   audio or video will not be interrupted.&nbsp; If your <strong>href</strong> is not
+   <strong>"javascript:void(0);"</strong> but instead a URL for another document, and the
+   image for your onclick popup content is some kind of
+   "<strong><em>Wait while loading ...</em></strong>" graphic, then use simply
+   <p align="center" class="text14">
+    <strong>onclick="overlib(...);"</strong>
+   </p>
+   with no return value at all.&nbsp; One similarly need not use a return value when an
+   overlib popup is invoked via an <strong>onload</strong> attribute in the body
+   start tag.
+   <br><br>
+   Note that you also can use <strong>onclick="overlib(...); event.returnValue=false;
+   return false;"</strong> as a way to present an informational popup for downloading a file
+   while blocking a direct display of that file, as illustrated via this link with an
+   <strong>href</strong> for an MS Word document:
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle" class="text22">
+   <a
+    href="onclick.doc"
+    onmouseover="return overlib('Click to see downloading instructions!!!',
+     TEXTFONTCLASS,'text12',TEXTPADDING,4,FGCOLOR,'#cceeff',
+     VAUTO,HAUTO,WRAP,BASE,2);"
+    onmouseout="nd();"
+    onclick="overlib('Click &lt;b&gt;right&lt;/b&gt; on this link.&nbsp; '
+     +'Choose &lt;b&gt;\'Save Target As\'&lt;/b&gt;&lt;br&gt;'
+     +'Save the file in a directory on your hard disk.', CAPTION,'Downloading Instructions',
+     TEXTFONTCLASS,'text12', TEXTPADDING,6, CAPTIONSIZE,'11px', CAPTIONPADDING,4,
+     CENTER, ABOVE, VAUTO, CGCLASS,'olcg', WRAP, BASE,2,
+     FGCOLOR,'#cceeff'); event.returnValue=false; return false;">Click Me Too!!!</a><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="center" valign="middle" class="text14">
+   <br>
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the markup
+   for these examples.</em>
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>These examples use <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',WRAP,BASE,2,TEXTPADDING,4,
+     REF,'dandt',REFP,'LL',REFX,-100,REFY,-5,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',WRAP,BASE,2,TEXTPADDING,4,
+     REF,'comref',REFP,'LL',REFX,-110,REFY,-5,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the &lt;span '
+     +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;\/i&gt;&lt;\/span&gt; '
+     +'shopping via this link&lt;br&gt;(with &lt;strong&gt;no&lt;\/strong&gt; '
+     +'extra costs to you).',
+     CAPTION,'Promote via Amazon', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-5,REFY,-35,
+     TEXTFONTCLASS,'text12',WRAP,BASE,2);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     VCENTER,WRAP,BASE,2,TEXTPADDING,4,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',
+     CAPTION,'Donate via PayPal', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     TEXTPADDING,8,FGCOLOR,'#bbddff',WRAP,BASE,2,
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    title="Click to Donate" alt="Click to Donate"></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',VCENTER,LEFT,WRAP,BASE,2,TEXTPADDING,4,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='ONCLICK.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

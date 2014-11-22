@@ -1,0 +1,707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Instructions for the SHADOW command and secondary popups in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - SHADOW command and Secondary Popups in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_draggable.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+<script type="text/javascript">
+<!--
+// Restrict BUBBLE image preload to quotation.gif
+var OLbubbleImages='quotation';
+//-->
+</script> 
+<script type="text/javascript" src="overlibmws_bubble.js"></script>
+
+<script type="text/javascript">
+<!--
+// Preload the semi-transparent and background images
+semitrans = new Image();
+semitrans.src = '../image/semitrans.gif';
+skateboard = new Image();
+skateboard.src = '../image/skateboard.gif';
+
+// Set the default shadow color to purple
+OLpageDefaults(CAPTIONPADDING,4,TEXTPADDING,4,SHADOWCOLOR,'#cf33cf');
+
+// For BACKGROUND example
+var skate = '<b>Watch<br>&nbsp;out!!<\/b>';
+
+/*******
+ The arrays and definitions below are for the overtwo example
+*******/
+// Create an Array for the secondary popup calls:
+var myArray = new Array();
+
+// For the STICKY secondary popup call with (default) left alignment:
+myArray[0] =
+ 'name="normal" id="normal" '
++'onmouseover="return overlib2(INARRAY,0, CAPARRAY,0, WIDTH,200, '
++'REF,\'normal\', REFC,\'UR\', REFP,\'LL\',REFX,5, REFY,10, BASE,2, '
++'SHADOW, SHADOWCOLOR,\'#6699cc\', DRAGGABLE, '
++'FGCOLOR,\'#ffcccc\', CGCOLOR,\'#5555bb\', STICKY, MOUSEOFF, '
++'STATUS,\'Normal alignment\');"'
++'onmouseout="nd2();"';
+
+// For the tooltip secondary popup call with center alignment:
+myArray[1] =
+ 'name="center" id="center" '
++'onmouseover="return overlib2(INARRAY,1, CAPARRAY,1, WIDTH,200, '
++'REF,\'center\', REFC,\'UR\', REFP,\'LL\', REFX,5, REFY,10, BASE,2, '
++'SHADOW, SHADOWCOLOR,\'#6699cc\', '
++'FGCLASS,\'olfgcenter\', CGCLASS,\'olcgcenter\', AUTOSTATUS);" '
++'onmouseout="nd2();"';
+
+// For the tooltip secondary popup call with right alignment:
+myArray[2] =
+ 'name="right" id="right" '
++'onmouseover="return overlib2(INARRAY,2, CAPARRAY,2, WIDTH,200, '
++'REF,\'right\', REFC,\'UR\', REFP,\'LL\', REFX,15, REFY,10, BASE,2, '
++'SHADOW, SHADOWCOLOR,\'#6699cc\', '
++'FGCLASS,\'olfgright\', CGCLASS,\'olcgright\', AUTOSTATUS);" '
++'onmouseout="nd2();"';
+
+// For the sticky secondary popup call with BUBBLE command:
+myArray[3] =
+ 'name="bubble" id="bubble" '
++'onmouseover="return overlib2(INARRAY,3, '
++'REF,\'bubble\', REFC,\'UR\', REFP,\'LL\', REFY,5, '
++'STICKY, NOCLOSE, TIMEOUT,5000, OFFDELAY, 1000, DRAGGABLE, '
++'BUBBLE, BUBBLETYPE,\'quotation\', TEXTSIZE,\'12px\', '
++'FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,\'#009800\', '
++'STATUS,\'Bubble popup\');" '
++'onmouseout="nd2();"';
+
+// For the INARRAY commands (the ol_texts Array is created by overlibmws.js):
+ol_texts[0] =
+ 'Normal alignment<br>Review CSS in the<br>'
++'<a title="Go to Section 5 of the Command Reference" '
++'href="commandRef.html#cascading-style-sheets">Command Reference<\/a>';
+ol_texts[1] = 'Center alignment';
+ol_texts[2] = 'Right alignment';
+ol_texts[3] =
+ 'Wow, a <a title="Go to Section 7 of the Command Reference" '
++'href="commandRef.html#bubble">quotation&nbsp;bubble<\/a>!!!';
+
+// For the CAPARRAY commands (the ol_caps Array is created by overlibmws.js):
+ol_caps[0] = 'NORMAL';
+ol_caps[1] = 'CENTER';
+ol_caps[2] = 'RIGHT';
+
+// For the primary popup's lead argument:
+var myText =
+ 'This example has three links demonstrating the alignment of captions '
++'and text in secondary popups via simple style sheets.&nbsp; The fourth '
++'link demonstrates a secondary bubble popup.<br>'
++'<ul>'
++'<li><b><a href="javascript:void(0);" '+myArray[0]+'>Normal<\/a><\/b> alignment example<\/li>'
++'<li><b><a href="javascript:void(0);" '+myArray[1]+'>Center<\/a><\/b> alignment example<\/li>'
++'<li><b><a href="javascript:void(0);" '+myArray[2]+'>Right<\/a><\/b> alignment example<\/li>'
++'<li><b><a href="javascript:void(0);" '+myArray[3]+'>Bubble<\/a><\/b> example<\/li>'
++'<\/ul><br>';
+//-->
+</script> 
+
+<style type="text/css">
+<!--
+.olfgcenter {background-color:#ffcccc; text-align:center;}
+.olcgcenter {background-color:#5555bb; text-align:center;}
+.olfgright {background-color:#ffcccc; text-align:right;}
+.olcgright {background-color:#5555bb; text-align:right;}
+.olfoot {font-family:Verdana,Arial,Helvetica;font-size:12px;color:#000000;}
+
+.bodyText {font-family:Arial;font-size:14px;color:#000000;}
+.jtClass {background-color:#dfffdf;font-family:Arial;font-size:12px;text-align:justify;
+  color:#003300;}
+.jcClass {background-color:#40b840;font-family:Arial;font-size:12px;text-align:center;
+  font-weight:bold;color:#dfffdf}
+.header {font-family:Verdana,Arial;font-size:14px;line-height:16px;}
+.spacer {line-height:4px;}
+.content {font-family:Verdana,Arial;font-size:12px;line-height:16px;}
+.footer {font-family:Verdana,Arial;font-size:12px;line-height:22px;}
+.commands {font-family:Verdana,Arial;font-size:12px;line-height:18px;}
+a {color:#338855;font-weight:bold}
+a:hover {color:#ff00ff;}
+
+a.target {text-decoration:none;text-align:left;color:#ddeeff;}
+
+.whitecap {font-family:Arial;font-size:12px;font-weight:bold;color:#ffffff;}
+.blacktext {font-family:Arial;font-size:14px;color:#000000;}
+.semiclearcap {font-family:Arial;font-size:12px;font-weight:bold;line-height:14px;
+  color: #ffffff;}
+.semicleartext {font-family:Arial;font-size:12px;color:#220022;}
+
+.text12 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.myHeader {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;}
+.mySubHead {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;}
+.mySpacer {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table width=680 cellpadding="5" cellspacing="0" border="0" align="center"> 
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Dropshadows, Draggable,</strong></span>
+   <span class="mySubHead"><strong><em>and</em></strong></span>
+   <span class="myHeader"><strong>Secondary <em>popups</em></strong></span><br>
+   <span class="mySubHead"><strong><em>with the</em></strong></span>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     WRAP,BASE,2,OFFSETX,-10,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText',
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20, FGCOLOR,'#bbddff',
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   <span class="text6"><a
+    name="styledemo" id="styledemo">&nbsp;</a><br></span>
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle" class="content">
+   <b><a
+    href="javascript:void(0);"
+    onmouseover="return overlib('&lt;center&gt;High Noon in New York City.&lt;/center&gt;',
+     CENTER,OFFSETX,2,OFFSETY,20,WRAP,BASE,2,SHADOW,SHADOWX,2,SHADOWY,6,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'bodyText',STATUS,'High Noon');"
+    onmouseout="nd();">High Noon</a>&nbsp;&nbsp;&nbsp;&nbsp;
+   <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('&lt;center&gt;2:00 p.m. in New York City.&lt;/center&gt;',
+     CENTER,OFFSETX,2,OFFSETY,20,WRAP,BASE,2,SHADOW,SHADOWX,4,SHADOWY,5,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'bodyText',STATUS,'2:00 p.m.');"
+    onmouseout="nd();">2:00 p.m.</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('&lt;center&gt;4:00 p.m. in New York City.&lt;/center&gt;',
+     CENTER,OFFSETX,2,OFFSETY,20,WRAP,BASE,2,SHADOW,SHADOWX,5,SHADOWY,3,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'bodyText',STATUS,'4:00 p.m.');"
+    onmouseout="nd();">4:00 p.m.</a>&nbsp;&nbsp;&nbsp;&nbsp;
+   <a
+    href="javascript:void(0);"
+    onmouseover=
+     "return overlib('&lt;center&gt;I am sticky and draggable.&lt;br&gt;Take me for a '
+     +'spin.&lt;/center&gt;',
+     CAPTION,'&lt;center&gt;STICKY &amp; DRAGGABLE&lt;/center&gt;',CLOSECLICK,
+     CLOSETEXT,'&lt;img src=\'../image/exit.gif\' alt=\'Click to close.\' '
+     +'width=12 height=11 hspace=2 vspace=2 border=0&gt;',TEXTPADDING,6,
+     VCENTER,OFFSETY,0,LEFT,WRAP,BASE,2,STICKY,DRAGGABLE,
+     SHADOW,SHADOWX,-6,SHADOWY,-5,SHADOWCOLOR,'#6699cc',
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',CGCOLOR,'#aa00aa',
+     TEXTFONTCLASS,'blacktext',CAPTIONFONTCLASS,'whitecap',STATUS,'Take a spin.');"
+    onmouseout="nd();">Take a spin.</a>&nbsp;&nbsp;&nbsp;&nbsp;
+   <a
+    href="javascript:void(0);"
+    onmousemove="if(OLie55)self.status='Semi Clear';"
+    onmouseover=
+     "return overlib('&lt;center&gt;This sticky is draggable,&lt;br&gt;with a '
+     +'semi-transparent&lt;br&gt;image for the shadow.&lt;br&gt;Note: '
+     +'MOUSEOFF is set.&lt;br&gt;&lt;/center&gt;',TEXTPADDING,6,
+     CAPTION,'&lt;center&gt;DRAGGABLE TOO&lt;/center&gt;',CLOSECLICK,
+     CLOSETEXT,'&lt;img src=\'../image/exit.gif\' alt=\'Click to close.\' '
+     +'width=12 height=11 hspace=2 vspace=2 border=0&gt;',
+     CENTER,OFFSETX,2,OFFSETY,20,WRAP,BASE,2,STICKY,DRAGGABLE,MOUSEOFF,
+     SHADOW,SHADOWX,10,SHADOWY,10,SHADOWIMAGE,'../image/semitrans.gif',SHADOWOPACITY,0,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',CGCOLOR,'#aa00aa',
+     TEXTFONTCLASS,'blacktext',CAPTIONFONTCLASS,'whitecap',STATUS,'Semi Clear');"
+    onmouseout="nd();">Semi Clear</a>&nbsp;&nbsp;&nbsp;&nbsp;
+   <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('&lt;center&gt;6:00 p.m. in New York City.&lt;/center&gt;',
+     CENTER,OFFSETX,2,OFFSETY,20,WRAP,BASE,2,SHADOW,SHADOWX,7,SHADOWY,4,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'bodyText',STATUS,'6:00 p.m.');"
+    onmouseout="nd();">6:00 p.m.</a>&nbsp;&nbsp;&nbsp;&nbsp;
+   <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('&lt;center&gt;8:00 p.m. in New York City.&lt;/center&gt;',
+     CENTER,OFFSETX,2,OFFSETY,20,WRAP,BASE,2,SHADOW,SHADOWX,9,SHADOWY,3,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'bodyText',STATUS,'8:00 p.m.');"
+    onmouseout="nd();">8:00 p.m.</a></b>
+   <br><br><br>
+  </td>
+ </tr>
+ <tr> 
+  <td class="content" valign="middle">
+   The dropshadow in these examples uses a second, simultaneously controlled
+   <span class="purple14">overlibmws</span> positioned div container (layer):
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;div <b>id="backdrop"</b> style="position:absolute; visibility:hidden;
+   z-index:999"&gt;&lt;/div&gt;
+  </td>
+ </tr>
+ <tr>
+  <td class="content" valign="middle">
+   This <b>backdrop</b> container will be created by <span class="purple14">overlibmws</span>
+   and need not be declared in the document, but do not use its <b>id</b> for another
+   element.&nbsp; The handling of two layers simultaneously allows class-based styling
+   together with a shadow for all of the browsers supported by overlib, as well as use of
+   the <b><a
+    href="javascript:void(0);"
+    onmouseover="return overlib(skate, BACKGROUND,'../image/skateboard.gif',
+     WIDTH,120,HEIGHT,60, PADX,2,2,PADY,8,2, CENTER,OFFSETY,20, TEXTFONTCLASS,'olfoot',
+     SHADOW,SHADOWX,8,SHADOWY,8,SHADOWCOLOR,'#6699cc',
+     STATUS,'BACKGROUND command with SHADOW command.');"
+    onmouseout="nd();">BACKGROUND</a></b> command.<br>
+  </td>
+ </tr> 
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content">
+   These examples use the <b>overlibmws_shadow.js</b> plugin module from the <b><a
+    href="./"
+    onmousemove="self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,HAUTO,OFFSETX,20, TEXTFONTCLASS,'olfoot',
+     SHADOW,SHADOWX,6,SHADOWY,-8,SHADOWIMAGE,'../image/semitrans.gif',SHADOWOPACITY,0);"
+    onmouseout="nd();">overlibmws</a></b> distribution and its <b><a
+    href="commandRef.html"
+    onmousemove="self.status=this.href;"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,BASE,2,HAUTO,OFFSETX,20, TEXTFONTCLASS,'olfoot',
+     SHADOW,SHADOWX,-5,SHADOWY,8,SHADOWIMAGE,'../image/semitrans.gif',SHADOWOPACITY,0);"
+    onmouseout="nd();">commands</a>.</b>&nbsp; Some also use the
+   <b>overlibmws_draggable.js</b> plugin module for the DRAGGABLE command toggle.
+  </td>
+ </tr>
+</table>
+
+<table width="580" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="commands">
+   The additional commands, parameters and variables for the dropshadow are<br>
+   <b><font
+    color="#bf33bf">SHADOW (ol_shadow)</font> toggle for whether to add a dropshadow
+   (default 0),<br>
+   <font
+    COLOR="#bf33bf">SHADOWX, pixels (ol_shadowx)</font> for the horizontal shadow
+   displacement (default 5),<br>
+   <font
+    color="#bf33bf">SHADOWY, pixels (ol_shadowy)</font> for the vertical shadow
+   displacement (default 5),<br>
+   <font
+    color="#bf33bf">SHADOWCOLOR, color (ol_shadowcolor)</font> for the shadow color
+   (default '#666666'),<br>
+   <font
+    color="#bf33bf">SHADOWIMAGE, picture (ol_shadowimage)</font> URL for an image
+   shadow (default '').<br>
+   <font
+    color="#bf33bf">SHADOWOPACITY, percentage (ol_shadowopacity)</font> for the
+   opacity (default 60) of the shadow (100 is solid; 0 turns off the feature and
+   thus also yields a solid shadow).</b><br>
+   The opacity feature is handled only for IE on PCs and for Gecko-engine browsers.&nbsp;
+   For SHADOWX or SHADOWY, positive pixel values yield displacements to the right or down,
+   negative to the left or up, respectively.&nbsp;
+   A semi-transparent image (<B>semitrans.gif</B>) is used in some of these examples,
+   and is included in the <b><a
+    href="./"
+    onmousemove="self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,CENTER,VAUTO,OFFSETY,18, TEXTFONTCLASS,'olfoot',
+     SHADOW,SHADOWX,6,SHADOWY,8,SHADOWIMAGE,'../image/semitrans.gif',SHADOWOPACITY,0);"
+    onmouseout="nd();">overlibmws</a></b> distribution.&nbsp; It can reside
+   anywhere pointed to via SHADOWIMAGE (ol_shadowimage).<br>
+  </td>
+ </tr>
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content">
+   <a
+    name="secondary" id="secondary"
+    class="target"><img
+    width="1" height="1" alt=""
+    hspace="0" vspace="0" border="0"
+    src="../image/tp.gif"></a>
+   <script type="text/javascript">if(!OLns4)document.write('<br>')</script><br>
+   This is an example of <b><a
+    name="sample" id="sample"
+    href="javascript:void(0);"
+    onmouseover="return overlib(myText,TEXTPADDING,6,CAPTION,'Secondary Popups',
+     STICKY,WIDTH,400,BASE,2,REF,'sample',REFC,'UR',REFX,10,REFY,-25,
+     FGCOLOR,'#ffffcc',BGCOLOR,'#333399',CGCOLOR,'#336699',CLOSECOLOR,'#ffccff',
+     DRAGGABLE,SHADOW,SHADOWX,10,SHADOWY,10,STATUS,'Example of Secondary Popups');"
+    onmouseout="nd();">secondary popups</a></b> invoked from within a primary overlib popup
+   which has a dropshadow and is draggable.&nbsp; The example uses the
+   <b>overlibmws_overtwo.js</b> plugin module, which has its own
+   <span class="purple14">overlibmws</span> positioned div container (layer):
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;div <b>id="overDiv2"</b> style="position:absolute; visibility:hidden;
+   z-index:1002"&gt;&lt;/div&gt;
+  </td>
+ </tr>
+ <tr>
+  <td class="content" valign="middle">
+   This <b>overDiv2</b> container will be created by <span class="purple14">overlibmws</span>
+   and need not be declared in the document, but do not use its <b>id</b> for another
+   element.&nbsp; A <strong>backdrop2</strong> positioned div (with
+   z-index:1001) also is created automatically for any secondary popups which
+   have shadows, complementary to the <strong>backdrop</strong> positioned div for any primary
+   popups with shadows (<em>see above</em>).&nbsp; Secondary popups are invoked via
+   <b>overlib2()</b> calls within the content of the <b>overlib()</b> call for the primary
+   popup.&nbsp; The primary popup <strong>must</strong> be STICKY.&nbsp; Secondary popups that
+   are tooltips (not sticky) are closed by <b>nd2()</b> calls.&nbsp; Sticky secondary popups are
+   closed via internal <strong>cClick2()</strong> calls when their Close link in the caption is
+   clicked, or on moving the cursor onto and then off of the secondary popup if
+   <strong>NOCLOSE</strong> or <strong>MOUSEOFF</strong> was included in the overlib2
+   call.&nbsp; Note that dragging for a primary popup is suspended whenever a secondary popup
+   is being displayed, and is re-asserted when the secondary popup is closed.&nbsp; Sticky
+   secondary popups can be draggable, as are the two sticky secondaries in this example.<br>
+  </td>
+ </tr>
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content">
+   <span class="spacer">&nbsp;<br></span>
+   The text and caption alignments for the secondary popups in this example
+   were achieved with the following, class-based CSS written in a style block:<br>
+  </td>
+ </tr>
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content" bgcolor="#ddddee">
+   <code>.olfgcenter {background-color:#ffcccc; text-align:center;}<br>
+   .olcgcenter {background-color:#5555bb; text-align:center;}<br>
+   .olfgright {background-color:#ffcccc; text-align:right;}<br>
+   .olcgright {background-color:#5555bb; text-align:right;}<br></code>
+  </td>
+  <td width="230" class="content">
+   <img src="../image/tp.gif" width="230" height="1" border="0" alt=""><br>
+  </td>
+ </tr>
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content">
+   <br>
+   The example uses <a
+    name="refpos" id="refpos"
+    href="REF.html"
+    onmouseover="return overlib('use of REFerence-based positioning',TEXTFONTCLASS,'myText',
+     REF,'refpos',REFP,'LL',BORDER,3,BGCOLOR,'#C0C080',FGCOLOR,'#FFFFAA',WRAP,BASE,2);"
+    onmouseout="nd();">REFerence</a>-based positioning for the secondary popups, with the
+   following javascript definitions written in a script block:
+  </td>
+ </tr>
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content" bgcolor="#ddddee">
+   <code>// Create an Array for the secondary popup calls:<br>
+   var myArray = new Array();
+   <br><br>
+   // For the <strong>STICKY</strong> secondary popup call with (default)
+   <strong>left</strong> alignment:<br>
+   myArray[0]=<br>
+   &nbsp;'name="normal" id="normal" '<br>
+   +'onmouseover="<span style="background-color:#ccccdd;">return <b>overlib2(</b>INARRAY,0,
+   CAPARRAY,0, WIDTH,200, '<br>
+   +'REF,\'normal\', REFC,\'UR\', REFP,\'LL\', REFX,5, REFY,10, BASE,2, '<br>
+   +'SHADOW, SHADOWCOLOR,\'#6699cc\', DRAGGABLE, '<br>
+   +'FGCOLOR,\'#ffcccc\', CGCOLOR,\'#5555bb\', STICKY, MOUSEOFF, '<br>
+   +'STATUS,\'Normal alignment\'<b>);</b></span>"'<br>
+   +'onmouseout="<span style="background-color:#ccccdd;"><b>nd2();</b></span>"';
+   <br><br>
+   // For the <strong>tooltip</strong> secondary popup call with
+   <strong>center</strong> alignment:<br>
+   myArray[1] =<br>
+   &nbsp;'name="center" id="center" '<br>
+   +'onmouseover="<span style="background-color:#ccccdd;">return <b>overlib2(</b>INARRAY,1,
+   CAPARRAY,1, WIDTH,200, '<br>
+   +'REF,\'center\', REFC,\'UR\', REFP,\'LL\', REFX,5, REFY,10, BASE,2,, '<br>
+   +'SHADOW, SHADOWCOLOR,\'#6699cc\', '<br>
+   +'FGCLASS,\'olfgcenter\', CGCLASS,\'olcgcenter\', AUTOSTATUS<b>);</b></span>" '<br>
+   +'onmouseout="<span style="background-color:#ccccdd;"><b>nd2();</b></span>"';
+   <br><br>
+   // For the <strong>tooltip</strong> secondary popup call with
+   <strong>right</strong> alignment:<br>
+   myArray[2] =<br>
+   &nbsp;'name="right" id="right" '<br>
+   +'onmouseover="<span style="background-color:#ccccdd;">return <b>overlib2(</b>INARRAY,2,
+   CAPARRAY,2, WIDTH,200, '<br>
+   +'REF,\'right\', REFC,\'UR\', REFP,\'LL\', REFX,15, REFY,10, BASE,2, '<br>
+   +'SHADOW, SHADOWCOLOR,\'#6699cc\', '<br>
+   +'FGCLASS,\'olfgright\', CGCLASS,\'olcgright\', AUTOSTATUS,<b>);</b></span>"'<br>
+   +'onmouseout="<span style="background-color:#ccccdd;"><b>nd2();</b></span>"';
+   <br><br>
+   // For the <strong>sticky</strong> secondary popup call with BUBBLE command:<br>
+   myArray[3] =<br>
+   &nbsp;'name="bubble" id="bubble" '<br>
+   +'onmouseover="<span style="background-color:#ccccdd;">return <b>overlib2(</b>INARRAY,3, '<br>
+   +'REF,\'bubble\', REFC,\'UR\', REFP,\'LL\', REFY,5, '<br>
+   +'STICKY, NOCLOSE, TIMEOUT,5000, OFFDELAY, 1000, DRAGGABLE, '<br>
+   +'BUBBLE, BUBBLETYPE,\'quotation\', TEXTSIZE,\'12px\', '<br>
+   +'FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,\'#009800\', '<br>
+  +'STATUS,\'Bubble popup\'<b>);</b></span>"'<br>
+   +'onmouseout="<span style="background-color:#ccccdd;"><b>nd2();</b></span>"';
+   <br><br>
+   // For the INARRAY commands (the ol_texts Array is created by overlibmws.js):<br>
+   ol_texts[0] =<br>
+   &nbsp;'Normal alignment&lt;br&gt;Review CSS in the&lt;br&gt;'<br>
+   +'&lt;a title="Go to Section 5 of the Command Reference" '<br>
+   +'href="commandRef.html#cascading-style-sheets">Command Reference&lt;/a&gt;';<br>
+   ol_texts[1] = 'Center alignment';<br>
+   ol_texts[2] = 'Right alignment';<br>
+   ol_texts[3] =<br>
+   &nbsp;'Wow, a &lt;a title="Go to Section 7 of the Command Reference" '<br>
+   +'href="commandRef.html#bubble">quotation&nbsp;bubble&lt;/a&gt;!!!';
+   <br><br>
+   // For the CAPARRAY commands (the ol_caps Array is created by overlibmws.js):<br>
+   ol_caps[0] = 'NORMAL';<br>
+   ol_caps[1] = 'CENTER';<br>
+   ol_caps[2] = 'RIGHT';
+   <br><br>
+   // For the primary popup's lead argument:<br>
+   var <span style="background-color:#ccccdd;">myText</span> =<br>
+   &nbsp;'This example has three links demonstrating the alignment of captions '<br>
+   +'and text in secondary popups via simple style sheets.&amp;nbsp; The fourth '<br>
+   +'link demonstrates a secondary bubble popup.&lt;br&gt;'<br>
+   +'&lt;ul&gt;'<br>
+   +'&lt;li&gt;&lt;b&gt;&lt;a
+   href="javascript:void(0);"'+myArray[0]+'&gt;Normal&lt;/a&gt;&lt;/b&gt;
+   alignment example&lt;/li&gt;'<br>
+   +'&lt;li&gt;&lt;b&gt;&lt;a
+   href="javascript:void(0);"'+myArray[1]+'&gt;Center&lt;/a&gt;&lt;/b&gt;
+   alignment example&lt;/li&gt;'<br>
+   +'&lt;li&gt;&lt;b&gt;&lt;a
+   href="javascript:void(0);"'+myArray[2]+'&gt;Right&lt;/a&gt;&lt;/b&gt;
+   alignment example&lt;/li&gt;'<br>
+   +'&lt;li&gt;&lt;b&gt;&lt;a
+   href="javascript:void(0);"'+myArray[3]+'&gt;Bubble&lt;/a&gt;&lt;/b&gt;
+   example&lt;/li&gt;'<br>
+   +'&lt;/ul&gt;&lt;br&gt;';</code>
+  </td>
+ </tr>
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content">
+   <br>
+   The example uses the following anchor to invoke the primary popup, also with <a
+    name="refpos1" id="refpos1"
+    href="REF.html"
+    onmouseover="return overlib('use of REFerence-based positioning',TEXTFONTCLASS,'myText',
+     REF,'refpos1',REFP,'LR',REFX,72,BORDER,3,BGCOLOR,'#C0C080',FGCOLOR,'#FFFFAA',WRAP,BASE,2);"
+    onmouseout="nd();">REFerence</a>-based positioning, and with its content and that for its
+   secondary popups accessed via the <b>myText</b> variable used as the overlib call's lead
+   argument:
+  </td>
+ </tr>
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content" bgcolor="#ddddee">
+   <code>&lt;a<br>
+    &nbsp;name="sample" id="sample"<br>
+    &nbsp;href="javascript:void(0);"<br>
+    &nbsp;onmouseover="return overlib(<span style="background-color:#ccccdd;">myText</span>,
+    TEXTPADDING,6, CAPTION,'Secondary Popups',<br>
+    &nbsp; STICKY, WIDTH,400, BASE,2, REF,'sample', REFC,'UR', REFX,10,  REFY,-25,<br>
+    &nbsp; FGCOLOR,'#ffffcc', BGCOLOR,'#333399', CGCOLOR,'#336699', CLOSECOLOR,'#ffccff',<br>
+    &nbsp; DRAGGABLE, SHADOW, SHADOWX,10, SHADOWY,10, STATUS,'Example of Secondary Popups');"<br>
+    &nbsp;onmouseout="nd();"&gt;</code><a
+    name="sample1" id="sample1"
+    href="javascript:void(0);"
+    onmouseover="return overlib(myText,TEXTPADDING,6,CAPTION,'Secondary Popups',
+     STICKY,WIDTH,400,BASE,2,REF,'sample1',REFC,'UR',REFX,10,REFY,-25,
+     FGCOLOR,'#ffffcc',BGCOLOR,'#333399',CGCOLOR,'#336699',CLOSECOLOR,'#ffccff',
+     DRAGGABLE,SHADOW,SHADOWX,10,SHADOWY,10,STATUS,'Example of Secondary Popups');"
+    onmouseout="nd();">secondary popups</a><code>&lt;/a&gt;</code><br>
+  </td>
+ </tr>
+</table>
+
+<table width="680" align="center" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td class="content">
+   <br>
+   <em>For some</em> <b>simpler examples</b> <em>of</em> <b>tooltip secondary popups</b>
+   <em>see the</em> <b><a
+    href="STICKY.html"
+    onmouseover="return overlib('Use of STICKY.',
+     CENTER,OFFSETX,2,ABOVE,WRAP,BASE,2,SHADOW,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'olfoot');"
+    onmouseout="nd();">STICKY</a></b><em>,</em> <b><a
+    href="BKGRND.html"
+    onmouseover="return overlib('use of BGBACKGROUND, CGBACKGROUND&lt;br&gt;'
+     +'and FGBACKGROUND vs. BACKGROUND',
+     CENTER,OFFSETX,2,ABOVE,WRAP,BASE,2,SHADOW,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'olfoot');"
+    onmouseout="nd();">?GBACKGROUND</a></b> <em>and</em> <b><a
+    href="DRAGGABLE.html"
+    onmouseover="return overlib('Use of DRAGGABLE.',
+     CENTER,OFFSETX,2,ABOVE,WRAP,BASE,2,SHADOW,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'olfoot');"
+    onmouseout="nd();">DRAGGABLE</a></b> <em>demonstration pages.&nbsp; Also see examples
+   of secondary popups in</em> <b><a
+    href="CrossFrame/"
+    onmouseover="return overlib('Test across frames (crossframe) support.',
+     CENTER,OFFSETX,2,ABOVE,WRAP,BASE,2,SHADOW,
+     BGCOLOR,'#333399',FGCOLOR,'#ccccff',TEXTFONTCLASS,'olfoot');"
+    onmouseout="nd();">frame&nbsp;documents</a></b>.
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text12" align="center" valign="bottom" colspan="3" rowspan="1">
+   <b>This document uses <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP, REF,'dandt',REFP,'LL',REFX,-100,REFY,-5, BASE,2,
+     TEXTPADDING,4, TEXTFONTCLASS,'olfoot',FGCLASS,'',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP, REF,'comref',REFP,'LL',REFX,-110,REFY,-5, BASE,2,
+     TEXTPADDING,4, TEXTFONTCLASS,'olfoot',FGCLASS,'',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8,FGCLASS,'',FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-10,
+     WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,VCENTER,BASE,2,TEXTPADDING,4,TEXTFONTCLASS,'olfoot',FGCLASS,'',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="100" align="center" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCLASS,'',FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5,WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='SHADOW.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of word translation setups in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Translate words with overlibmws</title>
+
+<!--
+  Import the overlibmws core module.
+  -->
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<script type="text/javascript">
+<!--
+// Set up page defaults for overlib popups.  Include only those commands and their
+// parameters, if any, that you want for all popups in this page.  Add any additional
+// commands and their parameters, if any, that you want for the translation/definition
+// popups to the overlib calls within the OLselectWord() and OLdisplayWord() functions.
+//
+OLpageDefaults(BGCOLOR,'#000000',CGCOLOR,'#000000',FGCOLOR,'#ffffc0',VAUTO,
+ BASE,2,CAPTIONSIZE,2,CLOSESIZE,1,TEXTSIZE,2,CAPTIONPADDING,4,TEXTPADDING,4);
+
+// Array for word translations/definitions.
+// Could be put in an imported js file together
+// with the MyWords[] array entries (see below).
+//
+var MyWords = new Array();
+
+// Function for setting selections of words.
+// Could be moved to an imported js file together
+// with OLdisplayWord() and OLndDs() (see below).
+//
+function OLselectWord(evt) {
+ if (!(OLloaded&&OLgateOK)) return;
+ var selWord='';
+ if (!OLns4 && typeof document.body.createTextRange!='undefined') {
+  evt=(evt)?evt:event;
+  var bRect, bIndRect, mX=evt.clientX, mY=evt.clientY;
+  var target=(evt.target) ? evt.target : event.srcElement;
+  if (target.tagName.toUpperCase()!="TABLE" &&
+  target.tagName.toUpperCase()!="BODY" && target.hasChildNodes()) {
+   var tr=document.body.createTextRange();
+   bRect=target.getBoundingClientRect();
+   if (mX>bRect.left && mX<bRect.right && mY>bRect.top && mY<bRect.bottom) {
+    for (var i=0; i<target.getClientRects().length; i++) {
+     bIndRect=target.getClientRects()[i];
+     if (typeof bIndRect=='undefined' || (mX>bIndRect.left &&
+     mX<bIndRect.right && mY>bIndRect.top && bIndRect.bottom)) break;
+    }
+    if (i<target.getClientRects().length) {
+     tr.moveToPoint(mX,mY);
+     tr.expand("word");
+     selWord=tr.text;
+     return OLdisplayWord(selWord, tr);
+    }
+   }
+  }
+ } else {
+  if (typeof window.getSelection!='undefined') selWord=window.getSelection().toString();
+  else if (typeof document.getSelection!='undefined') selWord=document.getSelection().toString();
+  else if (typeof document.selection!='undefined') 
+   selWord=document.selection.createRange().text.toString();
+  else return overlib('Sorry, feature not implemented for your browser.',WRAP);
+  if (OLns4 && !selWord) return overlib('Sorry, You must select a word first',WRAP);
+  if (selWord) return OLdisplayWord(selWord);
+ }
+ return false;
+}
+
+// Function for word lookups and displays of translations/definitions.
+// Could be moved to an imported js file together with OLselectWord()
+// and OLndDs() (see above and below).
+//
+function OLdisplayWord(word, tr) {
+ wordTrimmed=word.replace(/\s+$/,'');
+ wordTrimmed=wordTrimmed.replace(/[ ]/ig,'');
+ if (wordTrimmed!='') {
+  if (over) cClick();
+  if (tr) tr.select();
+  wordLowerCase=wordTrimmed.toLowerCase();
+  if (wordLowerCase && typeof MyWords[wordLowerCase]!='undefined') {
+   var theTxt = MyWords[wordLowerCase].split('|')[0];
+   var theCap = (typeof MyWords[wordLowerCase].split('|')[1]!='undefined')?
+    MyWords[wordLowerCase].split('|')[1]:
+    'Definition of "'+wordTrimmed+'"';
+   // Make the popup sticky if the translation/definition contains a link.
+   if (theTxt.indexOf('href=') > 0)
+    return overlib(theTxt,CAPTION,theCap,
+     STICKY,MOUSEOFF,TIMEOUT,8000,OFFSETX,0,OFFSETY,0,WRAP.NOFOLLOW);
+   else return overlib(theTxt,CAPTION,theCap,WRAP,NOFOLLOW);
+  }
+  return overlib('Sorry, can not find "'+wordTrimmed+'"',WRAP);
+ }
+ return false;
+}
+
+// Function to close tooltip popup for all browsers and to de-select for IE.
+// Could be moved to an imported js file together with OLselectWord() and
+// OLdisplayWord() (see above).
+//
+function OLndDs() {
+ if (!(OLloaded&&OLgateOK)) return;
+ nd();
+ if (typeof document.selection!='undefined') document.selection.empty(); 
+}
+//-->
+</script>
+
+<script type="text/javascript">
+<!--
+ // Array with word translations/definitions.  Could be placed in an imported js file.
+ // The translation/definition which will appear in the popup's main text area is defined
+ // for each array element.  You can follow that with a '|' separator and the CAPTION
+ // content.  Otherwise, the CAPTIONs are generated "on the fly".  In this demo we use
+ // the "on the fly" captions for the English elements, and the separator and CAPTION
+ // content for the Cyrillic and Persian elements.
+ //
+ // English
+ MyWords['the'] = 'the, der, les, etc.';
+ MyWords['quick'] = 'quick, fast';
+ MyWords['brown'] = 'brown, a football coach';
+ MyWords['fox'] = 'fox, an honorific for a nubile adolescent female';
+ MyWords['jump'] = 'jump, to threaten and rob in NYC';
+ MyWords['jumped'] = 'jump, to threaten and rob in NYC';
+ MyWords['over'] = 'over, the position of Toto relative to the rainbow';
+ MyWords['lazy'] = 'lazy, perpetual newbie-ness';
+ MyWords['dog'] = 'dog, An early inhabitant of the Canary Islands';
+ MyWords['dog\'s'] = 'dog, An early inhabitant of the Canary Islands';
+ MyWords['dogs'] = 'dog, An early inhabitant of the Canary Islands';
+ MyWords['back'] = 'back, frequent in browsing, illegal in chess';
+ MyWords['back.'] = 'back, frequent in browsing, illegal in chess';
+ MyWords['.'] = 'period|<i>Punctuation:<\/i> .';
+ // Cyrillic
+ MyWords['зима'] = 'зима, winter|зима, <i>f.<\/i>';
+ MyWords['је'] = 'је, to be|бити, <i>v.<\/i><br>[also used as an auxiliary]';
+ MyWords[','] = 'comma|<i>Punctuation:<\/i> ,';
+ MyWords['снег'] = 'снег, snow|снег, <i>m.<\/i>';
+ MyWords['замео'] = 'замео, to cover (with snow)|замѐсти, <i>perf.<\/i>'
+ +'<br>[заметем, заметеш, замету]|све|сав, <i>adj.<\/i>'
+ +'<br>[сва, сво]|до|до, <i>prep.<\/i><br>[+ gen.]';
+ MyWords['све'] = 'све, whole, wholly|сав, <i>adj.<\/i><br>[сва, сво]';
+ MyWords['до'] = 'до, to, up to, until|до, <i>prep.<\/i><br>[+ gen.]';
+ MyWords['кућних'] = 'кућних, house|кућни, <i>adj.<\/i><br>[кућна, кућно]';
+ MyWords['врата'] = 'врата, door|врата, <i>n.<\/i> <br>[pl. only]|и';
+ MyWords['и'] = 'и, and|и, <i>conj.<\/i>';
+ MyWords['свему'] = 'свему, whole, wholly|сав, <i>adj.<\/i> <br>[сва, сво]';
+ MyWords['одузео'] = 'одузео, whole, wholly|сав, <i>adj.<\/i> <br>[сва, сво]';
+ MyWords['стварни'] = 'стварни, real|стваран, <i>adj.<\/i> <br>[стварна, стварно]';
+ MyWords['облик'] = 'облик, shape|облик, <i>m.<\/i>';
+ // Persian
+ MyWords['»'] = '<span dir="rtl">»<\/span> = close-quote|<i>Punctuation:<\/i> <span '
+  +'dir="rtl">»<\/span>';
+ MyWords['خُشْکی'] = 'خُشْکی = (dry) land|<i>classical:<\/i> '
+  +'khushki<br><i>Tehrani:<\/i> khoshki';
+ MyWords['خُشْکی»'] = 'خُشْکی = (dry) land|Definition of "<span '
+  +'dir="rtl">خُشْکی<\/span>"';
+ MyWords['اَز'] = 'اَز = from, via, by, by way of, than, through,<br>with, about, '
+  +'concerning, out of, among|<i>classical:<\/i> az<br><i>Tehrani:<\/i> az';
+ MyWords['تُو'] = 'تُو = you (second person singular)|<i>classical:<\/i> '
+  +'tu<br><i>Tehrani:<\/i> to';
+ MyWords['رَوَم'] = 'رَوَم = (I) will go|<i>classical:<\/i> '
+  +'ravam<br><i>Tehrani:<\/i> ravam';
+ MyWords['دَرْیا'] = 'دَرْیا = sea|<i>classical:<\/i> '
+  +'daryā<br><i>Tehrani:<\/i> dariā';
+ MyWords['زِ'] = 'زِ = from, via, by, by way of, than, through,<br>with, about, '
+  +'concerning, out of, among|classical:<\/i> ze<br><i>Tehrani:<\/i> ze';
+ MyWords['مَن'] = 'مَن = I|<i>classical:  <\/i>man<br><i>Tehrani:  <\/i>man';
+ MyWords['اَسْت&nbsp;'] = 'اَسْت = (he, she, it) is|<i>classical:<\/i> '
+  +'ast<br><i>Tehrani:<\/i> ast';
+ MyWords['اَسْت'] = 'اَسْت = (he, she, it) is|<i>classical:<\/i> '
+  +'ast<br><i>Tehrani:<\/i> ast';
+ MyWords['بِسْیار'] = 'بِسْیار = many|<i>classical:<\/i> '
+  +'besyār<br><i>Tehrani:<\/i> besiār';
+ MyWords['راه'] = 'راه = road, path|<i>classical:<\/i> rāh<br><i>Tehrani:<\/i> rāh';
+ MyWords['کعْبَه'] = 'کعْبَه = the Kabah, Mecca|<i>classical:<\/i> '
+  +'ka`ba<br><i>Tehrani:<\/i> ka`be';
+ MyWords['سوی'] = 'سوی = direction|<i>classical:<\/i> su-i<br><i>Tehrani:<\/i> su-ye';
+ MyWords['«بِه'] = 'بِه = in, to, on, with|<i>classical:<\/i> ba, be<br><i>Tehrani:<\/i> be';
+ MyWords['بِه'] = 'بِه = in, to, on, with|<i>classical:<\/i> ba, be<br><i>Tehrani:<\/i> be';
+ MyWords['«'] = '<span dir="rtl">«<\/span> = open-quote|<i>Punctuation:<\/i> <span '
+  +'dir="rtl">«<\/span>';
+//-->
+</script>
+
+<style type="text/css">
+<!--
+/*
+   Styles used in spans or divs for translations/definitions.
+   If you use such CSS styling, you can modify them as appropriate
+   for your documents, and move them to an imported css file.
+*/
+.persian {font-family:Tahoma,"Microsoft Sans Serif","Times New Roman",Arial,"Courier New";
+ font-size:180%;}
+.cyrillic {font-family:Verdana,Arial,Helvetica;font-weight:bold;font-size:120%;}
+.english {font-family:Verdana,Arial,Helvetica;font-weight:bold;font-size:120%;}
+
+/*
+   Other styles for this document.
+   Not directly relevant to the translation/definition displays.
+*/
+body {font-family:Verdana,Arial,Helvetica;color:#000000;background-color:#ddeeff;
+ margin-top:15px;margin-bottom:15px;margin-left:5px;margin-right:5px;}
+a {color:#338855;font-weight:bold;}
+a:hover {color:#FF00FF;}
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.content {font-family:Verdana,Arial,Helvetica;font-size:83%;}
+.text12 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purpleh {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:110%;color:purple;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<script type="text/javascript">
+<!--
+// Set up flag for tranlation/definition instructions based on browser capability.
+//
+var OLhasCreate = (typeof document.body.createTextRange != 'undefined')?1:0;
+//-->
+</script>
+
+<table align="center"  width="710" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText" colspan="3">
+   <span class="myHeader"><strong>Examples of Word Translation</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     WRAP, CENTER, VAUTO, OFFSETY,20, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     WRAP, TEXTPADDING,6,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20, FGCOLOR,'#bbddff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     WRAP, TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for<br>
+   word translation support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     WRAP, TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" align="center" class="content">
+   <hr size="3" width="710">
+   <span class="mySpacer">&nbsp;<br></span>
+   <script type="text/javascript">
+    <!--
+    // Show translation/definition instructions based on browser capability.
+    //
+    if (OLhasCreate) document.write(
+     '<em>Mouseover words in the lines below to see their definitions.<\/em>');
+    else if (OLns4) document.write(
+     '<em>Select (<strong>double-click<\/strong> or <strong>click-and-drag<\/strong>) words '+
+     'in the lines below,<br>then mouseover the<\/em> <a href="javascript:void(0);" '+
+     'onmouseover="return OLselectWord(event);" '+
+     'onmouseout="nd();"><b>Translate<\/b><\/a> <em>links to see the word\'s '+
+     'definition.<\/em>');
+    else document.write(
+     '<em>Select (<strong>double-click<\/strong> or <strong>click-and-drag<\/strong>) words '+
+     'in the lines below,<br>then move the mouse to see their definitions.<\/em>');
+    //-->
+   </script>
+   <br><br>
+   <!--
+     Set up translations/definitions for a series of Persian words.
+     The class attribute for CSS styling and dir attribute for right-to-left
+     processing are not needed if you set up the fonts and directionality
+     elsewhere or otherwise.
+     Use div instead of span for encasing markup with any block-level
+     elements.
+     -->
+   <span
+    class="persian"
+    dir="rtl"
+    onmousemove="OLselectWord(event);"
+    ondblclick="OLselectWord(event);"
+    onmouseout="OLndDs();">
+    «بِه سوی کعْبَه راه بِسْیار اَسْت مَن زِ 
+    دَرْیا رَوَم تُو اَز خُشْکی»</span><br>
+   (see: <a
+    href="http://www.lib.washington.edu/neareast/yekruz/y1.htm"
+    onmouseover="return overlib('Go to Connie Bobroff\'s source for this Persian.',
+     WRAP,CENTER,OFFSETY,20,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">http://www.lib.washington.edu/neareast/yekruz/y1.htm</a>)
+   <br><br>
+   <!--
+     Set up translations/definitions for a series of Cyrillic words.
+     The class attribute for CSS styling is not needed if you set up
+     the fonts elsewhere or otherwise.
+     Use div instead of span for encasing markup with any block-level
+     elements.
+     -->
+   <span
+    class="cyrillic"
+    onmousemove="OLselectWord(event);"
+    ondblclick="OLselectWord(event);"
+    onmouseout="OLndDs();">
+    Зима је, снег замео све до кућних врата и
+    свему одузео стварни облик</span><br>
+   (see: <a
+    href="http://www.digital.transpoetics.org/texts/test/index.html"
+    onmouseover="return overlib('Go to Mike Psychomachine2000\'s source for this Cyrillic.',
+     WRAP,CENTER,OFFSETY,20,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">http://www.digital.transpoetics.org/texts/test/index.html</a>)
+   <br><br>
+   <!--
+     Set up translations/definitions for a series of English words.
+     The class attribute for CSS styling is not needed if you set up
+     the fonts elsewhere or otherwise.
+     Use div instead of span for encasing markup with any block-level
+     elements.
+     -->
+   <span
+    class="english"
+    onmousemove="OLselectWord(event);"
+    ondblclick="OLselectWord(event);"
+    onmouseout="OLndDs();">The quick brown fox jumped over the lazy dog's back.</span><br>
+   (affable Dennis Sandow and Fote Macrides were the source of this English)
+   <br>
+   <script type="text/javascript">
+   <!--
+   // Add another Translate link for Netscape v4.x
+   //
+   if (OLns4) document.write(
+    '<p><a href="javascript:void(0);" onmouseover="return OLselectWord(event);" '+
+    'onmouseout="nd();";><b>Translate<\/b><\/a><\/p>');
+   //-->
+   </script>
+   <span class="mySpacer">&nbsp;<br></span>
+   <hr size="3" width="710">
+<!--
+   The rest of this document is not directly related to
+   the setting up of translations/definitions.
+   -->
+   <br>
+   <b>These examples use</b> <a
+    href="http://www.macridesweb.com/oltest/"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,CENTER,OFFSETY,20,FGCOLOR,'#ccddff',TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><b>overlibmws</b></a> <b>and its</b> <a
+    href="http://www.macridesweb.com/oltest/commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,CENTER,OFFSETY,20,FGCOLOR,'#ccddff',TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><b>commands</b></a>.
+   <br><br>
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the</em>
+   <strong>script set</strong> <em>and markup for these examples.</em>
+   <br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'logo',REFX,95,REFY,1,BASE,2,TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',
+     WRAP,BASE,2,REF,'logo',REFP,'LL',REFX,-60,REFY,-5,TEXTPADDING,8,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0" alt="" hspace="10"></a><br>
+  </td>
+ </tr>
+</table>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='translateWord.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

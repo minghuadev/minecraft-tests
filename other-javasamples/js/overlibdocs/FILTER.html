@@ -1,0 +1,790 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of FILTER-based styling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - FILTER command in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(CGCLASS,'olcg', CAPTIONPADDING,6, CAPTIONFONTCLASS,'olcap', CAPBELOW,
+ TEXTPADDING,0, TEXTFONTCLASS,'oltxt', WRAP, BASE,2, NOJUSTY, FILTER,
+ STATUS,'FILTER command in overlibmws');
+
+var MyTxt = '<img src="meyersv2a.jpg" width="321" height="250" align="absbottom" border="0" alt="">';
+
+var MyCap = 'Dennis Sandow\'s Playground';
+
+meyersv2a = new Image();
+meyersv2a.src = "meyersv2a.jpg"
+//-->
+</script>
+
+<style type="text/css">
+<!--
+.olcg {background-color:#333399; text-align:center;}
+.olfg {background-color:#ccccff; text-align:center;}
+
+.olcap {font-family:Verdana,Arial,Helvetica;font-size:14px;font-weight:bold;color:#ffffff;}
+.oltxt {font-family:Verdana,Arial,Helvetica;font-size:14px;color:#000000;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff}
+
+a.red {color:red;font-weight:bold;}
+a.red:hover {color:#ff00ff}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:#000000;}
+.text14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:#000000;}
+.text12 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head> 
+
+<body text="#330033" bgcolor="#ddeeff">
+
+<table align="center" width="90%" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td align="center" valign="middle" colspan="17" class="text18">
+   <b>FILTER-based Styling in <span class="purple18">overlibmws</span></b>
+  </td>
+ </tr>
+ <tr>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,1,FADEOUT,1,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">1</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,2,FADEOUT,2,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">2</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,3,FADEOUT,3,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">3</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,4,FADEOUT,4,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">4</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,5,FADEOUT,5,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">5</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,6,FADEOUT,6,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">6</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,7,FADEOUT,7,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">7</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,8,FADEOUT,8,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">8</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,9,FADEOUT,9,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">9</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,10,FADEOUT,10,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">10</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,11,FADEOUT,11,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">11</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,12,FADEOUT,12,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">12</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,13,FADEOUT,13,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">13</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,14,FADEOUT,14,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">14</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,15,FADEOUT,15,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">15</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,16,FADEOUT,16,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">16</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,17,FADEOUT,17,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">17</a>
+  </td>
+ </tr>
+ <tr>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,18,FADEOUT,18,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">18</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,19,FADEOUT,19,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">19</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,20,FADEOUT,20,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">20</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,21,FADEOUT,21,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">21</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,22,FADEOUT,22,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">22</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,23,FADEOUT,23,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">23</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,24,FADEOUT,24,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">24</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    class="red"
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,25,FADEOUT,25,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">25</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,26,FADEOUT,26,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">26</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,27,FADEOUT,27,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">27</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,28,FADEOUT,28,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">28</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,29,FADEOUT,29,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">29</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,30,FADEOUT,30,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">30</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,31,FADEOUT,31,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">31</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,32,FADEOUT,32,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">32</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,33,FADEOUT,33,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">33</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,34,FADEOUT,34,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">34</a>
+  </td>
+ </tr>
+ <tr>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,35,FADEOUT,35,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">35</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,36,FADEOUT,36,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">36</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,37,FADEOUT,37,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">37</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,38,FADEOUT,38,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">38</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,39,FADEOUT,39,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">39</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,40,FADEOUT,40,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">40</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,41,FADEOUT,41,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">41</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,42,FADEOUT,42,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">42</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,43,FADEOUT,43,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">43</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,44,FADEOUT,44,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">44</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,45,FADEOUT,45,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">45</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,46,FADEOUT,46,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">46</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,47,FADEOUT,47,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">47</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,48,FADEOUT,48,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">48</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,49,FADEOUT,49,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">49</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,50,FADEOUT,50,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">50</a>
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,51,FADEOUT,51,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">51</a>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" colspan="17" class="text14">
+   &nbsp;&nbsp;<a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt,CAPTION,MyCap,FADEIN,52,FADEOUT,52,
+    REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">52</a> = Random selections from among the 51 fade types.
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="90%" cellpadding="5" cellspacing="0" border="0"> 
+ <tr>
+  <td width="30%" align="left" valign="top" class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="overlib(MyTxt, CAPTION,MyCap, FADEIN,2, FADEOUT,1, STICKY, CLOSECLICK,
+    REF,'flt', REFX,-160, REFY,-30); event.returnValue=false; return false;"
+    onmouseover="return overlib('Click me!', TEXTPADDING,4, TEXTFONTCLASS,'text12', STATUS,'',
+     FGCOLOR,'#cceeff');"
+    onmouseout="nd();">FADEIN,&nbsp;2,&nbsp;FADEOUT,&nbsp;1</a>
+  </td>
+  <td width="2%" align="left" valign="top" rowspan="10" class="text14">
+   &nbsp;<br>
+  </td>
+  <td width="68%" align="left" valign="top" rowspan="10" class="text14">
+   <table align="center" cellpadding="5" cellspacing="0" border="0">
+    <tr>
+     <td align="center" class="text18">
+      <a name="flt" id="flt">&nbsp;</a><br>
+      Setting Up <strong>FILTER</strong>-based Styling
+     </td>
+    </tr>
+    <tr>
+     <td class="text14">
+      The popups in this document use the <strong>FILTER</strong> toggle for the
+      <strong>FADEIN</strong>, and <strong>FADEOUT</strong> commands to implement the
+      Microsoft <a
+       name="msft" id="msft"
+       target="_blank"
+       href="http://msdn2.microsoft.com/en-us/library/ms532847.aspx"
+       onmouseover="return overlib('Go to the Microsoft Filters and Transistions docs.',
+        FGCOLOR,'#bbddff', TEXTPADDING,4, REF,'flt', REFX,-180, REFY,25, STATUS,'',
+        FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff', SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Filters and Transitions</a> primarily for IE v5.5+ (other browsers
+      show fully normal popups, emulating <strong style="color:red;">25</strong>
+      if they have opacity support, or without the special style effects).&nbsp; Use
+      links <strong>1</strong> to <strong>51</strong> in the above table to try the 51 fade
+      types implemented in <strong style="color:purple;">overlibmws</strong> via its
+      <strong>overlibmws_filter.js</strong>, plugin module, and the number <strong>52</strong>
+      link (default fade type value) for random selections of the fade type.&nbsp; Then choose
+      the fade type values for your overlib() calls.&nbsp; Some of the favorite fadein and
+      fadeout pairs are illustrated via the links at left.
+      <script type="text/javascript" src="frills.js"></script>&nbsp; The <a
+       href="javascript:void(0);"
+       onclick="event.returnValue=false; return false;"
+       onmouseover="return overlib(MyTxt,
+        CAPTION,MyCap, FADEIN,0, FADEOUT,0, FILTEROPACITY,60, ABOVE, HAUTO, VAUTO);"
+       onmouseout="nd();">FILTEROPACITY</a> feature works for recent versions of all the
+      supported browsers.&nbsp; See <a
+       id="cr8" name="cr8"
+       href="commandRef.html#filter"
+       onmouseover="return overlib('See Section 8 of the '
+        +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+        +'Command Reference.', FGCOLOR,'#bbddff',
+        TEXTPADDING,4, CENTER, ABOVE, OFFSETY,12, STATUS,'',
+        FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff', SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Section&nbsp;8</a> of the Command Reference for more information.
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt, CAPTION,MyCap, FADEIN,4, FADEOUT,3,
+     REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">FADEIN,&nbsp;4,&nbsp;FADEOUT,&nbsp;3</a>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="return overlib(MyTxt, CAPTION,MyCap, FADEIN,15, FADEOUT,14, STICKY, CLOSECLICK,
+     REF,'flt', REFX,-160, REFY,-30); event.returnValue=false; return false;"
+    onmouseover="return overlib('Click me!', TEXTPADDING,4, TEXTFONTCLASS,'text12', STATUS,'',
+     FGCOLOR,'#cceeff');"
+    onmouseout="nd();">FADEIN,15,FADEOUT,14</a>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt, CAPTION,MyCap, FADEIN,17, FADEOUT,16,
+     REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">FADEIN,17,FADEOUT,16</a>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="return overlib(MyTxt, CAPTION,MyCap, FADEIN,28, FADEOUT,27, STICKY, CLOSECLICK,
+     REF,'flt', REFX,-160, REFY,-30); event.returnValue=false; return false;"
+    onmouseover="return overlib('Click me!', TEXTPADDING,4, TEXTFONTCLASS,'text12', STATUS,'',
+     FGCOLOR,'#cceeff');"
+    onmouseout="nd();">FADEIN,28,FADEOUT,27</a>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt, CAPTION,MyCap, FADEIN,30, FADEOUT,29,
+     REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">FADEIN,30,FADEOUT,29</a>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="return overlib(MyTxt, CAPTION,MyCap, FADEIN,32, FADEOUT,31, STICKY, CLOSECLICK,
+     REF,'flt', REFX,-160, REFY,-30); event.returnValue=false; return false;"
+    onmouseover="return overlib('Click me!', TEXTPADDING,4, TEXTFONTCLASS,'text12', STATUS,'',
+     FGCOLOR,'#cceeff');"
+    onmouseout="nd();">FADEIN,32,FADEOUT,31</a>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt, CAPTION,MyCap, FADEIN,34, FADEOUT,33,
+     REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">FADEIN,34,FADEOUT,33</a>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="return overlib(MyTxt, CAPTION,MyCap, FADEIN,46, FADEOUT,46, STICKY, CLOSECLICK,
+     REF,'flt', REFX,-160, REFY,-30); event.returnValue=false; return false;"
+    onmouseover="return overlib('Click me!', TEXTPADDING,4, TEXTFONTCLASS,'text12', STATUS,'',
+     FGCOLOR,'#cceeff');"
+    onmouseout="nd();">FADEIN,46,FADEOUT,46</a>
+ </tr>
+ <tr>
+  <td class="text14">
+   <a
+    href="javascript:void(0);"
+    onclick="event.returnValue=false; return false;"
+    onmouseover="return overlib(MyTxt, CAPTION,MyCap, FADEIN,50, FADEOUT,49,
+     REF,'flt', REFX,-160, REFY,-30);"
+    onmouseout="nd();">FADEIN,50,FADEOUT,49</a>
+ </tr>
+</table>
+
+<div class="text12">&nbsp;<br></div>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>These examples use <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     REF,'dandt', REFP,'LL', REFX,-90, REFY,-12, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     STATUS,'',
+     FADEIN,4, FADEOUT,3, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', FGCOLOR,'#bbddff',
+     REF,'comref', REFP,'LR', REFX,100, REFY,-12, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     STATUS,'',
+     FADEIN,32, FADEOUT,31, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff', REF,'amazon', REFP,'UR', REFX,-5, REFY,-10,
+     TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     REF,'logo', REFX,92, REFY,1, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     STATUS,'', FGCOLOR,'#cceeff',
+     FADEIN,7, FADEOUT,8);"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).', TEXTPADDING,8, TEXTFONTCLASS,'text12', FGCOLOR,'#bbddff',
+     REF,'logo', REFC,'UL', REFP,'LL', REFX,-10, REFY,-5);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0" alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',
+     REF,'w3c', REFP,'UR', REFX,-5, REFY,3, TEXTPADDING,4, TEXTFONTCLASS,'text12', STATUS,'',
+     FGCOLOR,'#cceeff', FADEIN,8, FADEOUT,7);"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+
+<div class="text12">&nbsp;<br></div>
+
+<table align="center" cellpadding="2" cellspacing="0" border="0" bgcolor="#ccddff"><tr><td>
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#cceeff">
+ <tr>
+  <td align="center" class="myText">
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>&nbsp; Maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, ABOVE, OFFSETY,12, FGCOLOR,'#bbddff',
+     FADEIN,46, FADEOUT,46, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, ABOVE, OFFSETX,-16, OFFSETY,12,
+     FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a> &nbsp;<br>
+   <em>&nbsp; Discuss these examples, seek help, and offer suggestions &nbsp;<br>
+   for FILTER support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, ABOVE, OFFSETX,-16, OFFSETY,12,
+     FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a></strong>.<br>
+   <span class="mySpacer">&nbsp;<br></span>
+  </td>
+ </tr>
+</table>
+</td></tr></table>
+
+<div class="text12">&nbsp;<br></div>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='FILTER.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

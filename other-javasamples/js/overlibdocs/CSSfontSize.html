@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlibmws, overlib, DHTML popups, DHTML, popups, Macrides Web Services, Macrides, web services">
+<meta name="description" content="CSS font-size versus font integer settings in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLib - CSS font-size versus font integer settings in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<style type="text/css">
+body {background:#ddeeff; font-family:verdana,arial,sans-serif; margin:10px 5px 30px 5px;
+      color:#000000; font-size:12pt;}
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff;}
+.text12 {font-family:Verdana,Arial,sans-serif;font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif;font-size:14px;}
+.text13 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text16 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:16px;color:#000000;}
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Font Size Settings</strong></span>
+   <span class="mySubHead"><strong><em>in the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#ffffcc', BASE,2,
+     WRAP, OFFSETX,-10, OFFSETY,20, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', FGCOLOR,'#ffffcc', BASE,2,
+     STATUS,'Click to send form-based e-mail to Fote.',
+     WRAP, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20);"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     FGCOLOR,'#ffffcc', BASE,2,
+     WRAP, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for font size support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+     +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     FGCOLOR,'#ffffcc', BASE,2,
+     WRAP, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong>
+   <br><br>
+  </td>
+ </tr>
+</table>
+<table width="600" align="center" border="0" cellspacing="2" cellpadding="2">
+ <tr>
+  <td class="text13">
+   This table compares font sizes produced with your browser's current settings by five
+   CSS font-size methods <em>versus</em> the integer method for the parameters of the
+   <strong>TEXTSIZE</strong>, <strong>CAPTIONSIZE</strong>, <strong>CLOSESIZE</strong>
+   and <strong>PRINTSIZE</strong> commands in <span class="purple14">overlibmws</span>. 
+  </td>
+ </tr>
+ <tr>
+  <td class="text13">
+   <ul>
+    <li>
+     &nbsp;<strong>PX:</strong>&nbsp; CSS method with #px font-size&nbsp;
+     (e.g. TEXTSIZE, '13px')
+    </li>
+    <li>
+     &nbsp;<strong>PT:</strong>&nbsp; CSS method with #pt font-size&nbsp;&nbsp;
+     (e.g. TEXTSIZE, '10pt')
+    </li>
+    <li>
+     &nbsp;<strong>%:</strong>&nbsp; CSS method with #% font-size&nbsp;&nbsp;
+     (e.g. TEXTSIZE, '83%')
+    </li>
+    <li>
+     <strong>EM:</strong>&nbsp; CSS method with #em font-size&nbsp;
+     (e.g. TEXTSIZE, '.83em')
+    </li>
+    <li>
+     <strong>Absolute:</strong>&nbsp; CSS method with absolute font-size&nbsp;
+     (e.g. TEXTSIZE, 'x-small')
+    </li>
+    <li>
+     <strong>Integer:</strong>&nbsp; Integer method for font size&nbsp;
+     (e.g. TEXTSIZE, 2)
+    </li>
+   </ul>
+   </td>
+ </tr>
+</table>
+
+<table width="600" align="center" border="4" cellspacing="2" cellpadding="5">
+ <tr bgcolor="#ffffcc">
+  <th class="text13">
+   PX
+  </th>
+  <th class="text13">
+   PT
+  </th>
+  <th class="text13">
+   %&sup1;
+  </th>
+  <th class="text13">
+   EM&sup1;
+  </th>
+  <th class="text13">
+   Absolute
+  </th>
+  <th class="text13">
+   Integer&sup2;
+  </th>
+ </tr>
+
+ <!-- 7 PT -->
+ <tr bgcolor="white">
+  <td align="center">
+   <span style="font-family:verdana;font-size:9px;">9px</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:7pt;">7pt</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:58%;">58%</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:.58em;">.58em</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:xx-small;">xx-small</span>
+  </td>
+  <td align="center">
+   <font face="verdana" size="1">1</font>
+  </td>
+ </tr>
+
+ <!-- 8 PT -->
+ <tr bgcolor="#ffffcc">
+  <td align="center">
+   <span style="font-family:verdana;font-size:11px;">11px</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:8pt;">8pt</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:67%;">67%</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:.67em;">.67em</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:xx-small">xx-small</span>
+  </td>
+  <td align="center">
+   <font face="verdana" size="1">1</font>
+  </td>
+ </tr>
+
+ <!-- 10 PT -->
+ <tr bgcolor="white">
+  <td align="center">
+   <span style="font-family:verdana;font-size:13px;">13px</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:10pt;">10pt</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:83%;">83%</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:.83em;">.83em</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:x-small">x-small</span>
+  </td>
+  <td align="center">
+   <font face="verdana" size="2">2</font>
+  </td>
+ </tr>
+
+ <!-- 12 PT -->
+ <tr bgcolor="white">
+  <td align="center">
+   <span style="font-family:verdana;font-size:16px;">16px</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:12pt;">12pt</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:100%;">100%</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:1em;"> 1em</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:small">small</span>
+  </td>
+  <td align="center">
+   <font face="verdana" size="3">3</font>
+  </td>
+ </tr>
+
+ <!-- 14 PT -->
+ <tr bgcolor="white">
+  <td align="center">
+   <span style="font-family:verdana;font-size:19px;">19px</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:14pt;">14pt</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:117%;">117%</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:1.17em;">1.17em</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:medium">medium</span>
+  </td>
+  <td align="center">
+   <font face="verdana" size="4">4</font>
+  </td>
+ </tr>
+
+ <!-- 18 PT -->
+ <tr bgcolor="white">
+  <td align="center">
+   <span style="font-family:verdana;font-size:24px;">24px</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:18pt;">18pt</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:150%;">150%</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:1.5em;">1.5em</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:large">large</span>
+  </td>
+  <td align="center">
+   <font face="verdana" size="5">5</font>
+  </td>
+ </tr>
+
+ <!-- 24 PT -->
+ <tr bgcolor="white">
+  <td align="center">
+   <span style="font-family:verdana;font-size:32px;">32px</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:24pt;">24pt</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:200%;">200%</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:2em;"> 2em</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:x-large">x-<br>large</span>
+  </td>
+  <td align="center">
+   <font face=verdana size="6">6</font>
+  </td>
+ </tr>
+
+ <!-- 32 PT
+ <tr bgcolor="white">
+  <td align="center">
+   <span style="font-family:verdana;font-size:42px;">42px</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:32pt;">32pt</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:267%;">267%</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:2.67em;"> 2.67em</span>
+  </td>
+  <td align="center">
+   <span style="font-family:verdana;font-size:xx-large">xx-<br>large</span>
+  </td>
+  <td align="center">
+   <font face=verdana size="7">7</font>
+  </td>
+ </tr>-->
+
+ <tr>
+  <td colspan="7" bgcolor="#ffffcc" align="center" class="text13">
+   <b>&sup1;</b>Percentages are based on a 12pt font = 100% (1em). Calculate 8pt/12pt=67%.<br>
+   <b>Try varying your browser settings, e.g.:</b><br>
+   on <b><font color="green">IE</font></b> use <font color="green">View | Text Size</font><br>
+   on <b><font color="green">NS6/7</font></b> use <font color="green">Ctrl +</font> or
+   <font color="green">-</font><br>
+   on <b><font color="green">NS4</font></b> use <font color="green">Ctrl ]</font> or
+   <font color="green">[</font><br>
+  </td>
+ </tr>
+
+ <tr>
+  <td colspan="7" bgcolor="#ffffcc" class="text13">
+   <b>&sup2;</b>The valid range for integer parameters is 1 (<em>default</em>) to 7,
+   equivalent to the integer values for the size attribute of the font element.&nbsp;
+   But <span class="purple14">overlibmws</span> does not actually use the
+   depricated font element in the popup markup it generates for browsers that can
+   respect the W3C Strict DTDs.
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <td colspan="4" class="text14">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr bgcolor="#ccddff">
+  <td width="90" align="right" valign="middle" class="text14">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     REF,'logo',REFX,96,REFY,1,WRAP,BASE,2,TEXTPADDING,4,TEXTFONTCLASS,'text12',
+     FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright&nbsp;Foteos&nbsp;Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'library and its support materials at this site are &lt;br&gt;free to download '
+     +'and use, but voluntary donations via PayPal are&lt;br&gt;appreciated (donations '
+     +'via PayPal are fast, simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',WRAP,
+     BASE,2,REF,'logo',REFC,'UL',REFP,'LL',REFX,-10,REFY,-10,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0" alt="" hspace="10"></a><br>
+  </td>
+  <td width="100" align="center" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',TEXTFONTCLASS,'text12',
+     REF,'w3c',REFP,'UR',REFX,-5,REFY,2,TEXTPADDING,4,WRAP,BASE,2,FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt=""
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='CSSfontSize.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

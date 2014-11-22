@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of background image tiling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Background image tiling in overlibmws</title>
+
+<script type="text/javascript">
+<!--
+var OLbubbleImages='flower,oval,quotation';
+//-->
+</script>
+
+<script type="text/javascript" src="overlibmws.js"></SCRIPT>
+<script type="text/javascript" src="overlibmws_overtwo.js"></SCRIPT>
+<script type="text/javascript" src="overlibmws_filter.js"></SCRIPT>
+<script type="text/javascript" src="overlibmws_bubble.js"></SCRIPT>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(TEXTPADDING,6, CAPTIONPADDING,6, WRAP,
+ FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'#cf33cf', SHADOW, SHADOWCOLOR,'#cf33cf');
+
+// Preload backgound images.
+var rainbowline=new Image();
+rainbowline.src = "../image/rainbowline.gif"
+var calamine = new Image();
+calamine.src = "../image/calamine.jpg"
+var rb = new Image();
+rb.src = "../image/rb.jpg"
+var myRaisedBlue = new Image();
+myRaisedBlue.src = "raised_blue.gif";
+var myRaisedMetallic = new Image();
+myRaisedMetallic.src = "raised_metallic.gif";
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.olcap {font-family:Verdana;font-size:12px;font-weight:bold;color:#ffff00;}
+a.olclo {font-family:Verdana;font-size:12px;font-weight:bold;color:#c000c0;}
+a.olclo:hover {color:#FF3333;}
+.oltxt {font-family:Verdana,Arial,Helvetica;font-weight:bold;font-size:12px;color:#000000;}
+.oltxt14 {font-family:Verdana;font-size:14px;font-weight:bold;color:#330033;}
+.olraisedBlue {text-align:center;
+ background:#33aaff url(raised_blue.gif) repeat-x bottom left;}
+.oltxtRaisedBlue {font-family:Verdana;font-size:14px;font-weight:bold;color:#ffffff;}
+.olraisedMetallic {text-align:center;
+ background:#33aaff url(raised_metallic.gif) repeat-x bottom left;}
+.oltxtRaisedMetallic {font-family:Verdana;font-size:14px;font-weight:bold;color:#444444;
+ text-shadow:#ddd 2px 2px 0;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#FF00FF}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.txtb12 {font-family:Verdana,Arial,sans-serif; font-size:12px;font-weight:bold;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+.comic13 {font-family:'Comic Sans MS';font-weight:bold;font-size:13px;}
+.comic20 {font-family:'Comic Sans MS';font-size:20px;}
+.red {color:red;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table width="80%" cellpadding="5" align="center">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="mySubHead"><strong><em>(<span class="red">Spicy!!</span>)
+   Examples of</em></strong></span>
+   <span class="myHeader"><strong>Background Image Tiling</strong></span><br>
+   <span class="mySubHead"><strong><em>with the</em></strong></span>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', TEXTFONTCLASS,'comic13',
+     BUBBLE, BUBBLETYPE,'oval', ADJBUBBLE, FILTERSHADOWCOLOR,'#00b000');"
+    onmouseout="nd();">overlibmws</a></strong></span>
+   <span class="myHeader"><strong><em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20,
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20,
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for tiling support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20,
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   <span class="mySpacer">&nbsp;<br></span>
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle" class="mySubHead">
+   <b><font color="red">Here's a <a
+    href="JavaScript:void(0);"
+    onmousemove="if(OLie7)self.status='Background Images'"
+    onmouseover="return overlib('You might try to spice up&lt;br&gt;your popups a wee bit '
+     +'by&lt;br&gt;using background images.&lt;br&gt;See the &lt;a class=olclo '
+     +'href=&quot;commandRef.html&quot; onMouseOver=&quot;overlib2(\'See the '
+     +'&lt;span class=&amp;quot;purple14&amp;quot;&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.\',TEXTFONTCLASS,\'oltxt14\',BASE,2,FGCOLOR,\'#FFFFCC\', '
+     +'OFFSETX,-5,OFFSETY,20);&quot; '
+     +'onMouseOut=&quot;nd2();&quot;&gt;Command Reference&lt;/a&gt;&lt;br&gt;for the '
+     +'background image&lt;br&gt;commands.',
+     BORDER,6,BASE,6,BGBACKGROUND,'../image/rainbowline.gif',
+     CAPTION,'&nbsp;&nbsp;Background Images',CGBACKGROUND,'../image/calamine.jpg',
+     CAPTIONFONTCLASS,'olcap',CLOSEFONTCLASS,'olclo',
+     FGBACKGROUND,'../image/rb.jpg',TEXTFONTCLASS,'oltxt14',
+     STICKY,MIDX,0,RELY,80,AUTOSTATUSCAP);"
+    onmouseout="return nd();">spicy</a> tip.</font></b>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   These examples use <a
+    href="./"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('See &lt;span '
+     +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download &amp;amp; Test Directory',
+     BORDER,6, BASE,6, BGBACKGROUND,'../image/rainbowline.gif',
+     FGBACKGROUND,'../image/rb.jpg', TEXTFONTCLASS,'oltxt',
+     WIDTH,332, OFFSETX,-60, OFFSETY,20, VAUTO);"
+    onmouseout="nd();">overlibmws</A> and its <a
+    href="commandRef.html"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference',
+     BORDER,6,BASE,6,BGBACKGROUND,'../image/rainbowline.gif',
+     FGBACKGROUND,'../image/rb.jpg',TEXTFONTCLASS,'oltxt',
+     CENTER, OFFSETY,20, VAUTO);"
+    onmouseout="nd();">commands</a>, including the core commands <b>BGBACKGROUND</b>,
+   <b>CGBACKGROUND</b>, and <b>FGBACKGROUND</b> for tiling background images into,
+   respectively, the outer table for the BORDER (and BASE if present), the inner table
+   for the CAPTION and 'Close' areas (if present), and the inner table for the main text
+   area, of the popups.
+   <br><br>
+   This tiling of images into table cells contrasts with use of the <A
+    href="DRAGGABLE.html"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('Go to example of the BACKGROUND command',
+     BORDER,6,BASE,6,BGBACKGROUND,'../image/rainbowline.gif',
+     FGBACKGROUND,'../image/rb.jpg',TEXTFONTCLASS,'oltxt',
+     CENTER, ABOVE, OFFSETX,-100, OFFSETY,15, VAUTO);"
+    onmouseout="nd();">BACKGROUND</A> core command, which uses an image as a replacement
+   for the outer, border table, and a single, simplified table or one's own
+   <b>FULLHTML</b> to position the popup's textual content over a region of that image.
+   <br><br>
+   Note that IE has a bug which blocks display of a link's (anchor's) address (href value)
+   in the status bar when a background image is used with popups invoked via onmouseover.&nbsp;
+   If the address is "javascript:void(0);" that might not be considered a problem, but if
+   it is an active link to another document, a workaround for IE's bug is to include:
+   <div style="background-color:#ddddee;font-weight:bold;line-height:24px;width:98%;">
+    &nbsp;&nbsp;onmousemove="if(OLie7)self.status=this.href;"
+   </div>
+   in the link.
+   <br><br>
+   These examples also use <B>CAPTIONFONTCLASS</B>, <b>CLOSEFONTCLASS</b>, and
+   <b>TEXTFONTCLASS</b> for setting the popup font and 'Close' anchor characteristics via
+   <b>class</b> attributes associated with a <b>style sheet</b> in a style block (though it
+   normally would be in a <strong>.css</strong> file imported via a link tag).
+   <br><br>
+   In addition, these examples use the <strong>FILTER</strong>, <strong>FILTERSHADOW</strong>,
+   and <strong>FILTERSHADOWCOLOR</strong> commands for IE v5.5+ browsers.
+   <script type="text/javascript" src="frills.js"></script>
+   <br><br>
+   Also see examples of <a
+    href="STICKY.html#raisedcap"
+    onmouseover="return overlib('See examples with raised captions',
+    FGCLASS,'olraisedBlue', TEXTFONTCLASS,'oltxtRaisedBlue',
+    BORDER,3, BASE,3, BGBACKGROUND,'../image/rainbowline.gif',
+    ABOVE, CENTER, VAUTO);"
+    onmouseout="nd();">raised</a> <a
+    href="STICKY.html#raisedcap"
+    onmouseover="return overlib('See examples with raised captions',
+    FGCLASS,'olraisedMetallic', TEXTFONTCLASS,'oltxtRaisedMetallic',
+    BORDER,3, BASE,3, BGBACKGROUND,'../image/rainbowline.gif',
+    ABOVE, CENTER, VAUTO);"
+    onmouseout="nd();">captions</a> via background images.
+   <br><br>
+   <div align="center">
+    <em>Use your browser's</em> <b>View Source</b> <em>option to see the</em> <a
+     href="javascript:void(0);"
+     onmouseover="return overlib('&lt;center&gt;This page gives me&lt;br&gt;'
+     +'&lt;b&gt;heartburn!!!&lt;/b&gt;&lt;/center&gt;', TEXTFONTCLASS,'oltxt14',
+      BUBBLE, BUBBLETYPE,'quotation',FILTERSHADOWCOLOR,'#00B000',
+      STATUS,'This page gives me heartburn!!!');"
+     onmouseout="nd();">markup</a> <em>for these examples.</em>
+   </div>
+   <br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     REF,'logo',REFX,96,REFY,-4,BORDER,3,BASE,3,TEXTPADDING,4,TEXTFONTCLASS,'oltxt14',
+     FGBACKGROUND,'../image/rb.jpg',BGBACKGROUND,'../image/rainbowline.gif');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',FGBACKGROUND,'../image/rb.jpg',
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-10,REFY,-10,TEXTFONTCLASS,'txtb12',BORDER,6,BASE,6,
+     BGBACKGROUND,'../image/rainbowline.gif');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="110" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('&nbsp;Valid&nbsp;HTML&nbsp;4.01',BUBBLE,
+     TEXTFONTCLASS,'comic20',REF,'w3c',REFC,'UR',REFP,'LR',REFX,73,REFY,2,
+     FILTERSHADOW,1,FILTERSHADOWCOLOR,'#00B000');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="6"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='BKGRND.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

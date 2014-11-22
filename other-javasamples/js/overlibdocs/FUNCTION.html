@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Instructions for function-generated content in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - FUNCTION command in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_function.js"></script>
+
+<script type="text/javascript">
+ <!--
+// FUNCTION TO RETURN TODAY'S DATE AS A STRING
+ function TodayIs()
+ {
+  thedow = new Array("Sunday","Monday","Tuesday","Wednesday",
+                     "Thursday","Friday","Saturday");
+  themoy = new Array("January","February","March","April","May","June","July",
+                     "August","September","October","November","December");
+
+  thedate = new Date();
+
+  var txt = ''
+  txt += '<div align="center">';
+  txt += (thedow[thedate.getDay()] + ' ');
+  txt += (themoy[thedate.getMonth()] + ' ');
+  txt += (thedate.getDate() + ', ');
+  if (thedate.getYear() > 1000) {
+   txt += thedate.getYear();
+  } else {
+   if (thedate.getYear() > 90 && thedate.getYear() < 100) {
+    txt += ('19' + thedate.getYear());
+   } else {
+    if (thedate.getYear() > 99)
+     txt += (thedate.getYear() + 1900);
+   }
+  }
+  txt += '<\/div>';
+  return txt;
+ }
+
+// Preload image for popup background
+paper = new Image();
+paper.src = "../image/paper.jpg"
+ // -->
+</script>
+
+<style type="text/css">
+<!--
+.olcg {background-color:#AA00AA; text-align:center;}
+.olcap {font-family:'Times New Roman',Verdana;font-size:12px;font-weight:bold;color:#ffffff;}
+.oltxt {font-family:'Times New Roman',Verdana;font-size:16px;color:#aa00aa;}
+
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+.olfoot {font-family:Verdana,Arial,Helvetica;font-size:12px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head>
+
+<body text="#330033" bgcolor="#ddeeff">
+
+<table width="75%" cellpadding="5" align="center">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Function-generated Popup Content</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', OFFSETX,-16, OFFSETY,20,
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">overlibmws</a></strong></span>
+   <span class="myHeader"><strong><em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmousemove="if(OLie7)self.status='Click to send form-based e-mail to Fote.';"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, WRAP, BASE,2, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20,
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20,
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for<br>
+   FUNCTION support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20,
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   <span class="mySpacer">&nbsp;<br></span>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   This link has an example of the
+   <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(FUNCTION,TodayIs,
+     CAPTION,'Today\'s Date',CGCLASS,'olcg',
+     CAPTIONFONTCLASS,'olcap',TEXTPADDING,4,TEXTFONTCLASS,'oltxt',
+     WRAP,BASE,2,OFFSETX,-5,OFFSETY,20,AUTOSTATUSCAP,
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">FUNCTION</A> command.&nbsp; The function gets today's date.&nbsp;
+   The call for this example is:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>onmouseover=&quot;return overlib(FUNCTION,TodayIs,<br>
+   &nbsp;CAPTION,'Today\'s Date',CGCLASS,'olcg',<br>
+   &nbsp;CAPTIONFONTCLASS,'olcap',TEXTPADDING,4,TEXTFONTCLASS,'oltxt',<br>
+   &nbsp;WRAP,BASE,2,OFFSETX,-5,OFFSETY,20,AUTOSTATUSCAP,<br>
+   &nbsp;FGBACKGROUND,'../image/paper.jpg');<br>
+   onmouseout=&quot;nd();&quot;<br></code>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   where the parameter is a function reference.&nbsp; That is, it is the name of a
+   javascript function on your page which returns a string value.&nbsp;
+   The parens could be included, i.e., <b>FUNCTION, TodayIs()</b>, and are normally
+   included for functions which take arguments, e.g., <b>FUNCTION, Func(arg1,arg2,arg3)</b>.
+   <br><br>
+   This feature is implemented via the <strong>overlibmws_function.js</strong> plugin
+   module, which should be imported after the <strong>overlibmws.js</strong> core module
+   via a script block in the head section:<br>
+   <span style="line-height:24px;">&nbsp;&nbsp;&nbsp;&nbsp;<b>&lt;script
+    type=&quot;text/javascript&quot;
+    src=&quot;overlibmws_function.js&quot;&gt;&lt;/script&gt;</b></span>
+   <br><br>
+   The example uses the following script (in a script block) for getting today's date, and
+   style sheet (in a style block) for the popup:<br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <pre>&lt;script type=&quot;text/javascript&quot;&gt;
+ &lt;!--
+ function TodayIs()
+ {
+  thedow = new Array(&quot;Sunday&quot;,&quot;Monday&quot;,&quot;Tuesday&quot;,&quot;Wednesday&quot;,
+                     &quot;Thursday&quot;,&quot;Friday&quot;,&quot;Saturday&quot;);
+  themoy = new Array(&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;,&quot;July&quot;,
+                     &quot;August&quot;,&quot;September&quot;,&quot;October&quot;,&quot;November&quot;,&quot;December&quot;);
+
+  thedate = new Date();
+
+  var txt = '';
+  txt += '&lt;div align="center"&gt;';
+  txt += (thedow[thedate.getDay()] + ' ');
+  txt += (themoy[thedate.getMonth()] + ' ');
+  txt += (thedate.getDate() + ', ');
+  if (thedate.getYear() &gt; 1000) {
+   txt += thedate.getYear();
+  } else {
+   if (thedate.getYear() &gt; 90 && thedate.getYear() &lt; 100) {
+    txt += ('19' + thedate.getYear());
+   } else {
+    if (thedate.getYear() &gt; 99)       	
+     txt += (thedate.getYear() + 1900);       
+   }
+  }
+  txt += '&lt;/div&gt;';
+  return txt;
+ }
+ // --&gt;
+&lt;/script&gt;</pre>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="mySpacer">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>&lt;style type="text/css"&gt;<br>
+   &lt;!--<br>
+   .olcg {background-color:#aa00aa; text-align:center;}
+   <br><br>
+   .olcap {<br>
+   &nbsp;font-family:Times New Roman,Verdana;<br>
+   &nbsp;font-size:12px;<br>
+   &nbsp;font-weight:bold;<br>
+   &nbsp;color:#ffffff;}
+   <br><br>
+   .oltxt {<br>
+   &nbsp;font-family:Times New Roman,Verdana;<br>
+   &nbsp;font-size:16px;<br>
+   &nbsp;color:#aa00aa;}<br>
+   --&gt;<br>
+   &lt;/style&gt;</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="mySpacer">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <b>Note</b> that such scripts also can be used for overlib popups simply by
+   putting the function call (with parens) in the <a
+    name="leadarg" id="leadarg"
+    href="javascript:void(0);"
+    onmousemove="if(OLie7)self.status='When is it?'"
+    onmouseover="return overlib('It\'s promptly at 4:00 pm today:'+TodayIs(),
+     CAPTION,'When is it?',CGCLASS,'olcg',
+     CAPTIONFONTCLASS,'olcap',TEXTPADDING,4,TEXTFONTCLASS,'oltxt',
+     WRAP,BASE,2,AUTOSTATUSCAP,FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">Lead Argument</a> of the overlb call, rather than making it
+   the parameter for the FUNCTION command:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>onmouseover=&quot;return overlib('It\'s promptly at 4:00 pm today:'+TodayIs(),<br>
+   &nbsp;CAPTION,'When is it?',CGCLASS,'olcg',<br>
+   &nbsp;CAPTIONFONTCLASS,'olcap',TEXTPADDING,4,TEXTFONTCLASS,'oltxt',<br>
+   &nbsp;WRAP,BASE,2,AUTOSTATUSCAP,FGBACKGROUND,'../image/paper.jpg');<br>
+   onmouseout=&quot;nd();&quot;<br></code>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   &nbsp;<br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text12" align="center" valign="bottom" colspan="3" rowspan="1">
+   <b>These examples use <a
+    href="./"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,ABOVE,CENTER, TEXTPADDING,4, TEXTFONTCLASS,'olfoot',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,BASE,2,ABOVE,CENTER, TEXTPADDING,4, TEXTFONTCLASS,'olfoot',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-5,REFY,-10,
+     WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'logo',REFX,95,REFY,1,BASE,2,TEXTPADDING,4,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="100" align="center" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5,WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='FUNCTION.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

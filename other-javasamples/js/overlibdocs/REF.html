@@ -1,0 +1,553 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head> 
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Instructions for reference-based positioning in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLib - REF-based positioning in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_iframe.js"></script>
+<script type="text/javascript" src="overlibmws_hide.js"></script>
+
+<style type="text/css">
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.text12 {font-family:Verdana,Arial,sans-serif;font-size:12px;}
+.textrb12 {font-family:Verdana,Arial,sans-serif;font-size:12px;text-align:right;vertical-align:bottom;}
+.textlb12 {font-family:Verdana,Arial,sans-serif;font-size:12px;text-align:left;vertical-align:bottom;}
+.text14 {font-family:Verdana,Arial,sans-serif;font-size:14px;}
+.text16 {font-family:Verdana,Arial,sans-serif;font-size:16px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+</style>
+</head> 
+
+<body text="#220022" bgcolor="#ddeeff"> 
+
+<table align="center" width="90%" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center"  class="myText">
+   <span class="myHeader"><strong>REFerence-based Positioning</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span>
+   <span class="myHeader"><strong><a
+    name="oltestref" id="oltestref"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', BORDER,2, BASE,3, BGCOLOR,'#c0c080', FGCOLOR,'#ffffaa',
+     REF,'oltestref', REFP,'UR', REFX,-5, WRAP, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     NOJUSTY, FILTER, FADEIN,7, FADEOUT,8);"
+    onmouseout="nd();">overlibmws</a><br>
+   core <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', BORDER,2, BASE,3, BGCOLOR,'#c0c080', FGCOLOR,'#ffffaa',
+     REF,'comref', REFC,'UR', REFP,'UL', REFX,15, WRAP, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     NOJUSTY, FILTER, FADEIN,7, FADEOUT,8);"
+    onmouseout="nd();">commands</a>:&nbsp REF, REFC, REFP, REFX, REFY</strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    name="foteref" id="foteref"
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     BORDER,2, BASE,3, BGCOLOR,'#c0c080', FGCOLOR,'#ffffaa',
+     REF,'foteref',REFC,'LL', REFP,'UL', REFX,-5, REFY,10, WRAP,
+     TEXTPADDING,4, TEXTFONTCLASS,'text12', NOJUSTY, FILTER, FADEIN,7, FADEOUT,8);"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    name="oltref" id="oltref"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     BORDER,2, BASE,3, BGCOLOR,'#c0c080', FGCOLOR,'#ffffaa',
+     REF,'oltref',REFC,'LR', REFP,'UR', REFX,10, REFY,10, WRAP,
+     TEXTPADDING,4, TEXTFONTCLASS,'text12', NOJUSTY, FILTER, FADEIN,7, FADEOUT,8);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for REF support via the</em> <span class="purple14">overlibmws</span> <a
+    name="supref" id="supref"
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     BORDER,2, BASE,3, BGCOLOR,'#c0c080', FGCOLOR,'#ffffaa',
+     REF,'supref',REFC,'LR', REFP,'UR', REFX,10, REFY,10, WRAP,
+     TEXTPADDING,4, TEXTFONTCLASS,'text12', NOJUSTY, FILTER, FADEIN,7, FADEOUT,8);"
+    onmouseout="nd();">Support Group</a>.</strong>
+   <span class="text12"><br>&nbsp;<br></span>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',BORDER,3,BGCOLOR,'#c0c080',FGCOLOR,'#ffffaa',
+     REF,'logo',REFX,95,REFY,-2,TEXTPADDING,4,WRAP,BASE,3,FILTER,FADEIN,7,FADEOUT,8,
+     TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,WRAP,BASE,3,TEXTFONTCLASS,'text12',
+     REF,'logo',REFC,'LL',REFP,'UL',REFX,-6,REFY,5,FILTER,
+     BORDER,3,BGCOLOR,'#C0C080',FGCOLOR,'#FFFFAA');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="120" align="center" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',TEXTFONTCLASS,'text12',
+     REF,'w3c',REFP,'UR',REFX,-5,TEXTPADDING,4,WRAP,BASE,3,FILTER,FADEIN,8,FADEOUT,7,
+     BORDER,3,BGCOLOR,'#C0C080',FGCOLOR,'#FFFFAA');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt=""
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="90%" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <td class="text12">
+   <br>
+   <b>REF</b> (ol_ref) is the <b>name <em>and/or</em> id</b> of an anchor (link), image, or
+   iframe, or the <b>id</b> of any other element to be used as the <b><em>reference
+   object</em></b> for positioning the popup.&nbsp; <b><em>Note that with the modern browsers
+   virtually any element in the body of the document can have an </em>id<em> attritute, and its
+   value can be used for </em>REF<em>-based positioning of the popups</b> (with the "pre-modern"
+   Netscape 4.x, the </em><b>id</b><em> attribute can be used for this purpose only in
+   positioned divs, and it uses only the </em><b>name</b><em> attribute in anchors and images
+   for such positioning).</em>
+   <br><br>
+   <b>REFC</b> (ol_refc) defines the <b><em>corner of the reference object</em></b>, and
+   <b>REFP</b> (ol_refp) the <b><em>corner of the popup</em></b>, which should be
+   positioned relative to each other.&nbsp;
+   The allowable values are 'UL' (Upper Left), 'UR', (Upper Right), 'LL' (Lower Left), and
+   'LR' (Lower Right).&nbsp;
+   The values can be lower case, and must be specified as strings (i.e., quoted).&nbsp;
+   The defaults are normally 'UL'.&nbsp;
+   For example, if REFC is its default 'UL' and REFP is set to 'LL' then the lower left
+   corner of the popup will be  <a
+    name="link1" id="link1"
+    onmouseover="return overlib('REFC, \'UL\', REFP, \'LL\'', REF,'link1',REFP,'LL',WRAP,
+     TEXTFONTCLASS,'text14',BORDER,3,BGCOLOR,'#C0C080',FGCOLOR,'#FFFFAA',BASE,2,NOJUSTY,
+     STATUS,'REF is an anchor with name=&quot;link1&quot; and id=&quot;link1&quot;');"
+    onmouseout="return nd();"
+    href="javascript:void(0);">positioned</a> at the upper left corner of the reference
+   object.&nbsp;
+   In the case of anchors, the default value of 'UL' is the only value supported for REFC
+   in Netscape 4.x, and for all supported browsers it references the upper left corner of the
+   first character in textual anchor content (including space above the character associated
+   with the line height) even if there is wrapping in a string used as anchor content such
+   that the wrapped portion is to the left of the first character.&nbsp; If the anchor content
+   is an image, use that image as the reference object.
+   <br><br>
+   <b>REFX</b> (ol_refx) specifies any <b><em>horizontal displacement</em></b> (unquoted
+   number indicating pixels) desired between the reference object's and popup's corners.&nbsp;
+   Positive values move the popup to the right, and negative to the left.&nbsp;
+   The default normally is 0.&nbsp;
+   The popup will not overrun the left or right margin of the window unless NOJUSTX is
+   set.&nbsp;  
+   <b>REFY</b> (ol_refy) indicates any desired <b><em>vertical displacement</em></b>, with
+   positive numbers to move the popup down, and negative numbers for up.&nbsp;
+   This default also is normally 0.&nbsp;
+   The popup will not overrun the top or bottom margin of the window unless NOJUSTY is
+   set.&nbsp;
+   In the preceding paragraph the anchor was assigned a name and id value of "link1" for
+   use with <b>REF</b>, and in the following example we use that together with <b>REFY</b>
+   to position a popup at the lower left corner of the anchor content:
+   <br><br>
+   <span style="color:#225588;">&lt;a
+    onmouseover="return&nbsp;overlib('REFY,16, (UL UL)', REF,'link1', REFY,16, WRAP);"
+    onmouseout="return&nbsp;nd();"
+    href="javascript:void(0);"&gt;<a
+    onmouseover="return overlib('REFY,16, (UL UL)', REF,'link1',REFY,16,WRAP,
+     TEXTFONTCLASS,'text14',BORDER,3,BGCOLOR,'#C0C080',FGCOLOR,'#FFFFAA',BASE,2,
+     STATUS,'REF is an Anchor with name=&quot;link1&quot; and id=&quot;link1&quot;');"
+    onmouseout="return nd();"
+    href="javascript:void(0);">REFY,16,&nbsp;(UL&nbsp;UL)</a>&lt;/a&gt;</span>
+   <br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="80%" cellpadding="10" cellspacing="0" border="0">
+ <tr>
+  <td valign="top" rowspan="2">
+   <img
+    name="penguins" id="penguins"
+    width="50" height="231" border="0" alt=""
+    src="../image/penguinjump.gif"><br>
+  </td>
+  <td valign="top" class="text12">
+   The image at left has name and id attributes with the value
+   "penguins" so that we can use it as a reference for positioning popups:
+   <br><br>
+   <span style="color:#225588;"
+   >&lt;a onmouseover="return&nbsp;overlib('Don\'t&amp;lt;br&amp;gt;Push!', REF,'penguins',
+   REFP,'UR', WRAP);" onmouseout="return&nbsp;nd();"
+   href="javascript:void(0);"&gt;<a
+   onmouseover="return overlib('&lt;b&gt;&lt;em&gt;Don\'t&lt;br&gt;Push!&lt;em&gt;&lt;/b&gt;',
+    REF,'penguins',REFP,'UR',
+    WRAP,TEXTFONTCLASS,'text14',BORDER,3,BGCOLOR,'#336699',FGCOLOR,'#88CCFF',BASE,2,
+     STATUS,'REF is an img with name=&quot;penguins&quot; and id=&quot;penguins&quot;');"
+   onmouseout="return nd();" href="javascript:void(0);">UL&nbsp;UR</a>&lt;/a&gt;</span>
+   <br><br>
+   For images, we need not leave REFC as its default but can vary that as well.&nbsp;
+   For example, we could use:
+   <br><br>
+   <span style="color:#225588;"
+   >&lt;a onmouseover="return&nbsp;overlib('SPLASH!!!', REF,'penguins', REFC,'LR', 'REFP,'LL',
+   WRAP);" onmouseout="return&nbsp;nd();" href="javascript:void(0);"&gt;<a
+    onmouseover="return overlib('&lt;b&gt;&lt;em&gt;SPLASH!!!&lt;/em&gt;&lt;/b&gt;',
+     WRAP,REF,'penguins',REFC,'LR',
+     REFP,'LL', BORDER,5,BGCOLOR,'#00CC00',FGCOLOR,'#88FF88',TEXTFONTCLASS,'text16',BASE,3,
+     STATUS,'REF is an img with name=&quot;penguins&quot; and id=&quot;penguins&quot;');"
+    onmouseout="return nd();"
+    href="javascript:void(0);">LR&nbsp;LL</a>&lt;/a&gt;</span><br>
+  </td>
+ </tr>
+ <tr>
+  <td align="center">
+   <form name="form1" method="post" enctype="x-www-form-encoded" action="javascript:void(0);">
+    <table align="center" cellpadding="0" cellspacing="0" border="0">
+     <tr>
+      <td align="right" valign="bottom" class="textrb12">
+       <a name="beforeselect" id="beforeselect">&nbsp;</a>
+      </td>
+      <td class="text14" align="center" valign="bottom">
+       <select name="S1" id="select1" size="3">
+        <option>Select
+        <option>List
+        <option>Displaying
+        <option>Multiple
+        <option>Options
+       </select>
+      </td>
+      <td align="left" valign="bottom" class="textlb12">
+       <a name="afterselect" id="afterselect">&nbsp;</a>
+      </td>
+     </tr>
+    </table>
+   </form>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="90%" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <td class="text12">
+   Note that the anchors with name and id attributes need not have
+   href attributes, and can be placed around content or be used with a transparent character
+   such  as a non-breaking space
+   (<b>&lt;a&nbsp;name="foo"&nbsp;id="foo"&gt;&amp;nbsp;&lt/a&gt;</b>)
+   to create references anywhere in the document.&nbsp;
+   This can be useful for positioning popups <a
+    onmouseover="return overlib('Select an option&lt;br /&gt;from this list.',
+     REF,'beforeselect',REFP,'LR',REFX,1,REFY,10,
+     WRAP,BASE,2,BORDER,2,FILTER,
+     BGCOLOR,'#7D96AF',FGCOLOR,'#BBDDFF',TEXTFONTCLASS,'text12',
+     STATUS,'REF is a hidden anchor with name=&quot;beforeselect&quot; and '
+     +'id=&quot;beforeselect&quot;');"
+    onmouseout="return nd();"
+    href="javascript:void(0);">before</a> or <a
+    onmouseover="return overlib('Select an option&lt;br /&gt;from this list.',
+     REF,'afterselect',REFP,'LL',REFX,3,REFY,10,
+     WRAP,BASE,2,BORDER,2,FILTER,
+     BGCOLOR,'#7D96AF',FGCOLOR,'#BBDDFF',TEXTFONTCLASS,'text12',
+     STATUS,'REF is a hidden anchor with name=&quot;afterselect&quot; and '
+     +'id=&quot;afterselect&quot;');"
+    onmouseout="return nd();"
+    href="javascript:void(0);">after</a> form elements or other non-anchor objects such that
+   the positioning works for Netscape 4.x in addition to the modern browsers.&nbsp; One also
+   can use a small transparent gif image in this manner.&nbsp; But for the modern browsers one
+   can simply assign id attributes to form elements such as <a
+    onmouseover="return overlib('Select an option&lt;br /&gt;from this list.',
+     REF,'select1',REFP,'UR',REFX,-3,REFY,10,
+     WRAP,BASE,2,BORDER,2,FILTER,
+     BGCOLOR,'#7D96AF',FGCOLOR,'#BBDDFF',TEXTFONTCLASS,'text12',
+     STATUS,'REF is the select element with id=&quot;select1&quot;');"
+    onmouseout="return nd();"
+    href="javascript:void(0);">select</a>, input, button, or textarea, and use those for
+   positioning.
+   <br><br>
+   On failure to find a specified reference object or inability to use it for
+   positioning, the popup instead will be positioned so as to be centered within
+   the current window display (i.e., the REF specification will be negated and
+   instead <a
+    onmouseover="return overlib('MIDX,0,MIDY,0',WRAP,MIDX,0,MIDY,0,TEXTFONTCLASS,'text14',
+     BORDER,5,BASE,3,BGCOLOR,'#EEEE00',FGCOLOR,'#FFFFDD',HIDESELECTBOXES,
+     STATUS,'Popup is centered within the window.');"
+    onmouseout="return nd();"
+    href="javascript:void(0);">MIDX,0,MIDY,0</a>
+   will be used).
+   <br><br>
+   <b>These examples use <a
+    name="oldir" id="oldir"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,REF,'oldir',REFP,'LL', TEXTFONTCLASS,'text14',
+     BORDER,5,BASE,3,BGCOLOR,'#EEEE00',FGCOLOR,'#FFFFDD',NOJUSTY);"
+    onmouseout="return nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,BASE,2,REF,'oldir',REFP,'LL', TEXTFONTCLASS,'text14',
+     BORDER,5,BASE,3,BGCOLOR,'#EEEE00',FGCOLOR,'#FFFFDD',NOJUSTY);"
+    onmouseout="return nd();">commands</a>.</b>
+   <br><br>
+   In the following examples, popups are displayed with respect to reference objects
+   consisting of a <a
+    onMouseOver="return overlib('A positioned div (layer). (UL UL).',REF,'outerLayer',
+     WRAP,BORDER,2,BASE,2,AUTOSTATUS);"
+    onmouseout="return nd();"
+    href="javascript:void(0);">positioned&nbsp;div</a> (layer) with a <a
+    onmouseover="return overlib('A nested layer. (UL UL).',REF,'innerLayer',
+     WRAP,BORDER,2,BASE,2,AUTOSTATUS);"
+    onmouseout="return nd();"
+    href="javascript:void(0);">nested&nbsp;layer</a>, as well as an <a
+    onMouseOver="return overlib('Anchor in a nested layer. (UL UL)',REF,'nbspAnchor',
+     WRAP,BORDER,2,BASE,2,AUTOSTATUS);"
+    onmouseout="return nd();"
+    href="javascript:void(0);">anchor</a> and an <a
+    onmouseover="return overlib('Image in a nested layer. (UL UL)',REF,'swingImage',
+     WRAP,BORDER,2,BASE,2,AUTOSTATUS);"
+    onmouseout="return nd();"
+    href="javascript:void(0);">image</a> within layers.&nbsp;
+   The layers can have transparent backgrounds so that they blend into the document,
+   but are colored here to make the corners visible.<br>
+  </td>
+ </tr>
+</table>
+<br>
+
+<div id="outerLayer" style="position:relative; height:320px;
+ z-index:1; background-color:pink; layer-background-color:pink;">
+ <font size="2" color="#225588">&nbsp;&lt;div id="<b>outerLayer</b>" style="position:relative;
+ height:320px;<br>&nbsp;&nbsp;&nbsp;z-index:1; background-color:pink;
+ layer-background-color:pink;"&gt;</font>
+ <div id="innerLayer" style="position:absolute; width:300px; height: 210px; z-index:3;
+  left: 10px; top: 60px; background-color: #FFFF00; layer-background-color: #FFFF00;
+  border: 1px #000000 none;">
+  <font size="2" color="#225588">&lt;div id="<b>innerLayer</b>" style="position:absolute;<br>
+  &nbsp;width:300px; height: 210px; z-index:3; left: 10px;<br>
+  &nbsp;top: 90px; background-color: #FFFF00;<br>
+  &nbsp;layer-background-color: #FFFF00;<br>
+  &nbsp;border: 1px #000000 none"&gt;
+  <br><br>
+  &nbsp;&lt;a name="<b>nbspAnchor</b>"<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  id="<b>nbspAnchor</b>"&gt;<em><a
+  name="nbspAnchor" id="nbspAnchor">&amp;nbsp;</a></em>&lt;/a&gt;
+  <br><br>
+  &nbsp;<b>Image:</b> <img
+  src="../satire/image/monkey.gif"
+  name="swingImage" id="swingImage"
+  width="32" height="32" alt="">
+  &lt;img<br>&nbsp;name="<b>swingImage</b>" id="<b>swingImage</b>" ...&gt;</font>
+ </div>
+ <br><br>
+ <table width="300" border="1" cellspacing="0" cellpadding="2" align="right"> 
+  <tr> 
+   <td align="center" colspan="4">
+    <b><font size="2">Positioned relative to</font></b>
+   </td> 
+  </tr> 
+  <tr> 
+   <td align="center">
+    <font size="2"><b>div<br>(outerLayer)</b></font>
+   </td> 
+   <td align="center">
+    <font size="2"><b>div<br>(innerLayer)</b></font>
+   </td> 
+   <td align="center">
+    <font size="2"><b>ANCHOR<br>(nbspAnchor)</b></font>
+   </td>
+   <td align="center">
+    <font size="2"><b>IMAGE<br>(swingImage)</b></font>
+   </td>
+  </tr> 
+  <tr> 
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Left (+30, +0), Upper Left', WRAP,
+      REF, 'outerLayer', REFX, 30, BORDER, 5, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UL UL</a><br>(REFX,30)</font>
+   </td> 
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Left, Lower Left', WRAP,
+      REF, 'innerLayer', REFP, 'LL', BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UL LL</a></font>
+   </td> 
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Left, Lower Left', WRAP,
+      REF, 'nbspAnchor', REFP, 'LL', BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UL LL</a></font>
+   </td> 
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Left, Lower Left', WRAP,
+      REF, 'swingImage', REFP, 'LL', BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UL LL</a></font>
+   </td>
+  </tr> 
+  <tr> 
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Right (-30,+0), Upper Right', WRAP,
+      REF, 'outerLayer', REFC, 'UR', REFP, 'UR', REFX, -30, BORDER, 5, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UR UR</a><br>(REFX,-30)</font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Right, Upper Right', WRAP,
+      REF, 'innerLayer', REFC, 'UR', REFP, 'UR', BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UR UR</a></font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Left, Lower Right', WRAP,
+      REF, 'nbspAnchor', REFP, 'LR', BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UL LR</a></font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Right,<br>Lower Right', WRAP,
+      REF, 'swingImage', REFC, 'UR', REFP, 'UR', REFP, 'LR', BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UR LR</a></font>
+   </td>
+  </tr> 
+  <tr> 
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Lower Left (+10, -10), Lower Left', WRAP,
+      REF, 'outerLayer', REFC, 'LL', REFP, 'LL',
+      REFX, 10, REFY, -10, BORDER, 5, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">LL LL</a><br>(REFX,10,&nbsp;<br>&nbsp;REFY,-10)</font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Lower Left, Upper Left', WRAP,
+      REF, 'innerLayer', REFC, 'LL', BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">LL UL</a></font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Left (+0, +16),&lt;br&gt;Upper Left', WRAP,
+      REF, 'nbspAnchor', REFP, 'UL', REFY, 16, BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UL UL</a><br>(REFY,16)</font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Lower Left, Upper Left', WRAP,
+      REF, 'swingImage', REFC, 'LL', REFP, 'UL', BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">LL UL</a></font>
+   </td>
+  </tr> 
+  <tr> 
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Lower Right (+0, -30), Lower Right', WRAP,
+      REF, 'outerLayer', REFC, 'LR', REFP, 'LR',
+      REFY, -30, BORDER, 5, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">LR LR</a><br>(REFY,-30)</font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Lower Right (-75, +0), Upper Right', WRAP,
+      REF, 'innerLayer', REFC, 'LR', REFX, -75, BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">LR UL</a><br>(REFX,-75)</font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Upper Left (+0, +16),&lt;br&gt;Upper Right', WRAP,
+      REF, 'nbspAnchor', REFP, 'UR', REFY, 16, BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">UL UR</a><br>(REFY,16)</font>
+   </td>
+   <td align="center">
+    <font size="2"><a
+     href="javascript:void(0);"
+     onmouseover="return overlib('Lower Right (+0, -10),<br>Upper Left', WRAP,
+      REF, 'swingImage', REFC, 'LR', REFP, 'UL', REFY, -10, BORDER, 2, BASE, 2, STATUS, ' ')"
+     onmouseout="nd();">LR UL</a><br>(REFY,-10)</font>
+   </td>
+  </tr>
+ </table><br><br>
+</div>
+<div>&nbsp;<br></div>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='REF.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

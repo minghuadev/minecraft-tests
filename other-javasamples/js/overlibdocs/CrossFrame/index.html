@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+ "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrates frame handling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Across frames (crossframe) tests with overlibmws</title>
+<script type="text/javascript" src="../../script/ga.js"></script>
+</head>
+
+<frameset cols="90,*">
+ <frame scrolling="no" noresize name="f0"
+  src="left.html">
+ <frameset rows="25,*,25">
+  <frame scrolling="no" noresize name="f1"
+   src="top.html"> 
+  <frameset cols="50%,*">
+   <frame scrolling="auto" noresize name="f2"
+    src="middleLeft1.html">
+   <frame scrolling="auto" noresize name="f3"
+    src="middleRight.html">
+  </frameset>
+  <frame scrolling="no" noresize name="f4"
+   src="bottom.html">
+ </frameset> 
+ <noframes> 
+  <body bgcolor="#ffffff"> 
+   <p>
+    <em>This document illustrates across frames support via the crossframe and regCore plugins
+    in Macrides Web Services free open source software for enhancing web pages with DHTML
+    popups and tooltips, and thus requires a browser that can view frames.</em>
+   </p>
+  <!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='index.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest/CrossFrame';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body> 
+ </noframes>
+</frameset>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrates frame handling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Across frames (crossframe) tests with overlibmws (top.middleRight.middleRightTop.f301)</title>
+
+<script type="text/javascript">
+<!--
+if(parent==self)location.replace('index.html');
+// -->
+</script>
+
+<script type="text/javascript" src="../overlibmws.js"></script>
+<script type="text/javascript" src="../overlibmws_crossframe.js"></script>
+<script type="text/javascript">
+<!--
+var OLbubbleImageDir='../';
+var OLbubbleImages='flower';
+//-->
+</script>
+<script type="text/javascript" src="../overlibmws_bubble.js"></script>
+<script type="text/javascript" src="../overlibmws_exclusive.js"></script>
+<script type="text/javascript" src="../overlibmws_filter.js"></script>
+<script type="text/javascript" src="../overlibmws_hide.js"></script>
+<script type="text/javascript" src="../overlibmws_iframe.js"></script>
+<script type="text/javascript" src="../overlibmws_modal.js"></script>
+<script type="text/javascript" src="../overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="../overlibmws_scroll.js"></script>
+<script type="text/javascript" src="../overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(WRAP, RELX,5, RELY,25, CAPTION,'Example', STICKY,
+ TEXTPADDING,6, CAPTIONPADDING,4, FGCOLOR,'#44bbff',
+ HIDESELECTBOXES, HIDEBYIDNS4,'formDiv',
+ TEXTSIZE,'12px', CAPTIONSIZE,'12px', CLOSESIZE,'12px');
+
+var myOv2a = 'Reload this frame.';
+
+var myOv2b='Reload 1st file in this frame.';
+
+var myReload='<a href="middleRightTopRight.html" '
+ +'name="sameFrame" '
+ +'onmouseover="return overlib2(myOv2a,'
+ +' REF,\'sameFrame\', REFY,30, -STICKY, SHADOW,'
+ +' CAPTION,\'\', FGCOLOR,\'#ffffcc\', TEXTPADDING,4,'
+ +' DELAY,400, TIMEOUT,4400);" '
+ +'onmouseout="nd2();">Navigate</a>'
+
+var myHf2='<a href="middleLeft1.html" ';
+
+var myP1=
+  'name="myHref" '
+ +'onmouseover="return parent.frames[3][0][1].overlib2('
+ +'parent.frames[3][0][1].myOv2b,'
+ +' REF,\'myHref\', REFY,30, -STICKY, SHADOW,'
+ +' CAPTION,\'\', FGCOLOR,\'#ffffcc\', TEXTPADDING,4,'
+ +' DELAY,400, TIMEOUT,4400);" '
+ +'onmouseout="parent.frames[3][0][1].nd2();">Navigate</a>'
+
+var myP1link=
+  'name="frame2linkHref" '
+ +'onmouseover="return parent.frames[3][0][1].overlib2('
+ +'parent.frames[3][0][1].myOv2b,'
+ +' REF,\'frame2linkHref\', REFP,\'LL\', -STICKY, SHADOW,'
+ +' CAPTION,\'\', FGCOLOR,\'#ffffcc\', TEXTPADDING,4,'
+ +' DELAY,400, TIMEOUT,4400);" '
+ +'onmouseout="parent.frames[3][0][1].nd2();">Navigate</a>'
+
+var myHPf300='<a href="middleRightTopLeft.html" '
+ +'name="myHref" '
+ +'onmouseover="return parent.frames[1].overlib2('
+ +'parent.frames[1].myOv2a,'
+ +' -WRAP, WIDTH,126,'
+ +' REF,\'myHref\', REFY,30, -STICKY, SHADOW,'
+ +' CAPTION,\'\', FGCOLOR,\'#ffffcc\', TEXTPADDING,4,'
+ +' DELAY,400, TIMEOUT,4400);" '
+ +'onmouseout="parent.frames[1].nd2();">Navigate</a>'
+
+var myHPf31='<a href="middleRightBottom1.html" '
+ +'name="myHref" '
+ +'onmouseover="return parent.parent.frames[3][0][1].overlib2('
+ +'parent.parent.frames[3][0][1].myOv2b,'
+ +' REF,\'myHref\', REFP,\'LL\', REFY,-2, -STICKY, SHADOW,'
+ +' CAPTION,\'\', FGCOLOR,\'#ffffcc\', TEXTPADDING,4,'
+ +' DELAY,400, TIMEOUT,4400);" '
+ +'onmouseout="parent.parent.frames[3][0][1].nd2();">Navigate</a>'
+
+//-->
+</script>
+
+<style type="text/css">
+<!--
+body {margin:0px;}
+a {color:#008800; font-weight:bold;}
+a:hover {color:#ff00ff;}
+.text20 {font-family:'Times New Roman',sans-serif; color:#000000; font-size:20px;}
+.text16 {font-family:'Times New Roman',sans-serif; color:#ffffff; font-size:16px;}
+.text14h {font-family:'Times New Roman',sans-serif; font-size:14px; line-height:24px;}
+-->
+</style> 
+</head>
+  
+<body bgcolor="#D2D2D2" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<div class="text20">
+ <strong>Frame [3][0][1]</strong>
+</div>
+
+<table width="350" border="0" cellspacing="0" cellpadding="5" align="center">
+ <tr>
+  <td class="text16">
+   <div id="formDiv" style="position:relative; z-index:1;
+    font-family:'Times New Roman',sans-serif; font-size:14px;"><br>
+    <form name="F1" method="post" enctype="x-www-form-encoded"
+     action="javascript:void(0);">
+     <select size=3>
+      <option>Select
+      <option>List
+      <option>Displaying
+      <option>Multiple
+      <option>Options
+     </select>
+    </form>
+   </div>
+  </td>
+ </tr>
+ <tr>
+  <td class="text14h">
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(myReload,
+     STATUS,'Frame [3][0][1]',
+     SCROLL,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW, SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">frame[3][0][1]</a> FSh<br>
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(myHPf300, FRAME,top.frames[3][0][0],
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW, SHADOWCOLOR,'#cf33cf', MODAL, MODALCOLOR,'#440044',
+     STATUS,'Frame [3][0][0]');"
+    onmouseout="nd();">frame[3][0][0]</a> FShM<br>
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(myHPf31, FRAME,top.frames[3][1],
+     STATUS,'Frame [3][1]',
+     SCROLL,
+     SHADOW, SHADOWCOLOR,'#008000');"
+    onmouseout="nd();">frame[3][1]</a> Sh<br>
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('Hello!', FRAME,top.frames[0],
+     STATUS,'Frame [0]',
+     CAPTION,'E', -WRAP, WIDTH,20, CAPTIONPADDING,2);"
+    onmouseout="nd();">frame[0]</a><br>
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(myHf2+myP1, FRAME,top.frames[2],
+     STATUS,'Frame [2]',
+     SCROLL,
+     SHADOW, SHADOWCOLOR,'#00ff00');"
+    onmouseout="nd();">frame[2]</a> Sh<br>
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(myHf2+myP1, FRAME,top.frames[2],
+     STATUS,'Frame [2]',
+     SCROLL,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW, SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">frame[2]</a> FSh<br>
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(myHf2+myP1link,
+     FRAME, top.frames[2], STATUS,'Frame [2]',
+     HIDEBYIDNS4,'',
+     REF,'frame2link',REFP,'LL', REFX,-10);"
+    onmouseout="nd();">frame[2]</a> Ref<br>
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('&lt;div align=\'center\'&gt;Welcome&lt;/div&gt;',
+     FRAME,top.frames[2], STATUS,'Frame [2]',
+     -SCROLL, NOCLOSE, OFFDELAY,500,
+     BUBBLE, TEXTSIZE,'24px');"
+    onmouseout="nd(1500);">frame[2]</a> BubTimNoc<br>
+   Target: <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(myHf2+myP1+' (EXCLUSIVE - Must close)',
+     FRAME,top.frames[2], STATUS,'Frame [2]',
+     SCROLL,
+     EXCLUSIVE);"
+    onmouseout="nd();">frame[2]</a> Exc<br>
+  </td> 
+ </tr> 
+ <tr>
+  <td width="350" height="80">
+   <img src="../../image/tp.gif" width="350" height="80" border="0"><br>
+  </td> 
+ </tr> 
+</table> 
+<script type="text/javascript" src="../../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='middleRightTopRight.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest/CrossFrame';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

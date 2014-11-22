@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of NOCLOSE and MOUSEOFF command and use of CSS in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - NOCLOSE, MOUSEOFF and CSS in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(BGCLASS,'olbg', CGCLASS,'olcg', FGCLASS,'olfg',
+ CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo', TEXTFONTCLASS,'oltxt');
+
+paper = new Image();
+paper.src = "../image/paper.jpg"
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+//-->
+</script>
+
+<style type="text/css">
+<!--
+.olbg {background-color:#333399;}
+.olcg {background-color:#aa00aa;text-align:center;}
+.olfg {background-color:#ccccff;text-align:center;
+ background-image:url(../image/paper.jpg);}
+.olcap {font-family:Arial; font-size:12px; font-weight:bold; color:#ffffff;}
+a.olclo {font-family:Verdana; font-size:11px; font-weight:bold; color:#ddddff;}
+a.olclo:hover {color:#ffffff;}
+.oltxt {font-family:Arial; font-size:16px; color:#000000;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text4 {font-family:Verdana,Arial,sans-serif; font-size:4px;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+.olFoot {font-family:Verdana,Arial,Helvetica; font-size:12px; color:#000000;}
+a {color:#338855;font-weight:bold;}
+a:hover {color:#FF00FF;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+-->
+</style> 
+</head>
+
+<body text="#220022" bgcolor="#ddeeff">
+
+<table width="100%" cellpadding="2" cellspacing="0" border="0"> 
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Examples of NOCLOSE / MOUSEOFF</strong></span>
+   <span class="mySubHead"><strong><em>with<br>the</em></strong></span>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,OFFSETX,-10,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a></strong></span>
+   <span class="myHeader"><strong><em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmousemove="if(OLie55)self.status='Click to send form-based e-mail to Fote.';"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20);"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong><br><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle">
+   <table width="600" cellpadding="6" cellspacing="0"> 
+    <tr>
+     <td align="center" class="text18">
+      <b><a
+       href="javascript:void(0);"
+       onmousemove="if(OLie55)self.status='NOCLOSE sticky example';"
+       onmouseover="return overlib('This example sets NOCLOSE, so that you move on '
+        +'and then off anywhere in the popup to close it.', STICKY, NOCLOSE,
+        CAPTION,'NOCLOSE sticky example', AUTOSTATUSCAP,
+        MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,240)"
+       onmouseout="nd();">NOCLOSE sticky example</a></b>
+     </td>
+    </tr>
+    <tr> 
+     <td width="100%" class="text14">
+      <b>Called by the statement</b><br>
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text14">&nbsp;&nbsp;&nbsp;</td><td class="text14" bgcolor="#ddddee">
+       return overlib('This example sets NOCLOSE, so that you move on '<br>
+       +'and then off anywhere in the popup to close it.', <b>STICKY, NOCLOSE,</b><br>
+       CAPTION,'NOCLOSE sticky example', AUTOSTATUSCAP,<br>
+       MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,240);
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text18">
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onmousemove="if(OLie55)self.status='Default sticky example';"
+       onmouseover="return overlib('The default is for the sticky to be closed '
+        +'on mouse over the CLOSETEXT, which is \'Close\' by default but is set '
+        +'here to \'MouseMe\'', STICKY, CLOSETEXT,'MouseMe',
+        CAPTION,'Default sticky example', AUTOSTATUSCAP,
+        MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,240);"
+       onmouseout="nd();">Default sticky example</a></b>
+     </td>
+    </tr>
+    <tr> 
+     <td width="100%" class="text14">
+      <b>Called by the statement</b><br>
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text14">&nbsp;&nbsp;&nbsp;</td><td class="text14" bgcolor="#ddddee">
+       return overlib('The default is for the sticky to be closed on '<br>
+       +'mouse over the CLOSETEXT, which is \'Close\' by default but is set '<br>
+       +'here to \'MouseMe\'', <b>STICKY, CLOSETEXT,'MouseMe',</b><br>
+       CAPTION,'Default sticky example', AUTOSTATUSCAP,<br>
+       MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,240);
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr>
+     <td align="center" class="text18">
+      <a name="mouseoff" id="mouseoff">&nbsp;</a>
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onmousemove="if(OLie55)self.status='Default sticky with MOUSEOFF example';"
+       onmouseover="return overlib('When using the default for a sticky such that it '
+        +'can be closed via a CLOSETEXT link in the caption, one can also add the '
+        +'event handlers for closing the popup when mousing off after mousing over the '
+        +'popup by including the MOUSEOFF command.', STICKY, MOUSEOFF,
+        CAPTION,'Default sticky with MOUSEOFF example', AUTOSTATUSCAP,
+        MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,342);"
+       onmouseout="nd();">Default sticky with MOUSEOFF example</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td width="100%" class="text14">
+      <b>Called by the statement</b><br>
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text14">&nbsp;&nbsp;&nbsp;</td><td class="text14" bgcolor="#ddddee">
+       return overlib('When using the default for a sticky such that it can be '<br>
+       +'closed via a CLOSETEXT link in the caption, one can also add the event '<br>
+       +'handlers for closing the popup when mousing off after mousing over the '<br>
+       +'popup by including the MOUSEOFF command.', <b>STICKY, MOUSEOFF,</b><br>
+       CAPTION,'Default sticky with MOUSEOFF example', AUTOSTATUSCAP,<br>
+       MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,342);
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text18">
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onmousemove="if(OLie55)self.status='NOCLOSE,TIMEOUT sticky example';"
+       onmouseover="return overlib('This example sets NOCLOSE and a TIMEOUT '
+        +'of 10 seconds, such that it will close after that interval if you '
+        +'ignore it, but will clear the TIMEOUT and close on mouse off if '
+        +'you move on to anywhere in the popup.', STICKY, NOCLOSE,
+        CAPTION,'NOCLOSE,TIMEOUT sticky example', AUTOSTATUSCAP,
+        MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,240, TIMEOUT,10000);"
+       onmouseout="nd();">NOCLOSE,TIMEOUT sticky example</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td width="100%" class="text14">
+      <b>Called by the statement</b><br>
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text14">&nbsp;&nbsp;&nbsp;</td><td class="text14" bgcolor="#ddddee">
+       return overlib('This example sets NOCLOSE and a TIMEOUT '<br>
+        +'of 10 seconds, such that it will close after that interval if you '<br>
+        +'ignore it, but will clear the TIMEOUT and close on mouse off if '<br>
+        +'you move on to anywhere in the popup.', <b>STICKY, NOCLOSE,</b><br>
+       CAPTION,'NOCLOSE,TIMEOUT sticky example', AUTOSTATUSCAP,<br>
+       MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,240, <b>TIMEOUT,10000</b>);
+      </td></tr></table>
+     </td>
+    </tr> 
+    <tr> 
+     <td align="center" class="text18">
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onmousemove="if(OLie55)self.status='Captionless NOCLOSE,TIMEOUT sticky example';"
+       onmouseover="return overlib('This captionless example sets NOCLOSE and a '
+        +'TIMEOUT of 10 seconds, such that it will close after that interval if you '
+        +'ignore it, but will clear the TIMEOUT and close on mouse off if '
+        +'you move on to anywhere in the popup.', STICKY, NOCLOSE,
+        STATUS,'Captionless NOCLOSE,TIMEOUT sticky example',
+        MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,246, TIMEOUT,10000);"
+       onmouseout="nd();">Captionless NOCLOSE,TIMEOUT sticky example</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td width="100%" class="text14">
+      <b>Called by the statement</b><br>
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text14">&nbsp;&nbsp;&nbsp;</td><td class="text14" bgcolor="#ddddee">
+       return overlib('This captionless example sets NOCLOSE and a '<br>
+        +'TIMEOUT of 10 seconds, such that it will close after that interval '<br>
+        +'if you ignore it, but will clear the TIMEOUT and close on mouse off '<br>
+        +'if you move on to anywhere in the popup.', <b>STICKY, NOCLOSE,</b><br>
+       STATUS,'Captionless NOCLOSE,TIMEOUT sticky example',<br>
+       MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,246,  <b>TIMEOUT,10000</b>);
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text18">
+      <a name="ndtime" id="ndtime">&nbsp;</a><a name="demo" id="demo">&nbsp;</a>
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onmousemove="if(OLie55)self.status='NOCLOSE sticky example with nd(time)';"
+       onmouseover="return overlib('This example sets NOCLOSE, and sets up a delayed '
+        +'close via an nd(time) call. It will persist while your mouse stays over '
+        +'the link, will close 2 seconds after you mouse off the link, unless '
+        +'you mouse over the popup which will cancel the delayed close and '
+        +'substitute a close on mousing off from the popup.', STICKY, NOCLOSE,
+        CAPTION,'NOCLOSE sticky example with nd(time)', AUTOSTATUSCAP,
+        MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,400);"
+       onmouseout="nd(2000);">NOCLOSE sticky example with nd(time)</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td width="100%" class="text14">
+      <b>Called by the statement</b><br>
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text14">&nbsp;&nbsp;&nbsp;</td><td class="text14" bgcolor="#ddddee">
+       return overlib('This example sets NOCLOSE, and sets up a delayed '<br>
+        +'close via an nd(time) call. It will persist while your mouse stays over '<br>
+        +'the link, will close 2 seconds after you mouse off the link, unless '<br>
+        +'you mouse over the popup which will cancel the delayed close and '<br>
+        +'substitute a close on mousing off from the popup.', <b>STICKY, NOCLOSE,</b><br>
+        CAPTION,'NOCLOSE sticky example with nd(time)', AUTOSTATUSCAP,<br>
+        MIDX,0,VAUTO,OFFSETY,20, BASE,3, WIDTH,400);
+      </td></tr></table>
+      <b>with an nd(time) call:</b>
+      <span style="background-color:#ddddee;
+       line-height:24px;">&nbsp;onmouseout="nd(<b>2000</b>);"&nbsp;</span>
+     </td> 
+    </tr> 
+    <tr> 
+     <td width="100%" class="text14">
+      <a name="styledemo" id="styledemo">&nbsp;</a><br>
+     </td> 
+    </tr> 
+    <tr>
+   </table>
+   <table width="600" cellpadding="6" cellspacing="0" bgcolor="#ccddff"> 
+    <tr>
+     <td class="text14">
+      The style of the above popups is controlled via
+      <b><em>overlib's CSS class variables</em></b> defined in a script block
+      as follows:
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" class="text12" bgcolor="#ddddee">
+       <code>&lt;script type="text/javascript"&gt;<br>
+       &lt;!--<br>
+       OLpageDefaults(BGCLASS,'olbg', CGCLASS,'olcg', FGCLASS,'olfg',<br>
+       &nbsp;CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo', TEXTFONTCLASS,'oltxt');<br>
+       //--&gt;<br>
+       &lt;/script&gt;</code>
+     </td> 
+    </tr> 
+    <tr> 
+     <td class="text14">
+       in conjunction with a <b><em>style sheet</em></b> defined in a style block
+       as follows:
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" class="text12" bgcolor="#ddddee">
+       <code>&lt;style type="text/css&gt;<br>
+       &lt;!--<br> 
+       .olbg {background-color:#333399;<br>
+       .olcg {background-color:#aa00aa; text-align:center;}<br>
+       .olfg {background-color:#ccccff; text-align:center;<br>
+       &nbsp;background-image:url(../image/paper.jpg);}<br>
+       .olcap {font-family:Arial; font-size:12px; font-weight:bold; color:#ffffff;}<br>
+       a.olclo {font-family:Verdana; font-size:10px; font-weight:bold; color:#ddddff;}<br>
+       a.olclo:hover {color:#ffffff;}<br>
+       .oltxt {font-family:Arial; font-size:16px; color:#000000;}<br>
+       --&gt;<br>
+       &lt;/style&gt;</code><br>
+    </td> 
+    </tr> 
+   </table>
+  </td> 
+ </tr>
+ <tr>
+  <td align="center" class="myText">
+   <br>
+   NOCLOSE and MOUSEOFF are core commands.<br>
+   The examples use the default OFFDELAY (300 millisecs).
+   <br><br><br>
+  </td>
+ </tr> 
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP, REF,'dandt',REFP,'LL',REFX,-100,REFY,-5, BASE,2,
+     TEXTPADDING,4, TEXTFONTCLASS,'olFoot',FGCLASS,'',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP, REF,'comref',REFP,'LL',REFX,-110,REFY,-5, BASE,2,
+     TEXTPADDING,4, TEXTFONTCLASS,'olFoot',FGCLASS,'',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8,FGCLASS,'',FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-10,
+     WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,VCENTER,BASE,2,TEXTPADDING,4,TEXTFONTCLASS,'olFoot',FGCLASS,'',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCLASS,'',FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5,WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',WRAP,VCENTER,LEFT,BASE,2,
+     TEXTPADDING,4,TEXTFONTCLASS,'olFoot',FGCLASS,'',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='NOCLOSE.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

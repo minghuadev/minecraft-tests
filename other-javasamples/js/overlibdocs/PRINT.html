@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, print, link, button, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustration of print link or button procedures in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Popups with a Print Link or Button in overlibmws</title>
+
+<!--
+ Import the CSS file for this document.
+ ======================================
+ It's URL (href) also is used as the parameter for the PRINTCSS command.
+ -->
+<link rel="stylesheet" type="text/css" href="PRINT.css">
+
+<!--
+ For convenience, here is the content of the PRINT.css file.  Only the top
+ rules are directly relevant to the DHTML popups, but we import all of the
+ rules into the temporary printing windows via the PRINTCSS command in overlib
+ calls just in case other rules inadvertantly are affecting the DHTML popups.
+ =============================================================================
+.olbg {background-color:#000000;}
+.olcg {background-color:#000000;text-align:center;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.purpleh {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;color:purple;
+ font-weight:bold;font-style:italic;}
+.text18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:#000000;}
+.text14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:#000000;}
+.text12 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+ -->
+
+<!--
+ Import the overlibmws core and print modules, and other plugin modules.  The
+ core module must be imported first, but the order for plugins does not matter.
+ ==============================================================================
+ -->
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_print.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+// Example definition for a CAPTION parameter in overlib calls.
+// ============================================================
+var WestOrangeCap = 'Driving Instructions to West Orange Lacrosse Fields';
+
+// Example definition for a text area (lead argument) in overlib calls.
+// ===================================================================
+var WestOrangeDir =
+ '<ul><li>Long Hill Road east until it becomes River Road in Chatham.<\/li>'
++'<li>From entering Chatham at Bridge Avenue, follow River Road,<\/li>'
++'<li>4.3 miles to Watchung Avenue and turn right.<\/li>'
++'<li>0.1 miles to River Road and turn left. (Novartis, formerly Ciba-Geigy on your right)<\/li>'
++'<li>0.7 miles and take the left fork onto JFK Blvd. Pass Short Hills Mall on your right.<\/li>'
++'<li>4.3 miles to Northfield Ave. (Essex Cty route 508) and turn right.<\/li>'
++'<li>2.2 miles to Pleasant Valley Way. Straight through the traffic light.<\/li>'
++'<li>0.3 miles to St. Cloud Ave. Pass the skating Arena on the right.<\/li>'
++'<li>Turn left onto St. Cloud Ave. Landmark - the Turtle Brook Inn - a 2-story motel '
++'built right on the road. (Watch for a very tall cellular tower with anemic camoflage.)<\/li>'
++'<li><u>Stagg Field<\/u> is 0.1 mile on the left. LIMITED parking.<\/li>'
++'<li>Dennis Sandow will play Santa for the kids.<\/li>'
++'<\/ul>';
+
+// Example definition for a header pre-pended to the text area in a caption-less overlib call.
+// ===========================================================================================
+var WestOrangeHdr = '<div align="center"><strong>'+WestOrangeCap+'<\/strong><\/div>';
+
+// Function for an onload message.
+// ===============================
+function OnloadMsg() {
+ var onloadTxt =
+  '<strong><em>Enjoy these Print Link or Button Examples!!!<\/em><\/strong>';
+ overlib(onloadTxt,
+  WRAP, MIDX,0, RELY,12, TIMEOUT,5000,
+  TEXTSIZE,'14px', TEXTPADDING,5, FGCOLOR,'#ffffcc',
+  FILTER, FADEIN,15, FADEOUT,14,
+  BASE,2);
+}
+//-->
+</script>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff" onload="OnloadMsg();">
+<!-- Omitting an "overDiv" positioned div declaration; overlibmws will create it -->
+
+<table width="90%" align="center" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Print Link or Button Examples</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     WRAP, BASE,2, OFFSETX,-16, OFFSETY,20, TEXTPADDING,4, TEXTFONTCLASS,'myText',
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, WRAP, BASE,2, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20, FGCOLOR,'#bbddff',
+     FILTER, FADEIN,46, FADEOUT,46, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for<br>
+   printing support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   <span class="mySpacer"><br>&nbsp;<br></span>
+  </td>
+ </tr>
+ <tr>
+  <td align="center" class="text14">
+   <hr size="3" width="584" noshade>
+   <b>Attention Lacrosse Team and Fans:</b><br>
+   Saturday&nbsp;12/25/05<br>
+   Scrimmage&nbsp;at&nbsp;West&nbsp;Orange<br>
+   <span class="mySpacer">&nbsp;<br></span>
+<!--
+ overlib() call with print link in caption:
+ ==========================================
+ -->
+   <a
+    href="javascript:void(0)"
+    onmouseover="return overlib(WestOrangeDir, CAPTION,WestOrangeCap,
+     CAPTIONPADDING,6, WIDTH,520, MIDX,0, RELY,10, BASE,2,
+     STICKY, CLOSECLICK,
+     PRINT, PRINTCSSFILE,'PRINT.css',
+     BGCLASS,'olbg', CGCLASS,'olcg',
+     CAPCOLOR,'#ffffee', CLOSECOLOR,'#ffffee', FGCOLOR,'#ffffee',
+     FILTER, FADEIN,4, FADEOUT,3, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#5577cc',
+     SHADOW, SHADOWCOLOR,'#7799ee', SHADOWOPACITY,100,
+     AUTOSTATUSCAP);"
+    onmouseout="return nd();">Directions</a> (<em>w/ caption</em>)
+   <br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <b>Santa Claus says, &quot;<em>Be there!!!</em>&quot;</b><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <hr size="3" width="284" noshade>
+   <span class="mySpacer">&nbsp;<br></span>
+<!--
+ overlib() call with print button in text area:
+ ==================================================
+ -->
+   <a
+    href="javascript:void(0)"
+    onmouseover="return overlib(WestOrangeHdr+WestOrangeDir,
+     WIDTH,520, MIDX,0, RELY,10, BASE,2,
+     STICKY, NOCLOSE,
+     PRINT, PRINTCSSFILE,'PRINT.css',
+     BGCLASS,'olbg', FGCOLOR,'#ffffee',
+     FILTER, FADEIN,2, FADEOUT,1, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#5577cc',
+     SHADOW, SHADOWCOLOR,'#7799ee', SHADOWOPACITY,100,
+     AUTOSTATUSCAP);"
+    onmouseout="return nd();">Directions</a> (<em>w/o caption</em>)
+   <br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <b>Easter Bunny says, &quot;<em>It&#39;s Hoppin&#39;!!!</em>&quot;</b><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <hr size="3" width="560" noshade>
+   <br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   The above two links invoke a sticky popup and use the <strong>PRINT</strong> command
+   to insert a <strong>print link</strong> in the caption, or a <strong>print button</strong>
+   in the text area if the popup lacks a caption, so that the DHTML contents of the popup can
+   be sent to a printer via a temporary printing window.
+   <br><br>
+   Note that you can force use of a
+<!--
+ overlib() call with button in text area despite having a caption:
+ =================================================================
+ -->
+   <a
+    href="javascript:void(0)"
+    onmouseover="return overlib(WestOrangeDir, CAPTION,WestOrangeCap,
+     CAPTIONPADDING,6, WIDTH,520, MIDX,0, RELY,10, BASE,2,
+     STICKY,
+     PRINT, PRINTCSSFILE,'PRINT.css', PRINTBUTTON,
+     BGCLASS,'olbg', CGCLASS,'olcg',
+     CAPCOLOR,'#ffffee', CLOSECOLOR,'#ffffee', FGCOLOR,'#ffffee',
+     FILTER, FADEIN,4, FADEOUT,3, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#5577cc',
+     SHADOW, SHADOWCOLOR,'#7799ee', SHADOWOPACITY,100,
+     AUTOSTATUSCAP);"
+    onmouseout="return nd();">print&nbsp;button</a> in the text area (i.e., even if the
+   popup has a caption) by also using the <strong>PRINTBUTTON</strong> command.
+   <br><br>
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to review the markup
+   for this printing mechanism.&nbsp; It's <strong>not</strong> too complicated and you
+   <strong>can</strong> do it yourself once you catch on.</em>&nbsp;&nbsp;<img
+    src="../image/smiley14.gif" align="middle" width="14" height="14" border="0"
+    hspace="0" vspace="0" alt="Smile, you're on Candid Camera!!!"
+    title="Smile, you're on Candid Camera!!!">
+   <br><br>
+   Try examples with <a
+     href="DRAGGABLE.html"
+    onmouseover="return overlib('Go to examples with icons as the PRINTTEXT.',
+     FGCOLOR,'#bbddff',
+     WRAP, BASE,2, ABOVE, CENTER, OFFSETY,16, VAUTO, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER, FADEIN,31, FADEOUT,31, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">icons</a> as the <strong>PRINTTEXT</strong>.&nbsp; Also try examples
+    that use an <a
+    href="PRINTJOB.html"
+    onmouseover="return overlib('Go to examples with printing via an external function.',
+     FGCOLOR,'#bbddff',
+     WRAP, BASE,2, ABOVE, CENTER, OFFSETY,16, VAUTO, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER, FADEIN,31, FADEOUT,31, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">external&nbsp;function</a> for printing.&nbsp; See examples of
+   printable blow-ups for <a
+    href="PrintManonImages.html"
+    target="_blank"
+    onmouseover="return overlib('See examples of printable image blow-ups.',
+     FGCOLOR,'#bbddff',
+     WRAP, BASE,2, ABOVE, CENTER, OFFSETY,16, VAUTO, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER, FADEIN,31, FADEOUT,31, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">thumbnail&nbsp;image&nbsp;galleries</a>.
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<!-- overlibmws footer -->
+<table align="center" width="584" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="myText" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     WRAP, BASE,2, ABOVE, CENTER, OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER, FADEIN,31, FADEOUT,31, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', FGCOLOR,'#bbddff',
+     WRAP, BASE,2, ABOVE, CENTER, OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER, FADEIN,31, FADEOUT,31, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" width="130" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-10,
+     WRAP,BASE,2,TEXTFONTCLASS,'text12',FILTER);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'logo',REFX,95,REFY,1,BASE,2,TEXTPADDING,4,FILTER,FADEIN,6,FADEOUT,6,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',FILTER,
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5,WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',WRAP,BASE,2,FGCOLOR,'#cceeff',
+     REF,'w3c',REFP,'UR',REFX,-5,REFY,2,FILTER,TEXTPADDING,4,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='PRINT.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

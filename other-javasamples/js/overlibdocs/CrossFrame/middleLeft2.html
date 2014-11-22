@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrates frame handling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Across frames (crossframe) tests with overlibmws (top.f2 2)</title>
+
+<script type="text/javascript">
+<!--
+if(parent==self)location.replace('index.html');
+else if(document.layers)
+document.write(
+'<style type="text/css">\n<!--\n#bContent{position:absolute;left:0px;top:0px;width:1024}\n'
++'-->\n<'+'\/style>');
+// -->
+</script>
+
+<script type="text/javascript" src="../overlibmws_regCore.js"></script>
+
+<script type="text/javascript">
+<!--
+OLregisterPlugins('crossframe','bubble','exclusive','filter','hide','iframe','modal','overtwo','scroll','shadow');
+
+function OLok(){
+ /*
+   Equate f to the frame with the overlibmws script(s) relative to this frame
+   and precede all overlib and nd calls in this document with if(OLok()), e.g.:
+
+     onmouseover="if(OLok())return overlib('Hello World!!');"
+     onmouseout="if(OLok())nd();"
+ */
+ var r=0, f=parent.frames[3][0][1];
+ if(f&&f.OLloaded&&f.OLgateOK&&f.myP1){
+  r=1;
+  overlib=f.overlib;
+  nd=f.nd;
+ }
+ return r;
+}
+
+var myOv2='Reload 1st file in this frame.';
+//-->
+</script>
+
+<style type="text/css">
+<!--
+body {margin:0px;}
+a {color:#ffff88; font-weight:bold;}
+a:hover {color:#ff88ff;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.text20 {font-family:'Times New Roman',sans-serif; color:#ffffff; font-size:20px;}
+.text16 {font-family:'Times New Roman',sans-serif; color:#ffffff; font-size:16px;}
+-->
+</style> 
+</head>
+
+<body bgcolor="#8c8c8c" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<div class="text20">
+ <strong>Frame [2]</strong>
+</div>
+
+<table width="300" border="0" cellspacing="0" cellpadding="5" align="center">
+ <tr>
+  <td class="text16">
+   <div id="formDiv" style="position:relative; z-index:1;
+    font-family:'Times New Roman',sans-serif; font-size:14px;"><br>
+    <form name="F1" method="post" enctype="x-www-form-encoded"
+     action="javascript:void(0);">
+     <select size=3>
+      <option>Select
+      <option>List
+      <option>Displaying
+      <option>Multiple
+      <option>Options
+     </select>
+    </form>
+   </div>
+  </td>
+ <tr>
+ <tr>
+  <td class="text16">
+   <strong>This file set has tests of the <a
+    href="../"
+    name="dnload"
+    target="_top"
+    onmouseover="if(OLok())return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;&lt;br&gt; '
+     +'Download and Test&lt;br&gt;Directory.',
+     FRAME,top.frames[2], -STICKY, CAPTION,'', FGCOLOR,'#ffffcc', SHADOW,
+     DELAY,400, TIMEOUT,4400,
+     REF,'dnload', REFP,'LR', REFX,95, REFY,-2);"
+    onmouseout="if(OLok())nd();"><big>overlibmws</big></a> across frame popup
+   support via its <big>overlibmws_crossframe.js</big> and
+    <big>overlibmws_regCore.js</big> plugin modules.
+   <br><br>
+   This <a
+    href="middleLeft1.html"
+    name="frame2link"
+    title="Click to navigate.">link</A> is to the <big>1st file</big> in this frame. Click
+   the link while a popup is being displayed in this frame (via the lower links in the
+   upper-right frame, <em>see below</em>), to see if your browser on your platform
+   handles the navigation without complaints. Also try this via links in the popups,
+   and in the lower-right frame.
+   <br><br>
+   This file set has a series of frames. Each frame is labeled in the upper left
+   hand corner. The frame notation also indicates whether the frame is nested or
+   not. By nested, one means that the frameset loaded a document that itself was a
+   frameset document. This frame (Frame [2]) is the third frame defined in the
+   original frameset document. The frame in the middle, upper right (Frame
+   [3][0][1]) represents a third order of nesting.
+   <br><br>
+   The links in the Frame [3][0][1] will cause a series of STICKY popups (or a non-sticky
+   BUBBLE popup) to appear in their respective frames, in the upper left hand corner via
+   REL-based positioning, or over the above link via REF-based positioning. The core and
+   crossframe plugin modules include the frame reference to where a popup was originally
+   loaded and this is reset each time a new popup is shown. If this page is scrolled, the
+   popups with REL-based positioning should follow the scrolling.
+   <br><br>
+   You also can use frame references to access the same <big>overlibmws</big> 
+   module{s) in another frame, as this <a
+    href="middleLeft1.html"
+    name="frame2bottomLeft"
+    onmouseover="if(OLok())return overlib('Evoked via Frame [3][0][1]&lt;br&gt;'
+     +'with MIDX, 0, RELY, -80&lt;br&gt;postioning.', SHADOW, SHADOWCOLOR,'#444488',
+     FRAME,top.frames[2],
+     MIDX,0, RELY,-80, CAPTION,'Sticky', SCROLL);"
+    onmouseout="if(OLok())nd();">link</a> and this <a
+    href="middleLeft1.html"
+    name="frame2bottomMiddle"
+    onmouseover="if(OLok())return overlib('Evoked via Frame [3][0][1]',
+     FRAME,top.frames[2],
+     -STICKY, CAPTION,'', FGCOLOR,'#ffffcc', SHADOW,
+     DELAY,400, TIMEOUT,4400,
+     REF,'frame2bottomMiddle', REFP,'LR', REFX,40, REFY,-2);"
+    onmouseout="if(OLok())nd();">link</a> but not this <a
+    title="This is a title-based tooltip."
+    href="middleLeft1.html">link</a> show.</strong>
+   <br><br>
+  </td> 
+ </tr> 
+</table> 
+<script type="text/javascript" src="../../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='middleLeft2.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest/CrossFrame';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

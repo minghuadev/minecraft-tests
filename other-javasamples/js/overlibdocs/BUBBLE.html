@@ -1,0 +1,882 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, speech bubbles, DHTML popups, DHTML tooltips, bubble, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Instructions for speech bubbles in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Speech Bubble Popups in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_bubble.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(FGCOLOR,'#ffffcc', CAPTIONPADDING,4, TEXTPADDING,4, BASE,2);
+
+var mwshome = new Image();
+mwshome.src = "../satire/image/sfmem.jpg"
+
+var MWShome='<img alt="" width="290" height="178" src="../satire/image/sfmem.jpg">'
++'<div class="br6">&nbsp;<\/div>Link to the Macrides Web Services homepage';
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+//-->
+</script>
+
+<style type="text/css">
+body {font-family:Verdana,Arial,Helvetica;color:#330033;background-color:#ddeeff;
+ margin-top:10px;margin-bottom:30px;margin-left:5px;margin-right:5px;}
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff;}
+.title {font-family:Verdana,Arial,Helvetica;font-size:26px;font-weight:bold;text-align:center;}
+.author {font-family:Verdana,Arial,Helvetica;font-size:12px;font-style:italic;text-align:center;}
+.sectiontitle {font-family:Verdana,Arial,Helvetica;font-size:18px;font-weight:bold;}
+.cellcontent {font-family:Verdana,Arial,Helvetica;font-size:13px;padding-right:5px;
+ padding-left:5px;}
+.comic20 {font-family:'Comic Sans MS';font-size:20px;}
+.bubble1 {font-family:Verdana,Arial,Helvetica;font-size:13px;font-weight:bold;}
+.bubble2 {font-family:Verdana,Arial,Helvetica;font-size:18px;font-weight:bold;color:#dd0000;
+ text-align:center;}
+.bubble3 {font-family:Verdana,Arial,Helvetica;font-size:16px;font-weight:bold;color:#dd00dd;
+ text-align:center;}
+.olTxtMWS {font-family:Arial,sans-serif;font-size:12px;color:#666600;
+ font-style:italic;font-weight:bold;}
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text12 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.text14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.popfgpale {background-color:#ffffdd; text-align:center;}
+.br6 {font-size:4px; line-height:6px;}
+</style>
+</head>
+
+<body text="#330033" bgcolor="#ddeeff">
+
+<table align="center" width="90%" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Speech Bubble Plugin Module</strong></span>
+   <span class="mySubHead"><strong><em>for the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('&lt;strong&gt;Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.&lt;/strong&gt;',
+     BUBBLE, BUBBLETYPE,'oval',
+     WRAP, TEXTFONTCLASS,'myText',
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'purple');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&lt;div align=\'center\'&gt;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; Suggest enhancements.)&lt;/div&gt;',
+     STATUS,'Click to send form-based e-mail to Fote.',
+     BUBBLE, BUBBLETYPE,'roundcorners',
+     WRAP, TEXTFONTCLASS,'myText', TEXTPADDING,0, CENTER, OFFSETY,20,
+     FILTER, FADEIN,46, FADEOUT,46, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#668844');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib(MWShome,
+     FGCLASS,'popfgpale',TEXTFONTCLASS,'olTxtMWS',TEXTPADDING,0,LEFT,HAUTO,VAUTO,
+     BUBBLE, BUBBLETYPE,'roundcorners', OFFSETY,3,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#668844');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for BUBBLE support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('&lt;div align=\'center\'&gt;&lt;strong&gt;Link to the&lt;br&gt;'
+     +'&lt;span class=\'purple14\'&gt;overlibmws&lt;/span&gt;&lt;br&gt;'
+     +'Support Group&lt;/strong&gt;&lt;/div&gt;',
+     BUBBLE, BUBBLETYPE, 'pushpin', ADJBUBBLE,
+     TEXTFONTCLASS,'myText', WRAP, MIDX,-50, RELY,2,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#bb66ff');"
+    onmouseout="nd();">Support Group</a>.</strong>
+   <br><br>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top"> 
+   <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+     <td>
+      <table width="100%" cellpadding="2" cellspacing="2" border="0">
+       <tr> 
+        <td width="15" class="sectiontitle">
+         1.
+        </td>
+        <td class="sectiontitle">
+         Introduction
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         <p>
+          This document illustrates and describes how to invoke speech bubble popups with
+          <span class="purple14">overlibmws</span>.&nbsp; There are several ways to customize
+          overlib popups and using a long command line is <b>not</b> the recommended way.&nbsp;
+          You can instead set a default configuration for all popups that occur on your page
+          by using the <a
+           href="commandRef.html#introduction"
+           onmouseover="return overlib('Read about the OLpageDefaults function.',
+            BUBBLE, BUBBLETYPE,'roundcorners',
+            TEXTFONTCLASS,'text12', TEXTPADDING,0, WRAP,HAUTO,
+            FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4488cc');"
+           onmouseout="nd();">OLpageDefaults</a> function of the overlibmws.js core 
+          module and then use only those commands and their parameters, if any, which 
+          need to be changed for particular overlib calls.&nbsp; Read the 
+          <a
+           href="commandRef.html"
+           onmouseover="return overlib('See the '
+            +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+            +'Command Reference.',
+            BUBBLE, BUBBLETYPE,'roundcorners',
+            TEXTFONTCLASS,'text12', TEXTPADDING,0, WRAP, HAUTO,
+            FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4488cc');"
+           onmouseout="nd();">Command Reference</a> for more information about other
+          ways to customize overlib popups.&nbsp; Place the script block for importing this
+          plugin module:<br>
+          <span class="mySpacer"><br></span>
+          &nbsp;&nbsp; &nbsp;&nbsp;&lt;script type="text/javascript"
+           <strong>src="overlibmws_bubble.js"</strong>&gt;&lt;/script&gt;<br>
+          <span class="mySpacer"><br></span>
+          in the head section after that for importing the overlibmws.js core module.
+         </p>
+        </td>
+       </tr>
+       <tr> 
+        <td width="15" class="sectiontitle">
+         2.
+        </td>
+        <td class="sectiontitle">
+         Examples
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         <p>
+          The following examples illustrate the different types of 
+          &quot;bubble&quot; popups that are currently available.&nbsp; The bold lettering
+          below each link shows the overlib call to invoke it.&nbsp; The second call is the
+          same except that the ADJBUBBLE command (<em>see below</em>) has been added.&nbsp;
+          The flower examples use the following style rule for the text:<br>
+          <strong>&nbsp;&nbsp;.comic20 {font-family:'Comic Sans MS'; font-size:20px;}</strong>
+         </p>
+         <table align="center" cellpadding="0" cellspacing="0" border="0"><tr><td
+          class="cellcontent"><ul>
+          <li>
+           <a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;flower&lt;/b&gt; bubble popup.',
+             BUBBLE, STATUS,'flower popup', TEXTFONTCLASS,'comic20');"
+            onmouseout="nd();">flower</a>
+           bubble&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;flower&lt;/b&gt; bubble popup.',
+             BUBBLE, ADJBUBBLE, STATUS,'flower popup with ADJBUBBLE', TEXTFONTCLASS,'comic20');"
+            onmouseout="nd();">adjust bubble size</a><br>
+           <strong>overlib('This is a &amp;lt;b&amp;gt;flower&amp;lt;/b&amp;gt; 
+           bubble popup.',<br>
+           &nbsp;BUBBLE, TEXTFONTCLASS, 'comic20')</strong>
+          </li>
+          <li>
+           <a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is an &lt;b&gt;oval&lt;/b&gt; bubble popup.',
+            BUBBLE, BUBBLETYPE, 'oval', STATUS, 'oval popup', TEXTSIZE,2,
+            FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'purple');"
+            onmouseout="nd();">oval</a> 
+           bubble&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is an &lt;b&gt;oval&lt;/b&gt; bubble popup.',
+             BUBBLE, BUBBLETYPE, 'oval', ADJBUBBLE, STATUS, 'oval popup with ADJBUBBLE',
+             TEXTSIZE,2, FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'purple');"
+            onmouseout="nd();">adjust bubble size</a><br>
+           <strong>overlib('This is an &amp;lt;b&amp;gt;oval&amp;lt;/b&amp;gt;
+           bubble popup.', BUBBLE,<br>
+           &nbsp;BUBBLETYPE, 'oval', TEXTSIZE, 2, FILTER, FILTERSHADOW,1,<br>
+           &nbsp;FILTERSHADOWCOLOR,'purple')</strong>
+          </li>
+          <li>
+           <a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;square&lt;/b&gt; bubble popup.',
+             BUBBLE, BUBBLETYPE, 'square', STATUS, 'square popup', TEXTSIZE,'83%');"
+            onmouseout="nd();">square</a> 
+           bubble&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;square&lt;/b&gt; bubble popup.',
+             BUBBLE, BUBBLETYPE, 'square', ADJBUBBLE, STATUS, 'square popup with ADJBUBBLE',
+             TEXTSIZE,'83%');"
+            onmouseout="nd();">adjust bubble size</a><br>
+           <strong>overlib('This is a &amp;lt;b&amp;gt;square&amp;lt;/b&amp;gt; 
+           bubble popup.',<br>
+           &nbsp;BUBBLE, BUBBLETYPE, 'square', TEXTSIZE, '83%'</strong>
+          </li>
+          <li>
+           <a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;pushpin&lt;/b&gt; bubble popup.',
+             BUBBLE, BUBBLETYPE, 'pushpin', STATUS, 'pushpin popup', TEXTSIZE,'0.83em',
+             RELX,-50, RELY,30, FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'purple');"
+            onmouseout="nd();">pushpin</a> 
+           bubble&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;pushpin&lt;/b&gt; bubble popup.',
+             BUBBLE, BUBBLETYPE, 'pushpin', ADJBUBBLE, STATUS, 'pushpin popup with ADJBUBBLE',
+             TEXTSIZE,'0.83em', RELX,-50, RELY,30, FILTER, FILTERSHADOW,2,
+             FILTERSHADOWCOLOR,'purple');"
+            onmouseout="nd();">adjust bubble size</a><br>
+           <strong>overlib('This is a &amp;lt;b&amp;gt;pushpin&amp;lt;/b&amp;gt; 
+           bubble popup.',BUBBLE,<br>
+           &nbsp;BUBBLETYPE, 'pushpin', TEXTSIZE, '0.83em', RELX,-50, RELY,30,<br>
+           &nbsp;FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'purple')</strong>
+          </li>
+          <li>
+           <a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;quotation&lt;/b&gt; bubble popup.',
+             BUBBLE, BUBBLETYPE, 'quotation', STATUS, 'quotation popup', TEXTSIZE,'x-small');"
+            onmouseout="nd();">quotation</a> 
+           bubble&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;quotation&lt;/b&gt; bubble popup.',
+             BUBBLE, BUBBLETYPE, 'quotation', ADJBUBBLE, STATUS,
+              'quotation popup with ADJBUBBLE', TEXTSIZE,'x-small');"
+            onmouseout="nd();">adjust bubble size</a><br>
+           <strong>overlib('This is a &amp;lt;b&amp;gt;quotation&amp;lt;/b&amp;gt; 
+           bubble popup.',<br>
+           &nbsp;BUBBLE, BUBBLETYPE, 'quotation', TEXTSIZE, 'x-small')</strong>
+          </li>
+          <li>
+           <a
+            href="javascript:void(0);"
+            onmouseover="return overlib('This is a &lt;b&gt;roundcorners&lt;/b&gt; popup.',
+             TEXTPADDING,0,
+             BUBBLE,BUBBLETYPE,'roundcorners', STATUS, 'roundcorners popup', TEXTSIZE,2,
+             MIDX,30, MIDY,0, WRAP, FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'purple');"
+            onmouseout="nd();">roundcorners</a> 
+           popup.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adjust 
+           bubble size not applicable.<br>
+           <strong>overlib('This is a &amp;ltb&amp;gt;roundcorners&amp;lt;/b&amp;gt;
+           popup.', BUBBLE,<br>&nbsp;BUBBLETYPE, 'roundcorners',
+           TEXTSIZE, 2, MIDX,30, MIDY,0, WRAP,<br>&nbsp;FILTER, FILTERSHADOW,1,
+           FILTERSHADOWCOLOR,'purple')</strong>
+          </li>
+         </ul></td></tr></table>
+         <strong>Note</strong> that <strong>&amp;lt;</strong> and <strong>&amp;gt;</strong>
+         are the HTML entity references for &quot;&lt;&quot; and &quot;&gt;&quot; 
+         respectively.&nbsp; These are used to avoid any problems associated 
+         with firewalls, especially Norton's firewall.&nbsp; <strong>Also note</strong> that
+         the <strong>FILTER</strong> feature for IE v5.5+ browsers is being used with the
+         <strong>oval</strong>, <strong>pushpin</strong>, and <strong>roundcorners</strong>
+         examples (and with the non-bubble popups on this page).
+         <script type="text/javascript" src="frills.js"></script>
+         <p>
+          <a name="imagemap" id="imagemap">&nbsp;</a>
+         </p>
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         <map name="crash" id="crash">
+          <area
+           href="javascript:void(0);"
+           onmouseover="return overlib('&lt;b&gt;Look Barbie,&lt;br&gt;'
+            +'&nbsp;there\'s a sale on at Saks!&lt;/b&gt;',
+            BUBBLE,BUBBLETYPE,'flower', TEXTFONTCLASS,'bubble1',
+            REF,'crashimg',REFX,170,REFY,105,
+            STATUS,'This is an image map.  Try the anchor.')"
+           onmousemove="if(OLie4&&!OLieM&&!OLopr){
+            self.status='This is an image map.  Try the anchor.';return true};"
+           onmouseout="nd();"
+           shape="poly" alt=""
+           coords="209,338,211,313,300,267,307,277,319,278,326,274,330,265,332,255,352,257,408,284,415,307,389,317,380,337,360,338,352,334,348,326,262,340,210,338">
+          <area
+           href="javascript:void(0);"
+           onmouseover="return overlib('CRUNCH !!!',
+            BUBBLE,BUBBLETYPE,'square', TEXTFONTCLASS,'bubble2',
+            REF,'crashimg',REFX,150,REFY,1,
+            STATUS,'This is an image map.  Try the anchor.')"
+           onmousemove="if(OLie4&&!OLieM&&!OLopr){
+            self.status='This is an image map.  Try the anchor.';return true};"
+           onmouseout="nd();"
+           shape="poly" alt=""
+           coords="53,328,57,303,119,260,157,217,218,190,273,187,295,193,340,190,343,195,354,217,353,233,331,249,330,260,327,268,321,275,313,277,305,274,299,264,211,311,209,330,204,341,193,345,173,345,160,342,127,348,92,347,71,343,53,333,53,326">
+          <area
+           href="javascript:void(0);"
+           onmouseover="return overlib('My Word - What a mess!',
+            BUBBLE,BUBBLETYPE,'oval',ADJBUBBLE, TEXTFONTCLASS,'bubble3',
+            REF,'crashimg',REFX,20,REFY,240,
+            STATUS,'This is an image map.  Try the anchor.')"
+           onmousemove="if(OLie4&&!OLieM&&!OLopr){
+            self.status='This is an image map.  Try the anchor.';return true};"
+           onmouseout="nd();"
+           shape="poly" alt=""
+           coords="0,224,9,225,10,233,14,239,17,256,14,265,11,309,17,318,7,320,0,305">
+         </map>
+         <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+           <td>
+            <img
+             name="crashimg" id="crashimg"
+             src="crash.jpg"
+             usemap="#crash"
+             width="428" height="350" border="0" hspace="0" alt="" /><br>
+           </td>
+           <td width="10" class="cellcontent">
+            &nbsp;&nbsp;
+           </td>
+           <td valign="top" class="cellcontent">
+            <p>
+             <a
+              href="http://groups.yahoo.com/group/overlib/message/5617"
+              onmouseover="return overlib('See Stu\'s original implementation.',
+               TEXTFONTCLASS,'text12', WRAP, CENTER, OFFSETY,20, VAUTO,
+               BUBBLE, BUBBLETYPE,'roundcorners', FILTER);"
+              onmouseout="nd();">Stuart&nbsp;Crawshaw</a> originally implemented
+             <strong>speech bubbles</strong> with an earlier version of overlib and
+             offered it to the Yahoo overlib group.&nbsp;
+             A simulation using overlibmws_bubble.js and the mws core module's REF-based
+             positioning and class-based text styling (TEXTFONTCLASS) is at left.
+            </p>
+            <p>
+             Hover over the <a
+              href="javascript:void(0);"
+              onmouseover="return overlib('&lt;b&gt;Look Barbie,&lt;br&gt;'
+               +'&nbsp;there\'s a sale on at Saks!&lt;/b&gt;',
+               BUBBLE, BUBBLETYPE,'flower', TEXTFONTCLASS,'bubble1',
+               REF,'crashimg', REFX,170, REFY,105,
+               STATUS,'This is an anchor.  Try the image map.')"
+              onmouseout="nd();">blue&nbsp;car</a> first, then the <a
+              href="javascript:void(0);"
+              onmouseover="return overlib('CRUNCH !!!',
+               BUBBLE, BUBBLETYPE,'square', TEXTFONTCLASS,'bubble2',
+               REF,'crashimg', REFX,150, REFY,1,
+               STATUS,'This is an anchor.  Try the image map.')"
+              onmouseout="nd();">mauve&nbsp;car</a>, and finally the <a
+              href="javascript:void(0);"
+              onmouseover="return overlib('My Word - What a mess!',
+               BUBBLE, BUBBLETYPE,'oval', ADJBUBBLE, TEXTFONTCLASS,'bubble3',
+               REF,'crashimg', REFX,20, REFY,240,
+               STATUS,'This is an anchor.  Try the image map.')"
+              onmouseout="nd();">man</a> at the left of the picture to see the speech
+             bubbles invoked via an image map.
+            </p>
+           </td>
+          </tr>
+         </table>
+         <a name="section3" id="section3">&nbsp;</a><br>
+        </td>
+       </tr>
+       <tr> 
+        <td width="15" class="sectiontitle">
+         3.
+        </td>
+        <td class="sectiontitle">
+         Commands
+        </td>
+       </tr>
+       <tr>
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         <dl> 
+          <dt>
+           <strong>BUBBLE</strong>
+          </dt>
+          <dd>
+           Toggle for whether to show a speech bubble popup (default 0).<br>
+           Variable: ol_bubble
+          </dd>
+          <dt>
+           <strong>BUBBLETYPE</strong> <em><a
+            href="javascript:void(0);"
+            onmouseover="return overlib(
+             'flower, oval, square, pushpin, quotation, or roundcorners.',
+             CAPTION, 'Parameter &lt;I&gt;type of bubble image&lt;/I&gt;',
+             TEXTFONTCLASS,'text12', WRAP, FILTER,
+             STATUS, 'Parameter type of bubble image');"
+            onmouseout="nd();">type  of bubble image</a></em>
+          </dt>
+          <dd>
+           Specifies a string value, giving the type of &quot;bubble&quot; image to
+           display.&nbsp; Default value is 'flower'.&nbsp; Other permissible values are
+           'oval', 'square,' 'pushpin,' 'quotation,' and 'roundcorners'.&nbsp; The latter
+           bubbletype employs a 3 x 3 table with the outer cells filled with images
+           (cornerTL.gif, edgeT.gif, cornerTR.gif, edgeL.gif, edgeR.gif, cornerBL.gif,
+           edgeB.gif, and cornerBR.gif), with the actual content in the center cell, and
+           with the edge images scaled to match that content.&nbsp; These and the other
+           bubble images must be placed in a directory that can be specified via
+           <strong>OLbubbleImageDir</strong> (see <b>Pre-Init String Variables</b>,
+           <em>below</em>).&nbsp; The default value is '<b>./</b>'); preloading will occur
+           automatically when the plugin is loaded.<br>
+           Variable: ol_bubbletype
+          </dd>
+          <dt>
+           <strong>ADJBUBBLE</strong>
+          </dt>
+          <dd>
+           Toggles whether the &quot;bubble&quot; image will be resized proportionally
+           (i.e., so that the aspect ratio [width/height] is held constant), according
+           to how much content is in the popup.&nbsp; Default value is off (0).&nbsp;
+           This command has no effect when BUBBLETYPE is 'roundcorners'.&nbsp; Use of
+           this command might cause popups to be displayed slowly, depending on your
+           machine's processor speed, and perhaps should be used cautiously.<br>
+           Variable: ol_adjbubble
+          </dd>
+          <dt>
+           <strong>RCBUBBLECOLOR</strong> <em><a
+            href="javascript:void(0);"
+            onmouseover="return overlib(
+             'Hex code or color name.',
+             CAPTION, 'Parameter &lt;I&gt;color&lt;/I&gt;',
+             TEXTFONTCLASS,'text12', WRAP, FILTER,
+             STATUS, 'Hex code or color name');"
+            onmouseout="nd();">color</a></em>
+          </dt>
+          <dd>
+           A string value, giving the color for the textual content of speech bubble popups
+           which have 'roundcorners' as their BUBBLETYPE parameter.&nbsp; See the first
+           <a
+            href="BUBBLE_ddeeff.html"
+            onmouseover="return overlib('Use of RCBUBBLECOLOR.', CAPTION,'Demonstration',
+             TEXTFONTCLASS,'text12', WRAP, FILTER, STATUS, 'Use of RCBUBBLECOLOR');"
+            onmouseout="nd();">BUBBLE&nbsp;supplement</a> for an example of its use.&nbsp;
+           Default value is '#ffffcc'.<br>
+           Variable: ol_rcbubblecolor
+          </dd>
+          <dt>
+           <strong>BUBBLECLOSE</strong>
+          </dt>
+          <dd>
+           Toggles whether to block the normally automatic setting of NOCLOSE for bubble
+           popups that are sticky.&nbsp; Default value is off (0).&nbsp; Toggle BUBBLECLOSE
+           on if the popup content includes a close link that calls the cClick or cClick2
+           function for primary or secondary popups, respectively (see the <a
+           href="commandRef.html#introduction"
+           onmouseover="return overlib('Read about the cClick and cClick2 functions.',
+            TEXTFONTCLASS,'text12', WRAP,HAUTO,FILTER);"
+           onmouseout="nd();">Introduction</a> of the Command Reference), and you wish to
+           require that it be used to close the bubble popup (i.e., without the popup also
+           able to close via a mouseoff).<br>
+           Variable: ol_bubbleclose
+          </dd>
+         </dl>
+         <b>Pre-Init String Variables:&nbsp; OLbubbleImageDir, OLbubbleImageSet,
+         OLbubbleImages, OLbubbleIMGsuffix, and OLbubbleRCsuffix</b><br>
+         These string variables can be defined in a script block placed in the document's
+         head before the block for importing the plugin module.&nbsp;
+         <b>OLbubbleImageDir</b> can be used to replace the default of '<b>./</b>'
+         for the directory where the bubble images are sought.&nbsp; For example, if it is
+         defined to '<b>/images</b>' they will be sought in a directory named <b>images</b>
+         off the account's root directory.&nbsp; <b>OLbubbleImageSet</b> is a comma-separated
+         list which defines the BUBBLETYPE tokens for the full set of available bubble
+         images.&nbsp; It defaults to <b>'flower,oval,square,pushpin,quotation,roundcorners'</b>
+         and can be used to add tokens for any bubble images beyond those included in the <span
+         class="purple14">overlibmws</span> distribution.&nbsp; Note that all of the tokens for
+         <b>roundcorners</b> image sets must be last in the list and must begin with those same
+         12 characters.&nbsp; <b>OLbubbleImages</b> can be defined to a comma-separated list of
+         bubble images that are actually used by popups in the document (e.g.,
+         '<b>flower,roundcorners</b>' if only <b>flower.gif</b> and the <b>roundcorners</b>
+         image set are used), so that only those will be preloaded.&nbsp; If not defined, the
+         entire set of bubble images will be pre-loaded (see <b>BUBBLETYPE</b>,
+         <em>above</em>).&nbsp; <b>OLbubbleIMGsuffix</b> can be used to have a suffix added to
+         the root name of non-roundcorners bubble images (e.g., flower_<em>foo</em>.gif), and
+         <b>OLbubbleRCsuffix</b> can be used to do this for the roundcorners image set (e.g.,
+         cornerTL_<em>foo</em>.gif), which will be sought when the standard BUBBLETYPE values
+         are used.&nbsp; This makes it easy to use images which have modifications such as the
+         color of those from the <span class="purple14">overlibmws</span> distribution, but
+         without any changes in their sizes.&nbsp; See the second
+         <a
+          href="BUBBLE_fcfeff.html"
+          onmouseover="return overlib('Use of pre-init string variables.',
+           CAPTION,'Demonstration',
+           TEXTFONTCLASS,'text12', WRAP, FILTER,
+           STATUS, 'Use of pre-init variables');"
+          onmouseout="nd();">BUBBLE&nbsp;supplement</a> for an example.
+         <br><br>
+         <b>Pre-Init Array Variables:&nbsp; OLimgWidth, OLimgHeight, OLcontentWidth,
+         OLcontentHeight, OLpadLeft, OLpadTop, OLarwTipX and OLarwTipY</b><br>
+         These array variables provide values for sizing the bubble images and positioning
+         content for the non-roundcorners bubbletypes, as explained in Sections 4 and 5,
+         <em>below</em>.&nbsp; If you add such bubbletypes beyond the five in the <span
+         class="purple14">overlibmws</span> distribution, you can copy the default array
+         definitions from near the top of the <b>overlibmws_bubble.js</b> plugin module,
+         add the values for your additional bubbletypes, and place the expanded definitions
+         in a script block before the block for importing that plugin module so that you need
+         not edit the module, itself, whenever it is updated.&nbsp; See the
+         <a
+          href="BUBBLE_multicolor.html"
+          onmouseover="return overlib('Use of pre-init array variables.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">mulitcolor&nbsp;Speech&nbsp;Bubbles</a> support document for an
+         example.
+         <br><br>
+         <strong>Commands that are Disabled for Speech Bubbles</strong> include:
+         <ul>
+          <li>BGCOLOR, FGCOLOR, BORDER, BASE</li>
+          <li>BGBACKGROUND, CGBACKGROUND, FGBACKGROUND, BACKGROUND</li>
+          <li>CAPTION</li>
+          <li>FULLHTML</li>
+          <li>SHADOW</li>
+          <li>LEFT, CENTER (except for <em>roundcorners</em>)</li>
+          <li>ABOVE, VCENTER (except for <em>roundcorners</em>)</li>
+          <li>HAUTO, VAUTO (except for <em>roundcorners</em>)</li>
+          <li>WRAP, WIDTH (except for <em>roundcorners</em>)</li>
+         </ul>
+         <a name="section4" id="section4"></a>
+        </td>
+       </tr>
+       <tr> 
+        <td width="15" class="sectiontitle">
+         4.
+        </td>
+        <td class="sectiontitle">
+         How it works
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         <p>
+          A schematic representation of what is done for a non-roundcorners BUBBLE  popup is
+          shown in <strong>Figure 1</strong>.
+         </p> 
+         <p align="center">
+          <img
+           src="OLbubbleSetup.gif"
+           alt="Bubble Setup"
+           width="400" height="250" border="0" vspace="0" /><br>
+          <strong>Figure 1</strong>.&nbsp; Schematic illustration of a BUBBLE popup.
+         </p> 
+         <p>
+          In an early version, REB used two absolutely positioned div containers written to
+          the <strong>overDiv</strong> container.&nbsp; The first div container held the
+          bubble image and was positioned at the upper left corner (top=0px, left=0px).&nbsp;
+          This was pointlessly complicated, and in the <span class="purple14">overlibmws</span>
+          implementation the image is simply written into the <strong>overDiv</strong>
+          container with width and height attributes specified to the intended width and
+          height of the popup.&nbsp; The other div container (id=&quot;bContent&quot;) is
+          retained and contains the textual (plain text or HTML) content for the popup.&nbsp;
+          It is sized and positioned appropriately relative to the top, left corner of the
+          image.&nbsp; Before the layer generation functions (LGFs) are called with this
+          overall content, the fgcolor and bgcolor values are set to the null string and the
+          border value is set to 0.&nbsp; Automatic horizontal/vertical positioning
+          (hauto/vauto) and wrap/width (except for a 'roundcorners' popup) are turned off.&nbsp;
+          Since the <strong>overDiv</strong> container is absolutely positioned, it serves
+          as the positioning context for the overall content.&nbsp; The visibility of the
+          textual content is established via a higher z-index value relative to that of
+          the <strong>overDiv</strong> container, which is inherited by the image.
+         </p>
+         <p>
+          Another thing to consider is what happens when the popup's  height exceeds the
+          content area height.&nbsp; There are two ways  to proceed on this matter.
+         </p>
+         <ol>
+          <li>
+           Increase the content area height while keeping the aspect ratio of the image
+           fixed.&nbsp; This means that the content width  will also change which would
+           require that the popup be regenerated, leading to possibly new height and width
+           values.&nbsp; This also means that the layer generation routine would have to be 
+           called again with the new content area width.&nbsp; While this  approach is
+           probably the most accurate, it would require  at a minimum that at least two
+           additional calls to the layer  generation routine be made in order to estimate
+           approximate  width/height values that would contain the popup's content.&nbsp;
+           This approach may be added later, along with a parameter, that the user can set
+           to indicate that this approach be  taken.
+          </li>
+          <li>
+           For now, a more approximate method is used when the popup's height exceeds
+           the content area height.&nbsp; The image's height is increased without keeping 
+           the aspect ratio fixed.&nbsp; The popup's height is compared to the content
+           area height.&nbsp; If it is smaller, half of that difference is added to the
+           <strong>OLpadTop</strong> value so that the popup is positioned vertically in
+           the middle of the content area.&nbsp; If this difference is negative, the absolute
+           value of the difference is added to the image's height while  keeping it's width
+           fixed.&nbsp; This means that there will be some distortion of the background image,
+           but for most cases, it should not be too bad since most popups have content widths
+           less than the content area height.&nbsp; This approach  also means that the layer
+           generation routine doesn't need to be called again.
+          </li>
+         </ol>
+         <p>
+          For a roundcorners BUBBLE popup, the textual (plain text or HTML) content is handled
+          similarly to the content in a CAPTION-less non-BUBBLE popup, and then the 8 images
+          in the bubbletype's set (4 corners and 4 edges) are sized and positioned around that
+          content.&nbsp; There thus is no need for concern about aspect ratios.&nbsp; However,
+          if any images are included within the content (e.g., for a Close button which makes a
+          cClick or cClick2 call in a primary or secondary popup, respectively), their width
+          and height should be indicated in their img tags to ensure proper sizing of the edge
+          images on the first fetch (i.e., before the images are in local cache).
+         <br><a name="section5" id="section5">&nbsp;</a><br>
+          </p>
+        </td>
+       </tr>
+       <tr> 
+        <td width="15" CLASS="sectiontitle">
+         5.
+        </td>
+        <td class="sectiontitle">
+         Adding more &quot;bubble&quot; images.
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         <p>
+          In setting up a &quot;bubble&quot; popup, REB tried to do it in such a manner that
+          the user can easily add more images if s/he so chooses, and the <span
+          class="purple14">overlibmws</span> implementation further facilitated this by adding
+          pre-init string and array variables (see <em>above</em>) to avoid any need
+          whatsoever for
+          editing of the <b>overlibmws_bubble.js</b> plugin module.&nbsp; The additions
+          should be &quot;gif&quot; images because the area outside the boundaries of the
+          &quot;bubble&quot; outline will be set to transparent and, at present, this module
+          does not also provide support for &quot;png&quot; images.
+         </p>
+         <p>
+          The pertinent quantities required for each added non-roundcorners image are
+          illustrated in <b>Figure 2</b>.
+         </p>
+         <p align="center">
+          <img
+           src="OLbubbleTerms.gif"
+           alt="Schematic of bubble terms"
+           title="Schematic of bubble terms"
+           width="375" height="225" border="0" vspace="0" /><br>
+          <strong>Figure 2</strong>.&nbsp; Quantities required 
+          for each added &quot;bubble&quot; image.
+         </p>
+         <ol>
+          <li>
+           The image's width (<strong>OLimgWidth</strong>) and height 
+           (<strong>OLimgHeight</strong>) values (in pixels)
+          </li>
+          <li>
+           The content area's width (<strong>OLcontentWidth</strong>) 
+           and height (<strong>OLcontentHeight</strong>) values (in pixels).&nbsp;
+           This area must be rectangular.&nbsp; The easiest way to determine 
+           this is by a graphics program; determine the largest rectangular 
+           content area that will fit inside boundaries of the &quot;bubble&quot; 
+           outline.
+          </li>
+          <li>
+           The left (<strong>OLpadLeft</strong>) and top (<strong>OLpadTop</strong>) 
+           displacement of the content area from the upper left hand 
+           corner of the image (in pixels).
+          </li>
+          <li>
+           The x-offset (<strong>OLarwTipX</strong>) and y-offset (<strong>OLarwTipY</strong>) 
+           of the tip of the &quot;bubble&quot; outline from the upper 
+           left corner of the image (in pixels).&nbsp; The <strong>OLarwTipX</strong> value
+           is subtracted from the (default or specified) OFFSETX command value so as to move
+           the popup to the left.&nbsp; Use a negative value if you instead intend to have
+           the popup moved to the right.&nbsp; The <strong>OLarwTipY</strong> value is added
+           to the (default or specifed) OFFSETY command value, but is converted to a negative
+           number (to achieve a subtraction) if (as, e.g., in the case of the flower image,
+           but not, e.g., in the case of the oval image) the <strong>OLarwTipY</strong> value
+           is greater than half the height of the popup.&nbsp; That heuristic achieves correct
+           vertical positioning for the bubble images in the distribution, which point either
+           up or down, but might not be appropriate for bubble images you create yourself if
+           they point horizontally, in which case you should choose the sign of the
+           <strong>OLarwTipY</strong> value based on empirical testing.&nbsp; Make sure that
+           your <strong>OLarwTipX</strong> and <strong>OLarwTipY</strong> values (together
+           with the default or specifed OFFSETX/Y command values) will cause the popup
+           (including its transparent portion) to lie outside the cursor's position when it
+           is displayed.&nbsp; If that doesn't happen and the popup is not STICKY, the popup
+           will flash on/off as you move the cursor.&nbsp; This flicker occurs because the
+           mouseover/mouseout events are being toggled on/off.
+          </li>
+         </ol>
+         <p>
+          The items in BOLD lettering are what these quantities are called in the javascript
+          code (with an <b>OL</b> prefix in the <span class="purple14">overlibmws</span>
+          implementation to avoid namespace collisions).&nbsp; To add a new image to the
+          &quot;bubble&quot; collection, simply set up the pre-init string and array variable
+          definitions as discussed in
+          <a
+           href="#section3"
+           onmouseover="return overlib('Jump up to Section 3',
+            CAPTION,'Pre-Init Variables',
+            TEXTFONTCLASS,'text12', WRAP, FILTER,
+            STATUS, 'Jump up to Section 3');"
+           onmouseout="nd();">Section 3</a>, <em>above</em>.
+         </p>
+         <p>
+          For additions of roundcorners image sets, at present the 8 images in each set must
+          have a height and/or width of 14px to form an encasement of the content.&nbsp; The
+          4 corner images must be 14&nbsp;x&nbsp;14 squares (with the portions outside the
+          rounding made transparent) and the 4 edge images must be 14px by typically 2px in
+          their scalable dimension.&nbsp;  Only the pre-init <b>string</b> variables apply
+          (i.e., <b>not</b>  also the pre-init <b>array</b> variables).&nbsp;  If you've only
+          changed the background color for the <span class="purple14">overlibmws</span>
+          distribution's image set and you will be using only one roundcorners image set in
+          the document, then simply define the <b>OLbubbleRCsuffix</b> string variable, as
+          demonstrated in the
+          <a
+           href="BUBBLE_ddeeff.html"
+           onmouseover="return overlib('Use of RCBUBBLECOLOR.', CAPTION,'Demonstration',
+            TEXTFONTCLASS,'text12', WRAP, FILTER, STATUS, 'Use of RCBUBBLECOLOR');"
+           onmouseout="nd();">first</a> and
+          <a
+           href="BUBBLE_fcfeff.html"
+           onmouseover="return overlib('Use of pre-init string variables.',
+            CAPTION,'Demonstration',
+            TEXTFONTCLASS,'text12', WRAP, FILTER,
+            STATUS, 'Use of pre-init variables');"
+           onmouseout="nd();">second</a> BUBBLE supplements.&nbsp; If you have two or more
+          roundcorners image sets to be used in the same document, then instead include them
+          in <b>OLbubbleImageSet</b> and  <b>OLbubbleImages</b> definitions, making them
+          the last entries in those comma-separated lists (i.e., following any non-roundcorners
+          entries), as demonstrated in the
+          <a
+           href="BUBBLE_multicolor.html"
+           onmouseover="return overlib('Use of pre-init array variables.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">mulitcolor&nbsp;Speech&nbsp;Bubbles</a> support document.
+          <br><br>
+         </p>
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>
+   <br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP, ABOVE, CENTER, OFFSETY,20, TEXTFONTCLASS,'text12', TEXTPADDING,0,
+     FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'#00B000', BUBBLE, BUBBLETYPE,'roundcorners');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP, ABOVE, CENTER, OFFSETY,20, TEXTFONTCLASS,'text12', TEXTPADDING,0,
+     FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'#00B000', BUBBLE, BUBBLETYPE,'roundcorners');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     REF,'amazon', REFP,'UR', REFX,-13, REFY,-28, WRAP, TEXTFONTCLASS,'text12', TEXTPADDING,0,
+     FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'#0090ff', BUBBLE, BUBBLETYPE,'roundcorners');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib('&nbsp;&nbsp;Popups by '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     REF,'logo', REFC,'UR', REFP,'LL', REFX,-10, BUBBLE, BUBBLETYPE,'quotation',
+     TEXTFONTCLASS,'text12', FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'#0000ff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',TEXTFONTCLASS,'text12', TEXTPADDING,0,
+     REF,'logo', REFC,'UL', REFP,'LL', REFY,-12, WRAP, BUBBLE, BUBBLETYPE,'roundcorners',
+     FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'#60b0ff');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('&nbsp;Valid&nbsp;HTML&nbsp;4.01',BUBBLE,
+     TEXTFONTCLASS,'comic20', REF,'w3c', REFC,'UR', REFP,'LR', REFX,73, REFY,2,
+     FILTER, FILTERSHADOW,1, FILTERSHADOWCOLOR,'#00B000');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='BUBBLE.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

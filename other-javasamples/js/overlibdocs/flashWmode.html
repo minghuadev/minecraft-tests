@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, flash, windowless mode, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Example of Flash windowless mode with Macrides Web Services open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Flash-Handling via Windowless Mode with overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></SCRIPT>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript" src="flashBanner.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'olFoot');
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+.olfoot {font-family:Verdana,Arial,Helvetica; font-size:12px; color:#000000;}
+
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head>
+
+<body  text="#220022" bgcolor="#ddeeff">
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Flash-handling Example</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     VCENTER, HAUTO, OFFSETX,16, OFFSETY,10, TEXTFONTCLASS,'myText',
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', VCENTER, HAUTO, OFFSETX,16, OFFSETY,10,
+     FILTER, FADEIN,46, FADEOUT,46, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     FGCOLOR,'#bbddff', SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTFONTCLASS,'myText', VCENTER, HAUTO, OFFSETX,16, OFFSETY,10,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss this example, seek help, and offer suggestions<br>
+   via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTFONTCLASS,'myText', VCENTER, HAUTO, OFFSETX,16, OFFSETY,4,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+  </td>
+ </tr>
+ <tr>
+  <td align="center" valign="middle" class="text18">
+   <br>
+   <script type="text/javascript">
+   <!--
+    flashBanner();
+   //-->
+   </script>
+   <br><br>
+   <a
+    href="JavaScript:void(0);"
+    onmouseover="return overlib('&lt;div align=\'center\'&gt;Ain\'t no way I\'ll let '
+     +'that flash&lt;br&gt;&nbsp;object with its system controls&nbsp;&lt;br&gt;obscure '
+     +'this overlib popup!!!&lt;/div&gt;', CENTER, ABOVE, OFFSETX,0, OFFSETY,30,
+     TEXTFONTCLASS,'text12', SHADOW, SHADOWCOLOR,'#cf33cf', STATUS,' ');"
+    onmouseout="nd();">Pop Me!!!</a><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   &nbsp;<br>
+   This example uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     CENTER, OFFSETY,20, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     CENTER, OFFSETY,20, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">commands</a>.&nbsp; The above flash movie has been invoked in <a
+    target="_blank"
+    href="http://www.adobe.com/go/tn_15523"
+    onmouseover="return overlib('See the &lt;strong&gt;&lt;em&gt;Flash '
+     +'TechNote&lt;/em&gt;&lt;/strong&gt; for windowless mode.',
+     HAUTO, VAUTO, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">windowless&nbsp;mode</a> by setting the <strong>wmode</strong>
+   parameter to <strong>"transparent"</strong> in the <strong>param</strong> and
+   <strong>embed</strong> tags of the <strong>object</strong> element for the flash movie.&nbsp;
+   Setting <strong>wmode</strong> to <strong>"transparent"</strong> or <strong>"opaque"</strong>
+   prevents the flash movie from obscuring the popup for the supported browsers if they have a
+   reasonably current version of the <a
+    target="_blank"
+    href="http://www.adobe.com/products/flashplayer/"
+    onmouseover="return overlib('See the Flash Player &quot;Adobe Products Page&quot;',
+     HAUTO, VAUTO, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">flash player</a>.
+   <br><br>
+   If you cannot set the flash object's <strong>wmode</strong> to <strong>"transparent"</strong>
+   or <strong>"opaque"</strong> (e.g., on <a
+    target="_blank"
+    href="http://linux-magazine.com/online/news/flash_player_10_coming_around_the_final_bend/"
+    onmouseover="return overlib('See plans for Flash Player 10 on Linux.',
+     HAUTO, VAUTO, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">Linux</a> with <a
+    target="_blank"
+    href="https://bugzilla.mozilla.org/show_bug.cgi?id=137189#c136"
+    onmouseover="return overlib('See Bugzilla Bug 137189, Comment 136',
+     HAUTO, VAUTO, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">Firefox</a>), and for other objects which use system controls such as
+   <strong>applets</strong> and <strong>QuickTime</strong> movies, import
+   <strong>overlibmws_iframe.js</strong> to use an <a
+    name="ifs" id="ifs"
+    target="_blank"
+    href="IframeShim.html"
+    onmouseover="return overlib('See the iframe shim article.',
+     HAUTO, VAUTO, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">iframe&nbsp;shim</a> (as opposed to <a
+     name="ifc" id="ifc"
+     href="IFRAME.html"
+    onmouseover="return overlib('Go to an example of iframe as popup content.',
+     HAUTO, VAUTO, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">iframe&nbsp;content</a>) for IE v5.5 or greater, and for older versions
+   of IE and the other supported browsers which need it, import the
+   <strong>overlibmws_hide.js</strong> plugin module and use its
+   <strong>HIDEBYIDALL</strong> command.&nbsp; See an <a
+    href="flashHide.html"
+    onmouseover="return overlib('See earlier version of this document.',
+     HAUTO, VAUTO, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">earlier&nbsp;version</a> of this support document for an example.
+  </td>
+ </tr>
+</table>
+<div class="text12">&nbsp;</div>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="center" valign="middle" class="text12">
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the markup
+   for this example.</em><br>
+  </td>
+ </tr>
+</table>
+<div class="text12">&nbsp;</div>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="center" valign="middle" class="text12">
+   <strong>Go to examples</strong> for <a
+    href="hide.html"
+    onmouseover=
+     "return overlib('Hide form fields with system controls.',
+     CENTER, ABOVE, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">form</a> fields, <a
+    href="QTVR.html"
+    onmouseover=
+     "return overlib('Hide QuickTime objects with system controls.',
+     CENTER, ABOVE, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">QuickTime</a> objects, <a
+    href="applet.html"
+    onmouseover=
+     "return overlib('Hide applets with system controls.',
+     CENTER, ABOVE, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">applets</a>, and <a
+    href="testFrame.html"
+    onmouseover=
+     "return overlib('Hide form fields and objects with system controls in frame documents.',
+     CENTER, ABOVE, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">frame</a> documents.<br>
+  </td>
+ </tr>
+</table>
+<div class="text18">&nbsp;</div>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     VCENTER,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-60,REFY,-10,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0" alt="" hspace="10"></a><br>
+  </td>
+ </tr>
+</table>
+<div class="text12">&nbsp;<br>&nbsp;</div>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='flashWmode.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

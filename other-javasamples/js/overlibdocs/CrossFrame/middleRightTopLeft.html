@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrates frame handling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Across frames (crossframe) tests with overlibmws (top.middleRight.middleRightTop.f300)</title>
+
+<script type="text/javascript">
+<!--
+if(parent==self)location.replace('index.html');
+// -->
+</script>
+
+<script type="text/javascript" src="../overlibmws_regCore.js"></script>
+
+<script type="text/javascript">
+<!--
+OLregisterPlugins('crossframe','bubble','exclusive','filter','hide','iframe','modal','overtwo','scroll','shadow');
+
+function OLok(){
+ /*
+   Equate f to the frame with the overlibmws script(s) relative to this frame
+   and precede all overlib and nd calls in this document with if(OLok()), e.g.:
+
+     onmouseover="if(OLok())return overlib('Hello World!!');"
+     onmouseout="if(OLok())nd();"
+ */
+ var r=0, f=parent.frames[1];
+ if(f&&f.OLloaded&&f.OLgateOK&&f.myHPf300){
+  r=1;
+  overlib=f.overlib;
+  nd=f.nd;
+ }
+ return r;
+}
+
+var myHP='<a href="middleRightTopLeft.html" '
+ +'name="myHPref" '
+ +'onmouseover="return parent.frames[1].overlib2('
+ +'parent.frames[1].myOv2a,'
+ +' -WRAP, WIDTH,126, SHADOW,'
+ +' REF,\'myHPref\', REFP,\'LL\', REFY,-20, -STICKY,'
+ +' CAPTION,\'\', FGCOLOR,\'#ffffcc\', TEXTPADDING,4,'
+ +' DELAY,400, TIMEOUT,4400);" '
+ +'onmouseout="parent.frames[1].nd2();">Navigate</a>'
+//-->
+</script>
+
+<style type="text/css">
+<!--
+body {margin:0px;}
+a {color:#008800; font-weight:bold;}
+a:hover {color:#ff00ff;}
+.text14 {font-family:'Times New Roman',sans-serif; color:#000000; font-size:14px;}
+.text20 {font-family:'Times New Roman',sans-serif; color:#000000; font-size:20px;}
+-->
+</style> 
+</head>
+
+<body bgcolor="#d2d2d2" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<div class="text20">
+ <strong>Frame [3][0][0]</strong>
+</div>
+
+<iframe
+ name="myOverIframe" id="myOverIframe"
+ src="Iframe.html"
+ scrolling="no"
+ style="position:absolute; visibility:visible; z-index:997;
+  top:45px; left:20px; width:76px; height:95px;"></iframe>
+
+<div class="text14">
+ <br><br><br><br><br><br><br><br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ Frame<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ with a<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ MODAL<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <a
+  href="javascript:void(0);"
+  onmouseover="if(OLok())return overlib(myHP, MODAL, MODALCOLOR,'#440044',
+   FRAME,parent.frames[0],
+   REF,'myOverIframe', REFC,'LL',REFP,'UL', REFX,-15, REFY,8,
+   FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#cf33cf',
+   SHADOW, SHADOWCOLOR,'#cf33cf',
+   STATUS,'Frame [3][0][0]');"
+  onmouseout="if(OLok())nd();">link</a>
+</div>
+<script type="text/javascript" src="../../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='middleRightTopLeft.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest/CrossFrame';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

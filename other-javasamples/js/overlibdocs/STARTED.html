@@ -1,0 +1,686 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Instructions for setting up and using DHTML popups and tooltips with the overlibmws free open source software library from Macrides Web Services.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Getting started with overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+var myRaisedBlue = new Image();
+myRaisedBlue.src = "raised_blue.gif";
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.olcg {background-color:#333399; text-align:center;}
+.olfg {background-color:#ccccff; text-align:center;}
+
+.olcap {font-family:Verdana,Arial,Helvetica;font-size:11px;font-weight:bold;color:#ffffff;}
+.oltxt {font-family:Verdana,Arial,Helvetica;font-size:13px;color:#000000;}
+
+.olraisedBlue {text-align:center;
+ background:#33aaff url(raised_blue.gif) repeat-x bottom left;}
+table.olraisedBlue {border-bottom:1px solid #333399;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text4 {font-family:Verdana,Arial,sans-serif; font-size:4px;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text12h {font-family:Verdana,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:22px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+-->
+</style>
+</head> 
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table width="80%" cellpadding="5" align="center"> 
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Getting Started</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     WRAP,BASE,2,LEFT,OFFSETX,-16,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText',
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a><br>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20, FGCOLOR,'#bbddff',
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for<br>
+   Getting Started support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <span class="text12h">&nbsp;&nbsp;&nbsp;&nbsp;1. POPUP TYPES:<br></span>
+   The <span class="purple14"><i>overlibmws</i></span> library uses javascript for
+   DHTML popups that serve as informational and navigational aids for websites.&nbsp;
+   The overlib calls invoke either <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This is a tooltip popup.',AUTOSTATUS,WRAP);"
+    onmouseout="nd();">tooltip</a> popups, or (typically more elaborate) <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This is a (typically more elaborate) sticky popup.',
+     CAPTION,'This is a Caption',STICKY,STATUS,'This is a sticky popup with a caption.');"
+    onmouseout="nd();">sticky</a> popups that hang around until they are actively closed
+   or are replaced by another popup.&nbsp; Both types can be invoked with or without a <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This is a tooltip popup.',CAPTION,'This is a Caption',
+     WRAP, STATUS,'This is a tooltip popup with a caption.');"
+    onmouseout="nd();">caption</a>.&nbsp; They are most commonly invoked via the
+    <strong>onmouseover</strong> (hover) event, but also can be invoked via the
+    <strong>onclick</strong> event, or <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('Click to help an exhibitionist.',AUTOSTATUS,WRAP);"
+    onmouseout="nd();"
+    onclick="overlib('Thanks for clicking.&nbsp; I have a burning desire to be seen.',
+     CAPTION,'I love onclick!'); return false;">both&nbsp;events</a>, or any event supported
+   by browsers for invoking javascript (e.g., <strong>onload</strong>).&nbsp; The preceding
+   four anchors (links) invoke popups with the distribution default styles, but you
+   can customize the popups for your site's <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('Click to help an exhibitionist.',AUTOSTATUS,
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO);"
+    onmouseout="nd();"
+    onclick="overlib('Thanks for clicking.&nbsp; I&lt;br&gt;have a burning '
+     +'desire&lt;br&gt;to be seen.',CAPTION,'I love onclick!',STICKY,FGCOLOR,'#bbddff',
+     TEXTPADDING,8,CAPTIONPADDING,4,TEXTFONTCLASS,'oltxt',CAPTIONFONTCLASS,'olcap',
+     CLOSEFONTCLASS,'olcap',WRAP,BASE,2,HAUTO,FILTER); return false;"
+   >look&nbsp;and&nbsp;feel</a>.&nbsp;
+   You can make the <strong>tooltip</strong> popups <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This is a tooltip popup.',NOFOLLOW,DELAY,500,
+     TIMEOUT,5500,WRAP,HAUTO,FGCOLOR,'#ffffee',SHADOW,SHADOWX,3,SHADOWY,3,AUTOSTATUS);"
+    onmouseout="nd();">more&nbsp;like</a> an OS or title-based tooltip by toggling off
+   the mouse-following behavior and imposing an onset delay and a timeout.
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <span class="text12h">&nbsp;&nbsp;&nbsp;&nbsp;2. PREPARING THE HTML/XML DOCUMENT:<br></span>
+   The minimum necessary preparation is to import the <strong>core</strong> module,
+   <strong>overlibmws.js</strong>, via a script block in the head section of the document:
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;script type="text/javascript" src="overlibmws.js"&gt;&lt;/script&gt;
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   You also can declare the <strong>overDiv</strong> positioned div (layer) immediately
+   after the body start tag:
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;div id="overDiv" style="position:absolute; visibility:hidden; 
+   z-index:1000"&gt;&lt;/div&gt;
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   or omit the declaration and let the core module create the div dynamically.&nbsp; You may
+   need to include a path in the <strong>src</strong> value for the core module, if it is not
+   in the same directory (folder) as the document.&nbsp; If you have other javascript files or
+    blocks with code which captures mouse movements (e.g., for menu systems such as <a
+    target="_blank"
+    href="http://www.milonic.com/"
+    onmouseover="return overlib('Check out Milonic menus',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,
+     CENTER,VAUTO,OFFSETY,18);"
+    onmouseout="nd();">Milonic</a>), you should import the core module after those.&nbsp;
+   Also, if you have other positioned divs in the document, make sure that the
+   <strong>z-index</strong> of the overDiv layer is the highest.&nbsp; If the layer is
+   created dynamically, the default value of 1000 is used.&nbsp; The popups are
+   invoked by using the library's <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/ASIN/0764533428/macrideswebse-20/103-3602457-5535046?creative=125581&amp;camp=2321&amp;link_code=as1"
+    onmouseover="return overlib('Check out Danny Goodman\'s '
+     +'&lt;strong&gt;&lt;em&gt;Javascript Bible&lt;/em&gt;&lt;/strong&gt;',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,
+     STATUS,'http://www.amazon.com/exec/obidos/ASIN/0764533428');"
+    onmouseout="nd();">javascript</a> for <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/ASIN/0596003161/macrideswebse-20/103-3602457-5535046?creative=125581&amp;camp=2321&amp;link_code=as1"
+    onmouseover="return overlib('Check out Danny Goodman\'s '
+     +'&lt;strong&gt;&lt;em&gt;Dynamic HTML&lt;/em&gt;&lt;/strong&gt;',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,
+     STATUS,'http://www.amazon.com/exec/obidos/ASIN/0596003161');"
+    onmouseout="nd();">dynamically</a> loading content into the overDiv container (layer),
+   positioning the container, and changing its <strong>visibility</strong> to
+   <em>visible</em>.&nbsp; They are closed by restoring the visibility to <em>hidden</em>.<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <span class="text12h">&nbsp;&nbsp;&nbsp;&nbsp;3. INVOKING AND CLOSING POPUPS:<br></span>
+   You are now able to make <strong>overlib()</strong> calls for invoking popups with
+   the <strong>core commands</strong> (i.e., ones which do not require plugin modules,
+   <em>see below</em>), and <strong>nd()</strong> calls for closing the popups (though
+   sticky popups require an additional action to close).&nbsp;  Here are the calls
+   associated with the six anchors in the first section of this document:
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="return overlib('This is a tooltip popup.', AUTOSTATUS, WRAP);"<br>
+   &nbsp;onmouseout="nd();"&gt;<a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This is a tooltip popup.',AUTOSTATUS,WRAP);"
+    onmouseout="nd();">tooltip</a>&lt;/a&gt;
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="mySpacer">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="return overlib('This is a (typically more elaborate) sticky
+   popup.',<br>
+   &nbsp;&nbsp;CAPTION, 'This is a Caption', STICKY, STATUS, 'This is a sticky popup
+   with a caption.');"<br>
+   &nbsp;onmouseout="nd();"&gt;<a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This is a (typically more elaborate) sticky popup.',
+     CAPTION,'This is a Caption',STICKY,STATUS,'This is a sticky popup with a caption.');"
+    onmouseout="nd();">sticky</a>&lt;/a&gt;
+  </td>
+ <tr>
+  <td align="left" valign="middle" class="mySpacer">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="return overlib('This is a tooltip popup.',
+   CAPTION, 'This is a Caption',<br>
+   &nbsp;&nbsp;WRAP, STATUS, 'This is a tooltip popup with a caption.');"<br>
+   &nbsp;onmouseout="nd();"&gt;<a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This is a tooltip popup.',CAPTION,'This is a Caption',
+     WRAP,STATUS,'This is a tooltip popup with a caption.');"
+    onmouseout="nd();">caption</a>&lt;/a&gt;
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="mySpacer">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="return overlib('Click to help an exhibitionist.', AUTOSTATUS, WRAP);"<br>
+   &nbsp;onmouseout="nd();"<br>
+   &nbsp;onclick="overlib('Thanks for clicking.&amp;nbsp; I have a burning desire
+   to be seen.',<br>
+   &nbsp;&nbsp;CAPTION, 'I love onclick!'); return false;"&gt;<a
+    href="javascript:void(0);"
+    onmouseover="return overlib('Click to help an exhibitionist.',AUTOSTATUS,WRAP);"
+    onmouseout="nd();"
+    onclick="overlib('Thanks for clicking.&nbsp; I have a burning desire to be seen.',
+    CAPTION,'I love onclick!'); return false;">both&nbsp;events</a>&lt;/a&gt;
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="mySpacer">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="return overlib('Click to help an exhibitionist.', AUTOSTATUS,<br>
+   &nbsp;&nbsp;TEXTPADDING, 4, FGCOLOR, '#cceeff', TEXTFONTCLASS, 'oltxt', WRAP, BASE, 2,
+   HAUTO);"<br>
+   &nbsp;onmouseout="nd();"<br>
+   &nbsp;onclick="overlib('Thanks for clicking.&amp;nbsp; I&amp;lt;br&amp;gt;have a
+   burning '<br>
+   &nbsp;&nbsp;+'desire&amp;lt;br&amp;gt;to be seen.', CAPTION, 'I love onclick!', STICKY,
+   FGCOLOR, '#bbddff',<br>
+   &nbsp;&nbsp;TEXTPADDING, 8, CAPTIONPADDING, 4, TEXTFONTCLASS, 'oltxt', CAPTIONFONTCLASS,
+   'olcap',<br>
+   &nbsp;&nbsp;CLOSEFONTCLASS, 'olcap', WRAP, BASE, 2, HAUTO, FILTER); return false;"&gt;<a
+    href="javascript:void(0);"
+    onmouseover="return overlib('Click to help an exhibitionist.',AUTOSTATUS,
+    TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO);"
+    onmouseout="nd();"
+    onclick="overlib('Thanks for clicking.&nbsp; I&lt;br&gt;have a burning '
+     +'desire&lt;br&gt;to be seen.',CAPTION,'I love onclick!',STICKY,FGCOLOR,'#bbddff',
+    TEXTPADDING,8,CAPTIONPADDING,4,TEXTFONTCLASS,'oltxt',CAPTIONFONTCLASS,'olcap',
+    CLOSEFONTCLASS,'olcap',WRAP,BASE,2,HAUTO,FILTER); return false;"
+   >look&nbsp;and&nbsp;feel</a>&lt;/a&gt;
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="mySpacer">
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;a<br>
+   &nbsp;href="javascript:void(0);"<br>
+   &nbsp;onmouseover="return overlib('This is a tooltip popup.', NOFOLLOW, DELAY, 500,<br>
+   &nbsp;&nbsp;TIMEOUT, 5500, WRAP, HAUTO, FGCOLOR, '#ffffee', SHADOW, SHADOWX, 3, SHADOWY, 3, AUTOSTATUS);"<br>
+   &nbsp;onmouseout="nd();"&gt;<a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This is a tooltip popup.',NOFOLLOW,DELAY,500,
+     TIMEOUT,5500,WRAP,HAUTO,FGCOLOR,'#ffffee',SHADOW,SHADOWX,3,SHADOWY,3,AUTOSTATUS);"
+    onmouseout="nd();">more&nbsp;like</a>&lt;/a&gt;
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   These overlib calls consist of a <strong>lead argument</strong> which is a quoted
+   string that will be displayed as the popup content, and a comma-separated list of
+   uppercase <strong>commands</strong> that may have <strong>parameters</strong> which
+   are either quoted strings or unquoted numeric values.&nbsp;
+   We use <strong>href="javascript:void(0);"</strong> in these examples, and the STATUS
+   or AUTOSTATUS commands for specifying a status bar string to show when the popup is
+   displayed.&nbsp; The <strong>href instead could be a URL for another document</strong>,
+   in which case we would not specify a status bar string but instead allow the URL to be
+   shown in the status bar.&nbsp; <strong>Note</strong> that IE7's default security setting
+   allows such modifications of the status bar text only on intranets, so it will work when
+   using local copies of HTML/XHTHL files, but not when received via the Internet.&nbsp; Also,
+   Firefox has an option via its Tools | Options | Content | Enable JavaScript | Advanced menu
+   to disable such modifications.&nbsp; <strong>Also note</strong> that IE7 has a bug which
+   prevents the href from being displayed while hovering over a link if an onmouseover popup
+   contains a background or foreground image.&nbsp; If the link has an href other than
+   javascript:void(0); and thus should be displayed, a workaround for the IE7 bug is to include
+   <strong>onmousemove="if(OLie7)self.status=this.href;"</strong> which works even if the
+   file is received via the Internet (i.e., appears to be a "counterbalancing" bug in IE7).
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   Though this should be enough to get started "learning
+   by doing" you should study the <span class="purple14"><i>overlibmws</i></span> <a
+    href="commandRef.html"
+    onmouseover="return overlib('Link to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference, which should be bookmarked for easy access and regular study.',
+     TEXTFONTCLASS,'oltxt',FGCOLOR,'#bbddff',TEXTPADDING,6,CENTER,VAUTO,OFFSETY,18,BASE,2);"
+    onmouseout="nd();">Command&nbsp;Reference</a> to become proficient with the library.&nbsp;
+   It presently has <a
+    href="javascript:void(0);"
+    onmouseover="return overlib('This includes 79 core commands&lt;br&gt;plus 56 '
+     +'via plugin modules',TEXTFONTCLASS,'oltxt',FGCOLOR,'#bbddff',TEXTPADDING,6,
+     WRAP,BASE,2,CENTER,VAUTO,OFFSETY,18,STATUS,' ');"
+    onmouseout="nd();">135&nbsp;commands</a>.&nbsp; If commands which have parameters are
+   included in an overlib call, those values of the parameters are used instead of the
+   default values.&nbsp; Note that commands which do not have parameters are of two
+   types.&nbsp; A few are members of mutually exclusive sets, e.g., LEFT, CENTER and
+   RIGHT are such a set for horizontal positioning of popups relative to the cursor (RIGHT
+   is the distribution default), and ABOVE, VCENTER and BELOW are such a set for vertical
+   positioning of popups relative to the cursor (BELOW is the distribution default).&nbsp;
+   Most of the commands which do not have parameters act as toggles.&nbsp;
+   Their distribution defaults are normally off (0) and their inclusion in the
+   overlib call toggles them on (1) for that call so that the setting or action that
+   their command name indicates will be applied.&nbsp; But if the default is changed to on
+   (see below), inclusion of the command in the overlib call will toggle the setting or
+   action for that call to off (opposite of what the command name indicates).&nbsp; To
+   reduce possible confusion in that context, a minus sign can be placed immediately
+   before the command name to yield an unconditional off for that call.
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <span class="text12h">&nbsp;&nbsp;&nbsp;&nbsp;4. PLUGIN MODULES:<br></span>
+   Some commands or features which are not expected to be used frequently are implemented
+   via <strong>plugin</strong> modules of the form
+   <strong>overlibmws_<em>name</em>.js</strong>.&nbsp; They should be imported via script
+   blocks following the core module when their commands or features are to be used in the
+   document, e.g.:<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   &lt;script type="text/javascript" src="overlibmws.js"&gt;&lt;/script&gt;<br>
+   &lt;script type="text/javascript" src="overlibmws_overtwo.js"&gt;&lt;/script&gt;<br>
+   &lt;script type="text/javascript" src="overlibmws_filter.js"&gt;&lt;/script&gt;<br>
+   &lt;script type="text/javascript" src="overlibmws_shadow.js"&gt;&lt;/script&gt;<br>
+   &lt;script type="text/javascript" src="overlibmws_iframe.js"&gt;&lt;/script&gt;<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   You may need to add path information in the <strong>src</strong> attribute values if the
+   js files are not in the same directory (folder) as the HTML/XML document.&nbsp; The <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,BASE,2,CENTER,VAUTO,OFFSETY,17,TEXTPADDING,4,TEXTFONTCLASS,'text12',
+     FILTER,FADEIN,4,FADEOUT,3,FILTERSHADOW,1,FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">Command&nbsp;Reference</a> indicates the commands or features which
+   are handled via plugin modules.<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <span class="text12h"><a
+   name="customization"
+   id="customization">&nbsp;</a>&nbsp;&nbsp;&nbsp;5. CUSTOMIZATION:<br></span>
+   Although you can customize the popups via commands and their parameters, if any,
+   in the overlib calls, once you become familiar with the library you may wish to
+   customized it by changing the defaults so that they need not be set via commands in
+   every overlib call.&nbsp; As explained in <a
+    href="commandRef.html#introduction"
+    onmouseover="return overlib('Link to <strong>1. Introduction</strong> of the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO);"
+    onmouseout="nd();">Section&nbsp;1</a> of the <strong>Command Reference</strong>
+   and in the <a
+    href="zipArchive.html"
+    onmouseover="return overlib('Preview the contents of the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'zip archive.',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">distribution</a>'s
+   <b>overlibConfig.txt</b> file, you can change any distribution defaults:<br>
+   <ol type="a" class="text12">
+    <li>
+     in the <strong>DEFAULT CONFIGURATION</strong> sections near the tops of the core
+     and plugin modules such that the changes will apply to all of your HTML/XML files,
+     <strong>or</strong><br>
+    </li>
+    <li>
+     by defining sets of configuration defaults in a script block or imported js file so
+     that they override the corresponding distribution defaults for individual HTML/XML
+     documents, <strong>or</strong><br>
+    </li>
+    <li>
+     (<strong><em>preferred</em></strong>) by using the <strong>OLpageDefaults()</strong>
+     function in a script block or imported js file to set defaults for individual HTML/XML
+     documents in a manner homologous to making overlib calls (i.e., the commands and
+     their parameters, if any, which would be common to all overlib calls in the document
+     can instead be put in an OLpageDefaults call that is made once during loading of the
+     document).<br>
+    </li>
+   </ol>
+   A disadvantage of <strong>(a)</strong> is that you must edit the DEFAULT
+   CONFIGURATION sections every time you update your copies of <span
+    class="purple14"><i>overlibmws</i></span> js files (<em>see below</em>), whereas
+   <strong>(b)</strong> and <strong>(c)</strong> are unaffected.<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <span class="text12h"><a name="regulate">&nbsp;</a>&nbsp;&nbsp;&nbsp;6. REGULATION:<br></span>
+   The <strong>OLgateOK</strong> global variable can be used in documents to
+   <strong>disable</strong> popups by setting it equal to 0, and to re-<strong>enable</strong>
+   popups by restoring it to its default value of 1.<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <form name="f1" action="javascript:void(0);">
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <input type="button" name="b1" value="disable"
+    onmouseover="if(document.f1.b1.value=='disable'){
+      this.title='';overlib('Click to disable &lt;span '
+      +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; popups '
+      +'(<i>such as this one</i>).', TEXTPADDING,4, FGCOLOR,'#cceeff', TEXTFONTCLASS,'oltxt',
+      WRAP, BASE,2, ABOVE, OFFSETX,-80, HAUTO, VAUTO);
+     }else{
+      this.title='Click to enable overlibmws popups';}"
+    onmouseout="nd();"
+    onclick="if(document.f1.b1.value=='disable'){
+      nd();OLgateOK=0;document.f1.b1.value='enable';
+      this.title='Click to enable overlibmws popups';
+     }else{
+      OLgateOK=1;this.title='';document.f1.b1.value='disable';
+      overlib('Click to disable &lt;span '
+      +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; popups '
+      +'(<i>such as this one</i>).', TEXTPADDING,4, FGCOLOR,'#cceeff', TEXTFONTCLASS,'oltxt',
+      WRAP, BASE,2, ABOVE, OFFSETX,-80, HAUTO, VAUTO);}">
+   </form>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <span class="text12h">&nbsp;&nbsp;&nbsp;&nbsp;7. UPDATING:<br></span>
+   The <span class="purple14"><i>overlibmws</i></span> library does not use version
+   numbers.&nbsp; The <strong>overlibmws.zip</strong> <a
+    href="zipArchive.html"
+    onmouseover="return overlib('Preview the contents of the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'zip archive.',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">archive</a> is updated whenever the core module, any plugin modules,
+   and/or any support scripts are modified to incorporate an enhancement or fix a bug, and
+   the last-changed dates are recorded in the headers of the modified files.&nbsp; The overall
+   last-changed date also is indicated in the <strong>Status</strong> section of the <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,BASE,2,CENTER,ABOVE,OFFSETY,16,VAUTO,TEXTPADDING,4,TEXTFONTCLASS,'text12',
+     FILTER,FADEIN,4,FADEOUT,3,FILTERSHADOW,1,FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">Command&nbsp;Reference</a>.&nbsp; All enhancements and/or bug fixes are
+    recorded with their dates in the <a
+     href="changeHistory.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Change History.',
+     WRAP,BASE,2,CENTER,OFFSETY,17,VAUTO,TEXTPADDING,4,TEXTFONTCLASS,'text12',
+     FILTER,FADEIN,4,FADEOUT,3,FILTERSHADOW,1,FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+     onmouseout="nd();">Change&nbsp;History</a>.&nbsp; Once you
+   start using this code set, you should review the <a
+    href="changeHistory.html#bottom"
+    onmouseover="return overlib('Link to the bottom of the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Change History.',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">recent&nbsp;changes</a> in the <strong>Change History</strong> periodically
+   to see if anything has been done which would merit your doing an update at your
+   site(s).<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <span class="text12h">&nbsp;&nbsp;&nbsp;&nbsp;8. SUPPORT:<br></span>
+   You can use the <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',
+     STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,ABOVE,OFFSETY,16,VAUTO,
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,1,FILTERSHADOWCOLOR,'purple',
+     SHADOW,SHADOWCOLOR,'purple');"
+    onmouseout="nd();">Foteos&nbsp;Macrides</a> links in the support files at this site to
+   seek help getting started, report problems. or suggest enhancements.&nbsp;
+   <strong><em>Better yet</em></strong>, use the
+   <span class="purple14"><i>overlibmws</i></span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="return overlib('Link to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Support Group',
+     FGCOLOR,'#cceeff',ABOVE,HAUTO,VAUTO,WRAP,BASE,2,TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">Support Group</a>&nbsp;  <em>Whenever possible, please <strong>include
+    the URL</strong> for a document which illustrates the issue you are raising.</em>
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text12" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,ABOVE,CENTER,OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER,FADEIN,45,FADEOUT,45,FILTERSHADOW,1,FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,BASE,2,ABOVE,CENTER,OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER,FADEIN,31,FADEOUT,31,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the &lt;span '
+     +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;\/i&gt;&lt;\/span&gt; '
+     +'shopping via this link&lt;br&gt;(with &lt;strong&gt;no&lt;\/strong&gt; '
+     +'extra costs to you).',
+     CAPTION,'Promote via Amazon', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-35,
+     WRAP,BASE,2,TEXTFONTCLASS,'text12',FILTER);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'logo',REFX,95,REFY,1,BASE,2,TEXTPADDING,4,FILTER,FADEIN,6,FADEOUT,6,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',
+     CAPTION,'Donate via PayPal', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     TEXTPADDING,8,FGCOLOR,'#bbddff',FILTER,
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5,WRAP,BASE,2,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    title="Click to Donate" alt="Click to Donate"></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',WRAP,BASE,2,FGCOLOR,'#cceeff',
+     REF,'w3c',REFP,'UR',REFX,-5,REFY,2,FILTER,TEXTPADDING,4,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<div class="text12">&nbsp;<br>&nbsp;<br></div>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='STARTED.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

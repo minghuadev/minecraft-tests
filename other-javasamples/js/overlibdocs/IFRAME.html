@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="keywords" content="overlib, overlibmws, iframe, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Examples for iframe in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - iframe examples in overlibmws</title>
+
+<!-- OLiframeContent(src, width, height) script:
+ (include WIDTH with its parameter equal to width, and TEXTPADDING,0, in the overlib call)
+-->
+<script type="text/javascript" src="iframecontentmws.js"></script>
+
+<!-- Core module and plugins:
+-->
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_bubble.js"></script>
+<script type="text/javascript" src="overlibmws_draggable.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_scroll.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(BGCLASS,'olbg', CGCLASS,'olcg', FGCLASS,'olfg',
+ CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo', TEXTFONTCLASS,'oltxt');
+//-->
+</script>
+
+<style type="text/css">
+<!--
+.olbg {background-color:#333399;}
+.olcg {background-color:#aa00aa; text-align:center;}
+.olcgif {background-color:#333399; text-align:center;}
+.olfg {background-color:#ffffcc; text-align:center;}
+.olfgif {background-color:#bbddff; text-align:center;}
+.olcap {font-family:Arial; font-size:12px; font-weight:bold; color:#ffffff;}
+a.olclo {font-family:Verdana; font-size:11px; font-weight:bold; color:#ddddff;}
+a.olclo:hover {color:#ffffff;}
+.oltxt {font-family:Arial; font-size:12px; color:#000000;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#FF00FF;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text16 {font-family:Verdana,Arial,sans-serif; font-size:16px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+
+.myHeader {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;}
+.mySubHead {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;}
+.mySpacer {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+.yellow {color:#ffff00;}
+.red {color:#cc0000;}
+.blue {color:#0000cc;}
+-->
+</style> 
+
+<script type="text/javascript">
+<!--
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+//-->
+</script>
+</head>
+
+<body text="#220022" bgcolor="#ddeeff">
+
+<table width="100%" cellpadding="2" cellspacing="0" border="0"> 
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Examples of iframe popups</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,OFFSETX,-10,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText',
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20,
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for iframe support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle">
+   <table width="610" cellpadding="2" cellspacing="0"> 
+    <tr> 
+     <td align="center" class="text16">
+      <br>
+      <!--
+           Invoke a popup with iframe content
+        -->
+      <strong><a
+       href="javascript:void(0);"
+       onclick="return false;"
+       onmouseover="return overlib(
+        OLiframeContent('iframePopupContent.html', 510, 145, 'if1', 1, 'auto'),
+        WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, SCROLL,
+        CAPTIONPADDING,4, CAPTION,'Example with iframe content and a '
+        +'caption.&nbsp; Popup scrolls with the window.',
+        MIDX,0, RELY,90,
+        STATUS,'Example with iframe content, a caption and a Close link');"
+       onmouseout="nd();">Popup with iframe content, caption and Close link</a></strong>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>Called by the statement:</strong><br>
+      <!--
+           Show markup for invoking a popup with iframe content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(<strong>OLiframeContent('</strong><a
+        href="iframePopupContent.html"
+        onmouseover="return overlib('Directly access this file.', BASE,2, HAUTO);"
+        onmouseout="nd();">iframePopupContent.html</a><strong>', 510, 145, 'if1',
+       1, 'auto')</strong>,<br>
+       &nbsp;WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, <strong>SCROLL</strong>,<br>
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with iframe content and a '<br>
+       &nbsp;+'caption&amp;nbsp; Popup scrolls with the window.',<br>
+       &nbsp;MIDX,0, RELY,90,<br>
+       &nbsp;STATUS,'Example with iframe content, a caption and a Close link');"<br>
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>which uses this simple function for the lead argument in the overlib
+      call:</strong><br>
+      <!--
+           Show script used for invoking a popup with iframe content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       function <strong>OLiframeContent(src, width, height, name, frameborder,
+       scrolling)</strong> {<br>
+       &nbsp;return ('&lt;iframe src="'+src+'" width="'+width+'" height="'+height+'"'<br>
+       &nbsp;&nbsp;+(name!=null?' name="'+name+'" id="'+name+'"':'')<br>
+       &nbsp;&nbsp;+(frameborder!=null?' frameborder="'+frameborder+'"':'')<br>
+       &nbsp;&nbsp;+' scrolling="'+(scrolling!=null?scrolling:'auto')+'"&gt;'<br>
+       &nbsp;&nbsp;+'&lt;div&gt;[iframe not supported]&lt;/div&gt;&lt;/iframe&gt;');<br>
+       }
+      </td></tr></table>
+      <strong>Import the <a
+      href="zipArchive.html"
+      onmouseover="overlib('Preview the contents of '
+       +'&lt;strong&gt;overlibmws.zip&lt;/strong&gt;', WRAP, BASE,2, TEXTPADDING,4, HAUTO);"
+      onmouseout="nd();">distribution</a>'s iframecontentmws.js support script to have
+      this function available for use in overlib or overlib2 calls.</strong>
+      <br><br>
+      <strong>NOTE</strong> that the iframe document within the parent document's primary popup
+      can invoke secondary popups in the parent, and thus not be bound by the margins of the
+      iframe, either by making a <strong>parent.overlib2()</strong> function call to use an
+      <strong>overlibmws_overtwo.js</strong> plug-in module imported by the parent, in which
+      case the positioning in the parent document must be via REF, MIDX, MIDY, RELX, RELY, FIXX
+      and/or FIXY commands, or by importing that plug-in itself and using
+      <strong>overlib2()</strong> function calls with the <strong>FRAME,parent</strong> command
+      and parameter, in which case cursor-based positioning of the secondary popups (i.e., with
+      respect to cursor position within the iframe content) also can be used.&nbsp; A third
+      alternative is for the iframe document to import and use both the core and plug-in modules
+      so that it can invoke its own primary popups which if STICKY can invoke their own
+      secondary popups for links in the primary popup's content, but such primary and secondry
+      popups cannot extend beyond the margins of the iframe.
+     </td>
+    </tr>
+    <tr> 
+     <td align="center" class="text16">
+      <a name="draggable" id="draggable">&nbsp;</a><br>
+      <!--
+           Invoke a draggable popup with iframe content
+        -->
+      <strong><a
+       href="javascript:void(0);"
+       onclick="return false;"
+       onmouseover="return overlib(
+        OLiframeContent('iframePopupContent.html', 510, 145, 'if2', 1, 'auto'),
+        WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, DRAGGABLE, CLOSECLICK,
+        CAPTIONPADDING,4, CAPTION,'Example with iframe content and a '
+        +'caption.&nbsp; Draggable via the caption.',
+        MIDX,0, MIDY,0,
+        STATUS,'Example with iframe content, a caption and a Close link');"
+       onmouseout="nd();">Draggable with iframe content, caption and Close link</a></strong>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>Called by the statement:</strong><br>
+      <!--
+           Show markup for invoking a draggable popup with iframe content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(<strong>OLiframeContent('</strong><a
+        href="iframePopupContent.html"
+        onmouseover="return overlib('Directly access this file.', BASE,2, HAUTO);"
+        onmouseout="nd();">iframePopupContent.html</a><strong>', 510, 145, 'if2',
+       1, 'auto')</strong>,<br>
+       &nbsp;WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, <strong>DRAGGABLE</strong>, CLOSECLICK,<br>
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with iframe content and a '<br>
+       &nbsp;+'caption&amp;nbsp; Draggable via the caption.',<br>
+       &nbsp;MIDX,0, MIDY,0,<br>
+       &nbsp;STATUS,'Draggable popup with iframe content, a caption and a Close link');"<br>
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>Which also uses the above simple function.</strong>&nbsp; Note that the
+      <a
+        href="iframePopupContent.html"
+        onmouseover="return overlib('Directly access:&lt;br&gt;'
+         +'&lt;strong&gt;iframePopupContent.html&lt;/strong&gt;',
+         TEXTPADDING,6, BASE,2, HAUTO);"
+        onmouseout="nd();">iframe document</a> includes code for resetting the
+      <strong>o3_draggable</strong> runtime variable if a rapid downward drag via the
+      caption area causes the cursor to &quot;slip&quot; into the iframe content:<br>
+      <!--
+           Show script block with code for resetting o3_draggable
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       &lt;script type="text/javascript"&gt;<br>
+       &lt;!--<br>
+       if (!document.layers &&<br>
+       &nbsp;&nbsp;&nbsp;&nbsp;parent != self && typeof parent.o3_dragging != 'undefined') {<br>
+       &nbsp;document.onmouseup = function(e){parent.o3_dragging = 0;}<br>
+       }<br>
+       //--&gt;<br>
+       &lt;/script&gt;
+      </td></tr></table>
+      <strong>Review more <a name="embif"
+       href="overflow.html#iframecontent"
+       onmouseover="return overlib('Review more &lt;strong&gt;iframe&lt;/strong&gt; '
+        +'and &lt;strong&gt;object&lt;/strong&gt; examples.',
+        WRAP, BASE,2, TEXTPADDING,4, HAUTO);"
+       onmouseout="nd();">iframe</a></strong> and <strong>object</strong>
+      examples.&nbsp; <strong>Review</strong> an example of
+      <strong>iframe</strong> content with <strong><a
+       href="AJAX.html#ajaxex3"
+       onmouseover="return overlib('Review an &lt;strong&gt;iframe plus AJAX&lt;/strong&gt; '
+        +'example', WRAP, BASE,2, TEXTPADDING,4, HAUTO);"
+       onmouseout="nd();">AJAX</a></strong> content.
+     </td>
+    </tr>
+    <tr>
+     <td width="100%" class="text16" align="left">
+      <a name="embif" id="embif">&nbsp;</a><br>
+      <strong>Embedded iframe (name="eif1" id="eif1"):</strong><br>
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr>
+        <td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12">
+         <!--
+            Embed an iframe
+          -->
+         <iframe
+          src="embeddedIframeContent.html" width="510" height="215"
+          name="eif1" id="eif1" frameborder="1" scrolling="auto">
+          <div><br>[iframe not supported]<br><br></div>
+         </iframe><br>
+        </td>
+       </tr>
+      </table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>Embedded via the following markup:</strong><br>
+      <!--
+           Show markup for embedding an iframe
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       &lt;<strong>iframe<br>
+       &nbsp;&nbsp;src=</strong>"<a
+        href="embeddedIframeContent.html"
+        onmouseover="return overlib('Directly access this file.', STICKY, NOCLOSE, OFFDELAY,500, BUBBLE, ADJBUBBLE);"
+        onmouseout="nd(500);">embeddedIframeContent.html</a>"
+       <strong>width=</strong>"510" <strong>height=</strong>"215"<br>
+       &nbsp;&nbsp;<strong>name</strong>="eif1" <strong>id</strong>="eif1"
+       <strong>frameborder</strong>="1" <strong>scrolling</strong>="auto"&gt;<br>
+       &nbsp;&nbsp;&lt;div&gt;&lt;br&gt;[iframe not
+       supported]&lt;br&gt;&lt;br&gt;&lt;/div&gt;<br>
+       &lt;<strong>/iframe</strong>&gt;
+      </td></tr></table>
+      <div style="line-height:8px;font-size:6px;">&nbsp;</div>
+      <strong>NOTE</strong> that the embedded iframe document can invoke primary popups in the
+      parent, and thus not be bound by the margins of the iframe, either by making a
+      <strong>parent.overlib()</strong> function call to use an <strong>overlibmws.js</strong>
+      core module imported by the parent, in which case the positioning in the parent document
+      must be via REF, MIDX, MIDY, RELX, RELY, FIXX and/or FIXY commands, or by importing the
+      core module itself and using <strong>overlib()</strong> function calls with the
+      <strong>FRAME,parent</strong> command and parameter, in which case cursor-based
+      positioning of the primary popups (i.e., with respect to cursor position within the
+      embedded iframe) also can be used.&nbsp; If one uses <strong>parent.overlib()</strong>,
+      then any secondary popups for links in the primary popup's content should use
+      <strong>overlib2()</strong> function calls without a frame reference to use an
+      <strong>overlibmws_overtwo.js</strong> plug-in module imported by the parent.&nbsp; But
+      if the embedded iframe document instead uses an <strong>overlib()</strong> function call for its
+      own core module with <strong>FRAME,parent</strong>, then it should use a frame reference
+      pointing to the embedded iframe from the parent's perspective to invoke secondary popups
+      via its own <strong>overlibmws_overtwo.js</strong> plug-in module.&nbsp; For the above
+      example which uses <strong>eif1</strong> as a unique name and id for the embedded iframe,
+      the function call with frame reference is <strong>self.eif1.overlib2()</strong>.&nbsp;
+      Also, if the call for a secondary popup uses a lead argument which is defined in the
+      embedded iframe documents as a string in a script block or imported <strong>.js</strong>
+      file, then a frame reference from the parent's perspective also is needed for that (e.g.,
+      <strong>self.eif1.comRef</strong> for a string variable defined as
+      <strong>comRef</strong>).
+      <div style="line-height:8px;font-size:6px;">&nbsp;</div>
+      <strong>Another</strong> alternative if the embedded iframe document imports both the core
+      and plug-in modules is to invoke its primary popups without <strong>FRAME,parent</strong>
+      which if STICKY can invoke secondary popups for links in the primary popups' content also
+      without any frame references, but such primary and secondry popups cannot extend beyond
+      the margins of the embedded iframe.
+     </td>
+    </tr>
+   </table>
+  </td> 
+ </tr> 
+</table>
+
+<table align="center" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="center" valign="middle" class="text12">
+   <br>
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the markup
+   for these examples.</em>
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text12" align="center" valign="bottom" colspan="4" rowspan="1">
+   <strong>These examples use <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',FGCLASS,'',WRAP,BASE,2,
+     REF,'dandt',REFP,'LL',REFX,-100,REFY,-5,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',FGCLASS,'',WRAP,BASE,2,
+     REF,'comref',REFP,'LL',REFX,-110,REFY,-5,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</strong><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     FGCLASS,'',TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-10,
+     TEXTFONTCLASS,'text12',WRAP,BASE,2);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     FGCLASS,'',VCENTER,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff',WRAP,BASE,2);"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright&nbsp;Foteos&nbsp;Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',FGCLASS,'',TEXTPADDING,8,FGCOLOR,'#bbddff',WRAP,BASE,2,
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-7,REFY,-5,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',FGCLASS,'',VCENTER,LEFT,WRAP,BASE,2,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='IFRAME.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

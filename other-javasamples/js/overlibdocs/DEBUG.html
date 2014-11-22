@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Instructions for debug function in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Debug Function in overlibmws</title>
+
+<script type="text/javascript">
+<!--
+var OLdbg=0,OLdbg1=0,OLdbg2=0;
+//-->
+</script>
+<script type="text/javascript" src="overlibmws_vdbg.js"></script>
+<script type="text/javascript" src="overlibmws_debug.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(FGCOLOR,'#ffffcc',BASE,2,WRAP,TEXTPADDING,4,CAPTIONPADDING,4,
+ ALLOWDEBUG,'showProps,OLplaceLayer,OLrepositionTo');
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+//-->
+</script>
+
+<style type="text/css">
+<!--
+body {font-family:Verdana,Arial,Helvetica;font-size:13px;margin-top:10px;margin-bottom:30px;
+ margin-left:5px;margin-right:5px;}
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+.title {font-family:Arial,Helvetica;font-size:26px;font-weight:bold;text-align:center;}
+.author {font-size:12px;font-style:italic;text-align:center;}
+.sectiontitle {font-family:Arial,Helvetica;font-size:18px;font-weight:bold;}
+.cellcontent {font-family:Verdana,Arial,Helvetica;font-size:13px;padding-right:5px;
+ padding-left:5px}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text12 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.text14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table align="center" width="90%" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Debug Plugin Module</strong></span>
+   <span class="mySubHead"><strong><em>for the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     OFFSETX,-10, OFFSETY,20, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20);"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for debug support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   <span class="mySpacer">&nbsp;<br></span>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top"> 
+   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td>
+      <table width="100%" border="0" cellspacing="2" cellpadding="2">
+       <tr>
+        <td width="15" class="sectiontitle">
+         1.
+        </td>
+        <td class="sectiontitle">
+         Introduction
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent">
+         The purpose of this module is to allow the user to obtain information about
+         internal variables of the <span class="purple14">overlibmws</span> core and/or
+         plugin modules while the core and/or pluging modules are actually working in order
+         to assist in debugging situations for which popups are not behaving as expected.&nbsp;
+         To use this plugin module, import it after the core module:<br>
+         <span class="mySpacer"><br></span>
+         &nbsp;&nbsp;&nbsp;&nbsp;&lt;script
+          type="text/javascript" <b>src="overlibmws.js"</b>&gt;&lt;/script&gt;<br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&lt;script
+          type="text/javascript" <b>src="overlibmws_debug.js"</b>&gt;&lt;/script&gt;<br>
+         <span class="mySpacer"><br></span>
+        </td>
+       </tr>
+       <tr> 
+        <td width="15" class="sectiontitle">
+         2.
+        </td>
+        <td class="sectiontitle">
+         Initial (default) Debug Layer
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         To query variables within the core or a plugin module, just insert the following
+         statement at the appropriate place within the core or plugin code:<br>
+         <span class="mySpacer"><br></span>
+         &nbsp;&nbsp;&nbsp;&nbsp;<b>OLshowProperties(<i>variable_label</i>, <i>variable</i>,
+         ...)</b><br>
+         <span class="mySpacer"><br></span>
+         where <b><i>variable_label</i></b> is what you want to call the variable that
+         is going to be dislayed and <b><i>variable</i></b> is that actual variable to
+         display.&nbsp;
+         For example, if you want to see what the values of <b>OLx</b> and <b>OLy</b>
+         (overlib's run-time variables for the cursor coordinates) are while moving the
+         mouse around your page, insert the statement:<br>
+         <span class="mySpacer"><br></span>
+         &nbsp;&nbsp;&nbsp;&nbsp;<b>OLshowProperties('OLx', OLx, 'OLy', OLy)</b><br>
+         <span class="mySpacer"><br></span>
+         after the point where these variables are set in the <b>OLmouseMove</b> function,
+         as you can see by <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'First click enables default (showProps) debug layer.',
+           TEXTFONTCLASS,'text12', HAUTO, VAUTO, AUTOSTATUS);"
+          onmouseout="nd();"
+          onclick="OLdbg=1;return false;">clicking&nbsp;here</a>.<br>
+         <span class="mySpacer"><br></span>
+         <em><b>Note</b> that
+         the core module used on this page,</em> <b>overlibmws_vdbg.js</b><em>, has calls to
+         the OLshowProperties() function but is otherwise the same as</em>
+         <b>overlibmws.js</b>.&nbsp; <em>Flags set via the onClick event are being used to
+         regulate initiation of OLshowPropteries() handling simply for purposes of this
+         demonstration.</em><br>
+         <span class="mySpacer"><br></span>
+         When the OLshowProperties() function is called with only the 
+         <b><i>variable_label</i></b>, <b><i>variable</i></b> pairs as arguments, a
+         default positioned div container (layer) with <b>id="showProp"</b> is used.&nbsp;
+         The layer will be generated dynamically and need not be declared in the document,
+         but do not use <b>showProp</b> as the <b>id</b> value for another element.<br>
+         <span class="mySpacer"><br></span>
+        </td>
+       </tr>
+       <tr> 
+        <td width="15" class="sectiontitle">
+         3.
+        </td>
+        <td class="sectiontitle">
+         Multiple Debug Layers
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         You can place the OLshowProperties() function in more than one location in the
+         core and/or plugin modules, and correspondingly have more than one debug layer
+         (positioned div container) showing at a time.&nbsp;
+         To do so, each additional layer must have a unique <b>id</b>, and the <b>id</b>
+         (a string value) must be used as the first argument in the call to OLshowProperties(),
+         as in:<br>
+         <span class="mySpacer"><br></span>
+         &nbsp;&nbsp;&nbsp;&nbsp;<b>OLshowProperties(<i>layerID</i>, <i>variable_label</i>,
+         <i>variable</i>, ...)</b><br>
+         <span class="mySpacer"><br></span>
+         You can see a demonstration of multiple debug layers by <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'First click enables multiple debug layers.',
+           TEXTFONTCLASS,'text12', HAUTO, VAUTO, AUTOSTATUS);"
+          onmouseout="nd();"
+          onclick="OLdbg=OLdbg1=OLdbg2=1;return false;">clicking here</a>.<br>
+         <span class="mySpacer"><br></span>
+         To allow the user to see all of the popups (which are offset from one another
+         horizontally), the layer <b>id</b> is used as a link at upper left, which when
+         clicked will move that layer to the bottom of the stack and move the others
+         upward.&nbsp; The additional layers also will be created dynamically and need
+         not be declared explicitly in the document.<br>
+         <span class="mySpacer"><br></span>
+        </td>
+       </tr>
+       <tr> 
+        <td width="15" class="sectiontitle">
+         4.
+        </td>
+        <td class="sectiontitle">
+         Hiding and Restoring Debug Layers
+        </td>
+       </tr>
+       <tr> 
+        <td width="15">
+         &nbsp;
+        </td>
+        <td class="cellcontent"> 
+         You can set a debug layer's visibility to hidden by clicking on the close
+         button labeled <b>X</b> in the upper right-hand corner.&nbsp;
+         Once a debug layer has been cast to hidden, it will remain hidden unless it
+         is cast to visible again via the ALLOWDEBUG command (<em>see below</em>) or its
+         configuration variable.&nbsp; For this demonstration, ALLOWDEBUG has been made the
+         page default with the <b>showProps id</b> and the <b>id</b>s for the two additional
+         debug layers (<b>OLplaceLayer</b> and <b>OLrepositionTo</b>) used as its
+         parameter via the OLpageDefaults() configuration function:<br>
+         <span class="mySpacer"><br></span>
+         &nbsp;&nbsp;&nbsp;&nbsp;<b>OLpageDefaults(ALLOWDEBUG,
+         'showProps,OLplaceLayer,OLrepositionTo');</b><br>
+         <span class="mySpacer"><br></span>
+         so that once each layer is invoked, if hidden via its close button it will
+         become visible again whenever an overlib popup is invoked (and can be made
+         hidden again via its close button).<br>
+         <span class="mySpacer"><br></span>
+         <b>ALLOWDEBUG</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Debug layer &lt;b&gt;id&lt;/b&gt; or comma-separated list of debug layer '
+           +'&lt;b&gt;id&lt;/b&gt;s.',
+           TEXTFONTCLASS,'text12', CAPTION,'Parameter debugID(s)',AUTOSTATUSCAP);"
+          onmouseout="return nd();">debugID(s)</a></i><br>
+         Specifies a string value with the <b>id</b> of a debug layer or a comma-separated
+         list of debug layer <b>id</b>s (default is the null string, "").&nbsp
+         When the string value is non-null and points to valid <b>id</b>(s), the corresponding
+         debug layer(s) that was(were) made hidden via the debug layer close button at
+         upper right can be made visible again whenever an overlib call which can invoke
+         the debug layer(s) is made again.&nbsp;
+         Such layers can be made hidden again via their close button.&nbsp;
+         The string value can be set on the command line, via the configuration
+         variable, or via the OLpageDefaults() configuration function.<br>
+         Variable: ol_allowdebug.<br>
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>
+   <br><span class="mySpacer"><br></span>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     REF,'dandt', REFP,'LL', REFX,-100, REFY,-5, TEXTFONTCLASS,'text12', FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     REF,'comref', REFP,'LL', REFX,-110, REFY,-5, TEXTFONTCLASS,'text12', FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff', REF,'amazon', REFP,'UR', REFX,-5, REFY,-10,
+     TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     VCENTER, TEXTFONTCLASS,'text12', FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).', TEXTPADDING,8, FGCOLOR,'#bbddff',
+     REF,'logo', REFC,'UL', REFP,'LL', REFY,-5, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01', VCENTER, LEFT,
+     TEXTFONTCLASS,'text12', FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='DEBUG.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

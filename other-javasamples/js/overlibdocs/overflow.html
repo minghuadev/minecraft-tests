@@ -1,0 +1,833 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="keywords" content="overlib, overlibmws, scrollbar, iframe, object, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Instructions for adding scrollbars in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - CSS overflow, iframe, and object based scrollbars in overlibmws</title>
+
+<!-- OLiframeContent(src, width, height) script:
+ (include WIDTH with its parameter equal to width, and TEXTPADDING,0, in the overlib call)
+-->
+<script type="text/javascript" src="iframecontentmws.js"></script>
+
+<!-- OLobjectContent(data, width, height) script:
+ (include WIDTH with its parameter equal to width, and TEXTPADDING,0, in the overlib call)
+-->
+<script type="text/javascript" src="objectcontentmws.js"></script>
+
+<!-- Core module:
+-->
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<!-- Plugin modules:
+-->
+<script type="text/javascript" src="overlibmws_draggable.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_scroll.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(BGCLASS,'olbg', CGCLASS,'olcg', FGCLASS,'olfg',
+ CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo', TEXTFONTCLASS,'oltxt');
+
+/*
+  String variable definitions for popup content.
+  Could instead use an array, and an imported js file.
+*/
+var myText1=
+ 'This captionless example sets<br>MOUSEOFF and a TIMEOUT of 10<br>'
++'seconds, such that it will close<br>after that interval if you ignore it,<br>'
++'but will clear the TIMEOUT and<br>close <a href="javascript:void(0);" '
++'name="mtxt1" id="mtxt1" onmouseover="return overlib2(omo, REF,\'mtxt1\', '
++'REFP,\'LL\', FGCLASS,\'olfg2\', WRAP, BASE,2)" onmouseout="nd2();"'
++'>on mouse off<\/a> if you move<br>onto anywhere in the popup.';
+var omo='&nbsp;Implemented via the MOUSEOFF or NOCLOSE command.&nbsp;';
+
+var myText2=
+ '<div class="ovfl">This captioned example does<br>not set TIMEOUT '
++'nor NOCLOSE<br>so that it will not close after some<br>interval if you '
++'ignore it, nor will it<br>close <a href="javascript:void(0);" '
++'name="mtxt2" id="mtxt2" onmouseover="return overlib2(omo, REF,\'mtxt2\', '
++'REFP,\'LL\', FGCLASS,\'olfg2\', WRAP, BASE,2)" onmouseout="nd2();"'
++'>on mouse off<\/a> if you move<br>onto the popup.&nbsp; Instead, use<br>'
++'the Close link at upper right.<\/div>';
+
+var myText3=
+ '<div class="ovfl" id="ovflo">This captioned example sets<br>NOCLOSE and a '
++'TIMEOUT of 10<br>seconds, such that it will close<br>after that interval '
++'if you ignore it,<br>but will clear the TIMEOUT and<br>close '
++'<a href="javascript:void(0);" name="mtxt3" id="mtxt3" onmouseover="return '
++'overlib2(omo, REF,\'mtxt3\', REFP,\'LL\', FGCLASS,\'olfg2\', WRAP, BASE,2)" '
++'onmouseout="nd2();">on mouse off<\/a> if you move<br>onto anywhere in the '
++'popup.<\/div>';
+
+var myText4=
+ '<div class="ovfl">This captionless example sets<br>MOUSEOFF and a TIMEOUT '
++'of<br>10 seconds, such that it will close<br>after that interval if you '
++'ignore it,<br>but will clear the TIMEOUT and<br>close '
++'<a href="javascript:void(0);" name="mtxt4" id="mtxt4" onmouseover="return '
++'overlib2(omo, REF,\'mtxt4\', REFP,\'LL\', FGCLASS,\'olfg2\', WRAP, BASE,2)" '
++'onmouseout="nd2();">on mouse off<\/a> if you move<br>onto anywhere in the '
++'popup.<\/div>';
+
+var myText5=
+ '&nbsp;Go to the support document for REF-based positioning.&nbsp;';
+
+//-->
+</script>
+
+<style type="text/css">
+<!--
+.ovfl {
+  width:266px; height:100px; border:1px none #000000; padding:6px;
+  overflow:auto;
+}
+.olbg {background-color:#333399;}
+.olcg {background-color:#aa00aa; text-align:center;}
+.olfg {background-color:#ffffcc; text-align:center;}
+.olfg2 {background-color:#ffffee; text-align:center;}
+.olcap {font-family:Arial; font-size:12px; font-weight:bold; color:#ffffff;}
+a.olclo {font-family:Verdana; font-size:11px; font-weight:bold; color:#ddddff;}
+a.olclo:hover {color:#ffffff;}
+.oltxt {font-family:Arial; font-size:16px; color:#000000;}
+.oltxt12 {font-family:Arial; font-size:12px; color:#000000;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text16 {font-family:Verdana,Arial,sans-serif; font-size:16px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+
+.myHeader {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;}
+.mySubHead {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;}
+.mySpacer {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+.olFoot {font-family:Verdana,Arial,Helvetica; font-size:12px; color:#000000;}
+.yellow {color:#ffff00;}
+.red {color:#cc0000;}
+.blue {color:#0000cc;}
+-->
+</style> 
+</head>
+
+<body text="#220022" bgcolor="#ddeeff">
+
+<table width="100%" cellpadding="2" cellspacing="0" border="0"> 
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Examples of popups with scrollbars</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,OFFSETX,-10,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText',
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20,
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for scrollbar support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle">
+   <table width="54%" cellpadding="10" cellspacing="0" bgcolor="#ccddff"> 
+    <tr>
+     <td align="left" valign="middle" class="text14">
+      These examples compare popups with <em>versus</em> without
+      CSS <strong>overflow:auto;</strong> generated scrollbars, or with
+      scrollbars generated by using an <strong>iframe</strong> or <strong>object</strong>
+      element as the popup content.
+     </td>
+    </tr>
+   </table>
+   <table width="610"cellpadding="2" cellspacing="0"> 
+    <tr> 
+     <td align="center" class="text16">
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onmouseover="return overlib(myText1,
+        WRAP, TEXTPADDING,6, STICKY, MOUSEOFF,
+        TIMEOUT,10000, MIDX,0,RELY,10, BASE,2,
+        STATUS,'Example without scrollbar');"
+       onmouseout="nd();">Without scrollbar</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(myText1,<br>
+       &nbsp;WRAP, TEXTPADDING,6, STICKY, MOUSEOFF,<br>
+       &nbsp;TIMEOUT,10000, MIDX,0, RELY,10, BASE,2,<br>
+       &nbsp;STATUS,'Example without scrollbar');
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>with this string variable definition:</b><br>
+      <!--
+           Show string variable definition for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       var myText1=<br>&nbsp;&nbsp;'This captionless example sets&lt;br&gt;MOUSEOFF and a
+       TIMEOUT of 10&lt;br&gt;'<br>
+       +'seconds, such that it will close&lt;br&gt;after that interval if you ignore
+       it,&lt;br&gt;'<br>
+       +'but will clear the TIMEOUT and&lt;br&gt;close &lt;a href="javascript:void(0);" '<br>
+       +'name="mtxt1" id="mtxt1" onmouseover="return overlib2(<strong>omo</strong>,
+       REF,\'mtxt1\', '<br>
+       +'REFP,\'LL\', FGCLASS,\'olfg2\', WRAP, BASE,2)" onmouseout="nd2();"'<br>
+       +'&gt;on mouse off&lt;\/a&gt; if you move&lt;br&gt;onto anywhere in the popup.';<br>
+       var <strong>omo</strong>='&amp;nbsp;Implemented via the MOUSEOFF or NOCLOSE
+       command.&amp;nbsp;';
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text12">
+      <a name="dragcap" id="dragcap">&nbsp;</a><br>
+     </td> 
+    <tr> 
+     <td align="center" class="text16">
+      <b><a
+       href="javascript:void(0);"
+       onmouseover="return overlib(myText2,
+        WRAP, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+        CAPTIONPADDING,4, CAPTION,'Example with scrollbar and caption',
+        MIDX,0, RELY,10, DRAGGABLE, DRAGCAP,
+        STATUS,'Example with overflow scrollbar, caption and Close link');"
+       onmouseout="nd();"
+      >Draggable with overflow scrollbar, caption and Close link</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(myText2,<br>
+       &nbsp;WRAP, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,<br>
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with scrollbar and caption',<br>
+       &nbsp;MIDX,0, RELY,10, <strong>DRAGGABLE, <span class="red">DRAGCAP</span>,</strong><br>
+       &nbsp;STATUS,'Draggable with overflow scrollbar, caption and Close link');
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>with this string variable definition:</b><br>
+      <!--
+           Show string variable definition for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       var myText2=<br>
+       &nbsp;&nbsp;'<strong>&lt;div class="ovfl"&gt;</strong>This captioned example
+       does&lt;br&gt;not set TIMEOUT '<br>
+       +'nor NOCLOSE&lt;br&gt;so that it will not close after some&lt;br&gt;interval
+       if you '<br>
+       +'ignore it, nor will it&lt;br&gt;close &lt;a href="javascript:void(0);" '<br>
+       +'name="mtxt2" id="mtxt2" onmouseover="return overlib2(<strong>omo</strong>,
+       REF,\'mtxt2\', '<br>
+       +'REFP,\'LL\', FGCLASS,\'olfg2\', WRAP, BASE,2)" onmouseout="nd2();"'<br>
+       +'&gt;on mouse off&lt;\/a&gt; if you move&lt;br&gt;onto the popup.&amp;nbsp; Instead,
+       use&lt;br&gt;'<br>
+       +'the Close link at upper right.<strong>&lt;\/div&gt;</strong>';
+      </td></tr></table>
+      <strong>The <span class="red">DRAGCAP</span> command restricts the dragging handle to
+      the caption.</strong>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text12">
+      <a name="dragid" id="dragid">&nbsp;</a><br>
+     </td> 
+    </tr>
+    <tr> 
+     <td align="center" class="text16">
+      <b><a
+       href="javascript:void(0);"
+       onmouseover="return overlib(myText3,
+        WRAP, TEXTPADDING,0, BORDER,2, STICKY, NOCLOSE,
+        CAPTIONPADDING,4, CAPTION,'Example with scrollbar and caption',
+        TIMEOUT,10000, MIDX,0, RELY,10, DRAGGABLE, DRAGID,'ovflo',
+        STATUS,'Draggable example with overflow scrollbar and caption');"
+       onmouseout="nd();">Draggable with overflow scrollbar and caption</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(myText3,<br>
+       &nbsp;WRAP, TEXTPADDING,0, BORDER,2, STICKY, NOCLOSE,<br>
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with scrollbar and caption',<br>
+       &nbsp;TIMEOUT,10000, MIDX,0, RELY,10, <b>DRAGGABLE,
+       <span class="red">DRAGID,'ovflo'</span>,</b><br>
+       &nbsp;STATUS,'Draggable with overflow scrollbar and caption');
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>with this string variable definition:</b><br>
+      <!--
+           Show string variable definition for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       var myText3=<br>
+       &nbsp;&nbsp;'<strong>&lt;div class="ovfl"
+       <span class="red">id="ovflo"</span>&gt;</strong>This captioned
+       example sets&lt;br&gt;NOCLOSE and a '<br>
+       +'TIMEOUT of 10&lt;br&gt;seconds, such that it will close&lt;br&gt;after that
+       interval '<br>
+       +'if you ignore it,&lt;br&gt;but will clear the TIMEOUT
+       and&lt;br&gt;close '<br>
+       +'&lt;a href="javascript:void(0);" name="mtxt3" id="mtxt3" onmouseover="return '<br>
+       +'overlib2(<strong>omo</strong>, REF,\'mtxt3\', REFP,\'LL\', FGCLASS,\'olfg2\', WRAP,
+       BASE,2)" '<br>
+       +'onmouseout="nd2();"&gt;on mouse off&lt;\/a&gt; if you move&lt;br&gt;onto anywhere
+       in the '<br>
+       +'popup.<strong>&lt;/div&gt;</strong>';
+      </td></tr></table>
+      <strong>The <span class="red">DRAGID</span> command with the <span class="red">id</span>
+      of the div container should be used when scrollbars are enabled and the dragging handle
+      is not restricted to the caption.</strong>
+     </td> 
+    </tr>
+    <tr> 
+     <td align="center" class="text16">
+      <span class="text12">&nbsp;<br></span>
+      <b><a
+       href="javascript:void(0);"
+       onmouseover="return overlib(myText4,
+        WRAP, TEXTPADDING,0, BORDER,2, STICKY, MOUSEOFF,
+        TIMEOUT,10000, MIDX,0, RELY,10,
+        STATUS,'Example with overflow scrollbar');"
+       onmouseout="nd();">With overflow scrollbar</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(myText4,<br>
+       &nbsp;WRAP, TEXTPADDING,0, BORDER,2, STICKY, MOUSEOFF,<br>
+       &nbsp;TIMEOUT,10000, MIDX,0, RELY,10,<br>
+       &nbsp;STATUS,'Example with overflow scrollbar');
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>with this string variable definition:</b><br>
+      <!--
+           Show string variable definition for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       var myText4=<br>
+       &nbsp;&nbsp;'<strong>&lt;div class="ovfl"&gt;</strong>This captionless example
+       sets&lt;br&gt;MOUSEOFF and a TIMEOUT '<br>
+       +'of&lt;br&gt;10 seconds, such that it will close&lt;br&gt;after that interval if
+       you '<br>
+       +'ignore it,&lt;br&gt;but will clear the TIMEOUT and&lt;br&gt;close '<br>
+       +'&lt;a href="javascript:void(0);" name="mtxt4" id="mtxt4" onmouseover="return '<br>
+       +'overlib2(<strong>omo</strong>, REF,\'mtxt4\', REFP,\'LL\', FGCLASS,\'olfg2\', WRAP,
+       BASE,2)" '<br>
+       +'onmouseout="nd2();"&gt;on mouse off&lt;\/a&gt; if you move&lt;br&gt;onto anywhere in
+       the '<br>
+       +'popup.<strong>&lt;/div&gt;</strong>';
+      </td></tr></table>
+     </td> 
+    </tr>
+    <tr> 
+     <td align="center" class="text12">
+      <a name="scrolling" id="scrolling">&nbsp;</a><br>
+     </td> 
+    </tr>
+    <tr> 
+     <td align="center" class="text16">
+      <b><a
+       href="javascript:void(0);"
+       onmouseover="return overlib(myText2,
+        WRAP, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+        CAPTIONPADDING,4, CAPTION,'Example with scrollbar and caption',
+        MIDX,0, RELY,10, SCROLL,
+        STATUS,'Scrolling example with overflow scrollbar, caption and Close link');"
+       onmouseout="nd();">Scrolling with overflow scrollbar, caption and Close link</a></b>
+     </td>
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for the popup
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(myText2,<br>
+       &nbsp;WRAP, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,<br>
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with scrollbar and caption',<br>
+       &nbsp;MIDX,0, RELY,10, <b>SCROLL</b>,<br>
+       &nbsp;STATUS,'Scrolling with overflow scrollbar, caption and Close link');<br>
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>with the myText2 string variable (<i>see above</i>) for the lead argument.</b><br>
+      <div style="line-height:8px;font-size:8px;">&nbsp;<br></div>
+     </td> 
+    </tr>
+    <tr> 
+     <td align="center" class="text12">
+      <a name="styledemo" id="styledemo">&nbsp;</a><br>
+     </td> 
+    </tr>
+   </table> 
+   <table width="610" cellpadding="10" cellspacing="0" bgcolor="#ccddff"> 
+    <tr> 
+     <td class="text12">
+      The style of the above popups is controlled via
+      <b><em>overlib's CSS class variables</em></b> defined in a script block,
+      as follows:
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" class="text12" bgcolor="#ccccdd">
+       <code>&lt;script type="text/javascript"&gt;<br>
+       &lt;!--<br>
+       <strong>OLpageDefaults(BGCLASS,'olbg', CGCLASS,'olcg', FGCLASS,'olfg',<br>
+       &nbsp;CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo',
+       TEXTFONTCLASS,'oltxt');</strong><br>
+       //--&gt;<br>
+       &lt;/script&gt;</code><br>
+     </td> 
+    </tr>
+    <tr> 
+     <td align="left" class="text12">
+       and for the <strong>popups with overflow scrollbars</strong>, in an <strong>encasing
+       div</strong>:
+     </td> 
+    </tr>
+    <tr> 
+     <td align="left" class="text12" bgcolor="#ccccdd">
+       <code>&lt;<strong><em>div class=</em>'ovfl'</strong>&gt;...<em>popup
+       content</em>...&lt;<strong>/<em>div</em></strong>&gt;</code><br>
+    </tr>
+    <tr> 
+     <td align="left" class="text12">
+       in conjunction with a <b><em>style sheet</em></b> defined in a style block
+       as follows:
+     </td> 
+    </tr>
+    <tr> 
+     <td align="left" class="text12" bgcolor="#ccccdd">
+       <code>&lt;style type="text/css&gt;<br>
+       &lt;!--<br>
+       <strong>.ovfl {</strong><br>
+       &nbsp;&nbsp;&nbsp;<strong>width:</strong>266px; <strong>height:</strong>100px;
+       <strong>border:</strong>1px none #000000; <strong>padding:</strong>6px;<br>
+       &nbsp;&nbsp;&nbsp;<strong>overflow:auto;<br>
+       }</strong><br>
+       .olbg {background-color:#333399;}<br>
+       .olcg {background-color:#aa00aa; text-align:center;}<br>
+       .olfg {background-color:#ccccff; text-align:center;}<br>
+       .olcap {font-family:Arial; font-size:12px; font-weight:bold; color:#ffffff;}<br>
+       a.olclo {font-family:Verdana; font-size:10px; font-weight:bold; color:#ddddff;}<br>
+       a.olclo:hover {color:#ffffff;}<br>
+       .oltxt {font-family:Arial; font-size:16px; color:#000000;}<br>
+       --&gt;<br>
+       &lt;/style&gt;</code><br>
+     </td> 
+    </tr> 
+   </table>
+   <table width="610" cellpadding="10" cellspacing="0" bgcolor="#ccddff"> 
+    <tr> 
+     <td align="left" class="text12">
+      <strong>NOTE</strong> that <strong>Netscape v4.x browsers</strong> pre-date
+      the CSS overflow property and thus will not create scrollbars within popups.<br>
+     </td> 
+    </tr> 
+   </table>
+   <table width="610" cellpadding="2" cellspacing="0"> 
+    <tr> 
+     <td align="center" class="text16">
+      <div class="text12">&nbsp;<br></div>
+      <a name="iframecontent" id="iframecontent">&nbsp;</a>
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onclick="return false;"
+       onmouseover="return overlib(OLiframeContent('zipArchive.html', 510, 200, 'if1', 1,
+        (OLie4&amp;&amp;!OLopr)?'yes':'auto'),
+        WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+        CAPTIONPADDING,4, CAPTION,'Example with iframe scrollbar and caption',
+        MIDX,0, RELY,10,
+        STATUS,'Example with iframe scrollbar, caption and Close link');"
+       onmouseout="nd();">With iframe scrollbar, caption and Close link</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for invoking a popup with iframe content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(<strong>OLiframeContent('zipArchive.html', 510, 200, 'if1', 1,
+       (OLie4&amp;amp;&amp;amp;!OLopr)?'yes':'auto')</strong>,<br>
+       &nbsp;WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,<br>
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with iframe scrollbar and caption',<br>
+       &nbsp;MIDX,0, RELY,10,<br>
+       &nbsp;STATUS,'Example with iframe scrollbar, caption and Close link');
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>which uses this simple function for the lead argument in the overlib
+      call:</strong><br>
+      <!--
+           Show script used for invoking a popup with iframe content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       function <strong>OLiframeContent(src, width, height, name, frameborder, scrolling)</strong> {<br>
+       &nbsp;return ('&lt;iframe src="'+src+'" width="'+width+'" height="'+height+'"'<br>
+       &nbsp;&nbsp;+(name!=null?' name="'+name+'" id="'+name+'"':'')<br>
+       &nbsp;&nbsp;+(frameborder!=null?' frameborder="'+frameborder+'"':'')<br>
+       &nbsp;&nbsp;+' scrolling="'+(scrolling!=null?scrolling:'auto')+'"&gt;'<br>
+       &nbsp;&nbsp;+'&lt;div&gt;[iframe not supported]&lt;/div&gt;&lt;/iframe&gt;');<br>
+       }
+      </td></tr></table>
+      <strong>Import the distribution's iframecontentmws.js support script to have
+      this function available for use in overlib or overlib2 calls.</strong>
+      <br><br>
+      <strong>NOTE</strong> that <strong>Netscape v4.x browsers</strong>
+      pre-date iframe and will mishandle this markup unless you put alternate content
+      in the iframe container,as this function does.&nbsp; <strong>Also NOTE</strong>
+      that iframe is not included in the <strong>strict DTD</strong>s.&nbsp; You instead
+      could use object (<em>see below</em>), but browsers do still support iframe
+      despite its absence from those DTDs.&nbsp; <strong>Review more <a
+       href="IFRAME.html"
+       onmouseover="return overlib('Review more &lt;strong&gt;iframe&lt;/strong&gt; examples.',
+        WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'oltxt12');"
+       onmouseout="nd();">iframe</a> examples.</strong>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text16">
+      <a name="objectcontent" id="objectcontent">&nbsp;</a>
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onclick="return false;"
+       onmouseover="return overlib(OLobjectContent('zipArchive.html', 510, 200, 'ob1'),
+        WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+        CAPTIONPADDING,4, CAPTION,'Example with object scrollbar and caption',
+        MIDX,0, RELY,10,
+        STATUS,'Example with object scrollbar, caption and Close link');"
+       onmouseout="nd();">With object scrollbar, caption and Close link</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for invoking a popup with object content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(<strong>OLobjectContent('zipArchive.html', 510, 200, 'ob1')</strong>,<br>
+       &nbsp;WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK<br>
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with object scrollbar and caption',<br>
+       &nbsp;MIDX,0, RELY,10,<br>
+       &nbsp;STATUS,'Example with object scrollbar, caption and Close link');
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>which uses this simple function for the lead argument in the overlib
+      call:</strong><br>
+      <!--
+           Show script used for invoking a popup with object content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       function <strong>OLobjectContent(data, width, height, name)</strong> {<br>
+       &nbsp;return ('&lt;object data="'+data+'" width="'+width+'" height="'+height+'"'<br>
+       &nbsp;+(name?' name="'+name+'" id="'+name+'"':'')+' type="text/html"&gt;<br>
+       &nbsp;&lt;div&gt;[object not supported]&lt;/div&gt;&lt;/object&gt;');<br>
+       }
+      </td></tr></table>
+      <strong>Import the distribution's objectcontentmws.js support script to have
+      this function available for use in overlib or overlib2 calls.</strong>
+      <br><br>
+      <strong>NOTE</strong> that <strong>Netscape v4.x browsers</strong>
+      pre-date object and will mishandle this markup unless you put alternate content
+      in the object container.
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text16">
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onclick="return false;"
+       onmouseover="return overlib(OLobjectContent('zipArchive.html', 510, 200, 'ob2'),
+        WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, NOCLOSE,
+        CAPTIONPADDING,4, CAPTION,'Example with object scrollbar and caption',
+        TIMEOUT,10000, MIDX,0,RELY,10,
+        STATUS,'Example with object scrollbar and caption');"
+       onmouseout="nd();">With object scrollbar and caption</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for invoking a popup with object content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(<strong>OLobjectContent('zipArchive.html', 510, 200, 'ob2')</strong>,<br>
+       &nbsp;WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, NOCLOSE,<br>
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with object scrollbar and caption',<br>
+       &nbsp;TIMEOUT,10000, MIDX,0,RELY,10,<br>
+       &nbsp;STATUS,'Example with object scrollbar and caption');
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>which uses the above simple function.</b><br>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text16">
+      <br>
+      <b><a
+       href="javascript:void(0);"
+       onclick="return false;"
+       onmouseover="return overlib(OLobjectContent('zipArchive.html', 510, 200, 'ob3'),
+        WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, MOUSEOFF,
+        TIMEOUT,10000, MIDX,0,RELY,10,
+        STATUS,'Example with object scrollbar');"
+       onmouseout="nd();">With object scrollbar</a></b>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>Called by the statement:</b><br>
+      <!--
+           Show markup for invoking a popup with object content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       return overlib(<strong>OLobjectContent('zipArchive.html', 510, 200, 'ob3')</strong>,<br>
+       &nbsp;WIDTH,510, TEXTPADDING,0, BORDER,2, STICKY, MOUSEOFF,<br>
+       &nbsp;TIMEOUT,10000, MIDX,0,RELY,10,<br>
+       &nbsp;STATUS,'Example with object scrollbar');
+      </td></tr></table>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <b>which uses the above simple function.</b><br>
+     </td> 
+    </tr> 
+   </table>
+   <table width="610" cellpadding="2" cellspacing="0"> 
+    <tr> 
+     <td align="center" class="text16">
+      <a name="embeddedcontent" id="embeddedcontent">&nbsp;</a>
+      <br>
+      <b>Embedded div with scrollbar:</b>
+      <div style="line-height:6px;font-size:6px;">&nbsp;</div>
+      <div
+       style="background-color:#ffffcc; text-align:center;font-family:Arial; font-size:16px; color:#000000;
+        width:266px; height:100px; border:1px solid #aaaaaa; padding:6px; overflow:auto;">
+       This embedded example<br>
+       is not a DHTML popup<br>
+       and thus uses an<br>
+       overlib instead of overlib2 call<br>
+       for the <a
+        href="REF.html"
+        name="mtxt1Embedded" id="mtxt1Embedded"
+        onmouseover="return overlib(myText5, TEXTFONTCLASS,'oltxt12',
+         REF,'mtxt1Embedded', REFP,'LL', FGCLASS,'olfg2', WRAP, BASE,2)"
+        onmouseout="nd();">popup</a> in its content.<br>
+        Scroll the content to verify<br>
+        that the popup stays consistently
+        aligned (REFC,'UL', REFP,'LL')<br>
+        with the REFerenced link.
+      </div>
+     </td> 
+    </tr>
+   </table>
+   <br><br>
+  </td> 
+ </tr> 
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text12" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>These examples use <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',FGCLASS,'',WRAP,BASE,2,
+     REF,'dandt',REFP,'LL',REFX,-100,REFY,-5,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',FGCLASS,'',WRAP,BASE,2,
+     REF,'comref',REFP,'LL',REFX,-110,REFY,-5,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     FGCLASS,'',TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-10,
+     TEXTFONTCLASS,'text12',WRAP,BASE,2);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     FGCLASS,'',VCENTER,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff',WRAP,BASE,2);"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright&nbsp;Foteos&nbsp;Macrides<br>
+   &nbsp;&nbsp;2002-2010
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',FGCLASS,'',TEXTPADDING,8,FGCOLOR,'#bbddff',WRAP,BASE,2,
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-7,REFY,-5,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',FGCLASS,'',VCENTER,LEFT,WRAP,BASE,2,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='overflow.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

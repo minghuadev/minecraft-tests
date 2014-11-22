@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popups, tooltips, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of STICKY and SCROLL commands and use of CSS in Macrides Web Services open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - STICKY and SCROLL commands in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_scroll.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+<script type="text/javascript" src="overlibmws_exclusive.js"></script>
+
+<script type="text/javascript">
+<!--
+// Preload the images used in popups
+var myExit = new Image();
+myExit.src = "exit.gif";
+
+var myExitBlue = new Image();
+myExitBlue.src = "exit_blue.gif";
+
+var myRaisedBlue = new Image();
+myRaisedBlue.src = "raised_blue.gif";
+
+var myExitMetallic = new Image();
+myExitMetallic.src = "exit_metallic.gif";
+
+var myRaisedMetallic = new Image();
+myRaisedMetallic.src = "raised_metallic.gif";
+
+var myInputText = new Image();
+myInputText.src = "inputText.gif";
+
+// Define the variables used in popups
+var mySticky = 'Here is a link to the<br><a '
+ +'target="_blank" '
+ +'href="http://groups.yahoo.com/group/overlibmws/" '
+ +'onmouseover="return overlib2(\'Visit the overlibmws Support Group '
+ +'in a new window.\','
+ +'FGCOLOR,\'#ffffcc\', TEXTPADDING,4, TEXTFONTCLASS,\'oltxt\','
+ +'OFFSETX,-5, OFFSETY,20, VAUTO, WRAP, BASE,2);" '
+ +'onmouseout="nd2();">overlibmws Support Group<\/a>';
+
+// Always include the width and height for any images)
+var closeimg =
+  '<img src="exit.gif" alt="Click to Close" width="12" height="11" border="0">';
+var closeimgBlue =
+  '<img src="exit_blue.gif" alt="Close" width="14" height="15" border="0" name="blueExit" id="blueExit" '
+ +'onmouseover="document.blueExit.src=myExitMetallic.src" '
+ +'onmouseout="document.blueExit.src=myExitBlue.src">';
+var closeimgMetallic =
+ '<img src="exit_metallic.gif" alt="Close" width="14" height="15" border="0" name="metallicExit" id="metallicExit" '
+ +'onmouseover="document.metallicExit.src=myExitBlue.src" '
+ +'onmouseout="document.metallicExit.src=myExitMetallic.src">';
+
+var myGoogleCap =
+  'Search <span class="blue">www.macridesweb.com<\/span> or the '
+ +'<span class="blue">WWW<\/span> via <span class="yellow">Google<\/span>';
+
+var myGoogleTxt =
+  '<div align="center">'
+ +'<form name="f" method="GET" autocomplete="off" target="_blank" '
+ +'action="http://www.google.com/search">'
+ +'<input type="hidden" name="hl" value="en">'
+ +'<input type="hidden" name="ie" value='+(OLns4?'"ISO-8859-1"':'"UTF-8"')+'>'
+ +'<input type="hidden" name="oe" value='+(OLns4?'"ISO-8859-1"':'"UTF-8"')+'>'
+ +'<input type=hidden name=domains value="www.macridesweb.com">'
+ +'<input type=hidden name=cof value="S:http://www.macridesweb.com;GL:1;AH:center;T:black;'
+ +'BGC:#ddeeff;LC:blue;ALC:red;VLC:maroon;AWFID:0574228e2618b5a9;">'
+ +'<input type=radio name=sitesearch value="www.macridesweb.com" checked> www.macridesweb.com '
+ +'&nbsp;&nbsp;&nbsp;<input type=radio name=sitesearch value=""> WWW<br><br>'
+ +'<input type="text" name="q" size="55" maxLength="255" class="olinput"><br><br>'
+ +'<input type="submit" name=btnG value="Google Search" '
+ +'onmouseover="return overlib2(\'Click to &lt;b&gt;submit&lt;/b&gt; and '
+ +'&lt;b&gt;Receive a Hit List&lt;/b&gt; in &lt;b&gt;another window&lt;/b&gt;.\', '
+ +'TEXTPADDING,4,TEXTFONTCLASS,\'text12\',FGCOLOR,\'#bbddff\',WRAP,BASE,2,'
+ +'CENTER,OFFSETY,18,VAUTO);" '
+ +'onmouseout="nd2();"> '
+ +'&nbsp;&nbsp;&nbsp;<input type="submit" name=btnI value="I\'m Feeling Lucky" '
+ +'onmouseover="return overlib2(\'Click to &lt;b&gt;submit&lt;/b&gt; and '
+ +'&lt;b&gt;Display the First Hit&lt;/b&gt; in &lt;b&gt;another window&lt;/b&gt;.\', '
+ +'TEXTPADDING,4,TEXTFONTCLASS,\'text12\',FGCOLOR,\'#bbddff\',WRAP,BASE,2,'
+ +'CENTER,OFFSETY,18,VAUTO);" '
+ +'onmouseout="nd2();">'
+ +'<\/form><\/div>';
+
+// For setting focus on input field
+function OLsf() {
+ if (!(OLloaded&&OLgateOK)||overlib==no_overlib) return;
+ if (!OLns4) setTimeout("document.forms.f.elements.q.focus()",2);
+ return true;
+}
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.olcg {background-color:#333399; text-align:center;}
+.olfg {background-color:#cceeff; text-align:center;}
+
+.olcap {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;color:#ffffff;
+ font-weight:bold;}
+
+.olclo {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;color:#33ff33;
+ font-weight:bold;}
+a.olclo:hover {color:#ffbbff;}
+
+.oltxt {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+
+.olraisedBlue {text-align:center;
+ background:#33aaff url(raised_blue.gif) repeat-x bottom left;}
+table.olraisedBlue {border-bottom:1px solid #333399;}
+
+.olraisedMetallic {text-align:center;
+ background:#c2c2c2 url(raised_metallic.gif) repeat-x bottom left;}
+table.olraisedMetallic {border-bottom:1px solid #666666;}
+
+.olcapMetallic {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;
+ font-weight:bold; color:#333;text-shadow:#ddd 2px 2px 0;}
+
+.olfgMetallic {background-color:#eeeeee;text-align:center;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff}
+
+input.olinput {background:white url(inputText.gif) repeat-x bottom left;
+ min-height:16px;color: #000000;}
+
+.myHeader {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;}
+.mySubHead {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;}
+.mySpacer {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text6 {font-family:Verdana,Arial,sans-serif;font-size:6px;}
+.text12 {font-family:Verdana,Arial,sans-serif;font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif;font-size:14px;}
+.snip {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.blue {color:#cceeff;}
+.yellow {color:yellow;}
+
+-->
+</style>
+</head> 
+
+<body text="#330033" bgcolor="#ddeeff">
+
+<table width="80%" cellpadding="5" align="center"> 
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Examples of STICKY popups</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     WRAP,BASE,2,OFFSETX,-10,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText',
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a> <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20, FGCOLOR,'#bbddff',
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for STICKY support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   <span class="text6"><a
+    name="styledemo" id="styledemo">&nbsp;</a></span><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <b>This link has an example of the
+<!--
+  Sticky with caption at top
+ -->
+   <a
+    onmouseover="return overlib('Here is a link to the&lt;br&gt;&lt;a '
+     +'target=&quot;_blank&quot; '
+     +'href=&quot;http://groups.yahoo.com/group/overlibmws/&quot; '
+     +'onmouseover=&quot;return overlib2(\'Visit the overlibmws Support Group '
+     +'in a new window.\','
+     +'FGCOLOR,\'#ffffcc\', TEXTPADDING,4, TEXTFONTCLASS,\'oltxt\','
+     +'OFFSETX,-5, OFFSETY,20, VAUTO, WRAP, BASE,2);&quot; '
+     +'onmouseout=&quot;nd2();&quot;&gt;overlibmws Support Group&lt;/a&gt;',
+     STICKY,CAPTION,'STICKY Pop-up with a link', CAPTIONPADDING,4, TEXTPADDING,8,
+     CGCLASS,'olcg', FGCLASS,'olfg', CAPTIONFONTCLASS,'olcap', TEXTFONTCLASS,'oltxt',
+     CLOSETEXT,'&lt;img src=\'exit.gif\' alt=\'Click to Close\' '
+     +'width=\'12\' height=\'11\' border=\'0\'&gt;', CLOSECLICK,
+     RELX,100, RELY,20, WRAP, BASE,3, SCROLL,
+     STATUS,'STICKY popup with link and secondary popup');"
+    onmouseout="nd();"
+    href="javascript:void(0);">STICKY</a> command</b>, with a <b>link inside the popup</b>
+   and a <b>secondary popup</b> associated with that link.&nbsp; The link includes a
+   target attribute for a new window if the link is activated.&nbsp;
+   We use an exit image as the <b>CLOSETEXT</b>, and use <b>CLOSECLICK</b> to require
+   that it be clicked to close the pop-up.&nbsp;
+   We also thicken the <b>BASE</b> of the border by 3 pixels, use <b>RELX</b> and
+   <b>RELY</b> for positioning with respect to the window's margins, and use <b>SCROLL</b>
+   to maintain that position when the document is scrolled.&nbsp; The call for this example,
+   which includes the <b>CAPTIONPADDING</b><b>, TEXTPADDING</b>, <b>CGLASS</b>, <b>FGCLASS</b>,
+   <b>CAPTIONFONTCLASS</b>, and <b>TEXTFONTCLASS</b> commands, is:
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>onmouseover=&quot;return <b>overlib(</b>'Here is a link to
+   the&amp;lt;br&amp;gt;&amp;lt;<b>a</b> '<br>
+   &nbsp;+'target=&amp;quot;<span
+   style="background-color:#ccccdd;">_blank</span>&amp;quot; '<br>
+   &nbsp;+'href=&amp;quot;<span
+   style="background-color:#ccccdd;">http://groups.yahoo.com/group/overlibmws/</span>&amp;quot;
+   '<br>
+   &nbsp;+'onmouseover=&amp;quot;<span style="background-color:#ccccdd;">return
+   <b>overlib2(</b>\'Visit the overlibmws Support Group '<br>
+   &nbsp;+'in a new window.\','<br>
+   &nbsp;+'FGCOLOR,\'#ffffcc\', TEXTPADDING,4, TEXTFONTCLASS,\'oltxt\','<br>
+   &nbsp;+'OFFSETX,-5, OFFSETY,20, VAUTO, WRAP, BASE,2<b>)</b>;</span>&amp;quot; '<br>
+   &nbsp;+'onmouseout=&amp;quot;<span
+   style="background-color:#ccccdd;"><b>nd2()</b>;</span>&amp;quot;&amp;gt;<span
+   style="background-color:#ccccdd;">overlibmws
+   Support Group</span>&amp;lt;<b>/a</b>&amp;gt;',<br>
+   &nbsp;<b>STICKY</b>, CAPTION,'STICKY Pop-up with link', CAPTIONPADDING,4, TEXTPADDING,8,<br>
+   &nbsp;CGCLASS,'olcg', FGCLASS,'olfg', CAPTIONFONTCLASS,'olcap', TEXTFONTCLASS,'oltxt',<br>
+   &nbsp;<b>CLOSETEXT</b>,'&amp;lt;<span style="background-color:#ccccdd;"><b>img</b>
+   src=\'exit.gif\' alt=\'Click to Close\' '<br>
+   &nbsp;+'width=\'12\' height=\'11\' border=\'0\'</span>&amp;gt;', CLOSECLICK,<br>
+   &nbsp;<b>RELX</b>,100, <b>RELY</b>,20, WRAP, BASE,3, SCROLL,<br>
+   &nbsp;STATUS,'STICKY popup with link and secondary popup'<b>)</b>;&quot;</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   However, when HTML is used for the Lead Argument and/or the parameter of a command
+   such as CLOSETEXT (or CAPTION), it is better to use string variables or array entries,
+   so as to avoid the need to use HTML entities for reserved characters such as
+   angle-brackets, and to simplify the handling of embedded quotes.&nbsp;  For example,
+   the above Lead Argument and CLOSETEXT parameter could be defined in a script block or
+   imported <strong>.js</strong> file as: 
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>var <strong>mySticky</strong> = 'Here is a link to the<span
+   style="color:red;font-weight:bold;">&lt;</span>br<span
+   style="color:red;font-weight:bold;">&gt;&lt;</span><b>a</b> '<br>
+   &nbsp;+'target=<span style="color:red;font-weight:bold;">"</span><span
+   style="background-color:#ccccdd;">_blank</span><span
+   style="color:red;font-weight:bold;">"</span> '<br>
+   &nbsp;+'href=<span style="color:red;font-weight:bold;">"</span><span
+   style="background-color:#ccccdd;">http://groups.yahoo.com/group/overlibmws/</span><span
+   style="color:red;font-weight:bold;">"</span> '<br>
+   &nbsp;+'onmouseover=<span style="color:red;font-weight:bold;">"</span><span
+   style="background-color:#ccccdd;">return <b>overlib2(</b>\'Visit the overlibmws Support
+   Group '<br>
+   &nbsp;+'in a new window.\','<br>
+   &nbsp;+'FGCOLOR,\'#ffffcc\', TEXTPADDING,4, TEXTFONTCLASS,\'oltxt\','<br>
+   &nbsp;+'OFFSETX,-5, OFFSETY,20, VAUTO, WRAP, BASE,2<b>)</b>;</span><span
+   style="color:red;font-weight:bold;">"</span> '<br>
+   &nbsp;+'onmouseout=<span style="color:red;font-weight:bold;">"</span><span
+   style="background-color:#ccccdd;"><b>nd2()</b>;</span><span
+   style="color:red;font-weight:bold;">"&gt;</span><span
+   style="background-color:#ccccdd;">overlibmws Support Group</span><span
+   style="color:red;font-weight:bold;">&lt;</span><b>/a</b><span
+   style="color:red;font-weight:bold;">&gt;</span>';
+   <br><br>
+   var <strong>closeimg</strong> =<br>
+   &nbsp;&nbsp;'<span style="color:red;font-weight:bold;">&lt;</span><span
+   style="background-color:#ccccdd;"><b>img</b> src=<span
+   style="color:red;font-weight:bold;">"</span>exit.gif<span
+   style="color:red;font-weight:bold;">"</span> alt=<span
+   style="color:red;font-weight:bold;">"</span>Click to Close<span
+   style="color:red;font-weight:bold;">"</span> '<br>
+   &nbsp;+'width=<span
+   style="color:red;font-weight:bold;">"</span>12<span
+   style="color:red;font-weight:bold;">"</span> height=<span
+   style="color:red;font-weight:bold;">"</span>11<span
+   style="color:red;font-weight:bold;">"</span> border=<span
+   style="color:red;font-weight:bold;">"</span>0<span
+   style="color:red;font-weight:bold;">"</span></span><span
+   style="color:red;font-weight:bold;">&gt;</span>';</code><br>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   and the variables names could instead be used (unquoted) in the function call:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>onmouseover=&quot;return <b>overlib(mySticky</b>,<br>
+   &nbsp;<b>STICKY</b>, CAPTION,'STICKY Pop-up with link', CAPTIONPADDING,4, TEXTPADDING,8,<br>
+   &nbsp;CGCLASS,'olcg', FGCLASS,'olfg', CAPTIONFONTCLASS,'olcap', TEXTFONTCLASS,'oltxt',<br>
+   &nbsp;<b>CLOSETEXT</b>,<b>closeimg</b>, CLOSECLICK, <b>RELX</b>,100, <b>RELY</b>,20, WRAP,
+   BASE,3, SCROLL,<br>
+   &nbsp;STATUS,'STICKY popup with link and secondary popup'<b>)</b>;&quot;</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <a name="capbelow" id="capbelow">&nbsp;</a>
+   <br>
+   <b>OK, now try the
+<!--
+  Sticky with caption at bottom
+ -->
+    <a
+    onmouseover="return overlib(mySticky,
+     STICKY, CAPTION,'STICKY Pop-up with a link', CAPTIONPADDING,4, TEXTPADDING,8,
+     CGCLASS,'olcg', FGCLASS,'olfg', CAPTIONFONTCLASS,'olcap', TEXTFONTCLASS,'oltxt',
+     CLOSETEXT,closeimg, MIDX,0, MIDY,0, WRAP, SCROLL,
+     STATUS,'STICKY popup with link and secondary popup and FILTER for IE v5.5+',
+     FILTER, CAPBELOW);"
+    onmouseout="nd();"
+    href="javascript:void(0);">STICKY</a> command that way</b>, with the <strong>FILTER</strong>
+   command <strong><em>added</em></strong> for IE v5.5+ browsers and with the
+   <strong>FADEIN</strong> command defaulted to 52 for random selectons from the 51 (1-51) <a
+    href="FILTER.html"
+    onmouseover="return overlib('Go to the examples of all 51 fade types.',
+     FGCOLOR,'#ffffcc', TEXTFONTCLASS,'oltxt', OFFSETX,-5, OFFSETY,20, VAUTO,
+     WRAP, BASE,2, FILTER);"
+    onmouseout="nd();">fade types</a> (<strong>also try</strong> the
+   non-sticky popups for the links below).
+   <script type="text/javascript" src="frills.js"></script>&nbsp; The <strong>CAPBELOW</strong>
+   command also has been <strong><em>added</em></strong>, the <strong>CLOSECLICK</strong>
+   command has been <strong><em>omitted</em></strong>, and positioning has been
+   <strong><em>changed</em></strong> to <strong>MIDX</strong>,0, <strong>MIDY</strong>,0 for
+   centering in both the horizontal and vertical axes:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>onmouseover=&quot;return <b>overlib(mySticky</b>,<br>
+   &nbsp;<b>STICKY</b>, CAPTION,'STICKY Pop-up with link', CAPTIONPADDING,4, TEXTPADDING,8,<br>
+   &nbsp;CGCLASS,'olcg', FGCLASS,'olfg', CAPTIONFONTCLASS,'olcap', TEXTFONTCLASS,'oltxt',<br>
+   &nbsp;<b>CLOSETEXT</b>,<b>closeimg</b>, <b>MIDX</b>,0, <b>MIDY</b>,0, WRAP,
+   BASE,3, SCROLL,<br>
+   &nbsp;STATUS,'STICKY popup with link and secondary popup and FILTER for IE v5.5+',<br>
+   &nbsp;FILTER, CAPBELOW<b>)</b>;&quot;</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <a name="GoogleSearch" id="GoogleSearch">&nbsp;</a><br>
+   <b>And try a
+<!--
+  Google Search via sticky
+ -->
+   <span style="background-color:#c0e0ff;font-size:18px"><a
+    href="javascript:void(0);"
+    onmouseover="overlib(myGoogleTxt, CAPTION,myGoogleCap,
+    STICKY, EXCLUSIVE, CLOSECLICK, CAPTIONPADDING,4, TEXTPADDING,10,
+    CGCLASS,'olcg', CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo',
+    FGCOLOR,'#bbddff', TEXTFONTCLASS,'oltxt',
+    MIDX,0, RELY,20, WRAP, BASE,3, SCROLL); return OLsf();"
+    onmouseout="nd();"><img
+    src="../image/google.gif"
+    alt="" align="bottom" width="49" height="18" border="0"></a></span> search via a
+   sticky, scrolling popup.</b>&nbsp; We set this up so that the results will be returned in
+   a new window.&nbsp; We also use the <strong>EXCLUSIVE</strong> command so that this popup
+   must be closed before any other primary overlib popups can be invoked (or one instead
+   could use <strong>MODAL</strong> to block all access to the underlying document until
+   the popup is closed, in which case one need not include <strong>SCROLL</strong>).&nbsp;
+   Positioning is <strong>MIDX</strong>,0, <strong>RELY</strong>,20 for horizontal centering of
+   the popup near the top of the window.&nbsp; Finally, we call a function to <b>s</b>et the
+   <b>f</b>ocus to the input field when the popup is invoked:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>onmouseover=&quot;<b>overlib(myGoogleTxt</b>, CAPTION,<b>myGoogleCap</b>,<br>
+   &nbsp;<b>STICKY</b>, <b>EXCLUSIVE</b>, CLOSECLICK, CAPTIONPADDING,4, TEXTPADDING,10,<br>
+   &nbsp;CGCLASS,'olcg', CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo',<br>
+   &nbsp;FGCOLOR,'#bbddff', TEXTFONTCLASS,'oltxt',<br>
+   &nbsp;<b>MIDX</b>,0, <b>RELY</b>,20, WRAP, BASE,3, SCROLL<b>); return
+   OLsf()</b>;&quot;</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the definitions
+   of the</em> <strong>myGoogleTxt</strong> <em>and</em> <strong>myGoogleCap</strong>
+  <em>string variables and the code for the</em> <strong>OLsf()</strong> <em>function.</em>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <br>
+   The <strong>style sheet</strong> for the above examples is:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>&lt;style type="text/css&gt;<br>
+   &lt;!--<br> 
+   .olcg {background-color:#333399; text-align:center;}<br>
+   .olfg {background-color:#cceeff; text-align:center;}
+   <br><br>
+   .olcap {<br>
+   &nbsp;font-family:Verdana,Arial,Helvetica,sans-serif;<br>
+   &nbsp;font-size:11px;<br>
+   &nbsp;font-weight:bold;<br>
+   &nbsp;color:#ffffff;}
+   <br><br>
+   .olclo {<br>
+   &nbsp;font-family:Verdana,Arial,Helvetica,sans-serif;<br>
+   &nbsp;font-size:11px;<br>
+   &nbsp;font-weight:bold;<br>
+   &nbsp;color:#33ff33;}<br>
+   a.olclo:hover {color:#ffbbff;}
+   <br><br>
+   .oltxt {<br>
+   &nbsp;font-family:Verdana,Arial,Helvetica,sans-serif;<br>
+   &nbsp;font-size:13px;<br>
+   &nbsp;color:#000000;}
+   <br><br>
+   a {color:#338855; font-weight:bold;}<br>
+   a:hover {color:#ff00ff;}
+   <br><br>
+   input.olinput {<br>
+   &nbsp;background:white url(inputText.gif) repeat-x bottom left;<br>
+   &nbsp;min-height:16px;<br>
+   &nbsp;color: #000000;}<br>
+   --&gt;<br>
+   &lt;/style&gt;</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <a name="raisedcap">&nbsp;</a><br>
+   <b>Now try an example of a STICKY popup with a
+<!--
+  Sticky with raised blue caption background
+ -->
+   <a
+    onmouseover="return overlib(mySticky,
+     STICKY, CAPTION,'STICKY Pop-up with a link', CAPTIONPADDING,4, TEXTPADDING,8,
+     CGCLASS,'olraisedBlue', CLOSETEXT,closeimgBlue, CLOSECLICK, CLOSETITLE,'Close',
+     CAPTIONFONTCLASS,'olcap', FGCLASS,'olfg', TEXTFONTCLASS,'oltxt',
+     MIDX,0, MIDY,0, WRAP, BASE,2, SCROLL, FILTER,
+     STATUS,'STICKY popup with a raised blue background in its caption');"
+    onmouseout="nd();"
+    href="javascript:void(0);">raised blue</a> background in the caption.</b>&nbsp; It
+   uses the following overlib call:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>onmouseover=&quot;return <b>overlib(mySticky</b>,<br>
+   &nbsp;<b>STICKY</b>, CAPTION,'STICKY Pop-up with link', CAPTIONPADDING,4, TEXTPADDING,8,<br>
+   &nbsp;<span style="background-color:#ccccdd;"><b>CGCLASS</b>,<b>'olraisedBlue'</b>,
+   <b>CLOSETEXT</b>,<b>closeimgBlue</b>,</span>
+   <b>CLOSECLICK</b>, <b>CLOSETITLE</b>,<b>'Close'</b>,<br>
+   &nbsp;CAPTIONFONTCLASS,'olcap', FGCLASS,'olfg', TEXTFONTCLASS,'oltxt',<br>
+   &nbsp;<b>MIDX</b>,0, <b>MIDY</b>,0, WRAP, BASE,2, SCROLL, FILTER,<br>
+   &nbsp;STATUS,'STICKY popup with a raised blue background in its
+   caption'<b>)</b>;&quot;</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   with the following javascript definiton for the <b>closeimgBlue</b> string variable and CSS
+   rules for the <b>olraisedBlue</b> class:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>var <span style="background-color:#ccccdd;"><b>closeimgBlue</b></span> =<br>
+   &nbsp;&nbsp;'&lt;img src="exit_blue.gif" alt="Close" width="14" height="15" border="0" '<br>
+   &nbsp;+'name="blueExit" id="blueExit" '<br>
+   &nbsp;+'onmouseover="document.blueExit.src=myExitMetallic.src" '<br>
+   &nbsp;+'onmouseout="document.blueExit.src=myExitBlue.src"&gt;';
+   <br><br>
+   <span style="background-color:#ccccdd;"><b>.olraisedBlue</b></span> {text-align:center;<br>
+   &nbsp;background:#33aaff url(raised_blue.gif) repeat-x bottom left;}<br>
+   <span style="background-color:#ccccdd;"><b>table.olraisedBlue</b></span> {border-bottom:1px
+   solid #333399;}</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <br>
+   <b>And try an example of a STICKY popup with a
+<!--
+  Sticky with raised metallic caption background
+ -->
+   <a
+    onmouseover="return overlib(mySticky,
+     STICKY, CAPTION,'STICKY Pop-up with a link', CAPTIONPADDING,4, TEXTPADDING,8,
+     CGCLASS,'olraisedMetallic', CLOSETEXT,closeimgMetallic, CLOSECLICK, CLOSETITLE,'Close',
+     CAPTIONFONTCLASS,'olcapMetallic', FGCLASS,'olfgMetallic', TEXTFONTCLASS,'oltxt',
+     MIDX,0, MIDY,0, WRAP, BGCOLOR,'#666666', BASE,2, SCROLL,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#aaaaaa',
+     SHADOW, SHADOWX,3, SHADOWY,3, SHADOWCOLOR,'#aaaaaa',
+     STATUS,'STICKY popup with a raised metallic background in its caption');"
+    onmouseout="nd();"
+    href="javascript:void(0);">raised metallilc</a> background in the caption.</b>&nbsp; It
+   uses the following overlib call:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>onmouseover=&quot;return <b>overlib(</b>mySticky,<br>
+   &nbsp;STICKY, CAPTION,'STICKY Pop-up with link', CAPTIONPADDING,4, TEXTPADDING,8,<br>
+   &nbsp;<span style="background-color:#ccccdd;"><b>CGCLASS</b>,<b>'olraisedMetallic'</b>,
+   <b>CLOSETEXT</b>,<b>closeimgMetallic</b></span>, <b>CLOSECLICK</b>,<br>
+   &nbsp;<b>CLOSETITLE</b>,<b>'Close'</b>,
+   <span style="background-color:#ccccdd;"><b>CAPTIONFONTCLASS,'olcapMetallic'</b>,
+   <b>FGCLASS</b>,<b>'olfgMetallic'</b></span>,<br>
+   &nbsp;TEXTFONTCLASS,'oltxt', MIDX,0, MIDY,0, WRAP,
+   <span style="background-color:#ccccdd;"><b>BGCOLOR,'#666666'</b></span>, BASE,2, SCROLL,<br>
+   &nbsp;FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#aaaaaa',<br>
+   &nbsp;SHADOW, SHADOWX,3, SHADOWY,3, SHADOWCOLOR,'#aaaaaa',<br>
+   &nbsp;STATUS,'STICKY popup with a raised metallic background in its
+   caption'<b>)</b>;&quot;</code><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   with the following javascript definiton for the <b>closeimgMetallic</b> string variable and
+   CSS rules for the <b>olraisedMetallic</b>, <b>olcapMetallic</b> and <b>olfgMetallic</b>
+   classes:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>var <span style="background-color:#ccccdd;"><b>closeimgMetallic</b></span> =<br>
+   &nbsp;&nbsp;'&lt;img src="exit_metallic.gif" alt="Close" width="14" height="15" border="0" '<br>
+   &nbsp;+'name="metallicExit" id="metallicExit" '<br>
+   &nbsp;+'onmouseover="document.metallicExit.src=myExitBlue.src" '<br>
+   &nbsp;+'onmouseout="document.metallicExit.src=myExitMetallic.src"&gt;';
+   <br><br>
+   <span style="background-color:#ccccdd;"><b>.olraisedMetallic</b></span>
+   {text-align:center;<br>
+   &nbsp;background:#33aaff url(raised_metallic.gif) repeat-x bottom left;}<br>
+   <span style="background-color:#ccccdd;"><b>table.olraisedMetallic</b></span>
+   {border-bottom:1px solid #666666;}
+   <br><br>
+   <span style="background-color:#ccccdd;"><b>.olcapMetallic</b></span>
+   {font-family:Verdana,Arial,Helvetica,sans-serif; font-size:11px;<br>
+   &nbsp;font-weight:bold; color:#333;
+   <span style="background-color:#ccccdd;"><b>text-shadow:#ddd 2px 2px 0;</b></span>}
+   <br><br>
+   <span style="background-color:#ccccdd;"><b>.olfgMetallic</b></span>
+   {background-color:#eeeeee; text-align:center;}</code><br>
+  </td>
+ </tr>
+  <tr> 
+  <td align="left" valign="middle" class="text12">
+   <b>Note</b> that the <b>text-shadow</b> property used in the <b>olcapMetallic</b> class
+   has been implemented by <b>Safari</b> to create a "<i>sunken text</i>" effect.&nbsp; It has
+   been moved to CSS3 and eventually may be implemented by other browsers as well, but CSS3
+   will have <b>font-effect:engrave;</b> explicitly for this effect.<br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12">
+   <br>
+   It is desireable to <b>pre-load any images used in the document's popups.</b>&nbsp; Those
+   used in this document's popups have been pre-loaded via the following javascript:
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" class="text12" bgcolor="#ddddee">
+   <code>var myExit = new Image();<br>
+   myExit.src = "exit.gif";
+   <br><br>
+   var myExitBlue = new Image();<br>
+   myExitBlue.src = "exit_blue.gif";
+   <br><br>
+   var myRaisedBlue = new Image();<br>
+   myRaisedBlue.src = "raised_blue.gif";
+   <br><br>
+   var myExitMetallic = new Image();<br>
+   myExitMetallic.src = "exit_metallic.gif";
+   <br><br>
+   var myRaisedMetallic = new Image();<br>
+   myRaisedMetallic.src = "raised_metallic.gif"
+   <br><br>
+   var myInputText = new Image();<br>
+   myInputText.src = "inputText.gif";<br></code>
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   <br>
+   The STICKY command and other core commands in this document require only the
+   <strong>overlibmws.js</strong> core module.&nbsp; The <a
+    href="commandRef.html#behavior-positioning-sizes"
+    onmouseover="return overlib('Link to <strong>3. Behavior, Positioning and '
+     +'Sizes</strong>&lt;br&gt;in the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">SCROLL</a>, <a
+    href="commandRef.html#filter"
+    onmouseover="return overlib('Link to <strong>8. Transform Filters</strong> in the&lt;br&gt;'
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">FILTER</a>, <a
+    href="commandRef.html#behavior-positioning-sizes"
+    onmouseover="return overlib('Link to <strong>3. Behavior, Positioning and '
+     +'Sizes</strong>&lt;br&gt;in the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">EXCLUSIVE</a> and <a
+    href="commandRef.html#dropshadow"
+    onmouseover="return overlib('Link to <strong>6. Dropshadow</strong> in the&lt;br&gt;'
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">SHADOW</a> commands require the
+    <strong>overlibmws_scroll.js</strong>, <strong>overlibmws_filter.js</strong>,
+    <strong>overlibmws_exclusive.js</strong> and <strong>overlibmws_shadow.js</strong>
+    plugin modules, respectively.&nbsp; The <a
+    href="commandRef.html#introduction"
+    onmouseover="return overlib('Link to <strong>1. Introduction</strong> in the&lt;br&gt;'
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">overlib2()</a> and <a
+    href="commandRef.html#introduction"
+    onmouseover="return overlib('Link to <strong>1. Introduction</strong> in the&lt;br&gt;'
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference',
+     TEXTPADDING,4,FGCOLOR,'#cceeff',TEXTFONTCLASS,'oltxt',WRAP,BASE,2,HAUTO,VAUTO);"
+    onmouseout="nd();">nd2()</a> function calls for secondary popups require the
+   <strong>overlibmws_overtwo.js</strong> plugin module.
+  </td>
+ </tr>
+ <tr>
+  <td align="left" valign="middle" class="text12">
+   &nbsp;<br>&nbsp;<br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text12" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,ABOVE,CENTER,OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER,FADEIN,45,FADEOUT,45,FILTERSHADOW,1,FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,BASE,2,ABOVE,CENTER,OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER,FADEIN,31,FADEOUT,31,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#cf33cf',
+     SHADOW,SHADOWCOLOR,'#cf33cf');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the &lt;span '
+     +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;\/i&gt;&lt;\/span&gt; '
+     +'shopping via this link&lt;br&gt;(with &lt;strong&gt;no&lt;\/strong&gt; '
+     +'extra costs to you).',
+     CAPTION,'Promote via Amazon', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-35,
+     WRAP,BASE,2,TEXTFONTCLASS,'text12',FILTER);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'logo',REFX,95,REFY,1,BASE,2,TEXTPADDING,4,FILTER,FADEIN,6,FADEOUT,6,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',
+     CAPTION,'Donate via PayPal', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     TEXTPADDING,8,TEXTFONTCLASS,'text12',FGCOLOR,'#bbddff',FILTER,
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5,WRAP,BASE,2);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    title="Click to Donate" alt="Click to Donate"></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',WRAP,BASE,2,FGCOLOR,'#cceeff',
+     REF,'w3c',REFP,'UR',REFX,-5,REFY,2,FILTER,TEXTPADDING,4,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<div class="Text12">&nbsp;<br>&nbsp;<br></div>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='STICKY.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

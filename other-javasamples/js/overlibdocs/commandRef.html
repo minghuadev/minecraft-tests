@@ -1,0 +1,3138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Commands used in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Command Reference for the overlibmws DHTML Popup Library</title>
+<link rel="stylesheet" type="text/css" href="cmdrfmws.css">
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="cmdrfmws.js"></script>
+<script type="text/javascript">
+<!--
+OLpageDefaults(AUTOSTATUSCAP,OFFSETY,20,TEXTPADDING,4,CAPTIONPADDING,3,BASE,2,WRAP);
+
+var myRaisedBlue = new Image();
+myRaisedBlue.src = "raised_blue.gif";
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+//-->
+</script>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table align="center" width="95%" cellpadding="0" cellspacing="3" border="0">
+ <tr>
+  <td align="left">
+   <table align="center" cellpadding="0" cellspacing="3" border="0">
+    <tr>
+     <td class="title" align="left">
+      Command Reference <font class="subtitle"><em>for the</em></font><br>
+      <a
+       href="./"
+       onmouseover="return overlib('Go to the '
+        +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+        +'Download and Test Directory.',
+        OFFSETX,-10,OFFSETY,20,TEXTPADDING,4);"
+       onmouseout="nd();">overlibmws</a>
+     <font class="subtitle"><em>DHTML Popup Library</em></font>
+     </td>
+    </tr>
+    <tr>
+     <td class="author" align="center">
+      &nbsp;&nbsp;<em>maintained by</em> <a
+       href="javascript:olmail();"
+       onmouseover="return overlib('&lt;b&gt;Send e-mail to Foteos '
+        +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+        +'Report&lt;br&gt;problems.&nbsp; Suggest enhancements.)',OFFSETX,-6,
+        STATUS,'Click to send form-based e-mail to Fote.');"
+       onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+       href="../"
+       onmouseover="return overlib('Link to Macrides Web Services homepage.',LEFT,OFFSETX,-10);"
+       onmouseout="nd();">Macrides Web Services</a><br>
+     </td>
+    </tr>
+   </table>
+  </td>
+  <td align="right" valign="bottom" width="145">
+   <table align="right" width="145" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+     <td class="snip">
+      &nbsp;<br>
+     </td>
+    </tr>
+    <tr>
+     <td colspan="6" width="145" valign="bottom" class="snip">
+      <a
+       target="_blank"
+       href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+       onmouseover="return overlib('Help promote the &lt;span '
+        +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; library '
+        +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+        +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;\/i&gt;&lt;\/span&gt; '
+        +'shopping via this link&lt;br&gt;(with &lt;strong&gt;no&lt;\/strong&gt; '
+        +'extra costs to you).',
+        CAPTION,'Promote via Amazon', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+        TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-5,REFY,-25);"
+       onmouseout="nd();">
+      <img
+       name="amazon" id="amazon"
+       src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" hspace="5"
+       alt=""></a><br>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="100%" cellpadding="0" cellspacing="20" border="0">
+ <tr>
+  <td valign="top">
+   <table width="100%" cellpadding="1" cellspacing="2" border="0">
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;1.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="sectiontitle">
+         <a name="introduction" id="introduction">Introduction</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>NOTE:</b>&nbsp; <em>First-time visitors should review</em> <a
+          href="STARTED.html"
+          onmouseover="return overlib('Link to &lt;b&gt;&lt;em&gt;Getting Started '
+           +'with the &lt;span '
+           +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; DHTML '
+           +'Popup Library&lt;/em&gt;&lt;/b&gt;',FGCOLOR,'#bbddff',CENTER);"
+          onmouseout="nd();">Getting&nbsp;Started</a> <em> and should mouse over all
+         of the green, underlined anchors&nbsp;/&nbsp;links in this section.&nbsp;
+         You can select (click-n-drag) markup in sticky popups or the document's body for
+         copy and paste opererations into your documents.&nbsp; A</em> <a
+          href="http://groups.yahoo.com/group/overlibmws/"
+          onmouseover="return overlib('Link to the '
+           +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+           +'Support Group',
+           FGCOLOR,'#bbddff', LEFT,ABOVE,HAUTO,VAUTO);"
+          onmouseout="nd();">Support Group</a> <em>is available.</em>
+         <br><br>
+         This reference describes the <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(theCommands,CAPTIONPADDING,6,
+           MIDX,0,RELY,5,STICKY,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Commands by Category for the overlibmws DHTML Popup Library');"
+          onmouseout="nd();">commands</a> for the <b>overlibmws.js</b>
+         core module and its plugin modules to control the <b>overlib()</b>
+         function of the <span
+          style="color:purple;font-weight:bold;font-style:italic;
+          font-size:14px;">overlibmws</span> DHTML Popup Library.&nbsp; The core and any
+         <b>overlibmws_<em>name</em>.js</b> plugin modules should be <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(myHead+myImport+myHeadEnd,CAPTIONPADDING,6,
+           MIDX,0,RELY,10,STICKY,NOCLOSE,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Import the core and any plugin modules in the head section.');"
+          onmouseout="nd(1000);">imported</a> via script blocks in the document's head.&nbsp;
+         The <b>overDiv</b> container (layer) can be <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(myHead+myImport+myOverDiv,CAPTIONPADDING,6,
+           MIDX,0,RELY,10,STICKY,NOCLOSE,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Declare the overDiv containter (layer) immediately following the '
+           +'body start tag.');"
+          onmouseout="nd(1000);">declared</a> as a positioned div immediately following the
+         body start tag, or you may omit the declaration and let the core module create the
+         div dynamically.
+         <br><br>
+         The commands in an <b>overlib()</b> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(myInvoke,CAPTIONPADDING,6,
+           MIDX,0,RELY,10,STICKY,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Call overlib() and nd() via event attribute values.');"
+          onmouseout="nd();">function call</a> are always in
+         uppercase (case-sensitive) and can have none, one, or multiple parameters
+         that may be quoted strings or unquoted numeric values.&nbsp; Most of the
+         commands which do not have parameters are implemented as toggles, with off
+         (0) as their default, such that inclusion of the command in an overlib()
+         call toggles it on for that call and the setting or action which the command
+         name indicates will be applied.&nbsp; If a command's default is changed (see
+         below) to on (1), inclusion of the command will toggle it off for that call
+         (opposite of what the command name indicates).&nbsp; To reduce possible confusion
+         in that context, a minus sign can be placed immediately before the command name to
+         yield an unconditional off for that call (i.e., regardless of the default setting).
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>
+  </td>
+  <td width="145" valign="top">
+   <table width="145" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+     <td colspan="4" class="snip">
+      <b>On this page</b>
+     </td>
+    </tr>
+    <tr>
+     <td width="2">
+      <img
+       src="../image/tp.gif"
+       alt=""
+       border="0" width="2" height="2"><br>
+     </td>
+     <td width="1" bgcolor="#333333">
+      <img
+       src="../image/tp.gif"
+       alt=""
+       border="0" width="1" height="1"><br>
+     </td>
+     <td width="3">
+      <img
+       src="../image/tp.gif"
+       alt=""
+       border="0" width="2" height="2"><br>
+     </td>
+     <td width="140" class="snip">
+      <a
+       href="#introduction"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">1. Introduction</a><br>
+      <a
+       href="#content"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">2. Content</a><br>
+      <a
+       href="#behavior-positioning-sizes"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">3. Behavior,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Positioning<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;and Sizes</a><br>
+      <a
+       href="#colors-fonts-images"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">4. Colors, Fonts<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;and Images</a><br>
+      <a
+       href="#cascading-style-sheets"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">5. Cascading Style<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Sheets</a><br>
+      <a
+       href="#dropshadow"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">6. Dropshadow</a><br>
+      <a
+       href="#bubble"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">7. Speech Bubbles</a><br>
+      <a
+       href="#filter"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">8. Transform Filters</a><br>
+      <a
+       href="#print"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">9. Printing Popups</a><br>
+      <a
+       href="#debug"
+       class="snip"
+       onmouseover="return overlib('Jump to this section.',CENTER);"
+       onmouseout="nd();">10. Debug Function</a>
+      </td>
+    </tr>
+    <tr>
+     <td class="snip">
+      &nbsp;<br>
+     </td>
+    </tr>
+   </table>
+   <table width="145" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+     <td colspan="4" class="snip">
+      <b>Status</b>
+     </td>
+    </tr>
+    <tr>
+     <td width="2">
+      <img
+       src="../image/tp.gif"
+       alt=""
+       border="0" width="2" height="2">
+     </td>
+     <td width="1" bgcolor="#333333">
+      <img
+       src="../image/tp.gif"
+       alt=""
+       border="0" width="1" height="1">
+     </td>
+     <td width="3">
+      <img
+       src="../image/tp.gif"
+       alt=""
+       border="0" width="2" height="2">
+     </td>
+     <td width="140" class="snip">
+      overlib version: mws<br>
+      Created: 2002-08-18<br>
+      Changed: 2010-09-22
+     <br><br>
+     &nbsp;&nbsp;<a
+      target="_blank"
+      href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+      onmouseover="return overlib(
+       'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+       +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+       +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are '
+       +'fast, simple, and secure).',
+       CAPTION,'Donate via PayPal', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+       TEXTPADDING,8,FGCOLOR,'#bbddff',
+       REF,'ppdonate',REFC,'LL',REFP,'LR',REFX,-5,REFY,8);"
+      onmouseout="nd();"><img
+      name="ppdonate" id="ppdonate"
+      src="../image/PayPalDonate.gif"
+      width="62" height="31" border="0"
+      title="Click to Donate" alt="Click to Donate"></a><br>
+     </td>
+    </tr>
+    <tr>
+     <td class="snip">
+      &nbsp;<br>
+     </td>
+    </tr>
+   </table>
+<!--
+   <table width="145" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+     <td colspan="6" width="145" valign="top" class="snip">
+      <a
+       target="_blank"
+       href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+       onmouseover="return overlib('Help promote the '
+        +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+        +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+        +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+        +'shopping via this link&lt;br&gt;(with <b>no</b> extra costs to you).',
+        TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-5,REFY,-12);"
+       onmouseout="nd();">
+      <img
+       name="amazon" id="amazon"
+       src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" hspace="5"
+       alt=""></a><br>
+     </td>
+    </tr>
+    <tr>
+     <td class="snip">
+      &nbsp;<br>
+     </td>
+    </tr>
+   </table>
+-->
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign="top" colspan="2">
+   <table width="100%" cellpadding="1" cellspacing="2" border="0">
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;&nbsp;<br>
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="cellcontent">
+         The commands are associated with <b>configuration variables</b> which
+         set the default values. These variables begin with "ol_", followed by typically
+         the command name in lower case.&nbsp; Their values can be changed in the DEFAULT
+         CONFIGURATION sections of the <b>overlibmws.js</b> core module and the plugin
+         modules if you want the defaults changed across all of your HTML/XML files which
+         use overlib popups.&nbsp; These variables also can be <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(myHead+myDefs+myImport+myHeadEnd,CAPTIONPADDING,6,
+           MIDX,0,RELY,10,STICKY,NOCLOSE,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Define configuration variable values before importing '
+           +'the overlibmws modules.');"
+          onmouseout="nd(1000);">defined</a> in script blocks or imported js
+         files for individual HTML/XML files.&nbsp; Those definitions should be established
+         via a script block in the head section <b>before</b> the script block for importing
+         the <b>overlibmws.js</b> core module and any script blocks for importing plugin
+         modules.&nbsp; You instead can change the default values for individual files by
+         calling the <b>OLpageDefaults()</b> function with its arguments structured as a
+         comma-separated list of commands and their parameters if any, like those for an
+         overlib call.&nbsp; The <b>OLpageDefaults()</b> <a
+          href="javascript:void(0)"
+          onmouseover="return overlib(myHead+myImport+myCall+myHeadEnd,CAPTIONPADDING,6,
+           MIDX,0,RELY,10,STICKY,NOCLOSE,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Call OLpageDefaults() after importing the overlibmws modules.');"
+          onmouseout="nd(1000);">function call</a> should be placed in a script
+         block in the head section <b>after</b> the script block for importing
+         the <b>overlibmws.js</b> core module and any script blocks for importing plugin
+         modules.&nbsp; Note that placing a minus sign immediately before a command name
+         which is implemented as a toggle signifies unconditionally that off (0) is the page
+         default for that command.&nbsp; <em>See the</em> <span
+          style="color:purple;font-weight:bold;font-style:italic;
+          font-size:14px;">overlibmws</span> <a
+          href="zipArchive.html"
+          onmouseover="return overlib('Preview the contents of the &lt;span '
+           +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; zip archive.');"
+          onmouseout="nd();">distribution</a><em>'s
+         <b>overlibConfig.txt</b> for more information.</em>
+         <br><br>
+         The <b>nd()</b> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(myInvoke,CAPTIONPADDING,6,
+           MIDX,0,RELY,10,STICKY,NOCLOSE,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Call overlib() and nd() via event attribute values.');"
+          onmouseout="nd(1000);">function call</a> for closing a primary popup (i.e.,
+         one invoked via an <b>overlib()</b> function call) that is a tooltip
+         (i.e., not sticky) accepts an optional numeric argument indicating the number
+         of msec after the nd call to close the popup. Note that if the time argument is
+         used then an nd call will also close a sticky popup after that delay, e.g.,
+         <b>onmouseout="nd(2000);"</b> will cause the tooltip or sticky popup to close 2 sec
+         after a mouseout from the object which invoked it.&nbsp; See the <a
+          href="NOCLOSE.html#ndtime"
+          onmouseover="return overlib('Use of nd(time).',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP,CENTER,VAUTO);"
+          onmouseout="nd();">Demonstration</a>.&nbsp; If the time argument is omitted or is 0,
+         tooltips will close immediately but stickies will await an additional action (e.g.,
+         activation of a Close link in the caption).
+         <br><br>
+         The <b>secondary popups</b> that become available when the
+         <b>overlibmws_overtwo.js</b> plugin module has been imported use <b>overlib2()</b>
+         calls to invoke the secondary popups from within a primary overlib popup.&nbsp;
+         The primary popup must be sticky, and its secondary popups can be either tooltips
+         or stickies.&nbsp; The <b>nd2()</b> function is used for closing secondary popups
+         that are tooltips (i.e., not sticky).&nbsp; It does not support a time
+         argument.&nbsp; See the <a
+          href="SHADOW.html#secondary"
+          onmouseover="return overlib('Use of Secondary Popups.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP,CENTER,VAUTO);"
+          onmouseout="nd();">Demonstration</a>.
+         <br><br>
+         The <b>cClick()</b> function is used internally by <span
+          style="color:purple;font-weight:bold;font-style:italic;
+          font-size:14px;">overlibmws</span> to close sticky <b>primary popups</b>,
+         e.g., via the Close link in their caption, and the <b>cClick2()</b>
+         function is used for sticky <b>secondary popups</b>.&nbsp; They can be
+         used as public functions in wrapper scripts, or in markup associated with the
+         FULLHTML command (<em>See below, and the</em> <a
+          href="DRAGGABLE.html"
+          onmouseover="return overlib('Examples of FULLHTML with public use of the '
+           +'&lt;b&gt;cClick()&lt;/b&gt; function',CENTER,VAUTO);"
+          onmouseout="nd();">Demonstration</a>).
+         <br><br>
+         Note that at most one <b>primary popup</b> plus at most one
+         <b>secondary popup</b> can be open (displayed) at the same time.&nbsp;
+         If an overlib2 call is made when a secondary popup is already being displayed, a
+         cClick2 call will be issued automatically to close the current secondary popup
+         before the new secondary popup is displayed.&nbsp; Similary, a cClick call will
+         be issued automatically if an overlib call is made when a primary popup is being
+         displayed.&nbsp; Also note that if a primary popup is closed when its secondary
+         popup is still being displayed, a cClick2 call will be issued automatically to
+         close that secondary popup as well.
+         <br><br>
+         The <b>OLgateOK</b> global variable can be used in documents to disable
+         popups by setting it equal to 0, and to re-enable popups by restoring it to its
+         default value of 1 (<em>See the</em> <a
+          href="STARTED.html#regulate"
+          onmouseover="return overlib('Disabling / enabling popups via the value of '
+           +'&lt;b&gt;OLgateOK&lt;/b&gt;',CENTER,VAUTO);"
+          onmouseout="nd();">Demonstration</a>).
+         <br><br>
+         A <b>function set</b> in the <a
+          href="AJAX.html"
+          onmouseover="return overlib('See examples with the '
+           +'&lt;b&gt;ajaxcontentmws.js&lt;/b&gt; support script',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">ajaxcontentmws.js</a> support script can be used to load popup
+         content via AJAX.
+         <br><br>
+         A <b>function set</b> in the <a
+          href="IFRAME.html"
+          onmouseover="return overlib('See examples with the '
+           +'&lt;b&gt;iframecontentmws.js&lt;/b&gt; support script',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">iframecontentmws.js</a> support script can be used to implement
+         popups with iframe content that is intended to be displayed (<em>also see this</em>
+         <a
+          href="AJAX.html#ajaxex3"
+          onmouseover="return overlib('See an example with displayed iframe content that has '
+           +'AJAX content.', HAUTO,OFFSETY,10);"
+          onmouseout="nd();">example</a>).
+         <br><br>
+         You can import the <b>overlibmws_iframe.js</b> plugin module for pages which contain
+         system controls (e.g., some form elements, flash objects in 'window' mode, applets,
+         quicktime objects) which obscure overlib popups.&nbsp; It uses an <a
+          target="_blank"
+          href="IframeShim.html"
+          onmouseover="return overlib('Go to the iframe shim article.',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">iframe shim</a> (as opposed to displayed <a
+          href="IFRAME.html"
+          onmouseover="return overlib('See an example of iframe as displayed popup content.',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">iframe content</a>) to prevent this problem for IE v5.5
+         or higher.&nbsp; For earlier versions of IE and for other browsers, you also can
+         import the <b>overlibmws_hide.js</b> plugin module and use its commands (e.g.,
+         HIDESELECTBOXES, <em>see below</em>) to hide potentially obscuring elements
+         and objects with system controls, as illustrated for <a
+          href="hide.html"
+          onmouseover="return overlib('Prevent form elements from obscuring overlib popups.',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">form</a> elements, for a <a
+          href="flashWmode.html"
+          onmouseover="return overlib('Prevent flash objects from obscuring overlib popups.',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">flash</a> object, and with <a
+          href="DRAGGABLE.html"
+          onmouseover="return overlib('Using DRAGGABLE in conjunction with<br>'+
+           'the &lt;b&gt;overlibmws_iframe.js&lt;/b&gt;&lt;br&gt;'+
+           'and &lt;b&gt;overlibmws_hide.js&lt;/b&gt; plugins.',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">DRAGGABLE</a> popups.
+         <br><br>
+         A <b>function set</b> in the <a
+          href="AJAX.html#htmlspecialcharsmws"
+          onmouseover="return overlib('See examples with the '
+           +'&lt;b&gt;htmlspecialcharsmws.js&lt;/b&gt; support script',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">htmlspecialcharsmws.js</a> support script can be used to see the
+          markup which the library's <strong>Layer Generation Functions</strong> are creating
+          as popup content based on the arguments in the <strong>overlib</strong> or
+          <strong>overlib2</strong> function call, or which the browser is loading based on
+          that markup, and may assist you in debugging any problems you have in formulating
+          appropriate arguments (<em>also see section</em> <a
+           href="#debug"
+          onmouseover="return overlib('Jump to this section.',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">10. Debug Function</a>).
+         <br><br>
+         Check the <span
+          style="color:purple;font-weight:bold;font-style:italic;
+          font-size:14px;">overlibmws</span> <a
+          href="./"
+          onmouseover="return overlib('Go to the Download and Test Directory for '
+           +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;.',
+           CENTER,VAUTO);"
+          onmouseout="nd();">Download and Test Directory</a> regularly for any new example
+         files.&nbsp; Also check the <a
+          href="changeHistory.html"
+          onmouseover="return overlib('Review the '
+           +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+           +'Change History.', CENTER,VAUTO);"
+          onmouseout="nd();">Change History</a> regularly for any bug fixes or enhancements
+         that might merit your updating the <span
+          style="color:purple;font-weight:bold;font-style:italic;
+          font-size:14px;">overlibmws</span> DHTML Popup Library for your site. 
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;2.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="content" id="content">Content</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b><em>Lead Argument</em></b><br>
+         The lead argument in the overlib call normally is a quoted string that will
+         be displayed in a table data cell that represents the main text area of the
+         popup box.&nbsp; Use single-quoting if the overall event attribute value that
+         contains the <b>overlib()</b> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(myInvoke,CAPTIONPADDING,6,
+           MIDX,0,RELY,10,STICKY,NOCLOSE,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Call overlib() and nd() via event attribute values.');"
+          onmouseout="nd(1000);">function call</a> uses double-quoting, and backslash
+         escape any single-quotes (apostrophes) that occur within the string.&nbsp;
+         It can be plain text or HTML markup suitable for inclusion in a
+         table data cell.&nbsp;
+         It can be replaced by INARRAY or FUNCTION as described below for those
+         commands.&nbsp;
+         You also can define the string as a javascrpt variable via a script block
+         or js file, and use the variable name (unquoted) as the lead argument.&nbsp;
+         Use of javascript variables or arrays is favored when the string is
+         HTML markup.&nbsp;
+         The lead argument also can be a javascript function (unquoted) which returns
+         a string.&nbsp; Include the parens with the function reference, regardless
+         of whether the function accepts arguments.&nbsp;
+         If the HTML markup is included directly in the overlib call as part of the value
+         of an event attribute (e.g., onmouseover) and thus will be processed by the HTML
+         parser on its first pass through the document, the HTML reserved characters such
+         as angle brackets should be converted to HTML entities <b>&amp;lt;</b>
+         for open-angle-bracket, and <b>&amp;gt;</b> for close-angle-bracket) to
+         avoid corruption by some firewalls (particularly Norton's).&nbsp; Do not use HTML
+         entities for reserved characters when the HTML markup is declared in script blocks
+         or imported js files as javascript variables, functions or arrays (the HTML parser
+         skips script blocks and any imported js files on its first pass).&nbsp;
+         Note that absence of a lead argument as well as INARRAY and FUNCTION from the
+         overlib call yields use of the default lead argument (ol_text).&nbsp;
+         Also, if a lead argument (quoted string, string variable name, string array
+         entry, or function that returns a string) is used in an
+         <b>OLpageDefaults()</b> <a
+          href="javascript:void(0)"
+          onmouseover="return overlib(myHead+myImport+myCall+myHeadEnd,CAPTIONPADDING,6,
+           MIDX,0,RELY,10,STICKY,NOCLOSE,FGCOLOR,'#bbddff',TEXTPADDING,20,CGCLASS,'olcg',
+           CAPTION,'&nbsp;Call OLpageDefaults() after importing the overlibmws modules.');"
+          onmouseout="nd(1000);">function call</a> (normally it is omitted), that becomes
+         the default lead argument for the document.&nbsp; The lead argument can be a
+         concatenation (via plus signs) of quoted strings, string variable names, string
+         array entries, and/or functions that return strings (<a
+          href="FUNCTION.html#leadarg"
+          onmouseover="return overlib('Use of a function concatenation in the '
+           +'<b><em>Lead Argument</em></b>.',CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>).&nbsp; The lead argument can be URL-encoded
+         (hex escaped), e.g., via the php <b>rawurlencode()</b> function, if it is
+         derived from a server-side database and might otherwise include raw newline
+         characters that would pre-maturely terminate the lead argument for the javascript
+         parser.&nbsp; If <b>DECODE</b> (<em>see below</em>) is toggled on in the
+         overlib call or is made the page default, such lead arguments are decoded
+         automatically via the <b>decodeURIComponent()</b> or
+        <b>unescape()</b> javascript functions.<br>
+         Variable: ol_text
+         <br><br>
+         <b>CAPTION</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Caption text.',
+           CAPTION, 'Parameter title');"
+          onmouseout="nd();">title</a></i><br>
+         Sets the caption of the popup.&nbsp;
+         Can be plain text or HTML markup suitable for inclusion in a
+         table data cell that represents the text portion of the popup's
+         caption area.&nbsp;
+         In sticky popups, another table data cell to the right holds the
+         'Close' text and completes the overall caption area (see CLOSETEXT,
+         NOCLOSE, and STICKY, below).&nbsp;
+         The CAPTION command can be replaced by an element of a javascript array
+         (see CAPARRAY).&nbsp;
+         You also can define the string as a javascript variable via a script block or
+         js file, and use the variable name (unquoted) as the parameter for CAPTION.&nbsp;
+         A javascript function (unquoted and including its parens regardless of whether
+         the function has arguments) that returns a string also can be used as the
+         parameter.&nbsp;
+         Use of javascript variables, arrays or functions is favored when the string
+         is HTML markup.&nbsp;
+         If the HTML markup is included directly in the overlib call as part of the value
+         of an event attribute (e.g., onmouseover), the HTML reserved characters such as
+         angle brackets should be converted to HTML entities (<strong>&amp;lt;</strong> for
+         open-angle-bracket, and <strong>&amp;gt;</strong> for close-angle-bracket).&nbsp;
+         Do not use HTML entities for reserved characters when the HTML markup is declared
+         in script blocks or js files as javascript variables, arrays or functions.&nbsp;
+         The string cannot include raw newline characters, but instead should be made a
+         concatenation (via plus signs) of sub-strings, or can be URL-encoded (hex-escaped),
+         as described for the lead argument (<em>see above</em>), if <strong>DECODE</strong>
+         (<em>see below</em>) is toggled on in the overlib call or is made the page
+         default.<br>
+         Variable: ol_cap
+         <br><br>
+         <b>CLOSETEXT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Text to show.',
+           CAPTION,'Parameter text');"
+          onmouseout="nd();">text</a></i><br>
+         Replaces the default 'Close' link text in stickies with something else.&nbsp; The
+         replacement can be plain text or inline HTML markup suitable for use as Anchor
+         content, and can be an image (icon) if the markup uses an IMG element.&nbsp; A
+         Close icon (<B>exit.gif</B>) is included in the distribution.<br>
+         <a
+          href="STICKY.html"
+          onmouseover="return overlib('Use of CLOSETEXT.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_close
+         <br><br>
+         <b>CLOSECLICK</b><br>
+         Force users to click on 'Close' or its replacement to close sticky popups.&nbsp;
+         This command toggles the feature on and off.<br>
+         <a
+          href="STICKY.html"
+          onmouseover="return overlib('Use of CLOSECLICK.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_closeclick<br>
+         Unconditional off: -CLOSECLICK
+         <br><br>
+         <b>CLOSETITLE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string value of title attribute for '
+           +'&quot;Close&quot; link.', CAPTION, 'Parameter title attribute value');"
+          onmouseout="nd();">title attribute value</a></i><br>
+         Sets the text string value of the HTML/XML title attribute of the 'Close' link when
+         CLOSECLICK is on.&nbsp;
+         The title attribute serves to invoke an OS tooltip when the curser hovers over the
+         link for browsers which implement such tooltips via title attributes in links.&nbsp;
+         Default value is 'Click to Close'.<br>
+         Variable: ol_closetitle
+         <br><a name="noclose" id="noclose">&nbsp;</a><br>
+         <b>NOCLOSE</b><br>
+         Doesn't display the 'Close' text in a captioned sticky.&nbsp;
+         The popup can be closed by moving the cursor onto and then off of it,
+         or by invoking another overlib popup, if another is available in
+         the page.&nbsp;
+         Moving the cursor onto a NOCLOSE popup also will cancel any TIMEOUT that
+         was set, so that the popup will persist until the cursor is moved off of
+         it (or until a link within it, if present, is clicked to invoke another
+         document).&nbsp;
+         Also can be used to invoke these event handlers for captionless stickies,
+         or for tooltip (non-sticky) popups with at least one fixed-position command
+         such that the cursor could be moved over the popup.&nbsp;
+         This command toggles the feature on and off.<br>
+         <a
+          href="NOCLOSE.html"
+          onmouseover="return overlib('Use of NOCLOSE.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_noclose<br>
+         Unconditional off: -NOCLOSE
+         <br><br>
+         <b>MOUSEOFF</b><br>
+         Applies the same event handlers that are applied when using the NOCLOSE command
+         (<em>see above</em>), but allows the caption for sticky popups to include a
+         'Close' link.&nbsp;
+         This command toggles the feature on and off.<br>
+         <a
+          href="NOCLOSE.html#mouseoff"
+          onmouseover="return overlib('Use of MOUSEOFF.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_mouseoff<br>
+         Unconditional off: -MOUSEOFF
+         <br><br>
+         <b>OFFDELAY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Time to wait.',
+           CAPTION,'Parameter millisecs');"
+          onmouseout="nd();">millisecs</a></i><br>
+         The delay in millisecs (default 300) for closing NOCLOSE or MOUSEOFF popups
+         following a mouse off.&nbsp; If a mouse back over the popup occurs during this
+         delay, the close is cancelled.<br>
+         Variable: ol_offdelay
+         <br><br>
+         <b>CAPBELOW</b><br>
+         Causes the caption, when present, to be positioned below the main text area
+         instead of above it.&nbsp;  Commonly used when the main text area is an
+         image.&nbsp;
+         This command toggles the feature on and off.<br>
+         <a
+          href="FILTER.html"
+          onmouseover="return overlib('Use of CAPBELOW in tooltip (non-sticky) popups.',
+           CAPTION,'Demonstration 1',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 1</a><br>
+         <a
+          href="STICKY.html#capbelow"
+          onmouseover="return overlib('Use of CAPBELOW in a sticky popup.',
+           CAPTION,'Demonstration 2',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 2</a><br>
+         Variable: ol_capbelow<br>
+         Unconditional off: -CAPBELOW
+         <br><br>
+         <b>INARRAY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Position in array.',
+           CAPTION, 'Parameter id');"
+          onmouseout="nd();">id</a></i><br>
+         Tells overlib to read the text from the ol_texts array (placed
+         in overlibmws.js or in a SCRIPT block on the page).&nbsp;
+         The text strings loaded into the array can be plain text or HTML
+         markup suitable for inclusion in a table data cell.&nbsp;
+         This command and its parameter can be used instead of the lead,
+         single-quoted string in the overlib call.<br>
+         Examples: return&nbsp;overlib(INARRAY,&nbsp;0);
+         return&nbsp;overlib2(INARRAY,&nbsp;1);<br>
+         <a
+          href="SHADOW.html#secondary"
+          onmouseover="return overlib('Use of INARRAY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>.<br>
+         Variable: ol_texts
+         <br><br>
+         <b>CAPARRAY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Position in array.',
+           CAPTION, 'Parameter id');"
+          onmouseout="nd();">id</a></i><br>
+         Tells overlib to read the caption from the ol_caps array (placed
+         in overlibmws.js or in a SCRIPT block on the page).&nbsp;
+         The text strings loaded into the array can be plain text or HTML
+         markup suitable for inclusion in a table data cell.<br>
+         Examples: return&nbsp;overlib(INARRAY,&nbsp;0, CAPARRAY,&nbsp;0);
+         return&nbsp;overlib2(INARRAY,&nbsp;1, CAPARRAY,&nbsp;1);<br>
+         <a
+          href="SHADOW.html#secondary"
+          onmouseover="return overlib('Use of CAPARRAY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>.<br>
+         Variable: ol_caps
+         <br><br>
+         <b>TEXTPADDING</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Cellpadding value.',
+           CAPTION,'Parameter number');"
+          onmouseout="nd();">number</a></i><br>
+         Specifies the cellpadding number for the table data cell which holds the main
+         text.&nbsp; Default is 2.&nbsp; Overriden by any padding tokens specified via
+         FGCLASS (see below).<br>
+         <a
+          href="STICKY.html"
+          onmouseover="return overlib('Use of TEXTPADDING.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>.<br>
+         Variable: ol_textpadding
+         <br><br>
+         <b>CAPTIONPADDING</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Cellpadding value.',
+           CAPTION,'Parameter number');"
+          onmouseout="nd();">number</a></i><br>
+         Specifies the cellpadding number for the table data cell which holds the
+         caption.&nbsp; Inherited by the Close text.&nbsp; Default is 2.&nbsp; Overriden
+         by any padding tokens specified via CGCLASS (see below).<br>
+         <a
+          href="STICKY.html"
+          onmouseover="return overlib('Use of CAPTIONPADDING.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>.<br>
+         Variable: ol_captionpadding
+         <br><br>
+         <b>BORDER</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels.',
+           CAPTION,'Parameter pixels');"
+          onmouseout="nd();">pixels</a></i><br>
+         Makes the border of the popups thicker or thinner.<br>
+         Variable: ol_border
+         <br><br>
+         <b>BASE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels.',
+           CAPTION,'Parameter pixels');"
+          onmouseout="nd();">pixels</a></i><br>
+         Makes the base of the popup thicker, beyond the thickness specified
+         via the BORDER command or ol_border variable.<br>
+         Variable: ol_base
+         <br><br>
+         <b>FUNCTION</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Function to call.',
+           CAPTION, 'Parameter functionname');"
+          onmouseout="nd();">functionname</a></i><br>
+         Calls the specified function and takes the return value as the text that
+         should be displayed in the popup.&nbsp;
+         You must import the <b>overlibmws_function.js</b> plugin module to use this
+         feature.<br>
+         The FUNCTION command and its parameter should replace the normally lead,
+         single-quoted string argument in the overlib call, as do the INARRAY
+         command and its parameter (see above).&nbsp;
+         The parameter can be omitted if a default function has been declared
+         via variable ol_function.&nbsp;
+         The output of the function can be plain text or HTML markup suitable for
+         inclusion in a table data cell.&nbsp;
+         The function is called when the overlib command parser runs.&nbsp;
+         If the function takes no arguments itself, you can use the function
+         reference, without parens, as the FUNCTION command's parameter<br>
+         Example: return overlib(FUNCTION, NoParamFunc);<br>
+         Example: return overlib(FUNCTION, NoParamFunc());<br>
+         Example: return overlib(FUNCTION, Func(arg1,arg2,arg3));<br>
+         <a
+          href="FUNCTION.html"
+          onmouseover="return overlib('Use of FUNCTION.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_function
+         <br><br>
+         <b>STATUS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Text to show.',
+           CAPTION, 'Parameter text');"
+          onmouseout="nd();">text</a></i><br>
+         Sets the text in the browser's status bar to text.&nbsp; Note that IE7's default
+         security setting allows this only on intranets.&nbsp; Overriden by AUTOSTATUS
+         and AUTOSTATUSCAP.<br>
+         Variable: ol_status
+         <br><br>
+         <b>AUTOSTATUS</b><br>
+         Sets the status bar's text to the popup's text.&nbsp; Note that IE7's default security
+         setting allows this only on intranets.&nbsp; This command toggles the feature on and
+         off.&nbsp; Overridden by AUTOSTATUSCAP.&nbsp; Overrides STATUS.<br>
+         Variable: ol_autostatus = 1<br>
+         Unconditional off: -AUTOSTATUS
+         <br><br>
+         <b>AUTOSTATUSCAP</b><br>
+         Sets the status bar's text to the popup's caption.&nbsp; Note that IE7's default
+         security setting allows this only on intranets.&nbsp; This command toggles the feature
+         on and off.&nbsp; Overrides AUTOSTATUS and STATUS.<br>
+         Variable: ol_autostatus = 2<br>
+         Unconditional off: -AUTOSTATUSCAP
+         <br><br>
+         <b>DECODE</b><br>
+         Causes any URL-encoded (hex-escaped) characters in the lead argument and/or
+         caption to be decoded automaticaly via the <strong>decodeURIComponent()</strong>
+         or <strong>unescape()</strong> javascript functions.&nbsp; This command toggles
+         the feature on or off (default is 0 such that decoding is not performed).&nbsp;
+         The URL-encoding (hex-escaping) normally is done server-side for strings that
+         have been fetched from a database and might contain newline characters that would
+         cause pre-mature termination of string parsing by the javascript interpeter if not
+         encoded in the overlib() calls.&nbsp; Note that care should be taken to avoid using
+         the DECODE command directly on any strings which contain actual URLs with any
+         characters that require their URL-encoding.
+         <br>
+         <a
+          href="http://www.macridesweb.com/oltest/overlibmwsPHPquote.php4"
+          onmouseover="return overlib('Use of DECODE.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_decode<br>
+         Unconditional off: -DECODE
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;3.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="behavior-positioning-sizes"
+          id="behavior-positioning-sizes">Behavior, Positioning and Sizes</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>STICKY</b><br>
+         Makes the popup stick around until actively closed.&nbsp;
+         When a sticky popup has been invoked, it does not follow the
+         cursor movements.&nbsp;
+         This command toggles the feature on or off (default is 0).<br>
+         <a
+          href="STICKY.html"
+          onmouseover="return overlib('Use of STICKY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_sticky<br>
+         Unconditional off: -STICKY
+         <br><br>
+         <b>EXCLUSIVE</b><br>
+         Makes sticky <strong>primary</strong> popups exclusive, such that when an
+         exclusive sticky primary popup has been displayed, no other primary popups can be
+         displayed and replace it before the exclusive popup has been actively closed.&nbsp;
+         This command toggles the feature on or off (default is 0).&nbsp;
+         Associated commands are EXCLUSIVESTATUS and EXCLUSIVEOVERRIDE (see below).&nbsp;
+         You must import the <strong>overlibmws_exclusive.js</strong> plugin module to use
+         this feature set.&nbsp; <strong>Secondary</strong> popups cannot be made exclusive
+         and can always be invoked from within an exclusive sticky primary popup to provide
+         information about any links or other elements within the primary popup.<br>
+         <a
+          href="STICKY.html#GoogleSearch"
+          onmouseover="return overlib('Use of EXCLUSIVE with sticky popups.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_exclusive<br>
+         Unconditional off: -EXCLUSIVE
+         <br><br>
+         <b>EXCLUSIVESTATUS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Text to show.',
+           CAPTION, 'Parameter text');"
+          onmouseout="nd();">text</a></i><br>
+         Sets the text to be dispayed in the browser's status bar when an exclusive
+         sticky is being displayed and other primary popups thus cannot be invoked
+        (see above).&nbsp; Default is <em>'Please act on or close the open popup.'</em><br> 
+         Variable: ol_exclusivestatus
+         <br><br>
+         <b>EXCLUSIVEOVERRIDE</b><br>
+         Command to override any EXCLUSIVE command (see above) that might be in effect,
+         so that the current overlib call for a primary popup will proceed normally and
+         any exclusive sticky that is being displayed will be closed, allowing the popup
+         associated with the current overlib call to be displayed.&nbsp; This command is
+         implemented as a toggle (default is 0).<br>
+         Variable: ol_exclusiveoverride<br>
+         Unconditional off: -EXCLUSIVEOVERRIDE
+         <br><a name="modal" id="modal">&nbsp;</a><br>
+         <b>MODAL</b><br>
+         Makes a sticky <strong>primary</strong> or <strong>secondary</strong> popup modal,
+         such that the user cannot access other items in the current document until the MODAL
+         popup has been acted upon and closed.&nbsp; This command toggles the feature on or off
+         (default is 0).&nbsp; You must import the <strong>overlibmws_modal.js</strong> plugin
+         module to use this command.&nbsp; During display of a modal popup, a shield is
+         positioned between the popup and the underlying document.&nbsp; The shield has a
+         default color of '#bbbbbb' and a default opacity of 40.&nbsp; These defaults can be
+         changed via the MODALCOLOR and/or MODALOPACITY commands (<em>see below</em>).&nbsp;
+         The document's scroll bars are hidden, but can be allowed via the MODALSCROLL command
+         (<em>see below</em>).&nbsp; Note that objects with system controls, such as applets,
+         also are blocked in the document for IE v5.5 or higher, but use of HIDEBYIDALL (see
+         <i>below</i>) is needed to block them for earlier versions and other browsers.&nbsp;
+         If a <strong>primary</strong> popup is MODAL, a MODAL command in any
+         <strong>overlib2</strong> function call made via a link in the popup will be
+         ignored.&nbsp; Otherwise, a MODAL <strong>secondary</strong> popup will block access
+         to items in the <strong>primary</strong> popup as well as to the other items in the
+         current document.&nbsp; If the MODAL popup content includes any
+         <strong>textareas</strong> and/or <strong>inputs of type="text"</strong> then include
+         <strong>onfocus="OLmEdit=1;" onblur="OLmEdit=0;"</strong> in their start tags to enable
+         use of the paging and scrolling keys (including <strong>Spacebar</strong> and
+         <strong>Enter</strong>) by the browser's text editor.<br>
+         <a
+          href="MODAL.html"
+          onmouseover="return overlib('Use of MODAL and Confirm Dialog popups.',
+           CAPTION,'Demonstration 1',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 1</a><br>
+         <a
+          href="CrossFrame/"
+          onmouseover="return overlib('Use of MODAL in frame and iframe documents.',
+           CAPTION,'Demonstration 2',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 2</a><br>
+         Variable: ol_modal<br>
+         Unconditional off: -MODAL
+         <br><br>
+         <b>MODALCOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Sets the color (default '#bbbbbb') of the shield that is placed between a MODAL popup
+         (see <i>above</i>) and the document.&nbsp; You must import the
+         <strong>overlibmws_modal.js</strong> plugin module to use this command.<br>
+         <a
+          href="MODAL.html#color"
+          onmouseover="return overlib('Use of MODALCOLOR.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_modalcolor
+         <br><br>
+         <b>MODALOPACITY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Opacity of the modal shield.',
+           CAPTION,'Parameter percentage');"
+          onmouseout="nd();">percentage</a></i><br>
+         Percentage (default 40) for the opacity of the shield that is placed between a MODAL
+         popup (see <i>above</i>) and the document (100 is solid; 0 turns off the feature and
+         thus also yields a solid shield).&nbsp; The opacity feature is handled for IE on PCs
+         and for the versions of Gecko-engine, Safari, Konqueror, and Opera browsers with
+         opacity support.&nbsp; The shield is solid for the browser versions which lack opacity
+         support.&nbsp; You must import the <strong>overlibmws_modal.js</strong> plugin
+         module to use this command.<br>
+         <a
+          href="MODAL.html#color"
+          onmouseover="return overlib('Use of MODALOPACITY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_modalopacity
+         <br><br>
+         <b>MODALSCROLL</b><br>
+         Allows the document to retain its vertical and/or horizontal scroll bars when an
+         otherwise MODAL popup (see <i>above</i>) is invoked.&nbsp; This command toggles the
+         feature on or off (default is 0).&nbsp; If scrolling of the document is performed when
+         the popup is being displayed, e.g., because the popup's height and/or width exceed the
+         current viewport dimensions, the document will be returned automatically to its earlier
+         position when the popup is closed.&nbsp; You must import the
+         <strong>overlibmws_modal.js</strong> plugin module to use this command.<br>
+         <a
+          href="MODAL.html#color"
+          onmouseover="return overlib('Use of MODALSCROLL.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_modalscroll<br>
+         Unconditional off: -MODALSCROLL
+         <br><br>
+         <b>MODALCLICK</b><br>
+         Allows a click on the modal shield to close a MODAL primary or secondary popup,
+         equivalently to (or in lieu of) a Close link within the popup.&nbsp; This command toggles
+         the feature on or off (default is 0).&nbsp; You must import the
+         <strong>overlibmws_modal.js</strong> plugin module to use this command.<br>
+         <a
+          href="MODAL.html#color"
+          onmouseover="return overlib('Use of MODALCLICK.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_modalclick<br>
+         Unconditional off: -MODALCLICK
+         <br><br>
+         <b>NOFOLLOW</b><br>
+         Sets whether a tooltip (non-sticky) popup should stay put where initially invoked
+         (like OS and title-based tooltips) instead of following the curser movements.&nbsp;
+         This command is implemented as a toggle (default 0 such that the cursor movements
+         are followed).<br>
+         Variable: ol_nofollow<br>
+         Unconditional off: -NOFOLLOW
+         <br><br>
+         <b>WIDTH</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels wide the popup should be.',
+           CAPTION,'Parameter pixels');"
+          onmouseout="nd();">pixels</a></i><br>
+         Specifies the desired width of the box when you want it to differ from the
+         default.&nbsp;
+         This is a recommended width.&nbsp;
+         The exact width may be somewhat different depending on how the browser handles
+         table markup in relation to the popup content.&nbsp;
+         Overridden by WRAP.<br>
+         Variable: ol_width
+         <br><br>
+         <b>WRAP</b><br>
+         Toggles off use of an <i>a priori</i>, fixed WIDTH for popups, so that instead
+         the content determines the width.&nbsp;
+         It makes the popup be no wider than the content, except for normal padding,
+         unless the content is wider than the current window display width, in which
+         case wrapping of the content is adjusted for that maximum width.&nbsp; If
+         WRAPMAX (<em>see below</em>) has been set to a value greater than 0, wrapping
+         of the content instead is adjusted to the smaller of either that value or the
+         window display width.&nbsp; Default is off (0).<br>
+         <a
+          href="WRAP.html"
+          onmouseover="return overlib('Use of WRAP.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_wrap<br>
+         Unconditional off: -WRAP
+         <br><br>
+         <b>WRAPMAX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Maximum number of pixels wide the popup should be.',
+           CAPTION,'Parameter pixels');"
+          onmouseout="nd();">pixels</a></i><br>
+         If set to a value greater than 0, sets the maximum width of the popup, up to
+         the window display width, before wrapping occurs when the WRAP command is set
+         (default 0).<br>
+         <a
+          href="WRAP.html"
+          onmouseover="return overlib('Use of WRAPMAX.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_wrapmax
+         <br><br>
+         <b>HEIGHT</b><i> <a
+         href="javascript:void(0);"
+         onmouseover="return overlib('Number of pixels high the popup should be.',
+          CAPTION, 'Parameter pixels');"
+         onmouseout="nd();">pixels</a></i><br>
+         Sets the recommended height of the box.&nbsp;
+         The exact height may be somewhat different depending on how the browser
+         handles table markup in relation to the popup content.<br>
+         Variable: ol_height
+         <br><br>
+         <b>RIGHT</b><br>
+         Makes the popups go to the right of the cursor, but not overrun
+         the right margin of the window unless NOJUSTX is set.&nbsp; Mutually exclusive
+         with LEFT and CENTER.&nbsp; Overridden by REF, RELX, MIDX and FIXX.<br>
+         Variable: ol_hpos = RIGHT
+         <br><br>
+         <b>LEFT</b><br>
+         Makes the popups go to the left of the cursor, but not overrun
+         the left margin of the window unless NOJUSTX is set.&nbsp; Mutually exclusive
+         with RIGHT and CENTER.&nbsp; Overridden by REF, RELX, MIDX and FIXX.<br>
+         Variable: ol_hpos = LEFT
+         <br><br>
+         <b>CENTER</b><br>
+         Makes the popups centered relative to the cursor for the horizontal
+         dimension, but not overrun the left or right margin of the window
+         unless NOJUSTX is set.&nbsp;
+         The OFFSETX (ol_offsetx) setting also is applied, which by default is
+         10, roughly corresponding to the right edge of the hand for the cursor
+         invoked by links.  Include OFFSETX with a smaller value (typically 2)
+         if you want the centering to be relative to the tip of the finger.&nbsp;
+         Mutually exclusive with RIGHT and LEFT.&nbsp;
+         Overridden by REF, RELX, MIDX and FIXX.<br>
+         Variable: ol_hpos = CENTER
+         <br><br>
+         <b>BELOW</b><br>
+         Makes the popups go below the cursor, but not overrun
+         the bottom margin of the window unless NOJUSTY is set.&nbsp; Mutually exclusive
+         with ABOVE and VCENTER.&nbsp; Overridden by REF, RELY, MIDY and FIXY.<br>
+         Variable: ol_vpos = BELOW
+         <br><br>
+         <b>ABOVE</b><br>
+         Makes the popups go above the cursor, but not overrun
+         the top margin of the window unless NOJUSTY is set.&nbsp; Mutually exclusive
+         with BELOW and VCENTER.&nbsp; Overridden by REF, RELY, MIDY and FIXY.<br>
+         Variable: ol_vpos = ABOVE
+         <br><br>
+         <b>VCENTER</b><br>
+         Makes the popups centered relative to the cursor for the vertical
+         dimension, but not overrun the top or bottom margin of the window
+         unless NOJUSTY is set.&nbsp;
+         The OFFSETY (ol_offsety) setting also is applied, which by default is
+         10, roughly corresponding to the vertical mid-point of the
+         hand for the cursor invoked by links.  Include OFFSETY with a value of 0
+         if you want the centering to be relative to the tip of the finger.&nbsp;
+         Mutually exclusive with BELOW and ABOVE.&nbsp; 
+         Overridden by REF, RELY, MIDY and FIXY.<br>
+         Variable: ol_vpos = VCENTER
+         <br><br>
+         <b>OFFSETX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels.',
+           CAPTION,'Parameter x');"
+          onmouseout="nd();">x</a></i><br>
+         How far away from the cursor the popup will show up, horizontally.&nbsp;
+         Its parameter can be positive or negative for offsets in either
+         horizontal direction.&nbsp;
+         The popup will not overrun the left or right margin of the window
+         unless NOJUSTX is set.&nbsp;
+         Overridden by REF, RELX, MIDX and FIXX.<br>
+         Variable: ol_offsetx
+         <br><br>
+         <b>OFFSETY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels.',
+           CAPTION,'Parameter y');"
+          onmouseout="nd();">y</a></i><br>
+         How far away from the cursor the popup will show up, vertically.&nbsp;
+         Its parameter can be positive or negative for offsets in either 
+         vertical direction.&nbsp;
+         The popup will not overrun the top or bottom margin of the window
+         unless NOJUSTY is set.&nbsp;
+         Overridden by REF, RELY, MIDY and FIXY.<br>
+         Variable: ol_offsety
+         <br><br>
+         <b>SNAPX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels.',
+           CAPTION,'Parameter grid');"
+          onmouseout="nd();">grid</a></i><br>
+         Snaps the horizontal position of the popup to a position on a virtual grid.&nbsp;
+         Useful to prevent minor jitter if the user moves the cursor a few pixels.&nbsp;
+         The popup will not overrun the left or right margin of the window
+         unless NOJUSTX is set.&nbsp;
+         Used in conjunction with RIGHT (the default), LEFT, HAUTO (to set LEFT or RIGHT
+         automatically), CENTER or OFFSETX.&nbsp;
+         Overridden by REF, RELX, MIDX and FIXX.<br>
+         Variable: ol_snapx
+         <br><br>
+         <b>SNAPY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels.',
+           CAPTION,'Parameter grid');"
+          onmouseout="nd();">grid</a></i><br>
+         Snaps the vertical position of the popup to a position on a virtual grid.&nbsp;
+         Useful to prevent minor jitter if the user moves the cursor a few pixels.&nbsp;
+         The popup will not overrun the top or bottom margin of the window
+         unless NOJUSTY is set.&nbsp;
+         Used in conjunction with BELOW (the default), ABOVE, VAUTO (to set BELOW or
+         ABOVE automatically), or OFFSETY.&nbsp;
+         Overridden by REF, RELY, MIDY and FIXY.<br>
+         Variable: ol_snapy
+         <br><br>
+         <b>RELX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Column in pixels relative to window margin.',
+           CAPTION, 'Parameter position');"
+          onmouseout="nd();">position</a></i><br>
+         Sets the popup's horizontal position to a column relative to the window
+         display.&nbsp;
+         Overrides all other horizontal placement except REF and MIDX.&nbsp;
+         Positive numbers and 0 are treated as distances to the right from the
+         left window margin for the left edge of the popup.&nbsp;
+         Negative numbers are treated as distances to the left from the right
+         window margin for the right edge of the popup.&nbsp;
+         Will not overrun the left or right margin of the window unless NOJUSTX
+         is set.<br>
+         Variable: ol_relx
+         <br><br>
+         <b>RELY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Row in pixels relative to window margin.',
+           CAPTION,'Parameter position');"
+          onmouseout="nd();">position</a></i><br>
+         Sets the popup's vertical position to a row relative to the window display.&nbsp;
+         Overrides all other vertical placement except REF and MIDY.&nbsp;
+         Positive numbers and 0 are treated as distances down from the top
+         window margin for the top edge of the popup.&nbsp;
+         Negative numbers are treated as distances up from the bottom
+         window margin for the bottom edge of the popup.&nbsp;
+         Will not overrun the top or bottom margin of the window unless
+         NOJUSTY is set.<br>
+         Variable: ol_rely
+         <br><br>
+         <b>MIDX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Column in pixels relative to window midpoint.',
+           CAPTION, 'Parameter position');"
+          onmouseout="nd();">position</a></i><br>
+         Sets the popup's horizontal midpoint to a column relative to
+         the window display's horizontal midpoint.&nbsp;
+         Overrides all other horizontal placement except REF.&nbsp;
+         Positive numbers are treated as distances to the right from the window
+         midpoint.&nbsp;
+         Negative numbers are treated as distances to the left from the window
+         midpoint.&nbsp;
+         Will not overrun the left or right margin of the window unless NOJUSTX
+         is set.<br>
+         Example: return overlib('Text', MIDX,0,RELY,20);&nbsp; <i>keeps the popup
+         centered horizontally within the window display and its top margin 20 pixels
+         down from the top margin of the window regardless of any scrolling</i><br>
+         Variable: ol_midx
+         <br><br>
+         <b>MIDY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Row in pixels relative to window midpoint.',
+           CAPTION,'Parameter position');"
+          onmouseout="nd();">position</a></i><br>
+         Sets the popup's vertical midpoint to a row relative to the window display's
+         vertical midpoint.&nbsp;
+         Overrides all other vertical placement except REF.&nbsp;
+         Positive numbers are treated as distances down from the window midpoint.&nbsp;
+         Negative numbers are treated as distances up from the window midpoint.&nbsp;
+         Will not overrun the top or bottom margin of the window unless
+         NOJUSTY is set.<br>
+         Example: return overlib('Text', MIDX,0,MIDY,0);&nbsp; <i>centers the
+         popup within the window display regardless of any scrolling</i><br>
+         Variable: ol_midy
+         <br><br>
+         <b>SCROLL</b><br>
+         You must import the <b>overlibmws_scroll.js</b> plugin module to use the
+         scroll feature.&nbsp; Keeps re-establishing a sticky popup's position with
+         respect to the window margins and/or center (i.e., when RELX or MIDX, and RELY
+         or MIDY are used) if the document is scrolled via the window's scroll bars.&nbsp;
+         This command toggles the feature on or off.&nbsp; Is overridden by DRAGGABLE
+         (<em>see below</em>) if in the same window, or in the
+         same frame of a frameset.&nbsp; Note that for framesets, the DOCTYPE declarations
+         across frames should match for proper crossframe SCROLL handling.&nbsp; Also
+         note that scrolling of a primary popup is suspended whenever a secondary popup
+         is displayed, and is re-asserted when the secondary popup is closed.&nbsp; Sticky
+         secondary popups also support the SCROLL command when RELX or MIDX and RELY or MIDY
+         are used for positioning them, and do not require SCROLL to have been used for the
+         the primary popup.<br>
+         <a
+          href="STICKY.html"
+          onmouseover="return overlib('Use of SCROLL with sticky popups.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_scroll<br>
+         Unconditional off: -SCROLL
+         <br><br>
+         <b>REF</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('NAME of anchor or image, or ID of positioned layer.',
+           CAPTION, 'Parameter reference');"
+          onmouseout="nd();">reference</a></i><br>
+         The NAME of an anchor or image, or the ID of a positioned layer, to be used as the
+         reference object for positioning the popup.&nbsp;
+         Used in conjunction with REFC, REFP, REFX and REFY (specified, or with their default
+         values).&nbsp;
+         Overrides all other positioning commands.&nbsp;
+         Will not overrun the margins of the window unless NOJUSTX and/or NOJUSTY are set.<br>
+         <a
+          href="REF.html"
+          onmouseover="return overlib('Use of REF, REFC, REFP, REFX and REFY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_ref
+         <br><br>
+         <b>REFC</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Corner of REFerence object for positioning.',
+           CAPTION,'Parameter corner');"
+          onmouseout="nd();">corner</a></i><br>
+         Defines the corner of a reference object which should be use as the reference
+         point for positioning a corner of the popup.&nbsp;
+         The allowable values are 'UL' (Upper Left), 'UR', (Upper Right), 'LL' (Lower Left),
+         and 'LR' (Lower Right).&nbsp;
+         The value can be lower case, and must be specified as a string (i.e., quoted).&nbsp;
+         The default normally is 'UL'.&nbsp;
+         For anchors, only the default value of 'UL' is supported with Netscape 4.x, and
+         with all browsers references the upper left corner of the first character in textual
+         anchor content (including space above the character associated with the line height)
+         even if there is wrapping in an anchor content string such that the wrapped portion
+         is to the left of the first character.<br>
+         <a
+          href="REF.html"
+          onmouseover="return overlib('Use of REF, REFC, REFP, REFX and REFY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_refc
+         <br><br>
+         <b>REFP</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Corner of popup for positioning.',
+           CAPTION,'Parameter corner');"
+          onmouseout="nd();">corner</a></i><br>
+         Defines the corner of the popup which should be positioned with respect to a
+         corner of the reference object.&nbsp;
+         The allowable values are 'UL' (Upper Left), 'UR', (Upper Right), 'LL' (Lower Left),
+         and 'LR' (Lower Right).&nbsp;
+         The value can be lower case, and must be specified as a string (i.e., quoted).&nbsp;
+         The default normally is 'UL'.<br>
+         <a
+          href="REF.html"
+          onmouseover="return overlib('Use of REF, REFC, REFP, REFX and REFY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_refp
+         <br><br>
+         <b>REFX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('X displacement between corners, in pixels.',
+           CAPTION,'Parameter displacement');"
+          onmouseout="nd();">displacement</a></i><br>
+         Sets the horizontal displacement between the reference object's and popup's
+	 corners.&nbsp;
+         Positive values move the popup to the right; negative to the left.&nbsp;
+         The default normally is 0.&nbsp;
+         The popup will not overrun the left or right margin of the window unless NOJUSTX
+         is set.&nbsp;<br>
+         <a
+          href="REF.html"
+          onmouseover="return overlib('Use of REF, REFC, REFP, REFX and REFY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_refx
+         <br><br>
+         <b>REFY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Y displacement between corners, in pixels.',
+           CAPTION,'Parameter displacement');"
+          onmouseout="nd();">displacement</a></i><br>
+         Sets the vertical displacement between the reference object's and popup's
+         corners.&nbsp;
+         Positive values move the popup down; negative up.&nbsp;
+         The default normally is 0.&nbsp;
+         The popup will not overrun the top or bottom margin of the window unless NOJUSTY
+         is set.&nbsp;<br>
+         <a
+          href="REF.html"
+          onmouseover="return overlib('Use of REF, REFC, REFP, REFX and REFY.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_refy
+         <br><br>
+         <b>FIXX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Fixed column in pixels.',
+           CAPTION, 'Parameter position');"
+          onmouseout="nd();">position</a></i><br>
+         Sets the popup's horizontal position to a fixed column.&nbsp;
+         Overrides all other horizontal placement except REF, RELX and MIDX.&nbsp;
+         Positive numbers and 0 are treated as distances to the right for the left
+         edge of the popup.&nbsp;
+         Negative numbers are invalid.&nbsp;
+         Will not overrun the window margins unless NOJUSTX is set.<br>
+         Variable: ol_fixx
+         <br><br>
+         <b>FIXY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Fixed row in pixels.',
+           CAPTION,'Parameter position');"
+          onmouseout="nd();">position</a></i><br>
+         Sets the popup's vertical position to a fixed row.&nbsp;
+         Overrides all other vertical placement except REF, RELY and MIDY.&nbsp;
+         Positive numbers and 0 are treated as distances down for the top edge of
+         the popup.&nbsp;
+         Negative numbers are invalid.&nbsp;
+         Will not overrun the window margins unless NOJUSTY is set.<br>
+         Variable: ol_fixy
+         <br><br>
+         <b>NOJUSTX</b><br>
+         Toggles off the default justification of popups in the horizontal
+         dimension that prevents overruns of the window display's left and
+         right margins.&nbsp;
+         Can be used in conjunction with any horizontal positioning command,
+         but most likely with FIXX or RELX to force use of the indicated
+         horizontal position, with the assumption (sometimes incorrect, so
+         beware) that the user can increase the window size to accommodate
+         the entire popup.  Also is used with DRAGGABLE for stickies, such
+         that the user can drag any overrun portion of the popup back into
+         the window display.<br>
+         Variable: ol_nojustx<br>
+         Unconditional off: -NOJUSTX
+         <br><br>
+         <b>NOJUSTY</b><br>
+         Toggles off the default justification of popups in the vertical
+         dimension that prevents overruns of the window display's top and
+         bottom margins.&nbsp;
+         Can be used in conjunction with any horizontal positioning command,
+         but most likely with FIXY or RELY to force use of the indicated
+         vertical position, with the assumption (sometimes incorrect, so
+         beware) that the user can increase the window size to accommodate
+         the entire popup.  Also is used with DRAGGABLE for stickies, such
+         that the user can drag any overrun portion of the popup back into
+         the window display.<br>
+         Variable: ol_nojusty<br>
+         Unconditional off: -NOJUSTY
+         <br><br>
+         <b>HAUTO</b><br>
+         Automatically determine if the popup should be to the left or right of the
+         cursor, depending on whether the cursor is to the right or left, respectively,
+         of mid-screen and would extend beyond the window display area when the popup is
+         invoked.&nbsp; This command toggles the feature on or off.<br>
+         Variable: ol_hauto<br>
+         Unconditional off: -HAUTO
+         <br><br>
+         <b>VAUTO</b><br>
+         Automatically determine if the popup should be above or below the cursor,
+         depending on whether the cursor is below or above, respectively, mid-screen
+         and would extend beyond the window display area when the popup is invoked.&nbsp;
+         This command toggles the feature on or off.<br>
+         Variable: ol_vauto<br>
+         Unconditional off: -VAUTO
+         <br><a name="frame">&nbsp;</a><br>
+         <b>FRAME</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Unquoted frame reference.',
+           CAPTION,'Parameter frame');"
+          onmouseout="nd();">frame</a></i><br>
+         Controls popups in a different frame or in an iframe's parent.&nbsp; You must import
+         the <b>overlibmws_crossframe.js</b> plugin module to use this feature.&nbsp; You can
+         declare an <b>overDiv</b> and/or <b>overDiv2</b> positioned div container (layer) in
+         the target frame or parent, or let the core module create them dynamically.&nbsp;
+         The parameter passed to this command should be a valid frame reference and not be
+         treated as a text string (i.e., should not be quoted).<br>
+         <strong>Examples:</strong> return overlib('Text', FRAME, parent.right);
+         <i>(assuming you have a <strong>frame</strong> called <strong>right</strong>)</i><br>
+         &nbsp; return overlib('Text', FRAME, parent); <i>(in <strong>iframe</strong> content,
+         see below)</i><br>
+         <a
+          href="CrossFrame/"
+          onmouseover="return overlib('Use of FRAME command in&lt;br&gt;a frame set.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 1</a><br>
+         Note that a secondary popup invoked via an <strong>overlib2</strong> call inherits the
+         frame reference of its primary popup by default, but can be positioned in a different
+         frame via the FRAME command.&nbsp; Also note that an <strong>iframe</strong> used as
+         the content for a primary popup can use an <strong>overlib2</strong> function call
+         with a <strong>FRAME,parent</strong> command to handle the secondary popup in the
+         parent document.&nbsp; It thus is not bound by the margins of the iframe window, but
+         nonetheless can use cursor-based positioning.<br>
+         <a
+          href="IFRAME.html"
+          onmouseover="return overlib('Use of FRAME,parent in&lt;br&gt;popups with iframe content.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 2</a><br>
+         One also can use <strong>FRAME,parent</strong> in the <strong>overlib</strong> function
+         calls within an <strong>embedded iframe</strong> to have the primary popup not be
+         bound by the margins of the embedded iframe window, but still be able to use
+         cursor-based positioning.&nbsp; In that case, a secondary popup in the primary popup's
+         content should reference the embedded iframe window from the parent's perspective,
+         e.g., if the embedded iframe window's name were eif1, the primary popup's content
+         would use self.eif1.overlib2 function calls for its secondary popups.<br>
+         <a
+          href="IFRAME.html#embif"
+          onmouseover="return overlib('Use of FRAME,parent in&lt;br&gt;an embedded iframe.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 3</a><br>
+         Note that use of <strong>FRAME,parent</strong> can introduce cross-domain security
+         restrictions in modern browsers such that the <strong>overlib</strong> or
+         <strong>overlib2</strong> function calls may be blocked if the parent and iframe
+         documents are from different domains.<br>
+         Variable: ol_frame
+         <br><br>
+         <b>TIMEOUT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Time to wait.',
+           CAPTION,'Parameter millisecs');"
+          onmouseout="nd();">millisecs</a></i><br>
+         Makes the popup go away after the requested delay.<br>
+         Variable: ol_timeout
+         <br><br>
+         <b>DELAY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Time to wait.',
+           CAPTION,'Parameter millisecs');"
+          onmouseout="nd();">millisecs</a></i><br>
+         Makes the popup behave more like an OS or title-based tooltip.&nbsp; It will appear only
+         after a certain delay specified in millisecs.&nbsp; Note that to avoid a race condition,
+         the DELAY command is blocked for secondary popups in embedded iframe content.<br>
+         Variable: ol_delay
+         <br><a name="draggable">&nbsp;</a><br>
+         <b>DRAGGABLE</b><br>
+         Makes stickies draggable.&nbsp; Toggles the feature on or off.&nbsp;
+         The <b>overlibmws_draggable.js</b> plugin module must be imported to use this
+         command.&nbsp; You can select text in draggable stickies for copy and paste
+         operations by using Alt+Click (Option+Click on MACs; Ctrl+Click for Opera
+         versions less than v8.01).&nbsp; This command cannot be used (and thus is ignored)
+         across frames.&nbsp; However, it can be used for popups that have iframe content,
+         in which case the caption area but not the main text area of the popup can be used
+         for dragging.&nbsp; Overrides SCROLL (<em>see above</em>) unless the SCROLL command
+         is for a different frame.&nbsp; Note that dragging for a primary popup is suspended
+         whenever a secondary popup is being displayed, and is re-asserted when the secondary
+         popup is closed.&nbsp; Sticky secondary popups can be draggable.&nbsp;
+         See <b>DRAGCAP</b> and <b>DRAGID</b>, <em>below</em>.<br>
+         <a
+          href="DRAGGABLE.html"
+          onmouseover="return overlib('Use of DRAGGABLE with sticky popups.',
+           CAPTION,'Demonstration 1',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 1</a><br>
+         <a
+          href="IFRAME.html#draggable"
+          onmouseover="return overlib('Use of DRAGGABLE for a sticky with iframe content.',
+           CAPTION,'Demonstration 2',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 2</a><br>
+         <a
+          href="SHADOW.html#secondary"
+          onmouseover="return overlib('Use of DRAGGABLE for a sticky secondary popup.',
+           CAPTION,'Demonstration 3',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 3</a><br>
+         Variable: ol_draggable<br>
+         Unconditional off: -DRAGGABLE
+         <br><br>
+         <b>DRAGCAP</b><br>
+         Makes the dragging handle for draggable sticky popups restricted to the
+         caption.&nbsp; Toggles the feature on or off.&nbsp; The
+         <b>overlibmws_draggable.js</b> plugin module must be imported to use this
+         command.&nbsp; Is ignored if the popup does not have a caption.<br>
+         <a
+          href="overflow.html#dragcap"
+          onmouseover="return overlib('Use of DRAGCAP with DRAGGABLE, STICKY popups.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_dragcap<br>
+         Unconditional off: -DRAGCAP
+         <br><br>
+         <b>DRAGID</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'The id of an encasing div with overflow:auto;',
+           CAPTION,'Parameter divID');"
+          onmouseout="nd();">divID</a></i><br>
+         Required if <b>DRAGCAP</b> is not used with <b>DRAGGABLE</b> for <b>STICKY</b> popups
+         that have class-based CSS with an <b>overflow:auto;</b> rule to invoke scroll bars in
+         the popup when its content is large.&nbsp; The parameter is a quoted string with the
+         <strong>id</strong> of such an encasing <strong>div</strong> for the popup content.&nbsp;
+         The <b>overlibmws_draggable.js</b> plugin module must be imported to use this command.<br>
+         <a
+          href="overflow.html#dragid"
+          onmouseover="return overlib('Use of DRAGID with DRAGGABLE, STICKY popups.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_dragid<br>
+         <br><br>
+         <b>HIDESELECTBOXES</b><br>
+         Hides any select box(es) while a popup is displayed if the select box(es) would
+         overlap with the popup and potientially obscure it.&nbsp; This command toggles
+         the feature on or off.&nbsp;
+         You must import the <b>overlibmws_hide.js</b> plugin module to use this
+         command.&nbsp;
+         The command is not needed and thus is ignored for IE v5.5 or higher
+         when the <b>overlibmws_iframe.js</b> plugin has been imported (see <a
+          href="#introduction"
+          onmouseover="return overlib('Jump to this section.',CENTER);"
+          onmouseout="nd();">Introduction</a>).&nbsp; It also is ignored for
+         Opera v7+, IE v7+, Netscape v7.1+ and corresponding Gecko-engine browsers (e.g.,
+         Mozilla v1.4+ and Firefox), whose popups are not obscured by any form elements, and
+         for Netscape v4.x, whose popups are obscured by all form elements and which is
+         handled via the HIDEBYIDNS4 command (<em>see below</em>).&nbsp;
+         Thus, this command is needed and not ignored primarily for versions of IE older
+         than 5.5 whose popups otherwise are obscured by all portions of select boxes,
+         and for Netscape v6.x and v7.0 and other correspondingly old Gecko-engine browsers
+         whose popups otherwise can be obscured by the slide bars of select boxes.<br>
+         <a
+          href="hide.html"
+          onmouseover="return overlib('Prevent form objects form obscuring popups.',
+           CAPTION,'Demonstration 1',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 1</a><br>
+         <a
+          href="DRAGGABLE.html"
+          onmouseover="return overlib('Use of DRAGGABLE with select boxes.',
+           CAPTION,'Demonstration 2',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 2</a><br>
+         Variable: ol_hideselectboxes<br>
+         Unconditional off: -HIDESELECTBOXES
+         <br><br>
+         <b>HIDEBYIDALL</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'System Control id or comma-separated list of id\'s.',
+           CAPTION,'Parameter systemControlID(s)');"
+          onmouseout="nd();">systemControlID(s)</a></i><br>
+         Hides system controls (e.g., flash objects, applets) based on an id or
+         comma-separated list of id's passed as the parameter for this command.&nbsp;
+         You must import the <b>overlibmws_hide.js</b> plugin module to use this command.&nbsp;
+         The command is not needed and thus is ignored for IE v5.5 or higher when
+         the <b>overlibmws_iframe.js</b> plugin module has been imported (see <a
+          href="#introduction"
+          onmouseover="return overlib('Jump to this section.',CENTER);"
+          onmouseout="nd();">Introduction</a>).&nbsp;
+         If support for Netscape v4.x is needed, encase the system control in a div whose
+         style includes position:relative and use that div's id (rather than the id of the
+         system control, itself) in the parameter for this command.<br>
+         <a
+          href="flash.html"
+          onmouseover="return overlib('Hide s system object (flash movie).',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_hidebyidall
+         <br><br>
+         <b>HIDEBYIDNS4</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Positioned div (layer) id or comma-separated list of id\'s.',
+           CAPTION,'Parameter positionedDivID(s)');"
+          onmouseout="nd();">positionedDivID(s)</a></i><br>
+         Hides positioned div's (layers) based on an id or comma-separated list of id's passed
+         as the parameter for this command.&nbsp;
+         You must import the <b>overlibmws_hide.js</b> plugin module to use this command.&nbsp;
+         The command is acted upon <strong>only</strong> for Netscape 4.x browsers to hide
+         an entire form or sets of form fields encased by (a) positioned div(s) with the
+         indicated id(s).&nbsp; Use it together with HIDESELECTBOXES (<em>see above</em>)
+         for the other browsers when support for Netscape v4.x also is needed.<br>
+         <a
+          href="hide.html"
+          onmouseover="return overlib('Hide positioned div encasing a form for Netscape 4.x.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_hidebyidns4
+         <br><br>
+         <b>HIDEBYID</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Form field id or comma-separated list of id\'s.',
+           CAPTION,'Parameter formFieldID(s)');"
+          onmouseout="nd();">formFieldID(s)</a></i><br>
+         Hides form fields based on an id or comma-separated list of id's passed
+         as the parameter for this command.&nbsp; 
+         You must import the <b>overlibmws_hide.js</b> plugin module to use this
+         command.&nbsp; The command is not needed and thus is ignored for
+         IE v5.5 or higher when the <b>overlibmws_iframe.js</b> plugin has been imported
+        (see <a
+          href="#introduction"
+          onmouseover="return overlib('Jump to this section.',CENTER);"
+          onmouseout="nd();">Introduction</a>).&nbsp; It also is ignored for Opera 7+
+         because no form fields obscure its popups, and for Netscape 6/7+ and corresponding
+         Gecko-engine browsers (e.g., Mozilla) if the HIDESELECTBOXES command (<em>see
+         above</em>) also is being used for the popup.&nbsp; Finally, it is ignored for
+         Netscape 4.x so that the HIDEBYIDNS4 command (<em>see above</em>) can be used
+         selectively for positioned div's (layers) with that browser.&nbsp;
+         Although the command is not needed when the <strong>overlibmws_iframe.js</strong>
+         plugin has been imported and the preferable HIDESELECTBOXES command also is used,
+         it has been retained for backward compatibility.<br>
+         Variable: ol_hidebyid
+         <br><br>
+         <b>LABEL</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Labeling string for the primary popup (e.g., the id of the evoking element).',
+           CAPTION,'Parameter labelingString');"
+          onmouseout="nd();">labelingString</a></i><br>
+         For labeling <strong>primary</strong> sticky or tooltip popups.&nbsp; The parameter
+         for this command should be a labeling string, e.g., the id of the element which
+         invokes the primary popup, or a label for a set of primary popups.&nbsp; The label
+         is asserted when the primary popup is invoked, and persists until it is closed
+         (hidden).&nbsp; The runtime variable for LABEL (<strong>o3_label</strong>) thus
+         can be checked via javascript in HTML/XML documents to determine if a particular
+         popup, or a member of a set, is being displayed.&nbsp;  An example of its use is
+         in the support document for <a
+          href="ONFOCUS.html"
+          onmouseover="return overlib('Test keyboard-invoked popup support.',
+           HAUTO,VAUTO);"
+           onmouseout="nd();">keyboard</a>-invoked popups.&nbsp; This complements the
+         <strong>OLshowingsticky</strong> global variable, which is set (1, default 0)
+         whenever any sticky primary popup is being displayed.<br>
+         Variable: ol_label
+         <br><br>
+         <b>LABEL2</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Labeling string for the secondary popup (e.g., the id of the evoking element).',
+           CAPTION,'Parameter labelingString');"
+          onmouseout="nd();">labelingString</a></i><br>
+         For labeling <strong>secondary</strong> sticky or tooltip popups.&nbsp; The
+         parameter for this command should be a labeling string, and functions equivalently
+         to the LABEL parameter for primary popups (<em>see above</em>), such that the
+         runtime variable for LABEL2 (<strong>o3_label2</strong>) can be used for determining
+         whether particular secondary popups are being displayed.&nbsp; This complements
+         the <strong>OLshowingsticky2</strong> global variable, which is set (1, default 0)
+         whenever any sticky secondary popup is being displayed.<br>
+         Variable: ol_label2
+         <br><br>
+        <b>DONOTHING</b><br>
+         Filler command which does nothing, takes no parameters, and has no configuration
+         variable.&nbsp; The command has been made available for use in wrapper functions
+         that ultimately make an overlib call, and otherwise might require setups of multiple
+         overlib calls with different numbers of commands.&nbsp;  Variables can be defined as
+         stand-ins for some overlib commands and used in the wrapper function's overlib
+         call.&nbsp; Such variables can be equated to desired overlib commands under some
+         contingencies, but might not be wanted under other contigencies and instead can be
+         equated to DONOTHING when those contingencies are found to apply for the wrapper
+         function.<br>
+         Variable: none<br>
+         Unconditional off: none<br>
+         </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;4.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="colors-fonts-images"
+          id="colors-fonts-images">Colors, Fonts and Images</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>FGCOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Background color for the main text area of the popup box.&nbsp;
+         Overridden by FGCLASS.<br>
+         Variable: ol_fgcolor
+         <br><br>
+         <b>BGCOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Color of the border of the popup box.&nbsp;
+         Overridden by BGCLASS.<br>
+         Variable: ol_bgcolor
+         <br><br>
+         <b>CGCOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Background color for the caption area of the popup box.&nbsp;
+         Overridden by CGCLASS.<br>
+         Variable: ol_cgcolor
+         <br><br>
+         <b>TEXTCOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Sets the color of the main text.&nbsp;
+         Overridden by TEXTFONTCLASS.<br>
+         Variable: ol_textcolor
+         <br><br>
+         <b>CAPCOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Sets the color of the caption text.&nbsp;
+         Overridden by CAPTIONFONTCLASS.<br>
+         Variable: ol_capcolor
+         <br><br>
+         <b>CLOSECOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Sets the color of the 'Close' text.&nbsp;
+         Overridden by CLOSEFONTCLASS<br>
+         Variable: ol_closecolor
+         <br><br>
+         <b>TEXTFONT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Names of fonts to use.',
+           CAPTION,'Parameter font');"
+          onmouseout="nd();">font</a></i><br>
+         Sets the font to be used by the main text.&nbsp;
+         Overridden by TEXTFONTCLASS.<br>
+         Variable: ol_textfont
+         <br><br>
+         <b>CAPTIONFONT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Names of fonts to use.',
+           CAPTION,'Parameter font');"
+          onmouseout="nd();">font</a></i><br>
+         Sets the font of the caption.&nbsp;
+         Overridden by CAPTIONFONTCLASS.<br>
+         Variable: ol_capfont
+         <br><br>
+         <b>CLOSEFONT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Names of fonts to use.',
+           CAPTION,'Parameter font');"
+          onmouseout="nd();">font</a></i><br>
+         Defines the font for the 'Close' text.&nbsp;
+         Overridden by CLOSEFONTCLASS<br>
+         Variable: ol_closefont
+         <br><br>
+         <b>TEXTSIZE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Integer (1 - 7) or CSS font-size string for the font size.',
+           CAPTION,'Parameter size');"
+          onmouseout="nd();">size</a></i><br>
+         Size of the main text's font, normally expressed as an integer between 1
+         (default) and 7.&nbsp; Can instead make the parameter a (quoted) string with a <a
+          href="CSSfontSize.html"
+          onmouseover="return overlib(
+           'Compare CSS font-size string versus integer settings');"
+          onmouseout="nd();">CSS font-size</a> value and unit (e.g., '83%' or '14px').&nbsp;
+         Overridden by TEXTFONTCLASS.<br>
+         Variable: ol_textsize
+         <br><br>
+         <b>CAPTIONSIZE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Integer (1 - 7) or CSS font-size string for the font size.',
+           CAPTION,'Parameter size');"
+          onmouseout="nd();">size</a></i><br>
+         Size of the caption's font, normally expressed as an integer between 1
+         (default) and 7.&nbsp; Can instead make the parameter a (quoted) string with a <a
+          href="CSSfontSize.html"
+          onmouseover="return overlib(
+           'Compare CSS font-size string versus integer settings');"
+          onmouseout="nd();">CSS font-size</a> value and unit (e.g., '83%' or '14px').&nbsp;
+         Overridden by CAPTIONFONTCLASS<br>
+         Variable: ol_captionsize
+         <br><br>
+         <b>CLOSESIZE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Integer (1 - 7) or CSS font-size string for the font size.',
+           CAPTION,'Parameter size');"
+          onmouseout="nd();">size</a></i><br>
+         Size of the 'Close' text's font, normally expressed as an integer between 1
+         (default) and 7.&nbsp; Can instead make the parameter a (quoted) string with a <a
+          href="CSSfontSize.html"
+          onmouseover="return overlib(
+           'Compare CSS font-size string versus integer settings');"
+          onmouseout="nd();">CSS font-size</a> value and unit (e.g., '83%' or '14px').&nbsp;
+         Overridden by CLOSEFONTCLASS<br>
+         Variable: ol_closesize
+         <br><br>
+         <b>FGBACKGROUND</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('URL to the image.',
+           CAPTION,'Parameter picture');"
+          onmouseout="nd();">picture</a></i><br>
+         Defines a picture (typically, a textured background) to use instead
+         of color for the inside, text table (main text area) of the popup.&nbsp;
+         Overridden by FGCLASS.<br>
+         <a
+          href="BKGRND.html"
+          onmouseover="return overlib('Use of FGBACKGROUND.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+	   Variable: ol_fgbackground
+	   <br><br>
+         <b>BGBACKGROUND</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('URL to the image.',
+           CAPTION,'Parameter picture');"
+          onmouseout="nd();">picture</a></i><br>
+         Defines a picture to use instead of color for the outside, border
+         table of the popup.&nbsp;
+         Netscape 4.x inappropriately tiles the image into all of the table
+         data cells.&nbsp;
+         The workaround is also to use images rather than colors for the text
+         area (see FGBACKGROUND, above) and caption area (see CGBACKGROUND,
+         below).&nbsp;
+         Overridden by BGCLASS.<br>
+         <a
+          href="BKGRND.html"
+          onmouseover="return overlib('Use of BGBACKGROUND.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_bgbackground
+         <br><br>
+         <b>CGBACKGROUND</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('URL to the image.',
+           CAPTION,'Parameter picture');"
+          onmouseout="nd();">picture</a></i><br>
+         Defines a picture to use instead of color for an inside, caption table
+         (caption area) of the popup.&nbsp;
+         When having a Close link, Netscape 4.x will restart the image in that
+         table data cell, making things look bad unless the image is a texture
+         which can be tiled horizontally without visible seams.&nbsp;
+         Overridden by CGCLASS.<br>
+         <a
+          href="BKGRND.html"
+          onmouseover="return overlib('Use of CGBACKGROUND.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_cgbackground
+         <br><br>
+         <b>CAPICON</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('URL for the image.',
+           CAPTION,'Parameter picture');"
+          onmouseout="nd();">picture</a></i><br>
+         Displays a small icon before the popup caption.<br>
+         Variable: ol_capicon
+         <br><br>
+         <b>BACKGROUND</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('URL for image.',
+           CAPTION,'Parameter picture');"
+          onmouseout="nd();">picture</a></i><br>
+         Instead of using the table box as background, your picture
+         will be used.<br>
+         <a
+          href="DRAGGABLE.html"
+          onmouseover="return overlib('Use of BACKGROUND.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_background
+         <br><br>
+         <b>PADX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Pixels to pad.',
+           CAPTION, 'Parameter left');"
+          onmouseout="nd();">left</a></i><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Pixels to pad.',
+           CAPTION,'Parameter right');"
+          onmouseout="nd();">right</a></i><br>
+         Pads the background picture with horizontal whitespace for text placement.&nbsp;
+         Note that this is a two parameter command.<br>
+         Variable: ol_padxl and ol_padxr
+         <br><br>
+         <b>PADY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Pixels to pad.',
+           CAPTION,'Parameter top');"
+          onmouseout="nd();">top</a></i><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Pixels to pad.',
+           CAPTION,'Parameter bottom');"
+          onmouseout="nd();">bottom</a></i><br>
+         Pads the background picture with vertical whitespace for text placement.&nbsp;
+         Note that this is a two parameter command.<br>
+         Variable: ol_padyt and ol_padyb
+         <br><br>
+         <b>FULLHTML</b><br>
+         Allows you to control the html over the BACKGROUND picture completely.&nbsp;
+         Also can be used without the BACKGROUND command, to specify the popup content
+         entirely via your own markup (which could include background and/or foreground
+         images).&nbsp;
+         The html code is expected in "text".&nbsp;
+         This command toggles the feature on or off.<br>
+         <a
+          href="DRAGGABLE.html"
+          onmouseover="return overlib('Use of FULLHTML.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_fullhtml<br>
+         Unconditional off: -FULLHTML<br>
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;5.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="cascading-style-sheets"
+          id="cascading-style-sheets">Cascading Style Sheets</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="cellcontent">
+         <br>
+         These are core commands, any (or all six) of which can be used in any combination.&nbsp;
+         The parameter is a quoted string corresponding to a class for a CSS style sheet
+         declared in the head via a style block, or in an imported .css file.&nbsp;
+         Each command, if used, overrides some default formatting configuration variables
+         and their associated commands as indicated below, and so the style sheet should
+         include appropriate rules for the overridden variables (if their defaults are not
+         null strings), in addition to any other style rules you wish to apply.&nbsp; <a
+          href="STICKY.html#styledemo"
+          onmouseover="return overlib('Use of class-based CSS.',
+           CAPTION,'Demonstration 1',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration&nbsp;1</a>,&nbsp; <a
+          href="NOCLOSE.html#styledemo"
+          onmouseover="return overlib('Use of class-based CSS.',
+           CAPTION,'Demonstration 2',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration&nbsp;2</a>,&nbsp; <a
+          href="overflow.html#styledemo"
+          onmouseover="return overlib('Use of class-based CSS.',
+           CAPTION,'Demonstration 3',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration&nbsp;3</a>.&nbsp; <strong>Note</strong> that in
+         documents with popups you should avoid global rules for the table, tr and td elements,
+         and instead use only class-based rules so that you do not inadvertently affect the
+         styling of the popups.&nbsp; <strong>Also</strong>, if you use global rules for the
+         body element, you should avoid a font-size rule so that you do not inadvertently affect
+         the sizing of fonts in popups.&nbsp; <strong>However</strong>, if you include the
+         six class commands as explained below (plus the <strong>PRINTFONTCLASS</strong>
+         command when the <strong>overlibmws_print.js</strong> plugin is imported) in an
+         <strong>OLpageDefaults</strong> call to make them the page defaults, then the DHTML
+         popups can be rendered according to those class-based CSS rules, unaffected by any
+         generic CSS rules for the document's body, table, tr and/or td elements.<br>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>FGCLASS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string for a CSS class',
+           CAPTION,'Parameter class');"
+          onmouseout="nd();">class</a></i><br>
+         Class for the inside, text table (main text area) of the popup box.&nbsp;
+         Overrides ol_fgcolor / FGCOLOR, and ol_fgbackground / FGBACKGROUND (replace
+         with background-color and/or background-image rules).&nbsp;
+         For block-level rules (e.g., text-align:center; for centering the
+         main text).<br>
+         Variable: ol_fgclass
+         <br><br>
+         <b>CGCLASS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string for a CSS class',
+           CAPTION,'Parameter class');"
+          onmouseout="nd();">class</a></i><br>
+         Class for an inside, caption table (caption area) of the popup box.&nbsp;
+         Overrides ol_cgcolor / CGCOLOR, and ol_cgbackground / CGBACKROUND (replace
+         with background-color and/or background-image rules).&nbsp;
+         For block-level rules (e.g., text-align:center; for centering the
+         caption).<br>
+         Variable: ol_cgclass
+         <br><br>
+         <b>BGCLASS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string for a CSS class',
+           CAPTION,'Parameter class');"
+          onmouseout="nd();">class</a></i><br>
+         Class for the outside, border table of the popup box&nbsp;
+         Overrides ol_bgcolor / BGCOLOR, and ol_bgbackround / BGBACKGROUND (replace
+         with background-color and/or background-image rules).&nbsp;
+         For block-level rules applicable to the outside border of the popup.<br>
+         Variable: ol_bgclass
+         <br><br>
+         <b>TEXTFONTCLASS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string for a CSS class',
+           CAPTION,'Parameter class');"
+          onmouseout="nd();">class</a></i><br>
+         Class for the main text area.&nbsp;
+         Overrides ol_textcolor / TEXTCOLOR, ol_textfont / TEXTFONT, and
+         ol_textsize / TEXTSIZE (replace
+         with color, font-family and font-size rules).&nbsp;
+         For inline rules related to the main text font (e.g., font-weight).&nbsp;
+         Block-level rules appropriate for an encasing div also can be used.<br>
+         Variable: ol_textfontclass
+         <br><br>
+         <b>CAPTIONFONTCLASS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string for a CSS class',
+           CAPTION,'Parameter class');"
+          onmouseout="nd();">class</a></i><br>
+         Class for the caption text.
+         Overrides ol_capcolor / CAPCOLOR, ol_captionfont / CAPTIONFONT, and
+         ol_captionsize / CAPTIONSIZE (replace
+         with color, font-family and font-size rules).&nbsp;
+         For inline rules related to the caption font (e.g., font-weight).&nbsp;
+         Block-level rules appropriate for an encasing div also can be used.<br>
+         Variable: ol_captionfontclass
+         <br><br>
+         <b>CLOSEFONTCLASS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string for a CSS class',
+           CAPTION,'Parameter class');"
+          onmouseout="nd();">class</a></i><br>
+         Class for the Close link.&nbsp;
+         Overrides ol_closecolor / CLOSECOLOR, ol_closefont / CLOSEFONT, and
+         ol_closesize / CLOSESIZE.&nbsp; Use color, font-family, and font-size rules,
+         and any other appropriate rules for an anchor such as font-weight and
+         background-color, including for hover as illustrated in <a
+          href="overflow.html#styledemo"
+          onmouseover="return overlib('Use of class-based CSS.',
+           CAPTION,'Demonstration 3',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration&nbsp;3</a> for the popups with Close links.&nbsp;
+         Also see <strong>PRINTFONTCLASS</strong>, which is the homologous command for
+         the Print link when <a
+          href="#print"
+          onmouseover="return overlib('Jump below to &lt;b&gt;9. Printing Popups&lt;/b&gt;');"
+          onmouseout="nd();">Printing Popups</a>.<br>
+         Variable: ol_closefontclass<br>
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;6.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="dropshadow" id="dropshadow">Dropshadow</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="cellcontent">
+         <br>
+         Requires the <b>overlibmws_shadow.js</b> plugin module.<br>
+         <a
+          href="SHADOW.html"
+          onmouseover="return overlib('Use of SHADOW.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>.<br>
+        </td>
+       </tr>
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>SHADOW</b><br>
+         Toggle for whether to add a dropshadow (default 0).&nbsp; Is overridden by
+         FILTERSHADOW (or replaced by FILTERSHADOW,2) for IE v5.5+ browsers on PCs if FILTER
+         also is set.&nbsp; Thus, including SHADOW, FILTER and FILTERSHADOW commands in the
+         <strong>overlib</strong> or <strong>overlib2</strong> call will yield shadows for
+         all of the supported browsers, plus FILTER-based fadein/fadeout effects for IE v5.5+
+         browsers or a simple fadein/fadeout effect for other browsers which have style-based
+         opacity support (e.g., recent versions of Firefox and the other Gecko-engine browsers,
+         Opera, Safari, and Konqueror, or the old 4.0 and 5.0 versions of IE).&nbsp;
+         <em>See</em> <a
+          href="#filter"
+          onmouseover="return overlib(
+           'Jump ahead to &lt;b&gt;8. Transform Filters&lt;/b&gt;');"
+          onmouseout="nd();">Section 8</a> <em>for more information.</em><br>
+         Variable: ol_shadow<br>
+         Unconditional off: -SHADOW
+         <br><br>
+         <b>SHADOWX</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels.',
+           CAPTION,'Parameter pixels');"
+          onmouseout="nd();">pixels</a></i><br>
+         Number of pixels for the horizontal shadow displacement (default 5).<br>
+         Positive values yield displacements to the right, negative to the left.<br>
+         Variable: ol_shadowx
+         <br><br>
+         <b>SHADOWY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Number of pixels.',
+           CAPTION,'Parameter pixels');"
+          onmouseout="nd();">pixels</a></i><br>
+         Number of pixels for the vertical shadow displacement (default 5).<br>
+         Positive values yield displacements down, negative up.<br>
+         Variable: ol_shadowy
+         <br><br>
+         <b>SHADOWCOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Hex code or name for the shadow color (default '#666666').<br>
+         Variable: ol_shadowcolor
+         <br><br>
+         <b>SHADOWIMAGE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('URL to the image.',
+           CAPTION,'Parameter picture');"
+          onmouseout="nd();">picture</a></i><br>
+         URL for an image shadow (default "").<br>
+         A semi-transparent image (<B>semitrans.gif</B>) is included in the
+         distribution.&nbsp; It can reside anywhere pointed to via this command
+         or its variable.<br>
+         Variable: ol_shadowimage
+         <br><br>
+         <b>SHADOWOPACITY</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Opacity of the shadow.',
+           CAPTION,'Parameter percentage');"
+          onmouseout="nd();">percentage</a></i><br>
+         Percentage for the opacity (default 60) of the shadow (100 is solid;
+         0 turns off the feature and thus also yields a solid shadow).&nbsp;
+         The opacity feature is handled for IE on PCs and for the versions of Gecko-engine,
+         Safari, Konqueror, and Opera browsers with opacity support.&nbsp; The shadow is
+         solid for the browser versions which lack opacity support.<br>
+         Variable: ol_shadowopacity<br>
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;7.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="bubble" id="bubble">Speech Bubbles</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="cellcontent">
+         <br>
+         Requires the <b>overlibmws_bubble.js</b> plugin module.<br>
+         <a
+          href="BUBBLE.html"
+          onmouseover="return overlib('Use of Speech Bubble Popups.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>.<br>
+        </td>
+       </tr>
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>BUBBLE</b><br>
+         Toggle for whether to show a speech bubble popup (default 0).<br>
+         Variable: ol_bubble<br>
+         Unconditional off: -BUBBLE
+         <br><br>
+         <b>BUBBLETYPE</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'flower, oval, square, pushpin, quotation, or roundcorners.',
+           CAPTION,'Parameter type of bubble image');"
+          onmouseout="nd();">type of bubble image</a></i><br>
+         Specifies a string value, giving the type of &quot;bubble&quot; image to display.&nbsp;
+         Default value is 'flower'.&nbsp; Other permissible values are 'oval', 'square,'
+         'pushpin,' 'quotation,' and 'roundcorners'.&nbsp; The latter bubbletype employs a
+         3 x 3 table with the outer cells filled with images (cornerTL.gif, edgeT.gif,
+         cornerTR.gif, edgeL.gif, edgeR.gif, cornerBL.gif, edgeB.gif, and cornerBR.gif), with
+         the actual content in the center cell, and with the edge images scaled to match that
+         content.&nbsp; These and the other bubble images must be placed in a directory that
+         can be specified via <strong>OLbubbleImageDir</strong> (see <b>Pre-Init String
+         Variables</b>, <em>below</em>).&nbsp; The default value is '<b>./</b>'); preloading
+         will occur automatically when the plugin is loaded.<br>
+         Variable: ol_bubbletype
+         <br><br>
+         <b>ADJBUBBLE</b><br>
+         Toggles whether the &quot;bubble&quot; image will be resized proportionally
+         (i.e., so that the aspect ratio [width/height] is held constant), according
+         to how much content is in the popup.&nbsp; Default value is off (0).&nbsp;
+         This command has no effect when BUBBLETYPE is 'roundcorners'.&nbsp; Use of
+         this command might cause popups to be displayed slowly, depending on your
+         machine's processor speed, and perhaps should be used cautiously.<br>
+         Variable: ol_adjbubble<br>
+         Unconditional off: -ADJBUBBLE
+         <br><br>
+         <b>RCBUBBLECOLOR</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Hex code or color name.',
+           CAPTION, 'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Specifies a string value, giving the color for the textual content of speech bubble
+         popups which have 'roundcorners' as their BUBBLETYPE parameter (see
+         <i>above</i>).&nbsp; Default value is '#ffffcc'.<br>
+         <a
+          href="BUBBLE_ddeeff.html"
+          onmouseover="return overlib('Use of RCBUBBLECOLOR.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_rcbubblecolor
+         <br><br>
+         <b>BUBBLECLOSE</b><br>
+         Toggles whether to block the normally automatic setting of NOCLOSE for bubble popups
+         that are sticky.&nbsp; Default value is off (0).&nbsp; Toggle BUBBLECLOSE on if the
+         popup content includes a close link that calls the cClick or cClick2 function for
+         primary or secondary popups, respectively (see the <a
+          href="#introduction"
+          onmouseover="return overlib('Jump above to &lt;b&gt;1. Introduction&lt;/b&gt;');"
+          onmouseout="nd();">Introduction</a>, <i>above</i>), and you wish to require that
+         it be used to close the bubble popup (i.e., without the popup also able to close via
+         a mouseoff).<br>
+         Variable: ol_bubbleclose<br>
+         Unconditional off: -BUBBLECLOSE
+         <br><br>
+         <b>Pre-Init String Variables:&nbsp; OLbubbleImageDir, OLbubbleImageSet,
+         OLbubbleImages, OLbubbleIMGsuffix, and OLbubbleRCsuffix</b><br>
+         These string variables can be defined in a script block placed in the document's
+         head before the block for importing the plugin module.&nbsp;
+         <b>OLbubbleImageDir</b> can be used to replace the default of '<b>./</b>'
+         for the directory where the bubble images are sought.&nbsp; For example, if it is
+         defined to '<b>/images</b>' they will be sought in a directory named <b>images</b>
+         off the account's root directory.&nbsp; <b>OLbubbleImageSet</b> is a
+         comma-separated list which defines
+         the BUBBLETYPE tokens for the full set of available bubble images.&nbsp; It defaults
+         to <b>'flower,oval,square,pushpin,quotation,roundcorners'</b> and can be
+         used to add tokens for any bubble images beyond those included in the <span
+         class="purple14">overlibmws</span> distribution.&nbsp; Note that all of the tokens for
+         <b>roundcorners</b> image sets must be last in the list and must begin with
+         those same 12 characters.&nbsp; <b>OLbubbleImages</b> can be
+         defined to a comma-separated list of bubble images that are actually used by popups
+         in the document (e.g., '<b>flower,roundcorners</b>' if only <b>flower.gif</b> and the
+         <b>roundcorners</b> image set are used), so that only those will be preloaded.&nbsp;  If not
+         defined, the entire set of bubble images will be pre-loaded (see
+         <b>BUBBLETYPE</b>, <em>above</em>).&nbsp; <b>OLbubbleIMGsuffix</b> can be
+         used to have a suffix added to the root name of non-roundcorners bubble images
+         (e.g., flower_<em>foo</em>.gif), and <b>OLbubbleRCsuffix</b> can be used
+          to do this for the roundcorners image set (e.g., cornerTL_<em>foo</em>.gif), which
+         will be sought when the standard BUBBLETYPE values are used.&nbsp; This makes it easy
+         to use images which have modifications such as the color of those from the
+         <span class="purple14">overlibmws</span> distribution, but without any changes in
+         their sizes.<br>
+         <a
+          href="BUBBLE_fcfeff.html"
+          onmouseover="return overlib('Use of pre-init string variables.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>
+         <br><br>
+         <b>Pre-Init Array Variables:&nbsp; OLimgWidth, OLimgHeight, OLcontentWidth,
+         OLcontentHeight, OLpadLeft, OLpadTop, OLarwTipX and OLarwTipY</b><br>
+         These array variables provide values for sizing the bubble images
+         and positioning content for the non-roundcorners bubbletypes, as explained in
+         <a
+          href="BUBBLE.html#section4"
+          onmouseover="return overlib('BUBBLE support document',
+           CAPTION,'Sections 4 and 5',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Sections&nbsp;4&nbsp;and&nbsp;5</a> of the BUBBLE support
+         document.&nbsp; If you add such bubbletypes beyond the five in the <span
+         class="purple14">overlibmws</span> distribution, you can copy the default array
+         definitions from near the top of the <b>overlibmws_bubble.js</b> plugin module,
+         add the values for your additional bubbletypes, and place the expanded definitions
+         in a script block before the block for importing that plugin module so that you need
+         not edit the module, itself, whenever it is updated.<br>
+         <a
+          href="BUBBLE_multicolor.html"
+          onmouseover="return overlib('Use of pre-init array variables.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>
+
+         <br><br>
+         <b>Commands that are Disabled for Speech Bubbles</b> include:
+         <ul>
+          <li>BGCOLOR, FGCOLOR, BORDER, BASE</li>
+          <li>BGBACKGROUND, CGBACKGROUND, FGBACKGROUND, BACKGROUND</li>
+          <li>CAPTION</li>
+          <li>FULLHTML</li>
+          <li>SHADOW</li>
+          <li>LEFT, CENTER (except for <em>roundcorners</em>)</li>
+          <li>ABOVE, VCENTER (except for <em>roundcorners</em>)</li>
+          <li>HAUTO, VAUTO (except for <em>roundcorners</em>)</li>
+          <li>WRAP, WIDTH (except for <em>roundcorners</em>)</li>
+         </ul>
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;8.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="filter" id="filter">Transform Filters</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="cellcontent">
+         <br>
+         Requires the <b>overlibmws_filter.js</b> plugin module.&nbsp; This feature set is
+         implemented primarily via the MS <a
+          name="msft" id="msft"
+          target="_blank"
+          href=
+       "http://msdn.microsoft.com/library/default.asp?url=/workshop/author/filter/filters.asp"
+          onmouseover="return overlib('Go to the Microsoft Filters and Transistions docs.');"
+          onmouseout="nd();">Filters and Transitions</a> for IE v5.5+ browsers on PCs.&nbsp;
+         Browsers which lack these filters or their equivalents show fully normal popups
+         but without the filter-based enhancements.&nbsp; A simple fadein/fadeout effect,
+         similar to transform filter <a
+          href="FILTER.html"
+          onmouseover="return overlib('Examples of Transform Filter popups.',
+           CAPTION,'Demonstration 1 (see type 25)',-AUTOSTATUSCAP);"
+          onmouseout="nd();">type&nbsp;25</a> is used for the other browsers which have
+         style-based opacity support (e.g., recent versions of Firefox and other Gecko-engine
+         browsers, Opera v9+, Safari, and Konqueror, or the old 4.0 and 5.0 versions of IE).<br>
+         <a
+          href="FILTER.html"
+          onmouseover="return overlib('Examples of Transform Filter popups.',
+           CAPTION,'Demonstration 1',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 1</a> (<em>all <b>seventy-one</b> links,
+          whew!!!!</em>).<br>
+         <a
+          href="./"
+          onmouseover="return overlib('Examples of Transform Filter popups.',
+           CAPTION,'Demonstration 2',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 2</a> (<em>several links</em>).<br>
+         <a
+          href="STICKY.html"
+          onmouseover="return overlib('Examples of Transform Filter popups.',
+           CAPTION,'Demonstration 3',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 3</a> (<em>most links</em>).<br>
+         <a
+          href="BKGRND.html"
+          onmouseover="return overlib('Examples of Transform Filter popups.',
+           CAPTION,'Demonstration 4',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 4</a> (<em>all 8 links</em>).<br>
+         <a
+          href="BUBBLE.html"
+          onmouseover="return overlib('Examples of Transform Filter popups.',
+           CAPTION,'Demonstration 5',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 5</a> (<em>all links except some Speech
+           Bubbles</em>).<br>
+         The FILTEROPACITY feature (<em>see below</em>) also is implemented for earlier
+         versions of IE and for non-IE browsers with opacity support.<br>
+        </td>
+       </tr>
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>FILTER</b><br>
+         Toggle for whether to use transform filters with the popup (default 0).&nbsp;
+         With the normal defaults, simply including the <b>FILTER</b> command
+         will yield both a fadein and complementary fadeout for the popup in IE v5.5+
+         browsers on PCs, with the fadein/fadeout type selected at random from among the
+         51 available types, or will yield the simple fadein/fadeout for the other browsers
+         with opacity support.&nbsp; For IE v5.5+ browsers it also will cause SHADOW to be
+         overridden or replaced by FILTERSHADOW (<em>see below</em>).<br>
+         Variable: ol_filter<br>
+         Unconditional off: -FILTER
+         <br><br>
+         <b>FADEIN</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'A number from 1 to 51, or 52 for random selection of type.',
+           CAPTION,'Parameter type of fade transform filter');"
+          onmouseout="nd();">type of fade transform filter</a></i><br>
+         Specifies a number from 1 to 51 for one of the 51 available fade
+         transform filter types, or 52 (the IE v5.5+ default) for random selections of
+         the type.&nbsp; Use 0 to disable the fadein but still allow the fadeout
+         and/or filter-based opacity and/or shadow features (<em>see below</em>).&nbsp;
+         The non-zero numbers all yield an emulation of 25 for the other browsers with
+         opacity support.<br>
+         Variable: ol_fadein
+         <br><br>
+         <b>FADEOUT</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'A number from 1 to 51, or 52 for random selection of type.',
+           CAPTION,'Parameter type of fade transform filter');"
+          onmouseout="nd();">type of fade transform filter</a></i><br>
+         Specifies a number from 1 to 51 for one of the 51 available fade
+         transform filter types, or 52 (the IE v5.5+ default) for random selections of
+         the type.&nbsp; Use 0 to disable the fadeout but still allow the fadein
+         and/or filter-based opacity and/or shadow features (<em>see below</em>).&nbsp;
+         For the other browsers with opacity support, the non-zero numbers all yield an
+         emulation of 25, or may be treated as 0 in some frame documents.<br>
+         Variable: ol_fadeout
+         <br><br>
+         <b>FADETIME</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Duration of the transform-filter-based fadein.',
+           CAPTION,'Parameter time in millisec');"
+          onmouseout="nd();">time in millisec</a></i><br>
+         Specifies a time in millisec (default 800) for the duration of the
+         FADEIN and/or FADEOUT.<br>
+         Variable: ol_fadetime
+         <br><br>
+         <b>FILTEROPACITY</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'A numer from 0 to 100.',
+           CAPTION,'Parameter filter-based opacity value');"
+          onmouseout="nd();">filter-based opacity value</a></i><br>
+         Specifies a number for the FILTER-toggled opacity applied to the entire popup.&nbsp;
+         The higher the number, the more opaque (less transparent), with 100 (the default)
+         representing solid (no transparency).  Note that the value 0, which logically
+         would make the popup invisible, instead is treated as 100 (no transparency).&nbsp;
+         This feature also is implemented for earlier versions of IE, and for the versions of
+         Firefox, Netscape v6/7+, Mozilla and other Gecko-engine browsers, Safari, Konqueror
+         and Opera with opacity support.<br>
+         Variable: ol_filteropacity
+         <br><br>
+         <b>FILTERSHADOW</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'The number 1 for a dropshadow or 2 for a tapered shadow (0 is off).',
+           CAPTION,'Parameter type of filter-based shadow');"
+          onmouseout="nd();">type of filter-based shadow</a></i><br>
+         Specifies a number for the type of filter-based shadow.&nbsp; The number 1
+         is for a dropshadow, and 2 is for a tapered shadow (0, the default, is for
+         no shadow).&nbsp; Note that the (drop)shadow feature via the
+         <b>overlibmws_shadow.js</b> plugin module is implemented
+         for all of the supported browsers, and includes commands for setting the size
+         and displacement of the shadow.&nbsp; The filter-based shadows are used
+         primarily for special effects during fadeins and/or fadeouts.&nbsp; Also note that
+         if both the SHADOW and FILTER commands are toggled on, for IE v5.5+ on PCs the
+         SHADOW command will be overridden by FILTERSHADOW (or replaced by FILTERSHADOW,2
+         if FILTERSHADOW was not included in the <b>overlib</b> or
+         <b>overlib2</b> call).&nbsp; Thus, including SHADOW, FILTER and
+         FILTERSHADOW commands in the call will yield shadows for all of the supported browsers,
+         plus FILTER-based fadein/fadeout effects for IE v5.5+ browsers on PCs and for the
+         other browsers which have style-based opacity support. <em>See</em> <a
+          href="#dropshadow"
+          onmouseover="return overlib('Jump above to &lt;b&gt;6. Dropshadow&lt;/b&gt;');"
+          onmouseout="nd();">Section 6</a> <em>for more information.</em><br>
+         Variable: ol_filtershadow
+         <br><br>
+         <b>FILTERSHADOWCOLOR</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Specifies a string with the hex code or name for the color of the filter-based
+         shadow.<br>
+         Variable: ol_filtershadowcolor<br>
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      &nbsp;&nbsp;9.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="print" id="print">Printing Popups</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="cellcontent">
+         <br>
+         Requires the <b>overlibmws_print.js</b> plugin module.<br>
+         <a
+          href="PRINT.html"
+          onmouseover="return overlib('Print link versus button',
+           CAPTION,'Demonstration 1',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 1</a> (<em>Use of a Print <b>link</b>
+         versus <b>button</b></em>)<br>
+         <a
+          href="DRAGGABLE.html"
+          onmouseover="return overlib('Printing standard, BACKGROUND, or FULLHTML Popups',
+           CAPTION,'Demonstration 2',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 2</a> (<em>Printing <b>standard</b>,
+         <b>BACKGROUND</b>, or <b>FULLHTML</b> Popups</em>)<br>
+         <a
+          href="PRINTJOB.html"
+          onmouseover="return overlib('Use of an external function',
+           CAPTION,'Demonstration 3',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration 3</a> (<em>Use of an <b>external
+         function</b> for formatting and printing</em>)<br>
+        </td>
+       </tr>
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>PRINT</b><br>
+         Toggle for whether to insert a Print link at right in the DHTML popup&#39;s
+         caption, or a Print button centered at the bottom of a captionless DHTML popup
+         (default 0, meaning that a Print link or button is not inserted).&nbsp;
+         Although DHTML popups cannot be printed directly, activating the inserted Print
+         link or button invokes a temporary window that displays the popup via equivalent
+         markup.&nbsp; That window is printed and then closed automatically (unless
+         NOAUTOPRINT is set to substitute manual printing and closing, <em>see
+         below</em>).&nbsp; This feature applies only to DHTML popups which are sticky,
+         such that the user can reach and activate the Print link or button.<br>
+         Variable: ol_print<br>
+         Unconditional off: -PRINT
+         <br><br>
+         <b>PRINTBUTTON</b><br>
+         Toggle for whether to force use of a Print button in the text area instead of a
+         Print link in the caption when the PRINT toggle is on (default 0, meaning that
+         a button is not forced).<br>
+         Variable: ol_printbutton<br>
+         Unconditional off: -PRINTBUTTON
+         <br><br>
+         <b>NOAUTOPRINT</b><br>
+         Toggle for whether to block the normally automatic printing and then closing of
+         the temporary printing window created via the Print link or button (default 0,
+         meaning the block is not applied).&nbsp; If the block is applied, an alert box
+         instructs the user to print and then close the temporary printing window
+         manually.&nbsp;  This feature is primarily for allowing clear inspection of the
+         printing window contents when initially setting up the printing for a popup.<br>
+         Variable: ol_noautoprint<br>
+         Unconditional off: -NOAUTOPRINT
+         <br><br>
+         <b>PRINTCOLOR</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Hex code or color name.',
+           CAPTION,'Parameter color');"
+          onmouseout="nd();">color</a></i><br>
+         Sets the color of the Print link text.&nbsp; Overridden by PRINTFONTCLASS<br>
+         (<em>Note that the Print button text always is black on a system-generated
+         button.</em>)<br>
+         Variable: ol_printcolor
+         <br><br>
+         <b>PRINTFONT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Names of fonts to use.',
+           CAPTION,'Parameter font');"
+          onmouseout="nd();">font</a></i><br>
+         Defines the font for the Print link text.&nbsp;
+         Overridden by PRINTFONTCLASS&nbsp;<br>
+         Variable: ol_printfont
+         <br><br>
+         <b>PRINTSIZE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Integer (1 - 7) or CSS font-size string for the font size.',
+           CAPTION,'Parameter size');"
+          onmouseout="nd();">size</a></i><br>
+         Size of the Print link text's font, normally expressed as an integer between 1
+         (default) and 7.&nbsp; Can instead make the parameter a (quoted) string with a <a
+          href="CSSfontSize.html"
+          onmouseover="return overlib(
+           'Compare CSS font-size string versus integer settings');"
+          onmouseout="nd();">CSS font-size</a> value and unit (e.g., '83%' or '14px').&nbsp;
+         Overridden by PRINTFONTCLASS<br>
+         Variable: ol_printsize
+         <br><br>
+         <b>PRINTTEXT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Text to show.',
+           CAPTION,'Parameter text');"
+          onmouseout="nd();">text</a></i><br>
+         Replaces the default 'Print' link text in stickies with something
+         else.&nbsp; The replacement can be plain text or inline HTML/XML markup suitable for
+         use as Anchor content, and can be an image (icon) if the markup uses an IMG
+         element.&nbsp; A Print icon (<B>print.gif</B>) is included in the distribution.<br>
+         <a
+          href="DRAGGABLE.html"
+          onmouseover="return overlib('Use of PRINTTEXT.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a><br>
+         Variable: ol_printtext         <br><br>
+         <b>PRINTBUTTONTEXT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('Text to show.',
+           CAPTION,'Parameter text');"
+          onmouseout="nd();">text</a></i><br>
+         Replaces the default 'Print' button text in the text area of stickies with something
+         else.&nbsp; The replacement must be plain text suitable for a system-generated button
+         (i.e., via an input tag with type="button").&nbsp; Normally this is changed only to
+         a word for 'Print' in a non-English language.<br>
+         Variable: ol_printbuttontext
+         <br><br>
+         <b>PRINTTITLE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string value of title attribute for '
+           +'&quot;Print&quot; link.', CAPTION, 'Parameter title attribute value');"
+          onmouseout="nd();">title attribute value</a></i><br>
+         Sets the text string value of the HTML/XML title attribute for the Print link or
+         button.&nbsp; The title attribute serves to invoke an OS tooltip when the curser
+         hovers over the link or button for browsers which implement such tooltips via
+         title attributes.&nbsp; Default value is 'Click to Print'.<br>
+         Variable: ol_printtitle
+         <br><br>
+         <b>PRINTFONTCLASS</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('string for a CSS class',
+           CAPTION,'Parameter class');"
+          onmouseout="nd();">class</a></i><br>
+         Class for the Print link.&nbsp;
+         Overrides ol_printcolor / PRINTCOLOR, ol_printfont / PRINTFONT, and
+         ol_printsize / PRINTSIZE.&nbsp; Use color, font-family, and font-size rules,
+         and any other appropriate rules for an anchor such as font-weight and
+         background-color, including for hover.&nbsp;
+         Also see <b>CLOSEFONTCLASS</b>, which is the homologous command for
+         the Close link when using <a
+          href="#cascading-style-sheets"
+          onmouseover="return overlib('Jump above to &lt;b&gt;5. Cascading Style '
+           +'Sheets&lt;/b&gt;');"
+          onmouseout="nd();">Cascading&nbsp;Style&nbsp;Sheets</a>.<br>
+         Variable: ol_printfontclass
+         <br><br>
+         <b>PRINTCSSFILE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('URL for a .css file',
+           CAPTION,'Parameter URL');"
+          onmouseout="nd();">URL</a></i><br>
+         A partial, relative, or complete URL for a <b>.css</b> file containing
+         all of the CSS rules that affect the styling of the popup.&nbsp; It is
+         placed in a:<br>
+         &nbsp;<b>&lt;link rel="stylesheet" type="text/css" href="URL"
+         /&gt;</b><br>
+         tag in the head section of the markup that is inserted into the temporary printing
+         window.&nbsp; The default is a null string (no URL between the open- and
+         close-quotes), which prevents the tag from being included in the markup. <em>It is
+         best to specify the same <b>.css</b> file as is used for the original
+         document.</em><br> 
+         Variable: ol_printcssfile
+         <br><br>
+         <b>PRINTXML</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('String for an xml tag',
+           CAPTION,'Parameter xml tag');"
+          onmouseout="nd();">xml tag</a></i><br>
+         String for an (optional) xml tag to be inserted at the top of the markup for the
+         temporary printing window.&nbsp; The default is a null string (nothing between the
+         open- and close-quotes), which prevents the tag from being included in the
+         markup.&nbsp; An example parameter for this command is:<br>
+         &nbsp;<b>'&lt;?xml version="1.0" encoding="utf-8"?&gt;'</b><br>
+         in which case you also should set PRINTCHARSET (<em>see below</em>) to 'utf-8'
+         and PRINTTYPE (<em>see below</em>) to the appropriate MIME type.<br>
+         Variable: ol_printxml
+         <br><br>
+         <b>PRINTDOCTYPE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('String for the DOCTYPE declaration',
+           CAPTION,'Parameter DOCTYPE declaration');"
+          onmouseout="nd();">DOCTYPE declaration</a></i><br>
+         String for the DOCTYPE declaration to be inserted at the top of the markup
+         (below the xml tag if one is used, <em>see above</em>) for the temporary
+         printing window.&nbsp; The default is:<br>
+         &nbsp;&nbsp;<b>'&lt!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01
+         Transitional//EN" '<br>
+         &nbsp;+'"http://www.w3.org/TR/html4/loose.dtd"&gt;'</b><br>
+         for HTML 4.01 with the loose (Transitional) DTD.&nbsp; Omit the URL if you need
+         to invoke "quirks" mode for the popular browsers.<br>
+         Variable: ol_printdoctype
+         <br><br>
+         <b>PRINTROOT</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('String for the root tag',
+           CAPTION,'Parameter root tag');"
+          onmouseout="nd();">root tag</a></i><br>
+         String for the root tag to be inserted after the DOCTYPE declaration
+         {<em>see above</em>) at the top of the markup for the temporary printing
+         window.&nbsp; The default is:<br>
+         &nbsp;<b>'&lt;html&gt;'</b><br>
+         An example alternative parameter for this command is:<br>
+         &nbsp;<b>'&lt;html lang="fa"&gt;'</b><br>
+         which indicates that the document&#39;s language is Farsi.<br>
+         Variable: ol_printroot
+         <br><br>
+         <b>PRINTTYPE</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('String for the MIME type',
+           CAPTION,'Parameter MIME type');"
+          onmouseout="nd();">MIME&nbsp;type</a></i><br>
+         String for the MIME type to be inserted within a meta tag in the head
+         section of the markup for the temporary printing window.&nbsp; The default
+         is <b>'text/html'</b> which together with the default PRINTCHARSET
+         (<em>see below</em>) yields:<br>
+         &nbsp;<b>&lt;meta http-equiv="Content-Type" content="text/html;
+         charset=iso-8859-1" /&gt;</b><br>
+         Variable: ol_printtype
+         <br><br>
+         <b>PRINTCHARSET</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('String for the charset',
+           CAPTION,'Parameter charset');"
+          onmouseout="nd();">charset</a></i><br>
+         String for the charset to be inserted within a meta tag in the head
+         section of the markup for the temporary printing window.&nbsp; The default
+         is <b>'iso-8859-1'</b> which together with the default PRINTTYPE
+         (<em>see above</em>) yields:<br>
+         &nbsp;<b>&lt;meta http-equiv="Content-Type" content="text/html;
+         charset=iso-8859-1" /&gt;</b><br>
+        Variable: ol_printcharset
+         <br><br>
+         <b>PRINTURL</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('URL for document to be printed',
+           CAPTION,'Parameter URL');"
+          onmouseout="nd();">URL</a></i><br>
+         A partial, relative, or complete URL for a document (file or server-side script)
+         to be printed via the temporary printing window.&nbsp; Typically this is the URL
+         for a document that was used as iframe or object content in the popup.&nbsp; It
+         also can be alternative content more suitable for printing than the displayed
+         DHTML popup content, e.g., if the DHTML popup was invoked with CSS-based scroll bars,
+         or if the caption of an iframe- or object-base DHTML popup needs to be reproduced
+         as a header in the printed document.&nbsp; Overrides PRINTJOB<br>
+         Variable: ol_printurl
+         <br><br>
+         <b>PRINTJOB</b><i> <a
+          href="javascript:void(0);"
+          onmouseover="return overlib('String with the function name, parens, and any '
+           +'arguments', CAPTION,'Parameter functionstring');"
+          onmouseout="nd();">functionstring</a></i><br>
+         String for an external function&#39;s name, parens and any arguments, e.g.:<br>
+         &nbsp;<b>'myPrintJob(myPrintTxt, myPrintCap)'</b><br>
+         to be used instead of the <span
+          style="color:purple;font-weight:bold;font-style:italic;
+          font-size:14px;">overlibmws</span> internal function for printing the popup
+         content via a temporary printing window.&nbsp; For considerations like those
+         associated with PRINTURL (<em>see above</em>) but via a client-side wrapper
+         script.&nbsp; Overridden by PRINTURL<br>
+         <a
+          href="PRINTJOB.html"
+          onmouseover="return overlib('Use of an external function',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a> (<em>Use of an <b>external
+         function</b> for formatting and printing.</em>)<br>
+         Variable: ol_printjob<br>
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+    <tr>
+     <td class="sectiontitle" valign="top">
+      10.
+     </td>
+     <td valign="top">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="sectiontitle">
+         <a
+          name="debug" id="debug">Debug Function</a>
+        </td>
+       </tr>
+      </table>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>OLshowProperties(<i>variable_label, variable, ...</i>)</b><br>
+         Requires the <b>overlibmws_debug.js</b> plugin module.
+         <br><br>
+         Uses its own positioned div container (layer):<br>
+         <span style="line-height:24px">&nbsp;&nbsp;&lt;div <b>id="showProps"</b>
+          style="position:absolute;visibility:hidden;"&gt;&lt;/div&gt;<br></span>
+         which will be created dynamically, i.e, need not be declared in the document,
+         but <b>showProps</b> should not be used as an <b>id</b> for another element.
+         <br><br>
+         The function can be inserted into a position within a debug copy of your
+         overlibmws.js core module or of a plugin module to report the values of the
+         indicated variable or variables whenever that position in the code is reached
+         at run time.&nbsp;
+         You also can insert the function into multiple positions, and include a lead
+         argument (before the <i>variable_label,variable</i> pairs) that indicates a
+         unique <b>id</b> for each additional debug display layer which is thereby to be
+         created.&nbsp; These additional debug display layers also will be created
+         dynamically and need not be declared explicitly in the body of the document.&nbsp;
+         The container's <b>id</b> value string is displayed as a link at upper left in the
+         layer, and when multiple debug layers are displayed, can be used to cycle
+         through the layers with respect to which layer is displayed on top.&nbsp;
+         The debug layer displays also have a close button labeled <b>X</b> at upper right,
+         for casting the layer to hidden.&nbsp;
+         Once a debug layer has been cast to hidden, it will remain hidden unless it is
+         cast to visible again via the ALLOWDEBUG command or its configuration variable.<br>
+         <a
+          href="DEBUG.html"
+          onmouseover="return overlib('Use of Debug Function.',
+           CAPTION,'Demonstration',-AUTOSTATUSCAP);"
+          onmouseout="nd();">Demonstration</a>.<br>
+        </td>
+       </tr>
+       <tr>
+        <td class="cellcontent">
+         <br>
+         <b>ALLOWDEBUG</b> <i><a
+          href="javascript:void(0);"
+          onmouseover="return overlib(
+           'Debug layer &lt;b&gt;id&lt;/b&gt; or comma-separated list of debug layer '
+           +'&lt;b&gt;id&lt;/b&gt;s.',
+           CAPTION,'Parameter debugID(s)');"
+          onmouseout="nd();">debugID(s)</a></i><br>
+         Specifies a string value with the <b>id</b> of a debug layer or a comma-separated
+         list of debug layer <b>id</b>s (default is the null string, "").&nbsp
+         When the string value is non-null and points to valid <b>id</b>(s), the corresponding
+         debug layer(s) that was(were) made hidden via the debug layer close button at
+         upper right can be made visible again when an overlib call which can invoke
+         the debug layer(s) is made again.&nbsp;
+         Such layers can be made hidden again via their close link.&nbsp;
+         The string value can be set on the command line, via the configuration
+         variable, or via the OLpageDefaults() configuration function.<br>
+         Variable: ol_allowdebug<br>
+        </td>
+       </tr>
+       <tr>
+        <td class="cellcontent">
+         <br>
+         Note that a function set (<b>OLhtmlspecialchars</b>, <b>OLshowMarkup</b>,
+         <b>OLoverHTMLshow</b>, <b>OLover2HTMLshow</b> and <b>OLresponseAJAXshow</b>) in the
+         <a
+          href="AJAX.html#htmlspecialcharsmws"
+          onmouseover="return overlib('See examples with the '
+           +'&lt;b&gt;htmlspecialcharsmws.js&lt;/b&gt; support script',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();">htmlspecialcharsmws.js</a> support script can be used to see the
+         markup which the core and/or plugin modules are creating, or which the browser is
+         loading based on that markup, and thereby may also assist you in debugging.&nbsp;
+         Furthermore, its <b>OLhtmlspecialchars(</b><em>str</em>, <em>quo</em><b>)</b>
+         function, which performs the equivalent of the <b>php</b> <a
+          href="http://us2.php.net/manual/en/function.htmlspecialchars.php"
+          target="_blank"
+          onmouseover="return overlib('Review the specification for the '
+           +'&lt;strong&gt;htmlspecialchars&lt;\/strong&gt; function',
+           HAUTO,OFFSETY,10);"
+          onmouseout="nd();"
+         >htmlspecialchars</a><b>(</b><em>string</em>, <em>quote_style</em><b>)</b>
+         function for converting special characters to HTML entities in HTML or XHTML
+         fragments, can be used to make such fragments be displayed as their raw markup via
+         the <b>OLshowProperties</b> function. 
+        </td>
+       </tr>
+      </table>
+      <br>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="cellcontent" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     ABOVE,CENTER,OFFSETY,16,FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+    ABOVE,CENTER,OFFSETY,16,FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center"  valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the &lt;span '
+     +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;\/i&gt;&lt;\/span&gt; '
+     +'shopping via this link&lt;br&gt;(with &lt;strong&gt;no&lt;\/strong&gt; '
+     +'extra costs to you).',
+     CAPTION,'Promote via Amazon', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazonbot',REFP,'UR',REFX,-5,REFY,-35);"
+    onmouseout="nd();">
+   <img
+    name="amazonbot" id="amazonbot"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="cellcontent">
+   <a
+    name="bottom" id="bottom"
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     REF,'logobot',REFX,95,REFY,1,FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logobot' id="logobot"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="cellcontent">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',
+     CAPTION,'Donate via PayPal',CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     TEXTPADDING,8,FGCOLOR,'#bbddff',
+     REF,'logobot',REFC,'UL',REFP,'LL',REFY,-5);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    title="Click to Donate" alt="Click to Donate"></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="cellcontent">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',
+     REF,'w3cbot',REFP,'UR',REFX,-5,REFY,4,FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3cbot" id="w3cbot"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+
+<script type="text/javascript">
+<!--
+meyersv2a = new Image();
+meyersv2a.src = "meyersv2a.jpg"
+//-->
+</script>
+<script type="text/javascript" src="../script/ga.js"></script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='commandRef.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

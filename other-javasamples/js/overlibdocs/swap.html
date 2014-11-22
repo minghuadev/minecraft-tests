@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustration of color swapping in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Group Color Swaps for Anchors via overlibmws Pop-up</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(WRAP,BASE,2,CAPTIONPADDING,4,TEXTPADDING,4);
+
+// Swap Link String colors
+function swap(fromClass, toClass, nameStr) {
+ if (document.getElementsByTagName) {
+  var aL  = swap.arguments.length
+  var alA = document.getElementsByTagName("A");
+  if (alA.length) {
+   if (aL < 3) {
+    for (var i=0; i<alA.length; i++)
+     if (alA[i].className == fromClass) alA[i].className = toClass;
+   } else {
+    for (var i=0; i<alA.length; i++)
+     if (alA[i].getAttribute('NAME') == nameStr) alA[i].className = toClass;
+   }
+  }
+ }
+}
+
+var stickyText =
+ '<div'+
+ ' align=center>Here are links to Home Pages<br><br><a'+
+ ' class="atp"'+
+ ' title="Visit the Adhesive Theater Project"'+
+ ' onMouseOver="swap(\'atpabo\',\'atpaborev\');swap(\'atpsta\',\'atpstarev\');'+
+ 'swap(\'atpcon\',\'atpconrev\');swap(\'atpbio\',\'atpbiorev\')"'+
+ ' onMouseOut="swap(\'atpaborev\',\'atpabo\');swap(\'atpstarev\',\'atpsta\');'+
+ 'swap(\'atpconrev\',\'atpcon\');swap(\'atpbiorev\',\'atpbio\');"'+
+ ' href="http://www.adhesivetheater.com/"><b>Adhesive Theater Project<\/b><\/a><br><br><a'+
+ ' class="rsy"'+
+ ' title="Visit Ravi Singh Yoga"'+
+ ' onMouseOver="swap(\'rsyabo\',\'rsyaborev\');swap(\'rsyyog\',\'rsyyogrev\');'+
+ 'swap(\'rsytea\',\'rsytearev\');swap(\'rsyloc\',\'rsylocrev\')"'+
+ ' onMouseOut="swap(\'rsyaborev\',\'rsyabo\');swap(\'rsyyogrev\',\'rsyyog\');'+
+ 'swap(\'rsytearev\',\'rsytea\');swap(\'rsylocrev\',\'rsyloc\');"'+
+ ' href="http://www.raviyoga.com/"><b>Ravi Singh Yoga<\/b><\/a><br><br><\/div>';
+var stickyCaption = '<div align=center>STICKY Pop-up with links&nbsp;<\/div>';
+// -->
+</script>
+
+<style type="text/css">
+<!--
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff}
+
+a.atp {color:#339999;font-weight:bold;}
+a.atp:hover {color:#ff7711;}
+
+a.rsy {color:#a0a000;font-weight:bold;}
+a.rsy:hover {color:#ff3333;}
+
+a.atpabo {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#66cccc;}
+a.atpabo:hover {color:#ff7711;}
+
+a.atpsta {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#bf8abf;}
+a.atpsta:hover {color: #ff7711;}
+
+a.atpcon {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#99cc99;}
+a.atpcon:hover {color:#ff7711;}
+
+a.atpbio {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#dddd00;}
+a.atpbio:hover {color:#ff7711;}
+
+a.atpaborev {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#ff7711;}
+a.atpaborev:hover {color:#ff7711;}
+
+a.atpstarev {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#ff7711;}
+a.atpstarev:hover {color:#ff7711;}
+
+a.atpconrev {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#ff7711;}
+a.atpconrev:hover {color:#ff7711;}
+
+a.atpbiorev {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#ff7711;}
+a.atpbiorev:hover {color:#ff7711;}
+
+a.rsyabo {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#b0b000;}
+a.rsyabo:hover {color:#ff3333;}
+
+a.rsyyog {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#66ccff;}
+a.rsyyog:hover {color:#ff3333;}
+
+a.rsytea {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#848f00;}
+a.rsytea:hover {color:#ff3333;}
+
+a.rsyloc {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#567f8e;}
+a.rsyloc:hover {color:#ff3333;}
+
+a.rsyaborev {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#ff3333;}
+a.rsyaborev:hover {color:#ff3333;}
+
+a.rsyyogrev {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#ff3333;}
+a.rsyyogrev:hover {color:#ff3333;}
+
+a.rsytearev {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#ff3333;}
+a.rsytearev:hover {color:#ff3333;}
+
+a.rsylocrev {
+      font-family:'Times New Roman',Helvetica,Arial;
+        font-size:22px;
+      font-weight:bold;
+      line-height:26px;
+  text-decoration:none;
+            color:#ff3333;}
+a.rsylocrev:hover {color:#ff3333;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text12 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.text14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head> 
+
+<body text="#220022" bgcolor="#ddeeff">
+
+<table align="center" width="75%" cellpadding="5" cellspacing="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText" colspan="3">
+   <span class="myHeader"><strong>Example of Color Swapping</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     VAUTO, OFFSETX,-16, OFFSETY,20, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send browser-based e-mail to Fote.',
+     TEXTPADDING,6,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20, FGCOLOR,'#bbddff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss this example, seek help, and offer suggestions for<br>
+   color swapping support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="left" valign="middle" colspan="3">
+   This link has an example of the
+   <a
+    href="javascript:void(0);"
+    onmouseover="return overlib(stickyText,
+     CAPTION,stickyCaption,
+     STICKY,MIDX,-30,RELY,15,CLOSECOLOR,'#33ff33', FGCOLOR,'#bbddff',
+     BASE,3,STATUS,'STICKY Pop-up with links');"
+    onmouseout="return nd();">STICKY</a> command with links inside the popup that
+   swap the text string colors of related links in the main page (for browsers which
+   support "hover").
+   <br><br>
+  </td>
+ </tr> 
+ <tr> 
+  <td align="left" valign="middle">
+   <a
+    class="atpabo"
+    href="http://www.adhesivetheater.com/about/about.html"
+    title="About the Adhesive Theater Project">About Us</a><br>
+   <a
+    class="atpsta"
+    href="http://www.adhesivetheater.com/stage/stage.html"
+    title="Adhesive Theater Stage Projects">Theater Projects</a><br>
+   <a
+    class="atpcon"
+    href="http://www.adhesivetheater.com/contact/contact.html"
+    title="Contact Adhesive Theater Project Officers">Contact</a><br>
+   <a
+    class="atpbio"
+    href="http://www.adhesivetheater.com/bio/BioOfficers.html"
+    title="Adhesive Theater Project Biographies">Biographies</a><br>
+  </td>
+  <td width="150">
+   &nbsp;<br>
+  </td>
+  <td align="left" valign="middle">
+   <a
+    class="rsyabo"
+    href="http://www.raviyoga.com/aboutravi.htm"
+    title="Information About Ravi Singh">About Ravi</a><br>
+   <a
+    class="rsyyog"
+    href="http://www.raviyoga.com/about.htm"
+    title="...to be the best that we can be">About Kundalini</a><br>
+   <a
+    class="rsytea"
+    href="http://www.raviyoga.com/training.htm"
+    title="Kundalini Yoga Teachers' Training">Teachers' Training</a><br>
+   <a
+    class="rsyloc"
+    href="http://www.raviyoga.com/contact.htm"
+    title="RSY Location and Contact Information">Location</a><br>
+  </td>
+ </tr> 
+</table>
+<p align="center">
+ <span style="font-family: Verdana, Arial, sans-serif; font-size: 13px;"><em>Use
+ your browser's</em> <b>View Source</b> <em>option<br>
+ to see the markup for this example.</em>
+ <br><br>
+ <b>This example uses <a
+  href="./"
+  onmouseover="return overlib('Go to the '
+   +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+   +'Download and Test Directory.', FGCOLOR,'#bbddff',
+   CENTER,ABOVE,TEXTFONTCLASS,'myText');"
+  onmouseout="nd();">overlibmws</a> and its <a
+  href="commandRef.html"
+  onmouseover="return overlib('See the '
+   +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+   +'Command Reference.', FGCOLOR,'#bbddff',
+   CENTER,ABOVE,TEXTFONTCLASS,'myText');"
+  onmouseout="nd();">commands</a>.</b></span>
+</p>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     VCENTER,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-60,REFY,-10,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0" alt="" hspace="10"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='swap.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

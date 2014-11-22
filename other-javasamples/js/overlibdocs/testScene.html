@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrates frame handling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Scene Frame in overlibmws</title>
+
+<script type="text/javascript">
+<!--
+if(parent==self)location.replace('testFrame.html');
+// -->
+</script>
+
+<script type="text/javascript" src="flashWindowBanner.js"></script>
+
+<script type="text/javascript" src="overlibmws_regCore.js"></script>
+
+<script type="text/javascript">
+<!--
+OLregisterPlugins('crossframe','iframe','hide','shadow');
+
+overlib=parent.overlib;
+nd=parent.nd;
+
+if (typeof window.createPopup!='undefined') {
+var oPopup = window.createPopup();
+var oPopupBody = oPopup.document.body;
+oPopupBody.style.backgroundColor = "#ccccff";
+oPopupBody.style.border = "solid blue 1px";
+}
+
+function RelxyShow(theFrame)
+{
+ if (typeof window.createPopup=='undefined') return;
+ var RELX=20, RELY=17, Width=142, Height=237, theObj=theFrame.document.body;
+ oPopupBody.innerHTML=
+  '<img src="capicon.gif" width=140 height=235 alt="Test Image" border=0>'; 
+ oPopup.show(RELX, RELY, Width, Height, theObj);
+}
+
+function RelxyHide()
+{
+ if (typeof window.createPopup=='undefined') return;
+ oPopup.hide();
+}
+
+capicon=new Image();
+capicon.src="capicon.gif";
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.text10 {font-family:Verdana,Arial,sans-serif; font-size:10px; color:#000000;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px; color:#000000;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px; color:#000000;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px; color:#000000;}
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+-->
+</style> 
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000"></div>
+<div id="backdrop" style="position:absolute; visibility:hidden; z-index:1000"></div>
+
+<div id="flashDiv" style="position:relative; z-index:1">
+ <script type="text/javascript">
+ <!--
+  flashBanner();
+ //-->
+ </script>
+</div>
+
+<p align="center" class="text10">
+ <span class="text18"><b>overlib popups:</b></span>
+ &nbsp;<br>
+ <span class="text14">
+ <a
+  href="javascript:void(0);"
+  onmouseover="return overlib('&lt;img src=&quot;capicon.gif&quot; '
+   +'width=140 height=235 alt=&quot;Test Image&quot; border=0&gt;',
+   RELX, 20, RELY, 17, WIDTH, 140, FRAME, parent.scene,
+   HIDEBYIDALL,'flashDiv',
+   SHADOW, SHADOWCOLOR,'#cf33cf');"
+  onmouseout="nd();">Pop Me This Frame</a>
+ <br><br>
+ <a
+  name="ifshim" id="ifshim"
+  href="javascript:void(0);"
+  onmouseover="return overlib('&lt;img src=&quot;capicon.gif&quot; '
+   +'width=140 height=235 alt=&quot;Test Image&quot; border=0&gt;',
+   RELX, 20, RELY, 17, WIDTH, 140, FRAME, parent.menu,
+   HIDESELECTBOXES, HIDEBYIDNS4,'formDiv',
+   SHADOW, SHADOWCOLOR,'#cf33cf');"
+  onmouseout="nd();">Pop Me Cross Frame</a>
+ </span>
+</p>
+
+<table width="98%" cellspacing="0" cellpadding="0" border="0" align="center"> 
+ <tr>
+  <td class="text12">
+   Plugin module <strong>overlibmws_iframe.js</strong> is being used to
+   prevent obscuring of overlib popups for IE v5.5 or higher via an <a
+    target="_top"
+    href="IframeShim.html"
+    onmouseover="return overlib('Go to the iframe shim article.',
+     WRAP, REF,'ifshim',REFX,-16,REFY,18, BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', FRAME,parent.scene);"
+    onmouseout="nd();">iframe shim</a> (as opposed to <a
+    target="_top"
+    href="IFRAME.html"
+    onmouseover="return overlib('See an example of iframe as popup content.',
+     WRAP, REF,'ifshim',REFX,-63,REFY,18, BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', FRAME,parent.scene);"
+    onmouseout="nd();">iframe content</a>).&nbsp; For other old versions of browsers that
+   need it, plugin module <strong>overlibmws_hide.js</strong> also is imported and
+   its <strong>HIDESELECTBOXES</strong> and <strong>HIDEBYIDNS4</strong> commands are used
+   to hide and restore the form element if needed in conjunction with display and removal
+   of the popup in the cross frame, whereas its <strong>HIDEBYIDALL</strong> command is
+   used to hide the system control (flash object) in this frame.&nbsp; <strong>Also
+   see</strong> examples with <a
+    name="nest" id="nest"
+    target="_top"
+    href="CrossFrame/"
+    onmouseover="return overlib(
+     'See use of iframe shims or hide features across nested framesets.',
+     WRAP, REF,'nest',REFP,'LR',REFX,50, BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', FRAME,parent.scene);"
+    onmouseout="nd();">nested</a> framesets, as well as an example which deals with the flash
+   object by setting its <a
+    name="wm" id="wm"
+    target="_top"
+    href="flashWmode.html"
+    onmouseover="return overlib(
+     'See use of wmode in flash objects.',
+     WRAP, REF,'wm',REFP,'LL',REFX,-5, BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', FRAME,parent.scene);"
+    onmouseout="nd();">wmode</a> to <em>transparent</em>.<br>
+  </td>
+ </tr>
+</table>
+
+<p align="center" class="text10">
+ <span class="text14"><b>(for IE 5.5 or higher only)</b><br></span>
+ <span class="text18"><b>window.createPopup:</b></span>
+ <span class="text10"><br></span>
+ <span class="text14">
+ <a
+  href="JavaScript:void(0);"
+  onmouseover="RelxyShow(parent.scene);"
+  onmouseout="RelxyHide();">Create Me This Frame</a>
+ <br><br>
+ <a
+  href="JavaScript:void(0);"
+  onmouseover="RelxyShow(parent.menu);"
+  onmouseout="RelxyHide();">Create Me Cross Frame</a>
+  </span>
+</p>
+
+<table width="98%" cellspacing="0" cellpadding="0" border="0" align="center"> 
+ <tr>
+  <td class="text12">
+   The window.createPopup method was developed by Microsoft for creating popup
+   windows with DHTML functionality but not subject to being obscured by any form
+   elements or by objects with system controls.&nbsp; The method is restricted to IE
+   v5.5 or higher.&nbsp;  The <strong>overlibmws_iframe.js</strong> plugin module is
+   equally effective for overlib popups, but has the same browser and version
+   restriction.
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    target="_top"
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'logo',REFX,97,REFY,-3,BASE,2,TEXTPADDING,4,TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf',FRAME,parent.scene);"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,TEXTFONTCLASS,'text12',FGCOLOR,'#bbddff',
+     WRAP,BASE,2,REF,'logo',REFP,'LL',REFX,-60,REFY,-5,FRAME,parent.scene);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0" alt="" hspace="10"></a><br>
+  </td>
+ </tr>
+</table>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='testScene.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, modal, confirm dialog, DHTML popups, DHTML tooltips, DHTML, popups, tooltips, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of MODAL and Confirm Dialog popups in Macrides Web Services open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB -  MODAL and Confirm Dialog examples in overlibmws</title>
+
+<script type="text/javascript" src="ajaxcontentmws.js"></script>
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_modal.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_scroll.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<style type="text/css">
+<!--
+/*
+ * For the dialog popups
+ */
+.olbgD {background-color:#225588;}
+.olcgD {background-color:#336699; text-align:center;}
+.olfgD {background-color:#bbddff; text-align:center;}
+.olcapD {font-family:Verdana,Arial,Helvetica,sans-serif; font-size:11px;
+ font-weight:bold; color:#ffffff;}
+.olcloD {font-family:Verdana,Arial,Helvetica,sans-serif; font-size:11px;
+ color:#bbddff; font-weight:bold;}
+a.olcloD:hover { color:#ddeeff;}
+.oltxtD {font-family:Verdana,Arial,Helvetica,sans-serif; font-size:13px;
+ color:#000000;}
+.sep4 {font-size:4px;line-height:4px;}
+
+/*
+ * For popup with MODAL form
+ */
+.olraisedBlue {text-align:center;
+ background:#33aaff url(raised_blue.gif) repeat-x bottom left;}
+table.olraisedBlue {border-bottom:1px solid #333399;}
+.oltxtRaisedBlue {font-family:Verdana;font-size:14px;font-weight:bold;color:#ffffff;}
+input.olinput {background:white url(inputText.gif) repeat-x bottom left; min-height:16px;
+ font-family:Verdana,Arial,Helvetica,sans-serif; font-size:13px;color: #000000;}
+
+/*
+ * For this document
+ */
+body {
+ margin:20px;
+ font-family:Verdana,Arial,Helvetica,sans-serif;
+ font-size:13px;
+ background-color:#ddeeff;
+ color:#000000;
+}
+.olbg {background-color:#333399;}
+.olbgG {background-color:#002200;}
+.olbgB {background-color:#112288;}
+.olcg {background-color:#aa00aa; text-align:center;}
+.olcgG {background-color:#004400; text-align:center;}
+.olcgB {background-color:#333399; text-align:center;}
+.olfg {background-color:#ffffcc; text-align:center;}
+.olfgG {background-color:#bbffdd; text-align:center;}
+.olfgB {background-color:#bbddff; text-align:center;}
+.olcap {font-family:Arial; font-size:12px; font-weight:bold; color:#ffffff;}
+a.olclo {font-family:Verdana; font-size:11px; font-weight:bold; color:#ddddff;}
+a.olclo:hover {color:#ffffff;}
+.oltxt {font-family:Arial; font-size:12px; color:#000000;}
+.olinline {display:inline;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text16 {font-family:Verdana,Arial,sans-serif; font-size:16px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+
+.myHeader {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;}
+.mySubHead {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;}
+.mySpacer {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+.hr3 {width:100%; height:3px; border-style:solid;
+ background-color:#000099; color:#000099;}
+.salmon {background-color:#ddddee;}
+.yellow {color:#ffff00;}
+.red {color:#cc0000;}
+.blue {color:#0000cc;}
+-->
+</style>
+
+<!--Interface to overlibmws_modal.js  -->
+<script type="text/javascript">
+<!--
+var myQ='Format the hard disk?', myCap='Answer this Question';
+
+function myConfirmDialogBox(q, yes, no, caption){
+ q=(q||''); yes=(yes||''); no=(no||''); caption=(caption||'');
+ var myConfirmDialog=q
+  +(OLns4?'<form action="javascript:void(0);">':'')
+  +'<div class="sep4">&nbsp;<br><\/div>'
+  +'<input type="submit" '
+  +'onclick="cClick();'+yes
+  +';return false;" value=" Yes ">&nbsp;&nbsp;'
+  +'<input type="submit" '
+  +'onclick="cClick();'+no
+  +';return false;" value=" No ">'
+  +(OLns4?'<\/form>':'');
+ /*
+  * Modify the styling appropriately for your site
+  */
+ overlib(myConfirmDialog,
+  caption?CAPTION:DONOTHING, caption?caption:DONOTHING, CLOSETEXT,'',
+  CAPTIONPADDING,4, TEXTPADDING,10, BGCLASS,'olbgD',
+  CGCLASS,'olcgD', CAPTIONFONTCLASS,'olcapD', CLOSEFONTCLASS,'olcloD',
+  FGCLASS,'olfgD', TEXTFONTCLASS,'oltxtD',
+  SHADOW, SHADOWCOLOR,'#113377', SHADOWOPACITY,40,
+  WRAP, STICKY, MODAL, MIDX,0, MIDY,0);
+}
+
+function myYes(){
+ /*
+  * Supplement the overlib call with whatever you want a Yes response to do
+  */
+ overlib('You are very brave!', CAPTION,'"Yes" Response', CLOSECLICK,
+  CAPTIONPADDING,4, TEXTPADDING,10, BGCLASS,'olbgD',
+  CGCLASS,'olcgD', CAPTIONFONTCLASS,'olcapD', CLOSEFONTCLASS,'olcloD',
+  FGCLASS,'olfgD', TEXTFONTCLASS,'oltxtD',
+  SHADOW, SHADOWCOLOR,'#113377', SHADOWOPACITY,40,
+  WRAP, STICKY, MODAL, MODALCLICK, MIDX,0, MIDY,0);
+ // Do something if OK
+}
+
+function myNo(){
+ /*
+  * Supplement the overlib call with whatever you want a No response to do
+  */
+ overlib('A wise decision!', CAPTION,'"No" Response', CLOSECLICK,
+  CAPTIONPADDING,4, TEXTPADDING,10, BGCLASS,'olbgD',
+  CGCLASS,'olcgD', CAPTIONFONTCLASS,'olcapD', CLOSEFONTCLASS,'olcloD',
+  FGCLASS,'olfgD', TEXTFONTCLASS,'oltxtD',
+  SHADOW, SHADOWCOLOR,'#113377', SHADOWOPACITY,40,
+  WRAP, STICKY, MODAL, MODALCLICK, MIDX,0, MIDY,0);
+ // Do something else (or nothing) if not OK
+}
+
+/*
+ * Default styles for other popups in this document
+ */
+OLpageDefaults(BGCLASS,'olbg', CGCLASS,'olcg', FGCLASS,'olfg',
+ CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo', TEXTFONTCLASS,'oltxt');
+
+/*
+ * Popup for Email
+ */
+function olmail(){
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+
+/*
+ * For popups with info about shield
+ */
+var shield='The overlib function call for this popup<br>includes the commands:'
++'<div class="sep4">&nbsp;<\/div>MODALCOLOR,\'#00bb00\', MODALOPACITY,70'
++'<div class="sep4">&nbsp;<\/div>See the <a href="commandRef.html#modal" onmouseover="return '
++'overlib2(\'See the MODAL section of the Command Reference\', WRAP, BASE,2);" '
++'onmouseout="nd2();">Command Reference<\/a> for more information.';
+
+function modalShield(){
+ return overlib(OLresponseAJAX, CAPTION,'This is a MODAL popup.', STICKY, CLOSECLICK,
+  WRAP, BASE,2, MIDX,0, RELY,20, NOJUSTY, TEXTPADDING,8, BGCLASS,'olbgB', CGCLASS,'olcgB',
+  FGCLASS,'olfgB', MODAL, MODALSCROLL, MODALCOLOR,'#4488dd', MODALOPACITY,60);
+}
+
+function modalClick(){
+ return overlib(OLresponseAJAX, CAPTION,'This is a MODAL popup.', STICKY, CLOSECLICK,
+  WRAP, BASE,2, MIDX,0, RELY,20, NOJUSTY, TEXTPADDING,8, BGCLASS,'olbgB', CGCLASS,'olcgB',
+  FGCLASS,'olfgB', MODAL, MODALCLICK, MODALCOLOR,'#4488dd', MODALOPACITY,60, MODALSCROLL);
+}
+
+/*
+ * For popup with MODAL form
+ */
+var myModalForm=
+ '<form class="olinline" name="modalform" id="modalform" '
++'enctype="x-www-form-encoded" method="post" '
++'action="http://www.macridesweb.com/cgi/modalform.cgi" target="olMODALform">'
++'<label for="ta"><em>Textarea:<\/em><\/label><br>'
++'<textarea name="ta" id="ta" rows="4" cols="55" class="oltxtD" '
++'onfocus="OLmEdit=1;" onblur="OLmEdit=0;"><\/textarea>'
++'<br><br>'
++'<label for="ti"><em>Text Input:<\/em><\/label><br>'
++'<input type="text" name="ti" id="ti" value="" size="55" maxlength="255" class="olinput" '
++'onfocus="OLmEdit=1;" onblur="OLmEdit=0;">'
++'<br><br>'
++'<input type="submit" value="Submit">'
++'<\/form>'
+
+var closeimgBlue =
+ '<img src="exit_blue.gif" alt="Close" width="14" height="15" border="0" '
++'name="blueExit" id="blueExit" '
++'onmouseover="document.blueExit.src=myExitMetallic.src" '
++'onmouseout="document.blueExit.src=myExitBlue.src">';
+
+var myRaisedBlue = new Image();
+myRaisedBlue.src = "raised_blue.gif";
+var myExitBlue = new Image();
+myExitBlue.src = "exit_blue.gif";
+var myExitMetallic = new Image();
+myExitMetallic.src = "exit_metallic.gif";
+var myInputText = new Image();
+myInputText.src = "inputText.gif"
+//-->
+</script>
+</head>
+
+<body>
+<table width="100%" cellpadding="2" cellspacing="0" border="0"> 
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Examples of MODAL</strong></span>
+   <span class="mySubHead"><strong><em>and</em></strong></span>
+   <span class="myHeader"><strong>Confirm Dialog popups</strong></span><br>
+   <span class="mySubHead"><strong><em>with the</em></strong></span>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,OFFSETX,-10,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText',
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20,
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for MODAL support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle">
+   <!--********************
+         EXAMPLES SECTION
+       ********************-->
+   <table width="610" cellpadding="2" cellspacing="0"> 
+    <tr> 
+     <td align="left" class="text12">
+      <hr class="hr3">
+      <strong>Question:</strong> How do I generate a <strong>Yes/No confirm dialog</strong>
+      as a DHTML popup?
+      <br><br>
+      <strong>Answer:</strong> Try a function such as
+      <strong>myConfirmDialogBox(<span class="blue">q</span>,<span
+      class="blue">yes</span>,<span class="blue">no</span>,<span
+      class="blue">caption</span>)</strong>:
+     </td>
+    </tr>
+    <tr> 
+     <td align="center" class="text14">
+      <br>
+      <!--
+           Invoke a dialog popups
+        -->
+      <em>Invoke a</em>
+      <a
+       onmouseover="return overlib('Invoke a MODAL dialog popup',
+        WRAP, BASE,2, TEXTPADDING,4, HAUTO, VAUTO);"
+       onmouseout="nd();"
+       onclick="myConfirmDialogBox(myQ,'myYes()','myNo()',myCap,true);
+        return false;"
+       href="javascript:void(0);">MODAL dialog</a> <em>popup</em>
+     </td>
+    </tr>
+    <tr>
+     <td align="left" class="text12">
+      <br>
+      <strong>The preceding link was created by using the following markup:</strong>
+      <!--
+           Show markup for invoking the dialog popups
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       <code>&lt;em&gt;Invoke a&lt;/em&gt; &lt;a<br>
+       &nbsp;onmouseover="return overlib('Invoke a MODAL dialog popup',<br>
+       &nbsp;WRAP, BASE,2, TEXTPADDING,4, HAUTO, VAUTO);"<br>
+       &nbsp;onmouseout="nd();"<br>
+       &nbsp;onclick="<strong>myConfirmDialogBox(<span class="blue">myQ</span>,<span
+       class="blue">'myYes()'</span>,<span class="blue">'myNo()'</span>,<span
+       class="blue">myCap</span>)</strong>; return false;"<br>
+       &nbsp;href="javascript:void(0);"&gt;MODAL dialog&lt;/a&gt;
+       &lt;em&gt;popup&lt;/em&gt;</code>
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" class="text12">
+      <br>
+      <strong>with the following interface code:</strong>
+      <!--
+           Show interface code for the dialog popups
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12">&nbsp;&nbsp;&nbsp;</td><td class="text12" bgcolor="#ddddee">
+       <code>var myQ='Format the hard disk?', myCap='Answer this Question';
+       <br><br>
+       function <strong>myConfirmDialogBox(<span class="blue">q</span>,<span
+       class="blue">yes</span>,<span class="blue">no</span>,<span
+       class="blue">caption</span>)</strong>{<br>
+       &nbsp;<span class="blue"><strong>q</strong></span>=(<span
+       class="blue"><strong>q</strong></span>||'');
+       <span class="blue"><strong>yes</strong></span>=(<span
+       class="blue"><strong>yes</strong></span>||'');
+       <span class="blue"><strong>no</strong></span>=(<span
+       class="blue"><strong>no</strong></span>||'');
+       <span class="blue"><strong>caption</strong></span>=(<span
+       class="blue"><strong>caption</strong></span>||'');<br>
+       &nbsp;var myConfirmDialog=<span class="blue"><strong>q</strong></span><br>
+       &nbsp;+(OLns4?'&lt;form action="javascript:void(0);"&gt;':'')<br>
+       &nbsp;+'&lt;div style="font-size:4px;;line-height:4px;"&gt;&amp;nbsp;&lt;br&gt;&lt;\/div&gt;'<br>
+       &nbsp;+'&lt;input type="submit" '<br>
+       &nbsp;+'onclick="cClick();'+<span class="blue"><strong>yes</strong></span><br>
+       &nbsp;+';return false;" value=" Yes "&gt;&nbsp;&nbsp;'<br>
+       &nbsp;+'&lt;input type="submit" '<br>
+       &nbsp;+'onclick="cClick();'+<span class="blue"><strong>no</strong></span><br>
+       &nbsp;+';return false;" value=" No "&gt;'<br>
+       &nbsp;+(OLns4?'&lt;\/form&gt;':'');<br>
+       /*<br>
+       &nbsp;* Modify the styling appropriately for your site<br>
+       &nbsp;*/<br>
+       overlib(myConfirmDialog,<br>
+       &nbsp;<span class="blue"><strong>caption</strong></span>?CAPTION:DONOTHING, <span
+       class="blue"><strong>caption</strong></span>?<span
+       class="blue"><strong>caption</strong></span>:DONOTHING, CLOSETEXT,'',<br>
+       &nbsp;CAPTIONPADDING,4, TEXTPADDING,10, BGCLASS,'olbgD',<br>
+       &nbsp;CGCLASS,'olcgD', CAPTIONFONTCLASS,'olcapD', CLOSEFONTCLASS,'olcloD',<br>
+       &nbsp;FGCLASS,'olfgD', TEXTFONTCLASS,'oltxtD',<br>
+       &nbsp;SHADOW, SHADOWCOLOR,'#113377', SHADOWOPACITY,40,<br>
+       &nbsp;WRAP, STICKY, <span class="red"><strong>MODAL</strong></span>, MIDX,0, MIDY,0);<br>
+       }
+       <br><br>
+       function myYes(){<br>
+       &nbsp;/*<br>
+       &nbsp;&nbsp;* Supplement the overlib call with whatever you want a Yes response to do<br>
+       &nbsp;&nbsp;*/<br>
+       &nbsp;overlib('You are very brave!', CAPTION,'"Yes" Response', CLOSECLICK,<br>
+       &nbsp;&nbsp;CAPTIONPADDING,4, TEXTPADDING,10, BGCLASS,'olbgD',<br>
+       &nbsp;&nbsp;CGCLASS,'olcgD', CAPTIONFONTCLASS,'olcapD', CLOSEFONTCLASS,'olcloD',<br>
+       &nbsp;&nbsp;FGCLASS,'olfgD', TEXTFONTCLASS,'oltxtD',<br>
+       &nbsp;&nbsp;SHADOW, SHADOWCOLOR,'#113377', SHADOWOPACITY,40,<br>
+       &nbsp;&nbsp;WRAP, STICKY, <span class="red"><strong>MODAL</strong></span>, MODALCLICK, MIDX,0, MIDY,0);<br>
+       &nbsp;// Do something if OK<br>
+       }
+       <br><br>
+       function myNo(){<br>
+       &nbsp;/*<br>
+       &nbsp;&nbsp;* Supplement the overlib call with whatever you want a No response to do<br>
+       &nbsp;&nbsp;*/<br>
+       &nbsp;overlib('A wise decision!', CAPTION,'"Yes" Response', CLOSECLICK,<br>
+       &nbsp;&nbsp;CAPTIONPADDING,4, TEXTPADDING,10, BGCLASS,'olbgD',<br>
+       &nbsp;&nbsp;CGCLASS,'olcgD', CAPTIONFONTCLASS,'olcapD', CLOSEFONTCLASS,'olcloD',<br>
+       &nbsp;&nbsp;FGCLASS,'olfgD', TEXTFONTCLASS,'oltxtD',<br>
+       &nbsp;&nbsp;SHADOW, SHADOWCOLOR,'#113377', SHADOWOPACITY,40,<br>
+       &nbsp;&nbsp;WRAP, STICKY, <span class="red"><strong>MODAL</strong></span>, MODALCLICK, MIDX,0, MIDY,0);<br>
+       &nbsp;// Do something else (or nothing) if not OK<br>
+       }</code>
+      </td></tr></table>
+      <a name="color" id="color">&nbsp;</a>
+      <div style="background-color:#ccffcc; padding:6px;">
+      <strong>Note</strong> that the <strong>color</strong> and/or <strong>opacity</strong> of
+      the <strong>modal shield</strong> can be <a
+       href="javascript:void(0);"
+       onmouseover="return overlib('Use of MODALCOLOR and MODALOPACITY',
+        WRAP, BASE,2, HAUTO, VAUTO);"
+       onmouseout="nd();"
+       onclick="return overlib(shield, CAPTION,'This is a MODAL popup.', CLOSECLICK,
+        STICKY, WRAP, BASE,2, MIDX,0, MIDY,0, TEXTPADDING,8,
+        BGCLASS,'olbgG', CGCLASS,'olcgG', FGCLASS,'olfgG',
+        MODAL, MODALCOLOR,'#004400', MODALOPACITY,70);">changed</a> via the
+      <strong>MODALCOLOR</strong> and/or <strong>MODALOPACITY</strong> commands.&nbsp; Also,
+      <strong>document scrolling</strong> can be <a
+       href="javascript:void(0);"
+       onmouseover="return overlib('Use of MODALSCROLL, MODALCOLOR and MODALOPACITY',
+        WRAP, BASE,2, HAUTO, VAUTO);"
+       onmouseout="nd();"
+       onclick="return OLgetAJAX('popupContent.php5?exa=modal', modalShield);">allowed</a>
+      via the <strong>MODALSCROLL</strong> command.&nbsp; <strong>Clicking</strong> on the
+      <strong>modal shield</strong> can be used to <a
+       href="javascript:void(0);"
+       onmouseover="return overlib('Use of MODALCLICK, MODALCOLOR, MODALOPACITY and MODALSCROLL',
+        WRAP, BASE,2, HAUTO, VAUTO);"
+       onmouseout="nd();"
+       onclick="return OLgetAJAX('popupContent.php5?exa=click', modalClick);">close the popup</a>
+       if the <strong>MODALCLICK</strong> command is included in the overlib or overlib2 call.
+      </div>
+      <div>&nbsp;<br></div>
+      <div style="background-color:#bbddff; padding:6px;">
+      Further <strong>note</strong> that <strong>MODAL</strong> popups with <a
+       onmouseover="return overlib('Invoke a MODAL popup with textarea and text input',
+        WRAP, BASE,2, TEXTPADDING,4, HAUTO, VAUTO);"
+       onmouseout="nd();"
+       onclick="overlib(myModalForm,
+        MODAL, MODALCOLOR,'#4488dd', MODALOPACITY,60, MODALSCROLL, MODALCLICK,
+        CAPTION,'Play With This Form',
+        CGCLASS,'olraisedBlue', CLOSETEXT,closeimgBlue, CLOSECLICK, CLOSETITLE,'Close',
+        CAPTIONPADDING,4, TEXTPADDING,14, BGCLASS,'olbgD',
+        CAPTIONFONTCLASS,'olcapD', FGCLASS,'olfgD', TEXTFONTCLASS,'oltxtD',
+        SHADOW, SHADOWCOLOR,'#113377', SHADOWOPACITY,40,
+        WRAP, STICKY, SCROLL, MIDX,0, MIDY,0);
+        return false;"
+       href="javascript:void(0);">form content</a> should include:
+       <br><br>
+       <strong>&nbsp;&nbsp;onfocus="OLmEdit=1;"<br>
+       &nbsp;&nbsp;onblur="OLmEdit=0;"</strong>
+       <br><br>
+       in the start tags of any <strong>textareas</strong> and/or <strong>inputs of
+       type="text"</strong> to enable use of the paging and scrolling keys (including
+       <strong>Spacebar</strong> and <strong>Enter</strong>) by the browser's text editor.
+      </div>
+      <div>&nbsp;<br></div>
+      <strong>Also see MODAL examples in <a
+       href="CrossFrame/"
+       onmouseover="return overlib('Use of MODAL in frame and iframe documents',
+        WRAP, BASE,2);"
+       onmouseout="nd();">frame&nbsp;and&nbsp;iframe</a> documents, or with <a
+       href="MODALsysobj.html"
+       onmouseover="return overlib('Use of MODAL in documents with system controls',
+        WRAP, BASE,2, HAUTO);"
+       onmouseout="nd();">system&nbsp;controls</a>.</strong>
+      <div>&nbsp;<br></div>
+      <strong>Review the <a
+       href="commandRef.html#modal"
+       onmouseover="return overlib('See the MODAL section of the Command Reference',
+        WRAP, BASE,2);"
+       onmouseout="nd();">MODAL section</a> of the Command Reference.</strong>
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" class="text12">
+      <br>
+      <span style="color:#000099;"><em>Contrast the <strong>MODAL dialog popup</strong>
+      (above) with the native JavaScript <strong>confirm</strong> function (below).</em></span>
+      <hr class="hr3">
+      <div style="font-family:Verdana,Arial,Helvetica,sans-serif;
+       font-size:13px;font-weight:bold;color:#000099;">
+       JavaScript FAQ (<a
+        title="javascripter.net FAQ entry for confirm()"
+        href="http://www.javascripter.net/faq/confirm.htm"
+       >http://www.javascripter.net/faq/confirm.htm</a>):
+      </div>
+      <h3 style="font-family:Verdana,Arial,Helvetica,sans-serif;color:#000099;">
+       Confirm
+      </h3>
+      <a
+       title="Table of Contents for javascripter.net"
+       href="http://www.javascripter.net/faq/">Table of Contents</a>
+      <br><br>
+      <b>Question:</b> How do I generate an OK/Cancel dialog box from JavaScript?
+      <br><br>
+      <b>Answer:</b> To generate an OK/Cancel box, use the <b>confirm()</b>
+      method (which is <strong>modal</strong>):
+      <br><br>
+      <!--
+           Show code for javascript confirm
+        -->
+      <table width="370" cellpadding="6" cellspacing="0" border="0">
+       <tr><td width="370" class="text12" bgcolor="#ddddee">
+       <code>if (confirm('Your question')) {<br>
+       // do things if OK
+       }</code>
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" class="text12">
+      <br>
+      <form name="myform" action="javascript:void(0);">
+      <div>
+      <input type="button" value="Try it now" 
+       onclick=
+       "if(confirm('Format the hard disk?')) {
+         alert('You are very brave!');
+       } else {
+        alert('A wise decision!')
+       }">
+      </div>
+      </form>
+      <br>
+      The button above was created using the following code:
+      <br><br>
+      <!--
+           Show markup for the button
+        -->
+      <table width="370" cellpadding="6" cellspacing="0" border="0">
+       <tr><td width="370" class="text12" bgcolor="#ddddee">
+       <code>&lt;form name="myform" action="javascript:void(0);"&gt;<br>
+       &lt;div&gt;<br>
+       &lt;input type="button" value="Try it now"<br>
+       &nbsp;onclick=<br>
+       &nbsp;"if(confirm('Format the hard disk?')) {<br>
+       &nbsp;&nbsp;alert('You are very brave!');<br>
+       &nbsp;} else {<br>
+       &nbsp;&nbsp;alert('A wise decision!')<br>
+       &nbsp;}"&gt;<br>
+       &lt;/div&gt;<br>
+       &lt;/form&gt;</code>
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr> 
+     <td align="left" class="text12">
+      <br>
+      <div
+       style="font-family:Verdana,Arial,Helvetica,sans-serif;
+       font-size:13px;font-weight:bold;color:#000099;">
+      <a
+       title="JavaScripter.net Home Page"
+       href="http://www.javascripter.net">JavaScripter.net</a>, Alexei Kourbatov
+      </div>
+      <hr class="hr3">
+     </td> 
+    </tr> 
+   </table>
+  </td> 
+ </tr> 
+</table>
+
+<table align="center" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="center" valign="middle" class="text12">
+   <br>
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the markup
+   for these examples.</em>
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text12" align="center" valign="bottom" colspan="4" rowspan="1">
+   <strong>These examples use <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',FGCLASS,'',WRAP,BASE,2,
+     REF,'dandt',REFP,'LL',REFX,-100,REFY,-5,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',FGCLASS,'',WRAP,BASE,2,
+     REF,'comref',REFP,'LL',REFX,-110,REFY,-5,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</strong><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; shopping '
+     +'via this link&lt;br&gt;(with &lt;strong&gt;no&lt;/strong&gt; extra costs to you).',
+     FGCLASS,'',TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-10,
+     TEXTFONTCLASS,'text12',WRAP,BASE,2);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     FGCLASS,'',VCENTER,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff',WRAP,BASE,2);"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright&nbsp;Foteos&nbsp;Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',FGCLASS,'',TEXTPADDING,8,FGCOLOR,'#bbddff',WRAP,BASE,2,
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-7,REFY,-5,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',FGCLASS,'',VCENTER,LEFT,WRAP,BASE,2,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<div>
+&nbsp;<br>
+</div>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='MODAL.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

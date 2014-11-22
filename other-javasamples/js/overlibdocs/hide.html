@@ -1,0 +1,612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Example of form hiding in Macrides Web Services open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+
+<title>overLIB - Hide Elements with System Controls in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_iframe.js"></script>
+<script type="text/javascript" src="overlibmws_hide.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+<script type="text/javascript" src="overlibmws_bubble.js"></SCRIPT>
+<script type="text/javascript" src="overlibmws_filter.js"></SCRIPT>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'olfoot');
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.text6 {font-family:Verdana,Arial,sans-serif; font-size:6px;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text14h {font-family:Verdana,Arial,sans-serif; font-size:14px; line-height:24px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+.text22 {font-family:Verdana,Arial,sans-serif; font-size:22px;}
+.olfoot {font-family:Verdana,Arial,Helvetica; font-size:12px; color:#000000;}
+
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+.comic20 {font-family:'Comic Sans MS';font-size:20px;}
+-->
+</style>
+</head>
+
+<body  text="#220022" bgcolor="#ddeeff">
+
+<noscript>
+ <table align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+   <td width="430" class="myText">
+    [<em>This document uses informational javascript functions which<br>
+    &nbsp;are accessible via both mouse and keyboard navigation, in<br>
+    &nbsp;compliance with the ADA.</em>]
+    <br>&nbsp;<br>
+   </td>
+  </tr>
+ </table>
+</noscript>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Form-hiding Example</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    name="olMWStest" id="olMWStest"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     STATUS,'Go to the overlibmws Doownload and Test Directory.',
+     TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     VAUTO,  OFFSETX,-16, OFFSETY,20, 
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onfocus="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     STATUS,'Go to the overlibmws Doownload and Test Directory.',
+     TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     REF,'olMWStest', REFC,'LL', REFP,'UL');"
+    onblur="nd();"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    name="olFMemail" id="olFMemail"
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',
+     STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     CENTER, OFFSETY,20,
+     FILTER, FADEIN,46, FADEOUT,46, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onfocus="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',
+     STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     REF,'olFMemail', REFC,'LL', REFP,'UL');"
+    onblur="nd();"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    name="olMWShome" id="olMWShome"
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     STATUS,'Link to Macrides Web Services homepage.',
+     TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     LEFT, OFFSETX,-16, OFFSETY,20,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onfocus="return overlib('Link to Macrides Web Services homepage.',
+     STATUS,'Link to Macrides Web Services homepage.',
+     TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     REF,'olMWShome', REFC,'LR', REFP,'UR');"
+    onblur="nd();"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss this example, seek help, and offer suggestions<br>
+   via the</em> <span class="purple14">overlibmws</span> <a
+    name="olMWSgroup" id="olMWSgroup"
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+     +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     STATUS,'Link to the overlibmws Support Group.',
+     TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     LEFT, OFFSETX,-16, OFFSETY,20,
+     FILTER, FILTERSHADOW,2, FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onfocus="overlib('Link to the &lt;span '
+     +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     STATUS,'Link to the overlibmws Support Group.',
+     TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     REF,'olMWSgroup', REFC,'LR', REFP,'UR');"
+    onblur="nd();"
+    onmouseout="nd();">Support Group</a></strong>.<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="center" valign="middle">
+   <span class="text22">&nbsp;<br></span>
+   <!--
+****ANCHOR with the HIDESELECTBOXES command for IE versions less than 5.5 and
+     Geckos (Mozilla, modern Netscape, etc.) built on or before 2003-06-24,
+     and with the HIDEBYIDNS4 command for Netscape 4.x
+    Note that the form fields use REF-based positioning of their popups such that
+     their popups do not overlap with any form fields, and so no hiding for the older
+     browsers is needed in those cases.
+   -->
+   <span class="text18"><a
+    name="pop" id="pop"
+    href="javascript:void(0);"
+    onmouseover="return overlib('&lt;center&gt;Ain\'t no way I\'ll let '
+     +'any form&lt;br&gt;&nbsp;elements with system controls&nbsp;&lt;br&gt;obscure '
+     +'this overlib popup!!!&lt;/center&gt;',
+     CENTER, OFFSETX,8, OFFSETY,30,
+     HIDESELECTBOXES, HIDEBYIDNS4,'form1Div',
+     SHADOW, SHADOWCOLOR,'#cf33cf', STATUS,' ');"
+    onfocus="overlib('&lt;div align=\'center\'&gt;Ain\'t no way I\'ll let '
+     +'any form&lt;br&gt;&nbsp;elements with system controls&nbsp;&lt;br&gt;obscure '
+     +'this overlib popup!!!&lt;/div&gt;', TEXTFONTCLASS,'text12',
+     REF,'pop',REFP,'UL', REFX,-55, REFY,45,
+     HIDESELECTBOXES, HIDEBYIDNS4,'form1Div', STATUS,' ');"
+    onblur="nd();"
+    onmouseout="nd();">Pop Me!!!</a><br></span>
+   <span class="text6">&nbsp;<br></span>
+   <div id="form1Div" style="position:relative; width:100%; z-index:1;">
+    <!--
+*****FORM encased in a positioned div for the HIDEBYIDNS4 command in the above
+      anchor (otherwise, the encasement is not needed)
+    -->
+    <form name="F1" method="post" enctype="x-www-form-encoded"
+     action="http://www.macridesweb.com/cgi/fun.cgi">
+     <!--
+******FIRST TEXT INPUT
+     -->
+     <input name="T1" value="some Text"
+      onmouseover="return overlib('First Mystery Text Input!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LR', REFX,-5, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('First Mystery Text Input!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LR', REFX,-5, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+     <!--
+******FIRST SELECT BOX
+     -->
+     <select name="S1"
+      onmouseover="return overlib('First Mystery Select Box!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,-25, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('First Mystery Select Box!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,-25, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+      <option>Testing Testing Testing
+      <option>Mystery Test
+     </select>
+     <!--
+******CHECK BOX PRECEDED BY LABELING TEXT
+     -->
+     <span class="text12"
+      onmouseover="return overlib('Mystery Checkbox!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,140, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onmouseout="nd(300);"><strong>Just Checking</strong></span><input
+      type="checkbox" name="C1" checked
+      onmouseover="return overlib('Mystery Checkbox!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,140, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Mystery Checkbox!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,140, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd(300);">
+     <br>
+     <!--
+******SECOND TEXT INPUT
+     -->
+     <input name="T2" value="more Text"
+      onmouseover="return overlib('Second Mystery Text Input!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LR', REFX,15, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Second Mystery Text Input!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LR', REFX,15, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+     <!--
+******SECOND SELECT BOX
+     -->
+     <select name="S2" size="2"
+      onmouseover="return overlib('Second Mystery Select Box!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,-30, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Second Mystery Select Box!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,-30, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+      <option>Bigger Test
+      <option>Test Text
+      <option>Test 1
+      <option>Test 2
+      <option>Test 3
+      <option>Test 4
+      <option>Test 5
+      <option>Test 6
+      <option>Test 7
+     </select>
+     <!--
+******FIRST TO SIXTH RADIO BUTTONS
+     -->
+     <input name="R1" type="radio" value="V1"
+      onmouseover="return overlib('First Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('First Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+     <input name="R1" type="radio" value="V2"
+      onmouseover="return overlib('Second Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Second Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onblur="nd();"
+      onmouseout="nd();">
+     <input name="R1" type="radio" value="V3"
+      onmouseover="return overlib('Third Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Third Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+     <input name="R1" type="radio" value="V4"
+      onmouseover="return overlib('Fourth Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Fourth Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+     <input name="R1" type="radio" value="V5"
+      onmouseover="return overlib('Fifth Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Fifth Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+     <input name="R1" type="radio" value="V6" checked 
+      onmouseover="return overlib('Sixth Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Sixth Mystery Button!!!',
+       AUTOSTATUS, REF,'pop', REFP,'LL', REFX,120, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">
+     <br>
+     <!--
+******TEXTAREA
+     -->
+     <textarea name="TA1" rows="2" cols="30"
+      onmouseover="return overlib('Mystery Textarea!!!',
+       AUTOSTATUS, REF,'aSB1', REFP,'UR', REFX,-65, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="return overlib('Mystery Textarea!!!',
+       AUTOSTATUS, REF,'aSB1', REFP,'UR', REFX,-65, REFY,25);"
+      onblur="nd();"
+      onmouseout="nd();">Here
+is a
+TextArea
+test</textarea>&nbsp;
+     <a
+      name="aSB1" id="aSB1">&nbsp;</a><!--
+*******SUBMIT BUTTON:
+      --><input
+      name="SB1" type="submit" value="Submit"
+      onmouseover="return overlib('Click to submit the Mystery Form',
+       AUTOSTATUS, REF,'aSB1', REFP,'UL', REFX,-80, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="if(!OLns4)return overlib('Press ENTER to submit the Mystery Form',
+       AUTOSTATUS, REF,'aSB1', REFP,'UL', REFX,-100, REFY,25);"
+      onblur="nd()"
+      onclick="document.forms.F1.elements.SB1.blur();"
+      onmouseout="nd()">&nbsp;
+     <a
+      name="aRB1" id="aRB1">&nbsp;</a><!--
+*******RESET BUTTON:
+      --><input
+      name="RB1" type="reset" value="Reset"
+      onmouseover="return overlib('Click to reset the Myster Form',
+       AUTOSTATUS, REF,'aRB1', REFP,'UL', REFX,-80, REFY,25,
+       SHADOW, SHADOWCOLOR,'#cf33cf');"
+      onfocus="if(!OLns4)return overlib('Press ENTER to reset the Mystery Form',
+       AUTOSTATUS, REF,'aRB1', REFP,'UL', REFX,-100, REFY,25);"
+      onblur="nd()"
+      onclick="document.forms.F1.elements.RB1.blur();"
+      onmouseout="nd()">
+    </form>
+   </div>
+   <span class="text6">&nbsp<br></span>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="middle" class="text12">
+   <strong>This example</strong> uses <a
+    name='oldt' id="oldt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', CENTER, OFFSETY,20);"
+    onfocus="overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', REF,'oldt', REFX,-120, REFY,20);
+     if(!OLns4)self.status=OLgetRef('oldt').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="cmd" id="cmd"
+    href="commandRef.html"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', CENTER, OFFSETY,20);"
+    onfocus="overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', REF,'cmd', REFX,-110, REFY,20);
+     if(!OLns4)self.status=OLgetRef('cmd').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">commands</a>.&nbsp; The <strong>overlibmws_iframe.js</strong>
+   plugin module is used to prevent obscuring of the popup for IE v5.5 and v6.0 via an <a
+    name="ifs" id="ifs"
+    target="_blank"
+    href="IframeShim.html"
+    onmouseover="return overlib('See the iframe shim article.', HAUTO, VAUTO);"
+    onfocus="overlib('See the iframe shim article.',
+     REF,'ifs', REFP,'LL', REFX,-60, REFY,-3);
+     if(!OLns4)self.status=OLgetRef('ifs').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">iframe shim</a> (as opposed to <a
+     name="ifc" id="ifc"
+     href="IFRAME.html"
+    onmouseover="return overlib('Go to an example of iframe as popup content.', HAUTO, VAUTO);"
+    onfocus="overlib('Go to an example of iframe as popup content.',
+      REF,'ifc', REFP,'LL', REFX,-40, REFY,-2);
+     if(!OLns4)self.status=OLgetRef('ifc').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">iframe content</a>).&nbsp; For older versions of IE and the old
+   versions of other supported browsers which need it, the <strong>overlibmws_hide.js</strong>
+   plugin module also has been imported and its <strong>HIDESELECTBOXES</strong> and
+   <strong>HIDEBYIDNS4</strong> commands are used to hide and restore the form elements
+   in conjunction with the display and removal of the popup for the top (Pop Me!!!)
+   anchor.
+   <br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="center" valign="middle" class="text12">
+   <strong>Go to hiding examples</strong> for <a
+    name="fla" id="fla"
+    href="flashWmode.html"
+    onmouseover="return overlib('Hide system controls such as flash objects.',
+     CENTER, ABOVE, VAUTO);"
+    onfocus="overlib('Hide system controls such as flash objects.',
+     REF,'fla', REFP,'LL', REFX,-125, REFY,-2);
+     if(!OLns4)self.status=OLgetRef('fla').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">flash</a> or <a
+    name="qt" id="qt"
+    href="QTVR.html"
+    onmouseover="return overlib('Hide system controls such as QuickTime objects.',
+     CENTER, ABOVE, VAUTO);"
+    onfocus="overlib('Hide system controls such as QuickTime objects.',
+     REF,'fla', REFP,'LL', REFX,-125, REFY,-2);
+     if(!OLns4)self.status=OLgetRef('fla').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">QuickTime</a> objects, <a
+    name="app" id="app"
+    href="applet.html"
+    onmouseover=
+     "return overlib('Hide applets with system controls.',
+     CENTER, ABOVE);"
+    onfocus=
+     "return overlib('Hide applets with system controls.',
+     REF,'app', REFP,'LL', REFX,-125, REFY,-2);"
+    onblur="nd();"
+    onmouseout="nd();">applets</a>, and <a
+    name="fra" id="fra"
+    href="testFrame.html"
+    onmouseover=
+     "return overlib('Hide form fields and objects with system controls in frame documents.',
+     CENTER, ABOVE, VAUTO);"
+    onfocus=
+     "overlib('Hide form fields and objects with system controls in frame documents.',
+     REF,'fra', REFP,'LL', REFX,-200, REFY,-2);
+     if(!OLns4)self.status=OLgetRef('fra').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">frame</a> documents.
+   <br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="center" valign="middle" class="text12">
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the markup
+   for this example.</em>
+   <br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="middle" class="text14h">
+   <hr>
+   <strong>Mouse-based <em>versus</em> Keyboard Navigation:</strong>
+  </td>
+ </tr>
+ <tr>
+  <td valign="middle" class="text12">
+   Try both mouseovers and keyboard navigation (<strong>TAB</strong> and
+   <strong>Shift-TAB</strong>, or <strong>Ctrl-DownArrow</strong> and
+   <strong>Ctrl-UpArrow</strong> in Opera) for the anchors, form fields, and images
+   in this document&nbsp; They all are associated with DHTML popups via onmouseover
+   and onfocus.&nbsp; When keyboard navigating on the checkbox or radio buttons,
+   use the <strong>spacebar</strong> to check/uncheck or to choose buttons.&nbsp; But
+   in browsers for which <strong>TAB</strong> or <strong>Shift-TAB</strong> jumps to the
+   chosen radio button, use the <strong>arrow</strong> keys to move among the buttons and
+   set the chosen one.&nbsp; Similarly use the <strong>arrow</strong> keys when focus is
+   on a select box.&nbsp; Note some
+   <a
+    name="foc" id="foc"
+    href="FocusProblems.html"
+    onmouseover="return overlib('Review some focus problems in Gecko-engine browsers.',
+     HAUTO,VAUTO);"
+    onfocus="overlib('Review some focus problems in Gecko-engine browsers.',
+     REF,'foc', REFP,'LL', REFX,-255, REFY,-2);
+     if(!OLns4)self.status=OLgetRef('foc').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">problems</a> in Gecko-engine browsers.&nbsp; Also check out
+    mouse-based  <em>versus</em> keyboard navigation in
+    <a
+     name='onf' id="onf"
+     href="ONFOCUS.html"
+    onmouseover="return overlib('Test keyboard-invoked popup support.',
+     HAUTO,VAUTO);"
+    onfocus="overlib('Test keyboard-invoked popup support.',
+     REF,'onf', REFP,'LL', REFX,-105, REFY,-2);
+     if(!OLns4)self.status=OLgetRef('onf').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();">another</a> form-containing <span class="purple14">overlibmws</span>
+   support document.
+   <hr>
+   <span class="text14">&nbsp;<br></span>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     VCENTER,TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');"
+    onfocus="overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     REF,'logo',REFX,95,REFY,1,
+     TEXTFONTCLASS,'text12',FGCOLOR,'#cceeff');
+     if(!OLns4)self.status=OLgetRef('dandt').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    name="pypl" id="pypl"
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-10,REFY,-10,TEXTFONTCLASS,'text12');"
+    onfocus="overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-10,REFY,-10,TEXTFONTCLASS,'text12');
+     if(!OLns4)self.status=OLgetRef('pypl').href;return true;"
+    onblur="nd();"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    name="val" id="val"
+    target="_blank"
+    href="http://validator.w3.org/check/referer"
+    onmouseover="return overlib('&nbsp;Valid&nbsp;HTML&nbsp;4.01',BUBBLE,
+     TEXTFONTCLASS,'comic20',REF,'w3c',REFC,'UR',REFP,'LR',REFX,73,REFY,2,
+     FILTER,FILTERSHADOW,1,FILTERSHADOWCOLOR,'#00B000');"
+    onfocus="return overlib('&nbsp;Valid&nbsp;HTML&nbsp;4.01',
+     TEXTFONTCLASS,'comic20',REF,'w3c',REFC,'UR',REFP,'LR',REFX,73,REFY,2);"
+    onblur="nd();"
+    onmouseout="nd();"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="6"
+    src="../image/valid-html401.gif"></a>
+   <br>
+  </td>
+ </tr>
+</table>
+<div class="text12">&nbsp;<br>&nbsp;</div>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='hide.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

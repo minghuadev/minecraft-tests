@@ -1,0 +1,2158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta name="keywords" content="overlib, overlibmws, AJAX, XMLHttpRequest, iframe, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides" />
+<meta name="description" content="Examples for AJAX via XMLHttpRequest in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips." />
+<meta name="author" content="Foteos Macrides" />
+<title>overLIB - AJAX examples in overlibmws</title>
+
+<!-- Function set for AJAX / XMLHttpRequest handling -->
+<script type="text/javascript" src="ajaxcontentmws.js"></script>
+
+<!-- Function set for popups with iframe content -->
+<script type="text/javascript" src="iframecontentmws.js"></script>
+
+<!-- Function set for showing OLoverHTML, OLover2HTML, OLresponseAJAX, etc. -->
+<script type="text/javascript" src="htmlspecialcharsmws.js"></script>
+
+<!-- This site's key-based entry script for the Google Maps API
+     (get a key and script access for your own website via
+      http://www.google.com/apis/maps/ ) -->
+<script type="text/javascript"
+ src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAOXo6QxY6D7a5J3mkyWJ7GRQObX_C2Uwkq5mPn6mLIZ8zE_IUXBSqxsPOF9uoslUI0m8yg-ZYA7kMKg"></script>
+
+<!-- Core module and plugins -->
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_draggable.js"></script>
+<script type="text/javascript" src="overlibmws_exclusive.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_print.js"></script>
+<script type="text/javascript" src="overlibmws_scroll.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+//
+// Set up class-based styling for the 6 overlib popup fields
+//
+OLpageDefaults(BGCLASS,'olbg', CGCLASS,'olcg', FGCLASS,'olfg',
+ CAPTIONFONTCLASS,'olcap', CLOSEFONTCLASS,'olclo', TEXTFONTCLASS,'oltxt');
+
+// Define the Lead Argument for the Flash Slide Show
+var C_Kvows=
+ '<div class="loading">'
++'<object '
++' classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" '
++' width="400" height="355" '
++' data="flash/C_Kvows.swf" '
++' codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">'
++' <param name="movie" value="flash/C_Kvows.swf">'
++' <param name="wmode" value="transparent">'
++' <embed width="400" height="355" '
++'  src="flash/C_Kvows.swf" '
++'  type="application/x-shockwave-flash" '
++'  pluginspage="http://www.macromedia.com/go/getflashplayer" '
++'  wmode="transparent">'
++' </embed>'
++'</object>'
++'</div>';
+
+// Pre-load image
+var loadingImg=new Image();
+loadingImg.src='loading.gif';
+
+var myRaisedBlue = new Image();
+myRaisedBlue.src = "raised_blue.gif";
+//]]>
+</script>
+
+<!--*******************************************************************
+     CSS class-BASED STYLING FOR THIS SUPPORT DOCUMENT AND ITS POPUPS
+     You could define a series of ovfl# classes for AJAX popups with
+     different widths and heights (and move your CSS definitions to an
+     imported .css file). The overflow:auto; rule enables the dynamic
+     creation of scrollbars within the popups whenever needed due to
+     loading of a large amount of content.
+    *******************************************************************-->
+<style type="text/css">
+<!--
+.ovfl1 {
+  width:510px; height:145px; overflow:auto;
+  border:1px none #000000; padding:10px; background:#d8e9ff;
+}
+.ovfl2 {
+  width:550px; height:350px; overflow:auto;
+  border:1px none #000000; padding:0px; background:#eeeeee;
+}
+.ovflh {overflow:hidden;}
+
+.loading {
+  background-image:url(loading.gif); background-repeat:no-repeat;
+  background-color:#000000;
+}
+.olbg {background-color:#333399;}
+.olcg {background-color:#aa00aa; text-align:center;}
+.olcgif {background-color:#333399; text-align:center;}
+.olfg {background-color:#cceeff; text-align:left;}
+.olfgif {background-color:#bbddff; text-align:left;}
+.olfgifajax {background-color:#eeeeee; text-align:left;}
+.olcap {font-family:Arial; font-size:12px; font-weight:bold; color:#ffffff;}
+a.olclo {font-family:Verdana; font-size:11px; font-weight:bold; color:#ddddff;}
+a.olclo:hover {color:#ffffff;}
+.oltxt {font-family:Arial; font-size:12px; color:#000000;}
+.grnbg {background-color:#004000;}
+.grncg {background-color:#008000; text-align:center;}
+.grncap {font-family:Verdana; font-size:11px; font-weight:bold; color:#ffffff;}
+a.grncap {color:#ffffff; font-style:italic;}
+a.grncap:hover {color:#ccffcc;}
+.grnfg {background-color:#008000; text-align:left;}
+.gryvTitle {font-family:Times New Roman,Arial,Virdana; font-size:16px;
+  font-style:normal; font-weight:bold; text-align:center;
+  background-color:#dddddd; color:#444444;}
+.grybg {background-color:#808080;}
+.grycg {background-color:#000000; text-align:center;}
+.grycap {font-family:Verdana; font-size:11px; font-weight:bold; color:#d0d0d0;}
+a.grycap {color:#d0d0d0; font-style:italic;}
+a.grycap:hover {color:#f0f0f0;}
+.gryfg {background-color:#000000; text-align:left;}
+.olcgGM {background-color:#336699;}
+a.olcloGM {font-family:Verdana; font-size:11px; font-weight:bold; color:#ffccff;}
+a.olcloGM:hover {color:#ffffff;}
+.olraisedBlue {text-align:center;
+ background:#33aaff url(raised_blue.gif) repeat-x bottom left;}
+table.olraisedBlue {border-bottom:1px solid #333399;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#FF00FF;}
+.text6 {font-family:Verdana,Arial,sans-serif; font-size:6px;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text16 {font-family:Verdana,Arial,sans-serif; font-size:16px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+
+.myHeader {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;}
+.mySubHead {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;}
+.mySpacer {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+.purple {color:purple;}
+.yellow {color:#ffff00;}
+.red {color:#cc0000;}
+.blue {color:#0000cc;}
+
+.form {	background-color:#ccffcc;
+	font-family:Tahoma,Arial,Helvetica,sans-serif;
+	font-size:12px;
+	margin:5px;
+	border:3px groove #006600; 
+	padding:10px;
+	color:#000000;
+}
+.caption {
+	text-align:left;
+	font-size:12px;
+	font-weight:bold;
+	color:#336699;
+}
+-->
+</style>
+
+<!--***************************************************
+      START OF SCRIPT BLOCK FOR AJAX FORM HANDLING
+     Adapted by Foteos Macrides from Apple's code in
+ http://developer.apple.com/internet/webcontent/XMLHttpRequestExample/example.html
+     It creates links that can invoke the iTunes player
+     for music selected via dynamically populated form
+     fields and document elements.
+    ***************************************************-->
+<script type="text/javascript">
+//<![CDATA[
+// Our string variable for the lead argument of an overlib call.
+//
+var AppleAJAX=
+ '<div class="ovfl2">'
++'<form action="javascript:void(0);" class="form">'
++'<table cellspacing="0" cellpadding="0" border="0"><tr><td>'
++'<div class="caption">&#160;&#160;AJAX and PHP Demo '
++'(choose a Category then choose Items)<\/div>'
++'<div>&#160;&#160;&#160;&#160;Category:<br \/>'
++'<select onchange="loadDoc(event);">'
++' <option value="">Choose One<\/option>'
++' <option value="AppleAJAXexample.php5?music=songs">Top 10 Songs<\/option>'
++' <option value="AppleAJAXexample.php5?music=albums">Top 10 Albums<\/option>'
++' <option value="AppleAJAXexample.php5?music=new">Top 10 New Releases<\/option>'
++' <option value="AppleAJAXexample.php5?music=just">Top 10 Just Added<\/option>'
++'<\/select>'
++'<\/div>'
++'<div>&#160;&#160;&#160;&#160;Items:<br \/>'
++'<select size="10" id="topics" onchange="showDetail(event)">'
++' <option value="">Choose a Category First<\/option>'
++'<\/select>'
++'<\/div>'
++'<div id="details"><span><\/span><\/div>'
++'</td></tr></table>'
++'<\/form>'
++'<\/div>';
+
+// Our function for handling the OLhttp.responseXML XML document object
+// returned via the XMLHttpRequest object.  It's reference is used as the
+// second argument of the OLgetAJAX call in function loadDoc(evt), below.
+//
+function OLcmdX1() {
+ clearTopicList();
+ buildTopicList();
+}
+
+// Invoked by any "Category" select element change in the form.  Uses
+// OLgetAJAX(url, command) to initiate an asynchronous GET http request
+// for a php script, with a query string which indicates which XML
+// document to return.  Loads the chosen XML document object via OLcmdX1()
+// as instructed in the OLgetAJAX call, clears the Topics select element,
+// and loads new items into Topics select element.
+//
+function loadDoc(evt) {
+ // Equalize W3C/IE event models to get event object
+ evt = (evt) ? evt : ((window.event) ? window.event : null);
+ if (evt) {
+  // Equalize W3C/IE models to get event target reference
+  var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+  if (elem) {
+   try {
+    if (elem.selectedIndex > 0) {
+     //
+     // Make an OLgetAJAX(url, command) call to initiate and handle
+     // an asynchonous GET request for a resource with a Content-Type
+     // of text/xml via the XMLHttpRequest object.  See:
+     //   http://www.macridesweb.com/oltest/AJAX.html
+     //
+     OLgetAJAX(elem.options[elem.selectedIndex].value, OLcmdX1);
+    }	
+   }
+   catch(e) {
+    var msg = (typeof e == "string") ? e : ((e.message) ? e.message : "Unknown Error");
+    alert("Unable to get XML data:\n" + msg);
+    return;
+   }
+  }
+ }
+}
+
+// Retrieves text of an XML document element,
+// including elements using namespaces.
+//
+function getElementTextNS(prefix, local, parentElem, index) {
+ // circumvent browser differences in getElementsByTagNameNS
+ // and/or getElementsByTagName
+ var prefixwithlocal = (prefix) ?
+  parentElem.getElementsByTagName(prefix+ ":"+local)[index] : null;
+ var result = (prefix&&prefixwithlocal) ?
+  prefixwithlocal : parentElem.getElementsByTagName(local)[index];
+ // get text, accounting for possible
+ // whitespace (carriage return) text nodes 
+ return result?
+  (result.childNodes.length > 1 ? result.childNodes[1].nodeValue :
+  result.firstChild.nodeValue) : 'n/a';
+}
+
+// Empties the Topics select list content.
+function clearTopicList() {
+ var select = document.getElementById("topics");
+ while (select.length > 0) {
+  select.remove(0);
+ }
+}
+
+// Adds item to select element the less elegant, but compatible way.
+function appendToSelect(select, value, content) {
+ var opt;
+ opt = document.createElement("option");
+ opt.value = value;
+ opt.appendChild(content);
+ select.appendChild(opt);
+}
+
+// Fills the Topics select list with items from the current XML document.
+function buildTopicList() {
+ var select = document.getElementById("topics");
+ var items = OLhttp.responseXML.getElementsByTagName("item");
+ // Loop through <item> elements, and add each nested
+ // <title> element to Topics select element
+ for (var i = 0; i < items.length; i++) {
+  appendToSelect(select, i,
+  document.createTextNode(getElementTextNS("", "title", items[i], 0)));
+ }
+ // Clears detail display.
+ document.getElementById("details").innerHTML = "";
+}
+
+// Displays details retrieved from the XML document.
+function showDetail(evt) {
+ evt = (evt) ? evt : ((window.event) ? window.event : null);
+ var item, content, div;
+ if (evt) {
+  var select = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+  if (select && select.options.length > 1) {
+   // 
+   // Copy <content:encoded> element text for the selected item.
+   //
+   item = OLhttp.responseXML.getElementsByTagName("item")[select.value];
+   content = getElementTextNS("content", "encoded", item, 0);
+   div = document.getElementById("details");
+   div.innerHTML = "";
+   // Blast new HTML content into "details" <div>
+   div.innerHTML = content;
+  }
+ }
+}
+//]]>
+</script>
+<!-- END OF SCRIPT BLOCK FOR AJAX FORM HANDLING -->
+
+<!--****************************************************************************
+      START OF SCRIPT BLOCK FOR AJAX HANDLING flash object/embed POPUP CONTENT
+    ****************************************************************************-->
+<script type="text/javascript">
+//<![CDATA[
+// Functions for 2nd argument of the OLgetAJAX call
+function BJAJAX() {
+ return overlib(OLresponseAJAX, TEXTPADDING,0, CAPTIONPADDING,4, CAPTION,
+  '<a href="http://www.adhesivetheater.com/jug/jug.html" '
+  +'target="_blank" onclick="cClick();" '
+  +'title="Brooklyn Jugs archive at the Adhesive Theater Project" '
+  +'class="grncap">Brooklyn Jugs archive</a> at the ATP',
+  BGCLASS,'grnbg', CGCLASS,'grncg', FGCLASS,'grnfg',
+  CAPTIONFONTCLASS,'grncap', CLOSEFONTCLASS,'grncap',
+  WRAP, BORDER,1, STICKY, CLOSECLICK, SCROLL, MIDX,0, RELY,100,
+  LABEL,'audio',
+  EXCLUSIVE, EXCLUSIVESTATUS,
+  'Close the current popup to re-enable other popups');
+}
+
+function NBCAJAX() {
+ return overlib(OLresponseAJAX, TEXTPADDING,0, CAPTIONPADDING,6, CAPTION,
+  '<a href="http://www.nbc.com/Saturday_Night_Live/video/" '
+  +'target="_blank" onclick="cClick();" '
+  +'title="Go to the Saturday Night Live video page" '
+  +'class="grycap">Saturday Night Live</a> on NBC',
+  BGCLASS,'grybg', CGCLASS,'grycg', FGCLASS,'gryfg', CAPBELOW,
+  CAPTIONFONTCLASS,'grycap', CLOSEFONTCLASS,'grycap',
+  WRAP, BORDER,1, STICKY, CLOSECLICK, SCROLL, MIDX,0, RELY,10,
+  LABEL,'audio',
+  EXCLUSIVE, EXCLUSIVESTATUS,
+  'Close the current popup to re-enable other popups');
+}
+
+// Daisy-chain with the core's cClick for popups with overlib command: LABEL,'audio'
+var cClickOld=cClick;
+
+function cClickNew(){
+ if(OLloaded&&OLgateOK){
+  var o=(o3_label=='audio')?OLgetRef('overDiv'):null;
+  cClickOld();
+  if(o)o.innerHTML="";
+ }
+ return false;
+}
+
+cClick=cClickNew;
+//]]>
+</script>
+<!-- END OF SCRIPT BLOCK FOR AJAX FORM HANDLING -->
+
+<!--*********************************************
+        START OF SCRIPT BLOCK FOR GOOGLE MAPS
+    *********************************************-->
+<script type="text/javascript">
+//<![CDATA[
+// Our string variables for arguments in overlib and overlib2 calls.
+//
+var myGMdiv=
+ '<div id="map" style="width:500px; height:380px">'
++'<strong>&nbsp;Loading . . .<\/strong><\/div>';
+
+var myGMdiv2=
+ '<div id="map2" style="width:500px; height:380px">'
++'<strong>&nbsp;Loading . . .<\/strong><\/div>';
+
+var lowPowerGM='lowPowerGoogleMap.html';
+
+var highPowerGM='highPowerGoogleMap.html';
+
+var myGMdivCap=
+ '<div align="center"><span class="yellow">Le Petit Cafe</span> (718-596-7060)<br \/>'
++'502 Court Street, Carroll Gardens (Brooklyn), NY 11231<br \/>'
++'Click the Pin for <span class="yellow"><i>Printable Driving and Subway '
++'Information<\/i><\/span>.<br \/>'
++'Click <a class="olcloGM" '
++'href="http://maps.google.com/maps?f=q&amp;hl=en&amp;q=502+Court+St,+Brooklyn,+NY+11231&amp;ll=40.677351,-73.997426&amp;spn=0.009634,0.024376" '
++'target="_blank" '
++'title="Click to show a map with More Street Details" '
++'onclick="overlib2(myGMdiv2, TEXTPADDING,0, CAPTION,myGMdivCap2, '
++'STICKY, CLOSECLICK, WIDTH,500, BASE,2, REF,\'overDiv\', '
++'PRINT, PRINTJOB,\'PrintGoogleMap(highPowerGM)\', '
++'PRINTFONTCLASS,\'olcloGM\', PRINTTITLE,\'Click to Print the High Power Google Map\', '
++'CGCLASS,\'olcgGM\', CLOSEFONTCLASS,\'olcloGM\', '
++'SHADOW, SHADOWX,8, SHADOWY,8, STATUS,\'High Power Google Map for Le Petit Cafe\'); '
++'doLePetitCafeGoogleMaps(\'map2\'); return false;"'
++'>here<\/a> for a map with <span class="yellow"><i>More Street Details<\/i><\/span>.<br \/>'
++'Close and re-open the popup if any map panel fails.<\/div>'
+
+var myGMdivCap2=
+ '<div align="center"><span class="yellow">Le Petit Cafe</span> (718-596-7060)<br \/>'
++'502 Court Street, Carroll Gardens (Brooklyn), NY 11231<br \/>'
++'The <span class="yellow">F and G subways\' Carroll St. stop<\/span> is on Smith St.<br \/>'
++'Click on Close or the Pin for the lower power map.<br \/>'
++'Close and re-open the popup if any map panel fails.<\/div>'
+
+var myGMerrMsg='<strong>Map unavailible.&nbsp; Try again later.<\/strong>';
+
+var DriveSubInfo=
+ '<b><i>Driving:<\/i>&nbsp; Take the Brooklyn-Queens Expressway (I-278, from the '
++'Triboro or Manhattan Bridges) to Atlantic Ave., then turn right (South) after '
++'Clinton St. onto Court St. to the Le Petit Cafe at 502 Court St., between Lucuer St. '
++'and Nelson St.<br \/><br \/>'
++'<i>Subway:<\/i>&nbsp; From Manhattan, take the downtown, Brooklyn bound F train '
++'to the Carroll St. stop.&nbsp; From Queens, take the Brooklyn bound G train (via '
++'E or V trains to the Ely Ave. to Court Sq. connector), or Manhattan bound N, R or '
++'V trains to the F train (via the 34th St. connector), to the Carroll St. stop.&nbsp; '
++'Be toward the front of the F or G train.&nbsp; Exit the Carroll St. stop at the '
++'corner of Smith St. and 2nd Place.&nbsp; Turn right onto 2nd Pl. and walk 1 block '
++'West.&nbsp; Turn left onto Court St. and walk 3 blocks South to the Le Petit Cafe '
++'at 502 Court St., between Luquer St. and Nelson St.';
+
+var DriveSubInfoCap=
+ '<div align="center">Driving and Subway Information for 502 Court Street<\/div>';
+
+// Function which sets up and creates the
+// Google map contents for Le Petit Cafe.
+//
+function doLePetitCafeGoogleMaps(GMid){
+ // longitude and latitude for pin
+ var pinLong=parseFloat('-73.998650');
+ var pinLat=parseFloat('40.676650');
+
+ // longitude and latitude for center of map
+ var GMlong=(GMid=='map2')?pinLong:parseFloat('-73.977650');
+ var GMlat=(GMid=='map2')?parseFloat('40.678650'):parseFloat('40.696650');
+
+ // Create a new instance of the google map
+ var o=OLgetRef(GMid);if(!o){cClick(); return;}
+ var map=(typeof GMap2=='undefined')?null:new GMap2(o);
+ if(!map){o.innerHTML=myGMerrMsg; return;}
+ map.addControl(new GSmallMapControl());
+ map.addControl(new GMapTypeControl());
+ var GMzoom=(GMid=='map2')?15:13;
+ map.setCenter(new GLatLng(GMlat,GMlong), GMzoom);
+
+ // Create a new point to indicate the map location for the marker
+ var point = new GLatLng(pinLat,pinLong);
+
+ // Create a new marker with the point, and overlay it on the map
+ var marker = new GMarker(point);
+ map.addOverlay(marker);
+ if(GMid=='map2')GEvent.addListener(marker,'click',function(){return cClick2();});
+ else GEvent.addListener(marker,'click',function(){
+  overlib2(DriveSubInfo, CAPTION,DriveSubInfoCap, TEXTPADDING,5,
+   STICKY, CLOSECLICK, REF,'map', REFX,5, REFY,5, SHADOW, WIDTH,485,
+   CLOSEFONTCLASS,'olcloGM', BASE,2, PRINT, PRINTFONTCLASS,'olcloGM',
+   PRINTTITLE,'Click to Print the Driving and Subway Information',
+   CGCLASS,'olcgGM',PRINTCSSFILE,'AJAX.css');});
+}
+
+// Function invoked via the PRINTJOB command in overlib calls.
+// The URLs for this example are defined in the lowPowerGM and
+// highPowerGM string variables, above.
+// 
+function PrintGoogleMap(URL){
+ // If no URL, do nothing
+ if (!URL) return;
+
+ // Create a temporary window, passing it the URL for a file
+ // which will print itself and then close that window.
+ //
+ PrJob = window.open(URL,'printjob',
+  'resizable=0,width=560,height=480,status=0,location=0,toolbar=0,'
+  +'menubar=0,scrolling=0,screenX=0,left=0,screenY=0,top=0');
+
+ return;
+}
+//]]>
+</script>
+<!-- END OF SCRIPT BLOCK FOR GOOGLE MAPS -->
+
+<!--*******************************************
+        START OF SCRIPT BLOCK FOR DEBUGGING
+    *******************************************-->
+<script type="text/javascript">
+//<![CDATA[
+// Debug version of OLcmdExT1 function.
+//
+function OLcmdExT1debug() {
+ overlib( OLresponseAJAX , TEXTPADDING,0, CAPTIONPADDING,4, CAPTION,
+ 'Example with AJAX content via &lt;span '
+ +'class="yellow"&gt;responseText&lt;/span&gt;.&nbsp; '
+ +'Popup scrolls with the window.',
+ WRAP, BORDER,2, STICKY, CLOSECLICK, SCROLL,
+ MIDX,0, RELY,100,
+ STATUS,'Example with AJAX content via responseText of XMLHttpResponse');
+ OLresponseAJAXshow(); return false;
+}
+//]]>
+</script>
+<!-- END OF SCRIPT BLOCK FOR DEBUGGING -->
+
+<script type="text/javascript">
+<!--
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+//-->
+</script>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff" onunload="GUnload();">
+
+<table width="100%" cellpadding="2" cellspacing="0" border="0"> 
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Examples of AJAX popups</strong></span>
+   <span class="mySubHead"><strong><em>with the</em></strong></span><br />
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,BASE,2,OFFSETX,-10,OFFSETY,20,TEXTPADDING,4,TEXTFONTCLASS,'myText',
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br />
+   <span class="mySpacer">&nbsp;<br /></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;\/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER,OFFSETY,20,
+     FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Macrides Web Services</a><br />
+   <em>Discuss these examples, seek help, and offer suggestions<br />
+   for AJAX support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;\/span&gt; Support Group',
+     TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',LEFT,OFFSETX,-16,OFFSETY,20,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff',
+     SHADOW,SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">Support Group</a>.</strong><br />
+  </td>
+ </tr>
+ <tr> 
+  <td align="center" valign="middle">
+   <!--******************************************
+         INTRODUCTION AND DOCUMENTATION SECTION
+       ******************************************-->
+   <table width="620" cellpadding="2" cellspacing="0">
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <a name="ajax" id="ajax"><span class="text12">&nbsp;<br /></span></a> <strong>AJAX</strong>
+      is an acronym for <strong>A</strong>synchronous <strong>JA</strong>vascript and
+      <strong>X</strong>ML.&nbsp; To fully appreciate the examples in this support document,
+      it would help to have at least a passing familiarity with the associated concepts and
+      with the emerging standard for the <strong>XMLHttpRequest</strong> object in modern
+      browsers, and its ActiveX equivalent in Internet Explorer versions 5 and 6 (IE v7 has
+      included direct support for the <strong>XMLHttpRequest</strong> object).&nbsp;
+      For the computer scientists, the <a
+       href="http://www.w3.org/TR/XMLHttpRequest/"
+       target="_blank"
+       onmouseover="overlib('See the W3C draft standard for XMLHttpRequest',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Working Draft</a> of an emerging W3C standard is
+      now making real headway.&nbsp; But if that's Greek to you, try starting
+      with the <a
+       href="http://en.wikipedia.org/wiki/Xmlhttprequest"
+       target="_blank"
+       onmouseover="overlib('See what Wikipedia says about XMLHttpRequest',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Wikipedia</a>.&nbsp; Also, Apple's <a
+       href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html"
+       target="_blank"
+       onmouseover="overlib('See what Apple says about XMLHttpRequest',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Developer Connection</a> for AJAX is excellent, and two
+       of the examples in this support document are adapted from its <a
+       href="http://developer.apple.com/internet/webcontent/XMLHttpRequestExample/example.html"
+       onmouseover="overlib('Try the AJAX example at Apple',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"
+       target="_blank">example</a>.&nbsp; The Mozilla Developer Center also offers a <a
+       href="http://developer.mozilla.org/en/docs/AJAX:Getting_Started"
+       target="_blank"
+       onmouseover="overlib('See what the Mozilla folks say about AJAX',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Getting Started</a> document for AJAX.&nbsp; The <a
+       href="http://ajaxpatterns.org/Accessibility_Links"
+       target="_blank"
+       onmouseover="overlib('Discussion of Accessible Links at ajaxpatterns.org',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">accessibility issues</a> with <strong>AJAX</strong> merit
+      review.&nbsp; In this support document we also have an example which uses dynamic <a
+       href="http://www.google.com/apis/maps/"
+       target="_blank"
+       onmouseover="overlib('Get a Google Maps API key',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Google Maps</a> as DHTML popup content.&nbsp; Their API
+      is a particuarly creative use of AJAX.&nbsp; Our basic examples in this support
+      document use <strong>OLgetAJAX</strong> function calls for making <strong>GET</strong>
+      requests, and <strong>OLpostAJAX</strong> for using <strong>POST</strong>, via the <a
+       href="zipArchive.html"
+       target="_blank"
+       onclick="overlib(
+        OLiframeContent('zipArchive.html', 690, 350, 'if1dist', 1),
+        CAPTION,'Contents of overlibmws.zip', CAPTIONPADDING,4,
+        WIDTH,690, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+        MIDX,0, MIDY,0,
+        STATUS,'Contents of overlibmws.zip'); return false;"        
+       onmouseover="overlib('Preview the contents of '
+        +'&lt;strong&gt;overlibmws.zip&lt;\/strong&gt;',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"><strong>distribution</strong></a>'s
+      <strong>ajaxcontentmws.js</strong> support script (<em>see below</em>).
+     </td>
+    </tr>
+   </table>
+   <!--********************
+         EXAMPLES SECTION
+       ********************-->
+   <table width="620" cellpadding="2" cellspacing="0">
+    <!--*****************
+          FIRST EXAMPLE
+        *****************-->
+    <tr>
+     <td align="left" width="100%" class="text16">
+      <a name="ajaxex1" id="ajaxex1"><span class="text12">&nbsp;<br /></span></a>
+      <strong>The 1st (and most basic) example is a</strong><br />
+     </td>
+    </tr>
+    <tr> 
+     <td align="center" class="text14">
+      <!--
+           Invoke a scolling popup with responseText AJAX content
+        -->
+      <strong><a
+       href="javascript:void(0);"
+       onmouseover="return OLgetAJAX('popupContent.php5?exa=1', OLcmdExT1,
+       300, 'ovfl1');"
+       onmouseout="OLclearAJAX();"
+      >Popup with AJAX content via responseText of XMLHttpRequest</a></strong>
+     </td> 
+    </tr> 
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>called by the statement:</strong><br />
+      <!--
+           Show markup for invoking a popup with responseText AJAX content
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       onmouseover = "return
+       <strong>OLgetAJAX(</strong>'popupContent.php5?exa=1',
+       OLcmdExT1,<br />
+       &nbsp;300, 'ovfl1'<strong>);</strong>"<br />
+      </td></tr></table>
+      which initiates a <strong>wrapper function set</strong> that uses the
+      browser's <strong>XMLHttpRequest</strong> object for <strong>asynchronous
+      communication</strong> with an <strong>http</strong> or
+      <strong>https</strong> server (or issues an approriate message for
+      older browsers which are still supported by <strong><span
+      class="purple14">overlibmws</span></strong> but did not yet support
+      that object).&nbsp;  The function set is geared toward sending a
+      <strong>query string</strong> to a <strong>php</strong>,
+      <strong>asp</strong>, or <strong>cgi</strong> (e.g., <strong>perl</strong>)
+      script which can access the server's file, database, and / or authorization
+      systems and retrieve appropriate content for the DHTML popups to populate
+      them dynamically.<br />
+      <!--
+           Indicate that ajaxcontentmws.js should be imported.
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+      <strong>Import</strong> the <a
+       href="zipArchive.html"
+       target="_blank"
+       onclick="overlib(
+        OLiframeContent('zipArchive.html', 690, 350, 'if1dist', 1),
+        CAPTION,'Contents of overlibmws.zip', CAPTIONPADDING,4,
+        WIDTH,690, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+        MIDX,0, MIDY,0,
+        STATUS,'Contents of overlibmws.zip'); return false;"        
+       onmouseover="overlib('Preview the contents of '
+        +'&lt;strong&gt;overlibmws.zip&lt;\/strong&gt;',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"><strong>distribution</strong></a>'s
+      <strong>ajaxcontentmws.js</strong> support script to<br />
+      have the functions available for use with <strong>overlib</strong>
+      or <strong>overlib2</strong> calls.<br />
+      </td></tr></table>
+      The GET request for the server is indicated by a
+      <strong>partial, relative or complete URL</strong> entered as a quoted
+      <strong><em>string</em></strong> or unquoted string variable name or
+      array entry (or summation) in the required,<br />
+      <span style="background:#ddddee;"><strong><em>&nbsp;<span
+      class="blue">first argument</span>&nbsp;</em></strong></span> of
+      the:<br />
+      <!--
+           Show the OLgetAJAX function with its argument names and
+           its 1st arg emphasized.
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <strong>OLgetAJAX(<em><span class="blue">url</span></em></strong><em>,
+       command, delay, css</em><strong>);</strong>
+      </td></tr></table>
+      wrapper function.&nbsp; In this example the URL is for a php script
+      (<strong><em>popupContent.php5</em></strong>), with a query string
+      (<em><strong>?exa=1</strong></em>) which acts as an instruction to
+       return the content for the popup in this first example.&nbsp;
+      The URL need not have a query string, and instead could be a GET request
+      to return a file.&nbsp; Most commonly, the server-side script is set up
+      to return a plain text or HTML fragment which upon receipt by the browser
+      is converted to the lead argument of an <strong>overlib</strong> or
+      <strong>overlib2</strong> call, homologously to a statically defined
+      javascript string variable.&nbsp; But the server-side script also could
+      return a complete file.&nbsp; If it is <strong>a plain text or HTML
+      fragment</strong>, the server's response headers <strong>should</strong>
+      indicate a Content-Type of <strong>text/plain</strong>, e.g., for a php
+      script by its using:<br />
+      &nbsp;&nbsp;&nbsp;
+      <strong>&lt;?php header('Content-Type: text/plain'); ?&gt;</strong><br />
+      For a <strong>complete file</strong>, its correct Content-Type should be
+      indicated.&nbsp; For <strong>XML</strong> the Content-Type
+      <strong>must</strong> be indicated as <strong>text/xml</strong>.&nbsp;
+      Each response from the server becomes available as a <strong>string</strong>
+      loaded into <strong><span style="background:#aa00aa;"><span
+      class="olcap">&nbsp;OLhttp.</span><span
+      class="yellow">responseText</span>&nbsp;</span></strong>.&nbsp;
+      Also, any response which has <strong>text/xml</strong> indicated
+      <strong>and</strong> has well-formed XML is parsed into an <strong>XML
+      document object</strong> (i.e., a DOM object, not a string) which is
+      loaded into <strong><span style="background:#aa00aa;"><span
+      class="olcap">&nbsp;OLhttp.</span><span
+      class="yellow">responseXML</span>&nbsp;</span></strong>.&nbsp; The
+      <strong><span style="background:#aa00aa;"><span
+      class="olcap">&nbsp;OLhttp.</span><span
+      class="yellow">responseText</span>&nbsp;</span></strong> string with some
+      possible manipulation (<em>see below</em>) is loaded into the library's
+      <strong class="yellow"
+      style="background:#aa00aa;">&nbsp;OLresponseAJAX&nbsp;</strong>
+      global.<br />
+      The also required,<br />
+      <strong><span style="background:#ddddee;"><em>&nbsp;<span
+      class="blue">second argument</span>&nbsp;</em></span></strong> of
+      the:<br />
+      <!--
+           Show the OLgetAJAX function with its argument names and
+           its 2nd arg emphasized.
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+       bgcolor="#ddddee">
+       <strong>OLgetAJAX(</strong>url, <strong><em><span
+       class="blue">command</span></em></strong><em>, delay,
+       css</em><strong>);</strong>
+      </td></tr></table>
+      wrapper function is the <strong><em>reference</em></strong> (unquoted
+      name without parens) for a <strong><em>function</em></strong> to be
+      called when the server's reponse has been received.&nbsp; It could instead be a
+      <strong><em>quoted string</em></strong> which indicates a function with its parens
+      and any args, or an <strong><em>inline function</em></strong> (<em>see below</em>).&nbsp;
+      In this first example the <em>function reference</em>
+      (<strong><em>OLcmdExT1</em></strong>) points to a function which simply
+      makes an <strong>overlib</strong> call with <strong class="yellow"
+      style="background:#aa00aa;">&nbsp;OLresponseAJAX&nbsp;</strong>
+      as its lead argument:<br />
+      <!--
+           Show the OLcmdExT1 function
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       function <strong><a
+       href="javascript:void(0);"
+       onmouseover="return OLgetAJAX('popupContent.php5?exa=1', OLcmdExT1,
+       300, 'ovfl1');"
+       onmouseout="OLclearAJAX();">OLcmdExT1()</a></strong> <code>{<br />
+       &nbsp;return <strong>overlib(<span class="yellow"
+       style="background:#aa00aa;">&nbsp;OLresponseAJAX&nbsp;</span></strong>,
+       TEXTPADDING,0, CAPTIONPADDING,4, CAPTION,<br />
+       &nbsp;'Example with AJAX content via &amp;lt;span '<br />
+       &nbsp;+'class="yellow"&amp;gt;responseText&amp;lt;/span&amp;gt;.&amp;nbsp; '<br />
+       &nbsp;+'Popup scrolls with the window.',<br />
+       &nbsp;WRAP, BORDER,2, STICKY, CLOSECLICK, <strong>SCROLL</strong>,<br />
+       &nbsp;MIDX,0, RELY,100,<br />
+       &nbsp;STATUS,'Example with AJAX content via responseText of
+       XMLHttpResponse'<strong>);</strong><br />
+       }</code><br />
+      </td></tr></table>
+      The optional,<br />
+      <strong><span style="background:#ddddee;"><em>&nbsp;<span
+      class="blue">third argument</span>&nbsp;</em></span></strong> of
+      the:<br />
+      <!--
+           Show the OLgetAJAX function with its argument names,
+           and its 3rd arg emphasized.
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <strong>OLgetAJAX(</strong><em>url, command, <strong><span
+       class="blue">delay</span></strong>, css</em><strong>);</strong>
+      </td></tr></table>
+      wrapper function is an unquoted <strong><em>integer</em></strong>
+      indicating the <strong><em>number of millisecs</em></strong> to wait
+      before actually issuing the GET request to the server.&nbsp; It should
+      be <strong>0</strong> (or omitted if the fourth argument also is omitted)
+      when <strong>onclick</strong> or <strong>onload</strong> is used, but can
+      be a modest value (<strong><em>300</em></strong> in this first example)
+      with <strong>onmouseover</strong> to avoid making a request to the
+      server if the user simply sweeps across the link or other evoking
+      element instead of intentionally hovering over it.&nbsp; If used, you
+      also should use:<br />
+      <!--
+           Show markup for an onmouseout call to OLclearAJAX
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       onmouseout = "<strong>OLclearAJAX();</strong>"<br />
+      </td></tr></table>
+      If the popup is not STICKY, include an <strong>nd</strong> call if it
+      is a primary non-STICKY popup, or an <strong>nd2</strong> call if it
+      is a secondary non-STICKY popup, e.g.:<br />
+      <!--
+           Show markup for an onmouseover and onmouseout pair
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       onmouseover = "return <strong>OLgetAJAX(</strong><em>url,
+       command,</em> <strong>300</strong><em>,
+       css</em><strong>);</strong>"<br />
+       onmouseout = "<strong>OLclearAJAX(); nd();</strong>"<br />
+      </td></tr></table>
+      If <strong>onclick</strong> is used, force a return value of
+      <strong>false</strong>:<br />
+      <!--
+           Show markup for onclick
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       onclick = "<strong>OLgetAJAX(</strong><em>url, command,</em>
+       <strong>0</strong><em>, css</em><strong>); return
+       false;</strong>"<br />
+      </td></tr></table>
+      as discussed in the <strong><a
+       href="ONCLICK.html"
+       onmouseover="overlib('See the support document for onclick',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">onclick</a></strong> support document.<br />
+      If <strong>onload</strong> is used do not indicate a return
+      value:<br />
+      <!--
+           Show markup for onload
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       onload = "<strong>OLgetAJAX(</strong><em>url, command,</em>
+       <strong>0</strong><em>, css</em><strong>);</strong>"<br />
+      </td></tr></table>
+      The optional,<br />
+      <strong><span style="background:#ddddee;"><em>&nbsp;<span
+      class="blue">fourth argument</span>&nbsp;</em></span></strong>
+      of the:<br />
+      <!--
+           Show the OLgetAJAX function with its argument names,
+           and its 4th arg emphasized.
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <strong>OLgetAJAX(</strong><em>url, command, delay,
+       <strong><span class="blue">css</span></strong></em><strong>);</strong>
+      </td></tr></table>
+      wrapper function is a quoted <strong><em>string</em></strong> which
+      names a CSS <strong><em>class</em></strong>.&nbsp;  If used,
+      <strong><span style="background:#aa00aa;"><span
+      class="olcap">&nbsp;OLhttp.</span><span
+      class="yellow">responseText</span>&nbsp;</span></strong> is encased by
+      a <strong>div</strong> container with that class indicated in its start
+      tag when the <strong style="background:#aa00aa;"
+      class="yellow">&nbsp;OLresponseAJAX&nbsp;</strong> global
+      is constructed.&nbsp; In this support document we use class names of the
+      form <strong><em>ovfl#</em></strong> which for the first and second
+      examples are:<br />
+      <!--
+           Show markup for the ovfl1 class
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       .ovfl1 {<br />
+       &nbsp;&nbsp;width:510px; height:145px; overflow:auto;<br />
+       &nbsp;&nbsp;border:1px none #000000; padding:10px;
+       background:#d8e9ff;<br />
+       }<br />
+       .ovfl2 {<br />
+       &nbsp;&nbsp;width:550px; height:350px; overflow:auto;<br />
+       &nbsp;&nbsp;border:1px none #000000; padding:0px;
+       background:#eeeeee;<br />
+       }<br />
+      </td></tr></table>
+      We include <strong>WRAP</strong> in the associated <strong>overlib</strong>
+      or <strong>overlib2</strong> calls, so the <strong>width</strong> and
+      <strong>height</strong> specified via CSS determine the width and height
+      for the main text area of the popups.&nbsp; The <strong>overflow</strong>
+      value of <strong>auto</strong> specifies that <a
+       href="overflow.html"
+       onmouseover="overlib('See the support document for scrollbars in popups.',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">scrollbars</a> should be included within the popups
+      if needed based on the content size.&nbsp; Such encasement might instead
+      be done by a server-side script, or you may not be concerned about content
+      size and not wish to specify an overflow rule nor the popup dimensions in
+      this manner , which is why the fourth argument is optional in our javascript
+      function set.<br />
+      <strong class="red"><em>WE CAN use</em> POST</strong> instead of
+      <strong>GET</strong> with the <strong>XMLHttpRequest</strong> object via the
+      <strong>OLpostAJAX</strong> function of the <strong>ajaxcontentmws.js</strong>
+      function set.<br />
+      The required,<br />
+      <strong><span style="background:#ddddee;"><em>&nbsp;<span
+      class="blue">second argument</span>&nbsp;</em></span></strong> of
+      the:<br />
+      <!--
+           Show the OLpostAJAX function with its argument names and
+           its 2nd arg emphasized.
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+       bgcolor="#ddddee">
+       <strong>OLpostAJAX(</strong>url, <strong><em><span
+       class="blue">qry</span></em></strong><em>, command, delay,
+       css</em><strong>);</strong>
+      </td></tr></table>
+      wrapper function is a quoted <strong><em>string</em></strong> or unquoted
+      string variable name or array entry (or summation) with the material to be
+      <strong>POST</strong>ed to the server, and typically is a query string (without
+      a lead <strong>?</strong>).&nbsp; The other arguments are as for
+      <strong>OLgetAJAX</strong>.&nbsp; To reproduce this first example with
+      <strong>POST</strong> we would use:<br />
+      <!--
+           Show markup for invoking a popup with OLpostAJAX
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       onmouseover = &quot;return <a
+        href="javascript:void(0);"
+        onmouseover="OLpostAJAX('popupContent.php5', 'exa=1', OLcmdExT1,
+         300, 'ovfl1');"
+        onmouseout="OLclearAJAX(); nd();"
+       ><strong>OLpostAJAX</strong></a><strong>(</strong>'popupContent.php5',
+       <span class="blue">'exa=1'</span>, OLcmdExT1,<br />
+       &nbsp;300, 'ovfl1'<strong>);</strong>&quot;<br />
+       onmouseout="OLclearAJAX();"<br />
+      </td></tr></table>
+      The <strong>POST</strong> method might be preferred when using
+      <strong>https</strong> with a query string or other material which is
+      entered dynamically by the user (e.g., via a form) and which we do not
+      wish to be visible  as part of the url, in which case we would also use
+      the name of a string definition or an array entry (e.g., constructed from
+      a form-field value as in the 2nd and 3rd examples, <em>below</em>),
+      rather than a quoted string, as the second argument in the
+      <strong>OLpostAJAX</strong> call.<br />
+      <strong class="red">AN<a name="ajaxex1af"
+      id="ajaxex1af">&nbsp;</a>ALTERNATIVE&nbsp;FORMAT</strong> for using
+      <strong>OLgetAJAX</strong> or <strong>OLpostAJAX</strong> is illustated in
+      this link:<br />
+      <!--
+           Show alternative format with link for using it.
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       &lt;a<br />
+       <code>&nbsp;href="javascript:void(0);"<br />
+       &nbsp;onmouseover="overlib('Click to use an alternative format',<br />
+       &nbsp;&nbsp;TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"<br />
+       &nbsp;onmouseout="nd();"<br />
+       &nbsp;<strong class="red">onclick</strong>="<strong
+       class="red">overlib(</strong><br />
+       &nbsp;&nbsp;'&amp;lt;<strong>div class</strong>=\'<strong>ovfl1</strong>\'
+       <strong>id</strong>=\'<strong class="red">ajaxexa1</strong>\'&amp;gt;<strong
+        class="blue">&amp;nbsp;Loading . .
+       .</strong>&amp;lt;<strong>/div</strong>&amp;gt;',<br />
+       &nbsp;&nbsp;TEXTPADDING,0, CAPTIONPADDING,4, CAPTION,<br />
+       &nbsp;&nbsp;'Example with AJAX content via &amp;lt;span '<br />
+       &nbsp;&nbsp;+'class=\'yellow\'&amp;gt;responseText&amp;lt;/span&amp;gt;.&amp;nbsp; '<br />
+       &nbsp;&nbsp;+'Popup scrolls with the window.',<br />
+       &nbsp;&nbsp;WRAP, BORDER,2, STICKY, CLOSECLICK, <strong>SCROLL</strong>,<br />
+       &nbsp;&nbsp;MIDX,0, RELY,90,<br />
+       &nbsp;&nbsp;STATUS,'Example with AJAX content via responseText of
+       XMLHttpResponse'<strong class="red">);</strong><br />
+       &nbsp;&nbsp;<strong class="red">OLgetAJAX(</strong><span
+       class="blue">'popupContent.php5?exa=1'</span>,<br />
+       &nbsp;&nbsp;&nbsp;<span
+       class="blue">function(){<strong>OLgetRef(</strong>'<strong
+       class="red">ajaxexa1</strong>'<strong>)</strong>.innerHTML=<strong
+       style="background:#aa00aa;" class="yellow">&nbsp;OLresponseAJAX&nbsp;</strong>;}<strong
+       class="red">);</strong><br />
+       &nbsp;&nbsp;<strong class="red">return false;</strong>"&gt;</span></code><a
+       href="javascript:void(0);"
+       onmouseover="overlib('Click to use an alternative format',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"
+       onclick="overlib('&lt;div class=\'ovfl1\' id=\'ajaxexa1\'&gt;&nbsp;Loading . . .&lt;\/div&gt;',
+        TEXTPADDING,0, CAPTIONPADDING,4, CAPTION,
+        'Example with AJAX content via &lt;span class=\'yellow\'&gt;responseText&lt;\/span&gt;.&nbsp; '
+        +'Popup scrolls with the window.',
+        WRAP, BORDER,2, STICKY, CLOSECLICK, SCROLL,
+        MIDX,0, RELY,90,
+        STATUS,'Example with AJAX content via responseText of XMLHttpResponse');
+        OLgetAJAX('popupContent.php5?exa=1',
+         function(){OLgetRef('ajaxexa1').innerHTML=OLresponseAJAX;});
+        return false;">Popup with AJAX content via responseText of
+        XMLHttpRequest</a>&lt;\/a&gt;<br />
+      </td></tr></table>
+      It's <strong class="red">onclick</strong> call to  <strong
+      class="red">overlib</strong> invokes a STICKY popup with initial content of
+      <strong class="blue">&amp;nbsp;Loading . . .</strong> encased in a
+      <strong>div</strong> with a CSS <strong>class</strong>
+      (<strong>ovfl1</strong>) that has an <strong>overflow:auto;</strong>
+      rule.&nbsp; The <strong>div</strong> also has an <strong>id</strong>
+      (<strong class="red">ajaxexa1</strong>) so that its content can be
+      referenced as <span class="blue"><strong>OLgetRef(</strong>'<strong
+      class="red">ajaxexa1</strong>'<strong>)</strong>.innerHTML</span>.&nbsp;
+      The <strong class="red">overlib</strong> call thus is followed by an
+      <strong class="red">OLgetAJAX</strong> call whose first argument is the
+      URL for this first example (<span
+      class="blue">'popupContent.php5?exa=1'</span>), and whose second argument
+      is an inline function (without a name; handled equivalently to a function
+      reference for a named function) which sets the content of the
+      <strong>div</strong> to <strong style="background:#aa00aa;"
+      class="yellow">&nbsp;OLresponseAJAX&nbsp;</strong>.&nbsp; We then force a
+      <strong class="red">return</strong> value of <strong class="red">false</strong>
+      appropriately for <strong class="red">onclick</strong>.&nbsp; If we had used
+      <strong class="red">OLpostAJAX</strong> its first argument would have been
+      <span class="blue">'popupContent.php5'</span>, its second argument would have
+      been <span class="blue">'exa=1'</span>, and its third argument would have been
+      the inline function.<br />
+      <strong>NOTE</strong> that with this format one can easily replace the
+      <strong>OLgetAJAX</strong> or <strong>OLpostAJAX</strong> call with a call to the
+      equivalent function in one of the popular libraries for AJAX, e.g., <a
+       href="http://www.prototypejs.org/"
+       onmouseover="overlib('See what prototype is all about.',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">prototype</a> or <a
+       href="http://mootools.net/"
+       onmouseover="overlib('See what mootools is all about.',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">mootools</a>.<br />
+     </td>
+    </tr>
+    <!--******************
+          SECOND EXAMPLE
+        ******************-->
+    <tr> 
+     <td align="left" class="text16">
+      <a name="ajaxex2" id="ajaxex2"><span class="text12">&nbsp;<br /></span></a>
+      <strong>The 2nd example is a</strong><br />
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text14">
+      <!--
+           Invoke a scolling popup with responseXML AJAX content
+        -->
+      <strong><a
+       href="javascript:void(0);"
+       onmouseover="return overlib(AppleAJAX, TEXTPADDING,0, CAPTIONPADDING,4,
+        CAPTION,'AJAX content via &lt;span class=\'yellow\'&gt;responseXML&lt;\/span&gt; of '
+        +'XMLHttpRequest.&nbsp; Popup scrolls with the window.',
+        WRAP, BORDER,2, STICKY, CLOSECLICK, SCROLL,
+        MIDX,0, RELY,90,
+        STATUS,'Popup with AJAX content via responseXML of XMLHttpRequest');"
+       onmouseout="nd();">Popup with AJAX content via responseXML of XMLHttpRequest</a></strong>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>called by the statement:</strong><br />
+      <!--
+           Show markup for invoking a popup with responseXML AJAX content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       return <strong>overlib(</strong><code><span class="red">AppleAJAX</span>,
+       TEXTPADDING,0, CAPTIONPADDING,4,<br />
+       &nbsp;CAPTION,'AJAX content via responseXML of
+       XMLHttpRequest.&amp;nbsp; '<br />
+       &nbsp;+'Popup scrolls with the window.',<br />
+       &nbsp;WRAP, BORDER,2, STICKY, CLOSECLICK, <strong>SCROLL</strong>,<br />
+       &nbsp;MIDX,0, RELY,90,<br />
+       &nbsp;STATUS,'Popup with AJAX content via responseXML of
+       XMLHttpRequest'<strong>);</strong>"</code><br />
+      </td></tr></table>
+      with an <strong>overlib</strong> call which has a <span class="red">lead
+      argument</span> that is
+      a string variable defined for a form:<br />
+      <!--
+           Show string definition for the lead argument
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <code>var <span class="red">AppleAJAX</span>=<br />
+       &nbsp;'&lt;div class="ovfl2"&gt'<br />
+       +'&lt;<strong>form</strong> action="javascript:void(0);"
+       class="form"&gt;'<br />
+       +'&lt;table cellspacing="0" cellpadding="0" border="0"&gt;&lt;tr&gt'&lt;td&gt;'<br />
+       +'&lt;div class="caption"&gt;&#160;&#160;AJAX and PHP Demo '<br />
+       +'(choose a Category then choose Items)&lt;\/div&gt;'<br />
+       +'&lt;div&gt;&amp;#160;&amp;#160;<span
+       class="red">Category:</span>&lt;br \/&gt;'<br />
+       +'&lt;<strong>select</strong> <span
+       class="red">onchange="loadDoc(event);"</span>&gt;'<br />
+       +'&nbsp;&lt;option value=""&gt;Choose One&lt;\/option&gt;'<br />
+       +'&nbsp;&lt;option
+       value="<span class="red">AppleAJAXexample.php5?music=songs</span>"&gt;Top
+       10 Songs&lt;\/option&gt;'<br />
+       +'&nbsp;&lt;option
+       value="<span class="red">AppleAJAXexample.php5?music=albums</span>"&gt;Top
+       10 Albums&lt;\/option&gt;'<br />
+       +'&nbsp;&lt;option
+       value="<span class="red">AppleAJAXexample.php5?music=new</span>"&gt;Top
+       10 New Releases&lt;\/option&gt;'<br />
+       +'&nbsp;&lt;option
+       value="<span class="red">AppleAJAXexample.php5?music=just</span>"&gt;Top
+       10 Just Added&lt;\/option&gt;'<br />
+       +'&lt;\<strong>/select</strong>&gt;'<br />
+       +'&lt;\/div&gt;'<br />
+       +'&lt;div&gt;&amp;#160;&amp;#160;<span
+       class="red">Items:</span>&lt;br \/&gt;'<br />
+       +'&lt;<strong>select</strong> size="10" id="topics"
+       <span class="red">onchange="showDetail(event)"</span>&gt;'<br />
+       +'&nbsp;&lt;option value=""&gt;Choose a Category First&lt;\/option&gt;'<br />
+       +'&lt;\,<strong>/select</strong>&gt;'<br />
+       +'&lt;\/div&gt;'<br />
+       +'&lt;div id="details"&gt;&lt;span&gt;&lt;\/span&gt;&lt;\/div&gt;'<br />
+       +'&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;'<br />
+       +'&lt;\<strong>/form</strong>&gt;'<br />
+       +'&lt;\/div&gt;';</code><br />
+      </td></tr></table>
+      The form has two <strong>select</strong> (<em>drop-down</em>) boxes, for
+      each of which a javascript function is called via the <span
+      class="red">onchange</span> event, i.e., whenever an <strong>option</strong>
+      is selected.&nbsp; The <strong>option</strong> values for the first
+      <strong>select</strong> box point to a server-side script (<strong><em><span
+      class="red">AppleAJAXexample.php5</span></em></strong>) with a
+      <strong>query-string</strong> indicating a desired <span
+      class="red">Category</span> of <span class="red">music</span>.&nbsp; The
+      function called via the <span class="red">onchange</span> event includes
+      this call to our wrapper function for using the
+      <strong>XMLHttpRequest</strong> object:
+      <!--
+           Show the form-based call to OLgetAJAX
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <strong>OLgetAJAX(</strong><span
+       class="red">elem.options[elem.selectedIndex].value</span>,
+       OLcmdX1<strong>);</strong><br />
+      </td></tr></table>
+      For its <strong>first argument</strong>, we use the selected
+      option value, which is a URL with query string.&nbsp; The
+      <strong>second argument</strong> is a <em>reference</em> for the function
+      (<strong><em>OLcmdX1</em></strong>) which will handle the XML document
+      object returned via <strong><span style="background:#aa00aa;"><span
+      class="olcap">&nbsp;OLhttp.</span><span
+      class="yellow">responseXML</span>&nbsp;</span></strong> and load the
+      second <strong>select</strong> box with 10 <strong>option</strong>s.&nbsp;
+      Whenever one of those is selected, the associated
+      <span class="red">onchange</span> event will invoke another function which
+      will further handle the response and display an image and text below the
+      <strong>select</strong> box.&nbsp; That material includes links for
+      invoking Apple's iTunes digital jukebox and online music store (if
+      <strong><a
+       href="http://www.apple.com/itunes/download/"
+       target="_blank"
+       onmouseover="overlib('Link to the download site for Apple\'s iTunes '
+        +'jukebox and music store',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">installed</a></strong> on your computer), thereby
+      making music-minded members of the iPod generation ecstatic.<br />
+     </td>
+    </tr>
+    <!--*****************
+          THIRD EXAMPLE
+        *****************-->
+    <tr> 
+     <td align="left" class="text16">
+      <a name="ajaxex3" id="ajaxex3"><span class="text12">&nbsp;<br /></span></a>
+      <strong>The 3rd example is a</strong><br />
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="center" class="text14">
+      <!--
+           Invoke a draggable popup with iframe content that uses AJAX
+        -->
+      <strong><a
+       href="javascript:void(0);"
+       onclick="return false;"
+       onmouseover="return overlib(
+        OLiframeContent('popupContent.php5?exa=3',
+        550, 350, 'ifajax', 1),
+        WIDTH,550, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK, DRAGGABLE,
+        CAPTIONPADDING,4, CAPTION,'Example with iframe and AJAX content.&nbsp; '
+        +'Draggable via the caption.',
+        MIDX,0, MIDY,0, FGCLASS,'olfgifajax',
+        STATUS,'Draggable example with iframe and AJAX content');"
+       onmouseout="nd();">Draggable popup with iframe content that has AJAX
+      content</a></strong>
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" width="100%" class="text12">
+      <strong>called by the statement:</strong><br />
+      <!--
+           Show markup for invoking a draggable popup with iframe and AJAX content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+        bgcolor="#ddddee">
+       return <strong>overlib(<br />
+       &nbsp;OLiframeContent(</strong><code>'popupContent.php5?exa=3',
+       550, 350, 'ifajax', 1<strong>)</strong>,<br />
+       &nbsp;WIDTH,550, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+       <strong>DRAGGABLE</strong>,<br />
+       &nbsp;CAPTIONPADDING,4, CAPTION,'Example with iframe and AJAX content.&amp;nbsp; '<br />
+       &nbsp;+'Draggable via the caption.',<br />
+       &nbsp;MIDX,0, MIDY,0, FGCLASS,'olfgifajax',<br />
+       &nbsp;STATUS,'Draggable with iframe and AJAX content and a
+       caption'</code><strong>);</strong>"<br />
+      </td></tr></table>
+      which uses this <strong>simple function</strong> for the <strong>lead argument</strong>
+      in the overlib call:<br />
+      <!--
+           Show script used for invoking a daggable popup with iframe and AJAX content
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+        bgcolor="#ddddee">
+       function <strong>OLiframeContent(</strong><code><em class="blue">src</em>,
+       <em class="blue">width</em>, <em class="blue">height</em>,
+       <em class="blue">name</em>, <em
+       class="blue">frameborder</em>, <em
+       class="blue">scrolling</em><strong>)</strong> {<br />
+       &nbsp;return ('&lt;<strong>iframe</strong> src="'+<em
+       class="blue">src</em>+'" width="'+<em class="blue">width</em>+'"
+       height="'+<em class="blue">height</em>+'"'<br />
+       &nbsp;&nbsp;+(<em class="blue">name</em>!=null?' name="'+<em
+       class="blue">name</em>+'" id="'+<em class="blue">name</em>+'"':'')<br />
+       &nbsp;&nbsp;+(<em class="blue">frameborder</em>!=null?'
+       frameborder="'+<em class="blue">frameborder</em>+'"':'')<br />
+       &nbsp;&nbsp;+' scrolling="'+(<em class="blue">scrolling</em>!=null?<em
+       class="blue">scrolling</em>:'auto')+'"&gt;'<br />
+       &nbsp;&nbsp;+'&lt;div&gt;[iframe not
+       supported]&lt;\/div&gt;&lt;<strong>/iframe</strong>&gt;');<br />
+       }</code>
+      </td></tr></table>
+      You can:<br />
+      <!--
+           Indicate that iframecontentmws.js should be imported.
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <strong>Import</strong> the <a
+       href="zipArchive.html"
+       target="_blank"
+       onclick="overlib(
+        OLiframeContent('zipArchive.html', 690, 350, 'if1dist', 1),
+        CAPTION,'Contents of overlibmws.zip', CAPTIONPADDING,4,
+        WIDTH,690, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+        MIDX,0, MIDY,0,
+        STATUS,'Contents of overlibmws.zip'); return false;"        
+       onmouseover="overlib('Preview the contents of '
+        +'&lt;strong&gt;overlibmws.zip&lt;\/strong&gt;',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"><strong>distribution</strong></a>'s
+       <strong>iframecontentmws.js</strong> support script to<br />
+       have this function available for use with <strong>overlib</strong>
+       or <strong>overlib2</strong> calls.<br />
+      </td></tr></table>
+      It's <em class="blue">first argument</em> is a URL for a server-side
+      script or pre-existing file as for the first argument in the <a
+       href="AJAX.html#ajaxex1"
+       onmouseover="overlib('Review the &quot;most basic&quot; use of '
+        +'&lt;strong&gt;OLgetAJAX&lt;\/strong&gt; and '
+        +'&lt;strong&gt;OLpostAJAX&lt;\/strong&gt;',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">OLgetAJAX</a> function.&nbsp; In this example it
+      is for our <strong>php</strong> script
+      (<strong><em>popupContent.php5</em></strong>) with a query string
+      (<strong><em>?exa=3</em></strong>) which serves as an instruction to
+      return the content for this third example.&nbsp; The script actually
+      returns a pre-existing file (<a
+       href="AppleAJAXexamplePHP.html"
+       onmouseover="return overlib('Directly access:&lt;br&gt;'
+        +'&lt;strong&gt;AppleAJAXexamplePHP.html&lt;\/strong&gt;',
+        TEXTPADDING,6, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">AppleAJAXexamplePHP.html</a>), with an appropriate
+      header indicating a Content-Type of <strong>text/html</strong> by
+      using:<br />
+      &nbsp;&nbsp;&nbsp;
+      <strong>&lt;?php header('Content-Type: text/html'); ?&gt;</strong><br />
+      We could have used a URL for the file directly, rather than via the
+      sever-side script.&nbsp;
+      The file contains the same <strong>form</strong> as used in the <a
+       href="AJAX.html#ajaxex2"
+       onmouseover="overlib('Review the &lt;strong&gt;2nd example&lt;\/strong&gt;',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">second example</a>, which the server-side script in theory
+      might have fetched from a database and sandwiched between "top" and "bottom"
+      sections to construct a complete HTML document.&nbsp;The <em class="blue">second
+      argument</em> specifies the <em class="blue">width</em> for the
+      <strong>iframe</strong> and consequently for the main text area of the
+      popup.&nbsp; The <em class="blue">third argument</em> similarly specifies
+      the <em class="blue">height</em>.&nbsp; The <em class="blue">fourth
+      argument</em> is a quoted string which specifies the <em
+      class="blue">name</em> (and <em class="blue">id</em>) for the
+      <strong>iframe</strong> container element, and the <em
+      class="blue">fifth argument</em> is the integer <strong>1</strong> or
+      <strong>0</strong> for its <em class="blue">frameborder</em> <strong><a
+       href="http://www.htmlhelp.com/reference/html40/special/iframe.html"
+       onmouseover="overlib('Link to the Web Design Group\'s specification for iframe',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">attribute</a></strong>.<br />
+      <strong class="red">IN ADDITION</strong> to manipulating popup content with the
+      <strong>XMLHttpRequest</strong> object via the <strong>OLgetAJAX</strong> or
+      <strong>OLpostAJAX</strong> function, when it is <strong>iframe content</strong> we
+      can do content swapping via the <strong>src</strong> for the iframe element.&nbsp;
+      In this third example we included this link for a Help document:<br />
+      <!--
+           Show the link for a Help document
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+       bgcolor="#ddddee">
+       <span style="color:#336699;font-weight:bold;">[</span>&lt;a<br />
+       &nbsp;&nbsp;&nbsp;href="javascript:<strong>OLswapIframeSrc(</strong>'ifajax',
+       'popupContent.php5?exa=3help'<strong>);</strong>"<br />
+       &nbsp;&nbsp;&nbsp;title="get Help on how to use this form"&gt;<span
+       style="color:#0000ff;text-decoration:underline;">get Help</span>&lt;\/a&gt;<span
+       style="color:#336699;font-weight:bold;">]</span><br />
+      </td></tr></table>
+      so that the Help document can be swapped in via the
+      <strong>OLswapIframeSrc</strong> function of the <strong>iframecontentmws.js</strong>
+      function set:<br />
+       <!--
+           Show the OLswapIframeSrc function
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+       bgcolor="#ddddee">
+       function <strong>OLswapIframeSrc(</strong><code><em class="blue">name,
+       src</em></code><strong>)</strong>{<br />
+       <code>&nbsp;if(parent==self){<br />
+       &nbsp;&nbsp;alert(<em class="blue">src</em>+'\n\n is only for iframe
+       content');<br />
+       &nbsp;&nbsp;return;<br />
+       &nbsp;}<br />
+       &nbsp;var <strong>o</strong> = <strong>parent.OLgetRef(</strong><em
+       class="blue">name</em><strong>);</strong><br />
+       &nbsp;if(o)<strong>o.src</strong> = <em class="blue">src</em>;<br />
+       &nbsp;else alert(<em class="blue">src</em>+'\n\n is not available');</code><br />
+       }<br />
+      </td></tr></table>
+      for which the first argument is the <em class="blue">name</em>
+      (<strong><em>'ifajax'</em></strong>) we assigned to the iframe via the fourth
+      argument of the <strong>OLiframeContent</strong> function, and the second
+      argument (<em class="blue">src</em>) is the URL
+      (<strong><em>popupContent.php5?exa=3help</em></strong>) for the Help document,
+      which for this third example also is a pre-existing file (<a
+       href="AppleAJAXexamplePHPhelp.html"
+       onmouseover="return overlib('Directly access:&lt;br&gt;'
+        +'&lt;strong&gt;AppleAJAXexamplePHPhelp.html&lt;\/strong&gt;',
+        TEXTPADDING,6, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">AppleAJAXexamplePHPhelp.html</a>).&nbsp; Note that we
+      get the iframe object by using the <strong>OLgetRef</strong> function of the
+      <strong>overlibmws.js</strong> core module, invoked in the parent document
+      (<strong>AJAX.html</strong>) by use of the <strong>parent</strong>
+      reference.&nbsp; Within the Help document we include this link:<br />
+      <!--
+           Show link for a Back function
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+       bgcolor="#ddddee">
+       <strong>[</strong>&lt;a<br />
+       &nbsp;&nbsp;&nbsp;title="return to the Demo"<br />
+       &nbsp;&nbsp;&nbsp;href="javascript:<strong>OLiframeBack();</strong>"&gt;<span
+       style="color:#0000ff;text-decoration:underline;">return to
+       Demo</span>&lt;\/a&gt;<strong>]</strong><br />
+      </td></tr></table>
+      for restoring the preceding iframe document via the <strong>OLiframeBack</strong>
+      function of the <strong>iframecontentmws.js</strong> function set:
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+       bgcolor="#ddddee">
+       function <strong>OLiframeBack()</strong>{<br />
+       <code>&nbsp;if(parent==self){<br />
+       &nbsp;&nbsp;alert('This feature is only for iframe content');<br />
+       &nbsp;&nbsp;return;<br />
+       &nbsp;}<br />
+       &nbsp;<strong>history.back();</strong></code><br />
+       }<br />
+      </td></tr></table>
+      which simulates the browsers's <strong>Back</strong> button.<br />
+      <strong class="red">NOTE</strong> that the
+      <a
+       href="AppleAJAXexamplePHP.html"
+       onmouseover="return overlib('Directly access:&lt;br&gt;'
+        +'&lt;strong&gt;AppleAJAXexamplePHP.html&lt;\/strong&gt;',
+        TEXTPADDING,6, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">iframe with AJAX document</a> and the
+      <a
+       href="AppleAJAXexamplePHPhelp.html"
+       onmouseover="return overlib('Directly access:&lt;br&gt;'
+        +'&lt;strong&gt;AppleAJAXexamplePHPhelp.html&lt;\/strong&gt;',
+        TEXTPADDING,6, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Help document</a> include code for resetting the
+      <strong>o3_draggable</strong> runtime variable if a rapid downward drag
+      via the caption area causes the cursor to &quot;slip&quot; into the
+      iframe content:<br />
+      <!--
+           Show script block with code for resetting o3_draggable
+        -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td class="text12"
+        bgcolor="#ddddee">
+       &lt;script type="text/javascript"&gt;<br />
+       <code>//&lt;![CDATA[<br />
+       if (!document.layers &amp;&amp;<br />
+       &nbsp;&nbsp;&nbsp;&nbsp;parent != self &amp;&amp; typeof parent.o3_dragging
+       != 'undefined') {<br />
+       &nbsp;document.onmouseup = function(e){parent.o3_dragging = 0;}<br />
+       }<br />
+       //]]&gt;</code><br />
+       &lt;\/script&gt;
+      </td></tr></table>
+      <em>The second and third examples were adapted from a standalone</em> <a
+       href="http://developer.apple.com/internet/webcontent/XMLHttpRequestExample/example.html"
+       onmouseover="overlib('Try the AJAX example at Apple',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"><strong>example</strong></a> <em>offered by Apple
+      in its</em> <a
+       href="http://developer.apple.com/internet/webcontent/xmlhttpreq.html"
+       target="_blank"
+       onmouseover="overlib('See what Apple says about XMLHttpRequest',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"><strong>Developer Connection</strong></a>.<br />
+     </td>
+    </tr>
+    <!--*****************
+          FOURTH EXAMPLE
+        *****************-->
+    <tr>
+     <td align="left" width="100%" class="text16">
+      <a name="ajaxex4" id="ajaxex4"><span class="text12">&nbsp;<br /></span></a>
+      <strong>The 4th example is a</strong><br />
+     </td>
+    </tr>
+    <tr>
+     <td align="center" class="text14">
+      <!--
+           Invoke the Example 4 scolling popup with responseText AJAX content
+        -->
+      <strong><a
+       href="javascript:void(0);"
+       onmouseover="return OLgetAJAX('popupContent.php5?exa=4', BJAJAX, 300, 'ovflh');"
+       onmouseout="OLclearAJAX();"
+      >Popup with AJAX flash (object/embed) content that includes audio</a></strong>
+     </td> 
+    </tr> 
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>called by the statement:</strong><br />
+      <!--
+           Show markup for invoking the Example 4 popup
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       onmouseover = "return
+       <strong>OLgetAJAX(</strong>'popupContent.php5?exa=4', <strong>BJAJAX</strong>,
+       300, 'ovflh'<strong>);</strong>"<br />
+      </td></tr></table>
+      which uses the <strong>wrapper function set</strong> for the browser's
+      <strong>XMLHttpRequest</strong> object with this (2nd argument) function for the
+      overlib popup:<br />
+      <!--
+           Show the BJAJAX function
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       function <strong><a
+       href="javascript:void(0);"
+       onmouseover="return OLgetAJAX('popupContent.php5?exa=4', BJAJAX, 300, 'ovflh');"
+       onmouseout="OLclearAJAX();">BJAJAX()</a></strong> <code>{<br />
+       &nbsp;return <strong>overlib(<span class="yellow"
+       style="background:#aa00aa;">&nbsp;OLresponseAJAX&nbsp;</span></strong>,
+       TEXTPADDING,0, CAPTIONPADDING,4, CAPTION,<br />
+       &nbsp;'&lt;a href="http://www.adhesivetheater.com/jug/jug.html" '<br />
+       &nbsp;+'<strong>target="_blank" onclick="cClick();"</strong> '<br />
+       &nbsp;+'title="Brooklyn Jugs archive at the Adhesive Theater Project" '<br />
+       &nbsp;+'class="grncap"&gt;Brooklyn Jugs archive&lt;\/a&gt; at the ATP',<br />
+       &nbsp;BGCLASS,'grnbg', CGCLASS,'grncg', FGCLASS,'grnfg',<br />
+       &nbsp;CAPTIONFONTCLASS,'grncap', CLOSEFONTCLASS,'grncap',<br />
+       &nbsp;WRAP, BORDER,1, STICKY, CLOSECLICK, SCROLL, MIDX,0, RELY,100,<br />
+       &nbsp;<strong>LABEL,'audio',</strong><br />
+       &nbsp;<strong>EXCLUSIVE,</strong> EXCLUSIVESTATUS,<br />
+       &nbsp;'Close the current popup to re-enable other popups'<strong>);</strong><br />
+       }</code><br />
+      </td></tr></table>
+      The <strong>EXCLUSIVE</strong> command is included so that the popup cannot be closed
+      inadvertently.&nbsp; The <strong>LABEL</strong> command with the parameter
+      <strong>'audio'</strong> is included (and in any other overlib calls for popups with
+      audio in their  content) for use in a daisy-chain to the core module's
+      <strong>cClick</strong> function:<br />
+      <!--
+           Show the daisy-chain javascript
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <code>var cClickOld=cClick;<br /><br />
+       function cClickNew(){<br />
+       &nbsp;if(OLloaded&amp;&amp;OLgateOK){<br />
+       &nbsp;&nbsp;var o=(o3_label==<strong>'audio'</strong>)?OLgetRef('overDiv'):null;<br />
+       &nbsp;&nbsp;cClickOld();<br />
+       &nbsp;&nbsp;if(o)o.innerHTML="";<br />
+       &nbsp;}<br />
+       &nbsp;return false;<br />
+       }<br /><br />
+       cClick=cClickNew;</code><br />
+      </td></tr></table>
+      This daisy-chain code is included in a script block in the head section, following
+      the script block which imports the <strong>overlibmws.js</strong> core module.&nbsp;
+      For popups with the <strong>'audio'</strong> label, it causes the overDiv positioned
+      div to be emptied in addition to having its visibility set to "hidden" so that the
+      audio will not continue playing in the background after cClick is called via the
+      popup's Close link.&nbsp; Note that the popup includes a targeted link (i.e., one
+      which opens a new window or tab rather than replacing the document in the current
+      window or tab).&nbsp; We include <strong>onclick="cClick();"</strong> in that link so
+      that the audio will be silenced when the new window or tab is opened and receives
+      focus.&nbsp; Also note that we rely solely on <strong>WRAP</strong> to set the size,
+      and ensure that scrollbars will not be invoked by using this CSS class for the 4th
+      argument:<br />
+      <!--
+           Show markup for the ovfl1 class
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       .ovflh {overflow:hidden;}<br />
+      </td></tr></table>
+      <a name="ajaxex4" id="ajaxex4v"></a>
+      Now let's use <strong>AJAX flash (object/embed) content that has a:</strong><br />
+     </td>
+    </tr>
+    <tr> 
+     <td align="center" class="text14">
+      <!--
+           Invoke the Example 4v popup
+        -->
+      <strong><a
+       href="javascript:void(0);"
+       onmouseover="return OLgetAJAX('popupContent.php5?exa=4v', NBCAJAX, 300, 'ovflh');"
+       onmouseout="OLclearAJAX();">Sound Track for Acting instead of Singing</a></strong>
+     </td> 
+    </tr> 
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>called by the statement:</strong><br />
+      <!--
+           Show markup for invoking the Example 4v popup
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       onmouseover = "return
+       <strong>OLgetAJAX(</strong>'popupContent.php5?exa=4v', <strong>NBCAJAX</strong>, 300,<br>
+       &nbsp; 'ovflh'<strong>);</strong>"<br />
+      </td></tr></table>
+      which uses this (2nd argument) function for the overlib popup:<br />
+      <!--
+           Show the NBCAJAX function
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       function <strong><a
+       href="javascript:void(0);"
+       onmouseover="return OLgetAJAX('popupContent.php5?exa=4v', NBCAJAX, 300, 'ovflh');"
+       onmouseout="OLclearAJAX();">NBCAJAX()</a></strong> <code>{<br />
+       &nbsp;return <strong>overlib(<span class="yellow"
+       style="background:#aa00aa;">&nbsp;OLresponseAJAX&nbsp;</span></strong>,
+       TEXTPADDING,0, CAPTIONPADDING,6, CAPTION,<br />
+       &nbsp;'&lt;a href="http://www.nbc.com/Saturday_Night_Live/video/" '<br />
+       &nbsp;+'<strong>target="_blank" onclick="cClick();"</strong> '<br />
+       &nbsp;+'title="Go to the Saturday Night Live video page" '<br />
+       &nbsp;+'class="grycap"&gt;Saturday Night Live&lt;\/a&gt; on NBC',<br />
+       &nbsp;BGCLASS,'grybg', CGCLASS,'grycg', FGCLASS,'gryfg', <strong>CAPBELOW</strong>,<br />
+       &nbsp;CAPTIONFONTCLASS,'grycap', CLOSEFONTCLASS,'grycap',<br />
+       &nbsp;WRAP, BORDER,1, STICKY, CLOSECLICK, SCROLL, MIDX,0, RELY,10,<br />
+       &nbsp;<strong>LABEL,'audio',</strong><br />
+       &nbsp;<strong>EXCLUSIVE,</strong> EXCLUSIVESTATUS,<br />
+       &nbsp;'Close the current popup to re-enable other popups'<strong>);</strong><br />
+       }</code><br />
+      </td></tr></table>
+     </td>
+    </tr>
+    <!--******************
+          FIFTH EXAMPLE
+        ******************-->
+    <tr> 
+     <td align="left" class="text16">
+      <a name="ajaxex5" id="ajaxex5"><span class="text12">&nbsp;<br /></span></a>
+      <strong>The 5th example helps a user to:</strong><br />
+     </td> 
+    </tr> 
+    <tr>
+     <td align="center" class="text14">
+      <!--
+           Invoke a popup set with draggable Google Maps
+        -->
+      <strong><a
+       href="http://maps.google.com/maps?f=q&amp;hl=en&amp;q=502+Court+St,+Brooklyn,+NY+11231&amp;ll=40.683111,-73.998756&amp;spn=0.02226,0.066605"
+       target="_blank"
+       onmouseover="overlib('Click to view Google Maps for Le Petit Cafe',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"
+       onclick="overlib(myGMdiv, TEXTPADDING,0, CAPTION,myGMdivCap, 
+        STICKY, CLOSECLICK, WIDTH,500, BASE,2, MIDX,0, RELY,2,
+        PRINT, PRINTFONTCLASS,'olcloGM', PRINTJOB,'PrintGoogleMap(lowPowerGM)',
+        PRINTTITLE,'Click to Print the Low Power Google Map',
+        CGCLASS,'olcgGM', CLOSEFONTCLASS,'olcloGM',
+        SHADOW, SHADOWX,8, SHADOWY,8, STATUS,'Google Maps for Le Petit Cafe');
+        doLePetitCafeGoogleMaps('map');
+        event.returnValue=false; return false;"
+      >Visualize and Print Travel Information via Google Maps</a></strong><br />
+     </td>
+    </tr>
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>invoked via the link:</strong><br />
+      <!--
+           Show markup for invoking a popup with Google Maps
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       &lt;a<code><br />
+       &nbsp;href="<span
+       class="red">http://maps.google.com/maps?
+       f=q&amp;amp;hl=en&amp;amp;q=502+Court+St,+Brooklyn,+NY+11231&amp;amp;ll=40.683111,-
+       73.998756&amp;amp;spn=0.02226,0.066605</span>"<br />
+       &nbsp;target="<span class="red">_blank</span>"<br />
+       &nbsp;onmouseover="overlib('Click to view Google Maps for Le Petit
+       Cafe',<br />
+       &nbsp;&nbsp;TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"<br />
+       &nbsp;onmouseout="nd();"<br />
+       &nbsp;<strong>onclick</strong>="<strong>overlib(</strong><span
+       class="red">myGMdiv</span>, TEXTPADDING,0, CAPTION,<span
+       class="red">myGMdivCap</span>,<br />
+       &nbsp;&nbsp;STICKY, CLOSECLICK, WIDTH,500, BASE,2, MIDX,0, RELY,2,<br />
+       &nbsp;&nbsp;PRINT, PRINTFONTCLASS,'olcloGM',
+       <strong>PRINTJOB</strong>,'<strong>PrintGoogleMap(</strong><span
+       class="red">lowPowerGM</span><strong>)</strong>',<br />
+       &nbsp;&nbsp;PRINTTITLE,'Click to Print the Low Power Google Map',<br />
+       &nbsp;&nbsp;CGCLASS,'olcgGM', CLOSEFONTCLASS,'olcloGM',<br />
+       &nbsp;&nbsp;SHADOW, SHADOWX,8, SHADOWY,8, STATUS,'Google Maps for Le
+       Petit Cafe'<strong>);<br />
+       &nbsp;&nbsp;doLePetitCafeGoogleMaps(</strong>'<span
+       class="red">map</span>'<strong>);<br />
+       &nbsp;&nbsp;event.returnValue=false; return false;</strong>"</code><br />
+       &gt;<strong><a
+       href="http://maps.google.com/maps?f=q&amp;hl=en&amp;q=502+Court+St,+Brooklyn,+NY+11231&amp;ll=40.683111,-73.998756&amp;spn=0.02226,0.066605"
+       target="_blank"
+       onmouseover="overlib('Click to view Google Maps for Le Petit Cafe',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"
+       onclick="overlib(myGMdiv, TEXTPADDING,0, CAPTION,myGMdivCap, 
+        STICKY, CLOSECLICK, WIDTH,500, BASE,2, MIDX,0, RELY,2,
+        PRINT, PRINTFONTCLASS,'olcloGM', PRINTJOB,'PrintGoogleMap(lowPowerGM)',
+        PRINTTITLE,'Click to Print the Low Power Google Map',
+        CGCLASS,'olcgGM', CLOSEFONTCLASS,'olcloGM',
+        SHADOW, SHADOWX,8, SHADOWY,8, STATUS,'Google Maps for Le Petit Cafe');
+        doLePetitCafeGoogleMaps('map');
+        event.returnValue=false; return false;"
+       >Visualize and Print Travel Information via Google Maps</a></strong>&lt;/a&gt;<br />
+      </td></tr></table>
+      which uses the <strong>onclick</strong> event with an initial
+      <strong>overlib</strong> call to initiate display of a popup set, then
+      calls the function <strong>doLePetitCafeGoogleMaps</strong> to load a
+      low-power Google Map into the primary popup and make available a
+      high-power Google Map and iframe access to the Le Petit Cafe website
+      via links in the caption for secondary popups, as well as driving and
+      subway information for Le Petit Cafe (in Brooklyn, where a tree grew)
+      via a secondary popup associated with the pin in the low-power map.&nbsp;
+      (The lovely and talented <a
+       href="http://www.adhesivetheater.com/kalle/"
+       target="_blank"
+       onmouseover="overlib('Link to Kalle Macrides\' Home Page',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Kalle Macrides</a> was <a
+       href="javascript:void(0);"
+       onclick="return false;"
+       onmouseover="overlib(C_Kvows, CAPTION,'Flash Slide Show', SCROLL,
+        TEXTPADDING,0, STICKY, CLOSECLICK, MIDX,0, MIDY,0, BORDER,2);"
+       onmouseout="nd();">married</a> at Le Petit Cafe on June 3, 2006.)&nbsp;
+      Note that the href attribute value has been wrapped by your browser, and
+      should be one long line without spaces.&nbsp; Although we force a
+      return value of false for the onclick event so that the href would not
+      normally be acted upon, we do include a URL for invoking a map in another
+      window (by virute of the target attribute value) via the Google site
+      should the user have the browser's javascript turned off.&nbsp;
+      The Google Map content uses the XMLHttpRequest object to load map panels,
+      and to dynamically shift them in conjuction with left-click and dragging
+      movement with the cursor positioned on the map content.&nbsp; Use of the
+      basic AJAX code from Google requires a site-specific <a
+       href="http://www.google.com/apis/maps/"
+       target="_blank"
+       onmouseover="overlib('Get a Google Maps API key',
+        TEXTPADDING,4, WRAP, BASE,2, HAUTO, SHADOW, SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">API key</a> which should be obtained for your own
+      site.&nbsp;  The javascript code in the
+      <strong>doLePetitCafeGoogleMaps</strong> function provides an interface
+      between the popups and the basic Google Maps code accessed with the API
+      key.&nbsp; The <strong>PrintGoogleMap</strong> function uses string
+      variables (<span class="red">lowPowerGM</span> and <span
+      class="red">highPowerGM</span>) with the URLs via which to fetch
+      and load files for printing the maps by using the
+      <strong>PRINTJOB</strong> command of the
+      <strong>overlibmws_print.js</strong> plug-in module.<br />
+     </td> 
+    </tr> 
+    <tr> 
+     <td align="left" class="text16">
+      <!--
+          DEBUGGING
+       -->
+      <a name="htmlspecialcharsmws" id="htmlspecialcharsmws"><span
+      class="text12">&nbsp;<br /></span></a>
+      <strong>Debugging a <a
+       href="javascript:void(0);"
+       onmouseover="return OLgetAJAX('popupContent.php5?exa=1', OLcmdExT1,
+       300, 'ovfl1');"
+       onmouseout="OLclearAJAX();"
+      >popup</a> and AJAX</strong>
+      <div class="text6">&nbsp;</div>
+     </td> 
+    </tr> 
+    <tr>
+     <td align="center" width="100%" class="text12">
+      <!--
+          Standalone debugging links
+       -->
+      <a
+       href="javascript:void(0);"
+       title="Click to check OLoverHTML"
+       onclick="OLoverHTMLshow(); return false;">OLoverHTML</a>
+      &nbsp;&nbsp;
+      <a
+       href="javascript:void(0);"
+       title="Click to check over.innerHTML"
+       onclick="OLshowMarkup((over)?over.innerHTML:''); return false;">over.innerHTML</a>
+      &nbsp;&nbsp;
+      <a
+       href="javascript:void(0);"
+       title="Click to check OLover2HTML"
+       onclick="OLover2HTMLshow(); return false;">OLover2HTML</a>
+      &nbsp;&nbsp;
+      <a
+       href="javascript:void(0);"
+       title="Click to check over2.innerHTML"
+       onclick="OLshowMarkup((OLovertwoPI&amp;&amp;over2)?over2.innerHTML:'');
+        return false;">over2.innerHTML</a>
+      &nbsp;&nbsp;
+      <a
+       href="javascript:void(0);"
+       title="Click to check OLresponseAJAX"
+       onclick="OLresponseAJAXshow(); return false;">OLresponseAJAX</a>
+      &nbsp;&nbsp;
+     </td>
+    </tr>
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>These five links</strong> invoke STICKY, EXCLUSIVE popups for showing the
+      <strong>OLoverHTML</strong> value for the last-invoked primary popup (via an
+      <strong class="red">OLoverHTMLshow</strong> function call), the current
+      <strong>over.innerHTML</strong> markup (via an <strong class="red">OLshowMarkup</strong>
+      function call), the <strong>OLover2HTML</strong> value for the last-invoked secondary popup
+      (via an <strong class="red">OLover2HTMLshow</strong> function call), the current
+      <strong>over2.innerHTML</strong> markup (via an <strong class="red">OLshowMarkup</strong>
+      function call), and the current <strong>OLresponseAJAX</strong> value from the last-invoked
+      AJAX request (via an <strong class="red">OLresponseAJAXshow</strong> function call).
+     </td>
+    </tr>
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>Note</strong> that the innerHTML markup is nulled when a primary or secondary popup
+      is closed, so that standalone links as above for showing their innerHTML markup are useful
+      only when the popups are STICKY and currently being displayed.&nbsp; The
+      <strong>OLshowMarkup</strong> calls  normally would be inserted (temporarily, for debugging)
+      immediately after the <strong class="blue">overlib</strong> or <strong
+      class="blue">overlib2</strong> call, <em>e.g.</em>:<br />
+      <!--
+           Show markup for inserted OLshowMarkup calls
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <code><strong>onmouseover</strong>="<strong class="blue">overlib(...)</strong>;
+       <strong><span class="red">OLshowMarkup(</span>over.innerHTML<span
+       class="red">)</span></strong>; return true;"
+       <br /><br />
+       <strong>onclick</strong>="<strong class="blue">overlib(...)</strong>;
+       <strong><span class="red">OLshowMarkup(</span>over.innerHTML<span
+       class="red">)</span></strong>; return false;"
+       <br /><br />
+       <strong>onmouseover</strong>="<strong class="blue">overlib2(...)</strong>;
+       <strong><span class="red">OLshowMarkup(</span>over2.innerHTML<span
+       class="red">)</span></strong>; return true;"
+       <br /><br />
+       <strong>onclick</strong>="<strong class="blue">overlib2(...)</strong>;
+       <strong><span class="red">OLshowMarkup(</span>over2.innerHTML<span
+       class="red">)</span></strong>; return false;"</code><br />
+      </td></tr></table>
+      <strong>Also note</strong> that such inserted <strong class="red">OLshowMarkup</strong>
+      calls, or their calls in the above standalone links:<br />
+      <!--
+           Show markup for OLshowMarkup calls in standalone links:
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <code><strong>title</strong>="Click to check <strong>over.innerHTML</strong>"<br />
+       <strong>onclick</strong>="<strong><span
+       class="red">OLshowMarkup(</span>(over)?over.innerHTML:''<span
+       class="red">)</span></strong>; return false;"
+       <br /><br />
+       <strong>title</strong>="Click to check <strong>over2.innerHTML</strong>"<br />
+       <strong>onclick</strong>="<strong><span
+       class="red">OLshowMarkup(</span>(over2)?over2.innerHTML:''<span
+       class="red">)</span></strong>; return false;"</code><br />
+      </td></tr></table>
+      show the innerHTML which the browser itself created and used, based on the markup which
+      was created by the <strong class="purple">overlibmws</strong> library's <strong>Layer
+      Generation Functions</strong> (<strong>LGFs</strong>) for loading into the
+      <strong>overDiv</strong> or <strong>over2Div</strong> positioned div (<em>i.e.</em>, into
+      the <strong>over</strong> or <strong>over2</strong> objects, respectively).<br />
+     </td>
+    </tr>
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>The markup created by the LGFs</strong> (based on the arguments in the
+      <strong>overlib</strong> or <strong>overlib2</strong> call) is saved (at time of creation)
+      in the <strong>OLoverHTML</strong> and <strong>OLover2HTML</strong> global variables, and
+      so those can be used (temporarily, for debugging) to show that markup for the last (either
+      still open or closed and either tooltip or STICKY) popup, either via insertions:
+      <!--
+           Show markup for inserted OLoverHTMLshow or OLover2HTMLshow calls
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <code><strong>onmouseover</strong>="<strong class="blue">overlib(...)</strong>;
+       <strong class="red">OLoverHTMLshow()</strong>; return true;"
+       <br /><br />
+       <strong>onclick</strong>="<strong class="blue">overlib(...)</strong>;
+       <strong class="red">OLoverHTMLshow()</strong>; return false;"
+       <br /><br />
+       <strong>onmouseover</strong>="<strong class="blue">overlib2(...)</strong>;
+       <strong class="red">OLover2HTMLshow()</strong>; return true;"
+       <br /><br />
+       <strong>onclick</strong>="<strong class="blue">overlib2(...)</strong>;
+       <strong class="red">OLover2HTMLshow()</strong>; return false;"</code><br />
+      </td></tr></table>
+      or in standalone links:
+      <!--
+           Show markup for OLoverHTMLshow or OLover2HTML calls in standalone links
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <code><strong>title</strong>="Click to check <strong>over.innerHTML</strong>"<br />
+       <strong>onclick</strong>="<strong><span
+       class="red">OLoverHTMLshow()</span></strong>; return false;"
+       <br /><br />
+       <strong>title</strong>="Click to check <strong>over2.innerHTML</strong>"<br />
+       <strong>onclick</strong>="<strong><span
+       class="red">OLover2HTMLshow()</span></strong>; return false;"</code><br />
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>Displaying</strong> the current <strong>OLresponseAJAX</strong> value from the
+      last AJAX request may be helpful when your are debugging your server-side script and the
+      markup it is returning in response to the AJAX request.&nbsp; The <strong
+      class="red">OLresponseAJAXshow</strong> function call can be (temporarily) inserted either
+      into the function which handles the response, <em>e.g.</em>:<br />
+      <!--
+           Show markup for inserted OLresponseAJAXshow calls
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       function <strong><a
+       href="javascript:void(0);"
+       onmouseover="return OLgetAJAX('popupContent.php5?exa=1', OLcmdExT1debug,
+       300, 'ovfl1');"
+       onmouseout="OLclearAJAX();">OLcmdExT1()</a></strong> <code>{<br />
+       &nbsp;<strong>overlib(<span class="yellow"
+       style="background:#aa00aa;">&nbsp;OLresponseAJAX&nbsp;</span></strong>,
+       TEXTPADDING,0, CAPTIONPADDING,4, CAPTION,<br />
+       &nbsp;'Example with AJAX content via &amp;lt;span '<br />
+       &nbsp;+'class="yellow"&amp;gt;responseText&amp;lt;/span&amp;gt;.&amp;nbsp; '<br />
+       &nbsp;+'Popup scrolls with the window.',<br />
+       &nbsp;WRAP, BORDER,2, STICKY, CLOSECLICK, <strong>SCROLL</strong>,<br />
+       &nbsp;MIDX,0, RELY,100,<br />
+       &nbsp;STATUS,'Example with AJAX content via responseText of
+       XMLHttpResponse'<strong>);</strong><br />
+       &nbsp;<strong class="red">OLresponseAJAXshow()</strong>; return false;"<br />
+       }</code><br />
+      </td></tr></table>
+      or into a standalone link as above:<br />
+      <!--
+           Show markup for OLresponseAJAXshow calls in standalone links
+       -->
+      <table width="100%" cellpadding="6" cellspacing="0" border="0">
+       <tr><td class="text12" width="20">&nbsp;&nbsp;&nbsp;</td><td
+       class="text12" bgcolor="#ddddee">
+       <code><strong>title</strong>="Click to check <strong>OLresponseAJAX</strong>"<br />
+       <strong>onclick</strong>="<strong><span
+       class="red">OLresponseAJAXshow()</span></strong>; return false;"</code><br />
+      </td></tr></table>
+     </td>
+    </tr>
+    <tr>
+     <td align="left" width="100%" class="text12">
+      <strong>You need to import</strong> the
+      <a
+       href="zipArchive.html"
+       target="_blank"
+       onclick="overlib(
+        OLiframeContent('zipArchive.html', 690, 350, 'if1dist', 1),
+        CAPTION,'Contents of overlibmws.zip', CAPTIONPADDING,4,
+        WIDTH,690, TEXTPADDING,0, BORDER,2, STICKY, CLOSECLICK,
+        MIDX,0, MIDY,0,
+        STATUS,'Contents of overlibmws.zip'); return false;"        
+       onmouseover="overlib('Preview the contents of '
+        +'&lt;strong&gt;overlibmws.zip&lt;\/strong&gt;',
+        TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER, OFFSETY,20, VAUTO,
+        FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff', SHADOW,SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();"><strong>distribution</strong></a>'s
+      <strong>htmlspecialcharsmws.js</strong> support script to have these functions available
+      for use when debugging any problems with your <strong>overlib</strong> or
+      <strong>overlib2</strong>, and <strong>OLgetAJAX</strong> or <strong>OLpostAJAX</strong>
+      function calls.&nbsp; It includes an <strong
+      class="red">OLhtmlspecialchars(</strong><em>str</em>, <em>quo</em><strong
+      class="red">)</strong> function which performs the equivalent of the <strong>php
+      <a
+       href="http://us2.php.net/manual/en/function.htmlspecialchars.php"
+       target="_blank"
+       onmouseover="return overlib('Review the specification for the '
+        +'&lt;strong&gt;htmlspecialchars&lt;\/strong&gt; function',
+        TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER, OFFSETY,20, VAUTO,
+        FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff', SHADOW,SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">htmlspecialchars</a>(</strong><em>string</em>,
+      <em>quote_style</em><strong>)</strong> function for converting special characters to HTML
+      entities in HTML or XHTML fragments.&nbsp; The
+      <strong>optional</strong> second argument can be included (<strong>ENT_NOQUOTES</strong>
+      or <strong>ENT_QUOTES</strong>) to change the transformations of double and/or single
+      quotes from the default (<em>i.e.</em>, when that argument is omitted) which is to
+      transform the double but not singe quotes.&nbsp; The above display functions use the
+      transformation function to create the lead argument for their STICKY, EXCLUSIVE overlib
+      calls (so that the markup will be displayed instead of acted upon), and similarly can
+      accept the optional argument.&nbsp; You also can use the transformation function in
+      conjunction with the <strong>overlibmws_debug.js</strong> module's <a
+       href="commandRef.html#debug"
+       onmouseover="return overlib('Review the '
+        +'&lt;strong&gt;OLshowProperties&lt;\/strong&gt; function',
+        TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER, OFFSETY,20, VAUTO,
+        FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff', SHADOW,SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">OLshowProperties</a> function.&nbsp; <strong>Finally</strong>, your
+      browser's own debugging tools also may be helpful.&nbsp; But if worse comes to worst
+      and none of these debugging aids do the trick, you can always post to the
+      <a
+       href="http://groups.yahoo.com/group/overlibmws/"
+       onmouseover="overlib('Link to the &lt;span '
+        +'class=\'purple14\'&gt;overlibmws&lt;\/span&gt; Support Group',
+        TEXTPADDING,4,WRAP,BASE,2,TEXTFONTCLASS,'myText',CENTER, OFFSETY,20, VAUTO,
+        FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#4466ff', SHADOW,SHADOWCOLOR,'#4466ff');"
+       onmouseout="nd();">Support Group</a> for help (and be sure to include, if possible, a URL
+      for a test document which shows the problem).<br />
+     </td>
+    </tr>
+   </table>
+   <!--**** END OF EXAMPLES SECTION ****-->
+  </td> 
+ </tr> 
+</table>
+<table align="center" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="center" valign="middle" class="text12">
+   <br />
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the markup
+   for these examples.</em>
+   <br /><br /><br />
+  </td>
+ </tr>
+</table>
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text12" align="center" valign="bottom" colspan="4" rowspan="1">
+   <strong>These examples use <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; '
+     +'Download and Test Directory.', WRAP, BASE,2, SHADOW, SHADOWCOLOR,'#4466ff',
+     REF,'dandt', REFP,'LL', REFX,-100, REFY,-5, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; '
+     +'Command Reference.', WRAP, BASE,2, SHADOW, SHADOWCOLOR,'#4466ff',
+     REF,'comref', REFP,'LL', REFX,-110, REFY,-5, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">commands</a>.</strong><br />
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the &lt;span '
+     +'class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;\/i&gt;&lt;\/span&gt; '
+     +'shopping via this link&lt;br&gt;(with &lt;strong&gt;no&lt;\/strong&gt; '
+     +'extra costs to you).',
+     CAPTION,'Promote via Amazon', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     FGCLASS,'', TEXTPADDING,8, FGCOLOR,'#bbddff', REF,'amazon', REFP,'UR', REFX,-8, REFY,-35,
+     TEXTFONTCLASS,'text12', WRAP, BASE,2, SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8" /></a><br />
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt;',
+     VCENTER, TEXTFONTCLASS,'text12', WRAP, BASE,2, SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif" /></a><br />
+  </td>
+  <td valign="middle" class="snip">
+   Copyright&nbsp;Foteos&nbsp;Macrides<br />
+   &nbsp;&nbsp;2002-2010.<br />
+   &nbsp;&nbsp;All rights reserved.<br />
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;\/i&gt;&lt;\/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',
+     CAPTION,'Donate via PayPal', CGCLASS,'olraisedBlue', CAPTIONPADDING,4,
+     FGCLASS,'', TEXTPADDING,8, FGCOLOR,'#bbddff', WRAP, BASE,2,
+     REF,'logo', REFC,'UL', REFP,'LL', REFX,-7, REFY,-5, TEXTFONTCLASS,'text12',
+     SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    title="Click to Donate" alt="Click to Donate" /></a><br />
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid XHTML 1.0', VCENTER, LEFT, WRAP, BASE,2,
+     TEXTFONTCLASS,'text12', SHADOW, SHADOWCOLOR,'#4466ff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-xhtml10.png" /></a><br />
+  </td>
+ </tr>
+</table>
+<br />
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='AJAX.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

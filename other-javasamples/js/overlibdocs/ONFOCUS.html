@@ -1,0 +1,714 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlibmws, overlib, DHTML popups, DHTML, popups, Macrides Web Services, Macrides, web services">
+<meta name="description" content="Use of onfocus, onblur and onkeypress events in Macrides Web Services free open source software for enhancing web pages with DHTML popups.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Use of onfocus, onblur and onkeypress events in overlibmws</title>
+
+<!--
+ Import the core module
+-->
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<script type="text/javascript">
+<!--
+/*
+ Set page defaults for popups
+*/
+OLpageDefaults(WRAP, BASE,2, FGCOLOR,'#ffffcc', TEXTFONTCLASS,'text12', NOJUSTY);
+
+// Flags used in anchor or form markup (see below)
+var myFocus='',viaMouse=0;
+
+// OLgetRef(l) homologue for elements in form content.
+function OLgetFRef(f,l,i){
+ var c=(i)?'['+i+']':'';return eval('document.forms.'+f+'.elements.'+l+c);
+}
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+//-->
+</script>
+
+<style type="text/css">
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text12j {font-family:Verdana,Arial,sans-serif; font-size:12px; text-align:justify}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+a {color:#338855;font-weight:bold;}
+a:hover {color:#ff00ff}
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<noscript>
+ <table align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+   <td width="430" class="myText">
+    [<em>This document uses informational javascript functions which<br>
+    &nbsp;are accessible via both mouse and keyboard navigation, in<br>
+    &nbsp;compliance with the ADA.</em>]
+    <br>&nbsp;<br>
+   </td>
+  </tr>
+ </table>
+</noscript>
+
+<!--
+  Header and instructions
+-->
+<table width="95%" align="center" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText" colspan="3">
+   <span class="myHeader"><strong>Keyboard-invoked Popups</strong></span>
+   <span class="mySubHead"><strong><em>via the</em></strong></span>
+   <span class="myHeader"><strong><a
+    name="olMWStest" id="olMWStest"
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onfocus="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText',
+     REF,'olMWStest', REFC,'LR', REFP,'UR');"
+    onblur="nd();"
+    onmouseout="nd();">overlibmws</a><br>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    name="olFMemail" id="olFMemail"
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText',
+     CENTER, OFFSETY,20, FGCOLOR,'#bbddff');"
+    onfocus="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', FGCOLOR,'#bbddff',
+     REF,'olFMemail', REFC,'LL', REFP,'UL');"
+    onblur="nd();"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    name="olMWShome" id="olMWShome"
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onfocus="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText',
+     REF,'olMWShome', REFC,'LR', REFP,'UR');"
+    onblur="nd();"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for<br>
+   word translation support via the</em> <span class="purple14">overlibmws</span> <a
+    name="olMWSgroup" id="olMWSgroup"
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onfocus="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText',
+     REF,'olMWSgroup', REFC,'LR', REFP,'UR');"
+    onmouseout="nd();"
+    onblur="nd();">Support Group</a>.</strong><br>
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12j">
+   Use your <strong>TAB</strong> and <strong>Shift-TAB</strong> keys
+   (<strong>Ctrl-DownArrow</strong> and <strong>Ctrl-UpArrow</strong> for Opera) or your
+   mouse to access the form fields and the anchors (text and image links) in this
+   document.&nbsp; All of the form fields and anchors are associated with
+   <span class="purple14">overlibmws</span> tooltip popups.&nbsp; The keyboard-invoked
+   popups use the <strong>onfocus</strong>, <strong>onblur</strong> and
+   <strong>onkeypress</strong> events for popup control in a manner homologous to the
+   use of <strong>onmouseover</strong>, <strong>onmouseout</strong> and
+   <strong>onclick</strong> by the mouse.&nbsp; When keyboard navigation
+   imparts focus and a popup to a link or form button, pressing the <strong>ENTER</strong>
+   key will activate it.&nbsp; When focus is imparted to a text input field, data can be
+   entered via the keyboard and the form can be submitted by pressing the
+   <strong>ENTER</strong> key, but that key is treated as data (<strong>newline</strong>)
+   within the textarea field and you must leave it (e.g., via tabbing or a mouseover)
+   to submit the form.&nbsp; The keyboard-invoked popup support is important for
+   <!--
+*****FIRST ANCHOR with:
+      Both a name and id set to the same value for focus setting and for REF-based
+       positioning of the popup; we can't use cursor-base positioning for popups invoked
+       via keyboard navigation, but instead of REF we could use frame-based positioning
+       (i.e., RELX, RELY, MIDX, MIDY, FIXX, and/or FIXY);
+      An href specified, so that the anchor is a stopping point for keyboard navigation;
+      A mouseover event invokes a focus() call for the anchor so that any subsequent
+       keyboard navigation will proceed from here, and then invokes a popup; the viaMouse
+       flag is used to prevent the onfocus event from also invoking a popup;
+      An onfocus clears the myFocus flag (used with form fields, see below) and then invokes
+       a popup if the viaMouse flag is not set (i.e., if the onfocus event occurred via
+       keyboard navigation); we use separate mouse-invoked versus keyboard-invoked popups
+       so that they can differ if desired; in this case, their positioning is different to
+       take into account the presence or absence of the cursor "hand";
+      We close the popup on the mouseoff event for mouse-based navigation, because in
+       that case one normally activates the link via a click while hovering over the link;
+       we instead let the popup persist for keyboard navigation (until further navigation
+       occurs and another popup is invoked), because in that case the keyboard ENTER key
+       is used to activate the link;
+      We set the LABEL command's parameter to the anchor's name/id and check its runtime
+       variable (o3_label) for the onblur event; if the same, this anchor's popup is being
+       displayed, so we close it via nd(); otherwise, another popup was invoked and replaced
+       this one, so we don't call nd() to avoid closing the replacement popup.
+      Note that Netscape v4.x does not support use of onfocus (nor onblur and onkeypress)
+       events via anchors, so we bypass the focus() call for it; it will pause at anchors
+       with hrefs on keyboard navigation, but will invoke a popup for anchors only with
+       mouse-based navigation.
+   -->
+   <a
+    name="ada" id="ada"
+    href="http://www.usdoj.gov/crt/ada/adahom1.htm"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('ada').focus();}
+     return overlib('Go to the ADA Home Page.',
+     TEXTPADDING,4, FGCOLOR,'#bbddff', REF,'ada', REFX,-75, REFY,30, LABEL,'ada');"
+    onfocus="myFocus='';if(!viaMouse){overlib('Go to the ADA Home Page.',
+     TEXTPADDING,4, FGCOLOR,'#bbddff', REF,'ada', REFX,-75, REFY,18, LABEL,'ada');
+     if(!OLns4)self.status=OLgetRef('ada').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='ada')nd();"
+    onmouseout="nd();">ADA</a>-compliant web sites (note some
+   <!--
+*****SECOND ANCHOR;
+     See comments for FIRST ANCHOR, above;
+   -->
+   <a
+    name="foc" id="foc"
+    href="FocusProblems.html"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('foc').focus();}
+     return overlib('Review some focus problems in Gecko-engine browsers.',
+     TEXTPADDING,4, FGCOLOR,'#bbddff', REF,'foc', REFX,-155, REFY,30, LABEL,'foc');"
+    onfocus="myFocus='';if(!viaMouse){overlib(
+     'Review some focus problems in Gecko-engine browsers.',
+     TEXTPADDING,4, FGCOLOR,'#bbddff', REF,'foc', REFX,-155, REFY,18, LABEL,'foc');
+     if(!OLns4)self.status=OLgetRef('foc').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='foc')nd();"
+    onmouseout="nd();">problems</a> in Gecko-engine browsers).&nbsp; Also check out keyboard
+    <em>versus</em> mouse-based navigation in
+   <!--
+*****THIRD ANCHOR;
+     See comments for FIRST ANCHOR, above;
+   -->
+    <a
+     name='hid' id="hid"
+     href="hide.html"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('hid').focus();}
+     return overlib('Prevent form elements from obscuring overlib popups.',
+     TEXTPADDING,4, FGCOLOR,'#bbddff', REF,'hid', REFX,-150, REFY,30, LABEL,'hid');"
+    onfocus="myFocus='';if(!viaMouse){overlib(
+     'Prevent form elements from obscuring overlib popups.',
+     TEXTPADDING,4, FGCOLOR,'#bbddff', REF,'hid', REFX,-150, REFY,18, LABEL,'hid');
+     if(!OLns4)self.status=OLgetRef('hid').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='hid')nd();"
+    onmouseout="nd();">another</a> form-containing <span class="purple14">overlibmws</span>
+   support document.
+   <br><br>
+  </td>
+ </tr>
+</table>
+
+<!--
+  START of a form block with name, method, enctype and action specified.
+  The form content is a table with columns of label anchor and text input pairs,
+  and a table with a centered Submit and Reset button pair.
+-->
+<form name="F1" method="post" enctype="x-www-form-encoded"
+ action="http://www.macridesweb.com/cgi/fun.cgi">
+
+<table align="center" cellspacing="5" cellpadding="0" border="0">
+ <!--
+  Form Header
+ -->
+ <tr>
+  <td align="center" valign="middle" class="text14" colspan="5">
+   <strong>Have fun with this form!!</strong>
+   <br><br>
+  </td>
+ </tr>
+ <!--
+ TOP ROW of <a ...>label</a>: <input ...> pairs
+ -->
+ <tr>
+  <td align="right" valign="middle" class="text14">
+   <!--
+ ****LEFT COLUMN, TOP ROW, label anchor with:
+      Both a name and id set to the same value for focus setting and for REF-based
+       positionng of the popup (could instead use RELX, RELY, MIDX, MIDY, FIXX and/or
+       FIXY positioning);
+      An href specified, so that the anchor is a stopping point for keyboard navigation;
+      A mouseover event invokes a blur() - focus() sequence to this label's input field;
+       we need the lead blur() for the focus() call to work reliably;
+      An onfocus event (via keyboard navigation or via a focus() call) invokes checking
+       of the myFocus flag, such that if the flag is already set to this label anchor's
+       input field, we can infer a Shift-TAB (Ctrl-UpArrow for Opera) and thus change the
+       focus to the preceding anchor; otherwise, we set the focus to the input field, which
+       will set the myFocus flag to itself and invoke the popup;
+      Makes sure onclick events don't mess up the desired flag settings and focus;
+      Closes a mouse-evoked popup on the mouseout, but lets a keyboard-evoked popup persist
+       until a keypress occurs in the input field (see below) or another popup is invoked;
+   -->
+   <a
+    name="name" id="name"
+    href="javascript:void(0);"
+    onmouseover="OLgetFRef('F1','L1').blur();OLgetFRef('F1','L1').focus();
+     return (OLopr)?false:true;"
+    onfocus="if(myFocus=='L1')OLgetRef('hid').focus();
+     else OLgetFRef('F1','L1').focus();"
+    onclick="OLgetRef('name').focus();"
+    onmouseout="nd();">name</a>:
+  </td>
+  <td  valign="top" class="text14">
+   <!--
+****LEFT COLUMN, TOP ROW, text input field:
+     Sets the myFocus flag to itself and invokes the popup;
+     The mouseover-evoked popup will be closed on mouseoff from the label anchor (see above),
+      whereas the keyboard-invoked (onfocus) popup is not closed until the user starts
+      entering data (which triggers the onkeypress event) or invokes another popup;
+   -->
+   <input type="text" name="L1" size="20"
+    onfocus="myFocus='L1';return overlib('Enter your full name.',
+     AUTOSTATUS, REF,'name', REFX,48, REFY,20);"
+    onkeypress="nd();">
+  </td>
+  <!--
+   LEFT versus RIGHT COLUMN Spacer
+  -->
+  <td width="40" rowspan="8" class="text14">
+   &nbsp;
+  </td>
+  <td align="right" valign="middle" class="text14">
+   <!--
+    RIGHT COLUMN, TOP ROW, label anchor
+   -->
+   <a
+    name="phone" id="phone"
+    href="javascript:void(0);"
+    onmouseover="OLgetFRef('F1','L2').blur();OLgetFRef('F1','L2').focus();
+     return (OLopr)?false:true;"
+    onfocus="if(myFocus=='L2')OLgetRef('name').focus();
+     else OLgetFRef('F1','L2').focus();"
+    onclick="OLgetRef('phone').focus();"
+    onmouseout="nd();">phone</a>:
+  </td>
+  <td valign="top" class="text14">
+   <!--
+    RIGHT COLUMN, TOP ROW, text input field
+   -->
+   <input type="text" name="L2" size="20"
+    onfocus="myFocus='L2';return overlib('Enter your phone number.',
+     AUTOSTATUS, REF,'phone', REFX,56, REFY,20);"
+    onkeypress="nd();">
+  </td>
+ </tr>
+ <!--
+  ROW Spacer
+ -->
+ <tr>
+  <td colspan="3" class="text14">
+   &nbsp;
+  </td>
+ </tr>
+ <!--
+  SECOND ROW
+ -->
+ <tr>
+  <td align="right" class="text14">
+   <a
+    name="grade" id="grade"
+    href="javascript:void(0);"
+    onmouseover="OLgetFRef('F1','L3').blur();OLgetFRef('F1','L3').focus();
+     return (OLopr)?false:true;"
+    onfocus="if(myFocus=='L3')OLgetRef('phone').focus();
+     else OLgetFRef('F1','L3').focus();"
+    onclick="OLgetRef('grade').focus();"
+    onmouseout="nd();">grade</a>:
+  </td>
+  <td class="text14">
+   <input type="text" name="L3" size="20"
+    onfocus="myFocus='L3';return overlib('Enter your highest grade or degree.',
+     AUTOSTATUS, REF,'grade', REFX,52, REFY,20);"
+    onkeypress="nd();">
+  </td>
+  <td align="right" class="text14">
+   <a
+    name="street" id="street"
+    href="javascript:void(0);"
+    onmouseover="OLgetFRef('F1','L4').blur();OLgetFRef('F1','L4').focus();
+     return (OLopr)?false:true;"
+    onfocus="if(myFocus=='L4')OLgetRef('grade').focus();
+     else OLgetFRef('F1','L4').focus()"
+    onclick="OLgetRef('street').focus();"
+    onmouseout="nd();">street</a>:
+ </td>
+  <td class="text14">
+   <input type="text" name="L4" size="20"
+    onfocus="myFocus='L4';return overlib('Enter your street address.',
+     AUTOSTATUS, REF,'street', REFX,50, REFY,20);"
+    onkeypress="nd()">
+  </td>
+ </tr>
+ <!--
+  ROW Spacer
+ -->
+ <tr>
+  <td colspan="3" class="text14">
+   &nbsp;
+  </td>
+ </tr>
+ <!--
+  THIRD ROW
+ -->
+ <tr>
+  <td align="right" class="text14">
+   <a
+    name="city" id="city"
+    href="javascript:void(0);"
+    onmouseover="OLgetFRef('F1','L5').blur();OLgetFRef('F1','L5').focus();
+     return (OLopr)?false:true;"
+    onfocus="if(myFocus=='L5')OLgetRef('street').focus();
+     else OLgetFRef('F1','L5').focus();"
+    onclick="OLgetRef('city').focus();"
+    onmouseout="nd();">city</a>:
+  </td>
+  <td class="text14">
+   <input type="text" name="L5" size="20"
+    onfocus="myFocus='L5';return overlib('Enter your city.',
+     AUTOSTATUS, REF,'city', REFX,34, REFY,20);"
+    onkeypress="nd();">
+  </td>
+  <td align="right" class="text14">
+   <a
+    name="zip" id="zip"
+    href="javascript:void(0);"
+    onmouseover="OLgetFRef('F1','L6').blur();OLgetFRef('F1','L6').focus();
+     return (OLopr)?false:true;"
+    onfocus="if(myFocus=='L6')OLgetRef('city').focus();
+     else OLgetFRef('F1','L6').focus();"
+    onclick="OLgetRef('zip').focus();"
+    onmouseout="nd();">zip</a>:
+  </td>
+  <td class="text14">
+   <input type="text" name="L6" size="20"
+    onfocus="myFocus='L6';return overlib('Enter your zip code.',
+     AUTOSTATUS, REF,'zip', REFX,28, REFY,20);"
+    onkeypress="nd();">
+  </td>
+ </tr>
+ <!--
+  ROW Spacer
+ -->
+ <tr>
+  <td colspan="3" class="text14">
+   &nbsp;
+  </td>
+ </tr>
+ <!--
+  FOURTH ROW
+ -->
+ <tr>
+  <td align="right" valign="middle" class="text14">
+   <a
+    name="size" id="size"
+    href="javascript:void(0);"
+    onmouseover="OLgetFRef('F1','L7').blur();OLgetFRef('F1','L7').focus();
+     return (OLopr)?false:true;"
+    onfocus="if(myFocus=='L7') OLgetRef('zip').focus();
+     else OLgetFRef('F1','L7').focus();"
+    onclick="OLgetRef('size').focus();"
+    onmouseout="nd();">size</a>:
+  </td>
+  <td class="text14">
+   <textarea name="L7" cols="20" rows="2"
+    onfocus="myFocus='L7';return overlib('Discuss your size.',
+     AUTOSTATUS, REF,'size', REFX,34, REFY,(OLie4)?30:40);"
+    onkeypress="nd();"></textarea>
+  </td>
+  <td align="right" class="text14">
+   <a
+    name="color" id="color"
+    href="javascript:void(0);"
+    onmouseover="OLgetFRef('F1','L8').blur();OLgetFRef('F1','L8').focus();
+     return (OLopr)?false:true;"
+    onfocus="if(myFocus=='L8')OLgetRef('size').focus();
+     else OLgetFRef('F1','L8').focus();"
+    onclick="OLgetRef('color').focus();"
+    onmouseout="nd();">color</a>:
+  </td>
+  <td class="text14">
+   <input type="text" name="L8" size="20"
+    onfocus="myFocus='L8';return overlib('Enter your eye color.',
+     AUTOSTATUS, REF,'color', REFX,46, REFY,20);"
+    onkeypress="nd();">
+  </td>
+ </tr>
+ <!--
+  ROW Spacer
+ -->
+ <tr>
+  <td colspan="3" class="text14">
+   &nbsp;
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellspacing="0" cellpadding="0" border="0">
+ <!--
+   FIFTH ROW, Centered Submit and Reset button pair
+ -->
+ <tr>
+  <td valign="top" class="text12">
+   <!--
+*****Submit button
+      A mouseover event clears the myFocus flag, sets the viaMouse flag, and does a
+       blur() - focus() sequence to trigger the onfocus event, which then invokes the
+       popup; we need the lead blur() for the focus() call to work reliably;
+      The onfocus event checks the viaMouse flag and then uses different content for
+       the popup depending on whether mouse-based or keyboard-based navigation led
+       to the onfocus event;
+      Note that Netscape v4.x does not support a mouseover event for form buttons, so
+       that it invokes a popup only for an onfocus event from keyboard-based navigation;
+       it then must use the onblur event to close the popup;
+   -->
+   <input
+    type="submit" value="Submit" name="B1"
+    onmouseover="myFocus='';viaMouse=1;
+     OLgetFRef('F1','B1').blur();OLgetFRef('F1','B1').focus();"
+    onfocus="return overlib(
+      ((viaMouse)?'Click or press':'Press')+' ENTER to submit the form',
+      AUTOSTATUS, REF,'aB1', REFP,'LR', REFX,66, REFY,-2);"
+    onblur="if(OLns4)nd();"
+    onmouseout="viaMouse=0;nd();"
+    onkeypress="viaMouse=0;nd();">
+  </td>
+  <!--
+    Spacer and dummy anchors (no href) for positioning
+  -->
+  <td width="10" valign="top" class="text12">
+   <a name="aB1" id="aB1">&nbsp;</a>
+  </td>
+  <td width="10" valign="top" class="text12">
+   <a name="aB2" id="aB2">&nbsp;</a>
+  </td>
+  <td valign="top" class="text12">
+   <!--
+*****Reset button
+      Set up equivalently to the Submit button (see above);
+   -->
+   <input
+    type="reset" value="Reset" name="B2"
+    onmouseover="myFocus='';viaMouse=1;
+     OLgetFRef('F1','B2').blur();OLgetFRef('F1','B2').focus();"
+    onfocus="return overlib(
+     ((viaMouse)?'Click or press':'Press')+' ENTER to reset the form fields',
+     AUTOSTATUS, REF,'aB2', REFP,'LL', REFX,-64, REFY,-2);"
+    onblur="if(OLns4)nd();"
+    onmouseout="viaMouse=0;nd();"
+    onkeypress="viaMouse=0;nd();">
+  </td>
+ </tr>
+</table>
+</form>
+<!--
+ END of form block
+-->
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <!--
+  Suggestion to use View Source
+ -->
+ <tr>
+  <td align="center" valign="middle" class="text14">
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the markup
+   for these examples.</em>
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <!--
+***Set of anchors (links) with text or image content;
+   See comments for FIRST ANCHOR, above;
+ -->
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>These examples use <a
+    name="dandt" id="dandt"
+    href="./"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('dandt').focus();}
+     return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', TEXTPADDING,4, FGCOLOR,'#cceeff',
+     REF,'dandt', REFP,'LL', REFX,-100, REFY,-5, LABEL,'dandt');;"
+    onfocus="myFocus='';if(!viaMouse){overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', TEXTPADDING,4, FGCOLOR,'#cceeff',
+     REF,'dandt', REFP,'LL', REFX,-100, REFY,-5, LABEL,'dandt');
+     if(!OLns4)self.status=OLgetRef('dandt').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='dandt')nd();"
+    onmouseout="nd();">overlibmws</a> and its <a
+    name="comref" id="comref"
+    href="commandRef.html"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('comref').focus();}
+     return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', TEXTPADDING,4, FGCOLOR,'#cceeff',
+     REF,'comref', REFP,'LL', REFX,-110, REFY,-5, LABEL,'comref');"
+    onfocus="myFocus='';if(!viaMouse){overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', TEXTPADDING,4, FGCOLOR,'#cceeff',
+     REF,'comref', REFP,'LL', REFX,-110, REFY,-5, LABEL,'comref');
+     if(!OLns4)self.status=OLgetRef('comref').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='comref')nd();"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    name="amzn" id="amzn"
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('amzn').focus();}
+     return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff',
+     REF,'amazon', REFP,'UR', REFX,-5, REFY,-10, LABEL,'amzn');"
+    onfocus="myFocus='';if(!viaMouse){overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff',
+     REF,'amazon', REFP,'UR', REFX,-5, REFY,-10, LABEL,'amzn');
+     if(!OLns4)self.status=OLgetRef('amzn').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='amzn')nd();"
+    onmouseout="nd();"><img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="text12">
+   <a
+    name="oltst" id="oltst"
+    href="./"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('oltst').focus();}
+     return overlib('Popups by '
+     +'&lt;span class=\'purple14\';&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     TEXTPADDING,4, FGCOLOR,'#cceeff',
+     REF,'logo', REFX,95, REFY,1, LABEL,'oltst');"
+    onfocus="myFocus='';if(!viaMouse){overlib(					
+     'Popups by &lt;span class=\'purple14\';&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     TEXTPADDING,4, FGCOLOR,'#cceeff',
+     REF,'logo', REFX,95, REFY,1, LABEL,'oltst');
+     if(!OLns4)self.status=OLgetRef('oltst').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='oltst')nd();"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    name="pypl" id="pypl"
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('pypl').focus();}
+     return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff',
+     REF,'logo', REFC,'UL', REFP,'LL', REFY,-5, LABEL,'pyp1');"
+    onfocus="myFocus='';if(!viaMouse){overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff',
+     REF,'logo', REFC,'UL', REFP,'LL', REFY,-5, LABEL,'pyp1');
+     if(!OLns4)self.status=OLgetRef('pypl').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='pyp1')nd();"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    name="w3c" id="w3c"
+    href="http://validator.w3.org/check/referer"
+    onmouseover="if(!OLns4){viaMouse=1;OLgetRef('w3c').focus();}
+     return overlib('Valid HTML 4.01',
+     TEXTPADDING,4, FGCOLOR,'#cceeff',
+     REF,'html401', REFP,'UR', REFX,-7, REFY,1, LABEL,'w3c');"
+    onfocus="myFocus='';if(!viaMouse){overlib(
+     'Valid HTML 4.01',
+     TEXTPADDING,4, FGCOLOR,'#cceeff',
+     REF,'html401', REFP,'UR', REFX,-7, REFY,1, LABEL,'w3c');
+     if(!OLns4)self.status=OLgetRef('w3c').href;return true;}viaMouse=0;"
+    onblur="if(o3_label=='w3c')nd();"
+    onmouseout="nd();"><img
+    name="html401" id="html401"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='ONFOCUS.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

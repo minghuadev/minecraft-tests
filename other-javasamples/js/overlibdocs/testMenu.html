@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrates frame handling in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Menu Frame in overlibmws</title>
+
+<script type="text/javascript">
+<!--
+if(parent==self)location.replace('testFrame.html');
+// -->
+</script>
+
+<script type="text/javascript" src="overlibmws_regCore.js"></script>
+
+<script type="text/javascript">
+<!--
+OLregisterPlugins('crossframe','iframe','hide','shadow');
+
+overlib=parent.overlib;
+nd=parent.nd;
+//-->
+</script>
+
+<style type="text/css">
+<!--
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px; color:#000000;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px; color:#000000;}
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000"></div>
+<div id="backdrop" style="position:absolute; visibility:hidden; z-index:1000"></div>
+
+<div id="formDiv" style="position:relative; z-index:1">
+ <form name="F1" method="post" enctype="x-www-form-encoded"
+  action="javascript:void(0);">
+  <select size=3>
+   <option>Select
+   <option>List
+   <option>Displaying
+   <option>Multiple
+   <option>Options
+  </select>
+ </form>
+</div>
+
+<table width="88%" cellspacing="0" cellpadding="0" border="0" align="center"> 
+ <tr>
+  <td class="text14">
+   <strong>The overlib popup<br>examples use<br><a
+    name="download" id="download"
+    target="_top"
+    href="./"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WIDTH,156, REF,'download',REFP,'UL', REFY,35, BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', TEXTPADDING,4, FRAME,parent.menu);"
+    onmouseout="nd();">overlibmws</a><br>
+   and its<br>
+   <a
+    name="commands" id="commands"
+    target="_top"
+    href="commandRef.html"
+    onMouseOver=
+     "return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WIDTH,156, REF,'commands', REFP,'LL', BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', TEXTPADDING,4, FRAME,parent.menu);"
+    onMouseOut="nd();">commands</a>.<br></strong>
+  </td>
+ </tr>
+</table>
+
+<table width="85%" cellspacing="0" cellpadding="0" border="0" align="center"> 
+ <tr>
+  <td class="text12">
+   <strong><br>See the Microsoft<br><a
+    name="create" id="create"
+    target="_top"
+    href="http://msdn.microsoft.com/library/default.asp?url=/workshop/author/dhtml/reference/methods/createpopup.asp"
+    onmouseover=
+     "return overlib('See the MS docs for window.createPopup. ',
+     WIDTH,150, REF,'create',REFP,'LL', BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', TEXTPADDING,4, FRAME,parent.menu);"
+    onmouseout="nd();">documentation</a> for<br>window.createPopup.<br></strong>
+  </td>
+ </tr>
+</table>
+
+<table width="85%" cellspacing="0" cellpadding="0" border="0" align="center"> 
+ <tr>
+  <td class="text12">
+   <strong><br>See examples for <a
+    name="myform" id="myform"
+    target="_top"
+    href="hide.html"
+    onmouseover="return overlib(
+     'Hide form fields with system controls in non-frame documents.',
+     WIDTH,145, REF,'myform', REFP,'LL', BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', TEXTPADDING,4, FRAME,parent.menu);"
+    onmouseout="nd();">form</a> fields,<br>
+   <a
+    name="myflash" id="myflash"
+    target="_top"
+    href="flashWmode.html"
+    onmouseover="return overlib(
+     'Hide system controls such as flash objects in non-frame documents.',
+     WIDTH,145, REF,'myflash', REFP,'LL', BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', TEXTPADDING,4, FRAME,parent.menu);"
+    onmouseout="nd();">flash</a> objects, and<br>
+   <a
+    name="myapplet" id="myapplet"
+    target="_top"
+    href="applet.html"
+    onmouseover="return overlib(
+     'Hide system controls such as applets in non-frame documents.',
+     WIDTH,145, REF,'myapplet', REFP,'LL', BASE,2, TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf', TEXTPADDING,4, FRAME,parent.menu);"
+    onmouseout="nd();">applets</a></strong>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <br><a
+    target="_top"
+    href="./"
+    onmouseover="return overlib('Popups by&lt;br&gt;'
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'copyright',REFP,'LL',REFX,-5,REFY,-5,BASE,2,TEXTPADDING,4,TEXTFONTCLASS,'text12',
+     SHADOW,SHADOWCOLOR,'#cf33cf',FRAME,parent.menu);"
+    onmouseout="nd();"><img
+    name="copyright" id="copyright"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+<script type="text/javascript" src="../script/ga.js"></script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='testMenu.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

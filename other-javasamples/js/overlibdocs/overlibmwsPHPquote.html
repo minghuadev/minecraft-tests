@@ -1,0 +1,519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, php, DHTML popups, DHTML tooltips, DHTML, popups, tooltips, Macrides Web Services, Macrides">
+<meta name="description" content="Quoting php strings with Macrides Web Services open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB -- Quoting php strings for overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<script type='text/javascript'>
+<!--
+OLpageDefaults(WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'text12', FGCOLOR,'#ffffee');
+//-->
+</script>
+
+<style type='text/css'>
+<!--
+.codeDescParent {
+ background-color:#FFFFCC;
+ width:670px;
+ margin-right:auto;
+ margin-left:auto;
+}
+.codeDescription {
+ background-color:#FFFFCC;
+ padding:10px;
+ border:4px dashed #333333;
+ margin-right:auto;
+ margin-left:auto;
+}
+
+.phpCode {background-color:#FFCC99;}
+
+body {color:#000000; background-color:#ddeeff;} 
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#FF00FF;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.navy12 {font-family:Verdana,Arial,sans-serif; font-size:12px;color:#3366aa;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head> 
+
+<body text="#000000" bgcolor="#ddeeff"> 
+
+<table align="center" width="720">
+<tr><!--**** HEADER ****--><td align="center" class="myText">
+ <span class="myHeader"><strong>Quoting php <a
+  href="http://www.zend.com/manual/language.types.string.php"
+  onmouseover="return overlib('Consult a terrific reference on php string syntax.',
+   CENTER, OFFSETY,20, TEXTFONTCLASS,'myText');"
+  onmouseout="nd();">strings</a></strong></span>
+ <span class="mySubHead"><strong><em>for the</em></strong></span>
+ <span class="myHeader"><strong><a
+  href="./"
+  onmouseover="return overlib('Go to the '
+   +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+   +'Download and Test Directory.',
+   TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+  onmouseout="nd();">overlibmws</a><br>
+ <em>DHTML Popup Library</em></strong></span><br>
+ <span class="mySpacer">&nbsp;<br></span>
+ <strong><em>maintained by</em> <a
+  href="javascript:olmail();"
+  onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+   +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+   +'Report&lt;br&gt;problems.&nbsp; '
+   +'Suggest enhancements.)', STATUS,'Click to send form-based e-mail to Fote.',
+   TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20);"
+  onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+  href="../"
+  onmouseover="return overlib('Link to Macrides Web Services homepage.',
+   TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+  onmouseout="nd();">Macrides Web Services</a><br>
+ <em>Discuss these examples, seek help, and offer suggestions for<br>
+ server-side script support via the</em> <span class="purple14">overlibmws</span> <a
+  href="http://groups.yahoo.com/group/overlibmws/"
+  onmouseover="overlib('Link to the &lt;span '
+  +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+   TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+  onmouseout="nd();">Support Group</a>.</strong><br>
+</td></tr><tr><td class="text12">
+ <br>
+ This document has four examples of php-generated anchors with overlib popups.&nbsp;
+ The markup for this document is shown below, with the php coding in the salmon-colored
+ area.
+ <br><br>
+ This first example uses php's <strong>echo &quot;heredoc&quot;</strong> form
+ (<span class="navy12">echo &lt;&lt;&lt;word</span> equivalent to the perl
+ <span class="navy12">print &lt;&lt;word</span>).&nbsp; It allows one to avoid problems
+ with nested quotes associated with HTML markup by structuring them essentially as one
+ would for the HTML and javascript (client-side) parsers directly (i.e., as if one didn't
+ have the server-side parser to deal with as well), while still being able to swap in
+ material via variables (and database handlers) defined for the server-side parser.&nbsp;
+ The example uses a php variable whose raw string value included a single-quote (apostrophe),
+ double-quotes, and reserved HTML characters (open- and close-angle-brackets), as might
+ occur in text retrieved from a database.&nbsp; The php <a
+  href="http://us2.php.net/manual/en/function.htmlspecialchars.php"
+  onmouseover="return overlib('Go to the php reference page for the '
+   +'<strong>htmlspecialchars()</strong> function.', CENTER,VAUTO,OFFSETY,20);"
+  onmouseout="nd();">htmlspecialchars()</a> and <a
+  href="http://us2.php.net/manual/en/function.addslashes.php"
+  onmouseover="return overlib('Go to the php reference page for the '
+   +'<strong>addslashes()</strong> function.', CENTER,VAUTO,OFFSETY,20);"
+  onmouseout="nd();">addslashes()</a> functions are used, repectively, to covert the
+ double-quotes and angle-brackets to their HTML entities &amp;quot;, &amp;lt; and &amp;gt;,
+ and to backslash escape the single-quote.&nbsp; This makes the string suitable for use as
+ the <a
+  href="commandRef.html#content"
+  onmouseover="return overlib('Consult the paragraph on the &lt;em&gt;Lead Argument&lt;/em&gt;'
+   +'&lt;br&gt;in the '
+   +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+   +'Command Reference.', CENTER,VAUTO,OFFSETY,20);"
+  onmouseout="nd();">lead argument</a> (or as a caption) in an overlib call.
+</td></tr></table>
+<!-- First php anchor with raw popup content:
+   <strong>1.</strong> "une minuted'int&eacute;rieu" -->
+<table border="0" cellspacing="0" cellpadding="0" align="center"><tr>
+<td width="80" height="20" class="text12" align="center" bgcolor="#ccddff">
+<a href="javascript:void(0);"
+onmouseover="return overlib('&lt;strong&gt;1.&lt;/strong&gt; &quot;une minuted\'int&amp;eacute;rieur&quot;', AUTOSTATUS);"
+onmouseout="return nd();"> example 1</a>
+</td></tr></table>
+
+<table align="center" width="720"><tr><td class="text12">
+ <br>
+ This second example is like the first, but instead of using htmlspecialchars() and
+ addslashes() it uses the php <a
+  href="http://www.zend.com/manual/function.rawurlencode.php"
+  onmouseover="return overlib('Consult a terrific reference on the php '
+   +'<strong>rawurlencode()</strong> function.', CENTER,VAUTO,OFFSETY,20);"
+  onmouseout="nd();">rawurlencode()</a> function to URL-encode (hex-escape) the string, and
+ sets the <strong>DECODE</strong> toggle for the overlib call, so that any URL-encoding
+ in the lead argument or caption of an overlib call is decoded automatically for the
+ popup display.&nbsp; The URL-encoding normally is done server-side for strings that have
+ been fetched from a database and might contain newline characters that would cause
+ pre-mature termination of string parsing by the javascript interpeter if not encoded in
+ the overlib() calls.&nbsp; Note that care should be taken to avoid using the DECODE
+ command directly on any strings which contain actual URLs with any characters that
+ require their URL-encoding.
+</td></tr></table>
+<!-- Second php anchor with raw popup content:
+   <strong>2.</strong> "une minuted'int&eacute;rieu" -->
+<table border="0" cellspacing="0" cellpadding="0" align="center"><tr>
+<td width="80" height="20" class="text12" align="center" bgcolor="#ccddff">
+<a href="javascript:void(0);"
+onmouseover="return overlib('%3Cstrong%3E2.%3C%2Fstrong%3E%20%22une%20minuted%27int%26eacute%3Brieur%22', DECODE, AUTOSTATUS);"
+onmouseout="return nd();"> example 2</a>
+</td></tr></table>
+
+<table align="center" width="720"><tr><td class="text12">
+ <br>
+ This third example instead uses a series of statements to build up the equivalent anchor
+ and popup content into a variable (<em>$table</em>) for the echo statement
+ (<span class="navy12">echo $table;</span>).&nbsp; The text which has an embedded single
+ quote, double-quotes, and angle-brackets is separated into a sub-variable (<em>$txt</em>)
+ that becomes a component of the series, with
+ <strong>addslashes(htmlspecialchars($txt))</strong> similarly used to create the HTML
+ entities and to backslash escape the embedded single-quote, but in the course of
+ building up the series. 
+</td></tr></table>
+<!-- Third php anchor with raw popup content:
+   <strong>3.</strong> "une minuted'int&eacute;rieur" -->
+<table border="0" cellspacing="0" cellpadding="0" align="center"><tr>
+<td width="80" height="20" class="text12" align="center" bgcolor="#ccddff">
+<a href="javascript:void(0);"
+onmouseover="return overlib('&lt;strong&gt;3.&lt;/strong&gt; &quot;une minuted\'int&amp;eacute;rieur&quot;', AUTOSTATUS);"
+onmouseout="return nd();">example 3</a>
+</td></tr></table>
+
+<table align="center" width="720"><tr><td class="text12">
+ <br>
+ This fourth example is like the third but it instead uses <strong>rawurlencode($txt)</strong>
+ to URL-encode (hex-escape) the string, and sets the <strong>DECODE</strong> toggle in the
+ overlib call.
+</td></tr></table>
+<!-- Fourth php anchor with raw popup content:
+   <strong>4.</strong> "une minuted'int&eacute;rieur" -->
+<table border="0" cellspacing="0" cellpadding="0" align="center"><tr>
+<td width="80" height="20" class="text12" align="center" bgcolor="#ccddff">
+<a href="javascript:void(0);"
+onmouseover="return overlib('%3Cstrong%3E4.%3C%2Fstrong%3E%20%22une%20minuted%27int%26eacute%3Brieur%22', DECODE, AUTOSTATUS);"
+onmouseout="return nd();">example 4</a>
+</td></tr></table>
+
+<table align="center" width="720"><tr><td align="center" class="text12">
+ <br>
+ <div class="codeDescParent" align="center">
+ <div class="codeDescription" align="left">
+  &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;<br>
+  &lt;html&gt;<br>
+  &lt;head&gt;<br>
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"&gt;<br>
+  &lt;title&gt;overLIB -- php quoting for overlibmws&lt;/title&gt;
+  <br><br>
+  &lt;script type="text/javascript" src="overlibmws.js"&gt;&lt;/script&gt;
+  <br><br>
+  &lt;script type='text/javascript'&gt;<br>
+  &lt;!--<br>
+  OLpageDefaults(WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'text12',  FGCOLOR,'#ffffee');
+  <br><br>
+  paper = new Image();<br>
+  paper.src = "../image/paper.jpg"<br>
+  //--&gt;<br>
+  &lt;/script&gt;
+  <br><br>
+  &lt;style type='text/css'&gt;<br>
+  &lt;!--<br>
+  body {color:#000000; background-color:#ddeeff;} 
+  <br><br>
+  a {color:#338855;font-weight:bold;}<br>
+  a:hover {color:#FF00FF;}
+  <br><br>
+  .text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}<br>
+  .purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+  &nbsp;font-weight:bold;font-style:italic;}
+  .text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}<br>
+  --&gt;<br>
+  &lt;/style&gt;<br>
+  &lt;/head&gt;
+  <br><br>
+  &lt;body text="#000000" bgcolor="#ddeeff"&gt;
+  <br><br>
+  &lt;table align="center" width="720"&gt;&lt;tr&gt;&lt;td class="text18"&gt;<br>
+  Quoting php &lt;a<br>
+  &nbsp;href="http://www.zend.com/manual/language.types.string.php"<br>
+  &nbsp;onmouseover="return overlib('Consult a terrific reference on php string syntax.',<br>
+  &nbsp;&nbsp;CENTER, OFFSETY,20);"<br>
+  &nbsp;onmouseout="nd();">strings&lt;/a&gt; for
+  &lt;a<br>
+  &nbsp;href="./"<br>
+  &nbsp;onmouseover="return overlib('Go to the '<br>
+  &nbsp;&nbsp;+'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '<br>
+  &nbsp;&nbsp;+'Download and Test Directory.',<br>
+  &nbsp;&nbsp;LEFT, OFFSETX,-10, OFFSETY,20);"<br>
+  &nbsp;onmouseout="nd();"&gt;overlibmws&lt;/a&gt;.<br>
+  &lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="text12"&gt;<br>
+  This document has two examples of php-generated anchors with overlib popups.&amp;nbsp;
+  The markup<br>
+  for this document is shown below, with the php coding in the salmon-colored area.<br>
+  &lt;br&gt;&lt;br&gt;
+  <br>
+  This first example uses php's &lt;strong&gt;echo &quot;heredoc&quot;&lt;/strong&gt; form<br>
+  (&lt;span class="navy12"&gt;echo &amp;lt;&amp;lt;&amp;lt;word&lt;/span&gt; equivalent
+  to the perl<br>
+  &lt;span class="navy12"&gt;print &amp;lt;&amp;lt;word&lt;/span&gt;).&amp;nbsp; It allows one
+  to avoid problems with nested quotes associated with HTML markup by structuring them
+  essentially as one would for the HTML and javascript (client-side) parsers directly (i.e.,
+  as if one didn't have the server-side parser to deal with as well), while still being able
+  to swap in material via variables (and database handlers) defined for the server-side
+  parser.&amp;nbsp; The example uses a php variable whose raw string value included a
+  single-quote (apostrophe), double-quotes, and reserved HTML characters (open- and
+  close-angle-brackets), as might occur in text retrieved from a database.&amp;nbsp; The php
+  &lt;a<br>
+  &nbsp;href="http://www.zend.com/manual/function.htmlspecialchars.php"<br>
+  &nbsp;onmouseover="return overlib('Consult a terrific reference on the php '<br>
+  &nbsp;&nbsp;+'&lt;strong&gt;htmlspecialchars()&lt;/strong&gt; function.',
+  CENTER,VAUTO,OFFSETY,20);"<br>
+  &nbsp;onmouseout="nd();"&gt;htmlspecialchars()&lt;/a&gt; and &lt;a<br>
+  &nbsp;href="http://www.zend.com/manual/function.addslashes.php"<br>
+  &nbsp;onmouseover="return overlib('Consult a terrific reference on the php '<br>
+  &nbsp;&nbsp;+'&lt;strong&gt;addslashes()&lt;/strong&gt; function.',
+  CENTER,VAUTO,OFFSETY,20);"<br>
+  &nbsp;onmouseout="nd();"&gt;addslashes()&lt;/a&gt; functions are used, repectively, to
+  covert the double-quotes and angle-brackets to their HTML entities &amp;quot;,
+  &amp;lt; and &amp;gt;, and to backslash escape the single-quote.&amp;nbsp; This
+  makes the string suitable for use as the &lt;a<br>
+  &nbsp;href="commandRef.html#content"<br>
+  &nbsp;onmouseover="return overlib('Consult the paragraph on the &amp;lt;em&amp;gt;Lead
+  Argument&amp;lt;/em&amp;gt;'<br>
+  &nbsp;&nbsp;+'&amp;lt;br&amp;gt;in the '<br>
+  &nbsp;&nbsp;+'&amp;lt;span
+  class=\'purple14\'&amp;gt;&amp;lt;i&amp;gt;overlibmws&amp;lt;/i&amp;gt;&amp;lt;/span&amp;gt; '<br>
+  &nbsp;&nbsp;+'Command Reference.', CENTER,VAUTO,OFFSETY,20);"<br>
+  &nbsp;onmouseout="nd();"&gt;lead argument&lt;/a&gt; (or as a caption) in an overlib call.<br>
+  &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;<br>
+  &lt;!-- First php anchor with with raw popup content:<br>
+  &nbsp;&nbsp;&nbsp;&lt;strong&gt;1.&lt;/strong&gt; "une minuted'int&amp;eacute;rieu" --&gt;
+  <div class="phpCode">
+   <code>&lt;?php<br>
+   $tmp = '&lt;strong&gt;1.&lt;/strong&gt; "une '."minuted'int&eacute;rieur".'"';<br>
+   $txt = addslashes(htmlspecialchars($tmp));<br>
+   echo &lt;&lt;&lt;EOT<br>
+   &lt;table border="0" cellspacing="0" cellpadding="0" align="center"&gt;&lt;tr&gt;<br>
+   &lt;td width="80" height="20" class="text12" align="center" bgcolor="#ccddff"&gt;<br>
+   &lt;a href="javascript:void(0);"<br>
+   onmouseover="return overlib('$tmp', AUTOSTATUS);"<br>
+   onmouseout="return nd();"&gt;example 1&lt;/a&gt;<br>
+   &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+   <br><br>
+   EOT;<br>
+   ?&gt;</code>
+  </div>
+  <br>
+  &lt;table align="center" width="720"&gt;&lt;tr&gt;&lt;td class="text12"&gt;<br>
+  &lt;br&gt;
+  <br>
+  This second example is like the first, but instead of using htmlspecialchars() and
+  addslashes() it uses the php &lt;a<br>
+  &nbsp;href="http://www.zend.com/manual/function.rawurlencode.php"<br>
+  &nbsp;onmouseover="return overlib('Consult a terrific reference on the php '<br>
+  &nbsp;&nbsp;+'&lt;strong&gt;rawurlencode()&lt;/strong&gt; function.',
+  CENTER,VAUTO,OFFSETY,20);"<br>
+  &nbsp;onmouseout="nd();"&gt;rawurlencode()&lt;/a&gt; function to URL-encode (hex-escape) the
+  string, and sets the &lt;strong&gt;DECODE&lt;/strong&gt; toggle for the overlib call, so that
+  any URL-encoding in the lead argument or caption of an overlib call is decoded automatically
+  for the popup display.&nbsp; The URL-encoding normally is done server-side for strings that
+  have been fetched from a database and might contain newline characters that would cause
+  pre-mature termination of string parsing by the javascript interpeter if not encoded in
+  the overlib() calls.&nbsp; Note that care should be taken to avoid using the DECODE
+  command directly on any strings which contain actual URLs with any characters that require
+  their URL-encoding.<br>
+  &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;<br>
+  &lt;!-- Second php anchor with with raw popup content:<br>
+  &nbsp;&nbsp;&nbsp;&lt;strong&gt;2.&lt;/strong&gt; "une minuted'int&amp;eacute;rieu" --&gt;
+  <div class="phpCode">
+   <code>&lt;?php<br>
+   $tmp = '&lt;strong&gt;2.&lt;/strong&gt; "une '."minuted'int&eacute;rieur".'"';<br>
+   $txt = rawurlencode($tmp);<br>
+   echo &lt;&lt;&lt;EOT<br>
+   &lt;table border="0" cellspacing="0" cellpadding="0" align="center"&gt;&lt;tr&gt;<br>
+   &lt;td width="80" height="20" class="text12" align="center" bgcolor="#ccddff"&gt;<br>
+   &lt;a href="javascript:void(0);"<br>
+   onmouseover="return overlib('$tmp', DECODE, AUTOSTATUS);"<br>
+   onmouseout="return nd();"&gt;example 2&lt;/a&gt;<br>
+   &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+   <br><br>
+   EOT;<br>
+   ?&gt;</code>
+  </div>
+  <br>
+  &lt;table align="center" width="720"&gt;&lt;tr&gt;&lt;td class="text12"&gt;<br>
+  &lt;br&gt;
+  <br>
+  This third example instead uses a series of statements to build up the equivalent anchor
+  and popup content into a variable (&lt;em&gt;$table&lt;/em&gt;) for the echo statement
+  (&lt;span class="navy12"&gt;echo $table;&lt;/span&gt;).&nbsp; The text which has an
+  embedded single quote, double-quotes, and angle-brackets is separated into a sub-variable
+  (&lt;em&gt;$txt&lt;/em&gt;) that becomes a component of the series, with
+  &lt;strong&gt;addslashes(htmlspecialchars($txt))&lt;/strong&gt; similarly used to create
+  the HTML entities and to backslash escape the embedded single-quote, but in the course of
+  building up the series.<br> 
+  &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;<br>
+  &lt;!-- Third php anchor with raw popup content:<br>
+  &nbsp;&nbsp;&nbsp;&lt;strong&gt;3.&lt;/strong&gt; "une minuted'int&amp;eacute;rieur" --&gt;
+  <div class="phpCode">
+   <code>&lt;?php<br>
+   $txt = '&lt;strong&gt;3.&lt;/strong&gt; "'."une minuted'int&eacute;rieur".'"';<br>
+   $table = '&lt;table border="0" cellspacing="0" cellpadding="0"
+   align="center"&gt;&lt;tr&gt;';<br>
+   $table .= '<br>
+   &lt;td width="80" height="20" class="text12" align="center" bgcolor="#ccddff"&gt;';<br>
+   $table .= '<br>
+   &lt;a href="javascript:void(0);"<br>
+   onmouseover="return overlib(\''.addslashes(htmlspecialchars($txt)).'\', AUTOSTATUS);"<br>
+   onmouseout="return nd();"&gt;example 3&lt;/a&gt;';<br>
+   $table .= '
+   &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;<br>
+   ';<br>
+   echo $table;<br>
+   ?&gt;</code>
+  </div>
+  <br>
+  &lt;table align="center" width="720"&gt;&lt;tr&gt;&lt;td class="text12"&gt;<br>
+  &lt;br&gt;
+  <br>
+  This fourth example is like the third but it instead uses
+  &lt;strong&gt;rawurlencode($txt)&lt;/strong&gt; to<br>
+  URL-encode (hex-escape) the string, and sets the &lt;strong&gt;DECODE&lt;/strong&gt; toggle
+  in the overlib call.<br> 
+  &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;<br>
+  &lt;!-- Fourth php anchor with raw popup content:<br>
+  &nbsp;&nbsp;&nbsp;&lt;strong&gt;4.&lt;/strong&gt; "une minuted'int&amp;eacute;rieur" --&gt;
+  <div class="phpCode">
+   <code>&lt;?php<br>
+   $txt = '&lt;strong&gt;4.&lt;/strong&gt; "'."une minuted'int&eacute;rieur".'"';<br>
+   $table = '&lt;table border="0" cellspacing="0" cellpadding="0"
+   align="center"&gt;&lt;tr&gt;';<br>
+   $table .= '<br>
+   &lt;td width="80" height="20" class="text12" align="center" bgcolor="#ccddff"&gt;';<br>
+   $table .= '<br>
+   &lt;a href="javascript:void(0);"<br>
+   onmouseover="return overlib(\''.rawurlencode($txt).'\', DECODE, AUTOSTATUS);"<br>
+   onmouseout="return nd();"&gt;example 4&lt;/a&gt;';<br>
+   $table .= '
+   &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;<br>
+   ';<br>
+   echo $table;<br>
+   ?&gt;</code>
+  </div>
+  <br>
+  &lt;/body&gt;<br>
+  &lt;/html&gt;<br>
+ </div>
+ </div>
+ <br>
+</td></tr></table>
+
+<table align="center" width="720">
+ <tr>
+  <td align="center" class="text12">
+   <em>See an additional example that uses php and mysql <a
+    href="overlibmwsPHP.html"
+    onmouseover="return overlib('Go to a document with an example of database retrievals for '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;.',
+     CENTER, ABOVE);"
+    onmouseout="nd();">database</a> content with <span class="purple14">overlibmws</span>.</em> 
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#cceeff', ABOVE,CENTER,OFFSETY,16);"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', FGCOLOR,'#cceeff', ABOVE,CENTER,OFFSETY,16);"
+    onmouseout="nd();">commands</a></b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff', REF,'amazon',REFP,'UR',REFX,-8,REFY,-10);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="text12">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     FGCOLOR,'#cceeff', REF,'logo',REFX,95,REFY,1);"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="text12">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8, FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="text12">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01', FGCOLOR,'#cceeff',
+     REF,'w3c',REFP,'UR',REFX,-5,REFY,2);"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='overlibmwsPHPquote.php5';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

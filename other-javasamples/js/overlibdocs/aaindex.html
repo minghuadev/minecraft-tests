@@ -1,0 +1,647 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Macrides Web Services offers free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Download and Test Directory for the overlibmws DHTML Popup Library</title>
+
+<script type="text/javascript">
+<!--
+var OLbubbleImages='flower,roundcorners';
+//-->
+</script>
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_bubble.js"></script>
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+<script type="text/javascript" src="overlibmws_modal.js"></script>
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(TEXTPADDING,4, WRAP, BASE,2, TEXTFONTCLASS,'olText',
+ MODALCOLOR,'#4488dd', MODALOPACITY,60, MODALSCROLL, MODALCLICK);
+
+var mwshome = new Image();
+mwshome.src = "../satire/image/sfmem.jpg"
+var rainbowline=new Image();
+rainbowline.src = "../image/rainbowline.gif"
+var rb = new Image();
+rb.src = "../image/rb.jpg"
+var paper = new Image();
+paper.src = "../image/paper.jpg"
+var myExitBlue = new Image();
+myExitBlue.src = "exit_blue.gif"
+var myCapBG = new Image();
+myCapBG.src = "raised_blue.gif"
+var myInputText = new Image();
+myInputText.src = "inputText.gif"
+var myExitMetallic = new Image();
+myExitMetallic.src = "exit_metallic.gif";
+var myMetallicBG = new Image();
+myMetallicBG.src = "raised_metallic.gif"
+
+var closeimgBlue =
+ '<img src="exit_blue.gif" alt="Close" width="14" height="15" border="0" '
++'name="blueExit" id="blueExit" '
++'onmouseover="document.blueExit.src=myExitMetallic.src" '
++'onmouseout="document.blueExit.src=myExitBlue.src">';
+
+
+var MWShome='<img alt="" width="290" height="178" src="../satire/image/sfmem.jpg">'
++'<div class="br6">&nbsp;<\/div>Link to the Macrides Web Services homepage';
+
+var myGoogleCap =
+  '<span class="blue">Search<\/span> www.macridesweb.com <span class="blue">or the<\/span> '
+ +'WWW <span class="blue">via<\/span> <span class="yellow">Google<\/span>';
+
+var myGoogleTxt =
+  '<div align="center">'
+ +'<form name="f" method="GET" autocomplete="off" target="_blank" '
+ +'action="http://www.google.com/search">'
+ +'<input type="hidden" name="hl" value="en">'
+ +'<input type="hidden" name="ie" value='+(OLns4?'"ISO-8859-1"':'"UTF-8"')+'>'
+ +'<input type="hidden" name="oe" value='+(OLns4?'"ISO-8859-1"':'"UTF-8"')+'>'
+ +'<input type=hidden name=domains value="www.macridesweb.com">'
+ +'<input type=hidden name=cof value="S:http://www.macridesweb.com;GL:1;AH:center;T:black;'
+ +'BGC:#ddeeff;LC:#ee0000;ALC:maroon;VLC:maroon;AWFID:0574228e2618b5a9;">'
+ +'<input type=radio name=sitesearch value="www.macridesweb.com" checked> www.macridesweb.com '
+ +'&nbsp;&nbsp;&nbsp;<input type=radio name=sitesearch value=""> WWW<br><br>'
+ +'<input type="text" name="q" id="qInput" size="55" maxLength="255" class="olinput" '
+ +'onfocus="OLmEdit=1;" onblur="OLmEdit=0;" '
+ +'onmouseover="return overlib2(\'Submit for &lt;b&gt;results in another window&lt;/b&gt;.\', '
+ +'FGCOLOR,\'#bbddff\',REF,\'qInput\',REFC,\'LL\',REFP,\'UL\',REFX,0,REFY,3,VAUTO,'
+ +'TIMEOUT,5000);"  onmouseout="nd2();">'
+ +'&nbsp;&nbsp;<input type="submit" name=sa id="saInput" value="Go" '
+ +'onmouseover="return overlib2(\'Submit for &lt;b&gt;results in another window&lt;/b&gt;.\', '
+ +'FGCOLOR,\'#bbddff\',REF,\'saInput\',REFC,\'LR\',REFP,\'UR\',REFX,0,REFY,3,VAUTO,'
+ +'TIMEOUT,5000);" onmouseout="nd2();"><br>'+(OLie4&&!OLopr?'':'<br>')+'<\/form><\/div>';
+
+// Set Focus
+function OLsf() {
+ if (!(OLloaded&&OLgateOK)||overlib==no_overlib) return;
+ if (!OLns4) setTimeout("document.forms.f.elements.q.focus()",2);
+ return true;
+}
+
+// Popup for Email
+function olmail()
+{
+ olmailwin=window.open('http://www.macridesweb.com/cgi/olmail.cgi','olmail',
+ 'resizable=0,width=620,height=460,status=0,location=0,toolbar=1,menubar=0,'+
+ 'scrolling=0,screenX=90,left=90,screenY=0,top=0');
+ olmailwin.focus();
+}
+
+// Function for an onload message.
+function OnloadMsg() {
+ var onloadTxt =
+  '<strong><em>Hover over anchors (links) and images to invoke DHTML popups.<\/em><\/strong>';
+ overlib(onloadTxt,
+  MIDX,0, RELY,15, TIMEOUT,8000,
+  TEXTSIZE,'14px', TEXTPADDING,5, FGCOLOR,'#ffffcc',
+  FILTER, FADEIN,15, FADEOUT,14,
+  BASE,2);
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.myHeader {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;color:#000000;}
+.myHeaderB {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;color:#000000;
+ background-color:#cceeff;}
+.myHeaderPB {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:22px;color:purple;
+ background-color:#cceeff;}
+.mySubHead {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;}
+.mySpacer {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.comic16 {font-family:"Comic Sans MS",Verdana,sans-serif;font-size:16px;font-style:italic;}
+.purple {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;
+ color:purple;font-weight:bold;}
+.black {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;
+ color:#000000;font-weight:bold;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.aqua14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:aqua;
+ font-weight:bold;}
+a {font-weight:bold;}
+a.myText {color:#ee0000;font-weight:bold;}
+a.myText:hover {color:purple;}
+.olraisedBlue {text-align:center;
+ background:#33aaff url(raised_blue.gif) repeat-x bottom left;}
+table.olraisedBlue {border-bottom:1px solid #333399;}
+.oltxtRaisedBlue {font-family:Verdana;font-size:14px;font-weight:bold;color:#ffffff;}
+.olraisedMetallic {text-align:center;
+ background:#33aaff url(raised_metallic.gif) repeat-x bottom left;}
+table.olraisedMetallic {border-bottom:1px solid #666666;}
+.oltxtRaisedMetallic {font-family:Verdana;font-size:14px;font-weight:bold;color:#444444;
+ text-shadow:#ddd 2px 2px 0;}
+.olText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.olTxtB {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;
+ font-weight:bold;}
+.olTxtMWS {font-family:Arial,sans-serif;font-size:12px;color:#666600;
+ font-style:italic;font-weight:bold;}
+.snip {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:10px;}
+.olcg {background-color:#333399; text-align:center;}
+.olcap {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;font-weight:bold;
+ color:#ffffff;}
+input.olinput {background:white url(inputText.gif) repeat-x bottom left;
+ min-height:16px;color: #000000;}
+.blue {color:#cceeff;}
+.yellow {color:yellow;}
+.popfgblue {background-color:#99ccff; text-align:center;}
+.br6 {font-size:4px; line-height:6px;}
+-->
+</style>
+</head>
+
+<body text="#00000" bgcolor="#ddeeff" onload="OnloadMsg();">
+<p>http://www.macridesweb.com/oltest/</p>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <td class="myText" align="center">
+   <span class="myHeader"><b>Download and Test Directory</b></span>
+   <span class="mySubHead"><b><em>for the</em></b></span><br>
+   <span class="myHeaderPB"><b><em>&nbsp;overlibmws</em></b></span>
+   <span class="myHeaderB"><b><em>DHTML Popup Library&nbsp;</em></b></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <b><em>maintained by</em> <a
+    class="myText"
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',CENTER,VAUTO,
+     OFFSETY,20, FILTER,FADEIN,46,FADEOUT,46,FILTERSHADOW,2,FILTERSHADOWCOLOR,'purple',
+     SHADOW,SHADOWCOLOR,'purple',STATUS,'Click to send form-based e-mail to Fote.');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    class="myText"
+    href="../"
+    onmouseover="return overlib(MWShome,
+     FGCLASS,'popfgblue',TEXTFONTCLASS,'olTxtMWS',TEXTPADDING,6,LEFT,HAUTO,VAUTO,
+     FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#0070dd',
+     SHADOW,SHADOWCOLOR,'#0090ff');"
+    onmouseout="nd();">Macrides Web Services</a></b><br>
+   <b><em>extending Erik Bosrup's overlib with enhancements and bug-fixes</em></b>
+   <br><br>
+   <span style="background-color:#d2e4ff;font-weight:bold;">Hover over anchors (links) and images to
+   invoke DHTML popups.</span>
+   <br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff"><tr><td>
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="myText" align="center" valign="bottom" colspan="4" rowspan="1">
+   <span style="background-color:#c5e7f8;"><b>&nbsp;&nbsp;Use this link to <a
+    class="myText"
+    href="overlibmws.zip"
+    onmouseover="return overlib('Download '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'as a zip archive.',HAUTO,VAUTO,FGCOLOR,'#cceeff');"
+    onmouseout="nd();">download</a> <span
+    class="purple14"><em>overlibmws</em></span> as a zip <a
+    class="myText"
+    href="zipArchive.html"
+    onmouseover="return overlib('Preview the contents of the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; zip archive.',
+     LEFT,HAUTO,VAUTO,FGCOLOR,'#cceeff');"
+    onmouseout="nd();">archive</a>&nbsp;&nbsp;</b></span><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with no extra costs to you).',
+     TEXTPADDING,8,FGCOLOR,'#bbddff',REF,'amazon',REFP,'UR',REFX,-8,REFY,-14,FILTER,
+     BORDER,3,BASE,6,BGBACKGROUND,'../image/rainbowline.gif',TEXTFONTCLASS,'olTxtB',
+     FGBACKGROUND,'../image/paper.jpg');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    href="javascript:void(0)"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'aqua14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     REF,'logo',REFX,95,REFY,1,FGCLASS,'olraisedBlue', TEXTFONTCLASS,'oltxtRaisedBlue',
+     STATUS,'Popups by overlibmws');"
+    onmouseout="nd();"><img
+    name="logo" id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright&nbsp;Foteos&nbsp;Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',CAPTION,'Donate via PayPal',
+     CGCLASS,'olraisedBlue',CAPTIONPADDING,6,
+     TEXTPADDING,8,FGCOLOR,'#bbddff',FILTER,
+     REF,'logo',REFC,'LL',REFP,'UL',REFY,5);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" hspace="0" vspace="0" border="0" alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',
+     BGCOLOR,'#666666', FGCLASS,'olraisedMetallic', TEXTFONTCLASS,'oltxtRaisedMetallic',
+     REF,'w3c',REFP,'UR',REFX,-5,REFY,1,FGCOLOR,'#cceeff');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    width="88" height="31" hspace="5" vspace="0" border="0" alt=""
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+</td></tr></table>
+
+<table width="640" align="center" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <td class="myText" align="center">
+   <br>
+   <b>Use the <a
+    class="myText"
+    href="commandRef.html"
+    onmousemove="if(OLie7)self.status=this.href;"
+    onmouseover="overlib('Link to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference',HAUTO,VAUTO,
+     FGBACKGROUND,'../image/paper.jpg',BORDER,2,BASE,3,BGCOLOR,'#00cc00');"
+    onmouseout="nd();">Command Reference</a> for <span
+    class="purple14"><i>overlibmws</i></span> DHTML tooltip and sticky popups</b>
+   <font class="mySpacer">&nbsp;<br>&nbsp;<br></font>
+   <b>Check the <a
+    class="myText"
+    href="changeHistory.html"
+    onmouseover="return overlib('Link to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Change History',HAUTO,VAUTO,FGCOLOR,'#bbddff');"
+    onmouseout="nd();">Change History</a> for <span
+    class="purple14"><i>overlibmws</i></span> DHTML tooltips and stickies</b>
+   <font class="mySpacer">&nbsp;<br>&nbsp;<br></font>
+   <b>Access the <span class="purple14"><i>overlibmws</i></span> <a
+    class="myText"
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="return overlib('Link to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Support Group',
+     FGCOLOR,'#bbddff', LEFT,ABOVE,HAUTO,VAUTO);"
+    onmouseout="nd();">Support Group</a></b> <a
+    href="javascript:void(0);"
+    onmouseover="overlib(myGoogleTxt, CAPTION,myGoogleCap, MODAL, CLOSETEXT,closeimgBlue,
+     STICKY, CLOSECLICK, CAPTIONPADDING,6, CGCLASS,'olraisedBlue', CAPTIONFONTCLASS,'olcap',
+     CLOSETITLE,'Close', TEXTPADDING,10, TEXTFONTCLASS,'olText', FGCOLOR,'#bbddff',
+     REF,'amazon', REFC,'LR', REFP,'UR', REFX,8, REFY,3, BASE,3); return OLsf();"
+    onmouseout="nd();"><img name="gsearch" id="gsearch" alt="" align="middle"
+    src="../image/google.gif" width="70" height="26" hspace="50" border="0"></a><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#cceeff"><tr><td>
+<table width="640" align="center" cellpadding="0" cellspacing="2" border="0" bgcolor="#cceeff">
+ <tr>
+  <td class="myText" align="center" valign="bottom" height="24" colspan="2" rowspan="1">
+   <span style="background-color:#d2e4ff;"><b>&nbsp;&nbsp;Example and Test Files for the
+   <span
+    class="purple14"><em>overlibmws</em></span> DHTML Popup Library&nbsp;&nbsp;</b></span><br>
+  </td>
+ </tr>
+ <tr>
+  <td class="black" valign="top">
+   <ol class="black">
+    <li>
+     <a
+      class="myText"
+      href="STARTED.html"
+    onmousemove="if(OLie7)self.status=this.href;"
+      onmouseover="return overlib('Getting Started with '
+       +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+       FGBACKGROUND,'../image/paper.jpg',BORDER,2,BASE,3,BGCOLOR,'#00cc00',HAUTO,VAUTO);"
+      onmouseout="nd();">Getting Started</a>
+    </li>
+    <li>
+     return value for <a
+      class="myText"
+      href="ONCLICK.html"
+      onmouseover="return overlib('important onclick return value issue',
+       HAUTO,VAUTO);"
+      onmouseout="nd();">onclick</a> links
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="STICKY.html"
+      onmouseover="return overlib('use of STICKY, SCROLL, and other relevant commands',
+       HAUTO,VAUTO);"
+      onmouseout="nd();">STICKY &amp; SCROLL</a>
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="NOCLOSE.html"
+      onmouseover="return overlib('NOCLOSE / MOUSEOFF stickies',HAUTO,VAUTO);"
+      onmouseout="nd();">NOCLOSE / MOUSEOFF</a>
+    </li>
+    <li>
+     use of <a
+      name="pref" id="pref"
+      class="myText"
+      href="REF.html"
+      onmouseover="return overlib('use of REFerence-based positioning',
+       REF,'pref',REFP,'LL',REFX,30,REFY,18,
+       BORDER,3,BGCOLOR,'#C0C080',FGCOLOR,'#FFFFAA',NOJUSTY);"
+      onmouseout="nd();">REF</a> positioning
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="WRAP.html"
+      onmouseover="return overlib('use of WRAP and WRAPMAX',HAUTO,VAUTO);"
+      onmouseout="nd();">WRAP &amp; WRAPMAX</a>
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="SHADOW.html"
+      onmouseover="return overlib('use of SHADOW',
+       CENTER,ABOVE,VAUTO,FGCOLOR,'#dfffdf',BGCOLOR,'#003300',TEXTCOLOR,'#003300;',
+       SHADOW,SHADOWCOLOR,'#008000',SHADOWOPACITY,40);"
+      onmouseout="nd();">SHADOW</a>
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="SHADOW.html#secondary"
+      onmouseover="return overlib('use of Secondary Popups',
+       CENTER,ABOVE,VAUTO);"
+      onmouseout="nd();">Secondary Popups</a>
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="DRAGGABLE.html"
+      onmouseover="return overlib('DRAGGABLE stickies',
+       HAUTO,VAUTO);"
+      onmouseout="nd();">DRAGGABLE</a>
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="MODAL.html"
+      onmouseover="return overlib('use of MODAL and Confirm Dialog popups',
+       HAUTO,VAUTO);"
+      onmouseout="nd();">MODAL</a> &amp; Confirm Dialogs
+    </li>
+    <li>
+     use of <a
+      name="refpos" id="refpos"
+      class="myText"
+      href="BKGRND.html"
+    onmousemove="if(OLie7)self.status=this.href;"
+      onmouseover="return overlib('use of BGBACKGROUND, CGBACKGROUND&lt;br&gt;'
+       +'and FGBACKGROUND vs. BACKGROUND',TEXTFONTCLASS,'olTxtB',BORDER,3,BASE,6,
+       TEXTPADDING,6,BGBACKGROUND,'../image/rainbowline.gif',FGBACKGROUND,'../image/rb.jpg',
+       REF,'refpos',REFP,'LL',REFX,-50,REFY,-4,FILTER,NOJUSTY);"
+      onmouseout="nd();">?GBACKGROUND</a>
+    </li>
+    <li>
+     hide <a
+      class="myText"
+      href="hide.html"
+      onmouseover="return overlib('prevent form elements from obscuring overlib popups',
+       HAUTO,VAUTO);"
+      onmouseout="nd();">form</a> or <a
+      class="myText"
+      href="flashWmode.html"
+      onmouseover="return overlib('prevent flash objects from obscuring overlib popups',
+       HAUTO,VAUTO);"
+      onmouseout="nd();">flash</a> (incl. <a
+      class="myText"
+      href="testFrame.html"
+      onmouseover="return overlib('prevent obscuring of overlib popups in frame documents',
+       HAUTO,VAUTO);"
+      onmouseout="nd();">frames</a>)
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="FUNCTION.html"
+      onmouseover="return overlib('use of FUNCTION and its simple alternative',
+       CENTER,ABOVE,VAUTO);"
+      onmouseout="nd();">FUNCTION</a>
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="DEBUG.html"
+      onmouseover="return overlib('use of the OLshowProperties() Debug Function',
+       CENTER,ABOVE,VAUTO);"
+      onmouseout="nd();">Debug Function</a>
+    </li>
+   </ol>
+  </td>
+  <td class="black" valign="top">
+   <ol start="15" class="black"> 
+    <li>
+     use of <a
+      class="myText"
+      href="BUBBLE.html"
+      name="bubble" id="bubble"
+      onmouseover="return overlib(
+       '&lt;center&gt;use of&lt;br&gt;Speech Bubble Popups&lt/center&gt;',
+       BUBBLE,ADJBUBBLE,TEXTPADDING,0,TEXTFONTCLASS,'comic16',
+       REF,'bubble',REFP,'LR',REFX,125,REFY,-2);"
+      onmouseout="nd();">BUBBLE</a> (incl. <a
+      class="myText"
+      href="BUBBLE.html#imagemap"
+      onmouseover="return overlib(
+       '&lt;center&gt;popups via&lt;br&gt;image map&lt/center&gt;',
+       BUBBLE,ADJBUBBLE,TEXTPADDING,0,TEXTFONTCLASS,'comic16',
+       REF,'bubble',REFP,'LR',REFX,200,REFY,-2);"
+      onmouseout="nd();">image map</a>)
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="FILTER.html"
+      onmouseover="return overlib('&lt;center&gt;use '
+       +'of&lt;br&gt;Filter and Transition&lt;br&gt;styled popups.&lt;/center&gt;',
+       BUBBLE,ADJBUBBLE,TEXTPADDING,0,TEXTFONTCLASS,'comic16',
+       REF,'bubble',REFP,'LR',REFX,123,REFY,-5,
+       FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#00B000',FADEIN,45,FADEOUT,44);"
+      onmouseout="nd();">FILTER</a>
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="CSSfontSize.html"
+      onmouseover="return overlib('&lt;center&gt;use of CSS versus Integer parameters '
+       +'for the&lt;br&gt;TEXTSIZE, CAPTIONSIZE, CLOSESIZE&lt;br&gt;'
+       +'and PRINTSIZE commands&lt;/center&gt;',
+       BUBBLE,BUBBLETYPE,'roundcorners',TEXTPADDING,0,TEXTFONTCLASS,'comic16',
+       FILTER,FILTERSHADOW,2,FILTERSHADOWCOLOR,'#0000ff',FADEIN,39,FADEOUT,40,
+       CENTER,ABOVE,OFFSETY,20,VAUTO,NOFOLLOW);"
+      onmouseout="nd();">font-size</a> settings
+    </li>
+    <li>
+     set up <a
+      class="myText"
+      href="overflow.html"
+      onmouseover="return overlib('set up scrollbars within popups',
+       LEFT,HAUTO,VAUTO);"
+      onmouseout="nd();">scrollbars</a> within popups
+    </li>
+    <li>
+     loading <a
+      class="myText"
+      href="IFRAME.html"
+      onmouseover="return overlib('how to load pre-existing HTML files into popups',
+       LEFT,HAUTO,VAUTO);"
+      onmouseout="nd();">HTML files</a> into popups
+    </li>
+    <li>
+     use of <a
+      class="myText"
+      href="AJAX.html"
+      onmouseover="return overlib('how to load and modify popup content dynamically',
+       LEFT,HAUTO,VAUTO);"
+      onmouseout="nd();">AJAX</a> with popups
+    </li>
+    <li>
+     php/mysql db <a
+      class="myText"
+      href="overlibmwsPHP.html"
+      onmouseover="return overlib('php and mysql database content with '
+       +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+       CENTER,ABOVE,VAUTO);"
+      onmouseout="nd();">content</a> &amp; <a
+      class="myText"
+      href="http://www.macridesweb.com/oltest/overlibmwsPHPquote.php5"
+      onmouseover="return overlib('quoting php strings for '
+       +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+       CENTER,ABOVE,VAUTO);"
+      onmouseout="nd();">quoting</a>
+    </li>
+    <li>
+     add <a
+      class="myText"
+      href="PRINT.html"
+      onmouseover="return overlib('add a print link or button for STICKY popup content',
+       CENTER,ABOVE,VAUTO);"
+      onmouseout="nd();">print link or button</a> in stickies
+    </li>
+    <li>
+     select dates via <a
+      class="myText"
+      href="calendarmws.html"
+      onmouseover="return overlib('try the calendar popup form',
+       CENTER,ABOVE,VAUTO);"
+      onmouseout="nd();">calendar popups</a>
+    </li>
+    <li>
+     test <a
+      class="myText"
+      href="./CrossFrame/index.html"
+    onmousemove="if(OLie7)self.status=this.href;"
+      onmouseover="return overlib('test across frames (crossframe) support',
+       CENTER,ABOVE,VAUTO,FGBACKGROUND,'../image/paper.jpg',
+       BORDER,2,BASE,3,BGCOLOR,'#0000ff');"
+      onmouseout="nd();">across frames</a> support
+    </li>
+    <li>
+     test <a
+      class="myText"
+      href="ONFOCUS.html"
+    onmousemove="if(OLie7)self.status=this.href;"
+      onmouseover="return overlib('test keyboard-invoked popup support',
+       CENTER,ABOVE,VAUTO,FGBACKGROUND,'../image/paper.jpg',
+       BORDER,2,BASE,3,BGCOLOR,'#0000ff');"
+      onmouseout="nd();">keyboard</a>-invoked popups
+    </li>
+    <li>
+     translate <a
+      class="myText"
+      href="translateWord.html"
+      onmouseover="return overlib('use of popups for translations of selected words',
+       LEFT,HAUTO,VAUTO);"
+      onmouseout="nd();">words</a> or <a
+      class="myText"
+      href="BabelFish.html"
+      onmouseover="return overlib('use of popup for the Babel Fish translation service',
+       LEFT,HAUTO,VAUTO);"
+      onmouseout="nd();">documents</a>
+    </li>
+    <li>
+     I love my <a
+      class="myText"
+      href="harley.html"
+      onmouseover="return overlib('Associating audio with popups',
+       CENTER,ABOVE,VAUTO,BGCOLOR,'#00ff00',FGCOLOR,'#bbffdd');"
+      onmouseout="nd();">Harley</a> (sound)
+    </li>
+    <li>
+     link color <a
+      class="myText"
+      href="swap.html"
+      onmouseover="return overlib('link color swapping via popups',
+       CENTER,ABOVE,VAUTO);"
+      onmouseout="nd();">swapping</a> via popups
+    </li>
+   </ol><br>
+  </td>
+ </tr>
+</table>
+</td></tr></table>
+<div class="myText">&nbsp;<br>&nbsp;<br></div>
+
+<script type="text/javascript">
+<!--
+var meyersv2a = new Image();
+meyersv2a.src = "meyersv2a.jpg"
+//-->
+</script>
+<script type="text/javascript" src="../script/ga.js"></script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='index.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

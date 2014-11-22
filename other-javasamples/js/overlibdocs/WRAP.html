@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of the WRAP command in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - WRAP and WRAPMAX commands in overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript">
+<!--
+// Set page defaults for popups.
+OLpageDefaults(WRAP, TEXTPADDING,6, CAPTIONPADDING,4, BASE,2, VAUTO, FGCOLOR,'#eeeeee',
+ FGBACKGROUND,'../image/paper.jpg', SHADOW, SHADOWCOLOR,'#4466ff');
+
+// Preload background image.
+paper = new Image();
+paper.src = "../image/paper.jpg"
+
+// Short overlib Lead Argument for WRAP example.
+var shortTxt = 'This is relatively short content for a popup with <strong>WRAP<\/strong> '
+ +'instead of a fixed WIDTH.';
+
+// Lengthy overlib Lead Argument for WRAP example.
+var lengthyTxt = 'This is lengthy content for a popup with <strong>WRAP<\/strong>.&nbsp; '
+ +'The intent is to make the content lengthy enough so as to cause its width to be wider '
+ +'than the <strong>width of the browser window<\/strong> so that the wrapping component '
+ +'of the WRAP command is invoked.&nbsp; Try the links in this file with as many different '
+ +'browser and platform combinations as you can to see how the WRAP feature is implemented '
+ +'with each of them.';
+
+// Lead argument for which WRAPMAX sets width with WRAP.
+var lengthyTxtMAX = 'This is lengthy content for a popup with <strong>WRAP<\/strong>, and '
+ +'<strong>WRAPMAX<\/strong> set to <strong>400<\/strong>.&nbsp; The intent is to make '
+ +'the content lengthy enough so as to cause its width to be wider than <strong>400 '
+ +'pixels<\/strong> so that the wrapping component of the WRAP command is invoked.&nbsp; '
+ +'Try the links in this file with as many different browser and platform combinations '
+ +'as you can to see how the WRAP feature is implemented with each of them.';
+
+// Lead Argument for which HTML sets width with WRAP.
+var lengthyTxtHTML ='This is lengthy content for a popup with '
+ +'<strong>WRAP<\/strong>.&nbsp; It uses <strong>HTML<br>'
+ +'line breaks<\/strong> to specify a series of lines in the popup content,<br>'
+ +'so that the WRAP command adjusts the width of the popup<br>'
+ +'in relation to the <strong>longest line<\/strong> determined by the HTML.';
+
+/*
+      Dennis Sandow's adaptive width-calculator, adapted by
+      Foteos Macrides for use with WRAPMAX in overlibmws.
+
+   The integer values 300, /4, *9, 720 can be tuned for your preference.
+   With those values, the return value (for setting WRAPMAX's parameter)
+   will never be greater than 720 (in deference to users with 800 x 600
+   monitors), and will never be less than 300 (with any popups having a
+   single line narrower than 300 px WRAPped to a lesser value as normally).
+*/
+function OLdynamicSizer(aTxt, aCap) {
+ maxVal = Math.floor(300 + aTxt.length/4);
+ if (aCap) maxVal = Math.max(maxVal, Math.floor(aCap.length*9));
+ return Math.min(720, maxVal);
+}
+
+// Example text string for use with OLdynamicSizer.
+var myTxt4 = 'This is lengthy content for a popup with <strong>WRAP<\/strong>, and '
+ +'<strong>WRAPMAX<\/strong> set dynamically via Dennis Sandow\'s '
+ +'<strong>OLdynamicSizer()<\/strong> function.&nbsp; The function is used to set the parameter '
+ +'value for <strong>WRAPMAX<\/strong> and yield an approximate aspect ratio based on '
+ +'the content length.&nbsp; Javascript lovers may find this a fun alternative to '
+ +'specifying static parameter values for <strong>WRAPMAX<\/strong>.';
+
+// Example caption string for with OLdynamicSizer.
+var myCap4 = 'This is the caption for popup number 4';
+
+// Example WRAPMAX parameter for use with  OLdynamicSizer.
+// Omit the second argument if the popup has no caption.
+var myWidth4 = OLdynamicSizer(myTxt4, myCap4);
+//-->
+</script>
+
+<style type="text/css">
+<!--
+.olcg {background-color:#4466ff; text-align:center;}
+
+.text6 {font-family:Verdana,Arial,sans-serif; font-size:6px;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table align="center" width="80%" border="0" cellspacing="0" cellpadding="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Examples of WRAP</strong></span>
+   <span class="mySubHead"><strong><em>and</em></strong></span>
+   <span class="myHeader"><strong>MAXWRAP</strong></span>
+   <span class="mySubHead"><strong><em>with<br>the</em></strong></span>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     OFFSETX,-10, OFFSETY,20, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a></strong></span>
+   <span class="myHeader"><strong><em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmousemove="if(OLie55)self.status='Click to send form-based e-mail to Fote.';"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)',STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20);"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for WRAP<br>
+   and WRAPMAX support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong><br><br>
+  </td>
+ </tr>
+ <tr>
+  <td valign="middle" align="center" class="text18">
+   <!--
+     Short overlib lead argument with WRAP.
+    -->
+   <a
+    href="javascript:void(0);"
+    onmousemove="if(OLie55)self.status='Short popup content.';"
+    onmouseover="return overlib(shortTxt,
+     TEXTFONTCLASS,'text12', CENTER, OFFSETY,20, STATUS,'Short popup content.');"
+    onmouseout="nd();">Pop Me!!!</a><br>
+   <span class="text6">&nbsp;<br></span>
+   <!--
+     Lengthy overlib lead argument with WRAP.
+    -->
+   <a
+    href="javascript:void(0);"
+    onmousemove="if(OLie55)self.status='Popup with lengthy content.';"
+    onmouseover="return overlib(lengthyTxt,
+     TEXTFONTCLASS,'text12', CENTER, OFFSETY,20, STATUS,'Popup with lengthy content.');"
+    onmouseout="nd();">Pop Me Too!!!</a><br>
+   <span class="text6">&nbsp;<br></span>
+   <!--
+     Lengthy lead argument for which WRAPMAX sets width for WRAP.
+    -->
+   <a
+    href="javascript:void(0);"
+    onmousemove="if(OLie55)self.status='Lengthy popup content with WRAPMAX.';"
+    onmouseover="return overlib(lengthyTxtMAX,
+     TEXTFONTCLASS,'text12', CENTER, OFFSETY,20, WRAPMAX,400,
+     STATUS,'Lengthy popup content with WRAPMAX.');"
+    onmouseout="nd();">Pop Me Too, Two!!!</a><br>
+   <span class="text6">&nbsp;<br></span>
+   <!--
+     Fun with Dennis Sandow's "adaptive width-calculator" function.
+     Use it to set the parameter value for WRAPMAX dynamically.
+    -->
+   <a
+    href="javascript:void(0);"
+    onmousemove="if(OLie55)self.status='Lengthy popup content with shell script.';"
+    onmouseover="return overlib(myTxt4, CAPTION,myCap4, CGCLASS,'olcg',
+     CAPTIONSIZE,'12px', TEXTFONTCLASS,'text12', CENTER, OFFSETY,20, WRAPMAX,myWidth4,
+     STATUS,'Lengthy popup content with shell script.');"
+    onmouseout="nd();">Pop Me Too, Three!!!</a><br>
+   <span class="text6">&nbsp;<br></span>
+   <!--
+     Lengthy lead argument for which HTML sets width for WRAP.
+    -->
+   <a
+    href="JavaScript:void(0);"
+    onmousemove="if(OLie55)self.status='Lengthy popup content with HTML line breaks.';"
+    onmouseover="return overlib(lengthyTxtHTML,
+     CAPTION,'Almost all of the popups at this site use WRAP', CGCLASS,'olcg',
+     CAPTIONSIZE,'12px', TEXTFONTCLASS,'text12', CENTER, OFFSETY,20,
+     STATUS,'Lengthy popup content with HTML line breaks.');"
+    onmouseout="nd();">Pop Me As Well!!!</a><br>
+   &nbsp;<br>
+  </td>
+ </tr>
+ <tr>
+  <td align="center" class="text12">
+   <b>Vary your browser's window width to see how the<br>
+   widths and positioning of the popups are affected.</b>
+   <br><br>
+   <em>Use your browser's</em> <b>View Source</b> <em>option<br>
+   to see the markup for these examples.</em>
+   <br><br>
+   WRAP and WRAPMAX are core commands.
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="360" class="text12" align="center" valign="bottom" colspan="3" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     ABOVE,CENTER,OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     ABOVE,CENTER,OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no&lt;/strong&gt; extra costs to you).',
+     TEXTPADDING,8,REF,'amazon',REFP,'UR',REFX,-8,REFY,-10,
+     TEXTFONTCLASS,'text12');"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     REF,'logo',REFX,95,REFY,1,TEXTPADDING,4, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip" bgcolor="#ccddff">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="100" align="center" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmousemove="if(OLie55)self.status=this.href;"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8, TEXTFONTCLASS,'text12',
+     REF,'logo',REFC,'UL',REFP,'LL',REFX,-10,REFY,-5);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+ </tr>
+</table>
+<div>&nbsp;</div>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='WRAP.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

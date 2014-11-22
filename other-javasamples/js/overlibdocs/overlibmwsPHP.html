@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, php, mysql, DHTML popups, DHTML tooltips, DHTML, popups, tooltips, Macrides Web Services, Macrides">
+<meta name="description" content="Examples of accessing php and mysql database content with Macrides Web Services open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - php and mysql database content with overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<script type="text/javascript">
+<!--
+OLpageDefaults(WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'text12', FGCOLOR,'#ffffee');
+//-->
+</script>
+
+<style type='text/css'>
+<!--
+.codeDescParent {
+ background-color:#FFFFCC;
+ width:640px;
+ margin-right:auto;
+ margin-left:auto;
+}
+.codeDescription {
+ background-color:#FFFFCC;
+ padding:10px;
+ border:4px dashed #333333;
+ margin-right:auto;
+ margin-left:auto;
+}
+
+.phpCode {background-color:#FFCC99;}
+
+a {color:#338855;font-weight:bold;}
+a:hover {color:#FF00FF;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text18 {font-family:Verdana,Arial,sans-serif; font-size:18px;}
+.text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}
+.text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table align="center" width="720">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText" colspan="3">
+   <span class="myHeader"><strong>Display <a
+    href="http://www.php.net/"
+    onmouseover="return overlib('Go to the php homepage.',
+     OFFSETX,-10, OFFSETY,20, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">php</a> and <a
+    href="http://www.mysql.com/"
+    onmouseover="return overlib('Go to the mysql homepage.',
+     OFFSETX,-10, OFFSETY,20, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">mysql</a> database content</strong></span>
+   <span class="mySubHead"><strong><em>via the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     OFFSETX,-10, OFFSETY,20, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', STATUS,'Click to send form-based e-mail to Fote.',
+     TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20);"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.',
+     TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for<br>
+   server-side script support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group',
+     TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   <br>
+   This <a
+    href="http://www.macridesweb.com/oltest/overlibmwsPHPdbase.php5"
+    onmouseover="return overlib('Example with popup content retrieved from a database.',
+     OFFSETX,15,VCENTER);"
+    onmouseout="nd();">example</a> uses overlib popups to display information obtained by
+   php from a mysql database.&nbsp; The markup for that document is shown below, with the
+   php and database access coding in the salmon-colored area.&nbsp; The overall markup is
+   intended to serve as a guide for using overlib DHTML tooltip or sticky popups in
+   conjunction with any server-side scripting and database software.
+   <br><br>
+  </td>
+ </tr>
+ <tr>
+  <td align="center" class="text12">
+   <div class="codeDescParent" align="center">
+   <div class="codeDescription" align="left">
+    &lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;<br>
+    &lt;html&gt;<br>
+    &lt;head&gt;<br>
+    &lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"&gt;<br>
+    &lt;title&gt;overLIB - Virginia Good Bob Camping Clubs&lt;/title&gt;
+    <br><br>
+    &lt;script type="text/javascript" src="overlibmws.js"&gt;&lt;/script&gt;
+    <br><br>
+    &lt;script type='text/javascript'&gt;<br>
+    &lt;!--<br>
+    OLpageDefaults(WRAP, BASE, 2, CGCLASS,'olcg', FGCLASS,'olfg', CAPTION, 'Service Area',<br>
+    &nbsp;TEXTPADDING,4, TEXTFONTCLASS,'oltxt', CAPTIONPADDING,3, CAPTIONFONTCLASS,'olcap',<br>
+    &nbsp;AUTOSTATUS);<br>
+    //--&gt;<br>
+    &lt;/script&gt;
+    <br><br>
+    &lt;style type='text/css'&gt;<br>
+    &lt;!--<br>
+    .olcg {background-color:#333399; text-align:center;}<br>
+    .olfg {background-color:#ffffcc; text-align:center;}<br>
+    .olcap {font-family:Verdana,Arial,Helvetica;font-size:11px;color:#ffffff;font-weight:bold;}<br>
+    .oltxt {font-family:Verdana,Arial,Helvetica;font-size:13px;color:#000000;}
+    <br><br>
+    body {color:#000000; background-color:#ddeeff;}
+    <br><br>
+    a {color:#338855;font-weight:bold;}<br>
+    a:hover {color:#FF00FF;}
+    <br><br>
+    .text14 {font-family:Verdana,Arial,sans-serif; font-size:14px;}<br>
+    .text12 {font-family:Verdana,Arial,sans-serif; font-size:12px;}<br>
+    --&gt;<br>
+    &lt;/style&gt;<br>
+    &lt;/head&gt;
+    <br><br>
+    &lt;body text="#000000" bgcolor="#ddeeff"&gt;
+    <br><br>
+    &lt;table width="300" border="0" align="center" cellspacing="2" cellpadding="5"&gt;<br>
+    &lt;tr&gt;&lt;td class="text14"&gt;<br>
+    &lt;b&gt;Virginia Good Sam Clubs<br>
+    &lt;span  class="text12"&gt;Mouseover each link for area served&lt;/span&gt;&lt;/b&gt;<br>
+    &lt;/td&gt;&lt;/tr&gt;<br>
+    <div class="phpCode">
+     &lt;?php<br>
+     include_once('../include/db_constants.php');<br>
+     $mysqldb = mysql_pconnect($dbhost,$dbuser,$dbpassword);<br>
+     if (!$mysqldb) {<br>
+     echo "&lt;tr&gt;&lt;td class='text14'&gt;Can't connect to
+     database!&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;";<br>
+     exit;<br>
+     }<br>
+     mysql_select_db($dbname, $mysqldb) or die("Could not select the $dbname<br>
+     database, while attempting to access table:'chapters'");<br>
+     $result = mysql_query("select chapterName, service_area from chapters", $mysqldb);<br>
+     if (!$result) {<br>
+     echo "&lt;tr&gt;&lt;td class='text14'&gt;Could not run the
+     query.&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;";<br>
+     exit;<br>
+     }<br>
+     while (list($chapterName, $SA) = mysql_fetch_row( $result)) {<br>
+     echo '&lt;tr&gt;&lt;td class="text12"&gt;&lt;a href="javascript:;" onMouseOver="return
+     overlib(\''.$SA.'\');"<br>
+     onMouseOut="nd();"&gt;'.$chapterName.'&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;';<br>
+     }<br>
+     ?&gt;
+    </div>
+    &lt;/table&gt;
+    <br><br>
+    &lt;/body&gt;<br>
+    &lt;/html&gt;<br>
+   </div>
+   </div>
+  </td>
+ </tr>
+ <tr>
+  <td class="text12">
+   <br>
+   The <a
+    href="http://us3.php.net/include_once"
+    onmouseover="return overlib('Go to the php reference page for the '
+     +'<strong>include_once()</strong> function.', ABOVE,VAUTO,OFFSETX,-65);"
+    onmouseout="nd();">include_once()</a> call should be modified appropriately for your
+   server or be omitted.
+   <br><br>
+   Notice that the overlib calls have been kept short by using the
+   <a
+    href="STARTED.html#customization"
+    onmouseover="return overlib('Link to &lt;strong&gt;5. CUSTOMIZATION&lt;/strong&gt; in '
+     +'the &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Getting Started support file.', ABOVE,VAUTO,CENTER);"
+    onmouseout="nd();">OLpageDefaults()</a> configuration function from the <span
+   class="purple14">overlibmws</span> core module.&nbsp;
+   Thus, all that needs to be included in the overlib calls by the server-side script is
+   the overlib lead argument with text from the database.&nbsp; The CAPTION has been
+   pre-defined.&nbsp; In other cases, it might also use content from the database, or be
+   a variable related to the main text retrieved from the database.
+   <br><br>
+   Also notice that in this example the variable <strong>$SA</strong> used for the overlib
+   lead argument is being enclosed by single quotes, and they must be backslash escaped
+   because the whole echo statement is being delimited by single quotes.&nbsp; If
+   <strong>$SA</strong> contained any single-quotes (e.g., apostrophes in possessive nouns),
+   double-quotes, or HTML markup, then it should be processed through the php <a
+    href="http://us2.php.net/manual/en/function.addslashes.php"
+    onmouseover="return overlib('Go to the php reference page for the '
+     +'<strong>addslashes()</strong> function.', ABOVE,CENTER,OFFSETX,-90);"
+    onmouseout="nd();">addslashes()</a>, <a
+    href="http://us2.php.net/manual/en/function.htmlspecialchars.php"
+    onmouseover="return overlib('Go to the php reference page for the '
+     +'<strong>htmlspecialchars()</strong> function.', ABOVE,CENTER,OFFSETX,-95);"
+    onmouseout="nd();">htmlspecialchars()</a>, <a
+    href="http://us4.php.net/manual/en/function.htmlentities.php"
+    onmouseover="return overlib('Go to the php reference page for the '
+     +'<strong>htmlentities()</strong> function.', ABOVE,CENTER,OFFSETX,-95);"
+    onmouseout="nd();">htmlentities()</a> or <a
+    href="http://us4.php.net/manual/en/function.rawurlencode.php"
+    onmouseover="return overlib('Go to the php reference page for the '
+     +'<strong>rawurlencode()</strong> function.', ABOVE,CENTER,OFFSETX,150);"
+    onmouseout="nd();">rawurlencode()</a> functions, depending on what it contained.&nbsp;
+   See the paragraph about the overlib call's lead argument in the <a
+    href="commandRef.html#content"
+    onmouseover="return overlib('Link to &lt;strong&gt;2. Content&lt;/strong&gt; in the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', HAUTO,VAUTO);"
+    onmouseout="nd();">Command Reference</a>.
+   <br><br>
+   See additional examples of <a
+    href="http://www.macridesweb.com/oltest/overlibmwsPHPquote.php5"
+    onmouseover="return overlib('Examples of quoting php strings for '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;.',
+     HAUTO, VAUTO);"
+    onmouseout="nd();">quoting</a> php strings for <span class="purple14">overlibmws</span>. 
+   <br><br><br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This document uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#cceeff', ABOVE,CENTER,OFFSETY,16);"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.', FGCOLOR,'#cceeff', ABOVE,CENTER,OFFSETY,16);"
+    onmouseout="nd();">commands</a></b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff', REF,'amazon',REFP,'UR',REFX,-8,REFY,-10);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="text12">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     FGCOLOR,'#cceeff', REF,'logo',REFX,95,REFY,1);"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="text12">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8, FGCOLOR,'#bbddff',
+     REF,'logo',REFC,'UL',REFP,'LL',REFY,-5);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="text12">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01', FGCOLOR,'#cceeff',
+     REF,'w3c',REFP,'UR',REFX,-5,REFY,2);"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br><br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='overlibmwsPHP.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

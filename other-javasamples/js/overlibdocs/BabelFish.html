@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, babelfish, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustration of page translation support script in Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Offer Page Translation with overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<!-- Import BabelFish.js for the translation popup.  It generates a string
+     variable definition for a div with name BabelFish for use as the lead
+     argument in an overlib call (see below).  The div has class="babelfish"
+     for styling (see below). -->
+<script type="text/javascript" src="BabelFish.js"></script>
+
+<style type="text/css">
+body {color:#000000;background-color:#ddeeff;}
+
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.text12 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:12px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+
+.babelfish {
+	width:265px; height:220px; color:#224466; background-color:#ffffcc;
+	border:1px none #000000; overflow:auto;}
+</style>
+</head>
+
+<body bgcolor="#ddeeff" text="#000000" link="#338855" vlink="#338855" alink="#338855">
+
+<table align="center" width="90%" cellpadding="0" cellspacing="0" border="0">
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText" colspan="3">
+   <span class="myHeader"><strong>Popup with Page Translation Options</strong></span>
+   <span class="mySubHead"><strong><em>via the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#bbddff',
+     WRAP, BASE,2, CENTER, VAUTO, OFFSETY,20, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', STATUS,'Click to send form-based e-mail to Fote.',
+     WRAP, BASE,2, TEXTPADDING,6, TEXTFONTCLASS,'myText',
+     CENTER, OFFSETY,20, FGCOLOR,'#bbddff');"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#bbddff',
+     WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions for<br>
+   word translation support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+    +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#bbddff',
+     WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   &nbsp;<br>
+  </td>
+ </tr>
+</table>
+
+<table width="90%" align="center" cellspacing="0" cellpadding="10" border="0">
+ <tr>
+  <td align="center">
+   <a
+    onmouseover="return overlib('Know another language?&nbsp; Then click here.',
+     WRAP,CENTER,OFFSETY,20,FGCOLOR,'#ffffcc',BASE,2,TEXTFONTCLASS,'myText',STATUS,' ');"
+    onmouseout="nd();"
+    onclick="return overlib(BabelFish, STICKY,TIMEOUT,5000,MOUSEOFF,MIDX,0,RELY,10,TEXTPADDING,0);"
+    href="javascript:void(0);">Click here</a> for a menu of page translation options.
+  </td>
+ </tr>
+ <tr>
+  <td align="center">
+   The quick brown fox jumped over the lazy dog's back.
+  </td>
+ </tr>
+ <tr>
+  <td align="center">
+   The early bird catches the worm.
+  </td>
+ </tr>
+ <tr>
+  <td align="center">
+   Dogs can't tell it's not bacon.
+  </td>
+ </tr>
+ <tr>
+  <td align="center">
+   <em>This demonstration uses</em> <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP,CENTER,OFFSETY,20,FGCOLOR,'#ffffcc',BASE,2,TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a> <em>and its</em> <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP,CENTER,OFFSETY,20,FGCOLOR,'#ffffcc',BASE,2,TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">commands</a><em>, with the</em><br>
+   <strong>BabelFish.js</strong> <em>support script from the</em> <font
+    color="purple"><strong><em>overlibmws</em></strong></font> <a
+    href="zipArchive.html"
+    onmouseover="return overlib('See the contents of the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'zip archive.',WRAP,BASE,2,CENTER,VAUTO,OFFSETY,18,FGCOLOR,'#ffffcc',
+     TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">distribution</a>.
+   <br><br>
+   <em>Use your browser's</em> <strong>View Source</strong> <em>option
+   to see the markup for this demonstration.</em><br>
+<script type="text/javascript">
+<!--
+ if (location.href.indexOf("babelfish.altavista.com") == -1)
+ document.write('<a target="translate" '
+  +'onmouseover="return overlib(\'Translate this document to Glorious Greek!!!\','
+  +'WRAP,BASE,2,CENTER,VAUTO,OFFSETY,18,FGCOLOR,\'#ffffcc\',TEXTFONTCLASS,\'myText\');" '
+  +'onmouseout="nd();" '
+  +'href="http://babelfish.altavista.com/babelfish/tr?doit=done&amp;url='+location.href
+  +'&amp;lp=en_el"><img src="../image/el.gif" '
+  +'width="30" height="17" vspace="5" border="0"><\/a>');
+//-->
+</script>
+   <br>
+  </td>
+ </tr>
+</table>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP,REF,'logo',REFX,95,REFY,1,BASE,2,TEXTPADDING,4, TEXTFONTCLASS,'myText',
+     FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="10" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).',TEXTPADDING,8,TEXTFONTCLASS,'text12',FGCOLOR,'#bbddff',
+     WRAP,BASE,2,REF,'logo',REFP,'LL',REFX,-10,REFY,-5);"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01',FGCOLOR,'#cceeff',
+     WRAP,REF,'w3c',REFP,'UR',REFX,-5,REFY,3,BASE,2,TEXTPADDING,4,TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3d"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='BabelFish.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

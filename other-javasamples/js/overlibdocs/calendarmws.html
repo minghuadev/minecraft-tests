@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+ "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, calendar, date picker, DHTML popups, DHTML tooltips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrations of calendar support script in Macrides Web Services open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Date Picker calendar script for overlibmws</title>
+
+<!-- Import core mws module -->
+<script type="text/javascript" src="overlibmws.js"></script>
+
+<!-- Import plugin mws modules needed for commands in Date Picker script -->
+<script type="text/javascript" src="overlibmws_exclusive.js"></script>
+<script type="text/javascript" src="overlibmws_iframe.js"></script>
+
+<!-- (Optional.  Import if you want the calendar popups to be draggable) -->
+<script type="text/javascript" src="overlibmws_draggable.js"></script>
+
+<!-- (Optional.  Import if you want to use secondary popups for calendars) -->
+<script type="text/javascript" src="overlibmws_overtwo.js"></script>
+
+<!-- (For overlibmws footer.  Not used by Date Picker script) -->
+<script type="text/javascript" src="overlibmws_filter.js"></script>
+
+<!-- Date Picker support script -->
+<script type="text/javascript" src="calendarmws.js"></script>
+
+<script type="text/javascript">
+<!--
+// Lead argument for popup with form content
+var myFormInPopup=
+ '<form name="samplePopup" method="post" enctype="x-www-form-encoded"'
++' action="http://www.macridesweb.com/cgi/calendar.cgi">'
++' <p class="text14">'
++'  Beginning date: <input type="text" name="T1" size="20">&nbsp;&nbsp;'
++'  <a'
++'   href="javascript:ggUseOverlib2=1;show_calendar(\'samplePopup.T1\');"'
++'   onmouseover="return overlib2(\'&nbsp;Click here to choose a date from&nbsp;<br>'
++'    &nbsp;a <strong>one month</strong> pop-up calendar.\','
++'    TEXTPADDING,4, TEXTFONTCLASS,\'text12\', FGCOLOR,\'#ffffcc\', CENTER, ABOVE,'
++'    WRAP, BASE,2, STATUS,\'Date Picker\');"'
++'   onmouseout="nd2();"><img'
++'   src="showCalendar.gif"'
++'   width="24" height="22" border="0" alt=""></a>'
++' </p>'
++' <p class="text14">'
++'  Ending date:&nbsp;&nbsp;&nbsp;&nbsp;'
++'  <input type="text" name="T2" size="20">&nbsp;&nbsp;'
++'  <a'
++'   href="javascript:ggUseOverlib2=1;show_yearly_calendar(\'samplePopup.T2\');"'
++'   onmouseover="return overlib2(\'&nbsp;Click here to choose a date from&nbsp;<br>'
++'    &nbsp;a <strong>full year</strong> pop-up calendar.\','
++'    TEXTPADDING,4, TEXTFONTCLASS,\'text12\', FGCOLOR,\'#ffffcc\', CENTER, ABOVE,'
++'    WRAP, BASE,2, STATUS,\'Date Picker\');"'
++'   onmouseout="nd2();"><img'
++'   src="showCalendar.gif"'
++'   width="24" height="22" border="0" alt=""></a>'
++' </p>'
++' <p class="text14">'
++'  <input type="submit" value="Submit" name="B1"'
++'   onmouseover="return overlib2(\'Click to submit form\','
++'    TEXTPADDING,4, TEXTFONTCLASS,\'text12\', FGCOLOR,\'#ffffcc\', CENTER, ABOVE,'
++'    WRAP, BASE,2, AUTOSTATUS);"'
++'   onMouseout="nd2();">'
++'  <input type="reset" value="Reset" name="B2"'
++'   onmouseover="return overlib2(\'Click to reset form fields\','
++'    TEXTPADDING,4, TEXTFONTCLASS,\'text12\', FGCOLOR,\'#ffffcc\', CENTER, ABOVE,'
++'    WRAP, BASE,2, AUTOSTATUS);"'
++'   onMouseout="nd2();">'
++' </p>'
++'</form>';
+//-->
+</script>
+
+<!-- The first two, global anchor CSS rules also apply to the
+     calendar popups, whereas the class-based CSS rules do not. -->
+<style type="text/css">
+<!--
+a {color:#338855; font-weight:bold;}
+a:hover {color:#ff00ff;}
+
+.myHeader {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 22px;}
+.mySubHead {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px;}
+.mySpacer {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 4px;}
+.myText {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:13px;color:#000000;}
+.header {font-family:Helvetica,Arial;font-size:20px;color:#000000;}
+.text12 {font-family:Verdana,Arial,Helvetica;font-size:12px;color:#000000;}
+.text14 {font-family:Verdana,Arial,Helvetica;font-size:14px;color:#000000;}
+.text18 {font-family:Verdana,Arial,Helvetica;font-size:18px;color:#000000;}
+.snip {font-family:Verdana,Arial,Helvetica;font-size:10px;}
+.purple14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:purple;
+ font-weight:bold;}
+.purple18 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:18px;color:purple;
+ font-weight:bold;font-style:italic;}
+.red14 {font-family:Verdana,Arial,Helvetica,sans-serif;font-size:14px;color:#cc0000;
+ font-weight:bold;}
+-->
+</style>
+</head>
+
+<body text="#000000" bgcolor="#ddeeff">
+
+<table width="80%" align="center" cellpadding=0 cellspacing=0 border=0>
+ <tr>
+  <!--**********
+       HEADER
+      **********-->
+  <td align="center" class="myText">
+   <span class="myHeader"><strong>Date Picker Calendar Support Script</strong></span>
+   <span class="mySubHead"><strong><em>for the</em></strong></span><br>
+   <span class="myHeader"><strong><a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.', FGCOLOR,'#ffffcc',
+     WRAP, BASE,2, OFFSETX,-10, OFFSETY,20, TEXTPADDING,4, TEXTFONTCLASS,'myText');"
+    onmouseout="nd();">overlibmws</a>
+   <em>DHTML Popup Library</em></strong></span><br>
+   <span class="mySpacer">&nbsp;<br></span>
+   <strong><em>maintained by</em> <a
+    href="javascript:olmail();"
+    onmouseover="return overlib('&nbsp;&nbsp;&lt;b&gt;Send e-mail to Foteos '
+     +'Macrides.&lt;/b&gt;&lt;br&gt;(Seek help getting started.&nbsp; '
+     +'Report&lt;br&gt;problems.&nbsp; '
+     +'Suggest enhancements.)', FGCOLOR,'#ffffcc',
+     STATUS,'Click to send form-based e-mail to Fote.',
+     WRAP, BASE,2, TEXTPADDING,6, TEXTFONTCLASS,'myText', CENTER, OFFSETY,20);"
+    onmouseout="nd();">Foteos Macrides</a> <em>at</em> <a
+    href="../"
+    onmouseover="return overlib('Link to Macrides Web Services homepage.', FGCOLOR,'#ffffcc',
+     WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Macrides Web Services</a><br>
+   <em>Discuss these examples, seek help, and offer suggestions<br>
+   for calendar support via the</em> <span class="purple14">overlibmws</span> <a
+    href="http://groups.yahoo.com/group/overlibmws/"
+    onmouseover="overlib('Link to the &lt;span '
+     +'class=\'purple14\'&gt;overlibmws&lt;/span&gt; Support Group', FGCOLOR,'#ffffcc',
+     WRAP, BASE,2, TEXTPADDING,4, TEXTFONTCLASS,'myText', LEFT, OFFSETX,-16, OFFSETY,20);"
+    onmouseout="nd();">Support Group</a>.</strong><br>
+   <span class="mySpacer">&nbsp;<br>&nbsp;<br></span>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" align="center" class="header">
+   <hr size="3">
+   <a
+    target="_top"
+    href="http://javascript.internet.com"
+    onmouseover="return overlib('Go to the javascript.internet.com Home page.',
+     CENTER, OFFSETY,20, FGCOLOR,'#ffffcc', WRAP, BASE,2,
+     TEXTFONTCLASS,'text12',TEXTPADDING,4);"
+    onmouseout="nd();"><font color="#0000ff"><b>Home</b></font></a>
+   <img
+    src="arrow.gif"
+    height=13 width=7 border=0 alt="}">
+   <a
+    target="_top"
+    href="http://javascript.internet.com/time-date/"
+    onmouseover="return overlib('Go to the javascript.internet.com Time and Date page.',
+     CENTER, OFFSETY,20, FGCOLOR,'#ffffcc', WRAP, BASE,2,
+     TEXTFONTCLASS,'text12', TEXTPADDING,4);"
+    onmouseout="nd();"><font color="#ff0000"><b>Time&nbsp;and&nbsp;Date</b></font></a>
+   <img
+    src="arrow.gif"
+    height=13 width=7 border=0 alt="}">
+   <a
+    target="_top"
+    href="http://javascript.internet.com/time-date/date-picker.html"
+    onmouseover="return overlib('Go to the javascript.internet.com Date Picker page.',
+     CENTER, OFFSETY,20, FGCOLOR,'#ffffcc', WRAP, BASE,2,
+     TEXTFONTCLASS,'text12', TEXTPADDING,4);"
+    onmouseout="nd();"><font color="#006666"><b>Date Picker</b></font></a><br>
+   <table width="100%" cellpadding="3" cellspacing="0" border="0">
+    <tr>
+     <td align="left" class="text14">
+      <span class="mySpacer">&nbsp;<br></span>
+      Date Picker provides a popup calendar in a dynamically populated DIV.&nbsp;
+      It combines the original date-picker script by Kedar R. Bhave and overlib DHTML
+      popups.&nbsp; This method is an improvement over using popup windows, because so
+      many people are installing software to suppress the annoying popup windows generated
+      for advertising.&nbsp; The modifications to use overlib were first done by James
+      O'Connor.&nbsp; His version of the Date Picker script is accessible via the above
+      link.&nbsp;  <em><strong>This example document</strong> uses a version</em>
+      (<span class="red14">calendarmws.js</span>) <em>with further modifications by
+      Foteos Macrides and Bill McCormick, from the</em> <span
+       class="purple14">overlibmws</span> <a
+       class="myText"
+       href="zipArchive.html"
+       onmouseover="return overlib('See the contents of the '
+        +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+        +'zip archive.', WRAP, BASE,2, CENTER, VAUTO, OFFSETY,18, FGCOLOR,'#ffffcc',
+        TEXTFONTCLASS,'text12', TEXTPADDING,4);"
+       onmouseout="nd();">distribution</a>.
+     </td>
+    </tr>
+   </table>
+   <hr size="3">
+   <!--
+    Form with anchors (links) for calendar popups.
+   -->
+   <p class="text14">
+    <strong>Pop-up calendar sample form:</strong>
+   </p>
+   <form name="sample" method="post" enctype="x-www-form-encoded"
+    action="http://www.macridesweb.com/cgi/calendar.cgi">
+    <p class="text14">
+     Beginning date: <input type="text" name="T1" size="20">&nbsp;&nbsp;
+     <!--
+       Monthly calendar
+       ================
+       Can use ggPosX and ggPosY as parameters for FIXX and FIXY, e.g.,
+        href="javascript:ggPosX=10;ggPosY=10;show_calendar();"
+       Otherwise positioning is MIDX,0, RELY, 10
+       Can use ggInactive=1; to make dates preceding today's date inactive.
+       Can include onchange handling of date changes made via the calendar popup
+        by setting a ggOnChange function definition for onclick (also clear any
+        ggOnChange function definition before invoking the calendar popup via
+        onmouseover).
+       Can use ggUseOverlib2=1; for invoking the calendar as a secondary popup, e.g.,
+        href="javascript:ggUseOverlib2=1;show_calendar();"  Requires that a STICKY
+        primary popup be open.  The primary popup should have been invoked with
+        the EXCLUSIVE command.
+     -->
+     <a
+      href="javascript:show_calendar('sample.T1');"
+      onmouseover="return overlib('&nbsp;Click here to choose a date from&nbsp;&lt;br&gt;'
+       +'&nbsp;a &lt;strong&gt;one month&lt;/strong&gt; pop-up calendar.',
+       TEXTPADDING,4, TEXTFONTCLASS,'text12', FGCOLOR,'#ffffcc', CENTER, ABOVE,
+       WRAP, BASE,2, STATUS,'Date Picker');"
+      onmouseout="nd();"><img
+      src="showCalendar.gif"
+      width="24" height="22" border="0" alt=""></a>
+    </p>
+    <p class="text14">
+     Ending date:&nbsp;&nbsp;&nbsp;&nbsp;
+     <input type="text" name="T2" size="20">&nbsp;&nbsp;
+     <!--
+       Yearly calendar
+       ===============
+       Can use ggPosX and ggPosY as parameters for FIXX and FIXY, e.g.,
+        href="javascript:ggPosX=10;ggPosY=10;show_yearly_calendar();"
+       Otherwise positioning is MIDX,0, RELY, 10
+       Can use ggInactive=1; to make dates preceding today's date inactive.
+       Can include onchange handling of date changes made via the calendar popup
+        by setting a ggOnChange function definition for onclick (also clear any
+        ggOnChange function definition before invoking the calendar popup via
+        onmouseover).
+       Can use ggUseOverlib2=1; for invoking the calendar as a secondary popup, e.g.,
+        href="javascript:ggUseOverlib2=1;show_yearly_calendar();"  Requires that a STICKY
+        primary popup be open.  The primary popup should have been invoked with
+        the EXCLUSIVE command.
+     -->
+     <a
+      href="javascript:show_yearly_calendar('sample.T2');"
+      onmouseover="return overlib('&nbsp;Click here to choose a date from&nbsp;&lt;br&gt;'
+       +'&nbsp;a &lt;strong&gt;full year&lt;/strong&gt; pop-up calendar.',
+       TEXTPADDING,4, TEXTFONTCLASS,'text12', FGCOLOR,'#ffffcc', CENTER, ABOVE,
+       WRAP, BASE,2, STATUS,'Date Picker');"
+      onmouseout="nd();"><img
+      src="showCalendar.gif"
+      width="24" height="22" border="0" alt=""></a>
+    </p>
+    <p class="text14">
+     <input type="submit" value="Submit" name="B1"
+      onmouseover="return overlib('Click to submit form',
+       TEXTPADDING,4, TEXTFONTCLASS,'text12', FGCOLOR,'#ffffcc', CENTER, ABOVE,
+       WRAP, BASE,2, AUTOSTATUS);"
+      onMouseout="nd();">
+     <input type="reset" value="Reset" name="B2"
+      onmouseover="return overlib('Click to reset form fields',
+       TEXTPADDING,4, TEXTFONTCLASS,'text12', FGCOLOR,'#ffffcc', CENTER, ABOVE,
+       WRAP, BASE,2, AUTOSTATUS);"
+      onMouseout="nd();">
+    </p>
+   </form>
+   <p class="text14">
+    <strong>Use a form
+    <!--
+     See the script block, above, for the lead argument definition with
+     calendars as secondary popups.
+    -->
+    <a
+     href="javascript:void(0);"
+     onmouseover="return overlib(myFormInPopup, CAPTION,'&nbsp;&nbsp;Date Picker',
+      TEXTPADDING,10, TEXTFONTCLASS,'text12', FGCOLOR,'#ffffcc', CENTER, ABOVE, WRAP,
+      STICKY, CLOSECLICK, EXCLUSIVE, BASE,2);">within a popup</a></strong>
+   </p>
+   <hr size="3">
+  </td>
+ </tr>
+</table>
+
+<p align="center" class="text14">
+ <em>Use your browser's</em> <strong>View Source</strong> <em>option to see the markup
+ for this example.</em>
+</p>
+
+<p align="center" class="text14">
+ Also see examples with the <a
+  class="myText"
+  href="calendarmws_inactive.html"
+  onmouseover="return overlib('See examples of calendar popups with the inactive option.',
+   WRAP, BASE,2, CENTER, VAUTO, OFFSETY,18, FGCOLOR,'#ffffcc',
+   TEXTFONTCLASS,'text12', TEXTPADDING,4);"
+  onmouseout="nd();">inactive</a> option,<br>
+ and examples with <a
+  class="myText"
+  href="calendarmws_onchange.html"
+  onmouseover="return overlib('See examples of calendar popups with onchange handling.',
+   WRAP, BASE,2, CENTER, VAUTO, OFFSETY,18, FGCOLOR,'#ffffcc',
+   TEXTFONTCLASS,'text12', TEXTPADDING,4);"
+  onmouseout="nd();">onchange</a> handling,<br>
+ and examples with <a
+  class="myText"
+  href="calendarmws_lang.html"
+  onmouseover="return overlib('See examples of calendar popups with multi-language support.',
+   WRAP, BASE,2, CENTER, VAUTO, OFFSETY,18, FGCOLOR,'#ffffcc',
+   TEXTFONTCLASS,'text12', TEXTPADDING,4);"
+  onmouseout="nd();">multi-language</a> support.
+</p>
+
+<table align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ccddff">
+ <tr>
+  <td class="text14" align="center" valign="bottom" colspan="4" rowspan="1">
+   <b>This example uses <a
+    href="./"
+    onmouseover="return overlib('Go to the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Download and Test Directory.',
+     WRAP, BASE,2, ABOVE, CENTER, OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER, FADEIN,45, FADEOUT,45, FGCOLOR,'#cceeff');"
+    onmouseout="nd();">overlibmws</a> and its <a
+    href="commandRef.html"
+    onmouseover="return overlib('See the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; '
+     +'Command Reference.',
+     WRAP, BASE,2, ABOVE, CENTER, OFFSETY,16, TEXTPADDING,4, TEXTFONTCLASS,'text12',
+     FILTER, FADEIN,31, FADEOUT,31, FGCOLOR,'#cceeff');"
+    onmouseout="nd();">commands</a>.</b><br>
+  </td>
+  <td align="center" valign="middle" colspan="1" rowspan="2">
+   <a
+    target="_blank"
+    href="http://www.amazon.com/exec/obidos/redirect-home/macrideswebse-20"
+    onmouseover="return overlib('Help promote the '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and&lt;br&gt;its support materials at this site by doing&lt;br&gt;your '
+     +'&lt;span class=\'purple14\'&gt;&lt;i&gt;amazon.com&lt;/i&gt;&lt;/span&gt; '
+     +'shopping via this link&lt;br&gt;(with <strong>no</strong> extra costs to you).',
+     TEXTPADDING,8, FGCOLOR,'#bbddff', REF,'amazon', REFP,'UR', REFX,-8, REFY,-10,
+     WRAP, BASE,2, TEXTFONTCLASS,'text12', FILTER);"
+    onmouseout="nd();">
+   <img
+    name="amazon" id="amazon"
+    src="../image/home-logo-130x60b.gif" border="0" height="60" width="130" alt=""
+    hspace="8" vspace="8"></a><br>
+  </td>
+ </tr>
+ <tr>
+  <td width="90" align="right" valign="middle" class="myText">
+   <a
+    href="./"
+    onmouseover="return overlib(
+     'Popups by &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt;',
+     WRAP, REF,'logo', REFX,95, REFY,1, BASE,2, TEXTPADDING,4, FILTER, FADEIN,6, FADEOUT,6,
+     TEXTFONTCLASS,'text12', FGCOLOR,'#cceeff');"
+    onmouseout="nd();"><img
+    name='logo' id="logo"
+    width="88" height="31" hspace="10" vspace="0" align="right" border="0" alt=""
+    src="../image/overlibmwslogo.gif"></a><br>
+  </td>
+  <td valign="middle" class="snip">
+   Copyright Foteos Macrides<br>
+   &nbsp;&nbsp;2002-2010.<br>
+   &nbsp;&nbsp;All rights reserved.<br>
+  </td>
+  <td width="72" align="right" valign="middle" class="myText">
+   <a
+    target="_blank"
+    href="https://www.paypal.com/xclick/business=overlibmws%40macridesweb.com&amp;item_name=Donation+for+overlibmws&amp;no_note=1&amp;tax=0&amp;currency_code=USD"
+    onmouseover="return overlib(
+     'The &lt;span class=\'purple14\'&gt;&lt;i&gt;overlibmws&lt;/i&gt;&lt;/span&gt; library '
+     +'and its support materials at this site are &lt;br&gt;free to download and use, but '
+     +'voluntary donations via PayPal are&lt;br&gt;appreciated (donations via PayPal are fast, '
+     +'simple, and secure).', TEXTPADDING,8, FGCOLOR,'#bbddff', FILTER,
+     REF,'logo', REFC,'UL', REFP,'LL', REFY,-5, WRAP, BASE,2, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"><img
+    src="../image/PayPalDonate.gif"
+    width="62" height="31" border="0"
+    alt=""></a><br>
+  </td>
+  <td width="108" align="right" valign="middle" class="myText">
+   <a
+    onmouseover="return overlib('Valid HTML 4.01', WRAP, BASE,2, FGCOLOR,'#cceeff',
+     REF,'w3c', REFP,'UR', REFX,-5, REFY,4, FILTER, TEXTPADDING,4, TEXTFONTCLASS,'text12');"
+    onmouseout="nd();"
+    href="http://validator.w3.org/check/referer"><img
+    name="w3c" id="w3c"
+    border="0" height="31" width="88" alt="" hspace="5"
+    src="../image/valid-html401.gif"></a><br>
+  </td>
+ </tr>
+</table>
+<br>
+<script type="text/javascript" src="../script/ga.js"></script>
+
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='calendarmws.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body>
+</html>

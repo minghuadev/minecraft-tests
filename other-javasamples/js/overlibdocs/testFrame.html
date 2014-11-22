@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+ "http://www.w3.org/TR/REC-html4/frameset.dtd">
+<html> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="overlib, overlibmws, DHTML popups, DHTML tootips, DHTML, popup, tooltip, Macrides Web Services, Macrides">
+<meta name="description" content="Illustrates handling of system controls in frame sets with the Macrides Web Services free open source software for enhancing web pages with DHTML popups and tooltips.">
+<meta name="author" content="Foteos Macrides">
+<title>overLIB - Handle System Controls in Frame Sets with overlibmws</title>
+
+<script type="text/javascript" src="overlibmws.js"></script>
+<script type="text/javascript" src="overlibmws_crossframe.js"></script>
+<script type="text/javascript" src="overlibmws_iframe.js"></script>
+<script type="text/javascript" src="overlibmws_hide.js"></script>
+<script type="text/javascript" src="overlibmws_shadow.js"></script>
+
+<script type="text/javascript" src="../script/ga.js"></script>
+</head> 
+
+<frameset cols="185,10,*">
+ <frame scrolling="auto" name="menu" id="menu" src="testMenu.html">
+ <frame scrolling="no" name="buffer" id="buffer" src="testBuffer.html"> 
+ <frame scrolling="auto" name="scene" id="scene" src="testScene.html">
+ <noframes> 
+  <body bgcolor="#ffffff"> 
+   <p>
+    <em>This document requires a browser that can view frames.</em>
+   </p>
+   <p>
+    It uses plugin module overlibmws_iframe.js to prevent obscuring of overlib popups for
+    IE v5.5 or higher via an iframe shim (as opposed to iframe content).&nbsp; For the other
+    supported browsers, plugin module overlibmws_hide.js also is imported and its
+    HIDESELECTBOXES and HIDEBYIDNS4 commands are used to hide and restore the form element
+    if needed in conjunction with display and removal of the popup in the cross frame,
+    whereas its HIDEBYIDALL command is used to hide the system control (flash object) in this
+    frame.
+   </p>
+   <p>
+    The window.createPopup method was developed by Microsoft for creating popup windows with
+    DHTML functionality but not subject to being obscured by any form elements or by objects
+    with system controls.&nbsp; The method is restricted to IE v5.5 or higher.&nbsp;  The
+    overlibmws_iframe.js plugin module is equally effective for overlib popups, but has the
+    same browser and version restriction.
+   </p>
+  <!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 START -->
+<script type='text/javascript' src='https://count.carrierzone.com/app/count_server/count.js'></script>
+<script type='text/javascript'><!--
+wm_custnum='51d611149b389afb';
+wm_page_name='testFrame.html';
+wm_group_name='/services/webpages/m/a/macridesweb.com/public/oltest';
+wm_campaign_key='campaign_id';
+wm_track_alt='';
+wiredminds.count();
+// -->
+</script>
+<!-- WiredMinds eMetrics tracking with Enterprise Edition V5.4 END -->
+</body> 
+ </noframes>
+</frameset>
+
+</html>
