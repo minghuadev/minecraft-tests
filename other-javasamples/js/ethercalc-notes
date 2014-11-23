@@ -1,0 +1,62 @@
+
+http://en.wikipedia.org/wiki/Online_spreadsheet
+http://en.wikipedia.org/wiki/Dhtmlx
+http://docs.dhtmlx.com/index.html
+
+
+
+https://www.ethercalc.org/
+root resource  das <remove this> data
+
+
+
+levels
+===========
+client, transport, middle, service
+
+startup - middle
+================
+parser, boost spirit
+
+startup - service
+================
+linux boot, user kernel space, drivers
+
+runtime - client
+==================
+html, css, dom, javascript, gwt
+
+runtime - transport
+==================
+socket, websocket, unix msq, posix msq
+
+runtime - middle
+==================
+multithread, raii, stl, stdc++, exception, shm, mmap, dbus, distributed
+
+runtime - service
+==================
+kernel interface, exec mechanism, memory, cache, sem, spinlock, context
+
+algorithm - transport
+==================
+dos
+
+algorithm - middle
+==================
+routing, vector distance, link state, convergence, testability, recovery, logging, reflection 
+
+support - middle
+==================
+makefile, scripting, unit test, system test
+
+support - service
+==================
+dmesg, sysfs, debugfs, procfs
+
+support - general 
+==================
+documentation
+
+
+
