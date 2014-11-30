@@ -1,0 +1,21 @@
+
+spirit-1.8.5-miniboost.tar.gz 
+    originally 2012 from 
+    http://sourceforge.net/projects/spirit/files/spirit/1.8.5/spirit-1.8.5-miniboost.tar.gz/download
+
+
+spirit-patch-gcc46
+    patch to boost 1.34.1 for building with gcc 4.6
+
+
+spirit-examples/
+
+  numer_list.cpp
+
+      the original example 
+
+  number_list2.cpp
+
+      modified
+
+
