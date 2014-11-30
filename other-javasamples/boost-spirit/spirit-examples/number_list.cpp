@@ -36,7 +36,7 @@ parse_numbers(char const* str, vector<double>& v)
 
         //  Begin grammar
         (
-            real_p[push_back_a(v)] >> *(',' >> real_p[push_back_a(v)])
+            real_p[push_back_a(v)] >> *(',' >> real_p[push_back_a(v)]) >> end_p
         )
         ,
         //  End grammar
