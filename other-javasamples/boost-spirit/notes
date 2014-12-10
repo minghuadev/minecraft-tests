@@ -6,6 +6,7 @@
 [3.1] the cpplexer
 [3.1.1] boost 1.34 trailing space failure
 [3.4] metaprogramming excerpt
+[4] boost 1.34.1 download
 
 
 
@@ -85,5 +86,10 @@ Boost and Beyond by Dave Abrahams and Aleksey Gurtovoy has been made available o
 This excerpt contains a basic introduction to the Preprocessor library and preprocessor 
 metaprogramming which may help users new to the library and users interested in seeing 
 some of the facilities offered by the library. 
+
+
+
+[4] boost 1.34.1 download
+http://sourceforge.net/projects/boost/files/boost/1.34.1/
 
 
