@@ -1,18 +1,27 @@
 
 
-[1]
+[1] parser c code with boost spirit
+[2] boost wave
+[3] boost wave tutorial
+[3.1] the cpplexer
+[3.1.1] boost 1.34 trailing space failure
+[3.4] metaprogramming excerpt
+
+
+
+[1] parse c code with boost spirit
 http://stackoverflow.com/questions/6063888/can-boost-spirit-be-theoretically-practically-used-to-parse-c0x-or-any-othe
 search: parser c code with boost spirit
 
 
 
-[2]
+[2] boost wave
 http://stackoverflow.com/questions/14858017/using-boost-wave
 search: boost wave
 
 
 
-[3]
+[3] boost wave tutorial
 search: boost wave tutorial
 http://www.boost.org/doc/libs/1_38_0/libs/wave/doc/introduction.html
 
@@ -39,7 +48,7 @@ please find some time to update your application. Thanks!
 
 download: c
 
-[3.1.1]
+[3.1.1] boost 1.34 trailing space failure
 search: boost 1.34 trailing space failure
 https://svn.boost.org/trac/boost/ticket/1048
 Spirit returns full = false in 1.34 if there is trailing spaces in input
@@ -69,8 +78,12 @@ Here's where the change was first announced, for context:
      http://thread.gmane.org/gmane.comp.parsers.spirit.general/9839
 
 
-[3.4]
+[3.4] metaprogramming excerpt
 http://www.boost.org/doc/libs/1_57_0/libs/preprocessor/doc/index.html
-An excerpt from C++ Template Metaprogramming: Concepts, Tools, and Techniques from Boost and Beyond by Dave Abrahams and Aleksey Gurtovoy has been made available online. This excerpt contains a basic introduction to the Preprocessor library and preprocessor metaprogramming which may help users new to the library and users interested in seeing some of the facilities offered by the library. 
+An excerpt from C++ Template Metaprogramming: Concepts, Tools, and Techniques from 
+Boost and Beyond by Dave Abrahams and Aleksey Gurtovoy has been made available online. 
+This excerpt contains a basic introduction to the Preprocessor library and preprocessor 
+metaprogramming which may help users new to the library and users interested in seeing 
+some of the facilities offered by the library. 
 
 
