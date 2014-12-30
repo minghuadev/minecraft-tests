@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html style="height: 100%;"><head>
+	<title>Free Maps from the Web Using Web Mapping Service - CodeProject</title> 
+	<link type="text/css" rel="stylesheet" href="CodeProject_FreeMapsWebMappingService_files/Main.css">
+<link type="text/css" rel="stylesheet" href="CodeProject_FreeMapsWebMappingService_files/print.css">
+
+	
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Description" content="Overview of using the OpenGIS Web Mapping Service to retrieve maps from the web; Author: Tom Gaskins; Updated: 21 Jun 2004; Section: General Graphics; Chapter: Multimedia; Updated: 21 Jun 2004">
+<meta name="Keywords" content=".NET1.1, WinXP, VS.NET2003, C#, Dev, Intermediate,General Graphics,Multimedia,Free source code, tutorials">
+<meta name="Author" content="Tom Gaskins">
+<meta name="Rating" content="General">
+<meta name="Robots" content="index, follow, NOODP">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+<link rel="dns-prefetch" href="http://ajax.googleapis.com/"> 
+<link rel="canonical" href="http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service">
+
+
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - All Topics" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=1">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - Android" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=22">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - iOS" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=25">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - C++" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=2">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - C#" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=3">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Latest articles - Web" href="http://www.codeproject.com/WebServices/ArticleRSS.aspx?cat=23">
+<link rel="alternate" type="application/rss+xml" title="CodeProject Lounge Postings" href="http://www.codeproject.com/webservices/LoungeRSS.aspx">
+<link rel="search" type="application/opensearchdescription+xml" title="CodeProject" href="http://www.codeproject.com/info/OpenSearch.xml">
+
+	<!-- base href="http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service?display=Print" -->
+	<link rel="icon" href="http://www.codeproject.com/favicon.ico" type="image/ico">
+<link rel="shortcut icon" href="http://www.codeproject.com/favicon.ico" type="image/ico">
+<link rel="apple-touch-icon" href="http://www.codeproject.com/images/FavIcon-Apple.png" type="image/png">
+<script type="text/javascript" language="Javascript">//<![CDATA[
+function defrm () { /* thanks twitter */ document.write = ''; window.top.location = window.self.location;  setTimeout(function() { document.body.innerHTML = ''; }, 0);  window.self.onload = function(evt) { document.body.innerHTML = ''; }; }if (window.top !== window.self) {  try {  if (window.top.location.host) { /* will throw */ } else { defrm(); /* chrome */ }  } catch (ex) { defrm(); /* everyone else */ } }if (typeof(DemoUrl)!='undefined')   document.write(unescape('%3Cme')+'ta http'+'-equiv="re'+'fresh"                  con'+'tent="1;url='+DemoUrl+unescape('"%3CE'));
+
+//]]>
+</script>
+
+	
+
+
+
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-1735123-1']);
+	_gaq.push(['_trackPageview']);
+	_gaq.push(['_setDomainName', 'www.codeproject.com']);
+	_gaq.push(['_setSessionTimeout', '1200']); 
+
+	(function () {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})(); 
+</script><script src="CodeProject_FreeMapsWebMappingService_files/ga.js" async="" type="text/javascript"></script>
+
+
+<link href="CodeProject_FreeMapsWebMappingService_files/translateelement.css" charset="UTF-8" rel="stylesheet" type="text/css"><script src="CodeProject_FreeMapsWebMappingService_files/main.js" charset="UTF-8" type="text/javascript"></script><script src="CodeProject_FreeMapsWebMappingService_files/element_main.js" charset="UTF-8" type="text/javascript"></script></head>	
+
+<body style="position: relative; min-height: 100%; top: 0px;" class="firefox firefox34">
+<p> http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service?display=Print </p>
+
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="CodeProject_FreeMapsWebMappingService_files/t.gif"></a>
+
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	<table id="ctl00_Bn" style="width:100%;height:135px" class="banner fluid" cellpadding="0" cellspacing="0">
+	<tbody><tr valign="bottom">
+		<td class="blank-background" style="height:31px">&nbsp;</td>
+		<td class="blank-background" rowspan="3" style="width:250px;height:135px"><a href="http://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="CodeProject_FreeMapsWebMappingService_files/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></td>
+		<td class="blank-background align-right" style="width:728px;height:31px"></td>
+		<td class="blank-background" style="height:31px">&nbsp;</td>
+	</tr>
+	<tr valign="middle">
+		<td class="theme1-background" style="height:94px">&nbsp;</td>
+		<td class="theme1-background ad"></td>
+		<td class="theme1-background" style="height:94px">&nbsp;</td>
+	</tr>
+	<tr valign="top">
+		<td style="height: 14px;"></td>
+		<td style="height: 14px;" class="blank-background"></td>
+		<td style="height: 14px;"></td>
+	</tr>
+</tbody></table>
+
+
+	<a href="#Main"><img alt="Click here to Skip to main content" class="access-link" src="CodeProject_FreeMapsWebMappingService_files/t.gif"></a>
+
+	
+	
+	
+
+	<div id="A" class="container-content-wrap fluid print"> 
+
+	<div itemscope="" itemtype="http://schema.org/Article" class="container-content"> 
+
+		<div class="clearfix">
+			<div class="float-left container-breadcrumb">
+				<div><a href="http://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> » <a href="http://www.codeproject.com/Chapters/3/Multimedia.aspx">Multimedia</a> » <a href="http://www.codeproject.com/KB/graphics/"><span itemprop="articleSection">General Graphics</span></a> » <a href="http://www.codeproject.com/KB/graphics/#Graphics">Graphics</a></div>
+			</div>
+
+			<div class="align-left float-right padded-top" style="width">
+				
+			</div>
+
+			<div class="float-right article-nav">
+				
+				
+			</div>
+
+			<div class="align-right float-left">
+				
+			</div>
+		</div>
+
+		<table class="extended container-article-parts" cellpadding="0" cellspacing="0">
+        <tbody><tr valign="top">
+		<td width="117px">
+
+			
+
+		</td>
+		<td>
+			
+			<div id="AT" class="container-article  fluid tight"> 
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service?display=Print" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="kbn3x/E06lAloIsVlh+N1AV4yetWhw/h3MKZUiRb4IxOgmB2qM7nQNKXOlTvgHe6fr9AaLjUSP1AptMlpqdOkbkkPHSLWAxD/fJmr2wthDjOAQ/8VZF803p8SMC9PGWLwbXm3kDizwcacFdWGxD3qRDZjOXAv2xk0XhGESAW6mfY72Tak0I+rJkXO6tf8ldSnVMwnA0RQdXjyX6aJtgTkAtlAMaVsujcTLt7XWseh7R71UGnxsiISce4PvgDHf+gN6GkemqjVewBqUzJOV3D2QbU4hv8vfWlSYacCo0aldmhdqw7D24aio7G0APrmG4l1lM2d7y9eTT5NSm06HHAiQnwtmeiH5MJsXa4AOOXLNt6l+nR4yMrJyAP+o/n9tJLYpRE5JW1SR5XTYjuarEt3X/UmjWQMG9rgRCsel9awdfzhrZWUbEwLygb+nWno51pZkQHrEiA51oPihqVgK0QSWkMBrs3q/FF9A9WUzu7p68M07+1r4WraKMq9TJJHcslg1/glbig88oBdabv/svo5TDFnu9us8fomEgFP2FfoCfIWp/4nNyqRu+UxKu3y15xDAhXMxcPaCvX8HiG87+PokAwCWqgZk4X0CAWyA3VqkgbbwuvGms/w6HoRoLo3jg8km4ZhDhti/rnQxzKt9y5NpETgDngNuastx3pS0id3KWDxBjS6cmI4vhjHfzgS2RwOkBxQVS8FJz8U8b+rltM2F6By3afJcKdrRNycCacScpelPZ5Gf62MP1AWTiFi2fm/CW8mHacTqTr+NruM7NsDZ/Kp5vWKbDWFrWPJC+xZajq2ZLMDs6/tuUnmfuZ8Ozi9ThOVD5RgjoI26H7ktYYz/aSx9YT5w8a6k7/+0KGyQA8Rfk2+SccGoFkOur/ZJF7Aj4jqvJ7jiwn+jYVRH+CfoJwScDOVGpB40kngEVvhMmjCkQ8jZICYg/gR63WLNQuClvyejDDaLPetPV2aFFe6fJJ2opB0a6xtsqoyqfHtqVOfH/zCUYGs2lK0XJDvsgwTlGbZVhX0nyR023zi97iORymZ20Iya5WUkxOU2g0MMcsLEQWWwOgpwdioZJZ+SVIQgp/bRB7HTGipHRNw2Y02S3XvsQBEPbfOynpPAzeQbigAo2hR31W5BumOMsC+ptZjttpH0ASXbE4pIao1gTREUfuV6U5O01RpvDXqLO4g3FouHq7BaPBRM1qZ7HuQXT1FokymfbYFGBbrmfVBs3p640E+oOSoBD4x9ndBRmM3mjKSEQaTKn7eWGn+Af2HDcWY5Cxpf+ilAtkjNvZT40tGPAovfp66+L+G/yBAzzttQtXybonBtR1OD3M71iTLeyq9hQv/Rf0fi3Lhzd4wQtBiQpXKae24gL2N724AwPDVB/XtnyequGH5TEssxa0K87uYukpZDRRn3RMfJluHpJAfALF/Aqo5S7pVIk4GYn6agyND2l8fAHzhy7Dd12VNrRfP2q93HTIVH2eDcJfV1j6oMGl+vNRbwdSUh77vc0VzgNvP6+3Mr9RVjPIRJIVRlpQVfuevfLf1++v14yKmcc+x5jShcd9g2MggDT2B1Qov9MpL8U3xcyqmjXWVL3JtP5gUn0B3ho3G2rS6Jkqb9SIBZAxA//fVgGzsd601oHa9vT5K6hG8hvB4Q2X7JECZx9o9zFvTnB8L03qeGDvozFVXtTcVgWoRkp0KFz3h2iqkw00I4t0RkEdJheFPyRAfJwUPSlUE04nuUpm9ASmWDA4SZaDB2JjQ7W5UDNP2HUIx8qs4IRcqb3chgcIKkS68mysdS4kgG914DG/IijCSWCuiOOAYsk0xo4EA4OJ/fsiZnFQYEtxDvv3aO3tCBh73EEpOmu6hnTJXovDigpg29CwDRmprO0R0RWfGo/j7Qx76Xd8K9scqkb1XDlwaprp8jzCmKQ1RyF8PSrwzAqTwAnEvp313eBvUx6kiu7toFbVGp9U0VrevPwh/CZxz3TKay7nYgX4oZWVdoCr21xBiVy46NvfYEvHdwTvbvszhdG+HZmii6B61ujZvvdQAfYTcpa4Ff2c6JpoYUBbMoDwVYx5DCkmRBsdsa16LptT/c7bd1WfbkvbjlFCgXWaBsMWnVYKrQ6lttpXu7jNIX1bd+hcy6MWvkcuVGb8eh7GbWlaFeHVOntOuc8XkMKD07+1pOMAoIG73+kojMxicm7dHIEH+qgl5tiwOpHbLWB9L/d2Fw3TJlOf0Po+T06NoFZ5og0PWaXMIxCKyW0rdmp93Mxx14jvzgKztD9nPtVjBqMbMgt/rodSUzoW5Ec0XXh3Ci7fqIU/uIHQERX2USjPCzgFo5p1kyw=" type="hidden">
+</div>
+
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+
+					    
+					    <a name="_articleTop" id="_articleTop"></a>
+					    <div class="title">
+					        
+					        <h1 id="ctl00_ArticleTitle" itemprop="name">Free Maps from the Web Using Web Mapping Service</h1> 
+					    </div>
+
+                        <div style="height:34px">
+					        
+					        <div class="entry float-left">
+                                
+                                <div class="float-left">
+
+						            <span class="author"><a href="http://www.codeproject.com/script/Membership/View.aspx?mid=307688" rel="author"><span itemprop="author" itemscope="" itemtype="http://schema.org/Person"><span itemprop="name">Tom Gaskins</span></span></a></span>, 
+						            <span class="date" itemprop="dateModified" content="2004-06-21 00:00:00">
+							            20 Jun 2004</span>
+			
+                                    <a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><div id="ctl00_CurRat" class="tooltip anchorLink" style="cursor:pointer;margin-top: 5px">
+				
+							            
+
+<table class="small-text" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" cellpadding="0" cellspacing="0"> 
+<tbody><tr>
+	
+	<td class="nowrap">
+
+		
+			<meta itemprop="bestRating" content="5"> 
+			<meta itemprop="worstRating" content="1">
+		
+
+		<span id="ctl00_ArticleRating_VI">
+		<div class="nowrap rating-stars-large" style="height:21px;width:119px;position:relative;">
+	<div class="clipped align-left float-left" style="height:19px;width:115px;">
+		<img src="CodeProject_FreeMapsWebMappingService_files/stars-fill-lg.png" style="border-width:0px;">
+	</div><div class="clipped" style="height:19px;width:4px;position:relative;">
+		<img src="CodeProject_FreeMapsWebMappingService_files/stars-empty-lg.png" style="border-width:0px;position:absolute;top:0;right:0;">
+	</div>
+</div>
+		</span>
+
+		
+	</td>
+	
+	<td id="ctl00_ArticleRating_VR" class="nowrap">
+		&nbsp;
+		<span id="ctl00_ArticleRating_VotesR">&nbsp;<span itemprop="ratingValue" class="rating">4.83</span> (<span itemprop="ratingCount" class="count">51</span> votes)</span>
+		
+	</td>
+
+</tr>
+
+</tbody></table>
+
+
+							            <div id="ctl00_RB" class="speech-bubble-container-up">
+								            <div class="speech-bubble-up" style="width:150px !important">
+									                        
+<div>
+<table class="feature" title="Voting Distribution. Recent data only" width="100%" height="20px" cellpadding="0" cellspacing="0"><tbody><tr class="chart-row"><td class="chart-column rating-ignore-vote" title="Outside deviation limits - not included in score."><img src="CodeProject_FreeMapsWebMappingService_files/pollcol.gif" alt="3 votes, 5.9%" title="3 votes, 5.9%" width="20pxpx" height="1px" border="0px"><br><span title="3 votes">1</span></td>
+<td class="chart-column rating-ignore-vote" title="Outside deviation limits - not included in score."><img src="CodeProject_FreeMapsWebMappingService_files/t.gif" alt="" title="" width="20pxpx" height="1px" border="0px"><br><span title="0 votes">2</span></td>
+<td class="chart-column"><img src="CodeProject_FreeMapsWebMappingService_files/t.gif" alt="" title="" width="20pxpx" height="1px" border="0px"><br><span title="0 votes">3</span></td>
+<td class="chart-column"><img src="CodeProject_FreeMapsWebMappingService_files/pollcol.gif" alt="3 votes, 5.9%" title="3 votes, 5.9%" width="20pxpx" height="1px" border="0px"><br><span title="3 votes">4</span></td>
+<td class="chart-column"><img src="CodeProject_FreeMapsWebMappingService_files/pollcol.gif" alt="45 votes, 88.2%" title="45 votes, 88.2%" width="20pxpx" height="20px" border="0px"><br><span title="45 votes">5</span></td>
+</tr></tbody></table><div class="small-text align-center">4.83/5 - 51 votes</div><div class="small-text align-center subdue">3 removed</div><div class="small-text align-center subdue">μ 4.59, σ<sub>a</sub> 1.70 [<a href="http://www.codeproject.com/KB/FAQs/RatingReputationFAQ.aspx#noisefilter">?</a>]</div>
+</div>
+								            </div>
+								            <div class="speech-bubble-pointer-up">
+									            <div class="speech-bubble-pointer-up-inner"></div>
+								            </div>
+							            </div>
+						            </div>
+                                </div>
+					        </div>
+
+                            
+						    
+						    	
+
+						    	
+                            <div class="float-right" style="margin-right:20px">
+						        
+                            </div>                    
+						    	
+                        </div>
+
+   					    
+                        <div id="ctl00_description" class="summary">Overview of using the OpenGIS Web Mapping Service to retrieve maps from the web</div>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text" itemprop="articleBody">
+						
+
+
+
+<ul class="download">
+<li><a href="http://www.codeproject.com/KB/graphics/WMSOverviewAll/WMSOverviewSolution.zip">Download WMS Overview solution with source - 312 Kb </a>
+</li><li><a href="http://www.codeproject.com/KB/graphics/WMSOverviewAll/WMSOverviewExamples.zip">Download WMS Overview example binaries - 55 Kb </a></li></ul>
+<p><img alt="Sample image of WMS browser and a preview map." src="CodeProject_FreeMapsWebMappingService_files/WMSOverviewFigure01.gif" width="590" height="350"></p>
+<h2>Abstract</h2>
+<p>This tutorial introduces the Web Mapping Service (WMS) protocol 
+standardized by the OpenGIS Consortium for retrieving geographic maps 
+over the internet. The tutorial provides C# examples of progressively 
+increasing complexity to illustrate use of the protocol and programmatic
+ access from Windows .Net applications. Several utility classes for 
+accessing WMS servers and information are provided and described.</p>
+<h2>Introduction</h2>
+<p>An amazing number of free, interesting, and just plain beautiful 
+geographic maps are available on the web, and they can be easily 
+retrieved programmatically using the Web Mapping Service protocol 
+developed by the OpenGIS consortium (<a href="http://www.opengis.org/">http://www.opengis.org/</a>
+ ). For example, follow the link below to retrieve a world map of 
+today's highest temperatures. Come back here afterwards to learn how it 
+works. 
+</p><h6>Editor Note - Spaces inserted into URL to avoid horizontal scrolling </h6>
+<ul>
+<li><a href="http://viz.globe.gov/viz-bin/wmt.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;LAYERS=COASTLINES,RATMAX&amp;STYLES=,&amp;BBOX=-180,-90,180,90&amp;SRS=EPSG:4326&amp;FORMAT=image/gif&amp;HEIGHT=300&amp;WIDTH=600">http://viz.globe.gov/viz-bin/wmt.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;<br>LAYERS=COASTLINES,RATMAX&amp;STYLES=,&amp;BBOX=-180,-90,180,90&amp;SRS=EPSG:4326&amp;FORMAT=image/gif&amp;HEIGHT=300&amp;WIDTH=600</a></li></ul>
+<p>The map you saw in your browser should have looked something like 
+this, which shows the world's maximum temperatures on April 23, 2004: 
+</p><p><img alt="Image of world's maximum temperatures today." src="CodeProject_FreeMapsWebMappingService_files/WMSOverviewFigure02.gif" width="600" height="300"></p>
+<p>The URI you just followed is an example of a Web Mapping Service (WMS) <code>GetMap </code>request.
+ Each element of the URI is a defined parameter of the WMS protocol: The
+ base path of the URI identifies the WMS server; the query sting 
+specifies the desired maps and how to represent them. There are 
+additional parameters possible, but the ones above are the required 
+ones.</p>
+<p>This article gives an overview of WMS, and it presents C# code to 
+retrieve maps and perform other operations necessary when working with 
+WMS servers and information.</p>
+<p>
+</p><h2>The Web Mapping Service Protocol</h2>
+<p>WMS is a web protocol created by the OpenGIS Consortium as a standard
+ way to request and deliver geographic maps and associated information 
+over the web. Data providers and application developers are increasingly
+ adopting WMS. The full WMS specification is available at <a href="http://www.opengis.org/specs/?page=specs">www.opengis.org/specs/?page=specs</a>.
+ The most commonly implemented version is version 1.1.1, but there are 
+still some servers stuck at version 1.0. The next version, 1.3, (version
+ number 1.2 was skipped) is in development as of April 2004. As 
+standards go, the WMS standard is not hard to read, and it's blessedly 
+short. Give it a look when you're done reading this article. It contains
+ information essential to using WMS, and it's free! A WMS discussion 
+list exists at <a href="http://mail.digitalearth.org/mailman/listinfo/wms-dev">mail.digitalearth.org/mailman/listinfo/wms-dev</a> . There's a link to a WMS FAQ on that page, too. 
+</p><p>A WMS request is an HTTP-GET message sent to a WMS server. The WMS specification defines three request types: <code>GetCapabilities</code>, <code>GetMap</code>, and <code>GetFeatureInfo</code>.
+ You'll find that you use the first two almost exclusively. These two 
+request types are the only ones you need to achieve all the 
+functionality described in this tutorial. 
+</p><h2>Determining the Available Maps</h2>
+<p>The maximum temperature is one of the many maps available from 
+institutions that receive raw data and process it into geographic 
+information displays. The link two sections above accesses the NASA 
+GLOBE Visualization server (see <a href="http://www.globe.gov/">http://www.globe.gov/</a>
+ ), which provides comprehensive information on the world's environment 
+and is updated daily. This information comes from space-based and 
+land-based instruments, as well as teams of students around the world 
+who collect local data. 
+</p><p>How do you determine where to find WMS servers? And how do you 
+learn what maps are available? The last question is the easiest to 
+answer: Every WMS server provides upon request an XML document, called 
+the server's WMS capabilities description, that describes all the maps 
+that server can generate, and all the details and available variations 
+you can request for those maps. The document also identifies the URIs 
+for programmatically accessing the maps. Typically, the capabilities 
+description is updated daily to reflect new data. To see the 
+Capabilities document for the GLOBE server as of April 23, 2004, open <a href="http://www.codeproject.com/KB/graphics/WMSOverviewAll/GLOBECapabilities20040423.zip">this file (GLOBECapabilities20040423.xml)</a>
+ in a browser window, preferably a separate window from this one. You 
+can also follow the link below to get today's version of the document: 
+</p><h6>Editor Note - Spaces inserted into URL to avoid horizontal scrolling</h6>
+<ul>
+<li><a href="http://viz.globe.gov/viz-bin/wmt.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities">http://viz.globe.gov/viz-bin/wmt.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetCapabilities</a></li></ul>
+<p>But the content returned by the link above won't come back from the 
+server properly typed as XML, so the browser won't recognize it and 
+format it nicely. This typing issue is a problem with the WMS 1.1.1 
+specification. The specification ridiculously specifies a mime type 
+other than text/xml for the returned XML content, so unaware 
+applications receiving the content treat it as an unknown content type. 
+Your programs can work around this, but web browsers typically don't. 
+The problem is expected be corrected in the WMS 1.3 specification. 
+</p><p>The first section of the capabilities description is called the 
+Service section. It gives information about the WMS server itself, 
+including the server's owner and their contact information, any access 
+constraints or fees, and attribution requirements.</p>
+<p>The second section of the capabilities description is called the 
+Capability section. It identifies access URIs for the server's WMS 
+features such as <code>GetMap</code> requests. It gives the names and 
+descriptions of all the maps the server provides. The map names are each
+ unique relative to the server, and they are the tokens you use to 
+request a particular map. Other information about maps includes optional
+ textual titles and abstracts, the geographic regions over which a 
+particular map is defined, whether style information such as legends or 
+companion graphics -- logos, etc. -- exist and where to retrieve them 
+from, and lots of other map details and request options. Any optionally 
+implemented WMS capabilities are also indicated in the Capability 
+section. One such capability is the <code>GetFeatureInfo</code> service 
+that returns information about a particular location on a map. (See the 
+WMS specification for a full description and the details of using the <code>GetFeatureInfo</code> request.)</p>
+<h2>Available WMS Servers</h2>
+<p>Finding available WMS servers is currently a bit difficult. You 
+pretty much just need to know where they are, or be clever hunting for 
+them. There has been talk about creating an on-line registry of servers,
+ but this hasn't happened yet, and who knows whether it ever will. Here 
+are the URIs of three well-functioning servers that are available as 
+this article is being written and that support WMS version 1.1.1.</p>
+<ul>
+<li>http://viz.globe.gov/viz-bin/wmt.cgi 
+</li><li>http://wms.jpl.nasa.gov/gis-wms.cgi 
+</li><li>http://demo.cubewerx.com/demo/cubeserv/cubeserv.cgi </li></ul>
+<p>The offerings of these servers can be viewed using the WMS Browser example included in the download source of this article.</p>
+<p>A web site with links to WMS servers is available at <a href="http://sunrise.gsfc.nasa.gov/cgi-bin/viewer.cgi">http://sunrise.gsfc.nasa.gov/cgi-bin/viewer.cgi</a>.
+ Some of these servers implement WMS version 1.0, which the examples in 
+this article won't work with. For WMS products and some good demos, 
+visit <a href="http://www.cubewerx.com/main">http://www.cubewerx.com/main</a>.</p>
+<h2>Maps vs. Layers</h2>
+<p>You won't find the term "map" in a WMS capabilities document or the 
+WMS specification. WMS refers to what most of us would call a map as a 
+"layer." A layer can be an individual map, or it can be a collection of 
+maps, or even a collection of collections of maps. It's really just the 
+name for a node in a map hierarchy. The partially expanded GLOBE 
+server's hierarchy looks like the list below, with collection layers 
+identified by solid bullets, and layers that are individual maps 
+identified by hollow bullets and given in italics:</p>
+<ul>
+<li>Context Layers 
+</li><li>Physiography 
+<ul>
+<li><i>Topography and Bathymetry</i> 
+</li><li><i>Earth Geopotential Model</i> 
+</li><li><i>Latitude Shifts</i> 
+</li><li><i>Longitude Shifts</i></li></ul>
+</li><li>Air Temperature 
+</li><li>Pressure and Wind 
+</li><li>Liquid Precipitation 
+</li><li>Solid Precipitation 
+</li><li>Cloud Observation 
+</li><li>Land Cover 
+<ul>
+<li><i>Albedo</i> 
+</li><li><i>Composite Albedo</i> 
+</li><li><i>Vegetation Index</i></li></ul>
+</li><li>Surface Water 
+</li><li>Surface Moisture 
+</li><li>Surface Temperature 
+</li><li>Soil Characterization 
+</li><li>Land Cover/Biology <br>. . . 
+</li><li>World Weather Station Data 
+</li><li>Precipitation 
+</li><li>El Nino/Southern Oscillation 
+</li><li>Hydrology 
+</li><li>Radiation Budget 
+</li><li>NOPP (YOTO) Ocean Drifters</li></ul>
+<p>Each hollow-bullet layer above indicates a map. And while the 
+collection layers could contain additional collections of collection 
+layers, they don't on this particular server.</p>
+<p>Typically, only layers at the leaves of a layer hierarchy can be 
+requested (to be returned as maps). Their parent layers serve mainly to 
+group them logically. However, a server may allow some of these grouping
+ layers to be requested in a single <code>GetMap</code> request, in 
+which case the server returns a single map that combines all layers 
+within that group. This will yield one map with probably a lot of 
+information on it, but the server is likely to allow this capability 
+only if the layers make sense when displayed as a unit. The key to 
+whether a layer is requestable is the layer name field in the 
+capabilities description. All layers have a name field, but only layers 
+you can actually request have a name specified in that field. The field 
+is typically empty for grouping layers. So the rule is, if the 
+capabilities description gives a non-empty name for a layer, you can 
+request that layer in a <code>GetMap</code> request, regardless of whether that layer has sub-layers or not. If a layer has no name, it can't be requested.</p>
+<h2>The GetMap Request</h2>
+<p>The <code>GetMap</code> request is the only way to request a layer. 
+The request is a simple http-get request that contains a base path 
+identifying the server and a query string identifying the desired map 
+and any optional parameters. The most essential part of the query string
+ is the layer name. Other parameters of the query string are the desired
+ graphics format (GIF, JPEG, PNG, etc.), the size in pixels of the map 
+image to return, any specific time or elevation for which to generate 
+the map, and the geographic coordinate system or projection to use when 
+creating the map. You can find the full list of required and optional 
+parameters in the WMS spec.</p>
+<p>Here again is the <code>GetMap</code> URI from above:</p>
+<h6>Editor Note - Spaces inserted into URL to avoid horizontal scrolling</h6>
+<ul>
+<li><a href="http://viz.globe.gov/viz-bin/wmt.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;LAYERS=COASTLINES,RATMAX&amp;STYLES=,&amp;BBOX=-180,-90,180,90&amp;SRS=EPSG:4326&amp;FORMAT=image/gif&amp;HEIGHT=300&amp;WIDTH=600">http://viz.globe.gov/viz-bin/wmt.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;<br>LAYERS=COASTLINES,RATMAX&amp;STYLES=,&amp;BBOX=-180,-90,180,90&amp;SRS=EPSG:4326&amp;FORMAT=image/gif&amp;HEIGHT=300&amp;WIDTH=600</a></li></ul>
+<p>The URI components prior to the query string (everything before the 
+question mark) identifies the WMS server and the destination of the <code>GetMap</code>
+ request. This info is given in the server's capabilities description, 
+in its Capability section. The query string (everything after the 
+question mark) identifies the parameters describing the map we want, in 
+the form of attribute-value pairs separated by ampersands.</p>
+<p>The above URI requests two layers: "COASTLINES" and "RATMAX." These 
+layer names were taken from the server's capabilities description. Since
+ we're requesting two layers, the WMS server will compose those layers 
+into a single map and return that map to us. This is an important point 
+to understand: <code>GetMap</code> <i>always</i> returns one map, 
+regardless of how many layers we ask for. The URI above asks for the 
+returned map to be in GIF format. The formats a server can generate are 
+given in its capabilities description, but most servers can create GIF 
+and JPEG maps. The request asks for a map image 600 pixels wide and 300 
+pixels high. The map should cover the full longitude and latitude of the
+ Earth, -180 degrees longitude and -90 degrees latitude to +180 degrees 
+longitude and +90 degrees latitude, with those values specified in the 
+EPSG:4326 spatial reference system (SRS), which is the common 
+latitude/longitude system familiar to all of us. (EPSG is the 
+organization that defines such things as Earth coordinate systems.) One 
+more piece of required information is the "STYLES" we'd like. In this 
+case we specify an empty value, "STYLES=,&amp;", to get the default 
+style. I don't cover styles in this article, but you can look in the WMS
+ specification and the GLOBE server's capabilities description to get a 
+sense of what they are.</p>
+<p>All the above information is the minimum required to request a map. 
+You'll notice that the URI also contains values for "SERVICE" and 
+"VERSION", as well as the request name, "REQUEST= GetMap". All these 
+parameters are required. The value for the VERSION parameter must be one
+ the server supports, which you can determine by using the sever 
+negotiation procedure described in the WMS specification. In practice 
+you can most likely get away with just asking for version 1.1.1 until 
+the 1.3 specification comes out. When that happens we'll all have to get
+ more professional about version negotiation.</p>
+<h2>Using WMS Programmatically</h2>
+<p>So far we've just been using in-line URIs to get maps and the 
+server's capabilities. But I'm hoping that you're noticing how easy it 
+would be to form and invoke those URIs from a program, one written in 
+just about any language. (Does FORTRAN know about the web yet?) </p>
+<p>But how do you get the capabilities description programmatically? The
+ example below shows a simple way. It explicitly builds the <code>GetCapabilities</code> URI, using .Net's <code>System.UriBuilder</code> class, then uses .Net's <code>System.Net.WebRequest</code> and <code>System.Net.WebResponse</code>
+ classes to request and retrieve the XML capabilities description. In 
+this example the description is simply copied to a local text file with a
+ .xml file extension, then the program invokes Internet Explorer to 
+display it. The program is in the accompanying project code; give it a 
+try. You have to be connected to the internet for it to work 
+successfully, of course.</p><pre lang="cs"><span class="code-keyword">namespace</span> Wms.Client
+{
+    <span class="code-keyword">class</span> GetCapabilitesExample
+    {
+        [System.STAThread]
+        <span class="code-keyword">static</span> <span class="code-keyword">void</span> Main(<span class="code-keyword">string</span>[] args)
+        {
+            System.UriBuilder uri = <span class="code-keyword">new</span> System.UriBuilder(
+                <span class="code-string">@"</span><span class="code-string">http://viz.globe.gov/viz-bin/wmt.cgi"</span>);
+            uri.Query = <span class="code-string">"</span><span class="code-string">SERVICE=WMS&amp;REQUEST=GetCapabilities"</span>;
+            System.Net.WebRequest wr = System.Net.WebRequest.Create(uri.Uri);
+            System.Net.WebResponse response = wr.GetResponse();
+            System.IO.StreamReader sr = <span class="code-keyword">new</span> System.IO.StreamReader(
+                response.GetResponseStream());
+            <span class="code-keyword">string</span> fileName = System.IO.Path.GetTempPath() +
+                  <span class="code-string">@"</span><span class="code-string">capabilities.xml"</span>;
+            System.IO.StreamWriter sw = System.IO.File.CreateText(fileName);
+            sw.Write(sr.ReadToEnd());
+            sr.Close();
+            sw.Close();
+            invokeIe(fileName);
+        }
+
+        <span class="code-keyword">static</span> <span class="code-keyword">private</span> <span class="code-keyword">void</span> invokeIe(<span class="code-keyword">string</span> uri)
+        {
+            System.Diagnostics.Process ie = <span class="code-keyword">new</span> System.Diagnostics.Process();
+            ie.StartInfo.FileName = <span class="code-string">"</span><span class="code-string">iexplore.exe"</span>;
+            ie.StartInfo.Arguments = uri;
+            ie.Start();
+        }
+    }
+}</pre>
+<h2>Retrieving WMS Maps</h2>
+<p>Now let's get a map. The example below creates and sends a WMS <code>GetMap</code> request and displays the returned results in Internet Explorer. The GetMap request is formed using a <code>Wms.Client.WmsRequestBuilder</code>
+ class that I created to make it easy to build WMS requests. This class 
+is in the accompanying download project. It provides set and get 
+accessors for the WMS request parameters, and includes a get accessor to
+ retrieve the correctly formed WMS URI.</p>
+<p>Although WMS is an XML-based specification, the returned value from a <code>GetMap</code>
+ request is a graphics image, not XML. (The exception is if the request 
+asks for some XML-based graphics format, such as GML or SVG). You 
+encounter XML only in capabilities descriptions, in exception messages 
+returned from <code>GetMap</code> and other WMS requests, and in the information returned by the <code>GetFeatureInfo</code> request.</p>
+<p>To handle WMS capabilities descriptions easily, at least in C#, I've created a <code>Capabilities</code> class in a namespace <code>Wms.Client</code>. An instance of this class parses the XML capabilities description (using .Net's <code>System.Xml.XPath</code> classes), and provides granular, type-safe accessors to its contents. For example, to read the URI for sending <code>GetMap</code> requests, a program accesses the property <code>Wms.Client.Capabilities.GetMapUri</code>, as in the example below. The <code>Capabilities</code> class is included in the accompanying source code.</p>
+<p>The following example pulls the <code>GetMap</code> request 
+destination from the server's capabilities description, but merely uses 
+two hard-coded layer names that I know work. (We'll get more useful than
+ this later in the article.) It also uses another class, <code>Wms.Client.Server</code>, that I created to encapsulate a WMS server and its capabilities description.</p><pre lang="cs"><span class="code-keyword">namespace</span> Wms.Client
+{
+    <span class="code-keyword">class</span> GetMapExample
+    {
+        [System.STAThread]
+        <span class="code-keyword">static</span> <span class="code-keyword">void</span> Main(<span class="code-keyword">string</span>[] args)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> Create a request to get the 
+</span>            <span class="code-comment">//</span><span class="code-comment"> capabilities document from the server.
+</span>             System.UriBuilder serverUri =
+                 <span class="code-keyword">new</span> System.UriBuilder(
+                 <span class="code-string">@"</span><span class="code-string">http://viz.globe.gov/viz-bin/wmt.cgi"</span>);
+            Wms.Client.CapabilitiesRequestBuilder capsRequest = 
+                <span class="code-keyword">new</span> Wms.Client.CapabilitiesRequestBuilder(serverUri.Uri);
+
+            <span class="code-comment">//</span><span class="code-comment"> Retrieve the capabilities document and cache it locally.
+</span>            System.Net.WebRequest wr = 
+                System.Net.WebRequest.Create(capsRequest.Uri);
+            System.Net.WebResponse response = wr.GetResponse();
+            <span class="code-keyword">string</span> fileName = System.IO.Path.GetTempPath() + 
+                <span class="code-string">@"</span><span class="code-string">capabilities.xml"</span>;
+            copyStreamToFile(response.GetResponseStream(), fileName);
+
+            <span class="code-comment">//</span><span class="code-comment"> Parse the capabilities document and 
+</span>            <span class="code-comment">//</span><span class="code-comment"> create a capabilities object
+</span>            <span class="code-comment">//</span><span class="code-comment"> for reading the parsed information. 
+</span>            <span class="code-comment">//</span><span class="code-comment"> This is done by creating a Server
+</span>            <span class="code-comment">//</span><span class="code-comment"> object to represent the server 
+</span>            <span class="code-comment">//</span><span class="code-comment"> associated with the capabilities.
+</span>            Wms.Client.Server server = <span class="code-keyword">new</span> Wms.Client.Server(fileName);
+            Wms.Client.Capabilities caps = server.Capabilities;
+
+            <span class="code-comment">//</span><span class="code-comment"> Create a GetMap request using the MapRequestBuilder class. 
+</span>            <span class="code-comment">//</span><span class="code-comment"> When creating the request, use the URI given 
+</span>            <span class="code-comment">//</span><span class="code-comment"> in the server's capabilities
+</span>            <span class="code-comment">//</span><span class="code-comment"> document. This URI may be different than the one 
+</span>            <span class="code-comment">//</span><span class="code-comment"> used to get the
+</span>            <span class="code-comment">//</span><span class="code-comment"> capabilities document.
+</span>            Wms.Client.MapRequestBuilder mapRequest = 
+                <span class="code-keyword">new</span> Wms.Client.MapRequestBuilder(<span class="code-keyword">new</span> System.Uri(
+                caps.GetMapRequestUri));
+            mapRequest.Layers = <span class="code-string">"</span><span class="code-string">COASTLINES,RATMIN"</span>;
+            mapRequest.Styles = <span class="code-string">"</span><span class="code-string">,"</span>; <span class="code-comment">//</span><span class="code-comment"> use default style for each layer
+</span>            mapRequest.Format = <span class="code-string">"</span><span class="code-string">image/gif"</span>;
+            mapRequest.Srs = <span class="code-string">"</span><span class="code-string">EPSG:4326"</span>;
+            mapRequest.BoundingBox = <span class="code-string">"</span><span class="code-string">-180.0,-90.0,180.0,90.0"</span>;
+            mapRequest.Height = <span class="code-digit">300</span>;
+            mapRequest.Width = <span class="code-digit">600</span>;
+            mapRequest.Transparent = <span class="code-keyword">false</span>;
+
+            <span class="code-comment">//</span><span class="code-comment"> Retrieve the map and cache it locally.
+</span>            System.Net.WebRequest mwr = 
+                System.Net.WebRequest.Create(mapRequest.Uri);
+            System.Net.WebResponse mresponse = mwr.GetResponse();
+            <span class="code-keyword">string</span> mapFileName = System.IO.Path.GetTempPath() + 
+               <span class="code-string">@"</span><span class="code-string">wmsmap.gif"</span>;
+            copyStreamToFile(mresponse.GetResponseStream(), mapFileName);
+
+            <span class="code-comment">//</span><span class="code-comment"> Use Internet Explorer to display the map.
+</span>            invokeIe(mapFileName);
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">static</span> <span class="code-keyword">void</span> copyStreamToFile(
+             System.IO.Stream stream, <span class="code-keyword">string</span> destination)
+        {
+            <span class="code-keyword">using</span> (System.IO.BufferedStream bs = 
+                   <span class="code-keyword">new</span> System.IO.BufferedStream(stream))
+            {
+                <span class="code-keyword">using</span> (System.IO.FileStream os = 
+                     System.IO.File.OpenWrite(destination))
+                {
+                    <span class="code-keyword">byte</span>[] buffer = <span class="code-keyword">new</span> <span class="code-keyword">byte</span>[<span class="code-digit">2</span> * <span class="code-digit">4096</span>];
+                    <span class="code-keyword">int</span> nBytes;
+                    <span class="code-keyword">while</span> ((nBytes = bs.Read(buffer, <span class="code-digit">0</span>, buffer.Length)) &gt; <span class="code-digit">0</span>)
+                    {
+                        os.Write(buffer, <span class="code-digit">0</span>, nBytes);
+                    }
+                }
+            }
+        }
+
+        <span class="code-keyword">static</span> <span class="code-keyword">private</span> <span class="code-keyword">void</span> invokeIe(<span class="code-keyword">string</span> uri)
+        {
+            System.Diagnostics.Process ie = <span class="code-keyword">new</span> System.Diagnostics.Process();
+            ie.StartInfo.FileName = <span class="code-string">"</span><span class="code-string">iexplore.exe"</span>;
+            ie.StartInfo.Arguments = uri;
+            ie.Start();
+        }
+    }
+}</pre>
+<h2>WMS Retrieval Caching</h2>
+<p>All the examples in this article save the retrieved information, 
+either a capabilities description or a map, to a local file, and then 
+operate on that local file rather than the stream returned from the WMS 
+server. This may seem like an unnecessary step, and indeed it is if you 
+don't want to cache the retrieved information. But every useful WMS 
+program I've written wants to keep the retrieved information around so 
+that it doesn't have to request it again if the user wants to use it 
+again. This is especially true of maps, which can take considerable time
+ to retrieve and which can cause the WMS server a lot of work to create.
+ Because I suspect that you'll want to cache things, I make a point in 
+the examples of retrieving to a file. Feel free to do otherwise in your 
+programs.</p>
+<p>As I describe below in the section <i>Description of the Accompanying Code</i>, the <code>Wms.Client</code>
+ project in the accompanying download code contains a class that manages
+ a persistent file cache for WMS maps. The cache is user-specific and 
+persists across invocations of WMS programs that use it. Again, the need
+ for this came from my experience that most programs using WMS will want
+ to cache maps to avoid subsequent retrieval overhead.</p>
+<p>Caching WMS capabilities descriptions is a different story, however. I
+ usually do not cache those because they often change on the server from
+ day to day. For instance, if I cached the capabilities description from
+ the GLOBE server today, then when I used that cached description 
+tomorrow it would not include the many maps that server generated 
+overnight. For that reason I almost always retrieve a new version of the
+ capabilities description when a program starts. The exception is when I
+ want the program to run even when the computer is not connected to the 
+internet. In that case I will cache the capabilities description each 
+time I retrieve it, and then use the cached version if the computer is 
+not connected to the internet when the program is subsequently run. Of 
+course, the program still won't be able to access the WMS server and its
+ maps if it's not connected to the internet, so only maps that were also
+ cached will be available.</p>
+<h2>Making Asynchronous WMS Requests</h2>
+<p>Normally we don't want to retrieve maps -- or even capabilities 
+descriptions -- synchronously like we did in the above examples. The 
+example below demonstrates using two classes I created for asynchronous 
+retrieval, <code>Wms.Client.CapabilitiesRetriever</code> and <code>Wms.Client.MapRetriever</code>. We pass to an instance of these classes a <code>Wms.Client.WmsRequestBuilder</code>
+ object and an event handler (a C# delegate) to be called when the 
+request completes. We can also specify to the retriever a progress event
+ handler that is called at intervals to indicate retrieval progress. 
+It's in this event handler that the below example incorporates progress 
+feedback to the user. In the example, the progress event handler simply 
+adds characters to a text string in a status bar at the bottom of the 
+map window.</p>
+<p>This is the first example in this article that uses Windows Forms to display the map. The main form contains a Picture Box (<code>System.Windows.Forms.PictureBox</code>) to which we pass an Image (<code>System.Drawing.Image</code>) object that was created from the map file that was saved locally by the map retriever.</p>
+<p>The example is also the first to do some rudimentary error handling. 
+WMS servers return WMS exceptions if something goes wrong in the WMS 
+components of the server. These exceptions are returned as XML 
+documents, but with a content type of <code>application/vnd.ogc.se_xml</code>.
+ (This is another instance of WMS' misuse of content type, and it's 
+expected to be fixed in the next version of the specification.) The 
+example below merely checks for this content type (and a variant that is
+ erroneously returned by some WMS servers) and does not parse the 
+exception document. Not that parsing the exception document is 
+difficult, it's just more than I want to capture in this example. The 
+download code accompanying this article contains a class that converts 
+WMS XML exceptions to .Net exceptions. See the <i>Description of the Accompanying Code</i> section below for a description of it.</p>
+<p>Notice that the Retriever objects use Request objects to figure out 
+what to retrieve. The retrievers will not start -- an exception will be 
+thrown -- if its Request field is not set prior to calling the 
+Retriever's <code>Start</code> method. For more information about this see the <i>Description of the Accompanying Code</i> section below, and the Retriever code itself.</p><pre lang="cs"><span class="code-keyword">using</span> System;
+<span class="code-keyword">using</span> System.Drawing;
+<span class="code-keyword">using</span> System.Collections;
+<span class="code-keyword">using</span> System.ComponentModel;
+<span class="code-keyword">using</span> System.Windows.Forms;
+<span class="code-keyword">using</span> System.Data;
+
+<span class="code-keyword">namespace</span> Wms.Client
+{
+    <span class="code-summarycomment">///</span><span class="code-comment"> <span class="code-summarycomment">&lt;</span><span class="code-summarycomment">summary</span><span class="code-summarycomment">&gt;</span>
+</span>    <span class="code-summarycomment">///</span><span class="code-comment"> Retrieve WMS capabilities and maps asynchronously.
+</span>    <span class="code-summarycomment">///</span><span class="code-comment"> <span class="code-summarycomment">&lt;</span><span class="code-summarycomment">/</span><span class="code-summarycomment">SUMMARY</span><span class="code-summarycomment">&gt;</span>
+</span>    <span class="code-keyword">public</span> <span class="code-keyword">class</span> GetMapAsynchExample : System.Windows.Forms.Form
+    {
+        <span class="code-keyword">private</span> System.Windows.Forms.PictureBox pictureBox;
+        <span class="code-keyword">private</span> System.Windows.Forms.StatusBar statusBar;
+        <span class="code-keyword">private</span> System.ComponentModel.Container components = <span class="code-keyword">null</span>;
+
+        <span class="code-keyword">public</span> GetMapAsynchExample()
+        {
+            InitializeComponent();
+        }
+
+        <span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> Dispose( <span class="code-keyword">bool</span> disposing )
+        {
+            <span class="code-keyword">if</span>( disposing )
+            {
+                <span class="code-keyword">if</span> (components != <span class="code-keyword">null</span>) 
+                {
+                    components.Dispose();
+                }
+            }
+            <span class="code-keyword">base</span>.Dispose( disposing );
+        }
+
+        <span class="code-preprocessor">#region</span> Windows Form Designer generated code
+        <span class="code-summarycomment">///</span><span class="code-comment"> 
+</span>        <span class="code-summarycomment">///</span><span class="code-comment"> Required method for Designer support - do not modify
+</span>        <span class="code-summarycomment">///</span><span class="code-comment"> the contents of this method with the code editor.
+</span>        <span class="code-summarycomment">///</span><span class="code-comment"> 
+</span>        <span class="code-keyword">private</span> <span class="code-keyword">void</span> InitializeComponent()
+        {
+            <span class="code-keyword">this</span>.pictureBox = <span class="code-keyword">new</span> System.Windows.Forms.PictureBox();
+            <span class="code-keyword">this</span>.statusBar = <span class="code-keyword">new</span> System.Windows.Forms.StatusBar();
+            <span class="code-keyword">this</span>.SuspendLayout();
+            <span class="code-comment">//</span><span class="code-comment"> 
+</span>            <span class="code-comment">//</span><span class="code-comment"> pictureBox
+</span>            <span class="code-comment">//</span><span class="code-comment"> 
+</span>            <span class="code-keyword">this</span>.pictureBox.BorderStyle = 
+                System.Windows.Forms.BorderStyle.Fixed3D;
+            <span class="code-keyword">this</span>.pictureBox.Location = <span class="code-keyword">new</span> System.Drawing.Point(<span class="code-digit">8</span>, <span class="code-digit">8</span>);
+            <span class="code-keyword">this</span>.pictureBox.Name = <span class="code-string">"</span><span class="code-string">pictureBox"</span>;
+            <span class="code-keyword">this</span>.pictureBox.Size = <span class="code-keyword">new</span> System.Drawing.Size(<span class="code-digit">600</span>, <span class="code-digit">300</span>);
+            <span class="code-keyword">this</span>.pictureBox.TabIndex = <span class="code-digit">0</span>;
+            <span class="code-keyword">this</span>.pictureBox.TabStop = <span class="code-keyword">false</span>;
+            <span class="code-comment">//</span><span class="code-comment"> 
+</span>            <span class="code-comment">//</span><span class="code-comment"> statusBar
+</span>            <span class="code-comment">//</span><span class="code-comment"> 
+</span>            <span class="code-keyword">this</span>.statusBar.Location = <span class="code-keyword">new</span> System.Drawing.Point(<span class="code-digit">0</span>, <span class="code-digit">319</span>);
+            <span class="code-keyword">this</span>.statusBar.Name = <span class="code-string">"</span><span class="code-string">statusBar"</span>;
+            <span class="code-keyword">this</span>.statusBar.Size = <span class="code-keyword">new</span> System.Drawing.Size(<span class="code-digit">616</span>, <span class="code-digit">22</span>);
+            <span class="code-keyword">this</span>.statusBar.TabIndex = <span class="code-digit">1</span>;
+            <span class="code-comment">//</span><span class="code-comment"> 
+</span>            <span class="code-comment">//</span><span class="code-comment"> GetMapAsynchExample
+</span>            <span class="code-comment">//</span><span class="code-comment"> 
+</span>            <span class="code-keyword">this</span>.AutoScaleBaseSize = <span class="code-keyword">new</span> System.Drawing.Size(<span class="code-digit">5</span>, <span class="code-digit">13</span>);
+            <span class="code-keyword">this</span>.ClientSize = <span class="code-keyword">new</span> System.Drawing.Size(<span class="code-digit">616</span>, <span class="code-digit">341</span>);
+            <span class="code-keyword">this</span>.Controls.Add(<span class="code-keyword">this</span>.statusBar);
+            <span class="code-keyword">this</span>.Controls.Add(<span class="code-keyword">this</span>.pictureBox);
+            <span class="code-keyword">this</span>.Name = <span class="code-string">"</span><span class="code-string">GetMapAsynchExample"</span>;
+            <span class="code-keyword">this</span>.Text = <span class="code-string">"</span><span class="code-string">Get Map Asynch Example"</span>;
+            <span class="code-keyword">this</span>.ResumeLayout(<span class="code-keyword">false</span>);
+
+        }
+        <span class="code-preprocessor">#endregion</span>
+
+        <span class="code-keyword">static</span> <span class="code-keyword">void</span> Main() 
+        {
+            GetMapAsynchExample form = <span class="code-keyword">new</span> GetMapAsynchExample();
+            form.statusBar.Text = <span class="code-string">"</span><span class="code-string">Retrieving Capabilities "</span>;
+
+            <span class="code-comment">//</span><span class="code-comment"> Create and initialize a retriever to retrieve WMS capabilities.
+</span>            Wms.Client.CapabilitiesRetriever capsRetriever = 
+              <span class="code-keyword">new</span> Wms.Client.CapabilitiesRetriever(form);
+            capsRetriever.ProgressInterval = <span class="code-keyword">new</span> System.TimeSpan(<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">500</span>);
+            capsRetriever.Done += 
+              <span class="code-keyword">new</span> Wms.Client.RetrieverDoneEventHandler(form.capsRetrieveDone);
+            capsRetriever.Progress += 
+              <span class="code-keyword">new</span> Wms.Client.RetrieverProgressEventHandler(
+              form.showCapsProgress);
+            capsRetriever.Request = 
+                <span class="code-keyword">new</span> Wms.Client.CapabilitiesRequestBuilder(
+                <span class="code-keyword">new</span> System.Uri(<span class="code-string">@"</span><span class="code-string">http://viz.globe.gov/viz-bin/wmt.cgi"</span>));
+            capsRetriever.Destination = System.IO.Path.GetTempFileName();
+
+            <span class="code-comment">//</span><span class="code-comment"> Once the retriever is initialized, 
+</span>            <span class="code-comment">//</span><span class="code-comment"> tell it to start the retrieval.
+</span>            capsRetriever.Start();
+
+            Application.Run(form);
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> showCapsProgress(System.<span class="code-sdkkeyword">Object</span> sender, 
+              Wms.Client.RetrieverProgressArgs ea)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> Update the progress bar.
+</span>            <span class="code-keyword">this</span>.statusBar.Text += <span class="code-string">"</span><span class="code-string">+"</span>;
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> capsRetrieveDone(<span class="code-keyword">object</span> sender, 
+              Wms.Client.RetrieverDoneArgs ea)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> This event handler is called when the capabilities description has
+</span>            <span class="code-comment">//</span><span class="code-comment"> been retrieved from the WMS server 
+</span>            <span class="code-comment">//</span><span class="code-comment"> and parsed on the client side.
+</span>            <span class="code-keyword">if</span> (ea.Reason == 
+              Wms.Client.RetrieverDoneArgs.CompletionReason.Completed)
+            {
+                <span class="code-keyword">if</span> (ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">application/vnd.ogc.wms_xml"</span>)
+                    || ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">text/xml"</span>))
+                {
+                    <span class="code-comment">//</span><span class="code-comment"> Capabilities successfully retrieved from server.
+</span>                    initiateMapRequest(
+                      ea.DestinationObject <span class="code-keyword">as</span> Wms.Client.Server);
+                }
+                <span class="code-keyword">else</span> <span class="code-keyword">if</span> (ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">application/vnd.ogc.se_xml"</span>)
+                    || ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">application/vnd.ogc.se+xml"</span>))
+                {
+                    <span class="code-comment">//</span><span class="code-comment"> WMS servers indicate WMS exceptions 
+</span>                    <span class="code-comment">//</span><span class="code-comment"> using the above content types.
+</span>                    <span class="code-keyword">string</span> msg = <span class="code-string">"</span><span class="code-string">The WMS server returned an exception."</span>
+                        + System.Environment.NewLine;
+                    System.Windows.Forms.MessageBox.Show(msg, 
+                        <span class="code-string">"</span><span class="code-string">WMS Server Exception"</span>,
+                        System.Windows.Forms.MessageBoxButtons.OK, 
+                        System.Windows.Forms.MessageBoxIcon.Error);
+                }
+                <span class="code-keyword">else</span>
+                {
+                    <span class="code-comment">//</span><span class="code-comment"> If the content type is something unexpected, 
+</span>                    <span class="code-comment">//</span><span class="code-comment"> then it's likely that we
+</span>                    <span class="code-comment">//</span><span class="code-comment"> reached an HTML page, which can be displayed 
+</span>                    <span class="code-comment">//</span><span class="code-comment"> in Internet Explorer.
+</span>                    <span class="code-keyword">string</span> msg = 
+                        <span class="code-string">"</span><span class="code-string">The WMS server returned an incorrect format of "</span>
+                        + ea.ContentType + <span class="code-string">"</span><span class="code-string">."</span> + System.Environment.NewLine
+                        + <span class="code-string">"</span><span class="code-string">This is not a valid format."</span> 
+                        + System.Environment.NewLine
+                        + <span class="code-string">"</span><span class="code-string">Would you like to see if Internet Explorer"</span> 
+                        + <span class="code-string">"</span><span class="code-string"> can show you what was returned?"</span>;
+                    System.Windows.Forms.DialogResult yesNo = 
+                        System.Windows.Forms.MessageBox.Show(msg, 
+                          <span class="code-string">"</span><span class="code-string">Invalid WMS Format"</span>,
+                        System.Windows.Forms.MessageBoxButtons.YesNo, 
+                        System.Windows.Forms.MessageBoxIcon.Error);
+                    <span class="code-keyword">if</span> (yesNo == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        invokeIe(ea.Retriever.Request.ToString());
+                    }
+                }
+            }
+            <span class="code-keyword">else</span> <span class="code-keyword">if</span> (ea.Reason == 
+                Wms.Client.RetrieverDoneArgs.CompletionReason.TimedOut)
+            {
+                <span class="code-keyword">string</span> msg = <span class="code-string">"</span><span class="code-string">Contacting WMS server timed out."</span>
+                    + System.Environment.NewLine;
+                System.Windows.Forms.MessageBox.Show(msg, 
+                    <span class="code-string">"</span><span class="code-string">WMS Server Contact Timed Out"</span>,
+                    System.Windows.Forms.MessageBoxButtons.OK, 
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+            <span class="code-keyword">else</span> <span class="code-comment">//</span><span class="code-comment"> there was an error that we could not predict, 
+</span>                 <span class="code-comment">//</span><span class="code-comment"> most likely an http error.
+</span>            {
+                <span class="code-keyword">string</span> msg = <span class="code-string">"</span><span class="code-string">Error contacting WMS server: "</span> + ea.Message
+                    + System.Environment.NewLine;
+                System.Windows.Forms.MessageBox.Show(msg, 
+                    <span class="code-string">"</span><span class="code-string">Unable to contact WMS server"</span>,
+                    System.Windows.Forms.MessageBoxButtons.OK, 
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> initiateMapRequest(Wms.Client.Server server)
+        {
+            <span class="code-keyword">this</span>.statusBar.Text = <span class="code-string">"</span><span class="code-string">Retrieving Map "</span>;
+
+            <span class="code-comment">//</span><span class="code-comment"> Create a GetMap request for the layers COASTLINES 
+</span>            <span class="code-comment">//</span><span class="code-comment"> and RATMIN (min temperatures).
+</span>            Wms.Client.MapRequestBuilder mapRequest = 
+                <span class="code-keyword">new</span> Wms.Client.MapRequestBuilder(
+                <span class="code-keyword">new</span> System.Uri(
+                  server.Capabilities.GetCapabilitiesRequestUri));
+            mapRequest.Layers = <span class="code-string">"</span><span class="code-string">COASTLINES,RATMIN"</span>;
+            mapRequest.Styles = <span class="code-string">"</span><span class="code-string">,"</span>; <span class="code-comment">//</span><span class="code-comment"> use default style for each layer
+</span>            mapRequest.Format = <span class="code-string">"</span><span class="code-string">image/gif"</span>;
+            mapRequest.Srs = <span class="code-string">"</span><span class="code-string">EPSG:4326"</span>;
+            mapRequest.BoundingBox = <span class="code-string">"</span><span class="code-string">-180.0,-90.0,180.0,90.0"</span>;
+            mapRequest.Height = <span class="code-digit">300</span>;
+            mapRequest.Width = <span class="code-digit">600</span>;
+            mapRequest.Transparent = <span class="code-keyword">false</span>;
+
+            <span class="code-comment">//</span><span class="code-comment"> Create a retriever to execute the request.
+</span>            Wms.Client.MapRetriever mapRetriever = 
+                 <span class="code-keyword">new</span> Wms.Client.MapRetriever(<span class="code-keyword">this</span>);
+            mapRetriever.ProgressInterval = 
+                 <span class="code-keyword">new</span> System.TimeSpan(<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">500</span>);
+            mapRetriever.Done += <span class="code-keyword">new</span> Wms.Client.RetrieverDoneEventHandler(
+                 <span class="code-keyword">this</span>.mapRetrieveDone);
+            mapRetriever.Progress += 
+                 <span class="code-keyword">new</span> Wms.Client.RetrieverProgressEventHandler(
+                 <span class="code-keyword">this</span>.showMapProgress);
+            mapRetriever.Request = mapRequest;
+            mapRetriever.Destination = System.IO.Path.GetTempFileName();
+
+            <span class="code-comment">//</span><span class="code-comment"> Start the retrieval.
+</span>            mapRetriever.Start();
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> showMapProgress(System.<span class="code-sdkkeyword">Object</span> sender, 
+            Wms.Client.RetrieverProgressArgs ea)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> Update the progress bar.
+</span>            <span class="code-keyword">this</span>.statusBar.Text += <span class="code-string">"</span><span class="code-string">+"</span>;
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> mapRetrieveDone(<span class="code-keyword">object</span> sender, 
+              Wms.Client.RetrieverDoneArgs ea)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> This event handler is called when the map has
+</span>            <span class="code-comment">//</span><span class="code-comment"> been retrieved, or when an error
+</span>            <span class="code-comment">//</span><span class="code-comment"> occurs in the retrieval.
+</span>            Wms.Client.MapRequestBuilder mapRequest = 
+                ea.Retriever.Request <span class="code-keyword">as</span> Wms.Client.MapRequestBuilder;
+
+            <span class="code-keyword">if</span> (ea.Reason == 
+Wms.Client.RetrieverDoneArgs.CompletionReason.Completed)
+            {
+                <span class="code-keyword">if</span> (ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">application/vnd.ogc.se_xml"</span>)
+                    || ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">application/vnd.ogc.se+xml"</span>)
+                    || ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">text/xml"</span>))
+                {
+                    <span class="code-keyword">string</span> msg = <span class="code-string">"</span><span class="code-string">Retrieval of map returned an error:"</span> + 
+                       System.Environment.NewLine;
+                    System.Windows.Forms.MessageBox.Show(msg, 
+                        <span class="code-string">"</span><span class="code-string">WMS Server Exception"</span>,
+                        System.Windows.Forms.MessageBoxButtons.OK, 
+                        System.Windows.Forms.MessageBoxIcon.Error);
+                }
+                <span class="code-keyword">else</span>
+                {
+                    System.Drawing.Image image = 
+                       System.Drawing.Image.FromFile(ea.DestinationFile);
+                    <span class="code-keyword">this</span>.pictureBox.Image = image;
+                    <span class="code-keyword">this</span>.statusBar.Text = System.<span class="code-sdkkeyword">String</span>.Empty;
+                }
+            }
+            <span class="code-keyword">else</span> <span class="code-keyword">if</span> (ea.Reason == 
+                Wms.Client.RetrieverDoneArgs.CompletionReason.Error)
+            {
+               System.Windows.Forms.MessageBox.Show(
+                    <span class="code-string">"</span><span class="code-string">Error retrieving map: "</span> 
+                    + ea.Message,
+                    <span class="code-string">"</span><span class="code-string">Retrieval error"</span>,
+                    System.Windows.Forms.MessageBoxButtons.OK, 
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+            <span class="code-keyword">else</span> <span class="code-keyword">if</span> (ea.Reason == RetrieverDoneArgs.CompletionReason.TimedOut)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    <span class="code-string">"</span><span class="code-string">Retrieval of map timed out."</span>,
+                    <span class="code-string">"</span><span class="code-string">Retrieval error"</span>,
+                    System.Windows.Forms.MessageBoxButtons.OK, 
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+        }
+
+        <span class="code-keyword">static</span> <span class="code-keyword">private</span> <span class="code-keyword">void</span> invokeIe(<span class="code-keyword">string</span> uri)
+        {
+            System.Diagnostics.Process ie = <span class="code-keyword">new</span> System.Diagnostics.Process();
+            ie.StartInfo.FileName = <span class="code-string">"</span><span class="code-string">iexplore.exe"</span>;
+            ie.StartInfo.Arguments = uri;
+            ie.Start();
+        }
+    }
+}</pre>
+<h2>A WMS Browser and Dialog</h2>
+<p>Now let's get closer to something more generally useful. The figure 
+below shows a dialog box that lists, on the left, a WMS servers and its 
+layers. (The code for this example is included in the accompanying 
+download project.) The layers are presented in the dialog in the 
+hierarchy defined by the server. On the right is the WMS information 
+about the server or about the layer, depending on which item in the left
+ panel is selected. This information is that within the WMS capabilities
+ description retrieved from the server. In the figure, the "Cloud Cover"
+ layer of the GLOBE Program Visualization Server is selected. It's a 
+named layer -- "RCOXXR" -- so we can request a map for it. A small 
+version of that map is shown in the preview pane that partially covers 
+the right panel. Notice in the right panel that there is a lot of map 
+information that I haven't even mentioned.</p>
+<p><img alt="Sample image of WMS browser and a preview map." src="CodeProject_FreeMapsWebMappingService_files/WMSOverviewFigure03.gif" width="600" height="583"></p>
+<p>The version of this program in the download code contains three WMS 
+servers in the left panel: The GLOBE Visualization Server, the Web Map 
+Server at JPL, and the Cascading Map Server at CubeWerx, Inc. These 
+servers, especially the GLOBE and CubeWerx servers, hold a wonderful 
+collection of maps. You can use the sample program to take a look at 
+them.</p>
+<h2>Map Extents</h2>
+<p>Take a look at the "Extents" item in the right panel of the figure 
+above. That item is about a third of the way down from the top. The 
+extents field of a WMS layer gives the date, time, or elevation values 
+for which the layer can be presented -- for which a map can be 
+generated. One of the extents displayed above is:</p><pre lang="text">time, 1996-05-02/2004-04-22/P1D, Default = 2004-04-22</pre>
+<p>This indicates that cloud cover maps can be created for any day 
+between and including May 2, 1996 and April 22, 2004 (today, as I'm 
+writing this). The "P1D" term denotes that the capture period of the 
+data is every one day. We can specify the day we want a map for by 
+including an EXTENTS parameter in a GetMap request for this layer. Isn't
+ that cool! More cool is that we can create several GetMap requests for a
+ sequence of days, retrieve those maps, and use them to display an 
+animation, in this case changes in cloud cover. The accompanying project
+ contains a simple program that does just that. It display the world's 
+cloud cover for the first ten days of May 2004. The example is listed 
+and described below, in the section entitled <i>Animating Maps</i>.</p>
+<p>If I issue a GetMap request for this layer and do not specify a date,
+ I'll get back the map for the default time, which is April 22, 2004 as 
+shown in the above excerpt. On this WMS server, the default changes 
+every day because the server is updated with new data every night. In 
+fact, many of the layers on this server are updated nightly.</p>
+<p>The name of the field "Extents" is a bit misleading. On first sight 
+my guess would be that it has something to do with the geographic map 
+extents available. But no, that information is available in the 
+"Bounding Boxes" field.</p>
+<h2>Animating Maps</h2>
+<p>We're all familiar with the animated weather maps seen on television 
+newscasts. These are easy to create using WMS: Simply retrieve a 
+collection of maps and post them to the display successively. The 
+following example does this, and as you can see it's only a modified 
+version of the previous example that asynchronously retrieves one map. 
+This new example initiates retrieval of ten maps, each representing a 
+day's cloud cover composed with a map of the world's coastlines. Once 
+all the maps are retrieved, the example displays them successively to 
+show cloud movement. In order to reduce clutter in the example, I've 
+removed all the error handling code as well as the code Visual Studio 
+generated. The error handling code would be identical to that in the 
+previous example, and you can see the full program in the download code.</p>
+<p>Things to note in this example are that a new <code>Wms.Client.MapRetriever</code>
+ object is created for each map to retrieve. Also, there is no progress 
+handler for these retrievers; progress is monitored and displayed via a 
+Windows Forms Timer object. The timer-tick event handler of this timer 
+determines when all the maps have been retrieved, and then continually 
+posts them successively to the display until the program exits.</p>
+<p>You can produce these animations for any WMS layers that specify in 
+their server's capabilities description that they have extents. 
+Typically the extents are time, such as the dates available, and you ask
+ for each map within the specified extents by specifying the desired 
+time in the Time parameter of the GetMap request. In the example below, 
+notice that <code>mapRequest.Time</code> is set with a string indicating
+ the date of the map we want. Ten successive days are specified, from 
+May 1, 2004 to May 10, 2004. Many maps also have elevation extents. You 
+request any of the available elevations by using the Elevation parameter
+ of the GetMap request. The Time and Elevation parameters are 
+independent, so if the layer has both types of extents defined, you can 
+ask for a map for a particular time and a particular elevation. Other 
+extent types are possible, but the WMS specification doesn't 
+specifically call them out, and the method of requesting them is more 
+complex. See the WMS specification if you're interested in this.</p><pre lang="cs"><span class="code-keyword">using</span> System;
+<span class="code-keyword">using</span> System.Drawing;
+<span class="code-keyword">using</span> System.Collections;
+<span class="code-keyword">using</span> System.ComponentModel;
+<span class="code-keyword">using</span> System.Windows.Forms;
+<span class="code-keyword">using</span> System.Data;
+
+<span class="code-keyword">namespace</span> Wms.Client
+{
+    <span class="code-summarycomment">///</span><span class="code-comment"> 
+</span>    <span class="code-summarycomment">///</span><span class="code-comment"> Animate a collection of maps retrieved from a WMS server.
+</span>    <span class="code-summarycomment">///</span><span class="code-comment"> 
+</span>    <span class="code-keyword">public</span> <span class="code-keyword">class</span> MapAnimationExample : System.Windows.Forms.Form
+    {
+        <span class="code-keyword">private</span> System.Windows.Forms.PictureBox pictureBox;
+        <span class="code-keyword">private</span> System.Windows.Forms.StatusBar statusBar;
+        <span class="code-keyword">private</span> System.ComponentModel.IContainer components;
+        <span class="code-keyword">private</span> System.Windows.Forms.Timer timer;
+        <span class="code-keyword">private</span> System.Windows.Forms.ProgressBar progressBar;
+
+        <span class="code-keyword">private</span> Wms.Client.MapRequestBuilder    [] mapRequests;
+        <span class="code-keyword">private</span> System.Drawing.Image            [] mapImages;
+
+        <span class="code-keyword">public</span> MapAnimationExample()
+        {
+            InitializeComponent();
+
+            <span class="code-comment">//</span><span class="code-comment"> Create arrays to hold the map 
+</span>            <span class="code-comment">//</span><span class="code-comment"> requests and the retrieved images.
+</span>            <span class="code-keyword">this</span>.mapRequests = <span class="code-keyword">new</span> Wms.Client.MapRequestBuilder[<span class="code-digit">10</span>];
+            <span class="code-keyword">this</span>.mapImages = <span class="code-keyword">new</span> System.Drawing.Image[<span class="code-digit">10</span>];
+
+            <span class="code-comment">//</span><span class="code-comment"> Initialize the progress bar.
+</span>            <span class="code-keyword">this</span>.progressBar.Minimum = <span class="code-digit">0</span>;
+            <span class="code-keyword">this</span>.progressBar.Maximum = <span class="code-keyword">this</span>.mapImages.Length;
+        }
+
+        <span class="code-preprocessor">#region</span> Windows Form Designer generated code
+
+        <span class="code-keyword">static</span> <span class="code-keyword">void</span> Main() 
+        {
+            MapAnimationExample form = <span class="code-keyword">new</span> MapAnimationExample();
+            form.statusBar.Text = <span class="code-string">"</span><span class="code-string">Retrieving Capabilities "</span>;
+
+            <span class="code-comment">//</span><span class="code-comment"> Create and initialize a retriever to
+</span>            <span class="code-comment">//</span><span class="code-comment"> retrieve WMS capabilities.
+</span>            Wms.Client.CapabilitiesRetriever capsRetriever = 
+                 <span class="code-keyword">new</span> Wms.Client.CapabilitiesRetriever(form);
+            capsRetriever.ProgressInterval = 
+                 <span class="code-keyword">new</span> System.TimeSpan(<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">500</span>);
+            capsRetriever.Done += 
+                 <span class="code-keyword">new</span> Wms.Client.RetrieverDoneEventHandler(
+                 form.capsRetrieveDone);
+            capsRetriever.Progress += 
+                 <span class="code-keyword">new</span> Wms.Client.RetrieverProgressEventHandler(
+                  form.showCapsProgress);
+            capsRetriever.Request = 
+                  <span class="code-keyword">new</span> Wms.Client.CapabilitiesRequestBuilder(
+                <span class="code-keyword">new</span> System.Uri(<span class="code-string">@"</span><span class="code-string">http://viz.globe.gov/viz-bin/wmt.cgi"</span>));
+            capsRetriever.Destination = System.IO.Path.GetTempFileName();
+
+            <span class="code-comment">//</span><span class="code-comment"> Once the retriever is initialized, 
+</span>            <span class="code-comment">//</span><span class="code-comment"> tell it to start the retrieval.
+</span>            capsRetriever.Start();
+
+            Application.Run(form);
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> showCapsProgress(System.<span class="code-sdkkeyword">Object</span> sender,
+            Wms.Client.RetrieverProgressArgs ea)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> Increment the capabilities progress label.
+</span>            <span class="code-keyword">this</span>.statusBar.Text += <span class="code-string">"</span><span class="code-string">+"</span>;
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> capsRetrieveDone(<span class="code-keyword">object</span> sender, 
+             Wms.Client.RetrieverDoneArgs ea)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> This event handler is called when 
+</span>            <span class="code-comment">//</span><span class="code-comment"> the capabilities description has
+</span>            <span class="code-comment">//</span><span class="code-comment"> been retrieved from the WMS server and
+</span>            <span class="code-comment">//</span><span class="code-comment"> parsed on the client side.
+</span>            <span class="code-keyword">if</span> (ea.Reason == 
+              Wms.Client.RetrieverDoneArgs.CompletionReason.Completed)
+            {
+                <span class="code-keyword">if</span> (ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">application/vnd.ogc.wms_xml"</span>)
+                    || ea.ContentType.Equals(<span class="code-string">"</span><span class="code-string">text/xml"</span>))
+                {
+                    <span class="code-comment">//</span><span class="code-comment"> Capabilities successfully retrieved from server.
+</span>                    initiateMapRequest(ea.DestinationObject 
+                      <span class="code-keyword">as</span> Wms.Client.Server);
+                }
+            }
+
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> initiateMapRequest(Wms.Client.Server server)
+        {
+            <span class="code-keyword">this</span>.statusBar.Text = <span class="code-string">"</span><span class="code-string">Retrieving Maps "</span>;
+
+            <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-digit">0</span>; i &lt; <span class="code-keyword">this</span>.mapRequests.Length; i++)
+            {
+                <span class="code-comment">//</span><span class="code-comment"> Create a GetMap request for the layers 
+</span>                <span class="code-comment">//</span><span class="code-comment"> COASTLINES and Cloud Cover.
+</span>                <span class="code-keyword">this</span>.mapRequests[i] = <span class="code-keyword">new</span> Wms.Client.MapRequestBuilder(
+                    <span class="code-keyword">new</span> System.Uri(
+                       server.Capabilities.GetCapabilitiesRequestUri));
+                <span class="code-keyword">this</span>.mapRequests[i].Layers = <span class="code-string">"</span><span class="code-string">COASTLINES,RCOXXR"</span>;
+                <span class="code-keyword">this</span>.mapRequests[i].Styles = <span class="code-string">"</span><span class="code-string">,"</span>; 
+                    <span class="code-comment">//</span><span class="code-comment"> use default style for each layer
+</span>                <span class="code-keyword">this</span>.mapRequests[i].Format = <span class="code-string">"</span><span class="code-string">image/gif"</span>;
+                <span class="code-keyword">this</span>.mapRequests[i].Srs = <span class="code-string">"</span><span class="code-string">EPSG:4326"</span>;
+                <span class="code-keyword">this</span>.mapRequests[i].BoundingBox = <span class="code-string">"</span><span class="code-string">-180.0,-90.0,180.0,90.0"</span>;
+                <span class="code-keyword">this</span>.mapRequests[i].Height = <span class="code-digit">300</span>;
+                <span class="code-keyword">this</span>.mapRequests[i].Width = <span class="code-digit">600</span>;
+                <span class="code-keyword">this</span>.mapRequests[i].Transparent = <span class="code-keyword">false</span>;
+                <span class="code-keyword">this</span>.mapRequests[i].Time = 
+                  System.<span class="code-sdkkeyword">String</span>.Format(<span class="code-string">"</span><span class="code-string">2004-05-{0:D2}"</span>, i+1);
+
+                <span class="code-comment">//</span><span class="code-comment"> Create a retriever to execute the request.
+</span>                Wms.Client.MapRetriever mapRetriever = 
+                   <span class="code-keyword">new</span> Wms.Client.MapRetriever(<span class="code-keyword">this</span>);
+                mapRetriever.ProgressInterval = 
+                   <span class="code-keyword">new</span> System.TimeSpan(<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">0</span>,<span class="code-digit">500</span>);
+                mapRetriever.Done += 
+                  <span class="code-keyword">new</span> Wms.Client.RetrieverDoneEventHandler(
+                  <span class="code-keyword">this</span>.mapRetrieveDone);
+                mapRetriever.Request = <span class="code-keyword">this</span>.mapRequests[i];
+                mapRetriever.Destination = System.IO.Path.GetTempFileName();
+
+           <span class="code-comment">//</span><span class="code-comment"> Slow connections may require more than the default 60 second
+</span>           <span class="code-comment">//</span><span class="code-comment"> timeout period for map requests, so increase it to 180 seconds.
+</span>           mapRetriever.TimeoutInterval = System.TimeSpan.FromSeconds(<span class="code-digit">180</span>);
+
+                <span class="code-comment">//</span><span class="code-comment"> Start the retrieval.
+</span>                mapRetriever.Start();
+
+                <span class="code-comment">//</span><span class="code-comment"> Initialize the progress bar and start the progress timer.
+</span>                <span class="code-keyword">this</span>.statusBar.Text = <span class="code-string">"</span><span class="code-string">Retrieving Maps"</span>;
+                <span class="code-keyword">this</span>.progressBar.Visible = <span class="code-keyword">true</span>;
+                <span class="code-keyword">this</span>.timer.Start();
+            }
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> mapRetrieveDone(<span class="code-keyword">object</span> sender, 
+                 Wms.Client.RetrieverDoneArgs ea)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> This event handler is called when the map has been 
+</span>            <span class="code-comment">//</span><span class="code-comment"> retrieved, or when an error
+</span>            <span class="code-comment">//</span><span class="code-comment"> occurs in the retrieval.
+</span>            Wms.Client.MapRequestBuilder mapRequest = 
+              ea.Retriever.Request <span class="code-keyword">as</span> Wms.Client.MapRequestBuilder;
+
+            <span class="code-keyword">if</span> (ea.Reason == 
+              Wms.Client.RetrieverDoneArgs.CompletionReason.Completed)
+            {
+
+                System.Drawing.Image image = 
+                  System.Drawing.Image.FromFile(ea.DestinationFile);
+                <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-digit">0</span>; i &lt; <span class="code-keyword">this</span>.mapRequests.Length; i++)
+                {
+                    <span class="code-keyword">if</span> (<span class="code-keyword">this</span>.mapRequests[i] == mapRequest)
+                    {
+                        <span class="code-keyword">this</span>.mapImages[i] = image;
+                    }
+                }
+            }
+
+        }
+
+        <span class="code-keyword">private</span> <span class="code-keyword">void</span> timer_Tick(<span class="code-keyword">object</span> sender, System.EventArgs e)
+        {
+            <span class="code-comment">//</span><span class="code-comment"> Determine whether all the maps have arrived yet.
+</span>            <span class="code-keyword">int</span> count = <span class="code-digit">0</span>;
+            <span class="code-keyword">foreach</span> (System.Drawing.Image image <span class="code-keyword">in</span> <span class="code-keyword">this</span>.mapImages)
+            {
+                <span class="code-keyword">if</span> (image != <span class="code-keyword">null</span>)
+                    ++count;
+            }
+
+            <span class="code-comment">//</span><span class="code-comment"> If they have not, then update the progress bar.
+</span>            <span class="code-keyword">if</span> (count &lt; <span class="code-keyword">this</span>.mapImages.Length)
+            {
+                <span class="code-keyword">this</span>.progressBar.Value = count;
+            }
+
+            <span class="code-comment">//</span><span class="code-comment"> If all maps have arrived, start the animation.
+</span>            <span class="code-keyword">if</span> (count == <span class="code-keyword">this</span>.mapImages.Length)
+            {
+                <span class="code-keyword">this</span>.statusBar.Text = <span class="code-string">"</span><span class="code-string">Displaying sequence"</span>;
+
+                <span class="code-keyword">if</span> (<span class="code-keyword">this</span>.pictureBox.Image == <span class="code-keyword">null</span>) 
+                  <span class="code-comment">//</span><span class="code-comment"> first time image is displayed.
+</span>                {
+                    <span class="code-keyword">this</span>.pictureBox.Image = <span class="code-keyword">this</span>.mapImages[<span class="code-digit">0</span>];
+                }
+                <span class="code-keyword">else</span>
+                {
+                    <span class="code-comment">//</span><span class="code-comment"> Repeatedly cycle through the images, 
+</span>                    <span class="code-comment">//</span><span class="code-comment"> displaying each in turn,
+</span>                <span class="code-comment">//</span><span class="code-comment"> and returning to the first image after the last is shown.
+</span>                    <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-digit">0</span>; i &lt; <span class="code-keyword">this</span>.mapImages.Length; i++)
+                    {
+                        <span class="code-keyword">if</span> (<span class="code-keyword">this</span>.pictureBox.Image == <span class="code-keyword">this</span>.mapImages[i])
+                        {
+                            <span class="code-keyword">this</span>.pictureBox.Image = 
+                              <span class="code-keyword">this</span>.mapImages[(i+1) % <span class="code-keyword">this</span>.mapImages.Length];
+                            <span class="code-keyword">this</span>.pictureBox.Update();
+
+                            <span class="code-comment">//</span><span class="code-comment"> Use the progress bar to indicate the 
+</span>                            <span class="code-comment">//</span><span class="code-comment"> image sequence begin and end.
+</span>                            <span class="code-keyword">this</span>.progressBar.Value = i+1;
+                            <span class="code-keyword">break</span>;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}        </pre>
+<h2>Description of the Accompanying Code</h2>
+<p>The code accompanying this article consists of one Microsoft 
+Development Environment 2003 solution containing all the above examples 
+and a class library named <code>Wms.Client</code>. Everything is written
+ in C# and makes heavy use of Microsoft .Net version 1.1. The examples 
+are described above, and each is in its own project in the accompanying 
+solution. The <code>Wms.Client</code> classes are described briefly in the following sections.</p>
+<h3>Wms.Client Classes</h3>
+<p>The <code>Wms.Client</code> class library, included in the 
+accompanying MSDE 2003 solution, contains several classes that I found 
+useful for working with WMS servers and information. These classes 
+aren't rigorously designed or implemented, so feel free to grab the 
+source and clean them up as necessary for your needs. In the following 
+sections I briefly describe the <code>Wms.Client</code> classes and their purpose.</p>
+<h4>Wms.Client.Capabilities</h4>
+<p>This class provides a wrapper over the XML server capabilities 
+description. The class provides accessors for the capabilities fields. 
+Internally, the class uses XPath to parse, search and find the WMS 
+capabilities information. Use this class rather than the raw XML to 
+determine WMS server capabilities.</p>
+<h4>Wms.Client.Layer</h4>
+<p>This class represents a single layer in a WMS capabilities 
+description. Layers have much information associated with them. This 
+information is described via XML in the WMS capabilities description of 
+the server providing the layer. The <code>Layer</code> class provides 
+easy access to that information. Internally the class uses XPath to 
+parse and find requested information. A layer object is returned from 
+the <code>Layer</code> accessor of the <code>Wms.Client.Capabilities</code> class, and from the <code>Layers</code> accessor of another Layer object. Layers cannot be created independently of a Wms.Client.Capabilities object.</p>
+<h4>Wms.Client.Server</h4>
+<p>This is a simple class that represents a WMS server. It holds only 
+the server's capabilities document, but also contains a useful function 
+for generating Map requests pre-loaded with the server's <code>GetMap</code>
+ URI. One could argue that this class is not really needed; and I've had
+ that argument with myself several times. But it's proved handy to have 
+the class around, and it seems more obvious to pass a "server" around 
+than a capabilities reference, which is about all one really needs to 
+represent a WMS server.</p>
+<h4>Wms.Client.RequestBuilder</h4>
+<p>This is really two classes: <code>CapabilitiesRequestBuilder</code> and <code>MapRequestBuilder</code>.
+ These share a common base class representing a WMS request. The main 
+utility of these classes is to handle the formatting of the HTTP-GET URI
+ for a WMS request. Request parameters are specified by the application 
+via "set" accessors and stored within the request object. When the full 
+request URI is needed, the class forms it as a string containing the 
+request destination concatenated with the WMS query string for the 
+particular request.</p>
+<h4>Wms.Client.Retriever</h4>
+<p>Probably the most useful class in the bunch. It performs asynchronous
+ retrieval of WMS capabilities descriptions and maps. The application 
+passes to an instance of this class the WMS request to be executed, 
+specifies an event handler to be called when the request completes, and 
+then invokes the retriever's <code>Start</code> method, which will run 
+the retrieval on a separate thread. The application can then do work on 
+its own thread, typically the UI thread, and specify a progress callback
+ for the retriever to invoke periodically to indicate the progress of 
+the retrieval.</p>
+<p>One subtle aspect of this class is that <code>GetCapabilities</code> 
+requests are deemed complete only after the retrieved capabilities 
+description is parsed on the retriever's worker thread (or an error 
+occurs). This is by design because the XML capabilities description 
+returned by the WMS server typically contains a DTD reference that must 
+be resolved by the XML parser. The parser issues an HTTP request for 
+that reference. Rather than have this implicit HTTP request issued 
+within the client/UI thread, the retriever forces it to be issued in the
+ retriever's worker thread so that the client/UI thread isn't blocked 
+waiting for that request to complete.</p>
+<h4>Wms.Client.ExtensionMap</h4>
+<p>This class maps the content type field returned by HTTP requests to 
+the appropriate file suffix for the content. I admit that this is a 
+hack, but I'm too lazy right now to continue searching through Windows 
+documentation to determine the API for extracting this information from 
+the Registry. If you know the magic call, please send me email.</p>
+<h4>Wms.Client.DownloadCache</h4>
+<p>A class for caching downloaded WMS content on the local computer. 
+This class implements a persistent file cache in the user's TEMP 
+directory. It eliminates the need to continually retrieve the same maps 
+and capabilities descriptions from a WMS server; this is especially 
+useful for map files, which can be large. The cache creates two files in
+ the user's TEMP directory: one is the file with the content to cache; 
+the other is a text file containing the full WMS URI used to retrieve 
+that file. Prior to sending a WMS server a request, an application first
+ asks the cache if the full WMS request URI it's going to send is a key 
+in the cache. If it is, then the application can simply grab the file 
+from the cache rather than issuing the WMS request to get it.</p>
+<p>The cache contents are persisted in the user's TEMP directory. To 
+prime the cache at application run-time with previously cached files, 
+the application calls the cache's <code>LoadPersisted</code> function, 
+which fills the run-time cache with any cached files currently in the 
+TEMP directory. More description of this class and its use is included 
+in the section <i>WMS Retrieval Caching</i> above. Also see the WMS Browser example to understand how it's used.</p>
+<h4>Wms.Client.PreviewDialog</h4>
+<p>This is simply a Windows form implementing a display surface to show maps retrieved as previews by the <code>WmsDialog</code> class.</p>
+<h4>Wms.Client.ServerAddDialog</h4>
+<p>A class used by the <code>WmsDialog</code> class to allow the dialog 
+user to add a new WMS server to the list of servers displayed by the 
+dialog. This class hasn't been tested much.</p>
+<h4>Wms.Client.ServerDescriptor and WmsServerDescriptors.xml</h4>
+<p>The <code>ServerDescriptor</code> class wraps the internally defined 
+and used server-descriptor XML document, which specifies the default WMS
+ servers to be displayed by the <code>WmsDialog</code> class. The schema
+ is defined in WmsServerDescriptors.xsd, and the default servers are 
+listed according to that schema in the file 
+DefaultServerDescriptors.xml.</p>
+<h4>Wms.Client.WmsDialog</h4>
+<p>Modeled after the Windows file dialog, this class implements a dialog
+ box component for displaying available WMS servers and the maps they 
+can return. See the program WMSBrowser for an example of its use. The 
+dialog uses all the classes contained in Wms.Client. It retrieves WMS 
+capabilities descriptions and maps asynchronously, and it allows the 
+user to "preview" maps by showing them in a little pop-up form. 
+Applications can use <code>WmsDialog</code> either by invoking it via its <code>Show</code> or <code>ShowDialog</code> methods, or by deriving a new class from it, as the WMSBrowser application does.</p>
+<h4>Wms.Client.WmsException</h4>
+<p>This class wraps WMS exceptions that may be returned by a WMS server.
+ These exceptions come from the server as XML documents. The <code>WmsException</code> class parses those documents, using XPath, and places the exception information in an exception class derived from <code>System.ApplicationException</code>.</p>
+<h4>WMSBrowser</h4>
+<p>This class is not in the Wms.Client library, but it is included in 
+the download code. It implements a WMS browser application. Since it 
+derives its main form from <code>Wms.Client.WmsDialog</code>, it doesn't
+ need a lot of additional code. It implements only event handlers for 
+drawing and previewing maps, and for closing itself.</p>
+<h2>Conclusion</h2>
+<p>That's the nutshell overview of WMS and how to use it 
+programmatically. There's a good deal more to WMS than I've covered 
+here. I encourage you to read the WMS specification to learn the details
+ of tapping WMS capabilities. You'll also find there good, simple 
+descriptions of additional features and related specifications.</p>
+<h2>History</h2>
+<ul>
+<li>May 24, 2004: Initial version. </li></ul>
+
+
+						</div>
+						
+
+						<div class="float-right" style="margin:20px 0 0 10px;border:1px solid #ccc">
+						
+						</div>
+                        
+                        
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+                        
+						<h2>Share</h2>
+				        <div style="margin-bottom:40px;width:385px">
+					        
+				        </div> 
+    			        
+
+
+						
+						<h2 id="ctl00_AboutHeading">About the Author</h2>
+						
+
+<div class="container">
+<div style="width:210px;overflow:hidden;float:left;text-align:center">
+	<img id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberPhoto" class="profile-pic" src="CodeProject_FreeMapsWebMappingService_files/member_unknown.gif" style="border-width:0px;transform:rotate(1deg);">
+</div>
+<div class="container-member float-left" style="margin:35px 15px 0 0;">
+	<b><a id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberProfileLink" class="author" href="http://www.codeproject.com/Members/Tom-Gaskins">Tom Gaskins</a></b>
+	<div class="company">
+		<span id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberJobTitle">Web Developer</span>
+		<span id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberCompany"></span> 
+		<br><span id="ctl00_AboutAuthorRptr_ctl00_AboutAuthor_memberLocation">United States <img src="CodeProject_FreeMapsWebMappingService_files/US.gif" alt="United States" width="16px" height="11px"></span>
+	</div>
+</div>
+	
+<div class="padded-top float-left clearfix">
+	Tom Gaskins is an independent software consultant currently providing 
+technical assistance and software project management to NASA's Learning 
+Technologies Office. The creation of this article was sponsored by NASA.
+
+	
+
+	
+</div>
+</div><br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+						
+						<div style="margin:auto;height:90px;margin-top:10px;Widt:730px"> 
+							
+						</div>
+						
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				
+
+					<h2>Comments and Discussions</h2>
+					
+					<p><img alt="Comment" src="CodeProject_FreeMapsWebMappingService_files/NewComment.gif" width="12px" height="16px">
+					<b>25 messages</b> have been posted for this article 
+					Visit <b><a id="ctl00_ArticleLink" href="http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service">http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service</a></b> to post and view comments on 
+					this article, or click <b><a id="ctl00_PrintWithMessage" href="http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service?display=PrintAll">here</a></b> 
+					to get a print view with messages.</p>
+					
+				
+
+			</div>
+			
+		</td>
+		<td width="170px">
+			
+		</td>
+		</tr></tbody></table>
+
+		
+		<div class="theme1-background" style="height:2px" id="stickyStop"></div>
+
+		<div class="extended tiny-text">
+			<div class="row">
+				<div class="float-left">
+					<a id="ctl00_PermaLink" itemprop="url" href="http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service">Permalink</a> | 
+					<a id="ctl00_AdvertiseLink" href="http://developermedia.com/">Advertise </a> |
+					<a id="ctl00_PrivacyLink" href="http://www.codeproject.com/info/privacy.aspx">Privacy</a> |
+                    <a id="ctl00_TermsOfUseLink" href="http://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a> |
+					<a id="ctl00_Mobile" rel="nofollow" href="http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service?display=Mobile">Mobile</a>
+					<br>
+								
+					
+					Web01 |
+					2.8.141223.1 |
+					Last Updated 21 Jun 2004								
+				</div>
+
+                <div id="ctl00_GoogleTranslate" class="translate float-left"><div style="" dir="ltr" class="skiptranslate goog-te-gadget"><div class="goog-te-gadget-simple" style="white-space: nowrap;" id=":0.targetLanguage"><img style="background-image: url(&quot;https://translate.googleapis.com/translate_static/img/te_ctrl3.gif&quot;); background-position: -65px 0px;" class="goog-te-gadget-icon" src="CodeProject_FreeMapsWebMappingService_files/cleardot.gif"><span style="vertical-align: middle;"><a href="javascript:void(0)" class="goog-te-menu-value"><span>Select Language</span><img src="CodeProject_FreeMapsWebMappingService_files/cleardot.gif" width="1" height="1"><span style="border-left: 1px solid rgb(187, 187, 187);">​</span><img src="CodeProject_FreeMapsWebMappingService_files/cleardot.gif" width="1" height="1"><span style="color: rgb(155, 155, 155);">▼</span></a></span></div></div></div>      
+
+				<div class="float-right align-right">
+					Article Copyright 2004 by Tom Gaskins<br>Everything else
+					Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2014 <br>
+				</div>
+
+				
+
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div>
+</div>
+
+
+<div style="display:none;" id="dm_AdTable">
+	
+</div>
+
+
+
+
+<script type="text/javascript" language="Javascript" src="CodeProject_FreeMapsWebMappingService_files/jquery.js"></script><script type="text/javascript">//<![CDATA[
+if (typeof jQuery == 'undefined') {
+    document.write(unescape("%3Cscript src='/script/JS/jquery-1.6.2.min.js' type='text/javascript' %3E%3C/script%3E"));
+}//]]></script>
+<script type="text/javascript" language="Javascript" src="CodeProject_FreeMapsWebMappingService_files/element.js"></script>
+<script type="text/javascript" language="Javascript">//<![CDATA[
+function googleTranslateElementInit() {  new google.translate.TranslateElement({   pageLanguage: 'en',   layout: google.translate.TranslateElement.InlineLayout.SIMPLE,   autoDisplay: false,   gaTrack: true,   gaId: 'UA-1735123-1'},  'ctl00_GoogleTranslate');}
+$(document).ready(function() { anchorAnimate();
+$('#RHSticky').sticky($('#stickyStop'));
+$('#ctl00_Nav').sticky($('#stickyStop'));
+});
+
+//]]>
+</script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="CodeProject_FreeMapsWebMappingService_files/translate-32.png" width="20" height="20"></div><iframe style="width:348px;height:1.1em;float:right;" id="signin_status" border="0" src="CodeProject_FreeMapsWebMappingService_files/tminfo.html" frameborder="0"></iframe></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div style="display: none;" class="status-message"></div></div>
+
+
+
+<iframe style="visibility: visible; box-sizing: content-box; width: 860px; height: 263px; display: none;" class="goog-te-menu-frame skiptranslate" frameborder="0"></iframe></body></html>
