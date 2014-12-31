@@ -304,6 +304,7 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
             /* my code in WorldWindowGLAutoDrawable.java - begin */
             double eyelat = 0, eyelon = 0, eyealt = 0;
             double centlat = 0, centlon = 0, centalt = 0;
+            double bearingh = 0, bearingp = 0, bearingr = 0;
             View eyeview = sc.getView();
             if ( eyeview != null ) {
                 Position eyepos = eyeview.getCurrentEyePosition();
@@ -327,9 +328,13 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
                         }
                     }
                 }
+                bearingh = eyeview.getHeading().getDegrees();
+                bearingp = eyeview.getPitch().getDegrees();
+                bearingr = eyeview.getRoll().getDegrees();
             }
             MyWind.setEyePosition(eyelat, eyelon, eyealt);
             MyWind.setCentPosition(centlat, centlon, centalt);
+            MyWind.setBearing(bearingh, bearingp, bearingr);
             /* my code in WorldWindowGLAutoDrawable.java - end */
 
             // Determine if the view has changed since the last frame.
