@@ -1486,6 +1486,24 @@ Technologies Office. The creation of this article was sponsored by NASA.
 					Visit <b><a id="ctl00_ArticleLink" href="http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service">http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service</a></b> to post and view comments on 
 					this article, or click <b><a id="ctl00_PrintWithMessage" href="http://www.codeproject.com/Articles/7199/Free-Maps-from-the-Web-Using-Web-Mapping-Service?display=PrintAll">here</a></b> 
 					to get a print view with messages.</p>
+
+<p><b>Re: support for WMS version 1.3.2 [modified] 	bljacobs	19-Apr-10 9:33 </b>
+<br />
+....access the WMS server at http://frameworkwfs.usgs.gov/framework/wms/wms.cgi and found that ....
+</p>
+
+<p><b>Re: support for WMS version 1.3.2 	Tom Gaskins	19-Apr-10 9:47 </b>
+<br />
+I don't know about 1.3.2, but the differences between 1.1.1 and 1.3.0 are few. I believe the coordinate system tag is SRS in one and CRS in the other, the min/max scale layer attributes are different, and I think there's another change to layer attributes but I don't recall what it is. There's also a difference in the way a layer's geographic bounding box is described. As to 1.3.2, it's news to me that the revision exists.
+<br /> <br />
+There are WMS parsers in the NASA World Wind code (http://worldwind.arc.nasa.gov), both the .Net and the Java versions. World Wind Java handles 1.x and 1.3, and my guess is that the .Net version does too. The .Net version has not been officially supported for several years, but there is a community that keeps it running.
+
+<p><b>Re: support for WMS version 1.3.2 	Tom Gaskins	19-Apr-10 14:09 </b>
+<br />
+I checked into 1.3.2. It's a non-standard version served by Cubewerx server (a commercial product). Apparently USGS is using one of these. The way to get around it is to specify the maximum version recognized when making the GetCapabilities request. It tells the server to return a capabilities document for that version or less. For instance, including a &VERSION=1.3.0& parameter in the URL's query string tells the server that the client can handle that version. I don't remember what the code in this article supports, but if it's only up to 1.1.1 then that should be the version specified in the GetCapabilities request.
+<br /> <br />
+There's a Firefox plug-in called WMS Inspector that can be useful in exploring and debugging WMS.
+</p>
 					
 				
 
