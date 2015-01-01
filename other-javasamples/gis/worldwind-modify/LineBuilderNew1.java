@@ -373,12 +373,64 @@ public class LineBuilderNew1 extends AVListImpl
      */
     public static class AppFrame extends ApplicationTemplate.AppFrame
     {
+        private JButton selLayerButton;
+        private JButton selLinesButton;
+        
+        private LayerPanel panelLayer=null;
+        private LinePanel  panelLine=null;
+        
+        private JPanel     panelLeft=null;
+        private JPanel     panelLeftTop=null;
+        private JPanel     panelLeftMid=null;
+        
         public AppFrame()
         {
-            super(true, false, false);
+            super(true, true, false);
 
             LineBuilderNew1 lineBuilder = new LineBuilderNew1(this.getWwd(), null, null);
-            this.getContentPane().add(new LinePanel(this.getWwd(), lineBuilder), BorderLayout.WEST);
+            panelLine = new LinePanel(this.getWwd(), lineBuilder);
+            
+            panelLayer = this.getLayerPanel();
+            panelLeft = new JPanel(new BorderLayout());
+            panelLeftTop = new JPanel();
+            panelLeftMid = new JPanel(new BorderLayout());
+            
+            this.getContentPane().remove(panelLayer);
+            this.getContentPane().add(panelLeft, BorderLayout.WEST);
+            
+            panelLeft.add(panelLeftTop, BorderLayout.NORTH);
+            panelLeft.add(panelLeftMid, BorderLayout.CENTER);
+            
+            selLayerButton = new JButton("Layers");
+            selLinesButton = new JButton("Lines");
+            
+            selLayerButton.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent actionEvent)
+                    {
+                        selLayerButton.setText("done");
+                        selLayerButton.setEnabled(false);
+                        selLinesButton.setText("Lines");
+                        selLinesButton.setEnabled(true);
+                        panelLeftMid.removeAll();
+                        panelLeftMid.add(panelLayer, BorderLayout.CENTER);
+                    }
+                });
+            panelLeftTop.add(selLayerButton);
+            
+            selLinesButton.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent actionEvent)
+                    {
+                        selLinesButton.setText("done");
+                        selLinesButton.setEnabled(false);
+                        selLayerButton.setText("Layers");
+                        selLayerButton.setEnabled(true);
+                        panelLeftMid.removeAll();
+                        panelLeftMid.add(panelLine, BorderLayout.CENTER);
+                    }
+                });
+            panelLeftTop.add(selLinesButton);
         }
     }
 
