@@ -11,6 +11,8 @@ import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.render.*;
+import gov.nasa.worldwind.view.orbit.BasicOrbitView;
+import static gov.nasa.worldwindx.examples.ViewIteration.AppFrame.path;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -375,7 +377,9 @@ public class LineBuilderNew1 extends AVListImpl
     {
         private JButton selLayerButton;
         private JButton selLinesButton;
+        private JButton selPlacesButton;
         
+        private WorldWindow thisWwd=null;
         private LayerPanel panelLayer=null;
         private LinePanel  panelLine=null;
         
@@ -386,9 +390,11 @@ public class LineBuilderNew1 extends AVListImpl
         public AppFrame()
         {
             super(true, true, false);
+            
+            thisWwd = this.getWwd();
 
-            LineBuilderNew1 lineBuilder = new LineBuilderNew1(this.getWwd(), null, null);
-            panelLine = new LinePanel(this.getWwd(), lineBuilder);
+            LineBuilderNew1 lineBuilder = new LineBuilderNew1(thisWwd,null,null);
+            panelLine = new LinePanel(thisWwd, lineBuilder);
             
             panelLayer = this.getLayerPanel();
             panelLeft = new JPanel(new BorderLayout());
@@ -403,6 +409,7 @@ public class LineBuilderNew1 extends AVListImpl
             
             selLayerButton = new JButton("Layers");
             selLinesButton = new JButton("Lines");
+            selPlacesButton = new JButton("Places");
             
             selLayerButton.addActionListener(new ActionListener()
                 {
@@ -431,6 +438,19 @@ public class LineBuilderNew1 extends AVListImpl
                     }
                 });
             panelLeftTop.add(selLinesButton);
+            
+            selPlacesButton.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent actionEvent)
+                    {
+                        selPlacesButton.setText("done");
+                        BasicOrbitView view = (BasicOrbitView) thisWwd.getView();
+                        view.setHeading(Angle.fromDegrees(90));
+                        view.addEyePositionAnimator(4000, view.getEyePosition(), 
+                                Position.fromDegrees(38, -120, 3000) );
+                    }
+                });
+            panelLeftTop.add(selPlacesButton);
         }
     }
 
