@@ -16,10 +16,6 @@ import gov.nasa.worldwind.pick.*;
 import gov.nasa.worldwind.render.ScreenCreditController;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.dashboard.DashboardController;
-/* my code in WorldWindowGLAutoDrawable.java - begin */
-import gov.nasa.worldwind.geom.Vec4;
-import gov.nasa.worldwind.globes.Globe;
-/* my code in WorldWindowGLAutoDrawable.java - end */
 
 import javax.media.opengl.*;
 import javax.media.opengl.awt.AWTGLAutoDrawable;
@@ -302,39 +298,10 @@ public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldW
                 throw new IllegalStateException(msg);
             }
             /* my code in WorldWindowGLAutoDrawable.java - begin */
-            double eyelat = 0, eyelon = 0, eyealt = 0;
-            double centlat = 0, centlon = 0, centalt = 0;
-            double bearingh = 0, bearingp = 0, bearingr = 0;
-            View eyeview = sc.getView();
-            if ( eyeview != null ) {
-                Position eyepos = eyeview.getCurrentEyePosition();
-                if ( eyepos != null ) {
-                    eyelat = eyepos.getLatitude().getDegrees();
-                    eyelon = eyepos.getLongitude().getDegrees();
-                    eyealt = eyepos.getAltitude();
-                }
-                Globe eyeglobe = eyeview.getGlobe();
-                if ( eyeglobe != null ) {
-                    Vec4 eyev4 = eyeview.getCenterPoint();
-                    if ( eyev4 != null ) {
-                        Position ctrpos = 
-                                    eyeglobe.computePositionFromPoint(eyev4);
-                        if ( ctrpos != null ) {
-                            centlat = ctrpos.getLatitude().getDegrees();
-                            centlon = ctrpos.getLongitude().getDegrees();
-                            //centalt = ctrpos.getAltitude();
-                            centalt = eyeglobe.getElevation(
-                                  ctrpos.getLatitude(), ctrpos.getLongitude());
-                        }
-                    }
-                }
-                bearingh = eyeview.getHeading().getDegrees();
-                bearingp = eyeview.getPitch().getDegrees();
-                bearingr = eyeview.getRoll().getDegrees();
+            {
+                View eyeview = sc.getView();
+                MyWind.setDisplayViewParams(eyeview);
             }
-            MyWind.setEyePosition(eyelat, eyelon, eyealt);
-            MyWind.setCentPosition(centlat, centlon, centalt);
-            MyWind.setBearing(bearingh, bearingp, bearingr);
             /* my code in WorldWindowGLAutoDrawable.java - end */
 
             // Determine if the view has changed since the last frame.
