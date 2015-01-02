@@ -22,6 +22,7 @@ public class MyWind
     private static double _heading = 0, _pitch = 0, _roll = 0;
     private static double _p1lat = 0, _p1lon = 0, _p1alt = 0, _p1rad = 0;
     private static double _p2lat = 0, _p2lon = 0, _p2alt = 0, _p2rad = 0;
+    private static Globe _eyeglobe = null;
 
     public static String getShowString()
     {
@@ -62,6 +63,7 @@ public class MyWind
             }
             Globe eyeglobe = eyeview.getGlobe();
             if ( eyeglobe != null ) {
+                _eyeglobe = eyeglobe;
                 Vec4 eyev4 = eyeview.getCenterPoint();
                 if ( eyev4 != null ) {
                     Position ctrpos = 
@@ -82,5 +84,45 @@ public class MyWind
         MyWind.setEyePosition(eyelat, eyelon, eyealt);
         MyWind.setCentPosition(centlat, centlon, centalt);
         MyWind.setBearing(bearingh, bearingp, bearingr);
+    }
+    
+    public static double computeDistance(Position pos1, Position pos2)
+    {
+        double retd = 0;
+        if ( _eyeglobe == null ) {
+            return retd;
+        }
+        Vec4 p1 = _eyeglobe.computePointFromPosition(pos1);
+        Vec4 p2 = _eyeglobe.computePointFromPosition(pos2);
+        retd = p1.distanceTo3(p2);
+        return retd;
+    }
+    public static double computeElevGain(Position pos1, Position pos2)
+    {
+        double retd = 0;
+        if ( _eyeglobe == null ) {
+            return retd;
+        }
+        double alt1 = _eyeglobe.getElevation(
+                              pos1.getLatitude(), pos1.getLongitude());
+        double alt2 = _eyeglobe.getElevation(
+                              pos2.getLatitude(), pos2.getLongitude());
+        retd = alt2 - alt1;
+        return retd;
+    }
+    public static double computeSlope(Position pos1, Position pos2)
+    {
+        double retd = 0;
+        if ( _eyeglobe == null ) {
+            return retd;
+        }
+        double gain = computeElevGain(pos1, pos2);
+        double dist = computeDistance(pos1, pos2);
+        if ( dist > 0 ) {
+            retd = gain/dist;
+        } else {
+            retd = 0;
+        }
+        return retd;
     }
 }

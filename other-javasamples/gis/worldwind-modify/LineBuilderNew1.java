@@ -354,14 +354,27 @@ public class LineBuilderNew1 extends AVListImpl
         private void fillPointsPanel()
         {
             int i = 0;
+            Position lastpos = null;
             for (Position pos : lineBuilder.getLine().getPositions())
             {
                 if (i == this.pointLabels.length)
                     break;
 
-                String las = String.format("Lat %7.4f\u00B0", pos.getLatitude().getDegrees());
-                String los = String.format("Lon %7.4f\u00B0", pos.getLongitude().getDegrees());
-                pointLabels[i++].setText(las + "  " + los);
+                ///String las = String.format("Lat %7.4f\u00B0", pos.getLatitude().getDegrees());
+                ///String los = String.format("Lon %7.4f\u00B0", pos.getLongitude().getDegrees());
+                String las = String.format("%7.4f\u00B0", pos.getLatitude().getDegrees());
+                String los = String.format("%7.4f\u00B0", pos.getLongitude().getDegrees());
+                
+                if ( lastpos == null ) {
+                    lastpos = pos;
+                }
+                double dist = MyWind.computeDistance(lastpos, pos);
+                double gain = MyWind.computeElevGain(lastpos, pos);
+                double slop = MyWind.computeSlope(lastpos, pos);
+                String sls = String.format("%6.3f %5.2f %4.2f", slop,dist,gain);
+                lastpos = pos;
+                
+                pointLabels[i++].setText(sls + " " + las + " " + los);
             }
             for (; i < this.pointLabels.length; i++)
                 pointLabels[i++].setText("");
@@ -445,9 +458,17 @@ public class LineBuilderNew1 extends AVListImpl
                     {
                         selPlacesButton.setText("done");
                         BasicOrbitView view = (BasicOrbitView) thisWwd.getView();
+                        view.stopAnimations();
+                        
+                        final Position pos = view.getEyePosition();
                         view.setHeading(Angle.fromDegrees(90));
+                        view.setPitch(Angle.fromDegrees(45));
+                        view.setFieldOfView(Angle.fromDegrees(45));
+                        view.setRoll(Angle.fromDegrees(0));
+                        view.setEyePosition(pos);
+                        
                         view.addEyePositionAnimator(4000, view.getEyePosition(), 
-                                Position.fromDegrees(38, -120, 3000) );
+                                Position.fromDegrees(38.0080, -120.0082, 3000));
                     }
                 });
             panelLeftTop.add(selPlacesButton);
