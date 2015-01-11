@@ -27,7 +27,8 @@ install civ v, and select location to install in the diaglog.
 command line app
 ==================
 
-reference: https://developer.valvesoftware.com/wiki/SteamCMD
+reference: 
+  https://developer.valvesoftware.com/wiki/SteamCMD
 
 cd
 mkdir bin
@@ -39,5 +40,12 @@ tar zxf steamcmd_linux.tar.gz
 cd ../apps
 ../bin/steamcmd.sh
 
+
+  login anonymous
+  login <username>
+
+  force_install_dir ./cs_go/
+
+  app_update <app_id> [-beta <betaname>] [-betapassword <password>] [validate]
 
 
