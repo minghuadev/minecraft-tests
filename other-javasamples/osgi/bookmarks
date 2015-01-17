@@ -1,0 +1,49 @@
+
+
+-------------------------------------------------------------------------------
+http://stackoverflow.com/questions/1818778/what-is-the-underlying-theme-in-osgi
+http://www.infoq.com/articles/modular-java-what-is-it
+
+a guide to rest and api design
+5 pillars of API management
+the app attention span
+
+
+-------------------------------------------------------------------------------
+adding modularity afterward with embedded osgi
+http://www.slideshare.net/rpaulin1/embedded-felix
+
+fig addingmodularityfig.png .
+
+options: 
+ - osgi
+   -- mature 10+ years
+   -- tools
+   -- modularity is eforced
+   -- versioning
+   -- complex class loading
+   -- runtime
+ - inversion of control (ioc)
+   -- lightweight
+   -- easily added to existing systems
+   -- tools
+   -- modularity not enforced (diy)
+   -- no versioning
+ - jigsaw
+   -- java 7....8....9??
+   -- versioning
+   -- interoperability with osgi (penrose)
+
+
+-------------------------------------------------------------------------------
+google search: embedded service oriented architecture
+
+http://www.researchgate.net/post/What_are_the_current_trends_in_SOA_for_embedded_systems
+  -- dpws
+  -- microservice http://martinfowler.com/articles/microservices.html
+
+https://www2.informatik.hu-berlin.de/~milanovi/lws-milanovic.pdf
+
+...
+
+
