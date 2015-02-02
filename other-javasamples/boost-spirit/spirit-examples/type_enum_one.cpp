@@ -84,7 +84,7 @@ parse_numbers(char const* str, vector<string>& v, size_t len, string & nm)
         ,
         //  End grammar
 
-        skip_rule );
+        space_p );
 
     cout << "str: " << (s1-s0) << endl;
     cout << "result:" << endl;
