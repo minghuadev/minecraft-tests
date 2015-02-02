@@ -26,9 +26,11 @@
 #include <boost/spirit/actor/push_back_actor.hpp>
 #include <boost/spirit/actor/assign_actor.hpp>
 #include <boost/spirit/actor/clear_actor.hpp>
+#include <boost/spirit/actor/insert_at_actor.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 
 ///////////////////////////////////////////////////////////////////////////////
 using namespace std;
@@ -59,27 +61,35 @@ struct identif_grammar : public grammar<identif_grammar>
 //
 ///////////////////////////////////////////////////////////////////////////////
 bool
-parse_numbers(char const* str, vector<string>& v, size_t len, string & nm)
+parse_numbers(char const* strarg, size_t lenarg, string & enm, vector<string>& v, 
+              map<string,string> &mm)
 {
-    const char * s0 = str;
-    const char * s1 = str+len;
-    cout << "str: " << (s1-s0) << endl;
+    const char * s0 = strarg;
+    const char * s1 = strarg+lenarg;
+    cout << "strarg: " << (s1-s0) << endl;
 
-    skip_grammar skip_rule;
+    skip_grammar    skip_rule;
     identif_grammar identif_rule;
 
-    string itm;
-    string val;
+    //map<string,string>::value_type k;
+    //[insert_at_a(mm,k.first)] 
+    string itm, val;
 
     parse_info<> result = 
         parse(s0, s1, 
 
         //  Begin grammar
         (
-            str_p("enum") >> identif_rule[assign_a(nm)] >> '{' >> 
+            str_p("enum") >> identif_rule[assign_a(enm)] >> '{' >> 
             ( identif_rule[assign_a(itm)][clear_a(val)] >> 
-              *( '=' >> ( identif_rule | int_p | hex_p )[assign_a(val)] ))[push_back_a(v, itm)] 
-            >> *(',' >> identif_rule[push_back_a(v)]) >> eps_p 
+              *( '=' >> ( identif_rule | int_p | hex_p )[assign_a(val)] )
+            )[push_back_a(v, itm)] [insert_at_a(mm,itm,val)] 
+            >> 
+            *(',' >> 
+                      identif_rule[push_back_a(v)]
+             ) 
+            >> 
+            eps_p 
         )
         ,
         //  End grammar
@@ -119,7 +129,8 @@ main()
 
         vector<string> v;
         string nm;
-        if ( parse_numbers(str.c_str(), v, str.size(), nm ))
+        map<string,string> m;
+        if ( parse_numbers(str.c_str(), str.size(), nm, v, m ))
         {
             cout << "-------------------------\n";
             cout << "Parsing succeeded\n";
