@@ -25,6 +25,7 @@
 
 #include <boost/spirit/actor/push_back_actor.hpp>
 #include <boost/spirit/actor/assign_actor.hpp>
+#include <boost/spirit/actor/clear_actor.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -38,14 +39,7 @@ struct skip_grammar : public grammar<skip_grammar>
 {   template <typename ScannerT> struct definition {
         rule<ScannerT> r; rule<ScannerT> const& start() const { return r; }
         definition(skip_grammar const& /*self*/) {
-            r =   space_p
-                |   comment_p("//")                 // C++ comment
-                |   comment_p("/*", "*/")           // C comment
-                |   comment_p("#line")              // added for correctly
-                                                    // handling preprocessed
-                |   comment_p("#pragma")            // files from Intel V5.0.1
-                                                    // on W2K
-                ;
+            r = comment_p("//") | comment_p("/*", "*/") ;
         }
     };
 };
@@ -65,7 +59,7 @@ struct identif_grammar : public grammar<identif_grammar>
 //
 ///////////////////////////////////////////////////////////////////////////////
 bool
-parse_numbers(char const* str, vector<double>& v, size_t len, string & nm)
+parse_numbers(char const* str, vector<string>& v, size_t len, string & nm)
 {
     const char * s0 = str;
     const char * s1 = str+len;
@@ -74,13 +68,18 @@ parse_numbers(char const* str, vector<double>& v, size_t len, string & nm)
     skip_grammar skip_rule;
     identif_grammar identif_rule;
 
+    string itm;
+    string val;
+
     parse_info<> result = 
         parse(s0, s1, 
 
         //  Begin grammar
         (
-            str_p("enum") >> identif_rule[assign_a(nm)] >> '=' >> 
-            real_p[push_back_a(v)] >> *(',' >> real_p[push_back_a(v)]) >> eps_p 
+            str_p("enum") >> identif_rule[assign_a(nm)] >> '{' >> 
+            ( identif_rule[assign_a(itm)][clear_a(val)] >> 
+              *( '=' >> ( identif_rule | int_p | hex_p )[assign_a(val)] ))[push_back_a(v, itm)] 
+            >> *(',' >> identif_rule[push_back_a(v)]) >> eps_p 
         )
         ,
         //  End grammar
@@ -118,7 +117,7 @@ main()
         if (str.empty() || str[0] == 'q' || str[0] == 'Q')
             break;
 
-        vector<double> v;
+        vector<string> v;
         string nm;
         if ( parse_numbers(str.c_str(), v, str.size(), nm ))
         {
@@ -126,7 +125,7 @@ main()
             cout << "Parsing succeeded\n";
             cout << str << " Parses OK: " << nm << " " << endl;
 
-            for (vector<double>::size_type i = 0; i < v.size(); ++i)
+            for (vector<string>::size_type i = 0; i < v.size(); ++i)
                 cout << i << ": " << v[i] << endl;
 
             cout << "-------------------------\n";
