@@ -32,6 +32,8 @@
 #include <string>
 #include <map>
 
+#include <stdlib.h> /* for strtol */
+
 ///////////////////////////////////////////////////////////////////////////////
 using namespace std;
 using namespace boost::spirit;
@@ -146,6 +148,7 @@ main()
     cout << "The numbers will be inserted in a vector of numbers\n";
     cout << "Type [q or Q] to quit\n\n";
 
+    int rc = 0; /* default ok */
     string str;
     while (getline(cin, str))
     {
@@ -156,16 +159,47 @@ main()
         string nm;
         map<string,string> m;
         struct result_s resu;
-        if ( parse_numbers(str.c_str(), str.size(), nm, v, m, resu ))
+        if ( parse_numbers(str.c_str(), str.size(), nm, v, m, resu) )
         {
             cout << "-------------------------\n";
             cout << "Parsing succeeded\n";
             cout << str << " Parses OK: " << nm << " " << endl;
-
+            
+            int enumvalue = 0;
             for (vector<string>::size_type i = 0; i < v.size(); ++i) {
-                cout << i << ": " << v[i] << endl;
+                string k = v[i];
+                map<string,string>::iterator itr = m.find(k);
+                if ( itr == m.end() ) {
+                    cout << i << ": " << k << " <empty>" << endl;
+                    cout << "Error: no map second value" << endl;
+                    rc = 1;
+                    break;
+                } else {
+                    string r = itr->second;
+                    int t = enumvalue;
+                    if ( r.size() > 0 ) {
+                        char * endp;
+                        t = strtol(r.c_str(), &endp, 10);
+                    }
+                    cout << i << ": " << k << "==" << t << "==" << endl;
+                    m.erase (itr);
+                    enumvalue = t + 1;
+                }
             }
-
+            if ( rc ) {
+            cout << "-------------------------\n";
+                    break;
+            }
+            map<string,string>::iterator iter;
+            for (iter = m.begin(); iter != m.end(); iter++) {
+                cout << "more: " << iter->first << " " << iter->second << endl;
+                    rc = 1;
+            }
+            if ( rc ) {
+                    cout << "Error: map values not all used by the vector" << endl;
+            cout << "-------------------------\n";
+                    break;
+            }
             cout << "-------------------------\n";
         }
         else
@@ -173,11 +207,13 @@ main()
             cout << "-------------------------\n";
             cout << "Parsing failed\n";
             cout << "-------------------------\n";
+            rc = 1;
+            break;
         }
     }
 
     cout << "Bye... :-) \n\n";
-    return 0;
+    return rc;
 }
 
 
