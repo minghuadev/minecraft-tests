@@ -32,7 +32,8 @@
 #include <string>
 #include <map>
 
-#include <stdlib.h> /* for strtol */
+//#include <stdlib.h> /* for strtol */
+#include <boost/lexical_cast.hpp>
 
 ///////////////////////////////////////////////////////////////////////////////
 using namespace std;
@@ -178,8 +179,14 @@ main()
                     string r = itr->second;
                     int t = enumvalue;
                     if ( r.size() > 0 ) {
-                        char * endp;
-                        t = strtol(r.c_str(), &endp, 10);
+                        //char * endp; t = strtol(r.c_str(), &endp, 10);
+                        try {
+                            int x = boost::lexical_cast<int>( r.c_str() );
+                            t = x;
+                        } catch( boost::bad_lexical_cast const& ) {
+                            std::cout << "Error: input string was not valid: " 
+                                             << r.c_str() << " " << std::endl;
+                        }
                     }
                     cout << i << ": " << k << "==" << t << "==" << endl;
                     m.erase (itr);
