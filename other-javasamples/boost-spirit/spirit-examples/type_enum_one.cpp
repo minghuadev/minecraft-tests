@@ -55,6 +55,13 @@ struct identif_grammar : public grammar<identif_grammar>
     };
 };
 
+struct result_s {
+    int    hit;
+    size_t hitlen;
+    size_t reslen;
+    int    full;
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 //  Our comma separated list parser
@@ -62,7 +69,7 @@ struct identif_grammar : public grammar<identif_grammar>
 ///////////////////////////////////////////////////////////////////////////////
 bool
 parse_numbers(char const* strarg, size_t lenarg, string & enm, vector<string>& v, 
-              map<string,string> &mm)
+              map<string,string> &mm, struct result_s & resu)
 {
     const char * s0 = strarg;
     const char * s1 = strarg+lenarg;
@@ -80,16 +87,18 @@ parse_numbers(char const* strarg, size_t lenarg, string & enm, vector<string>& v
 
         //  Begin grammar
         (
-            str_p("enum") >> identif_rule[assign_a(enm)] >> '{' >> 
-            ( identif_rule[assign_a(itm)][clear_a(val)] >> 
-              *( '=' >> ( identif_rule | int_p | hex_p )[assign_a(val)] )
-            )[push_back_a(v, itm)] [insert_at_a(mm,itm,val)] 
+            str_p("enum") >> identif_rule[assign_a(enm)] >> '{' 
+            >> 
+                ( identif_rule[assign_a(itm)][clear_a(val)] >> 
+                  *( '=' >> ( identif_rule | int_p | hex_p )[assign_a(val)] )
+                )[push_back_a(v, itm)] [insert_at_a(mm,itm,val)] 
             >> 
             *(',' >> 
-                      identif_rule[push_back_a(v)]
+                ( identif_rule[assign_a(itm)][clear_a(val)] >> 
+                  *( '=' >> ( identif_rule | int_p | hex_p )[assign_a(val)] )
+                )[push_back_a(v, itm)] [insert_at_a(mm,itm,val)] 
              ) 
-            >> 
-            eps_p 
+            >>  *ch_p(',') >> '}' >> eps_p 
         )
         ,
         //  End grammar
@@ -102,7 +111,23 @@ parse_numbers(char const* strarg, size_t lenarg, string & enm, vector<string>& v
     cout << "stop: " << (result.stop -s0) << endl;
     string rest(result.stop, s1);
     cout << "rest: " << rest << " size: " << rest.size() << endl;
-    return result.full;
+
+    if ( result.hit ) {
+        resu.hit = 1;
+        resu.hitlen = (result.stop -s0);
+        resu.reslen = (rest.size());
+    } else {
+        resu.hit = 0;
+        resu.hitlen = 0;
+        resu.reslen = lenarg;
+    }
+    if ( result.full ) {
+        resu.full = 1;
+    } else {
+        resu.full = 0;
+    }
+
+    return result.full || result.hit;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -130,14 +155,16 @@ main()
         vector<string> v;
         string nm;
         map<string,string> m;
-        if ( parse_numbers(str.c_str(), str.size(), nm, v, m ))
+        struct result_s resu;
+        if ( parse_numbers(str.c_str(), str.size(), nm, v, m, resu ))
         {
             cout << "-------------------------\n";
             cout << "Parsing succeeded\n";
             cout << str << " Parses OK: " << nm << " " << endl;
 
-            for (vector<string>::size_type i = 0; i < v.size(); ++i)
+            for (vector<string>::size_type i = 0; i < v.size(); ++i) {
                 cout << i << ": " << v[i] << endl;
+            }
 
             cout << "-------------------------\n";
         }
