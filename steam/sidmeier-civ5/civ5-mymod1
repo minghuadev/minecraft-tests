@@ -1,0 +1,32 @@
+
+[ingame]$ pwd
+steamapps/common/Sid Meier's Civilization V/steamassets/assets/ui/ingame
+[ingame]$ vi citybannermanager.lua 
+
+
+    161                 if (city:IsCapital() and not player:IsMinorCiv()) then
+    162                         convertedKey = "[ICON_CAPITAL]" .. convertedKey;
+    163                 end
+    164                 ---orig---controls.CityName:SetText(convertedKey);
+    165                 ---mymod line 165 citybannermanager.lua
+    166                 local myCsDmg = city:GetDamage();
+    167                 local myiMaxDamage = GameDefines.MAX_CITY_HIT_POINTS;
+    168                 local myiHealthP = (myiMaxDamage - myCsDmg);
+    169                 local myCsHp = " " .. myiHealthP .. " " .. convertedKey;
+    170                 controls.CityName:SetText(myCsHp);
+    171             ---orig---DoResizeBanner(controls, convertedKey, isCapital, player:IsMinorCiv(), isActiveTeamCity);
+    172             DoResizeBanner(controls, myCsHp, isCapital, player:IsMinorCiv(), isActiveTeamCity);
+    173 
+    174 
+    175                 --controls.CityCapitalIcon:SetHide(not isCapital);
+    176 
+    177                 ---orig---controls.BannerButton:SetToolTipString(Locale.ConvertTextKey("TXT_KEY_CITY_ENTER_CITY_SCREEN"));
+    178                 ---mymod line 178 citybannermanager.lua
+    179                 local myCtHp = " HP " .. myiHealthP .. " "; 
+    180                 myCtHp = myCtHp .. Locale.ConvertTextKey("TXT_KEY_CITY_ENTER_CITY_SCREEN");
+    181                 controls.BannerButton:SetToolTipString(myCtHp);
+    182         
+    183                 -- Connected to capital?
+    184                 if (isActiveTeamCity) then
+
+
