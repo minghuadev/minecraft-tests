@@ -1,0 +1,45 @@
+
+=======================================================================
+“cloud architecture” concepts in a system architecture diagrams
+http://stackoverflow.com/questions/495320/cloud-architecture-concepts-in-a-system-architecture-diagrams
+
+
+If you design a distributed application for easy scale-out, or you just want to 
+make use of any of the new “cloud computing” offerings by Amazon, Google or Microsoft, 
+there are some typical concepts or components you usually end up using:
+
+    distributed blob storage (aka S3)
+    asynchronous, durable message queues (aka SQS)
+    non-Relational-/non-transactional databases (like SimpleDB, Google BigTable, Azure SQL Services)
+    distributed background worker pool
+    load-balanced, edge-service processes handling user requests (often virtualized)
+    distributed caches (like memcached)
+    CDN (content delivery network like Akamai)
+
+Now when it comes to design and sketch an architecture that makes use of such patterns, 
+are there any commonly used symbols I could use? Or even a download with some cool Visio stencils? :)
+
+It doesn’t have to be a formal system like UML but I think it would be great if 
+there were symbols that everyone knows and understands, like we have commonly used shapes 
+for databases or a documents, for example. I think it would be important to not mix it up 
+with traditional concepts like a normal file system (local or network server/SAN), or 
+a relational database.
+
+Simply speaking, I want to be able to draw some conclusions about an application’s scalability 
+or data consistency issues by just looking at the system architecture overview diagram.
+
+
+For Windows Azure: 
+http://davidpallmann.blogspot.com/2011/07/windows-azure-design-patterns-part-1.html
+
+EDIT Feb 2014 ==> Here's a more complete set released recently by Microsoft: 
+http://www.microsoft.com/en-us/download/details.aspx?id=41937 
+This is now the best option to use for Windows Azure.
+
+Amazon Web Services: 
+http://aws.typepad.com/aws/2011/12/introducing-aws-simple-icons-for-your-architecture-diagrams.html
+
+
+=======================================================================
+
+
