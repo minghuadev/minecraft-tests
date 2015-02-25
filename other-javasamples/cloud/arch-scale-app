@@ -1,0 +1,58 @@
+
+search: large scale application architecture
+
+
+======================================================
+
+http://stackoverflow.com/questions/473797/how-to-build-large-applications
+
+Large-Scale C++ Software Design Paperback – July 20, 1996
+by John Lakos (Author)
+
+
+======================================================
+
+http://stackoverflow.com/questions/3984316/large-scale-internet-application-where-to-start
+
+security: 
+  http://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project
+
+db layer: 
+  http://oreilly.com/catalog/9780596003067
+  high performance mysql optimization, backups, replication, load balancing and more
+
+app layer: 
+  http://www.javaconcurrencyinpractice.com/
+
+frontend: 
+  http://www.amazon.com/High-Performance-Web-Sites-Essential/dp/0596529309/ and 
+  http://www.amazon.com/Even-Faster-Web-Sites-Performance/dp/0596522304
+
+http://highscalability.com/
+
+
+======================================================
+
+http://stackoverflow.com/questions/5740156/help-with-scalable-javascript-application-architecture
+
+http://developer.yahoo.com/yui/theater/video.php?v=zakas-architecture
+
+https://github.com/aranm/scalable-javascript-architecture
+
+
+======================================================
+
+http://stackoverflow.com/questions/6544026/what-are-possible-architecture-options-for-large-scale-web-applications
+
+
+======================================================
+
+http://stackoverflow.com/questions/5400132/javascript-architecture-application-structure-best-practices
+
+  Nicholas Zakas 2011 podcast is a must see: Nicholas Zakas: Scalable JavaScript Application Architecture
+
+  Addy Osmani's online reference: Patterns For Large-Scale JavaScript Application Architecture
+  http://addyosmani.com/largescalejavascript/
+
+
+
