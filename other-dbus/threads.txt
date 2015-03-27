@@ -1,0 +1,460 @@
+
+search 1 - dbus thread safe
+  mozilla -- use single thread dispatch
+  ubuntu  -- use gdbus
+
+search 2 - dbus multithreading
+  gmane.org - single thread dispatch or multithread blocking calls
+
+search 3 - dbus threads_init
+  stackoverflow - dbus dispatch, dbus watch, dbus timeout
+
+
+
+
+search 1  - "dbus thread safe"
+==================================
+
+mozilla 
+----------
+
+ Bug 830290 - Move all DBUS code to single thread 
+ Reported: 2013-01-14
+
+ We currently use DBus with multiple threads, which can lead to lost responses, 
+ like in bug 827888. DBus is not thread-safe and should only be used 
+ from within a single thread [1].
+
+ The workaround for bug 872888 should be OK or now, but to fix the problem we need 
+ to run all DBus related code within a single thread.
+
+ [1] http://lists.freedesktop.org/archives/dbus/2010-August/013307.html
+
+
+ ref: http://smcv.pseudorandom.co.uk/2008/11/nonblocking/
+     why you shouldn't block on d-bus calls
+
+
+ubuntu
+-----------
+
+ Do not depend on dbus-glib, use GDBus
+ Bug #1258518 reported on 2013-12-06
+
+ The best would be to port gnomeradio to use GDBus, rather than dbus-glib, because 
+ GDBus is thread safe and adds more other advantages.
+
+
+
+search 2 - dbus multithreading
+=================================
+
+gmane.org - single thread dispatch or multithread blocking calls
+---------------
+
+Q:
+ problems when using dbus from a worker thread. Problem is pretty the same as described in 
+ http://lists.freedesktop.org/archives/dbus/2009-June/011554.html as 1-st problem.
+
+ Shortly, it's assertion failure in dbus_pending_call_block.
+
+A:
+ After calling dbus_threads_init(), DBusConnection has thread locks and
+ drops them when invoking user callbacks, so in general is
+ transparently threadsafe. However, DBusMessage does NOT have thread
+ locks; you must not send the same message to multiple DBusConnection
+ if those connections will be used from different threads, for example.
+
+ Also, if you dispatch or pop messages from multiple threads, it may
+ work in the sense that it won't crash, but it's tough to imagine sane
+ results; it will be completely unpredictable which messages go to
+ which threads.
+
+ It's recommended to dispatch from a single thread.
+
+ The most useful function to call from multiple threads at once is
+ dbus_connection_send_with_reply_and_block(). That is, multiple threads
+ can make method calls at the same time.
+
+ If you aren't using threads, you can use a main loop and
+ dbus_pending_call_set_notify() to achieve a similar result
+
+ No, there's no locking at all in dbus-glib.
+ I have no particular interest in making dbus-glib thread-safe
+
+
+
+search 3 - dbus threads_init
+================================
+
+stack overflow
+------------------
+
+DBusWatch and DBusTimeout examples
+
+ dbus_connection_read_write_dispatch
+
+ dbus-gmain.c:
+ dbus_connection_set_watch_functions dbus_connection_set_timeout_functions
+
+Code:
+ this one uses libevent. You can also run dbus message handling in a separate 
+ thread if that fits your architecture better, that requires direct dispatching 
+ of dbus messages. –  ldx Feb 21 '12 a
+
+ Is it mandatory to register watch functions in order to receive messages 
+ from the connection? And is there a good resource you can recommend, besides 
+ the DBus documentation. Something with C/C++ examples like yours? –  MrUser Jun 3 '14 at 14:53
+
+ Yes, you need to handle watch events. There are not that many resources I'm aware of for C/C++, 
+ unfortunately, when I had to implement a DBus client I was browsing 
+ through source code of projects doing similar stuff. –  ldx Jun 3 '14 at 15:43 
+
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+
+#include <dbus/dbus.h>
+
+struct dbus_ctx {
+    DBusConnection *conn;
+    struct event_base *evbase;
+    struct event dispatch_ev;
+    void *extra;
+};
+
+static void dispatch(int fd, short ev, void *x)
+{
+    struct dbus_ctx *ctx = x;
+    DBusConnection *c = ctx->conn;
+
+    logger(LOG_DEBUG "dispatching\n");
+
+    while (dbus_connection_get_dispatch_status(c) == DBUS_DISPATCH_DATA_REMAINS)
+        dbus_connection_dispatch(c);
+}
+
+static void handle_dispatch_status(DBusConnection *c,
+                                   DBusDispatchStatus status, void *data)
+{
+    struct dbus_ctx *ctx = data;
+
+    logger(LOG_DEBUG "new dbus dispatch status: %d\n", status);
+
+    if (status == DBUS_DISPATCH_DATA_REMAINS) {
+        struct timeval tv = {
+            .tv_sec = 0,
+            .tv_usec = 0,
+        };
+        event_add(&ctx->dispatch_ev, &tv);
+    }
+}
+
+static void handle_watch(int fd, short events, void *x)
+{
+    struct dbus_ctx *ctx = x;
+    struct DBusWatch *watch = ctx->extra;
+
+    unsigned int flags = 0;
+    if (events & EV_READ)
+        flags |= DBUS_WATCH_READABLE;
+    if (events & EV_WRITE)
+        flags |= DBUS_WATCH_WRITABLE;
+    /*if (events & HUP)
+        flags |= DBUS_WATCH_HANGUP;
+    if (events & ERR)
+        flags |= DBUS_WATCH_ERROR;*/
+
+    logger(LOG_DEBUG "got dbus watch event fd=%d watch=%p ev=%d\n",
+           fd, watch, events);
+    if (dbus_watch_handle(watch, flags) == FALSE)
+        logger(LOG_ERROR "dbus_watch_handle() failed\n");
+
+    handle_dispatch_status(ctx->conn, DBUS_DISPATCH_DATA_REMAINS, ctx);
+}
+
+static dbus_bool_t add_watch(DBusWatch *w, void *data)
+{
+    if (!dbus_watch_get_enabled(w))
+        return TRUE;
+
+    struct dbus_ctx *ctx = data;
+    ctx->extra = w;
+
+    int fd = dbus_watch_get_unix_fd(w);
+    unsigned int flags = dbus_watch_get_flags(w);
+    short cond = EV_PERSIST;
+    if (flags & DBUS_WATCH_READABLE)
+        cond |= EV_READ;
+    if (flags & DBUS_WATCH_WRITABLE)
+        cond |= EV_WRITE;
+
+    struct event *event = event_new(ctx->evbase, fd, cond, handle_watch, ctx);
+    if (!event)
+        return FALSE;
+
+    event_add(event, NULL);
+
+    dbus_watch_set_data(w, event, NULL);
+
+    logger(LOG_DEBUG "added dbus watch fd=%d watch=%p cond=%d\n", fd, w, cond);
+    return TRUE;
+}
+
+static void remove_watch(DBusWatch *w, void *data)
+{
+    struct event *event = dbus_watch_get_data(w);
+
+    if (event)
+        event_free(event);
+
+    dbus_watch_set_data(w, NULL, NULL);
+
+    logger(LOG_DEBUG "removed dbus watch watch=%p\n", w);
+}
+
+static void toggle_watch(DBusWatch *w, void *data)
+{
+    logger(LOG_DEBUG "toggling dbus watch watch=%p\n", w);
+
+    if (dbus_watch_get_enabled(w))
+        add_watch(w, data);
+    else
+        remove_watch(w, data);
+}
+
+static void handle_timeout(int fd, short ev, void *x)
+{
+    struct dbus_ctx *ctx = x;
+    DBusTimeout *t = ctx->extra;
+
+    logger(LOG_DEBUG "got dbus handle timeout event %p\n", t);
+
+    dbus_timeout_handle(t);
+}
+
+static dbus_bool_t add_timeout(DBusTimeout *t, void *data)
+{
+    struct dbus_ctx *ctx = data;
+
+    if (!dbus_timeout_get_enabled(t))
+        return TRUE;
+
+    logger(LOG_DEBUG "adding timeout %p\n", t);
+
+    struct event *event = event_new(ctx->evbase, -1, EV_TIMEOUT|EV_PERSIST,
+                                    handle_timeout, t);
+    if (!event) {
+        logger(LOG_ERROR "failed to allocate new event for timeout\n");
+        return FALSE;
+    }
+
+    int ms = dbus_timeout_get_interval(t);
+    struct timeval tv = {
+        .tv_sec = ms / 1000,
+        .tv_usec = (ms % 1000) * 1000,
+    };
+    event_add(event, &tv);
+
+    dbus_timeout_set_data(t, event, NULL);
+
+    return TRUE;
+}
+
+static void remove_timeout(DBusTimeout *t, void *data)
+{
+    struct event *event = dbus_timeout_get_data(t);
+
+    logger(LOG_DEBUG "removing timeout %p\n", t);
+
+    event_free(event);
+
+    dbus_timeout_set_data(t, NULL, NULL);
+}
+
+static void toggle_timeout(DBusTimeout *t, void *data)
+{
+    logger(LOG_DEBUG "toggling timeout %p\n", t);
+
+    if (dbus_timeout_get_enabled(t))
+        add_timeout(t, data);
+    else
+        remove_timeout(t, data);
+}
+
+static DBusHandlerResult handle_nameownerchanged(DBusMessage *message,
+                                                 void *data)
+{
+    struct dbus_ctx *ctx = data;
+    char *name, *old, *new;
+    if (dbus_message_get_args(message, NULL,
+                              DBUS_TYPE_STRING, &name,
+                              DBUS_TYPE_STRING, &old,
+                              DBUS_TYPE_STRING, &new,
+                              DBUS_TYPE_INVALID) == FALSE) {
+        logger(LOG_ERROR "spurious NameOwnerChanged signal\n");
+        return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+    }
+    logger(LOG_DEBUG "dbus NameOwnerChanged %s -> %s\n", old, new);
+
+    if (new[0] != '\0')
+        return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+
+    /* XXX handle disconnecting clients */
+
+    return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+}
+
+static DBusHandlerResult msg_filter(DBusConnection *connection,
+                                    DBusMessage *message, void *data)
+{
+    if (dbus_message_is_signal(message, DBUS_INTERFACE_DBUS,
+                               "NameOwnerChanged"))
+        return handle_nameownerchanged(message, data);
+
+    logger(LOG_DEBUG "got dbus message %d %s -> %s %s/%s/%s %s\n",
+           dbus_message_get_type(message),
+           dbus_message_get_sender(message),
+           dbus_message_get_destination(message),
+           dbus_message_get_path(message),
+           dbus_message_get_interface(message),
+           dbus_message_get_member(message),
+           dbus_message_get_type(message) == DBUS_MESSAGE_TYPE_ERROR ?
+           dbus_message_get_error_name(message) : "");
+
+    return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
+}
+
+static void unregister_func(DBusConnection *connection, void *data)
+{
+}
+
+static DBusHandlerResult message_func(DBusConnection *connection,
+                                      DBusMessage *message, void *data)
+{
+    struct dbus_ctx *ctx = data;
+
+    logger(LOG_DEBUG "got dbus message sent to %s %s %s\n",
+           dbus_message_get_destination(message),
+           dbus_message_get_interface(message),
+           dbus_message_get_path(message));
+
+    /* XXX handle DBus message */
+
+    return DBUS_HANDLER_RESULT_HANDLED;
+}
+
+static DBusObjectPathVTable dbus_vtable = {
+    .unregister_function = unregister_func,
+    .message_function = message_func,
+};
+
+struct dbus_ctx *dbus_init(struct event_base *eb)
+{
+    DBusConnection *conn = NULL;
+    struct dbus_ctx *ctx = calloc(1, sizeof(struct dbus_ctx));
+    if (!ctx) {
+        logger_perror("can't allocate dbus_ctx\n");
+        goto out;
+    }
+
+    conn = dbus_bus_get_private(DBUS_BUS_SESSION, NULL);
+    if (conn == NULL) {
+        logger(LOG_ERROR "failed to get bus\n");
+        goto out;
+    }
+
+    dbus_connection_set_exit_on_disconnect(conn, FALSE);
+
+    ctx->conn = conn;
+    ctx->evbase = eb;
+    event_assign(&ctx->dispatch_ev, eb, -1, EV_TIMEOUT, dispatch, ctx);
+
+    if (!dbus_connection_set_watch_functions(conn, add_watch, remove_watch,
+                                             toggle_watch, ctx, NULL)) {
+        logger(LOG_ERROR "dbus_connection_set_watch_functions() failed\n");
+        goto out;
+    }
+
+    if (!dbus_connection_set_timeout_functions(conn, add_timeout,
+                                               remove_timeout, toggle_timeout,
+                                               ctx, NULL)) {
+        logger(LOG_ERROR "dbus_connection_set_timeout_functions() failed\n");
+        goto out;
+    }
+
+    if (dbus_connection_add_filter(conn, msg_filter, ctx, NULL) == FALSE) {
+        logger(LOG_ERROR "dbus_connection_add_filter() failed\n");
+        goto out;
+    }
+
+    dbus_connection_set_dispatch_status_function(conn, handle_dispatch_status,
+                                                 ctx, NULL);
+
+    char match[256];
+    snprintf(match,
+             sizeof(match),
+             "type='signal',interface='%s',member='NameOwnerChanged'",
+             DBUS_INTERFACE_DBUS);
+    DBusError error;
+    dbus_error_init(&error);
+    dbus_bus_add_match(conn, match, &error);
+    if (dbus_error_is_set(&error)) {
+        logger(LOG_ERROR "dbus_bus_add_match() %s failed: %s\n",
+               "NameOwnerChanged", error.message);
+        dbus_error_free(&error);
+        goto out;
+    }
+
+    snprintf(match,
+             sizeof(match),
+             "type='signal',interface='%s',member='%s'",
+             GNP_IPC_INTERFACE, GNP_IPC_SIGNAL_DELIVER_SA);
+    dbus_error_init(&error);
+    dbus_bus_add_match(conn, match, &error);
+    if (dbus_error_is_set(&error)) {
+        logger(LOG_ERROR "dbus_bus_add_match() %s failed: %s\n",
+               GNP_IPC_SIGNAL_DELIVER_SA, error.message);
+        dbus_error_free(&error);
+        goto out;
+    }
+
+    if (dbus_connection_register_object_path(conn, GNP_IPC_PATH, &dbus_vtable,
+                                             ctx) != TRUE) {
+        logger(LOG_ERROR "failed to register object path\n");
+        goto out;
+    }
+
+    return ctx;
+
+out:
+    if (conn) {
+        dbus_connection_close(conn);
+        dbus_connection_unref(conn);
+    }
+    if (ctx)
+        free(ctx);
+    return NULL;
+}
+
+void dbus_close(struct dbus_ctx *ctx)
+{
+    if (ctx && ctx->conn) {
+        dbus_connection_flush(ctx->conn);
+        dbus_connection_close(ctx->conn);
+        dbus_connection_unref(ctx->conn);
+        event_del(&ctx->dispatch_ev);
+    }
+    if (ctx)
+        free(ctx);
+}
+
+
+
