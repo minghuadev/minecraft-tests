@@ -9,6 +9,7 @@ search 2 - dbus multithreading
 search 3 - dbus threads_init
   stackoverflow - dbus dispatch, dbus watch, dbus timeout
 
+search 4 - DBusWatch DBus
 
 
 
@@ -110,7 +111,6 @@ Code:
  Yes, you need to handle watch events. There are not that many resources I'm aware of for C/C++, 
  unfortunately, when I had to implement a DBus client I was browsing 
  through source code of projects doing similar stuff. –  ldx Jun 3 '14 at 15:43 
-
 
 #include <errno.h>
 #include <stdio.h>
@@ -527,6 +527,45 @@ ref thread lists.freedesktop.org
 
  Before sleeping in the select() the first time, you probably want to
  get_dispatch_status() to see if you need to dispatch.
+
+
+
+search 4 - DBusWatch DBusTimeout
+==================================
+
+search for: stackoverflow DBusWatch and DBusTimeout example
+
+http://qjw.qiujinwu.com/blog/2013/06/29/dbus_study3/
+
+Send Message
+----------------
+
+ dbus_connection_send() puts the message into the outgoing queue. 
+                        message is sent at the next main loop call.
+ dbus_connection_flush() flushes the message fron the queue.
+
+
+Receive Message blocked 1
+-----------------------------
+ dbus_connection_read_write() blocks until a msg and copy to in-q
+ dbus_connection_pop_message() gets the message from in-q
+ dbus_connection_borrow_message() does not delete the msg from in-q
+
+
+Receive Message blocked 2
+-----------------------------
+ dbus_connection_read_write_dispatch() 
+                         blocks until a msg and copy to in-q. then run 
+                         dbus_connection_dispatch()
+
+Receive Message nonblocked 
+-----------------------------
+
+ register with dbus_connection_set_watch_function(). when being notified 
+ through a watch event, inform dbus with dbus_watch_handl() to read the 
+ data into the in-q. then process the messages in in-q by the blocked 1 
+ or blocked 2 methods. 
+
 
 
 
