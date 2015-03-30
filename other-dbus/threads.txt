@@ -12,6 +12,11 @@ search 3 - dbus threads_init
 search 4 - DBusWatch DBus
 
 
+search 5 - dbuswatch select examples
+  apple bind9-24 dbus_service.c
+
+
+
 
 search 1  - "dbus thread safe"
 ==================================
@@ -55,7 +60,8 @@ gmane.org - single thread dispatch or multithread blocking calls
 
 Q:
  problems when using dbus from a worker thread. Problem is pretty the same as described in 
- http://lists.freedesktop.org/archives/dbus/2009-June/011554.html as 1-st problem.
+ http://lists.freedesktop.org/archives/dbus/2009-June/011554.html as 1-st problem  
+ (my note: 2 race conditions in dbus-glib in multi-thread environment).
 
  Shortly, it's assertion failure in dbus_pending_call_block.
 
@@ -566,6 +572,26 @@ Receive Message nonblocked
  data into the in-q. then process the messages in in-q by the blocked 1 
  or blocked 2 methods. 
 
+
+
+search 5 - dbuswatch select examples 
+=======================================
+
+ http://www.opensource.apple.com/source/bind9/bind9-24/bind9/contrib/dbus/dbus_service.c
+ apple bind9-24 dbus_service.c and other files:
+
+        threads-apple-dbus_mgr.c
+        threads-apple-dbus_mgr.h
+        threads-apple-dbus_service.c
+        threads-apple-dbus_service.h
+
+
+
+search 6 - mozilla moves all dbus
+=======================================
+
+ 830290 - move all dbus code to single thread
+ 957103 - move all dbus code and data to I/O thread
 
 
 
