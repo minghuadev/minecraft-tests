@@ -90,12 +90,13 @@ search 3 - dbus threads_init
 stack overflow
 ------------------
 
-DBusWatch and DBusTimeout examples
+Q: DBusWatch and DBusTimeout examples
 
  dbus_connection_read_write_dispatch
 
  dbus-gmain.c:
- dbus_connection_set_watch_functions dbus_connection_set_timeout_functions
+  dbus_connection_set_watch_functions dbus_connection_set_timeout_functions
+  ref: http://lists.freedesktop.org/archives/dbus/2007-September/008555.html
 
 Code:
  this one uses libevent. You can also run dbus message handling in a separate 
@@ -109,6 +110,7 @@ Code:
  Yes, you need to handle watch events. There are not that many resources I'm aware of for C/C++, 
  unfortunately, when I had to implement a DBus client I was browsing 
  through source code of projects doing similar stuff. –  ldx Jun 3 '14 at 15:43 
+
 
 #include <errno.h>
 #include <stdio.h>
@@ -455,6 +457,76 @@ void dbus_close(struct dbus_ctx *ctx)
     if (ctx)
         free(ctx);
 }
+
+
+ref thread lists.freedesktop.org
+----------------------------------
+
+ http://lists.freedesktop.org/archives/dbus/2007-September/008561.html
+
+ How can i use DBusWatch struct
+ Havoc Pennington hp at redhat.com
+ Wed Sep 19 09:12:32 PDT 2007
+
+ read_write_dispatch() is an alternative to your own select(). Don't
+ use it if you are using DBusWatch.
+
+ If you use DBusWatch, you need to *also* use DBusTimeout. You also
+ need to either dispatch() on every iteration of the main loop, *or*
+ use set_dispatch_status_function() so you know whether to dispatch.
+
+ set_wakeup_main_function() only matters if you are using threads.
+
+ When a watch is toggled off, you need to remove its file descriptor
+ from select(), or you will select() on a descriptor that should not be
+ select()'d on. For example, a write watch will be toggled off if there
+ are no messages to write.
+
+ When your select() sees that a descriptor is ready, you need to call
+ dbus_watch_handle() on the watch corresponding to that descriptor.
+
+ register_object_path() has nothing to do with any of this; it sets up
+ handlers to run when you dispatch, if a message is dispatched that
+ goes to that object path.
+
+ As it says in the docs, do not use pop_message() in combination with dispatch.
+
+ Conceptually here is what is going on:
+  - there is a list of incoming messages
+  - there is a list of outgoing messages
+  - when the connection file descriptor is ready to write,
+ dbus_watch_handle() will write the outgoing messages to the descriptor
+ and remove them from the outgoing list
+  - when the connection file descriptor is ready to read,
+ dbus_watch_handle() will read the incoming messages from the
+ descriptor and add them to the incoming list
+  - when you dbus_connection_dispatch(), each message in turn is
+ removed from the incoming list and any handlers that you have
+ registered are invoked, such as those from register_object_path()
+  - if you use pop_message() the messages are removed from the incoming
+ queue without being dispatched, which is not what you want
+
+ If you are hand-rolling your own C API, remember you also need to
+ implement object introspection.
+
+
+ Havoc Pennington hp at redhat.com
+ Wed Sep 19 10:51:58 PDT 2007
+
+ On 9/19/07, geaaru <geaaru at gmail.com> wrote:
+ > Now it works, but i have still a doubt.
+ > Now, i manage method correctly with dbus_connection_dispatch and
+ > dbus_watch_handle when there is an event on file descriptor, but
+ > DBusWatch not generate an event for NameAcquired signal. Why?
+ > Because when i call dbus_connection_set_watch_functions that signal is
+ > already on incoming message list? So, i need call
+ > dbus_connection_dispatch after dbus_connection_set_watch_functions for
+ > "initialize" incoming message list for a correct management by
+ > DBusWatch, right?
+ >
+
+ Before sleeping in the select() the first time, you probably want to
+ get_dispatch_status() to see if you need to dispatch.
 
 
 
