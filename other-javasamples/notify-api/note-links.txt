@@ -1,0 +1,46 @@
+
+search: amazon sns sqs open source
+
+    http://www.slideshare.net/openstack/open-source-versions-of-amazons-sns-and-sqspptx
+    https://www.openstack.org/summit/san-diego-2012/openstack-summit-sessions/presentation/open-source-versions-of-amazon-s-sns-and-sqs
+    http://stackoverflow.com/questions/9002636/is-there-an-open-source-equivalent-to-amazon-sns
+    https://github.com/Comcast/cmb
+
+    http://nsono.net/amazon-sqs-vs-rabbitmq/
+    http://www.infoq.com/articles/AmazonPubSub
+    http://www.sitepoint.com/message-queues-comparing-beanstalkd-ironmq-amazon-sqs/
+
+
+http://stackoverflow.com/questions/9002636/is-there-an-open-source-equivalent-to-amazon-sns
+
+A2:    
+    Presumably you are looking for a ready to install packaged solution? 
+    There is none I know of, however, in case you are comfortable with 
+    assembling some readily available components with a modest amount of 
+    custom code, you could build yourself a dedicated solution by means 
+    of the extremely versatile Apache Camel framework, which is a powerful 
+    open source integration framework based on known Enterprise Integration Patterns.
+
+    
+    It includes an ever growing list of components out of the box to interface 
+    with existing tools/protocols/APIs/etc., e.g. for cloning the Amazon SNS functionality:
+
+        Mail Component - provides access to Email via Spring's Mail support and 
+                         the underlying JavaMail system
+        HTTP4 Component - provides HTTP based endpoints for consuming external HTTP 
+                          resources (as a client to call external servers using HTTP)
+        SMPP Component - provides access to an SMSC (Short Message Service Center) 
+                         over the SMPP protocol to send and receive SMS
+        AWS Components - even those are available, in case you'd like to use them as well still
+            SNS Component - For Messaging with Amazon's Simple Notification Service (SNS) service
+            SQS Component - For Messaging with Amazon's Simple Queue Service (SQS) service
+
+    Assembling the components is remarkably simple indeed, and there are lots of 
+    Examples available, see for example the walkthroughs for configuration via 
+    Spring DSL (XML based) or via Java code
+
+    Granted, assembling a decently performing and scaling system like so will still 
+    require a fair amount of knowledge, but Apache Camel at least removes 
+    the burden regarding many of the involved tasks already.
+
+
