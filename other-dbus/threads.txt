@@ -593,5 +593,9 @@ search 6 - mozilla moves all dbus
  830290 - move all dbus code to single thread
  957103 - move all dbus code and data to I/O thread
 
+ code: 
+    https://github.com/mozilla/gecko-dev/tree/master/ipc/dbus
+    https://github.com/mozilla/mozilla-central/
+    https://dxr.mozilla.org/comm-central/source/mozilla/ipc/dbus
 
 
