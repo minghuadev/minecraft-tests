@@ -43,4 +43,6 @@ A2:
     require a fair amount of knowledge, but Apache Camel at least removes 
     the burden regarding many of the involved tasks already.
 
+    answered Jan 25 '12 at 15:32 Steffen Opel
+
 
