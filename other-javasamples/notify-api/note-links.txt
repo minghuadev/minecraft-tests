@@ -7,6 +7,8 @@ search: amazon sns sqs open source
     https://github.com/Comcast/cmb
 
     http://nsono.net/amazon-sqs-vs-rabbitmq/
+        http://www.celeryproject.org/ -- python distributed task queue
+
     http://www.infoq.com/articles/AmazonPubSub
     http://www.sitepoint.com/message-queues-comparing-beanstalkd-ironmq-amazon-sqs/
 
