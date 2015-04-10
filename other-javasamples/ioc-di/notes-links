@@ -1,0 +1,29 @@
+
+
+http://stackoverflow.com/questions/4549018/whats-the-python-version-for-code-against-an-interface-not-an-object
+
+
+http://stackoverflow.com/questions/4456424/what-do-programmers-mean-when-they-say-code-against-an-interface-not-an-objec?rq=1
+
+
+http://stackoverflow.com/questions/302421/ioc-design-resources
+
+    The Art of Unit Testing - http://www.manning.com/osherove/
+    Dependency Injection - http://www.manning.com/prasanna/
+
+    http://www.dimecasts.net/
+    http://jameskovacs.com/bookshelf/
+
+    Inversion of Control and Dependency Injection: Working with Windsor Container
+        - https://msdn.microsoft.com/en-us/library/aa973811.aspx
+
+        http://www.martinfowler.com/articles/injection.html
+
+
+
+http://stackoverflow.com/questions/4235743/design-by-interface-vs-ioc-di
+SOLID principles
+
+    http://stackoverflow.com/questions/871405/why-do-i-need-an-ioc-container-as-opposed-to-straightforward-di-code
+
+
