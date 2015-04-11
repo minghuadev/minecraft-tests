@@ -27,3 +27,19 @@ SOLID principles
     http://stackoverflow.com/questions/871405/why-do-i-need-an-ioc-container-as-opposed-to-straightforward-di-code
 
 
+
+http://stackoverflow.com/questions/2461702/why-is-ioc-di-not-common-in-python
+
+    the famous Martin Fowler's example ported from Java to Python: 
+    Python:Design_Patterns:Inversion_of_Control
+
+    class Container:
+        def __init__(self, system_data):
+            for component_name, component_class, component_args in system_data:
+                if type(component_class) == types.ClassType:
+                    args = [self.__dict__[arg] for arg in component_args]
+                    self.__dict__[component_name] = component_class(*args)
+                else:
+                    self.__dict__[component_name] = component_class
+
+
