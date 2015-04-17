@@ -1,0 +1,15 @@
+
+
+[1] comment out this: 
+    steamassets/assets/ui/frontend/mainmenu.lua
+        Controls.ModsButton:SetHide( true ); -- MAC_PORT - rickb Comment this line out to re-enable mods. Happy modding!
+
+
+[2] launch game and subscribe to mods to download
+
+
+[3] from mods: ~/.local/share/Steam/userdata/<numbers>/ugc
+    copy mods into: ~/.local/share/Aspyr/Sid Meier's Civilization 5/MODS
+    and unzip
+
+
