@@ -1,0 +1,48 @@
+
+
+search: python to javascript translator
+==========================================
+
+PyPy.js: First Steps
+Ryan Kelly
+Tue, 23 Jul 2013
+https://www.rfk.id.au/blog/entry/pypy-js-first-steps/
+
+skulpt, brython
+PyPy, Emscripten, ...
+
+
+A survey of Python to Javascript converters
+2011 aug 4
+http://chargen.blogspot.ca/2011/08/survey-of-python-to-javascript.html
+
+    Pyjamas
+    Skulpt
+    Jared Forsyth's PJs
+    hp-FEM's py2js
+    PyCow
+    Js4py
+    Nial McCarrol's Py2Js
+
+
+
+search: python to javascript converter
+==========================================
+
+https://github.com/PythonJS/PythonJS
+
+https://github.com/rusthon/Rusthon
+
+
+
+from: Susan Tan: Python in the Browser: Intro to Brython - PyCon 2014 
+=======================================================================
+https://www.youtube.com/watch?v=BcDV9QUium4
+
+the future of javascript? 
+  - javascript 6
+  - large growing ecosystem
+   -- asm, dart, typescript
+   -- MVC frameworks: Angular, Backbone, Embr, Knockout
+
+

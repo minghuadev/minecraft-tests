@@ -1,0 +1,68 @@
+Changes in Brython version 3.1.1
+================================
+
+
+New features
+============
+
+Implementation
+==============
+- speed improvements :
+    . dictionary creation and item setting
+    . list creation
+    . str() on integers and strings
+    . generators
+    . item generator on dictionaries (by Billy Earney)
+    . list element comparison (idem)
+- change implementation of execution frames
+- change format of line info : string instead of array
+- improve error reporting
+- create a specific class for subclasses of list
+
+Bug fixes
+=========
+- specify encoding of documentation files
+- fix long_int path issue (by Billy Earney)
+- fix bug with except clauses
+- fix bug in environment passed to generators
+- fix object.__repr__
+- fix str() for classes, repr() and str() for iterators
+- fix bug in instance creation function
+- fix bug with attribute "traceback" of exceptions if debug mode is not set
+
+Issues
+- #131 : timezone bug (by Billy Earney)
+- #137 : code objects compiled with "compile" can't be evaluated with "eval"
+- #148 : calling "raise" outside of except block
+- #153 : __getattr__ on metaclasses is given metaclass as first argument
+- #154 : __str__ does not work from metaclasses
+- #155 : metaclass not set as the type of a class when called directly
+
+Brython site
+============
+- fix a bug for languages other than 'en', 'fr', 'es' and 'pt'
+
+- change folder organisation to mirror that of the official site at 
+  brython.info : group everything under a folder "www", except cgi scripts in
+  a folder "cgi-bin" at the same level as "www"
+
+- add a page speed/index.html to compare execution speed of Brython and
+  the local CPython interpreter
+- add many benchmark scripts for simple operations
+- add a page to generate a table comparing the speed execution of these
+  benchmarks in Brython and CPython
+- create app to produce test results timings and upload to central server (by
+  Billy Earney)
+
+- add complex tests for binop unittests (by Billy Earney)
+- use Google Apps Engine to store speed results (id)
+
+Demos
+=====
+
+Standard distribution
+=====================
+- add attribute "brython_debug_mode" in module sys
+
+Documentation
+=============
