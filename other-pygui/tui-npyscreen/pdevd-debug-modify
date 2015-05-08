@@ -1,0 +1,11 @@
+
+import sys
+sys.path.append("./pydevdsrc")
+
+import pydevd
+pydevd.settrace(host="localhost", port=5678, stdoutToServer=False, stderrToServer=True)
+
+import os
+os.environ['TERM'] = 'xterm'
+
+
