@@ -1,11 +1,4 @@
 
-
-console.html:
-
-    <input id="zone"><button id="mybutton">click !</button>
-
-
-$ cat tests/myprog2.py
     import sys
     import traceback
 
@@ -36,4 +29,7 @@ $ cat tests/myprog2.py
 
     document['mybutton'].bind('click', echo)
 
+
+    #console.html:
+    #    <input id="zone"></input><button id="mybutton">click !</button>
 
