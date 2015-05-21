@@ -1,0 +1,15 @@
+
+search: py.test tkinter frontend
+
+
+http://socal-piggies.org/presentations/grig/2005_07_21/
+
+py.test
+py.execnet         - distributed programming
+py.magic.greenlet  - coroutines
+py.xml             - producing xml/html
+py.log
+py.path, py.magic.autopath - path management: local fs, subversion
+py.initpkg         - explicit name export control
+
+

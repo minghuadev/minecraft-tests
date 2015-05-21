@@ -1,0 +1,106 @@
+
+https://mail.python.org/pipermail/pytest-dev/2005-April/000234.html
+
+
+
+[py-dev] py.test tkinter frontend
+Jan Balster jan at balster.info
+Mon Apr 4 00:19:40 CEST 2005
+
+    Previous message: [py-dev] anybody using conftest.py?
+    Next message: [py-dev] py.test tkinter frontend
+
+Hello,
+
+i finished my rewrite of a tkinter-frontend for py.test. what's the best
+way to share it?
+
+i can post a screenshot and a tar.gz file (35kb).
+
+some informations about the package:
+
+it lives under py/test/gui and works only in the py-collect branch.
+it provides a tree view for all tests. every test can be executed just
+by double clicking it.
+the frontend watches all files and directories specified at the command
+line.
+if a test fails, a text widget shows a report similar to the current
+report by py.test (it uses TerminalDriver). all filenames in a report
+are links and open a text editor (see tkgui.py/TkMain.launch_editor) to
+show the point of failure.
+if a test fails the frontend calls tkinter.bell(), so you can hear if
+your changes break some code (should be an option).
+--collectonly, --nocapture, --showlocals , --fulltrace, --nomagic,
+should work as expected.
+
+todo:
+
+* documentation, documentation
+
+* more tests ;-)
+
+* replace hack for config.py and conftest.py !!
+
+* patch drive.py/Driver.runone -> call finish after the captured output
+is set (see py.test.gui.guidriver.py/GuiDriver.runone)
+
+* improve performance of tree widget when updating test results!!
+
+i would appreciate your feedback and comments!
+thank you!
+
+jan
+
+
+
+[py-dev] py.test tkinter frontend
+holger krekel hpk at trillke.net
+Sun Apr 3 23:30:54 CEST 2005
+
+    Previous message: [py-dev] py.test tkinter frontend
+    Next message: [py-dev] Re: [py-svn] r10293 - in py/branch/py-collect: bin test/tkinter test/tkinter/icons
+
+Hello Jan, 
+
+On Mon, Apr 04, 2005 at 00:19 +0200, Jan Balster wrote:
+> Hello,
+> 
+> i finished my rewrite of a tkinter-frontend for py.test. what's the best
+> way to share it?
+
+hum, what about you send me your desired accound name + ssh public key
+privately and you just commit it? 
+
+> ... 
+
+> some informations about the package:
+
+cool! 
+
+> todo:
+> 
+> * documentation, documentation
+> 
+> * more tests ;-)
+
+That is actually important and i know that writing 
+tests for interactive applications ca be hard especially
+if done after the fact ... 
+
+> * replace hack for config.py and conftest.py !!
+
+i'd like to see what you have done and how it compares 
+to the hacks we have done for PyPy :-) 
+
+> ...
+> i would appreciate your feedback and comments!
+
+i am still somewhat ill and have personal issues to 
+care for at the moment ... so if others can give your
+code a try (once it is checked in) that would be great ... 
+
+cheers & many thanks, 
+
+    holger
+
+
