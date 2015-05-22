@@ -1,0 +1,104 @@
+
+ls -lrt codespeak-lib/
+
+         288738 Dec 30  2005 codespeak-lib_0.7-svn20050721.orig.tar.gz
+            715 May  3  2006 codespeak-lib_0.7-svn20050721-4.dsc
+           4832 May  3  2006 codespeak-lib_0.7-svn20050721-4.diff.gz
+           1074 May  3  2006 python-codespeak-lib_0.7-svn20050721-4_all.deb
+
+ remove  312972 May  3  2006 python2.4-codespeak-lib_0.7-svn20050721-4_powerpc.deb
+
+         310628 May  3  2006 python2.4-codespeak-lib_0.7-svn20050721-4_i386.deb
+
+ remove  311532 May  3  2006 python2.4-codespeak-lib_0.7-svn20050721-4_amd64.deb
+ remove  312970 May  3  2006 python2.3-codespeak-lib_0.7-svn20050721-4_powerpc.deb
+
+         310622 May  3  2006 python2.3-codespeak-lib_0.7-svn20050721-4_i386.deb
+
+ remove  311534 May  3  2006 python2.3-codespeak-lib_0.7-svn20050721-4_amd64.deb
+
+         349737 Jul 21  2006 codespeak-lib_0.7-svn20060621.orig.tar.gz
+            730 Sep  8  2006 codespeak-lib_0.7-svn20060621-1build1.dsc
+           4747 Sep  8  2006 codespeak-lib_0.7-svn20060621-1build1.diff.gz
+         371744 Sep  8  2006 python-codespeak-lib_0.7-svn20060621-1build1_i386.deb
+
+ remove  374368 Sep  8  2006 python-codespeak-lib_0.7-svn20060621-1build1_amd64.deb
+ remove  374908 Sep  8  2006 python-codespeak-lib_0.7-svn20060621-1build1_powerpc.deb
+
+         482311 Apr 27  2007 codespeak-lib_0.9.0.orig.tar.gz
+           1080 Apr 27  2007 codespeak-lib_0.9.0-3.dsc
+           8686 Apr 27  2007 codespeak-lib_0.9.0-3.diff.gz
+
+ remove 2805102 Apr 29  2007 python-codespeak-lib_0.9.0-3_i386.deb
+ remove 2807562 Apr 30  2007 python-codespeak-lib_0.9.0-3_amd64.deb
+ remove 2789592 Apr 30  2007 python-codespeak-lib_0.9.0-3_ia64.deb
+ remove 2788720 May  2  2007 python-codespeak-lib_0.9.0-3_sparc.deb
+ remove 2802540 Aug 28  2007 python-codespeak-lib_0.9.0-3_lpia.deb
+
+            800 Oct 23  2007 codespeak-lib_0.9.0-3.1.dsc
+           8770 Oct 23  2007 codespeak-lib_0.9.0-3.1.diff.gz
+
+ remove  352988 Oct 26  2007 python-codespeak-lib_0.9.0-3.1_lpia.deb
+ remove  353332 Oct 26  2007 python-codespeak-lib_0.9.0-3.1_i386.deb
+ remove  357708 Oct 27  2007 python-codespeak-lib_0.9.0-3.1_powerpc.deb
+ remove  355890 Oct 27  2007 python-codespeak-lib_0.9.0-3.1_amd64.deb
+ remove  344698 Oct 27  2007 python-codespeak-lib_0.9.0-3.1_sparc.deb
+ remove  344698 Oct 27  2007 python-codespeak-lib_0.9.0-3.1_ia64.deb
+ remove  344638 Oct 28  2007 python-codespeak-lib_0.9.0-3.1_hppa.deb
+
+         490211 May  2  2008 codespeak-lib_0.9.1.orig.tar.gz
+           1212 Jun  5  2008 codespeak-lib_0.9.1-2.dsc
+           9813 Jun  5  2008 codespeak-lib_0.9.1-2.diff.gz
+
+ remove 3231648 Jun  5  2008 python-codespeak-lib_0.9.1-2_amd64.deb
+ remove 3229668 Jun  5  2008 python-codespeak-lib_0.9.1-2_i386.deb
+ remove 3229358 Jun  5  2008 python-codespeak-lib_0.9.1-2_lpia.deb
+ remove 2684126 Jun  5  2008 python-codespeak-lib_0.9.1-2_powerpc.deb
+ remove 3224774 Jun  5  2008 python-codespeak-lib_0.9.1-2_ia64.deb
+ remove 3226792 Jun  5  2008 python-codespeak-lib_0.9.1-2_sparc.deb
+ remove 3222020 Jun  7  2008 python-codespeak-lib_0.9.1-2_hppa.deb
+ remove 3221890 Nov  6  2008 python-codespeak-lib_0.9.1-3_sparc.deb
+
+           1317 Mar  5  2009 codespeak-lib_0.9.1-3ubuntu1.dsc
+          10836 Mar  5  2009 codespeak-lib_0.9.1-3ubuntu1.diff.gz
+
+ remove 3226292 Mar  5  2009 python-codespeak-lib_0.9.1-3ubuntu1_i386.deb
+ remove 3436290 Mar  5  2009 python-codespeak-lib_0.9.1-3ubuntu1_hppa.deb
+ remove 3224664 Mar  5  2009 python-codespeak-lib_0.9.1-3ubuntu1_lpia.deb
+ remove 3228970 Mar  5  2009 python-codespeak-lib_0.9.1-3ubuntu1_amd64.deb
+ remove 3442712 Mar  5  2009 python-codespeak-lib_0.9.1-3ubuntu1_armel.deb
+ remove 2678084 Mar  5  2009 python-codespeak-lib_0.9.1-3ubuntu1_powerpc.deb
+ remove 3221070 Mar  6  2009 python-codespeak-lib_0.9.1-3ubuntu1_ia64.deb
+
+         383084 Dec 12  2009 codespeak-lib_1.1.1.orig.tar.gz
+           1230 Jan  1  2010 codespeak-lib_1.1.1-3.dsc
+           8033 Jan  1  2010 codespeak-lib_1.1.1-3.diff.gz
+         158998 Jan  1  2010 python-codespeak-lib_1.1.1-3_all.deb
+
+         380065 May  9  2010 codespeak-lib_1.2.1.orig.tar.gz
+           1245 May  9  2010 codespeak-lib_1.2.1-4.dsc
+           9303 May  9  2010 codespeak-lib_1.2.1-4.debian.tar.gz
+
+ remove  153814 May 11  2010 python-py_1.2.1-4_all.deb
+
+         334265 Oct 15  2010 codespeak-lib_1.3.3.orig.tar.gz
+           1268 Oct 15  2010 codespeak-lib_1.3.3-2.dsc
+           9549 Oct 15  2010 codespeak-lib_1.3.3-2.debian.tar.gz
+
+ remove  147406 Oct 15  2010 python-py_1.3.3-2_all.deb
+
+         452938 Apr 30  2011 codespeak-lib_1.3.4.orig.tar.gz
+           1240 Apr 30  2011 codespeak-lib_1.3.4-2.dsc
+           9464 Apr 30  2011 codespeak-lib_1.3.4-2.debian.tar.gz
+         145974 Apr 30  2011 python-py_1.3.4-2_all.deb
+
+ remove   13102 May 21 21:29 index.html?C=N;O=D
+ remove   13102 May 21 21:29 index.html?C=M;O=A
+ remove   13102 May 21 21:29 index.html?C=S;O=A
+ remove   13102 May 21 21:29 index.html?C=D;O=A
+ remove   13102 May 21 21:37 index.html?C=N;O=A
+ remove   13102 May 21 21:37 index.html?C=M;O=D
+ remove   13102 May 21 21:37 index.html?C=S;O=D
+ remove   13102 May 21 21:37 index.html?C=D;O=D
+
+

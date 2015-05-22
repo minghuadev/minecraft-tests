@@ -105,7 +105,7 @@ download ...
     test/tkinter/testing/test_capture_out_err.py
 
 
-save the files from above linked location to ...
+save the files from above linked location to ... source-ubuntu-hardy/
 
 
 git clone https://github.com/jsop/pkg-codespeak-lib.git
