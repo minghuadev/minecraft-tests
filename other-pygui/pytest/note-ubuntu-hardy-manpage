@@ -1,4 +1,7 @@
 
+search: pytest tkinter
+2015 5 21
+
 
 the manpage with --tkinter option:
 http://manpages.ubuntu.com/manpages/hardy/man1/py.test.1.html
@@ -6,5 +9,113 @@ http://manpages.ubuntu.com/manpages/hardy/man1/py.test.1.html
 
 Binary package “python-codespeak-lib” in ubuntu hardy
 https://launchpad.net/ubuntu/hardy/+package/python-codespeak-lib
+
+
+
+where to find the source: 
+search: ubuntu hardy archive
+
+http://ubuntuforums.org/showthread.php?t=2177864
+Thread: Need to Install 8.04 but Repositories Not Found
+
+http://askubuntu.com/questions/91815/how-to-install-software-or-upgrade-from-old-unsupported-release
+
+  edit /etc/apt/sources.list and change archive.ubuntu.com to old-releases.ubuntu.com
+
+e.g. http://old-releases.ubuntu.com/ubuntu/dists/hardy/main/binary-i386/
+
+
+
+download Packages.gz from: 
+  http://old-releases.ubuntu.com/ubuntu/dists/hardy/universe/binary-i386/
+then vi search for py.test:
+
+ 370010 Package: python-codespeak-lib
+ 370011 Priority: optional
+ 370012 Section: universe/python
+ 370013 Installed-Size: 1912
+ 370014 Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+ 370015 Original-Maintainer: Guilherme Salgado <salgado@async.com.br>
+ 370016 Architecture: i386
+ 370017 Source: codespeak-lib
+ 370018 Version: 0.9.0-3.1
+ 370019 Replaces: python-pylib, python2.3-codespeak-lib, python2.4-codespeak-lib
+ 370020 Provides: python2.4-codespeak-lib, python2.5-codespeak-lib
+ 370021 Depends: python-central (>= 0.5.8), python (<< 2.6), python (>= 2.4), libc6 (>= 2.6.1-1)
+ 370022 Recommends: python-tkinter, python-docutils
+ 370023 Suggests: screen, rsync, graphviz, tetex-bin, gs-gpl | gs-esp, ps2eps, subversion
+ 370024 Conflicts: python-pylib, python2.3-codespeak-lib, python2.4-codespeak-lib
+ 370025 Filename: pool/universe/c/codespeak-lib/python-codespeak-lib_0.9.0-3.1_i386.deb
+ 370026 Size: 353332
+ 370027 MD5sum: 1fc4d8c0181e8a98e6189068376d787f
+ 370028 SHA1: a41e786de0386bd445118bcbf411acccaa7338ad
+ 370029 SHA256: c8ed90ba8cb7835dada2e5896eb1e94778e71f7e1a869edba3d72605e166a3e7
+ 370030 Description: The pylib library containing py.test, greenlets and other niceties
+ 370031  It includes py.test, whose focus is to get a test environment that's easier
+ 370032  to use than the existing ones, py.xml ("a fast'n'easy way to generate
+ 370033  xml/html documents"), py.magic.greenlet ("Lightweight in-process concurrent
+ 370034  programming") and many more features.
+ 370035  .
+ 370036  homepage: http://codespeak.net/py/
+ 370037 Python-Version: 2.4, 2.5
+ 370038 Bugs: mailto:ubuntu-users@lists.ubuntu.com
+ 370039 Origin: Ubuntu
+
+download Sources.gz from 
+  http://old-releases.ubuntu.com/ubuntu/dists/hardy/universe/source/
+search for codespeak:
+ 18300 Package: codespeak-lib
+  18301 Binary: python-codespeak-lib
+  18302 Version: 0.9.0-3.1
+  18303 Priority: optional
+  18304 Section: universe/python
+  18305 Maintainer: Guilherme Salgado <salgado@async.com.br>
+  18306 Build-Depends: python-all-dev (>= 2.3.5-10), python-central (>= 0.5), debhelper (>= 5.0.37.1), dpatch, python-        docutils, xsltproc, docbook-xsl, subversion
+  18307 Architecture: any
+  18308 Standards-Version: 3.7.2
+  18309 Format: 1.0
+  18310 Directory: pool/universe/c/codespeak-lib
+  18311 Files:
+  18312  286334ffa3c96ac907a662a78f523c93 800 codespeak-lib_0.9.0-3.1.dsc
+  18313  adecd7befdfa431341c8e09e0bc94ca3 482311 codespeak-lib_0.9.0.orig.tar.gz
+  18314  925a90bd102dfee4c2ec5859db299dea 8770 codespeak-lib_0.9.0-3.1.diff.gz
+  18315 Uploaders: Alexandre Fayolle <afayolle@debian.org>
+  18316 Python-Version: all
+
+http://old-releases.ubuntu.com/ubuntu/pool/universe/c/codespeak-lib/
+download ...
+
+    $ pwd
+    .../codespeak-lib-0.7-svn20050721.orig/py
+
+    $ grep -l -i -r tkinter *
+    documentation/TODO.txt
+    __init__.py
+    misc/testing/test_initpkg.py
+    test/config.py
+    test/defaultconftest.py
+    test/testing/test_session.py
+    test/tkinter/backend.py
+    test/tkinter/tksession.py
+    test/tkinter/tkgui.py
+    test/tkinter/testing/test_reportsession.py
+    test/tkinter/testing/test_repository.py
+    test/tkinter/testing/test_util.py
+    test/tkinter/testing/test_backend.py
+    test/tkinter/testing/test_capture_out_err.py
+
+
+save the files from above linked location to ...
+
+
+git clone https://github.com/jsop/pkg-codespeak-lib.git
+cd pkg-codespeak-lib
+git checkout 0.9.0-3.1
+
+$ grep -r tkinter -l *
+debian/control
+debian/copyright
+debian/py.test.xml
+debian/README.Debian
 
 
