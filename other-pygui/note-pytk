@@ -1,5 +1,5 @@
 
-Pythin Wiki Introduction
+Python Wiki Introduction
 ==============================
 
 * Intro to programming with Python and Tkinter - Python Wiki
@@ -53,5 +53,21 @@ change title icon: (you-icon can be a .png or .jpg file)
     root = Tk()
     img = PhotoImage(file='your-icon')
     root.tk.call('wm', 'iconphoto', root._w, img)
+
+
+
+Windows
+==============================
+windows python packages: 
+
+ Python 2.7 Pillow-2.5.1
+ Python 2.7 pywin32-218
+ python 2.7.6
+
+environment for tkinter: 
+
+ TCL_Library=c:/python2.7.6/tcl/tcl8.5
+
+
 
 
