@@ -1,0 +1,16 @@
+
+
+Linux
+=================
+
+$ cd virtualenv-<dir>
+$ python virtualenv.py ../ptenv/
+$ source ../ptenv/bin/activate
+
+$ cd py-<dir>
+$ pip install .
+
+$ cd pytest-<dir>
+$ pip install .
+
+
