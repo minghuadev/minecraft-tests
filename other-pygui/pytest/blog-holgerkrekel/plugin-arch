@@ -1,0 +1,98 @@
+
+http://holgerkrekel.net/2009/02/27/new-plugin-architecture-and-plugins-for-pytest/
+
+
+metaprogramming and politics
+New Plugin architecture and plugins for py.test
+
+
+I just merged the plugin branch and am very happy about it. Part of the effort was 
+driven by moving core functionality to become a plugin: Terminal reporting is now 
+fully a plugin, contained in a single file including tests. It does it work solely 
+by looking at testing events. Plugins can also add new aspects to tests files – 
+for example the pytest_restdoc.py plugin adds ReST syntax, referential integrity 
+and URL checking for Text files. (I used it for checking my blog post and its links, btw).
+
+Pytest’s good old conftest.py files are still useful: you can define project or 
+directory specific settings, including which plugins to use. For now, many old extensions 
+should work unmodified, as exemplified by PyPy‘s extensive conftest.py files. 
+It’s easy to port a conftest file to a plugin. In fact, you can first define 
+a local "ConftestPlugin" and later move it to become a cross-project one – a matter of 
+renaming the file and the class, done!
+
+To serve as guiding examples, I drafted some initial plugins and implemented 
+neccessary hooks within py.test core.
+
+    * pytest_unittest.py: collects traditional unittest.py based tests.
+    * pytest_xfail.py: marks tests as "expected to fail" and reports them specially.
+    * pytest_pocoo.py: supplying -P will send failures to http://paste.pocoo.org 
+      and report URLs to the terminal.
+
+If you wan’t to get a feel on how plugins are implemented, here is the pytest_eventlog.py 
+plugin which adds a command line option to allow logging of all testing events. 
+It’s instructive to look at how it’s done as well as the output because it shows 
+which testing events are generated.
+
+      1  class EventlogPlugin:
+      2      """ log pytest events to a file. """
+      3   
+      4      def pytest_addoption(self, parser):
+      5          parser.addoption("--eventlog", dest="eventlog",
+      6              help="write all pytest events to the given file.")
+      7   
+      8      def pytest_configure(self, config):
+      9          eventlog = config.getvalue('eventlog')
+     10          if eventlog:
+     11              self.eventlogfile = open(eventlog).open('w')
+     12   
+     13      def pytest_unconfigure(self, config):
+     14          if hasattr(self, 'eventlogfile'):
+     15              self.eventlogfile.close()
+     16              del self.eventlogfile
+     17   
+     18      def pyevent(self, eventname, *args, **kwargs):
+     19          if hasattr(self, 'eventlogfile'):
+     20              print >>self.eventlogfile, eventname, args, kwargs
+     21              self.eventlogfile.flush()
+
+This plugin code is complete, except that the original pytest_eventlog.py file 
+contains tests. The eventlog plugin methods above are called in the following way:
+
+    * def pytest_addoption(self, parser) is called before
+      commandline arguments are parsed.
+    * def pytest_configure(self, config) is called after parsing
+      arguments and before any reporting, collection or running
+      of tests takes place.
+    * def pytest_event(self, eventname, *args, **kwargs) is called
+      for each testing event. Events have names and come with
+      arguments which are supplied by the event producing site.
+    * def pytest_unconfigure(self, config) is called after
+      all test items have been processed.
+
+If you want to start writing your own plugin, please use an svn checkout of:
+
+    http://codespeak.net/svn/py/trunk/
+
+and activate it by e.g. python setup.py develop.
+
+If you want to write a plugin named pytest_XYZ, you can tell pytest to use it 
+by setting the environment variable PYTEST_PLUGINS=XYZ or by putting 
+pytest_plugins = 'xyz' into a test module or conftest.py file.
+
+A good way to contribute is to copy an existing plugin file to your home dir 
+and put it somewhere into your PYTHONPATH. py.test will use your version 
+instead of the default one and you can play with it untill you are happy (and 
+see to also add some tests showing the new behaviour).
+
+If you have questions or problems, you are invited to post here or to the py-dev 
+mailing list. I’d definitely like to pluginize more of pytest and add hooks 
+as needed and am happy for feedback and suggestions before i freeze the API for 1.0.
+
+holger
+
+Written by holger krekel
+February 27, 2009 at 11:22 am
+Posted in metaprogramming, testing
+
+
+
