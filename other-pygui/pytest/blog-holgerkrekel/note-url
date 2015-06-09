@@ -2,3 +2,12 @@
 http://holgerkrekel.net/2009/02/27/new-plugin-architecture-and-plugins-for-pytest/
 
 
+pages: page 1, 2, 3, 4
+
+  http://holgerkrekel.net/category/metaprogramming/
+  http://holgerkrekel.net/category/metaprogramming/page/2/
+  http://holgerkrekel.net/category/metaprogramming/page/3/
+  http://holgerkrekel.net/category/metaprogramming/page/4/
+
+
+
