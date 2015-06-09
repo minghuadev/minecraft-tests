@@ -1,0 +1,37 @@
+
+http://stackoverflow.com/questions/15691587/running-a-test-suite-an-arbitrary-collection-of-tests-with-py-test
+
+
+
+There is currently no direct way to control the order of test execution. 
+FWIW, there is a plugin hook pytest_collection_modifyitems which you can use 
+to implement something. See 
+https://github.com/klrmn/pytest-random/blob/master/random_plugin.py 
+for a plugin that uses it to implement randomization.
+	
+answered Apr 2 '13 at 8:25
+hpk42
+
+
+
+I guess it's a bit late now but I just finished up an interactive selection 
+plugin with docs here:
+
+https://github.com/tgoodlet/pytest-interactive
+
+I actually use the hook Holger mentioned above.
+
+It allows you to choose a selection of tests just after the collection phase 
+using IPython. Ordering the tests is pretty easy using slices, subscripts, 
+or tab-completion if that's what you're after. Note that it's an interactive 
+tool meant for use during development and not so much for automated regression 
+runs.
+
+For persistent ordering using marks I've used pytest-ordering which is actually 
+quite useful especially if you have baseline prerequisite tests in a long 
+regression suite. (http://pytest-ordering.readthedocs.org/en/develop/)
+
+answered Oct 31 '14 at 3:12
+goodboy
+
+

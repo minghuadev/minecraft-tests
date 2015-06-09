@@ -1,0 +1,13 @@
+
+
+https://speakerdeck.com/hpk42/re-inventing-packaging-and-testing-with-python
+
+ nose: pupular unittest-runner
+ py.test: popular generic test runner
+ unittest/2: standard library TestCases
+ zope.testing: layered-setup unittest-runner
+ twisted.trial: running twisted/async test cases
+ many other methods, include "make test"
+ setuptools has "setup.py test"
+
+

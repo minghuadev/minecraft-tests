@@ -1,0 +1,38 @@
+
+http://stackoverflow.com/questions/14399908/py-test-setup-teardown-for-whole-test-suite
+
+
+Create a file called conftest.py in your project root which contains this:
+
+import pytest
+import os
+import subprocess
+import tempfile
+
+@pytest.fixture(scope="session", autouse=True)
+def start_xvfb_server (request):
+    tempdir = tempfile.mkdtemp()
+    xvfb_cmd = ['Xvfb',
+                ':1022',
+                '-screen', '0', '800x600x24',
+                '-fbdir', tempdir,
+                '-noreset'
+    ]
+    xvfb_proc = subprocess.Popen(xvfb_cmd,
+            stdout=open(os.devnull),
+            stderr=open(os.devnull),
+            shell=False
+    )
+    request.addfinalizer(xvfb_proc.kill)
+
+Now, all you have to do is to set up each tests to set the DISPLAY to 1022 which is trivial to do.
+
+answered Jan 18 '13 at 14:22
+Sardathrion
+
+
+you might also return the port number so that other fixtures can easily access 
+it by stating "start_xvfb_server" as an argument. Also you might want to 
+not use "autouse=True" but instead put @pytest.mark.usefixtures("start_xvfb_server") 
+on a class or so. This way you don't setup the process for tests not needing it. 
+–  hpk42 Jan 20 '13 at 11:33 
