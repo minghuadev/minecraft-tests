@@ -1,0 +1,53 @@
+#!/bin/bash
+# runa1
+
+allopt=" -p no:unittest -p no:pastebin -p no:nose -p no:monkeypatch -p no:junitxml -p no:doctest -p no:pdb "
+allopt=" $allopt -p no:genscript "
+#allopt=" $allopt --trace-config "
+allopt=" $allopt -s "
+
+allfile=" testa1_um.py "
+
+
+export PYTHONDONTWRITEBYTECODE=1
+
+
+time -f '%e %M %I %O'   py.test  $allopt  $allfile
+#time  -v  py.test  $allopt  $allfile
+
+
+exit 0
+
+#output with --trace-config. and removed plugins '###' from the list:
+
+#    session             : <Session 'current workdir'>
+#    /current/pytest/workdir/conftest.pyc: /current/pytest/workdir/conftest.pyc
+
+#    helpconfig          : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/helpconfig.pyc
+#    pytestconfig        : <_pytest.config.Config object at 0x8464f6c>
+#    runner              : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/runner.pyc
+###    unittest            : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/unittest.pyc
+###    pastebin            : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/pastebin.pyc
+#    skipping            : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/skipping.pyc
+###    genscript           : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/genscript.pyc
+#    tmpdir              : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/tmpdir.pyc
+#    capture             : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/capture.pyc
+#    terminalreporter    : <_pytest.terminal.TerminalReporter instance at 0x859388c>
+#    assertion           : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/assertion/__init__.pyc
+#    mark                : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/mark.pyc
+#    terminal            : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/terminal.pyc
+#    main                : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/main.pyc
+###    nose                : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/nose.pyc
+#    python              : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/python.pyc
+#    recwarn             : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/recwarn.pyc
+#    funcmanage          : <_pytest.python.FixtureManager instance at 0x868928c>
+#    137961868           : <_pytest.config.PytestPluginManager object at 0x839218c>
+###    monkeypatch         : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/monkeypatch.pyc
+#    resultlog           : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/resultlog.pyc
+#    capturemanager      : <_pytest.capture.CaptureManager instance at 0x858210c>
+###    junitxml            : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/junitxml.pyc
+###    doctest             : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/doctest.pyc
+###    pdb                 : /current/pytest/virtenv/lib/python2.7/site-packages/_pytest/pdb.pyc
+
+#example from http://pythontesting.net/framework/pytest/pytest-introduction/#example
+
