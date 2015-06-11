@@ -1,0 +1,71 @@
+
+Running with the --collection-only option to avoid running the actual tests. 
+Added a print to the hooks pytest_configure() and pytest_ignore_collect() to 
+be sure indeed it is before the collection starts. 
+
+Ran it through profiling by 
+  python -m cProfile -s cumulat ~/.../py.test conftest.py
+
+A problem with *posix.stat* in the cygwin or cygwin python package, or 
+the *exists* and *isfile* at various places. 
+
+   104699 function calls (102659 primitive calls) in 12.223 CPU seconds
+   Ordered by: cumulative time
+ ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      1    0.016    0.016   12.223   12.223 {execfile}
+      1    0.000    0.000   12.223   12.223 <string>:1(<module>)
+      1    0.000    0.000   12.207   12.207 py.test:4(<module>)
+      1    0.000    0.000   12.051   12.051 config.py:23(main)
+  48/22    0.000    0.000   12.051    0.548 core.py:526(_docall)
+  48/22    0.000    0.000   12.051    0.548 core.py:520(__call__)
+ 129/82    0.000    0.000   12.051    0.147 core.py:387(execute)
+      1    0.000    0.000   11.926   11.926 config.py:634(pytest_cmdline_parse)
+      1    0.000    0.000   11.926   11.926 config.py:70(_prepareconfig)
+      1    0.000    0.000   11.926   11.926 config.py:741(parse)
+    4/3    0.000    0.000   11.926    3.975 core.py:97(wrapped_call)
+    4/3    0.000    0.000   11.926    3.975 core.py:121(__init__)
+      1    0.000    0.000   11.911   11.911 config.py:706(_preparse)
+     70    0.000    0.000   11.817    0.169 local.py:363(check)
+    260   11.817    0.045   11.817    0.045 {posix.stat}  <<<<this one???
+      1    0.000    0.000    9.302    9.302 config.py:698(_initini)
+      1    0.000    0.000    9.286    9.286 config.py:896(determine_setup)
+    188    0.000    0.000    9.286    0.049 genericpath.py:15(exists)  <<<<this one???
+     18    0.000    0.000    6.861    0.381 config.py:845(exists)  <<<<this one???
+      1    0.000    0.000    6.861    6.861 config.py:851(getcfg)  <<<<this one???
+      1    0.000    0.000    2.531    2.531 config.py:694(pytest_load_initial_conftests)
+      1    0.000    0.000    2.531    2.531 config.py:477(setinitial)
+      1    0.000    0.000    2.531    2.531 config.py:503(_try_load_conftest)
+     13    0.000    0.000    2.531    0.195 config.py:511(getconftestmodules)
+     32    0.000    0.000    2.531    0.079 genericpath.py:26(isfile)  <<<<this one???
+      8    0.000    0.000    2.425    0.303 common.py:261(exists)
+      1    0.000    0.000    0.156    0.156 pytest.py:4(<module>)
+      1    0.000    0.000    0.125    0.125 main.py:73(wrap_session)
+      1    0.000    0.000    0.125    0.125 config.py:615(do_configure)
+      1    0.000    0.000    0.125    0.125 main.py:115(pytest_cmdline_main)
+      1    0.000    0.000    0.109    0.109 config.py:56(_preloadplugins)
+  45/33    0.016    0.000    0.109    0.003 {__import__}
+      2    0.000    0.000    0.109    0.055 config.py:60(get_plugin_manager)
+199/157    0.016    0.000    0.109    0.001 posixpath.py:354(realpath)
+      1    0.000    0.000    0.109    0.109 __init__.py:44(pytest_configure)
+      1    0.000    0.000    0.094    0.094 inspect.py:512(findsource)
+   1524    0.094    0.000    0.094    0.000 {posix.lstat}
+      1    0.000    0.000    0.094    0.094 inspect.py:466(getmodule)
+   1524    0.000    0.000    0.094    0.000 posixpath.py:129(islink)
+      1    0.000    0.000    0.094    0.094 code.py:45(fullsource)
+      1    0.000    0.000    0.094    0.094 source.py:255(findsource)
+     20    0.000    0.000    0.094    0.005 core.py:363(importplugin)
+
+
+A note about sorting in profiling: It is hard to figure out what keyword to use. 
+Adding a line to print out the sort_arg_defs in pstats.py could give an idea:
+
+$ cat -n /usr/lib/python2.x.x/pstats.py
+214         sort_arg_defs = self.get_sort_arg_defs()
+215         sort_tuple = ()
+216         self.sort_type = ""
+217         connector = ""
+218         for word in field:
+219             sort_tuple = sort_tuple + sort_arg_defs[word][0]
+220             self.sort_type += connector + sort_arg_defs[word][1]
+221             connector = ", "
+
