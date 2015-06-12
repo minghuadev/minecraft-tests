@@ -1,0 +1,21 @@
+
+
+The problem is that pytest searches for //pytest.ini, //tox.ini, //setup.cfg, and //setup.py. 
+Each of them caused either genericpath.exists() or genericpath.isfile() to consume about 2.5 
+seconds.
+
+One fix is to add the lines below to genericpath.exists() and genericpath.isfile() to skip 
+those four specific paths.
+
+    if path.startswith(r'//'):
+        return False
+
+An alternative fix would be to modify _pytest/config.py so that it does not form those 
+double-slash in the paths to search. 
+
+Another way not to edit/hack the installation is to have cygwin invoke a windows native python 
+instead of the cygwin python. That is, replace the command py.test with 
+c:/python/path/Scripts/python.exe c:/ython/path/Scripts/py.test-script.py, 
+if your windows python is installed at c:/python/path. 
+
+

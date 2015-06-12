@@ -1,0 +1,49 @@
+$ diff -u /usr/lib/python2.6/genericpath.py genericpath.py
+--- /usr/lib/python2.6/genericpath.py   2012-06-09 08:33:12.000000000 -0700
++++ genericpath.py      2015-06-11 11:46:33.674285900 -0700
+@@ -9,14 +9,29 @@
+ __all__ = ['commonprefix', 'exists', 'getatime', 'getctime', 'getmtime',
+            'getsize', 'isdir', 'isfile']
+
++myshow = False
++import time as mytime
++mybasetime = mytime.time()
++def myshowtime():
++    currenttime = mytime.time()
++    tmdiff = currenttime - mybasetime
++    global mybasetime
++    mybasetime = currenttime
++    return tmdiff
+
+ # Does a path exist?
+ # This is false for dangling symbolic links on systems that support them.
+ def exists(path):
+     """Test whether a path exists.  Returns False for broken symbolic links"""
++    pretime = myshowtime()
++    if path.startswith(r'//'):
++        if myshow: print "\n  genericpath exists  %8.3f %8.3f False " % (pretime, myshowtime()), " ", path, "\n"
++        return False
+     try:
+         st = os.stat(path)
++        if myshow: print "\n  genericpath exists  %8.3f %8.3f True  " % (pretime, myshowtime()), " ", path, "\n"
+     except os.error:
++        if myshow: print "\n  genericpath exists  %8.3f %8.3f False " % (pretime, myshowtime()), " ", path, "\n"
+         return False
+     return True
+
+@@ -25,9 +40,15 @@
+ # for the same path ono systems that support symlinks
+ def isfile(path):
+     """Test whether a path is a regular file"""
++    pretime = myshowtime()
++    if path.startswith(r'//'):
++        if myshow: print "\n  genericpath isfile  %8.3f %8.3f False " % (pretime, myshowtime()), " ", path, "\n"
++        return False
+     try:
+         st = os.stat(path)
++        if myshow: print "\n  genericpath isfile  %8.3f %8.3f True  " % (pretime, myshowtime()), " ", path, "\n"
+     except os.error:
++        if myshow: print "\n  genericpath isfile  %8.3f %8.3f False " % (pretime, myshowtime()), " ", path, "\n"
+         return False
+     return stat.S_ISREG(st.st_mode)
+
