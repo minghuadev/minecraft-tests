@@ -37,7 +37,7 @@
 +        myfiles['lastwrite'] = mytime.time()
 +        ff = open(mycache, 'w')
 +        import json as mypickle
-+        mypickle.dump(myfiles, ff, 1)
++        mypickle.dump(myfiles, ff, indent=1)
 +        ff.close()
 +def mycachehas(path):
 +    if not mycache_ison:
