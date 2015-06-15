@@ -1,0 +1,37 @@
+
+
+https://pytest.org/latest/example/simple.html
+
+
+
+# content of conftest.py
+
+import pytest
+def pytest_addoption(parser):
+    parser.addoption("--runslow", action="store_true",
+        help="run slow tests")
+
+def pytest_runtest_setup(item):
+    if 'slow' in item.keywords and not item.config.getoption("--runslow"):
+        pytest.skip("need --runslow option to run")
+
+
+# content of test_module.py
+
+import pytest
+slow = pytest.mark.slow
+
+def test_func_fast():
+    pass
+
+@slow
+def test_func_slow():
+    pass
+
+
+
+$ py.test -rs    # "-rs" means report details on the little 's'
+$ py.test --runslow
+
+
+
