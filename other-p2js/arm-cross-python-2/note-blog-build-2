@@ -1,4 +1,139 @@
 
 http://www.trevorbowen.com/2013/10/07/cross-compiling-python-2-7-5-for-embedded-linux/
+posted oct 07 2013
+
+
+An Updated Patch and Build Process for Python-2.7.5
+------------------------------------------------------
+
+Using [this patch](http://bugs.python.org/file31991/Python-2.7.5-xcompile.patch) and a suitable cross-compilation tool-chain (gcc, c++, ar, ranlib, etc.), the following process can be used to build Python-2.7.5 on one Linux system to run on another Linux process:
+Prepare Sources
+
+ $ export RFS=/path_to_embedded_root_file_system
+ $ wget http://www.python.org/ftp/python/2.7.5/Python-2.7.5.tar.bz2
+ $ tar -jxf Python-2.7.5.tar.bz2
+ $ cp <wherever_you_saved_it>/Python-2.7.5-xcompile.patch Python-2.7.5/
+ $ cd Python-2.7.5
+
+Most embedded projects will have a directory on the build system, which contains all of the directories and files to be placed on the root file system of the embedded device. In this script, the full path to this directory is defined as RFS. The remaining steps retrieve the source code, unpack it, copy the above patch into place, and change into the build directory.
+
+
+Step #1 – Compile Programs Used by Build System During Build
+--------------------------------------------------------------
+
+The first major step compiles 2 binaries to run on the build system: the python interpreter and Parser/pgen:
+
+ $ ./configure  # for build-system's native tool-chain
+ $ make python Parser/pgen
+ $ mv python python_for_build
+ $ mv Parser/pgen Parser/pgen_for_build
+
+After building these 2 binaries, they are moved aside for later use during the full cross-compilation and installation process.
+
+
+Patch Build Files and Prepare for Cross-Compilation
+-----------------------------------------------------
+
+In preparation for the next step, all of the compiled files – except for the 2 moved aside – are deleted, the build files are re-configured using the cross-compilation toolchain, and the full Python suite is built including modules, such as ssl, zlib, and ctypes:
+
+ $ export PATH="/opt/freescale/usr/local/gcc-4.3.74-eglibc-2.8.74-dp-2/powerpc-none-linux-gnuspe/bin:${PATH}"
+ $ make distclean
+ $ ./configure --host=powerpc-none-linux-gnuspe --build=i586-linux-gnu --prefix=/ \
+    --disable-ipv6 ac_cv_file__dev_ptmx=no ac_cv_file__dev_ptc=no                    \
+    ac_cv_have_long_long_format=yes
+
+I have included the full path to my current tool-chain as an example. (I have used this process for both x86 and x86_64 build systems to produce a Python installation for a Freescale PowerPC embedded Linux system.) Please notice how the path contains and corresponds to the “host” entry in the cross-compilation configuration step. I had to specify a few extra switches (disable-ipv6, ac_cv_file__dev_ptms, ac_cv_file__dev_ptc, and ac_cv_have_long_long_format) to help the configure script resolve some tests that required execution on the host. These will vary depending upon your embedded host system’s architecture.
+
+For reference, here is the list directory listing of the above cross-compilation tool-chain:
+
+$ ls -la /opt/freescale/usr/local/gcc-4.3.74-eglibc-2.8.74-dp-2/powerpc-none-linux-gnuspe/bin
+-rwxrwxrwx 1 root root  590485 Mar  5  2012 powerpc-none-linux-gnuspe-addr2line
+-rwxrwxrwx 1 root root  614647 Mar  5  2012 powerpc-none-linux-gnuspe-ar
+-rwxrwxrwx 1 root root  897161 Mar  5  2012 powerpc-none-linux-gnuspe-as
+-rwxrwxrwx 1 root root  235382 Mar  5  2012 powerpc-none-linux-gnuspe-c++
+-rwxrwxrwx 1 root root  589227 Mar  5  2012 powerpc-none-linux-gnuspe-c++filt
+-rwxrwxrwx 1 root root  234277 Mar  5  2012 powerpc-none-linux-gnuspe-cpp
+-rwxrwxrwx 1 root root    8503 Mar  5  2012 powerpc-none-linux-gnuspe-embedspu
+-rwxrwxrwx 1 root root  235382 Mar  5  2012 powerpc-none-linux-gnuspe-g++
+-rwxrwxrwx 1 root root  233126 Mar  5  2012 powerpc-none-linux-gnuspe-gcc
+-rwxrwxrwx 1 root root  233126 Mar  5  2012 powerpc-none-linux-gnuspe-gcc-4.3.2
+-rwxrwxrwx 1 root root   16512 Mar  5  2012 powerpc-none-linux-gnuspe-gccbug
+-rwxrwxrwx 1 root root   28017 Mar  5  2012 powerpc-none-linux-gnuspe-gcov
+-rwxrwxrwx 1 root root  655127 Mar  5  2012 powerpc-none-linux-gnuspe-gprof
+-rwxrwxrwx 1 root root 1036372 Mar  5  2012 powerpc-none-linux-gnuspe-ld
+-rwxrwxrwx 1 root root  603678 Mar  5  2012 powerpc-none-linux-gnuspe-nm
+-rwxrwxrwx 1 root root  750617 Mar  5  2012 powerpc-none-linux-gnuspe-objcopy
+-rwxrwxrwx 1 root root  895336 Mar  5  2012 powerpc-none-linux-gnuspe-objdump
+-rwxrwxrwx 1 root root  614647 Mar  5  2012 powerpc-none-linux-gnuspe-ranlib
+-rwxrwxrwx 1 root root  264063 Mar  5  2012 powerpc-none-linux-gnuspe-readelf
+-rwxrwxrwx 1 root root  593901 Mar  5  2012 powerpc-none-linux-gnuspe-size
+-rwxrwxrwx 1 root root  591853 Mar  5  2012 powerpc-none-linux-gnuspe-strings
+-rwxrwxrwx 1 root root  750617 Mar  5  2012 powerpc-none-linux-gnuspe-strip
+
+As you can see, each of the binaries are prefixed with “powerpc-none-linux-gnuspe-“, which corresponds directly with the “host” variable in the configuration step.  (Please ignore the fact that these binaries are world writable!  This is not good, but it is a secure build system, and this is an artifact of some unrelated build system workarounds.   Your binaries should only be writable by user.)
+
+
+Step #2 – Cross-Compilation
+-----------------------------
+
+Having re-configured the sources for cross-compilation, the next major step is to actually cross-compile the fully Python suite include modules:
+
+ $ make --jobs=8 \
+    CFLAGS="-g0 -Os -s -I${RFS}/usr/include -fdata-sections -ffunction-sections" \
+    LDFLAGS='-L${RFS}/usr/lib -L${RFS}/lib'
+
+The linked patch hard-codes additional build dependencies, where the compiler and linker can find header and library dependencies, like so:
+
+
+diff --git a/packages/Python-2.7.5/setup.py b/packages/Python-2.7.5/setup.py
+index 716f08e..ca8b141 100644
+--- a/packages/Python-2.7.5/setup.py
++++ b/packages/Python-2.7.5/setup.py
+
+@@ -552,6 +556,11 @@ class PyBuildExt(build_ext):
+         if host_platform in ['darwin', 'beos']:
+             math_libs = []
+
++        # Insert libraries and headers from embedded root file system (RFS)
++        if 'RFS' in os.environ:
++            lib_dirs += [os.environ['RFS'] + '/usr/lib']
++            inc_dirs += [os.environ['RFS'] + '/usr/include']
++
+         # XXX Omitted modules: gl, pure, dl, SGI-specific modules
+
+         #
+
+
+However, they are also embedded in the above CFLAGS and LDFLAGS for good measure. :) Please notice that the patch depends on the RFS serving as a flag to trigger this behavior.
+
+
+Optional:  Reduce Binary Size
+-------------------------------
+
+Optionally, additional compilation flags are also set in the above step, which help the cross-compilation strip tool reduce the binary size, like so:
+
+ powerpc-none-linux-gnuspe-strip --strip-unneeded python
+
+This is entirely optional. Removing this step and the data-sections and function-sections compiler flags may help simplify the process, when troubleshooting.
+
+
+Install into Root File System for Embedded Target
+---------------------------------------------------
+
+Lastly, the suite can be installed into the embedded device’s root file system, like so:
+
+ $ sudo make install DESTDIR=${RFS} PATH="${PATH}"
+
+Often but not always, embedded root file system directories on the build system are owned by root; consequently, sudo is required to modify any files in the RFS directory. Since sudo also disregards the PATH environment variable, it must be passed explicitly via the command line.
+
+
+Conclusion
+------------
+
+Although patches and similar processes have been provided by others for Python-2.7.3 and below, there have been no recent updates or tutorials for 2.7.4 or 2.7.5 that I have been able to find on the internet. Most likely, this delay is because of the significant cross-compilation changes and the daunting complexity of the Python build process. The above process and linked patches enable this ongoing process for Python-2.7.5 and hopefully other future versions.  Hopefully, this patch set will eventually disappear as increasingly more cross-compilation capability is integrated into Python’s own internal build process.
+
+Although I don’t have time to support this patch, if you have any suggestions on improving it, or if you find any bugs, please let me know in comments below.
+
+A more elaborate build script with error checking and comments is available [here for download](http://bugs.python.org/file31992/cross-compile.sh).
 
 
