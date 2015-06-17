@@ -1,0 +1,234 @@
+
+http://pypy.org/download.html
+
+
+
+Download and install
+
+There are nightly binary builds available. Those builds are not always as stable as the release, but they contain numerous bugfixes and performance improvements.
+
+We provide binaries for x86 and ARM Linux, Mac OS/X and Windows for:
+
+    the Python2.7 compatible release — PyPy 2.6.0 — (what's new in PyPy 2.6.0?)
+    the Python3.2.5 compatible release — PyPy3 2.4.0 — (what's new in PyPy3 2.4.0?).
+    the Python2.7 Software Transactional Memory special release — PyPy-STM 2.5.1 (Linux x86-64 only)
+
+
+
+“JIT Compiler” version
+
+These binaries include a Just-in-Time compiler. They only work on x86 CPUs that have the SSE2 instruction set (most of them do, nowadays), or on x86-64 CPUs. They also contain stackless extensions, like greenlets.
+
+
+
+Linux binaries and common distributions
+
+Linux binaries are dynamically linked, as is usual, and thus might not be usable due to the sad story of linux binary compatibility. This means that Linux binaries are only usable on the distributions written next to them unless you're ready to hack your system by adding symlinks to the libraries it tries to open. There are better solutions:
+
+    use Squeaky's portable Linux binaries.
+    or download PyPy from your release vendor (usually an outdated version): Ubuntu (PPA), Debian, Homebrew, MacPorts, Fedora, Gentoo and Arch are known to package PyPy, with various degrees of being up-to-date.
+
+
+
+Python2.7 compatible PyPy 2.6.0
+
+    Linux x86 binary (32bit, tar.bz2 built on Ubuntu 12.04 - 14.04) (see [1] below)
+    Linux x86-64 binary (64bit, tar.bz2 built on Ubuntu 12.04 - 14.04) (see [1] below)
+    ARM Hardfloat Linux binary (ARMHF/gnueabihf, tar.bz2, Raspbian) (see [1] below)
+    ARM Hardfloat Linux binary (ARMHF/gnueabihf, tar.bz2, Ubuntu Raring) (see [1] below)
+    ARM Softfloat Linux binary (ARMEL/gnueabi, tar.bz2, Ubuntu Precise) (see [1] below)
+    Mac OS/X binary (64bit)
+    Windows binary (32bit) (you might need the VS 2008 runtime library installer vcredist_x86.exe.)
+    Source (tar.bz2); Source (zip). See below for more about the sources.
+    All our downloads, including previous versions. We also have a mirror, but please use only if you have troubles accessing the links above
+
+
+
+Python 3.2.5 compatible PyPy3 2.4.0
+
+    Linux x86 binary (32bit, tar.bz2 built on Ubuntu 10.04.4 LTS) (see [1] below)
+    Linux x86-64 binary (64bit, tar.bz2 built on Ubuntu 12.04 - 14.04) (see [1] below)
+    ARM Hardfloat Linux binary (ARMHF/gnueabihf, tar.bz2, Raspbian) (see [1] below)
+    ARM Hardfloat Linux binary (ARMHF/gnueabihf, tar.bz2, Ubuntu Raring) (see [1] below)
+    ARM Softfloat Linux binary (ARMEL/gnueabi, tar.bz2, Ubuntu Precise) (see [1] below)
+    Mac OS/X binary (64bit)
+    Windows binary (32bit) (you might need the VS 2008 runtime library installer vcredist_x86.exe.)
+    Source (tar.bz2)
+    Source (zip)
+    All our downloads, including previous versions. We also have a mirror, but please use only if you have troubles accessing the links above
+
+If your CPU is really, really old, it may be a x86-32 without SSE2. We could at some point make a PyPy with a JIT without SSE2 –ask us on IRC if you really want to know more– but note that your machine is probably low-spec enough that running CPython on it is a better idea in the first place.
+
+[1]: stating it again: the Linux binaries are provided for the distributions listed here. If your distribution is not exactly this one, it won't work, you will probably see: pypy: error while loading shared libraries: …. Unless you want to hack a lot, try out the portable Linux binaries.
+
+
+
+PyPy-STM 2.5.1
+
+This is a special version of PyPy! See the Software Transactional Memory (STM) documentation.
+
+    PyPy-STM Linux x86-64 binary (64bit, tar.bz2 built on Ubuntu 12.04 - 14.04)
+
+
+
+Other versions
+
+The other versions of PyPy are:
+
+    The most up-to-date nightly binary builds with a JIT, if the official release is too old for what you want to do. There are versions for different libc on this site too.
+    Sandboxing: A special safe version. Read the docs about sandboxing. (It is also possible to translate a version that includes both sandboxing and the JIT compiler, although as the JIT is relatively complicated, this reduces a bit the level of confidence we can put in the result.) Note that the sandboxed binary needs a full pypy checkout to work. Consult the sandbox docs for details. (These are old, PyPy 1.8.)
+        Linux binary (64bit)
+        Linux binary (32bit)
+
+
+
+Installing
+
+All binary versions are packaged in a tar.bz2 or zip file. When uncompressed, they run in-place. For now you can uncompress them either somewhere in your home directory or, say, in /opt, and if you want, put a symlink from somewhere like /usr/local/bin/pypy to /path/to/pypy-2.6.0/bin/pypy. Do not move or copy the executable pypy outside the tree – put a symlink to it, otherwise it will not find its libraries.
+
+
+
+Installing more modules
+
+The recommended way is to install pip, which is the standard package manager of Python. It works like it does on CPython. One practical difference, though, is that it usually comes pre-packaged for you when you get CPython from a place like your Linux distribution. In the case of PyPy (or CPython if you download it from http://www.python.org/), you need to get it separately, as explained in our FAQ.
+
+
+
+Installing NumPy
+
+NumPy is an exception to the rule that most packages work without changes. The “numpy” module needs to be installed from our own repository rather than from the official source.
+
+If you have pip:
+
+pypy -m pip install git+https://bitbucket.org/pypy/numpy.git
+
+Alternatively, the direct way:
+
+git clone https://bitbucket.org/pypy/numpy.git
+cd numpy
+pypy setup.py install
+
+If you installed to a system directory, you need to also run this once:
+
+sudo pypy -c 'import numpy'
+
+Note that NumPy support is still a work-in-progress, many things do not work and those that do may not be any faster than NumPy on CPython. For further instructions see the pypy/numpy repository.
+
+
+
+Building from source
+
+    Get the source code. The following packages contain the source at the same revision as the above binaries:
+        pypy-2.6.0-src.tar.bz2 (sources)
+
+    Or you can checkout the current trunk using Mercurial (the trunk usually works and is of course more up-to-date):
+
+    hg clone https://bitbucket.org/pypy/pypy
+
+    Make sure you installed the dependencies. See the list here.
+
+    Enter the goal directory:
+
+    cd pypy/pypy/goal
+
+    Run the rpython script. Here are the common combinations of options (works also with python instead of pypy; requires Python 2.x or PyPy 2):
+
+    pypy ../../rpython/bin/rpython -Ojit targetpypystandalone           # get the JIT version
+    pypy ../../rpython/bin/rpython -O2 targetpypystandalone             # get the no-jit version
+    pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sandbox version
+
+    Enjoy Mandelbrot :-) It takes on the order of an hour to finish the translation, and 2.x GB of RAM on a 32-bit system and 4.x GB on 64-bit systems. (Do not start a translation on a machine with insufficient RAM! It will just swap forever. See notes below in that case.)
+
+    If you want to install this PyPy as root, please read the next section.
+
+Notes:
+
+    It is recommended to use PyPy to do translations, instead of using CPython, because it is twice as fast. You should just start by downloading an official release of PyPy (with the JIT). If you really have to use CPython then note that we are talking about CPython 2.5-2.7 here, not CPython 3.x.
+
+    If RAM usage is a problem (or if you are on Windows, because win32's limit is 2 GB unless you have a 64 bit OS), then you can (for now) tweak some parameters via environment variables and command-line options. The following command takes a bit more time, but finishes with only using 3.0 GB of RAM (on Linux 64-bit; probably not much more than 1.6 GB on 32-bit). It should be noted that it is less than with CPython.
+
+    PYPY_GC_MAX_DELTA=200MB pypy --jit loop_longevity=300 ../../rpython/bin/rpython -Ojit targetpypystandalone
+
+    On Linux, because of asmgcroot, compiling the generated C files is delicate. It requires using gcc with no particularly fancy options. It does not work e.g. with clang, or if you pass uncommon options with the CFLAGS environment variable. If you insist on passing these options or using clang, then you can compile PyPy with the shadow stack option instead (for a small performance price in non-JITted code).
+
+
+
+Packaging
+
+Once PyPy is translated from source the binary package similar to those provided in the section Default (with a JIT Compiler) above could be easily created with package.py script as following:
+
+cd ./pypy/pypy/tool/release/
+python package.py --help #for information
+python package.py --archive-name pypy-my-own-package-name
+
+It is recommended to use package.py because custom scripts will invariably become out-of-date. If you want to write custom scripts anyway, note an easy-to-miss point: some modules are written with CFFI, and require some compilation. If you install PyPy as root without pre-compiling them, normal users will get errors:
+
+    PyPy 2.5.1 or earlier: normal users would see permission errors. Installers need to run pypy -c “import gdbm” and other similar commands at install time; the exact list is in package.py. Users seeing a broken installation of PyPy can fix it after-the-fact if they have sudo rights, by running once e.g. sudo pypy -c "import gdbm.
+    PyPy 2.6 and later: anyone would get ImportError: no module named _gdbm_cffi. Installers need to run pypy _gdbm_build.py in the lib_pypy directory during the installation process (plus others; see the exact list in package.py). Users seeing a broken installation of PyPy can fix it after-the-fact, by running pypy /path/to/lib_pypy/_gdbm_build.py. This command produces a file called _gdbm_cffi.pypy-26.so locally, which is a C extension module for PyPy. You can move it at any place where modules are normally found: e.g. in your project's main directory, or in a directory that you add to the env var PYTHONPATH.
+
+
+
+Checksums
+
+Here are the checksums for each of the downloads
+
+pypy-2.6.0 md5:
+
+7ea431ab25737462e23a65b9c3819de3  pypy-2.6.0-linux64.tar.bz2
+edec421b668d945c3922bb6a543b58c8  pypy-2.6.0-linux-armel.tar.bz2
+884f1e49fb130c0b8216795d7017025a  pypy-2.6.0-linux-armhf-raring.tar.bz2
+f6e7a7ffc775150994319c2d6f932c41  pypy-2.6.0-linux-armhf-raspbian.tar.bz2
+802f5122a691718dddcece43687cb2cf  pypy-2.6.0-linux.tar.bz2
+63d49e5ead794e6a83c9d87b577d806d  pypy-2.6.0-osx64.tar.bz2
+b09ab96f50ab3021d020e321f210e4c0  pypy-2.6.0-src.tar.bz2
+81297e691d861adb0c89e8a94ef44e8b  pypy-2.6.0-src.zip
+6a1e5451e98a19027333368280b465e1  pypy-2.6.0-win32.zip
+
+pypy3-2.4.0 md5:
+
+eadbc9790823fc0ae40c943087cd7cb3  pypy3-2.4.0-linux64.tar.bz2
+7ab84727da2d5363866907f2f7921d86  pypy3-2.4.0-linux-armel.tar.bz2
+83158d3a55ca134b179ef01dc2bb6a30  pypy3-2.4.0-linux-armhf-raring.tar.bz2
+b0b81cfa46e970c584bda10feebe1a85  pypy3-2.4.0-linux-armhf-raspbian.tar.bz2
+68af7a6ca5948a1448a4b9c839d1472c  pypy3-2.4.0-linux.tar.bz2
+c6cd12602469446db1dfa1e2bc6c699c  pypy3-2.4.0-osx64.tar.bz2
+8514f16b1a6262828e824bd8b37607db  pypy3-2.4.0-win32.zip
+96ba72916114d16904e12562b5d84e51  pypy3-2.4.0-src.tar.bz2
+c58015d0d3e08a9f24b93b8edca26d4d  pypy3-2.4.0-src.zip
+
+pypy-1.8 sandbox md5:
+
+2c9f0054f3b93a6473f10be35277825a  pypy-1.8-sandbox-linux64.tar.bz2
+009c970b5fa75754ae4c32a5d108a8d4  pypy-1.8-sandbox-linux.tar.bz2
+
+pypy-2.6.0 sha1:
+
+03374692eac05b5402b8fb16be9284efda5a0440  pypy-2.6.0-linux64.tar.bz2
+a3029480d3da45793b4a754ef86fca76f5aa0664  pypy-2.6.0-linux-armel.tar.bz2
+075864a8a8148c9439f8f1b59690d946d7c44ce8  pypy-2.6.0-linux-armhf-raring.tar.bz2
+0fa9a25781659e2b1d40482af315f5b7e73d7473  pypy-2.6.0-linux-armhf-raspbian.tar.bz2
+792db4424bf1654ee66f6dc7bdddc89746cef3f4  pypy-2.6.0-linux.tar.bz2
+fb1da056f355a19181b1a4e13699119a92807ccc  pypy-2.6.0-osx64.tar.bz2
+d6580ed01c0b963ef3735e810bc750b8d44f11f2  pypy-2.6.0-src.tar.bz2
+b768f87e8db6432bff3970bbb7a664c412fb4e1c  pypy-2.6.0-src.zip
+a4e212172f9656021d69af4baddc24f7139dde8c  pypy-2.6.0-win32.zip
+
+pypy3-2.4.0 sha1:
+
+7d715742f6929351b310a2ca3b924cab35913089  pypy3-2.4.0-linux64.tar.bz2
+b33e817f3557f91c434032c9f74e5220fe70036c  pypy3-2.4.0-linux-armel.tar.bz2
+bb098b72ecc83a0e73c426f364bb6a0974fb9360  pypy3-2.4.0-linux-armhf-raring.tar.bz2
+775dc9f8073c4fad7cd220c4b5dd385e7be469e9  pypy3-2.4.0-linux-armhf-raspbian.tar.bz2
+c39061f3e5e7a05548eb89c5cbd3ed81a795879f  pypy3-2.4.0-linux.tar.bz2
+9f01d8c5e18c8c7d54fc6ab77dbf5673a65c2af9  pypy3-2.4.0-osx64.tar.bz2
+2efca54daa4c5da23ef577d70006376e13cfb6b8  pypy3-2.4.0-win32.zip
+438572443ae6f54eb6122d807f104787c5247e01  pypy3-2.4.0-src.tar.bz2
+bd0a91cdda965f42c382bf00f4a2fb8677b929a6  pypy3-2.4.0-src.zip
+
+pypy-1.8 sandbox sha1:
+
+895aaf7bba5787dd30adda5cc0e0e7fc297c0ca7  pypy-1.8-sandbox-linux64.tar.bz2
+be94460bed8b2682880495435c309b6611ae2c31  pypy-1.8-sandbox-linux.tar.bz2
+
+
+
