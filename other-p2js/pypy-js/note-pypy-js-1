@@ -1,0 +1,254 @@
+
+https://www.rfk.id.au/blog/entry/pypy-js-first-steps/
+
+Ryan Kelly
+Tue, 23 Jul 2013
+[technology] [mozilla] [python] [javascript]
+
+PyPy.js: First Steps
+======================
+
+I've been spending a lot of time in JavaScript land lately. It's not totally 
+unexpected – when I first applied for a job with Mozilla, I was warned only 
+semi-jokingly that "they hire all the best Python programmers and then force 
+them to write JavaScript". I've no deep love or hate for it as a language, 
+but JavaScript is pretty interesting to me as a _platform_, as a kind of 
+runs-everywhere lowest-common-denominator environment that is slowly being 
+molded and coerced into a pretty decent universal runtime. But if ["the Web 
+is the Platform"](https://blog.mozilla.org/blog/2012/02/27/mozilla-in-mobile-
+the-web-is-the-platform/), what's a stranded Pythonista to do?
+
+Port Python to JavaScript, of course!
+
+This has been done before in a variety of ways. [Skulpt]() and [Brython]() 
+are impressive re-implementations of Python on top of JavaScript, including 
+interactive consoles that make for a very compelling demo. [Pyjamas]() lets 
+you translate Python apps into JavaScript so they can be run in the browser. 
+There are many more examples with varying degrees of success and completeness.
+
+I don't want to down-play the phenomenal efforts behind projects like this. 
+But personally, I'm a little wary of the re-implementation treadmill that 
+they risk being stuck on. I'd much prefer to leverage the work that's already 
+been done on making a fantastic Python interpreter, along with the work that's 
+already been done on making a fantastic JavaScript runtime, and re-implement 
+as little as possible while gluing them both together.
+
+I've finally taken my first tentative steps down that path, by combining 
+two amazing projects open-source projects: [PyPy]() and [Emscripten]().
+
+PyPy
+--------
+
+PyPy advertises itself as ["a fast, compliant alternative implementation of 
+the Python language"](), and it has a slick [speedtest site](speed.pypy.org) 
+to back up its claims. Speed is great of course, but what's really interesting 
+to me are the details of its implementation. In the process of building 
+a new Python interpreter, the PyPy team have created an powerful generic 
+toolkit for constructing dynamic language interpreters, and as a result 
+the PyPy project comes in two largely-independent halves.
+
+First there is the PyPy interpreter itself, which is written entirely in 
+Python. To be more specific, it's written in a restricted subset of 
+the language called [RPython](), which keeps many of the niceties of 
+the full Python language while enabling efficient ahead-of-time 
+compilation. This allows for greater ease and flexibility of development 
+than implementing the interpreter directly in C, as is done with 
+the standard interpreter available from [python.org]().
+
+Second, there is the [RPython translation toolchain](), which provides 
+a dazzling array of different methods and options for turning RPython 
+code into an executable. It can translate RPython into low-level C code 
+for direct compilation, or into higher-level bytecode for the Java 
+and .NET virtual machines. It can plug in any one of several different 
+memory-management schemes, threading implementations, and a host of other 
+options to customize the final executable.
+
+The RPython toolchain also contains the secret to PyPy's speed: the ability 
+to mostly-automatically generate a [just-in-time compiler]() for the hot 
+loops of an RPython program. It's meta-level magic of the deepest sort, 
+and it's exactly the kind of thing that would be needed to get decent 
+performance out of a Python interpreter running on the web.
+
+So in theory, we could get a fast and compliant port of Python to JavaScript 
+just by implementing a JavaScript-emitting backend for the RPython translation 
+toolchain.
+
+Emscripten
+--------------
+
+Emscripten is ["an LLVM to JavaScript compiler"]() that can be used 
+to compile C or C++ programs into JavaScript. It is typically used to bring 
+large existing C++ apps to the web, and is the compiler behind the recent 
+demo of [Epic Citadel running in the browser](). It's a terrifyingly 
+beautiful hack, and thanks to recent hot competition in the 
+browser-JavaScript-performance space, the resulting code can provide 
+quite acceptable performance.
+
+The techniques used by Emscripten to map the C programming model onto 
+JavaScript have recently been formalized in a specification called 
+[asm.js](asmjs.org), a restricted subset of JavaScript that allows 
+efficient ahead-of-time compilation. In JavaScript engines that 
+recognize asm.js code, an Emscripten-compiled program can perform 
+with overhead as low as [just two-times slowdown]() when compared to 
+a native executable.
+
+The potential combination of these two technologies is obvious in theory: 
+have the RPython toolchain compile things down to C code; compile 
+the C code to JavaScript using Emscripten; party down with Python 
+in your browser.
+
+Indeed, Emscripten has previously been used to compile the standard 
+C-based Python interpreter into JavaScript; this is what powers 
+the Python shell at [repl.it](repl.it). But the thought of unlocking 
+the extra speed of PyPy is quite seductive, and the flexibility 
+of the RPython build chain should open up some interesting possibilities. 
+So what might it look like?
+
+A JavaScript backend for RPython
+-------------------------------------
+
+To the great credit of the PyPy and Emscripten developers, combining 
+these two technologies was almost as easy in practice as it sounds 
+in theory. PyPy's RPython toolchain has extension points that let you 
+easily plug in a custom compiler, or indeed a whole new toolchain. 
+My github fork contains the necessary logic to hook it up to Emscripten:
+
+  https://github.com/rfk/pypy
+
+Emscripten goes out of its way to act like a standard posix build chain, 
+asking only that you replace the usual "gcc" invocation with "emcc". 
+I did have to make a few tweaks to the simulated posix runtime environment, 
+so you'll need to use my fork until these are merged with upstream:
+
+  https://github.com/rfk/emscripten
+
+To compile RPython code into a normal executable, you invoke the "rpython" 
+translator program on it. Here's a simple hello-world example that 
+can be run out-of-the-box from the PyPy source repo:
+
+  $> python ./rpython/bin/rpython ./rpython/translator/goal/targetnopstandalone.py 
+  [...lots and lots of compiler output...] 
+  $> 
+  $> ./targetnopstandalone-c 
+  debug: hello world 
+  $> 
+
+To instead compile the RPython code into JavaScript, you just need to 
+specify the "--backend=js" option. The resulting JavaScript file can 
+be executed from the command-line using a JavaScript shell such as nodejs:
+
+  $> python ./rpython/bin/rpython --backend=js ./rpython/translator/goal/targetnopstandalone.py 
+  [...lots and lots of compiler output...] 
+  $> 
+  $> node ./targetnopstandalone-js 
+  debug: hello world 
+  $>
+
+That is pretty much all there is to it. If you've got a few spare hours, 
+you can translate the entire PyPy interpreter into JavaScript by doing 
+the following:
+
+  $> python ./rpython/bin/rpython --backend=js --opt=2 ./pypy/goal/targetpypystandalone.py 
+  [...seriously, this will take forever...] 
+  ^C 
+  $>
+
+Or you can just grab the end result: [pypy.js](
+https://www.rfk.id.au/blog/entry/pypy-js-first-steps/pypy.js.gz).
+
+Uncompressed, that's 139M of generated JavaScript. It includes a full 
+Python language interpreter, a couple of the more important builtin 
+modules, and the bundled contents of all the .py files from the Python 
+standard library. If you've got a JavaScript shell handy, you can run 
+Python commands with this thing by passing them on the command-line like so:
+
+  $> node pypy.js -c 'print "HELLO WORLD"' 
+  debug: WARNING: Library path not found, using compiled-in sys.path. 
+  debug: WARNING: 'sys.prefix' will not be set. 
+  debug: WARNING: Make sure the pypy binary is kept inside its tree of files. 
+  debug: WARNING: It is ok to create a symlink to it from somewhere else. 
+  'import site' failed 
+  HELLO WORLD 
+  $> 
+
+As you might expect, this first version comes with quite a list of caveats:
+
+  * There's no JIT compiler. I explicitly disabled it by passing in 
+    the "--opt=2" option above. Producing a JIT compiler will require 
+    some platform-specific support code and I haven't really got my head 
+    around what that might look like yet.
+  * There's no filesystem access, which causes debug warnings to be printed 
+    at startup. There is work taking place to extend Emscripten with 
+    a pluggable virtual filesystem, which should enable native file access 
+    at some point in the future.
+  * Instead, it uses a bundled snapshot of the filesystem to provide 
+    the Python standard library. This makes startup very very slow, 
+    as the whole snapshot gets unpacked into memory before entering 
+    the main loop of the interpreter.
+  * There's no interactive console. Output works fine, but input not 
+    so much. I simply haven't dug into the details of this yet, but 
+    it shouldn't be too hard to get something rudimentary working.
+  * Lots of builtin modules are missing, because they require additional 
+    C-level dependencies. For example, the "hashlib" module depends 
+    on OpenSSL. I'll work on adding them, one by one.
+  * I most certainly haven't put a slick browser-based UI on top of it 
+    like [repl.it]().
+
+So no, you probably can't run this in your browser right now. But it is 
+a real Python interpreter and it can execute real Python commands. 
+To get all that in exchange for a little bit of glue code, seems 
+pretty awesome to me.
+
+Performance
+---------------
+
+...
+
+Will it JIT?
+----------------
+
+...
+
+
+
+    5 comments
+    Ryan F Kelly
+
+    fijal • 2 years ago Tuesday July 23 2013 
+
+    hey.
+
+    PyPy dev here. I think it's possible to come up with an llvm-jit 
+    backend (we tried few times already, there is even some work in 
+    this area done) and just JIT. With asm.js it might actually just 
+    work (for some definition of "just works")
+
+        chris fijal • a year ago Sunday February 23 2014
+
+        what if pypy were to have its own asm.js rpython target, and 
+        the JIT produce asm.js directly? iiuc, rpython is specifically 
+        designed for such things. I don't actually know too much about 
+        that, though.
+
+    Michael Chermside • a year ago Tuesday May 6 2014
+
+    So, you managed to achieve your "lofty, crazy, good-for-motivation-
+    but-likely-futile goal" within the first few months of 2014, 
+    less than 12 months after you posted this. I am very impressed; 
+    I would never have thought it possible.
+
+    Luke Stanley • 2 years ago Tuesday July 23 2013
+
+    Hey there, this probably doesn't help but I've got Shedskin ported: 
+    https://github.com/lukestanley/emscripten_shedskin_setup/
+
+    andrew • 2 years ago Wednesday July 24 2013
+
+    jit in javascript can invole doing dynamic evaluation of javascript 
+    strings into functions for each trace, I have no idea how one would 
+    to do it in pypy, but one example of the concept is done here in 
+    this mips processor emulator where they generate javascript for 
+    execution traces, which will in turn be jitted by the v8 jit compiler.
+    https://github.com/hulkholden/n64js/blob/master/src/r4300.js#L1815
+
+

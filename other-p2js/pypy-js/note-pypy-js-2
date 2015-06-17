@@ -1,0 +1,30 @@
+
+https://www.rfk.id.au/blog/entry/pypy-js-poc-jit/
+
+Ryan Kelly
+Thu, 08 Aug 2013
+[technology] [mozilla] [python] [javascript]
+
+PyPy.js Update: A Proof-of-Concept JIT
+==========================================
+
+Two weeks ago I hatched a plan to [port Python to the Web Platform]() by using 
+[Emscripten]() to translate [PyPy]() into JavaScript. My hope is to produce something 
+than can run in the browser with performance comparable to a standard Python 
+interpreter, a hope which hinges on two key ingredients:
+
+  * PyPy's powerful [just-in-time compiler](), which can optimize the hot loops 
+    of your program into efficient native code.
+  * The recent work on [asm.js](asmjs.org), a low-level subset of JavaScript 
+    that can act like an efficient virtual machine in the browser.
+
+By translating the PyPy interpreter into asm.js code, and by having its JIT backend 
+emit specialized asm.js code at runtime, it should theoretically be possible 
+to have an in-browser Python implementation whose hot loops perform within a factor 
+of two of native code.
+
+I'm excited to report a small but important milestone on the road to making this 
+a reality.
+
+...
+
