@@ -1,0 +1,59 @@
+
+http://stackoverflow.com/questions/1150373/compile-the-python-interpreter-statically
+
+
+
+I found this (mainly concerning static compilation of Python modules):
+
+    http://bytes.com/groups/python/23235-build-static-python-executable-linux
+
+Which describes a file used for configuration located here:
+
+  <Python_Source>/Modules/Setup
+
+If this file isn't present, it can be created by copying:
+
+  <Python_Source>/Modules/Setup.dist
+
+The Setup file has tons of documentation in it and the README included with the source offers lots of good compilation information as well.
+
+I haven't tried compiling yet, but I think with these resources, I should be successful when I try. I will post my results as a comment here.
+
+
+Update
+
+To get a pure-static python executable, you must also configure as follows:
+
+  ./configure LDFLAGS="-static -static-libgcc" CPPFLAGS="-static"
+
+Once you build with these flags enabled, you will likely get lots of warnings about "renaming because library isn't present". This means that you have not configured Modules/Setup correctly and need to:
+
+a) add a single line (near the top) like this:
+
+  *static*
+
+(that's asterisk/star the word "static" and asterisk with no spaces)
+
+b) uncomment all modules that you want to be available statically (such as math, array, etc...)
+
+You may also need to add specific linker flags (as mentioned in the link I posted above). My experience so far has been that the libraries are working without modification.
+
+It may also be helpful to run make with as follows:
+
+  make 2>&1 | grep 'renaming'
+
+This will show all modules that are failing to compile due to being statically linked.
+
+ answered Jul 20 '09 at 18:21
+ Jeremy Cowles
+
+
+
+Using freeze doesn't prevent doing it all in one run (no matter what approach you use, you will need multiple build steps - e.g. many compiler invocations). First, you edit Modules/Setup to include all extension modules that you want. Next, you build Python, getting libpythonxy.a. Then, you run freeze, getting a number of C files and a config.c. You compile these as well, and integrate them into libpythonxy.a (or create a separate library).
+
+You do all this once, for each architecture and Python version you want to integrate. When building your application, you only link with libpythonxy.a, and the library that freeze has produced.
+
+ answered Jul 19 '09 at 17:54
+ Martin v. Löwis
+
+
