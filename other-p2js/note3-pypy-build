@@ -39,3 +39,8 @@ build or using python instead of pypy
   pypy ../../rpython/bin/rpython -O2 --sandbox targetpypystandalone   # get the sandbox version
 
 
+build on centos 6.4 64
+
+  update libffi, libexpat, compat-expat1, openssl
+
+
