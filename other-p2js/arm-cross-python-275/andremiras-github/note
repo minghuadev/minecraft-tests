@@ -1,0 +1,58 @@
+
+
+download zip file: 
+2015 June 17
+
+https://github.com/AndreMiras/python-arm-xcompile f7bf783
+
+
+
+
+extra patches: 
+
+
+diff -ru saved1/python_xcompile.sh saved2/python_xcompile.sh
+--- saved1/python_xcompile.sh   2015-06-17 17:34:01.962680803 -0700
++++ saved2/python_xcompile.sh   2015-06-17 17:38:42.328053905 -0700
+@@ -1,7 +1,11 @@
+-#!/bin/bash
++#!/bin/bash -x
++
++
++export PATH=/home/mydir/bin/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin:$PATH
+
+ TARGET_HOST="arm-linux-gnueabihf"
+-ROOT_FILESYSTEM="/usr/arm-linux-gnueabi/"
++##ROOT_FILESYSTEM="/usr/arm-linux-gnueabi/"
++ROOT_FILESYSTEM="/home/mydir/cross/savedrootfs/"
+ BUILD_HOST="x86_64-linux-gnu" # find out with uname -m
+ WORKING_DIRECTORY="python_xcompile"
+ INSTALL_DIRECTORY="$WORKING_DIRECTORY/_install"
+@@ -43,3 +47,5 @@
+     ac_cv_have_long_long_format=yes
+ make
+ make install
++
++
+
+
+[dev@BuildServer trunk]$ cat patch3
+--- python_xcompile/Python-2.7.5/Lib/sre_constants.py-orig      2015-06-17 18:11:45.338924948 -0700
++++ python_xcompile/Python-2.7.5/Lib/sre_constants.py   2015-06-17 18:13:25.148806386 -0700
+@@ -15,7 +15,11 @@
+
+ MAGIC = 20031017
+
+-from _sre import MAXREPEAT
++try:
++        from _sre import MAXREPEAT
++except ImportError:
++        import _sre
++        _sre.MAXREPEAT = 65535 # Oh man. I hate myself so much.
+
+ # SRE standard exception (access as sre.error)
+ # should this really be here?
+
+
+
+
