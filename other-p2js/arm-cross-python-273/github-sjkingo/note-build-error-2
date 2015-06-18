@@ -1,0 +1,41 @@
+
+build.sh-2
+
+https://bugs.launchpad.net/ubuntu/+source/gcc-4.4/+bug/503448
+
+
+/home/dev/bin/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin/../lib/gcc/arm-linux-gnueabihf/4.7.3/../../../../arm-linux-gnueabihf/bin/ld: /home/dev/bin/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin/../arm-linux-gnueabihf/libc/usr/lib/arm-linux-gnueabihf/libc.a(genops.o): relocation R_ARM_THM_MOVW_ABS_NC against `_IO_list_all' can not be used when making a shared object; recompile with -fPIC
+/home/dev/bin/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin/../arm-linux-gnueabihf/libc/usr/lib/arm-linux-gnueabihf/libc.a: could not read symbols: Bad value
+collect2: error: ld returned 1 exit status
+
+Python build finished, but the necessary bits to build these modules were not found:
+_bsddb             _curses            _curses_panel   
+_sqlite3           _ssl               _tkinter        
+bsddb185           bz2                dbm             
+dl                 gdbm               imageop         
+nis                readline           sunaudiodev     
+zlib                                                  
+To find the necessary bits, look in setup.py in detect_modules() for the module's name.
+
+
+Failed to build these modules:
+_collections       _ctypes            _ctypes_test    
+_elementtree       _hotshot           _io             
+_locale            _lsprof            _multiprocessing
+_random            _socket            _struct         
+_testcapi          array              audioop         
+cmath              cPickle            cStringIO       
+datetime           fcntl              grp             
+linuxaudiodev      math               mmap            
+ossaudiodev        pyexpat            resource        
+select             spwd               strop           
+syslog             termios            time            
+unicodedata                                           
+
+python: ELF 32-bit LSB executable, ARM, version 1 (SYSV), statically linked, for GNU/Linux 2.6.31, not stripped
+
+real    4m48.495s
+user    4m14.626s
+sys     0m27.487s
+
+

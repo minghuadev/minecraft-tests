@@ -1,0 +1,103 @@
+#!/bin/bash
+
+# change these to match your environment
+TARGET_HOST="arm-linux-gnueabihf"
+CROSS_TOOLS_PATH=/home/dev/bin/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin
+BUILD_HOST="x86_64-linux-gnu"
+
+myskip=1
+
+# you shouldn't need to change these
+PYTHON="Python-2.7.3"
+CONFIGURE_ARGS="--disable-ipv6"
+BUILD_LOG="build.log"
+
+# build log goes here
+rm -f $BUILD_LOG
+touch $BUILD_LOG
+echo "Build output will be in $BUILD_LOG"
+
+# download dist if it doesn't already exist
+if [ ! -f $PYTHON.tar.xz ] ; then
+    echo "Downloading $PYTHON .."
+    wget http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tar.xz >> $BUILD_LOG
+fi
+
+if [ $myskip -ne 1 ]; then
+rm -rf $PYTHON
+tar -xf $PYTHON.tar.xz
+cp -p files/config.site $PYTHON
+fi
+cd $PYTHON
+BUILD_LOG="../$BUILD_LOG"
+unset CROSS_COMPILE
+
+# ensure static glibc is installed
+rpm -qa | grep -q glibc-static
+if [ $? -eq 1 ] ; then
+    echo "Installing glibc-static (with sudo yum install) .."
+    sudo yum install -y glibc-static >> $BUILD_LOG
+fi
+
+set -e
+
+# first we need to build the host executables (python and Parser/pgen)
+if [ $myskip -ne 1 ]; then
+echo "Stage 1: compiling host executables .."
+
+echo >> $BUILD_LOG
+echo "Stage 1: compiling host executables .." >> $BUILD_LOG
+echo >> $BUILD_LOG
+
+./configure $CONFIGURE_ARGS CONFIG_SITE="config.site" >> $BUILD_LOG
+make python Parser/pgen >> $BUILD_LOG
+mv python hostpython
+mv Parser/pgen Parser/hostpgen
+fi
+make distclean
+
+# set up environment for cross compile - we really shouldn't blindly add to PATH
+export PATH="$PATH:$CROSS_TOOLS_PATH"
+export CROSS_COMPILE=arm-linux-gnueabihf-
+
+
+
+if [ $myskip -ne 1 ]; then
+echo "Stage 1.5: patching Python for cross-compile .."
+
+echo >> $BUILD_LOG
+echo "Stage 1.5: patching Python for cross-compile .." >> $BUILD_LOG
+echo >> $BUILD_LOG
+
+patch -p0 < ../files/Python-2.7.3-xcompile.patch
+fi
+
+# cross compile
+echo "Stage 2: configure cross-compiling for $TARGET_HOST .."
+
+echo >> $BUILD_LOG
+echo "Stage 2: configure cross-compiling for $TARGET_HOST .." >> $BUILD_LOG
+echo >> $BUILD_LOG
+
+./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
+    LDFLAGS="-static -static-libgcc" CPPFLAGS="-static" CONFIG_SITE="config.site" >> $BUILD_LOG
+if [ $myskip -ne 1 ]; then
+sed -i '1r ../files/Setup' Modules/Setup
+else
+  echo
+  echo "Skip touching Modules/Setup"
+  echo
+fi
+
+echo "Stage 3: cross-compiling make for $TARGET_HOST .."
+
+echo >> $BUILD_LOG
+echo "Stage 3: cross-compiling make for $TARGET_HOST .." >> $BUILD_LOG
+echo >> $BUILD_LOG
+
+make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen CROSS_COMPILE_TARGET=yes BUILDARCH=$BUILD_HOST HOSTARCH=$TARGET_HOST >> $BUILD_LOG  2>&1 
+
+sed -n -e '/Python build finished/,$p' $BUILD_LOG | grep -v 'install'
+file python
+
+
