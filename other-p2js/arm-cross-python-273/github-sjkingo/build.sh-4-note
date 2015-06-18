@@ -1,0 +1,90 @@
+
+change static build back to shared build based on the original instruction from 
+
+
+and
+
+  http://www.csce.uark.edu/~yfrancku/cross-python.html
+
+but not use yet 
+
+  configure -enable-shared
+
+
+
+build.log last lines:
+
+1362 arm-linux-gnueabihf-gcc -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes  -I. -IInclude -I./Inc     lude   -DPy_BUILD_CORE  -c ./Modules/xxsubtype.c -o Modules/xxsubtype.o
+
+1363 arm-linux-gnueabihf-gcc -c -fno-strict-aliasing -g -O2 -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes  -I. -IInclude -I./     Include   -DPy_BUILD_CORE \
+1364               -DSVNVERSION="\"`LC_ALL=C svnversion .`\"" \
+1365               -DHGVERSION="\"`LC_ALL=C `\"" \
+1366               -DHGTAG="\"`LC_ALL=C `\"" \
+1367               -DHGBRANCH="\"`LC_ALL=C `\"" \
+1368               -o Modules/getbuildinfo.o ./Modules/getbuildinfo.c
+
+1369 rm -f libpython2.7.a
+1370 ar rc libpython2.7.a Modules/getbuildinfo.o
+1371 ar rc libpython2.7.a Parser/acceler.o Parser/grammar1.o Parser/listnode.o \
+      Parser/node.o Parser/parser.o Parser/parsetok.o Pa     rser/bitset.o \
+      Parser/metagrammar.o Parser/firstsets.o Parser/grammar.o Parser/pgen.o \
+      Parser/myreadline.o Parser/tokenizer.o
+1372 ar rc libpython2.7.a Objects/abstract.o Objects/boolobject.o \
+      Objects/bufferobject.o Objects/bytes_methods.o Objects/bytearra     yobject.o \
+      Objects/capsule.o Objects/cellobject.o Objects/classobject.o Objects/cobject.o \
+      Objects/codeobject.o Objects/comple     xobject.o Objects/descrobject.o \
+      \
+      Objects/enumobject.o Objects/exceptions.o Objects/genobject.o Objects/fileobject.o \
+      Objects/f     loatobject.o Objects/frameobject.o Objects/funcobject.o \
+      Objects/intobject.o Objects/iterobject.o Objects/listobject.o O\
+      bject     s/longobject.o Objects/dictobject.o Objects/memoryobject.o \
+      Objects/methodobject.o Objects/moduleobject.o Objects/object.o \
+      Ob     jects/obmalloc.o Objects/rangeobject.o Objects/setobject.o \
+      Objects/sliceobject.o Objects/stringobject.o Objects/structseq.o      \
+      Objects/tupleobject.o Objects/typeobject.o Objects/weakrefobject.o \
+      Objects/unicodeobject.o Objects/unicodectype.o
+1373 ar rc libpython2.7.a Python/_warnings.o Python/Python-ast.o Python/asdl.o \
+      Python/ast.o Python/bltinmodule.o Python/ceval.o P     ython/compile.o \
+      Python/codecs.o Python/errors.o Python/frozen.o Python/frozenmain.o \
+      Python/future.o Python/getargs.o Python/     getcompiler.o Python/getcopyright.o \
+      Python/getplatform.o Python/getversion.o Python/graminit.o Python/import.o \
+      Python/import     dl.o Python/marshal.o Python/modsupport.o Python/mystrtoul.o \
+      Python/mysnprintf.o Python/peephole.o Python/pyarena.o Python/p     yctype.o \
+      Python/pyfpe.o Python/pymath.o Python/pystate.o Python/pythonrun.o \
+      Python/random.o Python/structmember.o Python/sym     table.o Python/sysmodule.o \
+      Python/traceback.o Python/getopt.o Python/pystrcmp.o Python/pystrtod.o \
+      Python/dtoa.o Python/forma     tter_unicode.o Python/formatter_string.o \
+      Python/dynload_shlib.o   Python/thread.o
+1374 ar rc libpython2.7.a Modules/config.o Modules/getpath.o Modules/main.o Modules/gcmodule.o
+1375 ar rc libpython2.7.a Modules/threadmodule.o  Modules/signalmodule.o  \
+      M\
+      odules/posixmodule.o  Modules/errnomodule.o  Modules/p     wdmodule.o  \
+      Modules/_sre.o  Modules/_codecsmodule.o  Modules/_weakref.o  M\
+      odules/zipimport.o  Modules/symtablemodule.o  Modu     les/xxsubtype.o
+1376 arm-linux-gnueabihf-ranlib libpython2.7.a
+1377 arm-linux-gnueabihf-gcc  -Xlinker -export-dynamic -o python \
+1378                         Modules/python.o \
+1379                         libpython2.7.a -lpthread -ldl  -lpthread -lutil   -lm
+
+1484 config.status: linking /home/dev/python-arm-xcompile/Python-2.7.3/Modules/_ctypes/libffi/src/arm/ffitarget.h to in     clude/ffitarget.h
+1485 config.status: linking /home/dev/python-arm-xcompile/Python-2.7.3/Modules/_ctypes/libffi/include/ffi_common.h to i     nclude/ffi_common.h
+1486 config.status: executing depfiles commands
+1487 config.status: executing libtool commands
+1488 config.status: executing include commands
+1489 config.status: executing src commands
+1490 /home/dev/python-arm-xcompile/Python-2.7.3/Modules/_ctypes/cfield.c: In function ‘PyCField_FromDesc’:
+1491 /home/dev/python-arm-xcompile/Python-2.7.3/Modules/_ctypes/cfield.c:50:29: warning: variable ‘length’ set but not      used [-Wunused-but-set-variable]
+1492 /home/dev/python-arm-xcompile/Python-2.7.3/Modules/_ctypes/libffi/src/arm/ffi.c:204:1: warning: function declarati     on isn’t a prototype [-Wstrict-prototypes]
+1493 
+1494 Python build finished, but the necessary bits to build these modules were not found:
+1495 _bsddb             _curses            _curses_panel
+1496 _sqlite3           _ssl               _tkinter
+1497 bsddb185           bz2                dbm
+1498 dl                 gdbm               imageop
+1499 nis                readline           sunaudiodev
+1500 zlib
+1501 To find the necessary bits, look in setup.py in detect_modules() for the module's name.
+1502 
+1503 /usr/bin/install -c -m 644 ./Tools/gdb/libpython.py python-gdb.py
+
+

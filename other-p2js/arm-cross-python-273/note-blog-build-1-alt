@@ -1,0 +1,49 @@
+
+
+http://www.csce.uark.edu/~yfrancku/cross-python.html
+
+
+after building the host python, distclean, and patching, 
+the commands for xilinx for configure/make/install and beyond are different: 
+
+
+6) - Configure the Python install process for the target platform
+
+  $ ./configure CC=arm-xilinx-linux-gnueabi-gcc –enable-shared \
+    CXX=arm-xilinx-linux-gnueabi-g \
+    –host=arm-xilinx-linux-gnueabi –build=x86_64-linux-gnu –prefix=/python \
+    AR=arm-xilinx-linux-gnueabi-ar RANLIB=arm-xilinx-linux-gnueabi-ranlib \
+    LD=arm-xilinx-linux-gnueabi-ld NM=arm-xilinx-linux-gnueabi-gcc-nm \
+    –disable-ipv6
+
+7) Build
+
+  $ make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen \
+    BLDSHARED=“arm-xilinx-linux-gnueabi-gcc -shared” \
+    CROSS_COMPILE=arm-xilinx-linux-gnueabi- CROSS_COMPILE_TARGET=yes \
+    HOSTARCH=arm-xilinx-linux-gnueabi BUILDARCH=x86_64-linux-gnu
+
+8) Cross-compiled Python for the target architecture
+
+  $ make install HOSTPYTHON=./hostpython \
+    BLDSHARED=“arm-xilinx-linux-gnueabi-gcc -shared” \
+    CROSS_COMPILE=arm-xilinx-linux-gnueabi- CROSS_COMPILE_TARGET=yes \
+    prefix=~/Downloads/Python-2.7.3/_install
+
+Python has been cross-compiled and can be found in the folder ~/Downloads/Python-2.7.3/_install.
+
+9) Copy the cross-compiled Python on the target:
+
+    copy the binary _install/bin/python2.7 into /usr/local/bin (on the target platform)
+
+    copy the library _install/inculde/python2.7 into /usr/local/include (on the target platform)
+
+    copy the shared and static libraries in _install/lib/* into /usr/local/lib (on the target platform)
+
+10) Finally, before running python on the target, make sure that the Library path is set:
+
+  $ export LD_LIBRARY_PATH=/usr/local/lib
+
+Test on target:
+
+
