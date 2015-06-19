@@ -1,0 +1,164 @@
+
+pyc files found after geting and setting url:
+------------------------------------------------
+
+install these py files.
+
+lib/python2.7/_abcoll.pyc
+lib/python2.7/tempfile.pyc
+lib/python2.7/platform.pyc
+lib/python2.7/linecache.pyc
+lib/python2.7/posixpath.pyc
+lib/python2.7/socket.pyc
+lib/python2.7/keyword.pyc
+lib/python2.7/traceback.pyc
+lib/python2.7/sysconfig.pyc
+lib/python2.7/UserDict.pyc
+lib/python2.7/bisect.pyc
+lib/python2.7/sre_parse.pyc
+lib/python2.7/subprocess.pyc
+lib/python2.7/codecs.pyc
+lib/python2.7/struct.pyc
+lib/python2.7/types.pyc
+lib/python2.7/pickle.pyc
+lib/python2.7/re.pyc
+lib/python2.7/hashlib.pyc
+lib/python2.7/random.pyc
+lib/python2.7/string.pyc
+lib/python2.7/warnings.pyc
+lib/python2.7/getopt.pyc
+lib/python2.7/os.pyc
+lib/python2.7/base64.pyc
+lib/python2.7/abc.pyc
+lib/python2.7/textwrap.pyc
+lib/python2.7/collections.pyc
+lib/python2.7/__future__.pyc
+lib/python2.7/genericpath.pyc
+lib/python2.7/encodings/aliases.pyc
+lib/python2.7/encodings/__init__.pyc
+lib/python2.7/encodings/hex_codec.pyc
+lib/python2.7/encodings/ascii.pyc
+lib/python2.7/stat.pyc
+lib/python2.7/_weakrefset.pyc
+lib/python2.7/mimetools.pyc
+lib/python2.7/copy_reg.pyc
+lib/python2.7/urlparse.pyc
+lib/python2.7/heapq.pyc
+lib/python2.7/functools.pyc
+lib/python2.7/sre_compile.pyc
+lib/python2.7/httplib.pyc
+lib/python2.7/rfc822.pyc
+lib/python2.7/sre_constants.pyc
+lib/python2.7/ssl.pyc
+lib/python2.7/urllib.pyc
+lib/python2.7/json/encoder.pyc
+lib/python2.7/json/__init__.pyc
+lib/python2.7/json/scanner.pyc
+lib/python2.7/json/decoder.pyc
+lib/python2.7/site.pyc
+
+
+error 1:
+-------------------
+
+  failed open ...config/Makefile
+  failed import module select
+
+install also: 
+  lib/.../config
+  lib/.../lib-dynload
+
+# install273v5/bin/python
+Could not find platform dependent libraries <exec_prefix>
+Consider setting $PYTHONHOME to <prefix>[:<exec_prefix>]
+Traceback (most recent call last):
+  File "/root/install273v5/lib/python2.7/site.py", line 563, in <module>
+    main()
+  File "/root/install273v5/lib/python2.7/site.py", line 545, in main
+    known_paths = addusersitepackages(known_paths)
+  File "/root/install273v5/lib/python2.7/site.py", line 278, in addusersitepackages
+    user_site = getusersitepackages()
+  File "/root/install273v5/lib/python2.7/site.py", line 253, in getusersitepackages
+    user_base = getuserbase() # this will also set USER_BASE
+  File "/root/install273v5/lib/python2.7/site.py", line 243, in getuserbase
+    USER_BASE = get_config_var('userbase')
+  File "/root/install273v5/lib/python2.7/sysconfig.py", line 521, in get_config_var
+    return get_config_vars().get(name)
+  File "/root/install273v5/lib/python2.7/sysconfig.py", line 420, in get_config_vars
+    _init_posix(_CONFIG_VARS)
+  File "/root/install273v5/lib/python2.7/sysconfig.py", line 288, in _init_posix
+    raise IOError(msg)
+IOError: invalid Python installation: unable to open /python/lib/python2.7/config/Makefile (No such file or directory)
+
+   def get_config_var(name):
+       """Return the value of a single variable using the dictionary returned by
+       'get_config_vars()'.
+
+       Equivalent to get_config_vars().get(name)
+       """
+521    return get_config_vars().get(name)
+
+   def get_config_vars(*args):
+       """With no arguments, return a dictionary of all configuration
+       variables relevant for the current platform.
+
+       On Unix, this means every variable defined in Python's installed Makefile;
+       On Windows and Mac OS it's a much smaller set.
+
+       With arguments, return a list of values that result from looking up
+       each argument in the configuration variable dictionary.
+       """
+       import re
+       global _CONFIG_VARS
+       if _CONFIG_VARS is None:
+           _CONFIG_VARS = {}
+           # Normalized versions of prefix and exec_prefix are handy to have;
+           # in fact, these are the standard versions used most places in the
+           # Distutils.
+           _CONFIG_VARS['prefix'] = _PREFIX
+           _CONFIG_VARS['exec_prefix'] = _EXEC_PREFIX
+           _CONFIG_VARS['py_version'] = _PY_VERSION
+           _CONFIG_VARS['py_version_short'] = _PY_VERSION_SHORT
+           _CONFIG_VARS['py_version_nodot'] = _PY_VERSION[0] + _PY_VERSION[2]
+           _CONFIG_VARS['base'] = _PREFIX
+           _CONFIG_VARS['platbase'] = _EXEC_PREFIX
+           _CONFIG_VARS['projectbase'] = _PROJECT_BASE
+
+           if os.name in ('nt', 'os2'):
+               _init_non_posix(_CONFIG_VARS)
+           if os.name == 'posix':
+420            _init_posix(_CONFIG_VARS)
+
+   def _init_posix(vars):
+       """Initialize the module as appropriate for POSIX systems."""
+       # load the installed Makefile:
+       makefile = _get_makefile_filename()
+       try:
+           _parse_makefile(makefile, vars)
+       except IOError, e:
+           msg = "invalid Python installation: unable to open %s" % makefile
+           if hasattr(e, "strerror"):
+               msg = msg + " (%s)" % e.strerror
+288        raise IOError(msg)
+
+in sysconfig on a v7 install to /root/install273: 
+      _CONFIG_VARS['prefix']   is   '/python' 
+      _PREFIX                  is   '/root/install273'
+
+
+error 2
+--------------------
+
+>>> import json
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/root/install273v5/lib/python2.7/json/__init__.py", line 108, in <module>
+    from .decoder import JSONDecoder
+  File "/root/install273v5/lib/python2.7/json/decoder.py", line 24, in <module>
+    NaN, PosInf, NegInf = _floatconstants()
+  File "/root/install273v5/lib/python2.7/json/decoder.py", line 18, in _floatconstants
+    _BYTES = '7FF80000000000007FF0000000000000'.decode('hex')
+LookupError: no codec search functions registered: can't find encoding
+
+
+
