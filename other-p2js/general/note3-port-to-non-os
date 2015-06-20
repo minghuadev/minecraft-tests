@@ -1,0 +1,31 @@
+
+http://stackoverflow.com/questions/9519346/porting-python-to-an-embedded-system?rq=1
+
+
+
+
+fyi I just ported CPython 2.7x to non-POSIX OS. That was easy. You need write pyconfig.h in right way, remove most of unused modules. Disable unused features. Then fix compile, link errors. Then it just works after fixing some simple problems on run. If You have no some POSIX header, write one by yourself. Implement all POSIX functions, that needed, such as file i/o. Took 2-3 weeks in my case. Although I have heavily customized Python core. Unfortunately cannot opensource it :(.
+
+After that I think Python can be ported easily to any platform, that has enough RAM.
+
+ answered Jun 11 '14 at 11:27
+ NoAngel
+
+
+
+Compile it to c :)
+
+http://shed-skin.blogspot.com/
+shareeditflag
+	
+ answered Mar 5 '12 at 23:40
+ 8bitwide
+
+
+
+There are ... python-on-a-chip, PyMite or tinypy. 
+
+ answered Mar 5 '12 at 12:42
+ timrorr
+
+

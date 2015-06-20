@@ -1,0 +1,13 @@
+
+
+http://stackoverflow.com/questions/1496761/guidance-on-optimising-python-runtime-for-embedded-systems-with-low-system-resou?rq=1
+
+
+See the C API section in What's new in Python 2.5, look for the item called Evan Jones’s patch to obmalloc
+
+Alex Martelli (whose advice should always be at least considered), says multiprocess is the only way to go to free memory. If you cannot use multiprocessing (module in Python 2.6), os.fork is at least available. Using os.fork in the most primitive manner (fork one work process at the beginning, wait for it to finish, fork a new..) is still better than relauching the interpreter paying 25 seconds for that.
+
+ answered Sep 30 '09 at 9:25
+ u0b34a0f6ae
+
+

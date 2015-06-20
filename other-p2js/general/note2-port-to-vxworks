@@ -1,0 +1,176 @@
+
+
+http://stackoverflow.com/questions/240996/anyone-using-python-for-embedded-projects?rq=1
+
+
+http://www.gsalcazar.altervista.org/tools/how-to-port-python-to-vxworks/
+
+
+January 2009 - This topic is a small guide to obtain a Python language interpreter running on a VxWorks VxSIM Simulator.
+The process of embedding Python in VxWorks is quite simple but needs a significant number of file manipulations.
+Due to copyright issues, I can not attach the source code of the project, but I can post hints to re-create a similar one by yourself.
+
+The main concept followed was to cross-compile Python source code under Tornado 2.2, and add a simple wrapper to execute Python code from .py files on host machine.
+
+
+Tool Set:
+
+    Pyhton 2.6.1
+    Tornado 2.2
+    CygWin 1.5.24
+
+Instructions:
+
+Configuring the enviroment
+
+Extract Python source code in a proper directory.
+
+
+From the CygWin shell, add Tornado host compiler path to the Cygwin PATH, i.e.
+$ export PATH=/cygdrive/c/tornado2_2/host/x86-win32/bin/:$PATH
+and then, move to source directory and launch the ./configure script.
+
+This will cause the script to prepare a pyconfig.h file that will be refferred to by the compiler to correctly compile a host compliant Python interpreter.
+
+To obtain cross-compiling for the simulated target, the ./configure script must be launched with the following parameters:
+
+Code: [Select]
+
+$ CC=ccsimpc ./configure -host=x86-win32
+
+
+The CC variable is set to ccsimpc which is the Tornado compiler for VxSIM Simulator, while host parameter is the target architecture.
+In this case the Simulator will be running under a Win32 PC.
+
+
+This is beautiful but not enough.
+
+
+The ./configure script seems to be not optimized for cross-compilation with VxWorks, and with these parameters returns a few errors. It needs to be patched to correctly run.
+
+All references to "cross compiling" that are followed by pieces of C code have been removed, because the script could not execute them and check the results.
+
+NOTE: If you search for "cross compiling" keywords in the script, you will find many references. DO NOT delete all of them, but only those references followed by C code and some script commands used to evaluate the results.
+In my experience, only three occurrencies of cross compiling test had to be removed.
+
+NOTE: Replace the cygwin1.dll file in Tornado2.2\host\x86-win32\bin\ with the one present in your CygWin installation!!!
+
+Compiling
+
+After the script execution, some files are created: pyconfig.h, Makefile and Modules/config.c.
+
+Give a glance to the first file (pyconfig.h), because it has to be edited in some details:
+be sure to uncomment the definition of HAVE_DIRENT_H, and then check for the other uncommented defines to be sure that the script correctly identified the feature of the target OS.
+
+Now it's time to create a VxSim project to compile the source files and link them in a Simulator.
+
+Project type is "Bootable VxWorks image (custom configured)", and the selected BSP is "simpc" on "gnu" toolchain.
+
+In the VxWorks tab from the Workspace window, it is important to include all the modules labelled "C++ components" and "operating system components".
+
+Now look at the Makefile in the Python home directory: all the .c files related to .o (objects from compilation) listed in it must be added to the project.
+They should be a little more than one hundred.
+
+Edit the project build options to add all the include-paths needed by Python to compile:
+
+    Python-2.6.1/Include
+    Python-2.6.1/Objects
+    Python-2.6.1/Python
+    Python-2.6.1/Parser
+    Python-2.6.1/Modules
+    Python-2.6.1
+    Python-2.6.1/Objects/stringlib (NOTE: this path must be included after "Tornado2.2/target/h" path)
+
+Since Python source code is not optimized for VxWorks, a few modules have to be edited to better discriminate OS-dependant details.
+
+The following files have to be removed from the project:
+
+    "Modules/posixmodule.c"
+    "Modules/main.c"
+    "Parser/tokenizer_pgen.c"
+    "Python/dup2.c"
+
+Edit the "Modules\getbuildinfo.c" by substituting the Py_GetBuildInfo(void) function by the following code:
+Code: [Select]
+
+const char *
+Py_GetBuildInfo(void)
+{
+    static char buildinfo[50];
+    const char *revision = Py_SubversionRevision();
+    const char *sep = *revision ? ":" : "";
+    const char *branch = Py_SubversionShortBranch();
+    PyOS_snprintf(buildinfo, sizeof(buildinfo), 
+        "%s%s%s, %.20s, %.9s", branch, sep, revision,
+            __DATE__, __TIME__);
+    return buildinfo;
+}
+
+And remove all the #define stuff about DATE and TIME in the head of the file.
+
+Edit "Objects\stringlib\ctype.h" file by adding in the head these lines:
+Code: [Select]
+
+#ifndef Py_BYTES_CTYPE_H_MAX
+#define Py_BYTES_CTYPE_H_MAX
+
+
+and in the tail this line:
+Code: [Select]
+
+#endif
+
+
+Edit also "Parser\tokenizer.c" adding in the head this line:
+Code: [Select]
+
+#define PGEN
+
+
+In the "Module/config.c" file delete all the lines containg references to "initposix" and "initpwd" (should be 4 lines)
+
+Now build the project.
+
+
+Executing Python code on target
+
+At this point a running Simulator has been created, and Python code can be executed in three ways:
+
+1. By invoking Python Shell. Simply, call:
+
+Py_Main 1, ""
+
+2. By executing a single line expression. Enter this sequence:
+
+Py_Initialize
+PyRun_SimpleString "insert python code here"
+
+3. By adding a C wrapper to execute .py files on host machine. To obtain this feature, add a function like this one in a separate .cpp file and build again the Simulator:
+
+Code: [Select]
+
+#include "Python.h"
+#include "fioLib.h"
+
+extern void Py_MyRun(const char* filename)
+{
+  FILE * fd = fopen(filename, "r");
+
+  if(!Py_IsInitialized())
+    Py_Initialize();
+
+  PyRun_SimpleFile(fd, filename);
+
+  Py_Finalize();
+
+  fclose(fd);
+}
+
+
+And then call the function from VxWorks Shell:
+Py_MyRun "host:C:/my_python_file.py"
+
+Enjoy python!
+« Last Edit: March 30, 2011, 11:01:34 AM by BeerBaron »
+
+
