@@ -1,0 +1,43 @@
+
+cloned june 19 2015 by 
+
+  git chone https://github.com/sjkingo/python-arm-xcompile
+
+then remove the .git/ directory
+
+
+
+history inside the repo: 
+
+[python-arm-xcompile]$ git log 
+commit c9f44f837dca7055a94a9537475f6f4e6d6012be
+Author: Sam Kingston <sam@sjkwi.com.au>
+Date:   Mon Apr 29 12:45:57 2013 +1000
+
+    credits
+
+commit 46f552002a433534f0285b81d87bbe9673db92a4
+Author: Sam Kingston <sam@sjkwi.com.au>
+Date:   Mon Apr 29 12:43:21 2013 +1000
+
+    updated gitignore to only ignore the dist archive
+
+commit 64caaddbd790a952c325c7b36550f9356d45f680
+Author: Sam Kingston <sam@sjkwi.com.au>
+Date:   Mon Apr 29 12:42:35 2013 +1000
+
+    build script and patch files
+
+commit e5d7ba791fa79e14cccd543bcac467bcc6bb231c
+Author: Sam Kingston <sam@sjkwi.com.au>
+Date:   Mon Apr 29 12:41:05 2013 +1000
+
+    README
+
+commit 802128e31c50edd9730c4c559187a0c44e30f983
+Author: Sam Kingston <sam@sjkwi.com.au>
+Date:   Mon Apr 29 12:39:31 2013 +1000
+
+    gitignore
+
+
