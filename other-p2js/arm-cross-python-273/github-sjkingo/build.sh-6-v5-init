@@ -1,8 +1,30 @@
 
-pyc files found after geting and setting url:
-------------------------------------------------
+summary
+---------------
 
-install these py files.
+install to an armv5 system: 
+
+  bin/
+  include/
+  libs/python2.7/...      the 52 files incl. json/ and encodings/
+  libs/python2.7/config/  directory
+  libs/lib-dynload/       directory
+
+  additional files to lib...encodings:
+      cp1252.pyc
+      cp437.pyc
+      latin_1.pyc
+      mbcs.pyc
+      utf_8.pyc
+ 
+  additional .py files if a .pyc or .pyo is found on another running system
+
+
+
+pyc files found after geting and setting url on an armv7 processor:
+---------------------------------------------------------------------
+
+install these 52 .py files to an armv5 system.
 
 lib/python2.7/_abcoll.pyc
 lib/python2.7/tempfile.pyc
@@ -58,13 +80,46 @@ lib/python2.7/json/decoder.pyc
 lib/python2.7/site.pyc
 
 
-error 1:
+
+after building for armv5 on a host:
+---------------------------------------
+
+more lib files than the list of armv7 used pyc files
+
+./lib2to3/pgen2/driver.pyc
+./lib2to3/pgen2/token.pyc
+./lib2to3/pgen2/__init__.pyc
+./lib2to3/pygram.pyc
+./lib2to3/__init__.pyc
+
+./logging/__init__.pyc 
+
+
+
+windows virtualenv more files under encodings used:
+--------------------------------------------------------
+
+$ ls -l *.pyc
+  __init__.pyc
+  aliases.pyc
+  ascii.pyc
+  hex_codec.pyc
+
+  cp1252.pyc
+  cp437.pyc
+  latin_1.pyc
+  mbcs.pyc
+  utf_8.pyc
+
+
+
+error 1 armv5:
 -------------------
 
   failed open ...config/Makefile
   failed import module select
 
-install also: 
+install to armv5 also: 
   lib/.../config
   lib/.../lib-dynload
 
@@ -146,8 +201,12 @@ in sysconfig on a v7 install to /root/install273:
       _PREFIX                  is   '/root/install273'
 
 
-error 2
+
+error 2 armv5
 --------------------
+
+reason: wrong naming of lib/.../encodings
+        the encodings/__init__.py is invoked by .so before running to .py
 
 >>> import json
 Traceback (most recent call last):
