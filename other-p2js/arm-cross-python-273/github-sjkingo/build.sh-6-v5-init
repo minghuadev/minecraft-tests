@@ -19,6 +19,10 @@ install to an armv5 system:
  
   additional .py files if a .pyc or .pyo is found on another running system
 
+run: 
+  may need to set PYTHONHOME=/path/to/python/root 
+  or else it gets error when trying to read config/Makefile from /python prefix. 
+
 
 
 pyc files found after geting and setting url on an armv7 processor:
