@@ -1,0 +1,35 @@
+
+
+https://wiki.python.org/moin/EmbeddedPython
+
+
+
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/python
+https://blogs.gnome.org/johan/2007/01/18/introducing-python-launcher/
+http://www.pygtk.org/pygtk2tutorial/examples/pygtkconsole.py
+
+
+http://www.myhdl.org/
+http://sourceforge.net/projects/whatos/
+
+
+
+https://wiki.python.org/moin/Freeze
+
+$ python freeze.py hello.py
+$ make
+$ ./hello
+
+$ python freeze.py -X pydoc hello.py
+
+$ python freeze.py -X codecs -X copy -X distutils -X encodings -X locale -X macpath -X ntpath -X os2emxpath -X popen2 -X pydoc -X re -X warnings hello.py
+
+
+
+http://groups.google.com/group/comp.lang.python/browse_frm/thread/9407982ad24b62ec/5018f9abebaa285a?lnk=st&q=build+python+static&rnum=3&hl=en#5018f9abebaa285a
+using static modules
+
+before running configure: 
+perl -pi -e 's!(^#\*shared\*)!*static*\n$1!' Modules/Setup.dist
+
+

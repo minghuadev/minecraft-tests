@@ -1,0 +1,35 @@
+
+http://dan.iel.fm/posts/python-c-extensions/
+August 03, 2012  by Dan Foreman-Mackey
+
+
+other options wrapping: 
+  http://www.cython.org/ http://www.swig.org/ http://docs.python.org/library/ctypes.html
+
+
+git clone git://gist.github.com/3247796.git c_ext
+cd c_ext
+python setup.py build_ext --inplace
+
+
+>>> import _chi2
+>>> print _chi2.chi2(2.0, 1.0, [-1.0, 4.2, 30.6],
+...                            [-1.5, 8.0, 63.0],
+...                            [1.0, 1.5, 0.6])
+2.89888888889
+
+
+reference 
+
+ http://www.diveintopython.net/getting_to_know_python/everything_is_an_object.html
+ http://docs.python.org/extending/extending.html#the-module-s-method-table-and-initialization-function
+ http://docs.python.org/c-api/arg.html
+ http://docs.scipy.org/doc/numpy/user/c-info.how-to-extend.html#PyArray_FROM_OTF
+ http://docs.python.org/extending/extending.html#ownership-rules
+ http://docs.scipy.org/doc/numpy/reference/c-api.array.html#PyArray_NDIM
+ http://docs.python.org/distutils/index.html
+
+
+
+
+
