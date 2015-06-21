@@ -36,8 +36,11 @@ fi
 myskip=0
 if [ -f $PYTHON/myskipdone1 ]; then 
 myskip=1
+  if [ -f $PYTHON/myskipdone2 ]; then 
+  myskip=2
+  fi
 fi
-mystatic=0
+mystatic=1
     # set mystatic to 1 to build non-static binary that is necessary for armv7
     # though armv5 may be able to build static , not sure how to do it ...
 
@@ -99,18 +102,21 @@ echo >> $BUILD_LOG
 echo "Stage 2: configure cross-compiling for $TARGET_HOST from $BUILD_HOST .." >> $BUILD_LOG
 echo >> $BUILD_LOG
 
-if [ $mystatic -ne 1 ]; then
+if [ $myskip -lt 2 ]; then
+  if [ $mystatic -ne 1 ]; then
 
-  if [ -f Makefile ]; then make distclean ; fi
-  ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
-    LDFLAGS="-static -static-libgcc" CPPFLAGS="-static" CONFIG_SITE="config.site" >> $BUILD_LOG
-  rm -f myskipdone3 myskipdone4
-else
+    if [ -f Makefile ]; then make distclean ; fi
+    ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
+      LDFLAGS="-static -static-libgcc" CPPFLAGS="-static" CONFIG_SITE="config.site" >> $BUILD_LOG
+    rm -f myskipdone3 myskipdone4
+  else
 
-  if [ -f Makefile ]; then make distclean ; fi
-  ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
-    CONFIG_SITE="config.site" --prefix=/python >> $BUILD_LOG
-  rm -f myskipdone3 myskipdone4
+    if [ -f Makefile ]; then make distclean ; fi
+    ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
+      CONFIG_SITE="config.site" --prefix=/python >> $BUILD_LOG
+    rm -f myskipdone3 myskipdone4
+  fi
+  touch myskipdone2
 fi
 
 if [ $myskip -lt 1 ]; then
@@ -205,6 +211,14 @@ else
     echo "Skip Stage 4: cross-compiling make install for static" >> $BUILD_LOG
     echo
     echo >> $BUILD_LOG
+
+    #make install HOSTPYTHON=./hostpython  \
+    #  CROSS_COMPILE_TARGET=yes prefix=$myinstalldir  >> $BUILD_LOG  2>&1 
+    #rc4=$?
+    #if [ $rc4 -eq 0 ]; then
+    #   touch myskipdone4
+    #fi
+
   else
     make install HOSTPYTHON=./hostpython  \
       BLDSHARED="${CROSS_COMPILE}gcc -shared" \
