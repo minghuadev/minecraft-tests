@@ -101,16 +101,16 @@ echo >> $BUILD_LOG
 
 if [ $mystatic -ne 1 ]; then
 
-  make distclean
   ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
     LDFLAGS="-static -static-libgcc" CPPFLAGS="-static" CONFIG_SITE="config.site" >> $BUILD_LOG
-  rm myskipdone3 myskipdone4
+  rm -f myskipdone3 myskipdone4
+  make distclean
 else
 
-  make distclean
   ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
     CONFIG_SITE="config.site" --prefix=/python >> $BUILD_LOG
-  rm myskipdone3 myskipdone4
+  rm -f myskipdone3 myskipdone4
+  make distclean
 fi
 
 if [ $myskip -lt 1 ]; then
