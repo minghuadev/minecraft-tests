@@ -1,9 +1,17 @@
 #!/bin/bash
 
+# must have arm tool chain installed at $ARMTOOLSPATH:
+if [ ! -f $ARMTOOLSPATH/arm-none-linux-gnueabi-gcc ]; then
+    echo No gcc found at $ARMTOOLSPATH/arm-none-linux-gnueabi-gcc
+    echo Must set ARMTOOLSPATH so a gcc is at \$ARMTOOLSPATH/arm-none-linux-gnueabi-gcc
+    exit 1
+fi
+
+
 # change these to match your environment
 TARGET_HOST="arm-none-linux-gnueabi"
-CROSS_TOOLS_PATH=/opt/freescale/usr/local/gcc-4.1.2-glibc-2.5-nptl-3/arm-none-linux-gnueabi/bin
-BUILD_HOST="x86_64-linux-gnu"
+CROSS_TOOLS_PATH=$ARMTOOLSPATH
+BUILD_HOST="x86_32-linux-gnu"
 
 
 # you shouldn't need to change these
