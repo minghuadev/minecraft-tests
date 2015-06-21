@@ -33,3 +33,47 @@ before running configure:
 perl -pi -e 's!(^#\*shared\*)!*static*\n$1!' Modules/Setup.dist
 
 
+
+https://groups.google.com/forum/?hl=en#!topic/comp.lang.python/lAeYKtJLYuw
+mu...@vex.net 	
+8/6/04
+Other recipients: m...@python.net, pytho...@python.org, cx-free...@lists.sourceforge.net, ant...@computronix.com
+Yes, thanks!, it was easy.  I just edited Modules/Setup as follows:
+
+(1) Changed the commented *shared* line to the *static* line (see below).
+
+(2) Uncommented the modules (math, time, array) that I wanted incorporated
+into the static libpython.a library.
+
+(3) Added lines for a couple other modules (strop & _random) that
+previously weren't listed in the Setup file.
+
+(4) Reran configure, make & make install.  It works!
+
+Now I can run freeze.py and build a truly stand-alone executable including
+the modules I mentioned.
+
+Here's a section of Modules/Setup with my changes:
+--------------------------------------------------------------------------
+# Uncommenting the following line tells makesetup that all following #
+modules are to be built as shared libraries (see above for more
+# detail; also note that *static* reverses this effect):
+
+*static*
+
+# Modules that should always be present (non UNIX dependent):
+
+array arraymodule.c # array objects
+#cmath cmathmodule.c # -lm # complex math library functions
+math mathmodule.c # -lm # math library functions, e.g. sin()
+#struct structmodule.c  # binary structure packing/unpacking
+time timemodule.c # -lm # time operations and variables
+#operator operator.c    # operator.add() and similar goodies
+#_weakref _weakref.c    # basic weak reference support
+#_testcapi _testcapimodule.c    # Python C API test module
+strop stropmodule.c
+_random _randommodule.c
+--------------------------------------------------------------------------
+
+
+
