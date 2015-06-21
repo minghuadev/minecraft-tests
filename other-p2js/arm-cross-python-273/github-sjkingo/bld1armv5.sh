@@ -101,16 +101,16 @@ echo >> $BUILD_LOG
 
 if [ $mystatic -ne 1 ]; then
 
+  if [ -f Makefile ]; then make distclean ; fi
   ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
     LDFLAGS="-static -static-libgcc" CPPFLAGS="-static" CONFIG_SITE="config.site" >> $BUILD_LOG
   rm -f myskipdone3 myskipdone4
-  make distclean
 else
 
+  if [ -f Makefile ]; then make distclean ; fi
   ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
     CONFIG_SITE="config.site" --prefix=/python >> $BUILD_LOG
   rm -f myskipdone3 myskipdone4
-  make distclean
 fi
 
 if [ $myskip -lt 1 ]; then
@@ -143,7 +143,8 @@ else
   echo >> $BUILD_LOG
   
   if [ $mystatic -ne 1 ]; then
-    make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen CROSS_COMPILE_TARGET=yes BUILDARCH=$BUILD_HOST HOSTARCH=$TARGET_HOST >> $BUILD_LOG  2>&1 
+    make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen \
+      CROSS_COMPILE_TARGET=yes BUILDARCH=$BUILD_HOST HOSTARCH=$TARGET_HOST >> $BUILD_LOG  2>&1 
     rc3=$?
   else
     make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen \
