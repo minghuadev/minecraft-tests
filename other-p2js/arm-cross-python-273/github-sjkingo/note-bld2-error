@@ -1,0 +1,34 @@
+
+bld2armv5.sh
+if set mystatic=0 , and enable install at stage 4 (commented out now), it has an error:
+
+R_ARM_TLS_LE32 relocation not permitted in shared object
+
+
+
+search turned up: 
+
+http://keviniwu.blogspot.ca/2010/11/rarmtlsle32-relocation-not-permitted-in.html
+
+
+When I tried to include library statically, it pulled in the static C library into my shared library.  The static C library contains relocations that cannot be used in a shared library.
+
+Some online article suggested recompiling the gcc with the "--disable-libmudflap" will fix the problem.
+
+For me, I just need to link the libc dynamic instead of shared.  So in my LDFLAGS, I added -Wl -Bstatic in front of my two static libs and -Wl -Bdynamic afterward.  Problem solved.
+Posted by Kevin at 5:55 PM 
+
+
+bduhbyaJune 4, 2012 at 11:26 AM
+
+Hello. I ran into this same error, and after trying your suggestion (and some other approaches). None of the approaches worked for me. I found I only had to remove the '-static' flag from the compiler flags and no other flags were required. I initially thought I need '-static' for compilation, but it turns out I did not.
+
+Not sure if this applies to your project, but it was much easier than the alternative approaches.
+
+
+Christopher CopeFebruary 18, 2014 at 3:52 AM
+
+Same here bduhbya, removing the -static flag from my LDFLAGS fixed the relocation issue. Need some more thought onto why...
+
+
+
