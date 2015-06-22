@@ -14,7 +14,7 @@ fi
 # change these to match your environment
 TARGET_HOST="arm-none-linux-gnueabi"
 CROSS_TOOLS_PATH=$ARMTOOLSPATH
-BUILD_HOST="x86_32-linux-gnu"
+BUILD_HOST="x86_64-linux-gnu"
 
 
 # you shouldn't need to change these
