@@ -1,0 +1,15 @@
+
+run bld3collectlib.sh to collect .py into lib/
+
+
+install: 
+
+  copy libpython2.7.a to        target lib/
+  copy those lib/*.py files to  target lib/python2.7/
+  copy Makefile  to             target lib/python2.7/config/
+  copy pyconfig.h to            target include/python2.7/
+
+run
+
+  use PYTHONHOME point to target top of lib/ include/ etc. 
+
