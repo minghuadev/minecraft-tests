@@ -3,7 +3,7 @@ bld1armv5.sh
 
 
 checking build system type... Invalid configuration `x86_32-linux-gnu': machine `x86_32' not recognized
-configure: error: /bin/sh /home/pytester/tmp2/Python-2.7.3/Modules/_ctypes/libffi/config.sub x86_32-linux-gnu failed
+configure: error: /bin/sh /home/dev/Python-2.7.3/Modules/_ctypes/libffi/config.sub x86_32-linux-gnu failed
 Failed to configure _ctypes module
 
 

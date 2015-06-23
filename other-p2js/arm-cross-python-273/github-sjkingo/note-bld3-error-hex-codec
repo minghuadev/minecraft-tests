@@ -1,0 +1,43 @@
+
+
+with _struct module statically buildin:
+
+
+
+[/root]# PYTHONHOME=/root/install273v5 install273v5/bin/python
+Python 2.7.3 (default, Jun 22 2015, 22:35:39) 
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import json
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/root/install273v5/lib/python2.7/json/__init__.py", line 108, in <module>
+    from .decoder import JSONDecoder
+  File "/root/install273v5/lib/python2.7/json/decoder.py", line 24, in <module>
+    NaN, PosInf, NegInf = _floatconstants()
+  File "/root/install273v5/lib/python2.7/json/decoder.py", line 18, in _floatconstants
+    _BYTES = '7FF80000000000007FF0000000000000'.decode('hex')
+LookupError: unknown encoding: hex
+
+
+print in the search function at startup: 
+
+  encoding search func   ansi_x3.4-1968  type  <type 'str'> 
+
+
+print in the search function when importing json: 
+
+  encoding search try  hex_codec  type  <type 'str'> 
+  encoding search try  hex  type  <type 'str'> 
+
+
+error when importing encodings.hex_codec 
+
+  >>> import encodings.hex_codec 
+  Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    File "/root/install273v5/lib/python2.7/encodings/hex_codec.py", line 9, in <module>
+      import codecs, binascii
+  ImportError: No module named binascii
+
+
+

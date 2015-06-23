@@ -1,22 +1,31 @@
 
-run bld3collectlib.sh to collect .py into lib/
+run bld3collectlib.sh to collect .py into inst273/
 
 
 install: 
 
-  copy libpython2.7.a to        target lib/
-  copy those lib/*.py files to  target lib/python2.7/
-  copy Makefile  to             target lib/python2.7/config/
-  copy pyconfig.h to            target include/python2.7/
+ --not needed:
+  #copy libpython2.7.a to        target lib/
+ --done by bld3....sh:
+  #copy those lib/*.py files to  target lib/python2.7/
+  #copy Makefile  to             target lib/python2.7/config/
+  #copy pyconfig.h to            target include/python2.7/
 
 run
 
   use PYTHONHOME point to target top of lib/ include/ etc. 
 
-add missing modules by uncommenting in Modules/Setup: 
+add missing modules by uncommenting in Modules/Setup (copy note-bld3-Setup): 
 
   _struct  ... 
+  <from> array <to> unicodedata  <except _testcapi and _pickle>
+  _socket select fcntl spwd grp
+  binascii cStringIO
 
+copy in missing modules from .py lib dir
+
+ --done by bld3....sh:
+  logging/  weakref  atexit
 
 
 on an arm-v7 build these are the dyn files: 

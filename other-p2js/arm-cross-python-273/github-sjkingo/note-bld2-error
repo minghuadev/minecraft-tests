@@ -4,6 +4,8 @@ if set mystatic=0 , and enable install at stage 4 (commented out now), it has an
 
 R_ARM_TLS_LE32 relocation not permitted in shared object
 
+  solution: not turn on stage 4 install. use bld3collect.sh.
+
 
 
 search turned up: 

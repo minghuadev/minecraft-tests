@@ -11,7 +11,7 @@ inc=$top/include/python2.7
 
 mkdir $top
 mkdir $top/bin
-mkdir -p $lib $lib/encodings $lib/json $lib/config
+mkdir -p $lib $lib/encodings $lib/json $lib/config  $lib/logging
 mkdir -p $inc
 
 for fn in  _abcoll.py tempfile.py platform.py linecache.py posixpath.py socket.py  \
@@ -21,7 +21,7 @@ for fn in  _abcoll.py tempfile.py platform.py linecache.py posixpath.py socket.p
            textwrap.py collections.py __future__.py genericpath.py stat.py   \
            _weakrefset.py mimetools.py copy_reg.py urlparse.py heapq.py      \
            functools.py sre_compile.py httplib.py rfc822.py sre_constants.py \
-           ssl.py urllib.py site.py ; do
+           ssl.py urllib.py site.py  weakref.py atexit.py  ; do
   cp $PYTHONVER/Lib/$fn  $lib/
 done
 
@@ -37,8 +37,10 @@ for fn in  encodings/aliases.py encodings/__init__.py encodings/hex_codec.py  \
   cp $PYTHONVER/Lib/$fn  $lib/encodings/
 done
 
+  cp $PYTHONVER/Lib/logging/*  $lib/logging/
+
 cp $PYTHONVER/python          $top/bin/
-cp $PYTHONVER/libpython2.7.a  $top/lib/
+#cp $PYTHONVER/libpython2.7.a  $top/lib/
 cp $PYTHONVER/Makefile        $lib/config/
 
 cp $PYTHONVER/pyconfig.h      $inc/
