@@ -34,7 +34,7 @@ done
 for fn in  encodings/aliases.py encodings/__init__.py encodings/hex_codec.py  \
            encodings/ascii.py encodings/cp1252.py encodings/cp437.py         \
            encodings/latin_1.py encodings/mbcs.py encodings/utf_8.py  ; do
-  cp $PYTHONVER/Lib/$fn  $lib/json/
+  cp $PYTHONVER/Lib/$fn  $lib/encodings/
 done
 
 cp $PYTHONVER/python          $top/bin/
