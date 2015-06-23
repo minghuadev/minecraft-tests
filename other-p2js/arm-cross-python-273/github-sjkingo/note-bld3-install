@@ -13,3 +13,29 @@ run
 
   use PYTHONHOME point to target top of lib/ include/ etc. 
 
+add missing modules by uncommenting in Modules/Setup: 
+
+  _struct  ... 
+
+
+
+on an arm-v7 build these are the dyn files: 
+
+host:~/inst273/lib/python2.7/lib-dynload$ ls
+Python-2.7.3-py2.7.egg-info  _hotshot.so                  array.so                     operator.so
+_bisect.so                   _io.so                       audioop.so                   ossaudiodev.so
+_codecs_cn.so                _json.so                     binascii.so                  parser.so
+_codecs_hk.so                _locale.so                   cPickle.so                   pyexpat.so
+_codecs_iso2022.so           _lsprof.so                   cStringIO.so                 resource.so
+_codecs_jp.so                _md5.so                      cmath.so                     select.so
+_codecs_kr.so                _multibytecodec.so           crypt.so                     spwd.so
+_codecs_tw.so                _multiprocessing.so          datetime.so                  strop.so
+_collections.so              _random.so                   fcntl.so                     syslog.so
+_csv.so                      _sha.so                      future_builtins.so           termios.so
+_ctypes.so                   _sha256.so                   grp.so                       time.so
+_ctypes_test.so              _sha512.so                   itertools.so                 unicodedata.so
+_elementtree.so              _socket.so                   linuxaudiodev.so
+_functools.so                _struct.so                   math.so
+_heapq.so                    _testcapi.so                 mmap.so
+
+
