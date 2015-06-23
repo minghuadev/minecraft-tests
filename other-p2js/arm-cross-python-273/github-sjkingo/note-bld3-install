@@ -21,6 +21,7 @@ add missing modules by uncommenting in Modules/Setup (copy note-bld3-Setup):
   <from> array <to> unicodedata  <except _testcapi and _pickle>
   _socket select fcntl spwd grp
   binascii cStringIO
+  _md5 _sha _sha256 _sha512
 
 copy in missing modules from .py lib dir
 
