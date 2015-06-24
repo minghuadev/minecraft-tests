@@ -1,0 +1,19 @@
+
+summary building static 2.7.3: 
+
+
+start with these files/directories
+
+    bld2armv5.sh
+    bld3collectlib.sh
+    files/                from python-arm-xcompile/ from github
+    Python-2.7.3.tar.xz   downloaded from python.org stamp 9976088 Apr9 2012
+
+run: 
+
+  ./bld2armv5.sh
+  ./bld3collectlib.sh
+
+the result is under inst273/ directory.
+
+
