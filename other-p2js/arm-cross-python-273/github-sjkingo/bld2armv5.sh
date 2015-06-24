@@ -71,7 +71,7 @@ if [ $myskip -lt 1 ]; then
   echo "Stage 1: compiling host executables .." >> $BUILD_LOG
   echo >> $BUILD_LOG
 
-  ./configure $CONFIGURE_ARGS CONFIG_SITE="config.site" >> $BUILD_LOG
+  ./configure $CONFIGURE_ARGS CFLAGS="-Wformat" CONFIG_SITE="config.site" >> $BUILD_LOG
   make python Parser/pgen >> $BUILD_LOG
   mv python hostpython
   mv Parser/pgen Parser/hostpgen
@@ -106,14 +106,15 @@ if [ $myskip -lt 2 ]; then
   if [ $mystatic -ne 1 ]; then
 
     if [ -f Makefile ]; then make distclean ; fi
-    ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
-      LDFLAGS="-static -static-libgcc" CPPFLAGS="-static" CONFIG_SITE="config.site" >> $BUILD_LOG
+    ./configure $CONFIGURE_ARGS  --build=$BUILD_HOST --host=$TARGET_HOST \
+       CFLAGS="-Wformat" LDFLAGS="-static -static-libgcc" CPPFLAGS="-static" \
+       CONFIG_SITE="config.site" >> $BUILD_LOG
     rm -f myskipdone3 myskipdone4
   else
 
     if [ -f Makefile ]; then make distclean ; fi
     ./configure $CONFIGURE_ARGS --build=$BUILD_HOST --host=$TARGET_HOST \
-      CONFIG_SITE="config.site" --prefix=/python >> $BUILD_LOG
+       CFLAGS="-Wformat" CONFIG_SITE="config.site" --prefix=/python >> $BUILD_LOG
     rm -f myskipdone3 myskipdone4
   fi
   touch myskipdone2

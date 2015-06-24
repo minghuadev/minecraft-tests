@@ -1,0 +1,148 @@
+
+
+In file included from Include/Python.h:126:0,
+                 from ./Modules/getbuildinfo.c:1:
+Include/modsupport.h:27:1: warning: ‘PyArg_ParseTuple’ is an unrecognized format function type [-Wformat=]
+ PyAPI_FUNC(int) PyArg_ParseTuple(PyObject *, const char *, ...) Py_FORMAT_PARSETUPLE(PyArg_ParseTuple, 2, 3);
+
+
+
+https://bugzilla.redhat.com/show_bug.cgi?id=927358
+Bug 927358 - error: 'PyArg_ParseTuple' is an unrecognized format function type 
+
+The relevant configure.in fragment is:
+
+# Check whether GCC supports PyArg_ParseTuple format
+if test "$GCC" = "yes"
+then
+  AC_MSG_CHECKING(whether gcc supports ParseTuple __format__)
+  save_CFLAGS=$CFLAGS
+  CFLAGS="$CFLAGS -Werror"
+  AC_COMPILE_IFELSE([
+    AC_LANG_PROGRAM([[void f(char*,...)__attribute((format(PyArg_ParseTuple, 1, 2)));]], [[]])
+  ],[
+    AC_DEFINE(HAVE_ATTRIBUTE_FORMAT_PARSETUPLE, 1,
+      [Define if GCC supports __attribute__((format(PyArg_ParseTuple, 2, 3)))])
+    AC_MSG_RESULT(yes)
+  ],[
+    AC_MSG_RESULT(no)
+  ])
+  CFLAGS=$save_CFLAGS
+fi
+
+I do indeed see:
+  checking whether gcc supports ParseTuple __format__... yes
+for both debug and optimized configurations, whereas in reality our gcc doesn't.
+
+The issue appears to be that -Wformat is no longer included by default in gcc 4.8
+
+The underlying test code (from configure) is:
+
+void f(char*,...)__attribute((format(PyArg_ParseTuple, 1, 2)));
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+
+With gcc 4.7:
+$ gcc -Werror /tmp/foo.c 
+/tmp/foo.c:1:1: error: ‘PyArg_ParseTuple’ is an unrecognized format function type [-Werror=format]
+cc1: all warnings being treated as errors
+$ echo $?
+1
+
+With gcc 4.8:
+$ ~/coding/gcc-python/gcc-svn-trunk/install/bin/gcc -Werror /tmp/foo.c
+$ echo $?
+0
+
+but on adding -Wall:
+$ ~/coding/gcc-python/gcc-svn-trunk/install/bin/gcc -Werror -Wall /tmp/foo.c
+/tmp/foo.c:1:1: error: ‘PyArg_ParseTuple’ is an unrecognized format function type [-Werror=format=]
+ void f(char*,...)__attribute((format(PyArg_ParseTuple, 1, 2)));
+ ^
+cc1: all warnings being treated as errors
+$ echo $?
+1
+
+
+Underlying warning comes from gcc/c-family/c-format.c:
+
+282       warning (OPT_Wformat_, "%qE is an unrecognized format function type",
+283                format_type_id);
+
+Upstream gcc commit r193304 changed:
+c.opt:
+ Wformat
+-C ObjC C++ ObjC++ Warning
++C ObjC C++ ObjC++ Warning Alias(Wformat=, 1, 0)
+ Warn about printf/scanf/strftime/strfmon format string anomalies
+
+[...snip...]
+
+ Wformat=
+-C ObjC C++ ObjC++ Joined Warning
++C ObjC C++ ObjC++ Joined RejectNegative UInteger Var(warn_format) Warning LangEnabledBy(C ObjC C++ ObjC++,Wall, 1, 0)
++Warn about printf/scanf/strftime/strfmon format string anomalies
+
+If I'm reading this right, this commit made it so that -Wformat only warn when -Wall is set, or when enabled explicitly, whereas before it appears to have been on by default.
+
+See http://gcc.gnu.org/viewcvs/gcc?view=revision&revision=193304 for full commit.
+
+Filed upstream as http://bugs.python.org/issue17547
+
+
+
+
+https://hg.python.org/cpython/rev/9d50af4c482f/
+Mercurial > cpython
+changeset 83711:9d50af4c482f 2.7
+
+-Wformat is needed by gcc 4.8 (closes #17547) [#17547]
+author 	Benjamin Peterson <benjamin@python.org>
+date 	Sat, 11 May 2013 13:00:05 -0500 (2013-05-11)
+parents 	9c93a631e95a
+children 	abc780332b60
+files 	Misc/NEWS configure configure.ac
+diffstat 	3 files changed, 5 insertions(+), 2 deletions(-) [+]
+
+--- a/Misc/NEWS
++++ b/Misc/NEWS
+@@ -95,6 +95,9 @@ Library
+ Build
+ -----
+ 
++- Issue #17547: In configure, explicitly pass -Wformat for the benefit for GCC
++  4.8.
++
+ - Issue #17682: Add the _io module to Modules/Setup.dist (commented out).
+ 
+ - Issue #17086: Search the include and library directories provided by the
+--- a/configure
++++ b/configure
+@@ -6253,7 +6253,7 @@ then
+   { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether gcc supports ParseTuple __format__" >&5
+ $as_echo_n "checking whether gcc supports ParseTuple __format__... " >&6; }
+   save_CFLAGS=$CFLAGS
+-  CFLAGS="$CFLAGS -Werror"
++  CFLAGS="$CFLAGS -Werror -Wformat"
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+--- a/configure.ac
++++ b/configure.ac
+@@ -1326,7 +1326,7 @@ if test "$GCC" = "yes"
+ then
+   AC_MSG_CHECKING(whether gcc supports ParseTuple __format__)
+   save_CFLAGS=$CFLAGS
+-  CFLAGS="$CFLAGS -Werror"
++  CFLAGS="$CFLAGS -Werror -Wformat"
+   AC_COMPILE_IFELSE([
+     AC_LANG_PROGRAM([[void f(char*,...)__attribute((format(PyArg_ParseTuple, 1, 2)));]], [[]])
+   ],[
+
+
