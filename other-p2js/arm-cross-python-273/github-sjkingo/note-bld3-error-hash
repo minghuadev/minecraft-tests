@@ -1,0 +1,35 @@
+
+despite the error, the program works well. 
+
+error resolution: add md5, sha, sha256, sha512 modules
+
+
+
+ERROR:root:code for hash md5 was not found.
+Traceback (most recent call last):
+
+  File "/root/install273v5/lib/python2.7/hashlib.py", line 139, in <module>
+    globals()[__func_name] = __get_hash(__func_name)
+
+  File "/root/install273v5/lib/python2.7/hashlib.py", line 91, in __get_builtin_constructor
+    raise ValueError('unsupported hash type %s' % name)
+
+ValueError: unsupported hash type md5
+
+
+ERROR:root:code for hash sha1 was not found.
+ValueError: unsupported hash type sha1
+
+ERROR:root:code for hash sha224 was not found.
+ValueError: unsupported hash type sha224
+
+ERROR:root:code for hash sha256 was not found.
+ValueError: unsupported hash type sha256
+
+ERROR:root:code for hash sha384 was not found.
+ValueError: unsupported hash type sha384
+
+ERROR:root:code for hash sha512 was not found.
+ValueError: unsupported hash type sha512
+
+
