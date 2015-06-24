@@ -40,7 +40,7 @@ myskip=1
   myskip=2
   fi
 fi
-mystatic=1
+mystatic=0
     # set mystatic to 1 to build non-static binary that is necessary for armv7
     # though armv5 may be able to build static , not sure how to do it ...
 
@@ -119,12 +119,53 @@ if [ $myskip -lt 2 ]; then
   touch myskipdone2
 fi
 
+    function enable_modules() {
+        for x in `cat << allines
+          array
+          cmath
+          math
+          _struct
+          time
+          operator
+          _random
+          _collections
+          itertools
+          strop
+          _functools
+          _elementtree
+          datetime
+          _bisect
+        
+          unicodedata
+        
+          fcntl
+          spwd
+          grp
+          select
+        
+          _socket
+        
+          binascii
+          cStringIO
+        
+          _md5 
+          _sha 
+          _sha256
+          _sha512 `; do 
+        
+            echo "  " Enable builtin module: $x
+            echo "  " Enable builtin module: $x >> $BUILD_LOG
+            sed -e "s/^#\($x[ \t].*\)$/\1/" -i Modules/Setup
+        done
+    }
+
 if [ $myskip -lt 1 ]; then
   if [ $mystatic -ne 1 ]; then
     sed -i '1r ../files/Setup' Modules/Setup
     echo
     echo "Touching Modules/Setup"
     echo "Touching Modules/Setup" >> $BUILD_LOG
+    enable_modules
     echo
   else
     echo
@@ -144,6 +185,7 @@ else
       echo
       echo "Touching Modules/Setup"
       echo "Touching Modules/Setup" >> $BUILD_LOG
+      enable_modules
       echo
     fi
   else 
