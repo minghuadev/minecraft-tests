@@ -1,0 +1,24 @@
+
+
+bld2armv5.sh
+if set mystatic=0 , even without enabling install at stage 4 (commented out now), it has the error:
+
+R_ARM_TLS_LE32 relocation not permitted in shared object
+
+
+  solution: build for target python only
+
+  reason: it was building for python, oldsharedmods, sharedmods, gdbhooks
+          building any shared mods would cause the problem
+
+
+~/arm-2014.05/bin/../lib/gcc/arm-none-linux-gnueabi/4.8.3/../../../../arm-none-linux-gnueabi/bin/ld: 
+~/arm-2014.05/bin/../arm-none-linux-gnueabi/libc/usr/lib/libc.a(dl-tsd.o)(.text+0x14): 
+R_ARM_TLS_LE32 relocation not permitted in shared object
+~/arm-2014.05/bin/../arm-none-linux-gnueabi/libc/usr/lib/libc.a(dl-tsd.o): 
+In function `_dl_initial_error_catch_tsd':
+dl-tsd.c:(.text+0x14): dangerous relocation: unsupported relocation
+collect2: error: ld returned 1 exit status
+
+
+

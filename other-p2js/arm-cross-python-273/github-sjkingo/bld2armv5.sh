@@ -210,7 +210,8 @@ else
   echo >> $BUILD_LOG
   
   if [ $mystatic -ne 1 ]; then
-    make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen \
+    # static build, make for target python only. 
+    make python HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen \
       CROSS_COMPILE_TARGET=yes BUILDARCH=$BUILD_HOST HOSTARCH=$TARGET_HOST >> $BUILD_LOG  2>&1 
     rc3=$?
   else
