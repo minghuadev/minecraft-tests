@@ -3,7 +3,7 @@
 $ ls -ld ss*
 
 lrwxrwxrwx 1    53 Apr 16 21:48 ssmods -> ./.local/share/Aspyr/Sid Meier's Civilization 5/MODS/
-lrwxrwxrwx 1    43 Apr 16 21:47 ssugc -> ./.local/share/Steam/userdata/171029132/ugc
+lrwxrwxrwx 1    43 Apr 16 21:47 ssugc -> ./.local/share/Steam/userdata/897102913/ugc
 
 
 
