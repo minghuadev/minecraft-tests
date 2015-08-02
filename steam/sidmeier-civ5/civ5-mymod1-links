@@ -1,0 +1,41 @@
+
+
+$ ls -ld ss*
+
+lrwxrwxrwx 1    53 Apr 16 21:48 ssmods -> ./.local/share/Aspyr/Sid Meier's Civilization 5/MODS/
+lrwxrwxrwx 1    43 Apr 16 21:47 ssugc -> ./.local/share/Steam/userdata/171029132/ugc
+
+
+
+$ ls -l ssmods/
+
+drwxrwxr-x 7    4096 Apr 16 23:08 Ingame Editor (v 39)
+-rw-rw-r-- 1  579603 Apr 16 23:06 ingame_editor__v_39_1.zip
+
+
+$ ls -l ssugc/
+
+-rw-rw-r-- 1   306 Jul 10 00:43 8930_subscriptions.vdf
+drwxrwxr-x 2  4096 Jul  9 23:15 download
+drwxrwxr-x 4  4096 Jul  9 23:15 referenced
+
+
+$ ls -l ssugc/download/
+total 0
+
+$ ls -l ssugc/referenced/
+
+drwxrwxr-x 2  4096 Jul  9 23:14 613924704308377446
+drwxrwxr-x 2  4096 Jul  9 23:15 902127820571533318
+
+$ ls -l ssugc/referenced/613924704308377446/
+
+-rwxrwxr-x 1  17195523 Jul  9 23:14 [bnw] colonialist legacies - canada (v2).civ5mod
+-rw-rw-r-- 1       173 Jul  9 23:14 data.vdf
+
+$ ls -l ssugc/referenced/902127820571533318/
+
+-rw-rw-r-- 1       154 Jul  9 23:15 data.vdf
+-rwxrwxr-x 1  46162084 Jul  9 23:15 r.e.d. modpack (v 27).civ5mod
+
+
