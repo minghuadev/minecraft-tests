@@ -1,0 +1,31 @@
+
+search: elinux arm toolchain
+
+
+
+http://elinux.org/Toolchains
+http://elinux.org/ARMCompilers
+
+  https://sourcery.mentor.com/GNUToolchain/package12774/public/arm-none-eabi/arm-2014.05-28-arm-none-eabi-i686-pc-linux-gnu.tar.bz2
+  https://sourcery.mentor.com/GNUToolchain/package12813/public/arm-none-linux-gnueabi/arm-2014.05-29-arm-none-linux-gnueabi-i686-pc-linux-gnu.tar.bz2
+                   gcc 4.8.3
+
+  https://www.linaro.org/downloads/
+    https://www.linaro.org/downloads/historic/
+      https://wiki.linaro.org/Cycles/1404/Release
+        http://releases.linaro.org/13.04/components/toolchain/binaries/gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux.tar.bz2
+
+
+http://www.ibm.com/developerworks/library/l-arm-toolchain/
+http://gnuarmeclipse.livius.net/blog/toolchain-install/
+http://www.arm.linux.org.uk/developer/toolchain/
+
+
+
+
+search: gnueabihf
+
+https://releases.linaro.org/13.04/components/toolchain/binaries/
+https://releases.linaro.org/13.04/components/toolchain/binaries/gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux.tar.bz2
+
+
