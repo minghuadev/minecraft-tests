@@ -1,0 +1,67 @@
+
+https://stackoverflow.com/questions/24397643/is-it-necessary-to-use-a-lock-for-the-accept-function-when-doing-socket-programm
+
+
+The thundering herd problem is completely solved for accept(), so there is no need 
+for you to lock. It (the article) interestingly explains the problem is not solved 
+for demultiplexors (select(), poll(), etc.), but the common implementation 
+for those calls is that the number of processes waiting on the common FD is limited 
+to the number of CPUs/cores on the platform, so the "herd" is very small. 
+No locks are needed. –  jxh Jun 25 '14 at 18:48 
+
+
+
+
+Serializing accept(), AKA Thundering Herd, AKA the Zeeg Problem
+http://uwsgi-docs.readthedocs.org/en/latest/articles/SerializingAccept.html
+https://github.com/unbit/uwsgi-docs/blob/master/articles/SerializingAccept.rst
+
+
+Example:
+
+    int s = socket(...)
+    bind(s, ...)
+    listen(s, ...)
+    fork()
+
+After having forked itself a bunch of times, each process will generally start blocking on accept()
+
+    for(;;) {
+        int client = accept(...);
+        if (client < 0) continue;
+        ...
+    }
+
+The funny problem is that on older/classic UNIX, accept() is woken up in each process blocked on it whenever a connection is attempted on the socket.
+
+Only one of those processes will be able to truly accept the connection, the others will get a boring EAGAIN.
+
+The de facto solution was placing a lock before the accept() call to serialize its usage:
+
+    for(;;) {
+        lock();
+        int client = accept(...);
+        unlock();
+        if (client < 0) continue;
+        ...
+    }
+
+For threads, dealing with locks is generally easier but for processes you have to fight with system-specific solutions or fall back to the venerable SysV ipc subsystem (more on this later).
+
+In modern times, the vast majority of UNIX systems have evolved, and now the kernel ensures (more or less) only one process/thread is woken up on a connection event.
+
+Ok, problem solved, what we are talking about?
+
+
+## select()/poll()/kqueue()/epoll()/... 
+
+...
+
+## Application Servers VS WebServers
+
+...
+
+### SysV IPC is not good for application servers :(*
+
+
+
