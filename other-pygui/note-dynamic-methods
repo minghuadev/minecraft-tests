@@ -1,0 +1,62 @@
+
+search: python add function to class
+
+
+
+http://hoardedhomelyhints.dietbuddha.com/2012/12/python-metaprogramming-dynamically.html
+
+
+Dynamic Class Method Addition
+
+  Occasionally you may need dynamically add a function as a method to a class. 
+  This is easily accomplished by assigning the function as an attribute of the class.
+
+    def fn(self):
+      return id(self), self, type(self)
+     
+    # Traditional Class Definition
+    class A_Class(object):
+      def method_a(self):
+        return id(self), self, type(self)
+     
+    instance = A_Class()
+     
+    # Modify the class and add fn as a method
+    setattr(A_Class, 'method_b', fn)
+     
+    # Call the traditionally defined method
+    instance.method_a()
+    # Call the dynamically added method
+    instance.method_b()
+
+
+Dynamic Instance Method Addition
+
+  When you add the method to a class all instances can access it. 
+  If you only want a particular instance to have a method do this:
+
+    from types import MethodType
+     
+    instance2 = A_Class()
+    setattr(instance, fn.__name__, MethodType(fn, instance, type(instance)))
+     
+    # Calls the fn method attached to the instance
+    instance.fn()
+     
+    # Throws an exception
+    instance2.fn()
+
+
+The function name:
+
+    def logmsg(message):
+        import inspect #, logging
+        func = inspect.currentframe().f_back.f_code
+        term.write('  %s :: %s in %s:%i  ' % (
+            message,
+            func.co_name,
+            func.co_filename,
+            func.co_firstlineno
+        ))
+
+
