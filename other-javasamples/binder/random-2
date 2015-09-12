@@ -1,0 +1,10 @@
+
+The design is object-oriented typing system on top of dbus (called binder). The benefits of this design could make it easier to achieve: 
+
+    Active messaging system around dbus.
+    Dependency management based on systemd approach.
+    Objects association using advanced technologies other people have developed, that is closer to dbus implementation.
+
+Though there are many ways of achieving the same.
+
+

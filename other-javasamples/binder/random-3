@@ -1,0 +1,64 @@
+
+
+
+While looking at the many trends of different new architectures and beyond, it becomes clear 
+that many of the traditional design styles and techniques can be applied to improve 
+the end-application components bottom-up. Once enough areas have been improved, 
+it would become nature the traditional approach, like multi-tasking based design 
+or event-driven design, will never become the main design style of the application system.
+
+The top-level architecture of many of the popular and mature systems are mostly 
+structure-driven, or loosely speaking a object-oriented restful SOA system. 
+Many features were intended though never got time implemented, like self-documenting, 
+self-publishing, self-evolving, self-recovery, etc. Changing the top-level architecture 
+into legacy style in a hurry, e.g. making it event-driven, would be a prehibitively 
+big task if done in one shot at the moment. However once the aforementioned intended 
+features are well understood there is no reason to prevent switching to a more efficient 
+design style. Efficiency and feature-rich are two ends of a spectrum. At this very early 
+stage of product development, feature flexibility should take priority.
+
+Some of the intended features:
+
+  * Web/middle/HAL would be loosely coupled, thus can be started in any order.
+  * HAL should depend on nothing but hardware and OS. Similarly middle and web too.
+  * Any party should be restarted without affecting other parties significantly, 
+          and the previous whole system state will be restored. 
+  * When new features are introduced by new or modified elements on the api, the other 
+          parties should detect this and either restart itself to incorporate the new ability 
+          or ignore and keep running in a legacy mode.
+  * When a party introduce new ability it should cope with other parties without the 
+          new ability implemented.
+
+
+
+The design ideas or fundamentals can be talked about many times in various occasions and 
+in different appearances, if not written down and understood consistently by stakeholders.
+
+Encoded in the structure-driven design is the organizational collective intelligence and workflow. 
+It affects how good the products can be, as well as how knowledge from all-over the organization 
+can be utilized to improve the development of products. The idea, may be further thought 
+by items in the list below:
+
+  * Software components are developed by people with different specialization and skill set. 
+          Some changes in the system may be small at the first look. Once that small change 
+          propagates over to other components the impact may be huge to the people in charge 
+          of other components.
+  * Changes in requirements, sometimes big changes, will come. Thus the software fundamental 
+          structure needs to be flexible yet keep high-level abstraction stable.
+  * The system is developed on high-level abstractions, though sometimes those abstractions 
+          are hidden in the code, and taken for granted on people's minds. A valid architecture 
+          needs to capture those concepts and rules too, in addition to having a solid 
+          technical foundation in itself.
+  * Though officially agile is often a management style, an architecture should be too.
+  * When a new component is added to the system it is equally important to consider how the 
+          component can be removed and/or replaced by another component which may behave 
+          similarly but built on a different technology.
+  * It often is implied but better to be explicit: The components need to be developed and 
+          tested independently, that means a system of the subject component should be able 
+          to run with minimal dependency on other components.
+  * QA, releasing, build, manufacturing, are all parts of the whole picture. As well as 
+          the customer facing teams.
+
+
+
+
