@@ -1,0 +1,30 @@
+
+
+pwd: OPENSHIFT_DATA_DIR/dotssh:
+
+
+
+[dotssh]\> ls -l 
+-r--------. 1 592d 592d  221 Jul  3  2014 config
+-r--------. 1 592d 592d 1675 Jul  3  2014 id_rsa_opengit
+-r--------. 1 592d 592d  389 Jul  3  2014 id_rsa_opengit.pub
+-rw-r--r--. 1 592d 592d 1595 Jul 17  2014 known_host
+-rw-------. 1 592d 592d   21 Jul 21  2014 projname
+
+
+
+[dotssh]\> cat config
+Host github.com
+        IdentityFile /var/lib/openshift/592d/app-root/data/dotssh/id_rsa_opengit
+        UserKnownHostsFile /var/lib/openshift/592d/app-root/data/dotssh/known_host
+        User yourgithubusername
+
+
+
+[dotssh]\> cat -n known_host 
+     1  github.com,192.30.252.129 ssh-rsa ABNyc....=
+     2  192.30.252.128 ssh-rsa ABNyc....=
+     3  192.30.252.130 ssh-rsa ABNyc....=
+     4  192.30.252.131 ssh-rsa ABNyc....=
+
+
