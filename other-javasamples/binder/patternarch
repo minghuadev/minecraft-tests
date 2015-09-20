@@ -1,0 +1,38 @@
+
+search pattern based software architecture
+
+
+
+http://www.cs.wustl.edu/~schmidt/POSA/
+
+Pattern-Oriented Software Architecture: A System of Patterns, Volume 1
+
+POSA1 is the first volume in the POSA series and was published in 1996. This book represents the progression and evolution of the pattern approach into a system of patterns capable of describing and documenting large-scale applications. The patterns presented in this book span several levels of abstractions from high-level architectural patterns and medium-level design patterns to low-level idioms.
+
+Pattern-Oriented Software Architecture: Patterns for Concurrent and Networked Objects, Volume 2
+
+POSA2 is the second volume in the POSA series and was published in 2000. The 17 patterns in POSA2 form the basis of a pattern language that addresses issues associated with concurrency and networking. This material represents a range of patterns from idioms to architecture designs. The patterns cover core elements of building concurrent and networked systems: service access and configuration, event handling, synchronization, and concurrency. All patterns present extensive examples and the pattern known uses are presented in various programming languages, including C++, C, and Java.
+
+Pattern-Oriented Software Architecture: Patterns for Resource Management, Volume 3
+
+POSA3
+POSA4
+POSA5
+
+
+http://www.cs.wustl.edu/~schmidt/patterns.html
+patterns and frameworks
+
+
+http://www.dre.vanderbilt.edu/
+Distributed Object Computing (DOC) Group for Distributed Real-time and Embedded (DRE) Systems 
+
+
+
+
+https://en.wikibooks.org/wiki/Introduction_to_Software_Engineering/Architecture/Design_Patterns
+ntroduction to Software Engineering/Architecture/Design Patterns
+
+
+
+
