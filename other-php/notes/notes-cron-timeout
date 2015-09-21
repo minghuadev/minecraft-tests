@@ -1,0 +1,12 @@
+
+https://forums.openshift.com/cron-questions
+
+
+ramr
+Posted May 3, 2012 at 4:55 PM
+
+Correction on 2) -- there is a default timeout of 5 minutes on the top level script. So if you need something to run for longer, you can just start it nohupped and backgrounded ala:
+
+nohup /path-to/some-other-script > $OPENSHIFT_LOG_DIR/logfile 2>&1 &
+
+
