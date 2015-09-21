@@ -1,0 +1,34 @@
+
+
+https://developers.openshift.com/en/diy-overview.html
+
+
+
+Get started
+
+    * Add the framework of choice to your repo.
+    * Modify .openshift/action_hooks/start to start your application. 
+      The application is required to bind to $OPENSHIFT_DIY_IP:$OPENSHIFT_DIY_PORT.
+    * Modify .openshift/action_hooks/stop to stop your application.
+    * Commit and push your changes.
+
+
+Repo layout
+
+    static/           Externally exposed static content goes here
+    .openshift/
+        action_hooks/ See the Action Hooks documentation 
+            start     Custom action hook used to start your application
+            stop      Custom action hook to stop your application
+
+
+Environment Variables
+
+The diy cartridge provides the following environment variables to reference for ease of use:
+
+    Variable Name             Purpose
+    OPENSHIFT_DIY_IP          The IP address assigned to the application
+    OPENSHIFT_DIY_PORT        The port assigned to the the application
+
+
+
