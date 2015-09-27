@@ -44,7 +44,32 @@ Amazon WebServices:                               l5-c2
 Heroku:                          l3-c1                           l3-c3
                                  l2-c1            l2-c2
 
+OpenShift:
 CloudFoundry:                    l3-c1
                                  l2-c1            l2-c2
+
+
+IBM, Codename BlueMix
+BigQuery:                                         l3-c2          l3-c3
+
+
+Thoughts on Layer 4:
+      +----------------------------------------------+
+      | browser:   styling and user ineraction       |  CSS
+      |            client-side logic                 |
+      |            server communication              |  Rich Forms DSL
+      +----------------------------------------------+
+      +----------------------------------------------+
+      | jvm:                                         |  Microflow DSL
+      |  +------------------+  +------------------+  |  Mapping DSL
+      |  |  Flows & actions |  | API & connectors |  |  Security DSL
+      |  +------------------+  +------------------+  |  Domain model
+      |  +----------------------------------------+  |
+      |  |            Access rules                +  |
+      |  +----------------------------------------+  |
+      |  +----------------------------------------+  |
+      |  |                  ORM                   |  |
+      |  +----------------------------------------+  |
+      +----------------------------------------------+
 
 
