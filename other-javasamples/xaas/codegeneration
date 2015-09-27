@@ -9,3 +9,42 @@ http://www.theenterprisearchitect.eu/blog/2014/06/28/software-defined-to-metadat
 http://www.theenterprisearchitect.eu/blog/2013/10/12/the-cloud-landscape-described-categorized-and-compared/
 
 
+A framework to categorize and compare cloud platforms
+---------+------------------+----------------------------------------------+------------
+ Layer 6 |       SaaS       |        Application                           | End-users 
+---------+------------------+----------------------------------------------+------------
+ Layer 5 |   App Service    | Compute App    | Communicate  |  Store App   | Citizen 
+         |                  |  Services      | App Services |  Services    | developers
+---------+------------------+----------------+--------------+--------------+------------
+ Layer 4 |   Model-Driven   | bpmPaas, Model-| Model-Driven |              | Business 
+         |       PaaS       | Driven aPaaS   |    iPaaS     |    baPaaS    | engineers
+---------+------------------+----------------+--------------+--------------+------------
+         |                  |                |              |              | Professional 
+ Layer 3 |       PaaS       |      aPaaS     |    iPaaS     |    dbPaaS    | developers 
+---------+------------------+----------------+--------------+--------------+------------
+         |   Foundational   |  Application   |   Routing,   |   Object     | 
+ Layer 2 |       PaaS       |   containers   |  messaging   |   storage    | DevOps 
+---------+------------------+----------------+--------------+--------------+------------
+         | Software Defined |    Virtual     |Software Defi-|Software Defi-|Infrastructure 
+ Layer 1 |    Datacenter    |    Machines    |ned Networking|ned Storage   | engineers 
+         |                  |                |     (SDN)    |    (SDS)     | 
+----------------------------+----------------+--------------+--------------+------------
+                            |    Compute     | Communicate  |    Store     |
+                            +----------------+--------------+--------------+
+                                   c1               c2             c3
+
+OpenStack:                                                       l2-c3
+                                 l1-c1            l1-c2          l1-c3
+
+Amazon WebServices:                               l5-c2
+                                 l3-c1                           l3-c3
+                                                  l2-c2          l2-c3
+                                 l1-c1            l1-c2          l1-c3
+
+Heroku:                          l3-c1                           l3-c3
+                                 l2-c1            l2-c2
+
+CloudFoundry:                    l3-c1
+                                 l2-c1            l2-c2
+
+
