@@ -30,7 +30,7 @@ gcc ${ccflags} ${llflags}  ${srcfile}
 #     terminal 1:    source ssenv  ;    ./a.out listen
 #     terminal 2:    source ssenv  ;    ./a.out query 1234
 #
-# [5] signal to selector
+# [5] signal to selector (dbus-select-1-signal.c)
 #     terminal 1:    source ssenv  ;    ./a.out selector
 #     terminal 2:    source ssenv  ;    ./a.out send 1234
 #
