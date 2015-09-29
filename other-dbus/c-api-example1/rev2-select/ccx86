@@ -34,6 +34,10 @@ gcc ${ccflags} ${llflags}  ${srcfile}
 #     terminal 1:    source ssenv  ;    ./a.out selector
 #     terminal 2:    source ssenv  ;    ./a.out send 1234
 #
+# [6] sigle rpc to selector (dbus-select-2-rpc.c)
+#     terminal 1:    source ssenv  ;    ./a.out selector
+#     terminal 2:    source ssenv  ;    ./a.out seltest 1234
+#
 # Note: dbus-launch is from:
 #       [dbs]$ rpm -q -f /usr/bin/dbus-launch
 #       dbus-x11-1.2.24-7.el6_3.x86_64
