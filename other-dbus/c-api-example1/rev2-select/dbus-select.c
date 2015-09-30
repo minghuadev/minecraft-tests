@@ -475,14 +475,23 @@ static struct timeval watched_timeout_start_tv = { 0, 0 };
 static unsigned int watched_timeout_setv = 0;
 static unsigned int watched_timeout_lastv = 0;
 
+#define TIMEOUT_MAX_MS ( 1000 * 1000 ) /* 1000 sec */
+#define TIMEOUT_MOD_MS ( 8 * TIMEOUT_MAX_MS ) /* 8000 sec */
+               /* note: last_time is 0 to 7999 sec. 
+                *       next_timeout is 0 to 8999.
+                */
+#define TIME_TV_TO_MS(x) \
+               ( (x.tv_sec%(TIMEOUT_MOD_MS/1000))*1000 + \
+                 x.tv_usec/1000 )
+
 static dbus_bool_t add_timeout(DBusTimeout *t, void *data)
 {
     if (!dbus_timeout_get_enabled(t))
         return TRUE;
 
     int ms = dbus_timeout_get_interval(t);
-    if ( ms < 0 || ms > 1000000 ) {
-        ms = 1000000;
+    if ( ms < 0 || ms > TIMEOUT_MAX_MS ) {
+        ms = TIMEOUT_MAX_MS;
         if ( ms < 0 || ms > INT_MAX/2-1 ) {
             ms = INT_MAX/2-1;
         }
@@ -493,7 +502,7 @@ static dbus_bool_t add_timeout(DBusTimeout *t, void *data)
 
     struct timeval tnow = {0,0};
     gettimeofday(&tnow, NULL);
-    unsigned int tnowms = (tnow.tv_sec%8000)*1000+tnow.tv_usec/1000;
+    unsigned int tnowms = TIME_TV_TO_MS(tnow);
 
     printf(LOG_DEBUG " adding timeout %p value %u ms\n", t, ms);
 
@@ -531,8 +540,8 @@ static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcrep
                                       DBusPendingCall** pendingargptr);
 #include <sys/select.h>
 
-static int dbus_selector_process_post(DBusConnection* conn, char * param,
-                                      DBusPendingCall** pendingargptr);
+static int dbus_selector_process_post_send( DBusConnection* conn, char * param,
+                                            DBusPendingCall** pendingargptr);
 static int dbus_selector_process_post_reply( DBusConnection* conn,
                                              DBusPendingCall** pendingargptr );
 #include <time.h>
@@ -585,7 +594,7 @@ int dbus_selector(char *param, int altsel )
    // add a rule for which messages we want to see
    dbus_bus_add_match(conn, "type='signal',interface='test.signal.Type'", &err); 
                                            // see signals from the given interface
-   dbus_connection_flush(conn);
+   dbus_connection_flush(conn); /* Note: this would block */
    if (dbus_error_is_set(&err)) {
       fprintf(stderr, "Match Error (%s)\n", err.message);
       return ret; /* ret=1 fail */
@@ -646,7 +655,7 @@ int dbus_selector(char *param, int altsel )
             unsigned int tdiff = 0;
 
             gettimeofday(&tnow, NULL);
-            tnowms = (tnow.tv_sec%8000)*1000+tnow.tv_usec/1000;
+            tnowms = TIME_TV_TO_MS(tnow);
 
             if ( startv.tv_sec != local_to_startv.tv_sec || 
                  startv.tv_usec != local_to_startv.tv_sec   ) 
@@ -654,7 +663,7 @@ int dbus_selector(char *param, int altsel )
                 local_to_startv = startv;
             }
             if ( lastv > tnowms ) {
-                tnowms += 8000000;
+                tnowms += TIMEOUT_MOD_MS;
             }
             toms = lastv + setv + 1;
                              /* add 1 to make up for rounding loss */
@@ -691,19 +700,20 @@ int dbus_selector(char *param, int altsel )
             struct timeval tnow = {0,0};
             unsigned int tnowms = 0;
             unsigned int toms = 0;
+
             gettimeofday(&tnow, NULL);
-            tnowms = (tnow.tv_sec%8000)*1000+tnow.tv_usec/1000;
+            tnowms = TIME_TV_TO_MS(tnow);
 
             if ( startv.tv_sec == local_to_startv.tv_sec && 
                  startv.tv_usec == local_to_startv.tv_sec   ) 
             { /* same timeout */
                 if ( lastv > tnowms ) {
-                    tnowms += 8000000;
+                    tnowms += TIMEOUT_MOD_MS;
                 }
                 toms = lastv + setv + 1;
                              /* add 1 to make up for rounding loss */
                 if ( toms >= tnowms ) {
-                    lastv = tnowms%8000000;
+                    watched_timeout_lastv = tnowms%TIMEOUT_MOD_MS;
                     printf(LOG_DEBUG " dbus handle timeout %p\n", 
                            watched_timeout);
                     dbus_timeout_handle(watched_timeout);
@@ -717,8 +727,8 @@ int dbus_selector(char *param, int altsel )
         if ( altsel ) {
             unsigned int tmnow = time(NULL);
             unsigned int tmdiff = tmnow - lastregtime;
-            if ( tmdiff > 10 ) {
-                dbus_selector_process_post(conn, param, &pending);
+            if ( tmdiff > 10 ) { /* send a rpc evey 10 seconds */
+                dbus_selector_process_post_send(conn, param, &pending);
                 lastregtime = tmnow;
             }
         }
@@ -783,6 +793,10 @@ static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcrep
                 printf(" rpc pending check SUCCESS: received rpc reply \n");
                 dbus_connection_return_message(conn, msg);
                 msg = NULL;
+                dbus_connection_dispatch(conn);
+                                  /* dispatch so the received message is 
+                                   * passed to the pendingcall
+                                   */
                 dbus_selector_process_post_reply( conn, pendingargptr );
                 printf(" rpc pending check SUCCESS: processed rpc reply \n");
 
@@ -846,8 +860,8 @@ static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcrep
     }
     return ret;
 }
-static int dbus_selector_process_post(DBusConnection* conn, char * param,
-                                      DBusPendingCall** pendingargptr)
+static int dbus_selector_process_post_send( DBusConnection* conn, char * param,
+                                            DBusPendingCall** pendingargptr)
 { /* mostly a copy of query() */
    DBusMessage* msg = NULL;
    DBusMessageIter args = {0};
@@ -892,7 +906,7 @@ static int dbus_selector_process_post(DBusConnection* conn, char * param,
    }
    printf("Request Sent\n");
 
-   dbus_connection_flush(conn);
+   dbus_connection_flush(conn); /* Note: block until write finishes */
    printf("Request flushed\n");
 
    // free message
@@ -910,7 +924,7 @@ static int dbus_selector_process_post_reply( DBusConnection* conn,
    DBusPendingCall* pending = *pendingargptr;
 
    // block until we recieve a reply
-   dbus_pending_call_block(pending);
+   /* dbus_pending_call_block(pending); Note: this would block. use dispatch. */
     if ( ! dbus_pending_call_get_completed(pending) ) {
         dbus_pending_call_unref(pending);
         fprintf(stderr, " error Reply incomplete\n");
@@ -924,6 +938,9 @@ static int dbus_selector_process_post_reply( DBusConnection* conn,
      *           returns a string about the possible error.
      */
 
+    /* can use cancel at top level. still safe to call cancel here: 
+    dbus_pending_call_cancel(pending);
+     */
 
    // get the reply message
    msg = dbus_pending_call_steal_reply(pending);
