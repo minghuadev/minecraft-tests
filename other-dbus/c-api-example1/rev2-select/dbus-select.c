@@ -576,7 +576,7 @@ static void toggle_timeout(DBusTimeout *t, void *data)
 static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcreply,
                                       DBusPendingCall** pendingargptr);
 
- /* send rpc */
+ /* send rpc request */
 static int dbus_selector_process_post_send( DBusConnection* conn, char * param,
                                             DBusPendingCall** pendingargptr);
  /* receive rpc reply, called by process_recv() */
@@ -642,7 +642,7 @@ int dbus_selector(char *param, int altsel )
    }
    printf("Match signal rule sent\n");
 
-
+    /* setup watch and timeout */
     if (!dbus_connection_set_watch_functions(conn, add_watch, remove_watch,
                                              toggle_watch, NULL, NULL)) {
         printf(" ERROR dbus_connection_set_watch_functions() failed\n");
@@ -655,12 +655,13 @@ int dbus_selector(char *param, int altsel )
         return ret; /* ret=1 fail */
     }
 
+    /* the selector loop */
     ret = 0; /* default success */
     struct timeval local_to_startv = {0,0};
     DBusPendingCall* pending = NULL; /* keep track of the outstanding rpc call */
     while(ret == 0) {
 
-        /* the selector loop, stage 1, setup for select() call. 
+        /* the selector loop stage 1, setup for select() call. 
          * in this stage no dbus watch/timeout change should happen 
          */
 
@@ -674,19 +675,20 @@ int dbus_selector(char *param, int altsel )
         int nfds = 1;
         int rc = 0;
 
+        printf("\n");
         FD_ZERO(&rfds); FD_ZERO(&wfds); FD_ZERO(&efds);
         if ( watched_watch != NULL ) {
             if ( watched_rd_fd ) { 
                 FD_SET(watched_rd_fd, &rfds);
                 FD_SET(watched_rd_fd, &efds);
                 if ( nfds <= watched_rd_fd ) { nfds = watched_rd_fd + 1; } 
-                printf(" select nfds %d  rdfd %d\n", nfds, watched_rd_fd);
+                printf(" SELECT nfds %d  rdfd %d\n", nfds, watched_rd_fd);
             }
             if ( watched_wr_fd ) { 
                 FD_SET(watched_wr_fd, &wfds);
                 FD_SET(watched_wr_fd, &efds);
                 if ( nfds <= watched_wr_fd ) { nfds = watched_wr_fd + 1; } 
-                printf(" select nfds %d  wrfd %d\n", nfds, watched_wr_fd);
+                printf(" SELECT nfds %d  wrfd %d\n", nfds, watched_wr_fd);
             }
         }
         if ( watched_chgevt_fds[0] != 0 ) {
@@ -728,7 +730,6 @@ int dbus_selector(char *param, int altsel )
             }
         }
 
-        printf("\n");
         if ( modified_timeout ) {
             printf(" SELECT with nfds %d ... new tiemout %u.%03u\n", 
                          nfds, timeoutval.tv_sec, timeoutval.tv_usec/1000);
@@ -751,10 +752,7 @@ int dbus_selector(char *param, int altsel )
             struct timeval startv = watched_timeout_start_tv;
             unsigned int setv = watched_timeout_setv;
             unsigned int lastv = watched_timeout_lastv;
-
-            struct timeval tnow = {0,0};
-            unsigned int tnowms = 0;
-            unsigned int toms = 0;
+            struct timeval tnow = {0,0}; unsigned int tnowms = 0, toms = 0;
 
             gettimeofday(&tnow, NULL);
             tnowms = TIME_TV_TO_MS(tnow);
@@ -775,7 +773,7 @@ int dbus_selector(char *param, int altsel )
                     printf(" HANDLING dbus handle timeout %p done\n", 
                            watched_timeout);
                 }
-            }
+            } /* else if not the same timeout as before select() skip for now */
         }
 
         /* self initiated rpc call */
@@ -794,7 +792,7 @@ int dbus_selector(char *param, int altsel )
             continue;
         }
 
-        /* some event happened */
+        /* some event happened according to select() */
         printf(" SELECT returned rc %d \n", rc);
         if ( watched_watch != NULL ) {
             if ( watched_rd_fd ) { 
@@ -822,7 +820,7 @@ int dbus_selector(char *param, int altsel )
             }
         }
 
-        /* empty pipe */
+        /* chgevt pipe */
         if ( watched_chgevt_fds[0] != 0 && FD_ISSET(watched_chgevt_fds[0], &rfds) ) {
             int chgevt = watched_chgevt_get();
             switch (chgevt) {
@@ -846,51 +844,41 @@ static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcrep
     dbus_connection_read_write(conn, 2);
     DBusDispatchStatus dispatch_rc = dbus_connection_get_dispatch_status(conn);
     if ( DBUS_DISPATCH_DATA_REMAINS != dispatch_rc ) {
-            printf(" ERROR no message pending \n");
+        printf(" ERROR recv no message pending \n");
     }
     while( DBUS_DISPATCH_DATA_REMAINS == dispatch_rc ) {
         DBusMessage* msg = dbus_connection_borrow_message(conn);
         if ( msg == NULL ) {
-            printf(" ERROR pending check FAILED: remains but "
+            printf(" ERROR recv pending check FAILED: remains but "
                             "no message borrowed. \n");
             break;
         }
         int mtype = dbus_message_get_type(msg);
-        if ( mtype == DBUS_MESSAGE_TYPE_METHOD_RETURN ) {
-            if ( iswaiting_rpcreply ) {
-                printf(" RPC REPLY pending check SUCCESS: received rpc reply \n");
-                dbus_connection_return_message(conn, msg);
-                msg = NULL;
-                dbus_connection_dispatch(conn);
+        if ( iswaiting_rpcreply &&  
+             ( mtype == DBUS_MESSAGE_TYPE_METHOD_RETURN ||
+               mtype == DBUS_MESSAGE_TYPE_ERROR           ) ) {
+            printf(" RPC REPLY pending check SUCCESS: received rpc reply \n");
+            dbus_connection_return_message(conn, msg);
+            dbus_connection_dispatch(conn);
                                   /* dispatch so the received message is 
                                    * passed to the pendingcall
                                    */
-                dbus_selector_process_post_reply( conn, pendingargptr );
-                printf(" RPC REPLY pending check SUCCESS: processed rpc reply \n");
-
-            } else {
-                printf(" RPC REPLY pending check FAILED: received rpc reply \n");
-            }
+            dbus_selector_process_post_reply( conn, pendingargptr );
+            printf(" RPC REPLY pending check SUCCESS: processed rpc reply \n");
+        } else if ( mtype == DBUS_MESSAGE_TYPE_METHOD_RETURN ) {
+            printf(" RECV pending check FAILED: received rpc reply \n");
+            dbus_connection_steal_borrowed_message(conn, msg);
+            dbus_message_unref(msg);
         } else if ( mtype == DBUS_MESSAGE_TYPE_ERROR ) {
-            if ( iswaiting_rpcreply ) {
-                printf(" RPC REPLY pending check SUCCESS: received rpc ERROR \n");
-                if ( pendingargptr && *pendingargptr ) {
-                    dbus_pending_call_cancel(*pendingargptr);
-                    *pendingargptr = NULL;
-                    printf(" RPC REPLY pending call canceled.\n");
-                } else {
-                    if ( pendingargptr ) *pendingargptr = NULL;
-                    printf(" RPC REPLY pending call FAILED to cancel.\n");
-                }
-            } else {
-                printf(" RPC REPLY pending check FAILED: received rpc ERROR \n");
-            }
+            printf(" RECV pending check FAILED: received ERROR \n");
+            dbus_connection_steal_borrowed_message(conn, msg);
+            dbus_message_unref(msg);
         } else if ( mtype == DBUS_MESSAGE_TYPE_SIGNAL ) {
-                printf(" SIGNAL pending check SUCCESS: received and drop \n");
-                dbus_connection_steal_borrowed_message(conn, msg);
-                dbus_message_unref(msg);
+            printf(" SIGNAL pending check SUCCESS: received and drop \n");
+            dbus_connection_steal_borrowed_message(conn, msg);
+            dbus_message_unref(msg);
         } else if ( mtype == DBUS_MESSAGE_TYPE_METHOD_CALL ) {
-                printf(" RPC RECV check SUCCESS: received rpc call. \n");
+            printf(" RPC RECV check SUCCESS: received rpc call. \n");
             dbus_connection_steal_borrowed_message(conn, msg);
             DBusMessage* reply = NULL;
             do {
@@ -1003,6 +991,7 @@ static int dbus_selector_process_post_reply( DBusConnection* conn,
    /* dbus_pending_call_block(pending); Note: this would block. use dispatch. */
     if ( ! dbus_pending_call_get_completed(pending) ) {
         dbus_pending_call_unref(pending);
+        *pendingargptr = NULL;
         fprintf(stderr, " error Reply incomplete\n");
         exit(1);
     }
