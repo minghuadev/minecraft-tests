@@ -17,6 +17,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* for profiling */
+#include <sys/time.h> /* for gettimeofday */
+static unsigned int usdiff(struct timeval *x, struct timeval *y) 
+{
+    unsigned int tmx = x->tv_sec % 1000;
+    unsigned int tmy = y->tv_sec % 1000;
+    if ( tmy < tmx ) tmy += 1000;
+    return (tmy*1000000+y->tv_usec) - (tmx*1000000+x->tv_usec);
+}
+static unsigned int tmnlist[20] = {0};
+static unsigned int tmnlistcnt = 0;
+
 /**
  * Connect to the DBUS bus and send a broadcast signal
  */
@@ -97,6 +109,7 @@ void query(char* param , int altdest)
    int ret;
    dbus_bool_t stat;
    dbus_uint32_t level;
+    const char * dbname = "test.method.caller";
 
    printf("Calling remote method with %s\n", param);
 
@@ -110,20 +123,24 @@ void query(char* param , int altdest)
       dbus_error_free(&err);
    }
    if (NULL == conn) { 
+      fprintf(stderr, "Connection null\n"); 
       exit(1); 
    }
 
    // request our name on the bus
-   ret = dbus_bus_request_name(conn, "test.method.caller", DBUS_NAME_FLAG_REPLACE_EXISTING , &err);
+   ret = dbus_bus_request_name(conn, dbname, DBUS_NAME_FLAG_REPLACE_EXISTING , &err);
    if (dbus_error_is_set(&err)) { 
       fprintf(stderr, "Name Error (%s)\n", err.message); 
       dbus_error_free(&err);
    }
    if (DBUS_REQUEST_NAME_REPLY_PRIMARY_OWNER != ret) { 
+      fprintf(stderr, "Name not primary\n"); 
       exit(1);
    }
 
    // create a new method call and check for errors
+    struct timeval tmn1 = {0,0}; gettimeofday(&tmn1,NULL);
+    printf("time before sending    %lu.%lu\n", tmn1.tv_sec, tmn1.tv_usec);
     if ( altdest == 0 ) {
    msg = dbus_message_new_method_call("test.method.server", // target for the method call
                                       "/test/method/Object", // object to call on
@@ -149,6 +166,8 @@ void query(char* param , int altdest)
       exit(1);
    }
    
+    struct timeval tmn2 = {0,0}; gettimeofday(&tmn2,NULL);
+    printf("time before sending    %lu.%lu\n", tmn2.tv_sec, tmn2.tv_usec);
    // send message and get a handle for a reply
    if (!dbus_connection_send_with_reply (conn, msg, &pending, -1)) { // -1 is default timeout
       fprintf(stderr, "Out Of Memory!\n"); 
@@ -161,6 +180,8 @@ void query(char* param , int altdest)
    dbus_connection_flush(conn);
    
    printf("Request Sent\n");
+    struct timeval tmn3 = {0,0}; gettimeofday(&tmn3,NULL);
+    printf("time after sending     %9lu.%06lu\n", tmn3.tv_sec, tmn3.tv_usec);
    
    // free message
    dbus_message_unref(msg);
@@ -179,6 +200,8 @@ void query(char* param , int altdest)
      *   if destination replies late, it consumes full timeout duration and
      *           returns a string about the possible error.
      */
+    struct timeval tmn4 = {0,0}; gettimeofday(&tmn4,NULL);
+    printf("time after receiving   %lu.%lu\n", tmn4.tv_sec, tmn4.tv_usec);
 
 
    // get the reply message
@@ -239,6 +262,29 @@ void query(char* param , int altdest)
    
    // free reply
    dbus_message_unref(msg);   
+
+    struct timeval tmn9 = {0,0}; gettimeofday(&tmn9,NULL);
+    printf("time after receiving   %lu.%lu\n", tmn9.tv_sec, tmn9.tv_usec);
+    unsigned int tmncost = usdiff(&tmn1, &tmn9);
+    printf("time consumed           %19s.%06u\n", "", tmncost);
+
+    if ( tmnlistcnt < 20 ) {
+        tmnlist[tmnlistcnt] = tmncost;
+        tmnlistcnt ++;
+    } else if ( tmnlistcnt == 20 ) {
+        unsigned int tmnavg = 0;
+        unsigned int i;
+        for (i=0; i<20; i++) {
+            tmnavg += tmnlist[i];
+        }
+        tmnavg /= 20;
+        tmnlistcnt ++;
+        printf("time consumed           %9s.%06u\n", "", tmncost);
+        printf("time consumed avg       %30s.%06u\n", "", tmnavg);
+    }
+
+    dbus_bus_release_name(conn, dbname, &err);
+    dbus_connection_unref(conn);
 }
 
 void reply_to_method_call(DBusMessage* msg, DBusConnection* conn)
@@ -587,6 +633,7 @@ static int dbus_selector_process_post_reply( DBusConnection* conn,
 #include <sys/select.h>
 #include <time.h>
 static unsigned int lastregtime = 0;
+static struct timeval tmn0 = {0,0};
 
 int dbus_selector(char *param, int altsel )
 {
@@ -658,7 +705,7 @@ int dbus_selector(char *param, int altsel )
 
     /* the selector loop */
     ret = 0; /* default success */
-    struct timeval local_to_startv = {0,0};
+    struct timeval local_to_startv = {0,0}; /* timeout saved locally */
     DBusPendingCall* pending = NULL; /* keep track of the outstanding rpc call */
     while(ret == 0) {
 
@@ -782,6 +829,11 @@ int dbus_selector(char *param, int altsel )
             unsigned int tmnow = time(NULL);
             unsigned int tmdiff = tmnow - lastregtime;
             if ( tmdiff > 10 ) { /* send a rpc evey 10 seconds */
+
+                struct timeval tmn = {0,0}; gettimeofday(&tmn,NULL);
+                printf(" RPC call time  %lu.%06lu\n", tmn.tv_sec, tmn.tv_usec);
+                tmn0 = tmn;
+
                 dbus_selector_process_post_send(conn, param, &pending);
                 lastregtime = tmnow;
             }
@@ -865,6 +917,28 @@ static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcrep
                                    * passed to the pendingcall
                                    */
             dbus_selector_process_post_reply( conn, pendingargptr );
+                struct timeval tmn = {0,0}; gettimeofday(&tmn,NULL);
+                printf(" RPC returned time  %lu.%06lu\n", tmn.tv_sec, tmn.tv_usec);
+
+                unsigned int tmncost = usdiff(&tmn0, &tmn);
+                printf(" RPC cost time      %19s.%06u\n", "", tmncost);
+
+                if ( tmnlistcnt < 20 ) {
+                    tmnlist[tmnlistcnt] = tmncost;
+                    tmnlistcnt ++;
+                } else if ( tmnlistcnt == 20 ) {
+                    unsigned int tmnavg = 0;
+                    unsigned int i;
+                    for (i=0; i<20; i++) {
+                        tmnavg += tmnlist[i];
+                    }
+                    tmnavg /= 20;
+                    tmnlistcnt ++;
+                    printf("time consumed           %9s.%06u\n", "", tmncost);
+                    printf("time consumed avg       %30s.%06u\n", "", tmnavg);
+exit(0);
+                }
+
             printf(" RPC REPLY pending check SUCCESS: processed rpc reply \n");
         } else if ( mtype == DBUS_MESSAGE_TYPE_METHOD_RETURN ) {
             printf(" RECV pending check FAILED: received rpc reply \n");
@@ -1079,7 +1153,9 @@ int main(int argc, char** argv)
       return 1;
    }
    char* param = "no param";
-   if (3 >= argc && NULL != argv[2]) param = argv[2];
+   int repeat = 0;
+   if (4 <= argc && NULL != argv[2]) param = argv[2];
+   if (4 <= argc && NULL != argv[3]) repeat = 20;
    if (0 == strcmp(argv[1], "send"))
       sendsignal(param);
    else if (0 == strcmp(argv[1], "receive"))
@@ -1087,7 +1163,16 @@ int main(int argc, char** argv)
    else if (0 == strcmp(argv[1], "listen"))
       listen();
    else if (0 == strcmp(argv[1], "query"))
+    {
       query(param, 0);
+        printf(" repeat %d \n", repeat);
+        if ( repeat ) {
+            int i=0;
+            for (i=0; i<20; i++) {
+                query(param, 0);
+            }
+        }
+    }
    else if (0 == strcmp(argv[1], "selector"))
       dbus_selector(param, 0);
    else if (0 == strcmp(argv[1], "seltest"))

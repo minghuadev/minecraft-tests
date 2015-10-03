@@ -43,6 +43,10 @@ gcc ${ccflags} ${llflags}  ${srcfile}
 #     terminal 1:    source ssenv  ;    ./a.out selector
 #     terminal 2:    source ssenv  ;    ./a.out selpost 1234
 #
+# [8] rpc repeat 20 times averaging
+#     terminal 1:    source ssenv  ;    ./a.out listen
+#     terminal 2:    source ssenv  ;    ./a.out query 1234 1
+#
 # Note: dbus-launch is from:
 #       [dbs]$ rpm -q -f /usr/bin/dbus-launch
 #       dbus-x11-1.2.24-7.el6_3.x86_64
