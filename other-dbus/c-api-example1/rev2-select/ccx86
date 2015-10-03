@@ -44,11 +44,15 @@ gcc ${ccflags} ${llflags}  ${srcfile}
 #     terminal 2:    source ssenv  ;    ./a.out selpost 1234
 #    profiling result 20 calls: 5.5ms avg
 #
-# [8] rpc repeat 20 times averaging
+# [8] rpc repeat 20 times averaging mode 1 new connection each
 #     terminal 1:    source ssenv  ;    ./a.out listen
 #     terminal 2:    source ssenv  ;    ./a.out query 1234 1
-#    profiling result 20 calls: 8.5ms avg (8.4 to 8.9) TMNMAX=20
-#    profiling result 2000 calls: 8.5ms avg (8.2 to 8.7)
+#    profiling result 20 calls: 0.8ms avg (0.7 to 1.0) tmnmax=20
+#    profiling result 2000 calls: 0.7ms avg (./a.out query 1234 1 2000)
+#
+# [9] rpc repeat 2000 times averaging mode 2 same connection
+#     terminal 2:    source ssenv  ;    ./a.out query 1234 2 2000
+#    profiling result 2000 calls: 0.46ms avg (./a.out query 1234 2 2000)
 #
 # Note: dbus-launch is from:
 #       [dbs]$ rpm -q -f /usr/bin/dbus-launch

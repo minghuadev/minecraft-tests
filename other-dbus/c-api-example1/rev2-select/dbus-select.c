@@ -26,7 +26,8 @@ static unsigned int usdiff(struct timeval *x, struct timeval *y)
     if ( tmy < tmx ) tmy += 1000;
     return (tmy*1000000+y->tv_usec) - (tmx*1000000+x->tv_usec);
 }
-#define TMNMAX (20)
+#define TMNMAX (100000)
+static unsigned int tmnmax=20;
 static unsigned int tmnlist[TMNMAX] = {0};
 static unsigned int tmnlistcnt = 0;
 
@@ -100,7 +101,7 @@ void sendsignal(char* sigvalue)
 /**
  * Call a method on a remote object
  */
-void query(char* param , int altdest, int repeat)
+void query(char* param , int altdest, int repeatmode)
 {
    DBusMessage* msg;
    DBusMessageIter args;
@@ -111,6 +112,8 @@ void query(char* param , int altdest, int repeat)
    dbus_bool_t stat;
    dbus_uint32_t level;
     const char * dbname = "test.method.caller";
+    int nrepeats = 0;
+    int ii = 0;
 
    printf("Calling remote method with %s\n", param);
 
@@ -138,7 +141,8 @@ void query(char* param , int altdest, int repeat)
       fprintf(stderr, "Name not primary\n"); 
       exit(1);
    }
-
+ if ( repeatmode == 2 ) nrepeats = tmnmax;
+ for ( ii=0; ii<=nrepeats; ii++ ) {
    // create a new method call and check for errors
     struct timeval tmn1 = {0,0}; gettimeofday(&tmn1,NULL);
     printf("time before sending    %lu.%lu\n", tmn1.tv_sec, tmn1.tv_usec);
@@ -269,20 +273,22 @@ void query(char* param , int altdest, int repeat)
     unsigned int tmncost = usdiff(&tmn1, &tmn9);
     printf("time consumed           %19s.%06u\n", "", tmncost);
 
-    if ( tmnlistcnt < TMNMAX ) {
+    if ( tmnlistcnt < tmnmax ) {
         tmnlist[tmnlistcnt] = tmncost;
         tmnlistcnt ++;
-    } else if ( tmnlistcnt == TMNMAX ) {
+    } else if ( tmnlistcnt == tmnmax ) {
         unsigned int tmnavg = 0;
         unsigned int i;
-        for (i=0; i<TMNMAX; i++) {
+        for (i=0; i<tmnmax; i++) {
             tmnavg += tmnlist[i];
         }
-        tmnavg /= TMNMAX;
+        tmnavg /= tmnmax;
         tmnlistcnt ++;
         printf("time consumed           %9s.%06u\n", "", tmncost);
-        printf("time consumed avg       %30s.%06u\n", "", tmnavg);
+        printf("time consumed avg       %30s.%06u tmnmax %u\n", 
+               "", tmnavg, tmnmax);
     }
+ } /* for ii */
 
     dbus_bus_release_name(conn, dbname, &err);
     dbus_connection_unref(conn);
@@ -305,6 +311,8 @@ void reply_to_method_call(DBusMessage* msg, DBusConnection* conn)
    else 
       dbus_message_iter_get_basic(&args, &param);
 
+   //struct timeval tmn={0,0}; gettimeofday(&tmn,NULL);
+   //printf("Method called with %s  %lu.%06lu\n", param, tmn.tv_sec, tmn.tv_usec);
    printf("Method called with %s\n", param);
 
    // create a reply from the message
@@ -372,12 +380,12 @@ void listen()
    // loop, testing for new messages
    while (1) {
       // non blocking read of the next available message
-      dbus_connection_read_write(conn, 0);
+      dbus_connection_read_write(conn, 100);
       msg = dbus_connection_pop_message(conn);
 
       // loop again if we haven't got a message
       if (NULL == msg) { 
-         usleep(10000);
+         usleep(100);
          continue; 
       }
       
@@ -924,19 +932,20 @@ static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcrep
                 unsigned int tmncost = usdiff(&tmn0, &tmn);
                 printf(" RPC cost time      %19s.%06u\n", "", tmncost);
 
-                if ( tmnlistcnt < TMNMAX ) {
+                if ( tmnlistcnt < tmnmax ) {
                     tmnlist[tmnlistcnt] = tmncost;
                     tmnlistcnt ++;
-                } else if ( tmnlistcnt == TMNMAX ) {
+                } else if ( tmnlistcnt == tmnmax ) {
                     unsigned int tmnavg = 0;
                     unsigned int i;
-                    for (i=0; i<TMNMAX; i++) {
+                    for (i=0; i<tmnmax; i++) {
                         tmnavg += tmnlist[i];
                     }
-                    tmnavg /= TMNMAX;
+                    tmnavg /= tmnmax;
                     tmnlistcnt ++;
                     printf("time consumed           %9s.%06u\n", "", tmncost);
-                    printf("time consumed avg       %30s.%06u\n", "", tmnavg);
+                    printf("time consumed avg       %30s.%06u tmnmax %u\n", 
+                           "", tmnavg, tmnmax);
 exit(0);
                 }
 
@@ -1154,13 +1163,22 @@ int main(int argc, char** argv)
       return 1;
    }
    char* param = "no param";
-   int repeat = 0;
+   int repeatmode = 0;
    if (3 <= argc && NULL != argv[2]) param = argv[2];
     if (4 <= argc && NULL != argv[3]) {
         if ( strncmp(argv[3],"1",2) == 0 ) {
-            repeat = 1;
+            repeatmode = 1;
         } else if ( strncmp(argv[3],"2",2) == 0 ) {
-            repeat = 2;
+            repeatmode = 2;
+        }
+    }
+    if (5 <= argc && NULL != argv[4]) {
+        long t = atol(argv[4]);
+        if ( t > 0 && t < TMNMAX ) {
+            tmnmax = (unsigned int)t;
+            printf(" repeat max new value %u\n", tmnmax);
+        } else {
+            printf(" repeat max out of range %ld\n", t);
         }
     }
    if (0 == strcmp(argv[1], "send"))
@@ -1171,15 +1189,17 @@ int main(int argc, char** argv)
       listen();
    else if (0 == strcmp(argv[1], "query"))
     {
-        printf(" repeat %d \n", repeat);
-        if ( repeat == 0 ) {
+        printf(" repeatmode %d \n", repeatmode);
+        if ( repeatmode == 0 ) {
       query(param, 0, 0);
-        } else if ( repeat == 1 ) {
+        } else if ( repeatmode == 1 ) {
             int i=0;
             query(param, 0, 1);
-            for (i=0; i<TMNMAX; i++) {
+            for (i=0; i<tmnmax; i++) {
                 query(param, 0, 1);
             }
+        } else if ( repeatmode == 2 ) {
+            query(param, 0, 2);
         }
     }
    else if (0 == strcmp(argv[1], "selector"))
