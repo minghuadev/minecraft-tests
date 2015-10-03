@@ -13,6 +13,7 @@ fi
 srcfile=dbus-select.c 
 
 ccflags="-I/usr/include/dbus-1.0 -I/usr/${libdir}/dbus-1.0/include"
+ccflags="$ccflags -Wall -Werror"
 llflags="-L/${libdir} -ldbus-1 -lpthread -lrt"
 
 gcc ${ccflags} ${llflags}  ${srcfile}

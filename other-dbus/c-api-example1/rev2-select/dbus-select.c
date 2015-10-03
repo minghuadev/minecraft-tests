@@ -8,10 +8,14 @@
  * Subsequent tweaks by Will Ware <wware@alum.mit.edu>
  * Still in the public domain.
  */
+
+#define _GNU_SOURCE /* for unistd.h for pipe2 */
+
 #include <dbus/dbus.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * Connect to the DBUS bus and send a broadcast signal
@@ -287,12 +291,9 @@ void reply_to_method_call(DBusMessage* msg, DBusConnection* conn)
 void listen() 
 {
    DBusMessage* msg;
-   DBusMessage* reply;
-   DBusMessageIter args;
    DBusConnection* conn;
    DBusError err;
    int ret;
-   char* param;
 
    printf("Listening for method calls\n");
 
@@ -731,7 +732,7 @@ int dbus_selector(char *param, int altsel )
         }
 
         if ( modified_timeout ) {
-            printf(" SELECT with nfds %d ... new tiemout %u.%03u\n", 
+            printf(" SELECT with nfds %d ... new tiemout %lu.%03lu\n", 
                          nfds, timeoutval.tv_sec, timeoutval.tv_usec/1000);
         } else {
             printf(" SELECT with nfds %d...\n", nfds);
@@ -932,8 +933,6 @@ static int dbus_selector_process_post_send( DBusConnection* conn, char * param,
    DBusError err = {0};
    DBusPendingCall* pending = NULL;
    int ret = 0;
-   dbus_bool_t stat = FALSE;
-   dbus_uint32_t level = 0;
 
    * pendingargptr = NULL;
 
@@ -976,6 +975,7 @@ static int dbus_selector_process_post_send( DBusConnection* conn, char * param,
    // free message
    dbus_message_unref(msg);
    * pendingargptr = pending;
+    return ret;
 }
 
 static int dbus_selector_process_post_reply( DBusConnection* conn,
