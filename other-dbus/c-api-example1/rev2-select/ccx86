@@ -42,10 +42,13 @@ gcc ${ccflags} ${llflags}  ${srcfile}
 # [7] auto rpc to selector (dbus-select-3-post.c)
 #     terminal 1:    source ssenv  ;    ./a.out selector
 #     terminal 2:    source ssenv  ;    ./a.out selpost 1234
+#    profiling result 20 calls: 5.5ms avg
 #
 # [8] rpc repeat 20 times averaging
 #     terminal 1:    source ssenv  ;    ./a.out listen
 #     terminal 2:    source ssenv  ;    ./a.out query 1234 1
+#    profiling result 20 calls: 8.5ms avg (8.4 to 8.9) TMNMAX=20
+#    profiling result 2000 calls: 8.5ms avg (8.2 to 8.7)
 #
 # Note: dbus-launch is from:
 #       [dbs]$ rpm -q -f /usr/bin/dbus-launch
