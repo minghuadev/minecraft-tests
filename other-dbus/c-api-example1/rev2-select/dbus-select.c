@@ -903,10 +903,18 @@ static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcrep
 {
     int ret = 1; /* default fail */
 
-    dbus_connection_read_write(conn, 2);
+    /* remove this call that consumes .1ms because dbus is already read 
+     * by dbus_watch_handle():
+     * dbus_connection_read_write(conn, 0);
+     * 
+     * according to dbus_connection_dispatch(): The incoming data buffer 
+     * is filled when the connection reads from its underlying transport 
+     * (such as a socket). Reading usually happens in dbus_watch_handle() 
+     * or dbus_connection_read_write().
+     */
     DBusDispatchStatus dispatch_rc = dbus_connection_get_dispatch_status(conn);
     if ( DBUS_DISPATCH_DATA_REMAINS != dispatch_rc ) {
-        printf(" ERROR recv no message pending \n");
+        printf(" ERROR recv no message in queue \n");
     }
     while( DBUS_DISPATCH_DATA_REMAINS == dispatch_rc ) {
         DBusMessage* msg = dbus_connection_borrow_message(conn);
@@ -922,8 +930,8 @@ static int dbus_selector_process_recv(DBusConnection* conn, int iswaiting_rpcrep
             printf(" RPC REPLY pending check SUCCESS: received rpc reply \n");
             dbus_connection_return_message(conn, msg);
             dbus_connection_dispatch(conn);
-                                  /* dispatch so the received message is 
-                                   * passed to the pendingcall
+                                  /* dispatch so the received message at the 
+                                   * head of queue is passed to the pendingcall
                                    */
             dbus_selector_process_post_reply( conn, pendingargptr );
                 struct timeval tmn = {0,0}; gettimeofday(&tmn,NULL);
