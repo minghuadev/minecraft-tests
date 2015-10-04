@@ -1,0 +1,35 @@
+#!/bin/bash
+#ccs  -- compile dbus-watch-simple.c for x86-64 or x86 platform.
+#
+
+mach=$(uname -m)
+if [ "x$mach" == "xx86_64" ]; then
+ libdir=lib64
+else
+ libdir=lib
+fi
+
+srcfile=dbus-watch-simple.c 
+
+ccflags="-I/usr/include/dbus-1.0 -I/usr/${libdir}/dbus-1.0/include"
+ccflags="$ccflags -Wall -Werror"
+llflags="-L/${libdir} -ldbus-1 -lpthread -lrt"
+
+gcc ${ccflags} ${llflags}  ${srcfile}
+
+#
+#to run:
+# [1] run:   dbus-launch
+# [2] copy the returned two lines into ssenv. add export to each of the two lines.
+#
+# [3] auto rpc to selector
+#     terminal 1:    source ssenv  ;    ./a.out selector
+#     terminal 2:    source ssenv  ;    ./a.out selpost 1234
+#    profiling result 20 calls: 1.06ms avg
+#
+# Note: dbus-launch is from:
+#       [dbs]$ rpm -q -f /usr/bin/dbus-launch
+#       dbus-x11-1.2.24-7.el6_3.x86_64
+#
+
+
