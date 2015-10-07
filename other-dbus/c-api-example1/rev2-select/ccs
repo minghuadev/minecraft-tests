@@ -26,6 +26,13 @@ gcc ${ccflags} ${llflags}  ${srcfile}
 #     terminal 1:    source ssenv  ;    ./a.out selector
 #     terminal 2:    source ssenv  ;    ./a.out selpost 1234
 #    profiling result 20 calls: 1.06ms avg
+#    term 1 to /dev/null and term 2 to file: 0.891 ms avg.
+#
+#    arm v5 200mhz term1 uart term2 ssh: 10ms
+#                  term1 ssh term2 ssh:  12ms
+#                  term1 null term2 file: 7.5ms
+#    arm v7 800mhz term1 ssh term2 ssh:   3.3ms
+#                  term1 null term2 file: 1.8ms
 #
 # Note: dbus-launch is from:
 #       [dbs]$ rpm -q -f /usr/bin/dbus-launch
