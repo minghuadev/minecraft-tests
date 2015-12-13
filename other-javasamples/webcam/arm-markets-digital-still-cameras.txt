@@ -1,0 +1,15 @@
+
+https://www.arm.com/markets/home/digital-still-cameras.php
+
+
+Digital Still Cameras
+
+ARM is the world’s leading provider of physical semiconductor intellectual 
+property (IP) for the design of complex System-on-Chip (SoC) integrated circuits. 
+ARM is at the heart of Digital Still Camera (DSC) technology, enabling 
+our silicon partners to integrate the IP functionality into a single 
+System On Chip (SOC). Designers are free to choose from a family of Processors, 
+Graphics Processors, System IP and Physical IP that provide the best performance, 
+cost and power optimization.
+
+
