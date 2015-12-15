@@ -1,4 +1,7 @@
 
+http://savannah.gnu.org/bugs/?39900
+bug #39900: unar: Uncaught exception NSCharacterConversionException, reason: Can't get cString from Unicode string.
+
 GNUSTEP_STRING_ENCODING=UTF-8
 
 
