@@ -291,20 +291,26 @@ static const unsigned int L1Words = 16;
 #elif TESTSET==(4)
   static const unsigned int L1Size = 256 * 1024 ; /* L2 size */
   static const unsigned int L1Ways = 16;          /* double ways */
-  /* result: 26 215 */
+  /* result: 26 215   total 1M blk 32k  */
   static const unsigned int L1Lines = L1Size / (L1Ways/2) / L1Words;
   static const unsigned int L1Blk = L1Lines * L1Words; /* copy a block to another block */
 #elif TESTSET==(5)
   static const unsigned int L1Size = 256 * 1024 ; /* L2 size */
   static const unsigned int L1Ways = 8;           /* ways */
-  /* result: 13 16  total data 512k */
+  /* result: 13 16  total data 512k  blk 32k */
   static const unsigned int L1Lines = L1Size / (L1Ways) / L1Words;
   static const unsigned int L1Blk = L1Lines * L1Words; /* copy a block to another block */
 #elif TESTSET==(6)
   static const unsigned int L1Size = 256 * 1024 ; /* L2 size */
   static const unsigned int L1Ways = 8;           /* ways */
-  /* result: 26 32  total data 1024k */
+  /* result: 26 32  total data 1024k blk 64k */
   static const unsigned int L1Lines = L1Size / (L1Ways/2) / L1Words;
+  static const unsigned int L1Blk = L1Lines * L1Words; /* copy a block to another block */
+#elif TESTSET==(7)
+  static const unsigned int L1Size = 256 * 1024 ; /* L2 size */
+  static const unsigned int L1Ways = 16;          /* ways */
+  /* result: 13 149   total data 512k blk 16k */
+  static const unsigned int L1Lines = L1Size / (L1Ways) / L1Words;
   static const unsigned int L1Blk = L1Lines * L1Words; /* copy a block to another block */
 #else
   #error unknown test set
@@ -785,6 +791,29 @@ static int verify_data_access() {
  verify_data_access22_triple_loop       time cost us : 000 226 532  
  verify_data_access23_triple_trashing   time cost us : 001 898 255  
  TESTSET 3  data total 8388608  lines 4096  blk 262144
+ */
+/* this version: set 4.
+                                          time cost us : 000 026 701  total
+ verify_data_access22_triple_loop         time cost us : 000 026 031  
+ verify_data_access23_triple_trashing     time cost us : 000 216 065  
+ TESTSET 4  data total 1048576  lines 2048  blk 32768
+ */
+/* this version: set 5.
+                                          time cost us : 000 013 397  total
+ verify_data_access22_triple_loop         time cost us : 000 012 909  
+ verify_data_access23_triple_trashing     time cost us : 000 016 845  
+ TESTSET 5  data total 524288  lines 2048  blk 32768
+ */
+/* this version: set 6.
+                                          time cost us : 000 026 640  total
+ verify_data_access22_triple_loop         time cost us : 000 026 062  
+ verify_data_access23_triple_trashing     time cost us : 000 032 684  
+ TESTSET 6  data total 1048576  lines 4096  blk 65536
+ */
+/* this version: set 7.
+ verify_data_access22_triple_loop         time cost us : 000 013 763  
+ verify_data_access23_triple_trashing     time cost us : 000 118 621  
+ TESTSET 7  data total 524288  lines 1024  blk 16384
  */
 
 
