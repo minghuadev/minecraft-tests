@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 
     DIR * dirp = opendir("/proc");
     if ( dirp == NULL ) {
-        perror("cannot opendir /proc\n");
+        perror("\ncannot opendir /proc\n");
         return 1;
     }
     
@@ -321,7 +321,7 @@ struct data_block_s data[L1Ways];
 
 #include <sys/time.h>
 
-static int verify_data_access1() {
+static int verify_data_access1_single_blk() {
     /* touch data[0] so it gets into cache */
     memset(&data[0], 0, sizeof(data[0]));
     
@@ -357,7 +357,7 @@ static int verify_data_access1() {
 }
 
 /* repeat on same data block [0] */
-static int verify_data_access2() {
+static int verify_data_access2_single_repeat() {
   unsigned int tmcosts[L1Ways] = {0};
   
   for (int k=0; k<L1Ways; k++) {
@@ -401,7 +401,7 @@ static int verify_data_access2() {
 }
 
 /* iterate through data block [k] */
-static int verify_data_access3() {
+static int verify_data_access3_ways_block() {
   unsigned int tmcosts[L1Ways] = {0};
   
   for (int k=0; k<L1Ways; k++) {
@@ -446,7 +446,7 @@ static int verify_data_access3() {
 }
 
 /* for loop copy byte by byte ... */
-static int verify_data_access11() {
+static int verify_data_access11_linear_loop() {
   unsigned int tmcosts[L1Ways] = {0};
   
   for (int k=0; k<L1Ways; k++) {
@@ -492,7 +492,7 @@ static int verify_data_access11() {
 }
 
 /* do not touch data block [k] */
-static int verify_data_access12() {
+static int verify_data_access12_no_touch() {
   unsigned int tmcosts[L1Ways] = {0};
   
  for (int k=0; k<L1Ways; k++) {
@@ -664,11 +664,11 @@ static int verify_data_access23_triple_trashing() {
 }
 
 static int verify_data_access() {
-    int rc1 = verify_data_access1(); /* data and code cache */
-    int rc2 = verify_data_access2(); /* code cache */
-    int rc3 = verify_data_access3();
-    int rc11 = verify_data_access11();
-    int rc12 = verify_data_access12();
+    int rc1 = verify_data_access1_single_blk(); /* data and code cache */
+    int rc2 = verify_data_access2_single_repeat(); /* code cache */
+    int rc3 = verify_data_access3_ways_block();
+    int rc11 = verify_data_access11_linear_loop();
+    int rc12 = verify_data_access12_no_touch();
     int rc21 = verify_data_access21_double_loop();
     int rc22 = verify_data_access22_triple_loop(); /* code cache */
     int rc23 = verify_data_access23_triple_trashing();
@@ -678,10 +678,10 @@ static int verify_data_access() {
 }
 
 /* testset 3 result:
- verify_data_access1
+ verify_data_access1 single block
    time cost us : 000 001 068
 
- verify_data_access2
+ verify_data_access2 single block repeat
    time cost us : 000 000 976  k 0
    time cost us : 000 001 038  k 1
    time cost us : 000 001 007  k 2
@@ -699,7 +699,7 @@ static int verify_data_access() {
    time cost us : 000 001 007  k 14
    time cost us : 000 000 976  k 15
 
- verify_data_access3
+ verify_data_access3 ways block
    time cost us : 000 000 977  k 0
    time cost us : 000 000 855  k 1
    time cost us : 000 001 007  k 2
@@ -717,7 +717,7 @@ static int verify_data_access() {
    time cost us : 000 000 946  k 14
    time cost us : 000 000 946  k 15
 
- verify_data_access11
+ verify_data_access11 linear loop
    time cost us : 000 010 834  k 0
    time cost us : 000 010 956  k 1
    time cost us : 000 010 956  k 2
@@ -735,7 +735,7 @@ static int verify_data_access() {
    time cost us : 000 010 956  k 14
    time cost us : 000 010 956  k 15
 
- verify_data_access12
+ verify_data_access12 no touch
    time cost us : 000 010 926  k 0
    time cost us : 000 010 956  k 1
    time cost us : 000 010 926  k 2
@@ -775,8 +775,16 @@ static int verify_data_access() {
  verify_data_access22_triple_loop          time cost us : 000 205 566
  verify_data_access23_triple_trashing      time cost us : 000 655 731
 
- TESTSET 3
+ TESTSET 3  total data 8M
  
+
+ */
+
+/* this version: the last test is much slower.
+                      double_loop       time cost us : 000 225 374  total
+ verify_data_access22_triple_loop       time cost us : 000 226 532  
+ verify_data_access23_triple_trashing   time cost us : 001 898 255  
+ TESTSET 3  data total 8388608  lines 4096  blk 262144
  */
 
 
