@@ -114,7 +114,7 @@ static int verify_data_access1_single_blk() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data);
+    ///printf("\n %p \n", &data);
     
     struct timeval tm1 = {0,0};
     struct timeval tm2 = {0,0};
@@ -127,7 +127,7 @@ static int verify_data_access1_single_blk() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data); 
+    ///printf("\n %p \n", &data); 
     
     unsigned int tmcost = 0;
     if ( tm2.tv_sec > tm1.tv_sec ) {
@@ -136,7 +136,7 @@ static int verify_data_access1_single_blk() {
     }
     tmcost += tm2.tv_usec;
     tmcost -= tm1.tv_usec;
-    printf("\n %s \n", __func__);
+    printf("\n %-40s ", __func__);
     printf("   time cost us : %03u %03u %03u \n\n", 
             tmcost/1000000, (tmcost/1000) % 1000, tmcost% 1000);
     return 0;
@@ -153,7 +153,7 @@ static int verify_data_access2_single_repeat() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data);
+    ///printf("\n %p \n", &data);
     
     struct timeval tm1 = {0,0};
     struct timeval tm2 = {0,0};
@@ -166,7 +166,7 @@ static int verify_data_access2_single_repeat() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data); 
+    ///printf("\n %p \n", &data); 
     
     unsigned int tmcost = 0;
     if ( tm2.tv_sec > tm1.tv_sec ) {
@@ -177,10 +177,11 @@ static int verify_data_access2_single_repeat() {
     tmcost -= tm1.tv_usec;
     tmcosts[k] = tmcost;
   }
-    printf("\n %s \n", __func__);
+    printf("\n %-40s ", __func__);
   for (int k=0; k<L1Ways; k++) {
     unsigned int tmcost = tmcosts[k];
-    printf("   time cost us : %03u %03u %03u  k %u\n\n", 
+    if ( k != 0 ) printf(" %-40s ", "");
+    printf("   time cost us : %03u %03u %03u  k %u\n", 
             tmcost/1000000, (tmcost/1000) % 1000, tmcost% 1000, k);
   }
     return 0;
@@ -197,7 +198,7 @@ static int verify_data_access3_ways_block() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data);
+    ///printf("\n %p \n", &data);
     
     struct timeval tm1 = {0,0};
     struct timeval tm2 = {0,0};
@@ -211,7 +212,7 @@ static int verify_data_access3_ways_block() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data); 
+    ///printf("\n %p \n", &data); 
     
     unsigned int tmcost = 0;
     if ( tm2.tv_sec > tm1.tv_sec ) {
@@ -222,10 +223,11 @@ static int verify_data_access3_ways_block() {
     tmcost -= tm1.tv_usec;
     tmcosts[k] = tmcost;
   }
-    printf("\n %s \n", __func__);
+    printf("\n %-40s ", __func__);
   for (int k=0; k<L1Ways; k++) {
     unsigned int tmcost = tmcosts[k];
-    printf("   time cost us : %03u %03u %03u  k %u\n\n", 
+    if ( k != 0 ) printf(" %-40s ", " ");
+    printf("   time cost us : %03u %03u %03u  k %u\n", 
             tmcost/1000000, (tmcost/1000) % 1000, tmcost% 1000, k);
   }
     return 0;
@@ -242,7 +244,7 @@ static int verify_data_access11_linear_loop() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data);
+    ///printf("\n %p \n", &data);
     
     struct timeval tm1 = {0,0};
     struct timeval tm2 = {0,0};
@@ -257,7 +259,7 @@ static int verify_data_access11_linear_loop() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data); 
+    ///printf("\n %p \n", &data); 
     
     unsigned int tmcost = 0;
     if ( tm2.tv_sec > tm1.tv_sec ) {
@@ -268,10 +270,11 @@ static int verify_data_access11_linear_loop() {
     tmcost -= tm1.tv_usec;
     tmcosts[k] = tmcost;
   }
-    printf("\n %s \n", __func__);
+    printf("\n %-40s ", __func__);
   for (int k=0; k<L1Ways; k++) {
     unsigned int tmcost = tmcosts[k];
-    printf("   time cost us : %03u %03u %03u  k %u\n\n", 
+    if ( k != 0 ) printf(" %-40s ", " ");
+    printf("   time cost us : %03u %03u %03u  k %u\n", 
             tmcost/1000000, (tmcost/1000) % 1000, tmcost% 1000, k);
   }
     return 0;
@@ -288,7 +291,7 @@ static int verify_data_access12_no_touch() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data);
+    ///printf("\n %p \n", &data);
     
     struct timeval tm1 = {0,0};
     struct timeval tm2 = {0,0};
@@ -303,7 +306,7 @@ static int verify_data_access12_no_touch() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data); 
+    ///printf("\n %p \n", &data); 
     
     unsigned int tmcost = 0;
     if ( tm2.tv_sec > tm1.tv_sec ) {
@@ -314,10 +317,11 @@ static int verify_data_access12_no_touch() {
     tmcost -= tm1.tv_usec;
     tmcosts[k] = tmcost;
   }
-    printf("\n %s \n", __func__);
+    printf("\n %-40s ", __func__);
   for (int k=0; k<L1Ways; k++) {
     unsigned int tmcost = tmcosts[k];
-    printf("   time cost us : %03u %03u %03u  k %u\n\n", 
+    if ( k != 0 ) printf(" %-40s ", " ");
+    printf("   time cost us : %03u %03u %03u  k %u\n", 
             tmcost/1000000, (tmcost/1000) % 1000, tmcost% 1000, k);
   }
     return 0;
@@ -335,7 +339,7 @@ static int verify_data_access21_double_loop() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data);
+    ///printf("\n %p \n", &data);
     
     struct timeval tm1 = {0,0};
     struct timeval tm2 = {0,0};
@@ -353,7 +357,7 @@ static int verify_data_access21_double_loop() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data); 
+    ///printf("\n %p \n", &data); 
     
     unsigned int tmcost = 0;
     if ( tm2.tv_sec > tm1.tv_sec ) {
@@ -364,15 +368,17 @@ static int verify_data_access21_double_loop() {
     tmcost -= tm1.tv_usec;
     tmcosts[k] = tmcost;
   }
-    printf("\n %s \n", __func__);
+    printf("\n %-40s ", __func__);
     unsigned int costtotal = 0;
   for (int k=0; k<L1Ways; k++) {
     unsigned int tmcost = tmcosts[k];
+    if ( k != 0 ) printf(" %-40s ", " ");
     costtotal += tmcost;
-    printf("   time cost us : %03u %03u %03u  k %u\n\n", 
+    printf("   time cost us : %03u %03u %03u  k %u\n", 
             tmcost/1000000, (tmcost/1000) % 1000, tmcost% 1000, k);
   }
-    printf("   time cost us : %03u %03u %03u  total\n\n", 
+    printf(" %-40s ", " ");
+    printf("   time cost us : %03u %03u %03u  total\n", 
             costtotal/1000000, (costtotal/1000) % 1000, costtotal% 1000);
     return 0;
 }
@@ -398,7 +404,7 @@ static int verify_data_access22_triple_loop() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data); 
+    ///printf("\n %p \n", &data); 
     
     unsigned int tmcost = 0;
     if ( tm2.tv_sec > tm1.tv_sec ) {
@@ -407,8 +413,8 @@ static int verify_data_access22_triple_loop() {
     }
     tmcost += tm2.tv_usec;
     tmcost -= tm1.tv_usec;
-    printf("\n %s \n", __func__);
-    printf("   time cost us : %03u %03u %03u  \n\n", 
+    printf("\n %-40s ", __func__);
+    printf("   time cost us : %03u %03u %03u  \n", 
             tmcost/1000000, (tmcost/1000) % 1000, tmcost% 1000);
     return 0;
 }
@@ -434,7 +440,7 @@ static int verify_data_access23_triple_trashing() {
     /* pass data to an external function so to hint the compiler that 
      * the data could be changed. this may not work though. 
      */
-    printf("\n %p \n", &data); 
+    ///printf("\n %p \n", &data); 
     
     unsigned int tmcost = 0;
     if ( tm2.tv_sec > tm1.tv_sec ) {
@@ -443,8 +449,8 @@ static int verify_data_access23_triple_trashing() {
     }
     tmcost += tm2.tv_usec;
     tmcost -= tm1.tv_usec;
-    printf("\n %s \n", __func__);
-    printf("   time cost us : %03u %03u %03u  \n\n", 
+    printf("\n %-40s ", __func__);
+    printf("   time cost us : %03u %03u %03u  \n", 
             tmcost/1000000, (tmcost/1000) % 1000, tmcost% 1000);
     return 0;
 }
@@ -698,5 +704,100 @@ static int verify_data_access() {
  TESTSET 7  data total 524288  lines 1024  blk 16384
  */
 
+/* remove the printf(...&data)
+ verify_data_access1_single_blk              time cost us : 000 000 183
+
+ verify_data_access2_single_repeat           time cost us : 000 000 061  k 0
+                                             time cost us : 000 000 030  k 1
+                                             time cost us : 000 000 000  k 2
+                                             time cost us : 000 000 000  k 3
+                                             time cost us : 000 000 030  k 4
+                                             time cost us : 000 000 031  k 5
+                                             time cost us : 000 000 000  k 6
+                                             time cost us : 000 000 000  k 7
+                                             time cost us : 000 000 031  k 8
+                                             time cost us : 000 000 030  k 9
+                                             time cost us : 000 000 000  k 10
+                                             time cost us : 000 000 000  k 11
+                                             time cost us : 000 000 030  k 12
+                                             time cost us : 000 000 031  k 13
+                                             time cost us : 000 000 000  k 14
+                                             time cost us : 000 000 000  k 15
+
+ verify_data_access3_ways_block              time cost us : 000 000 061  k 0
+                                             time cost us : 000 000 031  k 1
+                                             time cost us : 000 000 031  k 2
+                                             time cost us : 000 000 000  k 3
+                                             time cost us : 000 000 000  k 4
+                                             time cost us : 000 000 030  k 5
+                                             time cost us : 000 000 031  k 6
+                                             time cost us : 000 000 030  k 7
+                                             time cost us : 000 000 000  k 8
+                                             time cost us : 000 000 000  k 9
+                                             time cost us : 000 000 000  k 10
+                                             time cost us : 000 000 000  k 11
+                                             time cost us : 000 000 000  k 12
+                                             time cost us : 000 000 000  k 13
+                                             time cost us : 000 000 000  k 14
+                                             time cost us : 000 000 030  k 15
+
+ verify_data_access11_linear_loop            time cost us : 000 000 641  k 0
+                                             time cost us : 000 000 702  k 1
+                                             time cost us : 000 000 672  k 2
+                                             time cost us : 000 000 671  k 3
+                                             time cost us : 000 000 702  k 4
+                                             time cost us : 000 000 672  k 5
+                                             time cost us : 000 000 702  k 6
+                                             time cost us : 000 000 671  k 7
+                                             time cost us : 000 000 701  k 8
+                                             time cost us : 000 010 681  k 9
+                                             time cost us : 000 000 672  k 10
+                                             time cost us : 000 000 671  k 11
+                                             time cost us : 000 000 702  k 12
+                                             time cost us : 000 000 672  k 13
+                                             time cost us : 000 000 672  k 14
+                                             time cost us : 000 000 671  k 15
+
+ verify_data_access12_no_touch               time cost us : 000 000 732  k 0
+                                             time cost us : 000 000 672  k 1
+                                             time cost us : 000 000 732  k 2
+                                             time cost us : 000 000 671  k 3
+                                             time cost us : 000 000 672  k 4
+                                             time cost us : 000 000 641  k 5
+                                             time cost us : 000 000 702  k 6
+                                             time cost us : 000 000 671  k 7
+                                             time cost us : 000 000 671  k 8
+                                             time cost us : 000 000 672  k 9
+                                             time cost us : 000 000 671  k 10
+                                             time cost us : 000 000 672  k 11
+                                             time cost us : 000 000 671  k 12
+                                             time cost us : 000 000 671  k 13
+                                             time cost us : 000 000 672  k 14
+                                             time cost us : 000 000 671  k 15
+
+ verify_data_access21_double_loop            time cost us : 000 000 854  k 0
+                                             time cost us : 000 000 794  k 1
+                                             time cost us : 000 000 793  k 2
+                                             time cost us : 000 000 794  k 3
+                                             time cost us : 000 000 793  k 4
+                                             time cost us : 000 000 794  k 5
+                                             time cost us : 000 000 794  k 6
+                                             time cost us : 000 000 793  k 7
+                                             time cost us : 000 010 803  k 8
+                                             time cost us : 000 000 794  k 9
+                                             time cost us : 000 000 793  k 10
+                                             time cost us : 000 000 794  k 11
+                                             time cost us : 000 000 793  k 12
+                                             time cost us : 000 000 824  k 13
+                                             time cost us : 000 000 793  k 14
+                                             time cost us : 000 000 794  k 15
+                                             time cost us : 000 022 797  total
+
+ verify_data_access22_triple_loop            time cost us : 000 022 857
+
+ verify_data_access23_triple_trashing        time cost us : 000 084 351
+
+ TESTSET 7  data total 524288  lines 1024  blk 16384
+ */
 
 
