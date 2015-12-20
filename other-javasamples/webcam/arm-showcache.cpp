@@ -592,8 +592,111 @@ static int verify_data_access() {
  */
 /* this version: set 7.
  verify_data_access22_triple_loop         time cost us : 000 013 763  
+ verify_data_access23_triple_trashing     time cost us : 000 148 621  
+ TESTSET 7  data total 524288  lines 1024  blk 16384
+ */
+
+/* set 7 full output: 
+ verify_data_access1_single_blk   time cost us : 000 000 091
+ verify_data_access2_single_repeat
+   time cost us : 000 000 061  k 0
+   time cost us : 000 000 030  k 1
+   time cost us : 000 000 030  k 2
+   time cost us : 000 000 031  k 3
+   time cost us : 000 000 000  k 4
+   time cost us : 000 000 031  k 5
+   time cost us : 000 000 000  k 6
+   time cost us : 000 000 031  k 7
+   time cost us : 000 000 030  k 8
+   time cost us : 000 000 000  k 9
+   time cost us : 000 000 000  k 10
+   time cost us : 000 000 031  k 11
+   time cost us : 000 000 000  k 12
+   time cost us : 000 000 031  k 13
+   time cost us : 000 000 030  k 14
+   time cost us : 000 000 030  k 15
+ verify_data_access3_ways_block
+   time cost us : 000 000 031  k 0
+   time cost us : 000 000 030  k 1
+   time cost us : 000 000 000  k 2
+   time cost us : 000 000 000  k 3
+   time cost us : 000 000 030  k 4
+   time cost us : 000 000 030  k 5
+   time cost us : 000 000 000  k 6
+   time cost us : 000 000 000  k 7
+   time cost us : 000 000 030  k 8
+   time cost us : 000 000 031  k 9
+   time cost us : 000 000 030  k 10
+   time cost us : 000 000 030  k 11
+   time cost us : 000 000 030  k 12
+   time cost us : 000 000 031  k 13
+   time cost us : 000 000 031  k 14
+   time cost us : 000 000 030  k 15
+
+ verify_data_access11_linear_loop
+   time cost us : 000 000 672  k 0
+   time cost us : 000 000 733  k 1
+   time cost us : 000 000 732  k 2
+   time cost us : 000 000 733  k 3
+   time cost us : 000 000 763  k 4
+   time cost us : 000 000 732  k 5
+   time cost us : 000 000 732  k 6
+   time cost us : 000 000 702  k 7
+   time cost us : 000 000 733  k 8
+   time cost us : 000 000 732  k 9
+   time cost us : 000 000 733  k 10
+   time cost us : 000 000 763  k 11
+   time cost us : 000 000 733  k 12
+   time cost us : 000 000 732  k 13
+   time cost us : 000 000 763  k 14
+   time cost us : 000 000 763  k 15
+
+ verify_data_access12_no_touch
+   time cost us : 000 000 701  k 0
+   time cost us : 000 000 732  k 1
+   time cost us : 000 000 732  k 2
+   time cost us : 000 000 732  k 3
+   time cost us : 000 000 732  k 4
+   time cost us : 000 000 702  k 5
+   time cost us : 000 000 763  k 6
+   time cost us : 000 000 733  k 7
+   time cost us : 000 000 732  k 8
+   time cost us : 000 000 732  k 9
+   time cost us : 000 000 733  k 10
+   time cost us : 000 000 702  k 11
+   time cost us : 000 000 733  k 12
+   time cost us : 000 000 763  k 13
+   time cost us : 000 000 702  k 14
+   time cost us : 000 000 732  k 15
+
+ verify_data_access21_double_loop
+   time cost us : 000 000 854  k 0
+   time cost us : 000 000 855  k 1
+   time cost us : 000 000 855  k 2
+   time cost us : 000 000 855  k 3
+   time cost us : 000 000 824  k 4
+   time cost us : 000 000 855  k 5
+   time cost us : 000 000 824  k 6
+   time cost us : 000 000 885  k 7
+   time cost us : 000 000 916  k 8
+   time cost us : 000 000 854  k 9
+   time cost us : 000 000 855  k 10
+   time cost us : 000 000 824  k 11
+   time cost us : 000 000 854  k 12
+   time cost us : 000 000 855  k 13
+   time cost us : 000 000 885  k 14
+   time cost us : 000 000 855  k 15
+   time cost us : 000 013 705  total
+
+ verify_data_access22_triple_loop
+   time cost us : 000 012 757
+
+ verify_data_access23_triple_trashing
+   time cost us : 000 049 103
+
  verify_data_access23_triple_trashing     time cost us : 000 118 621  
  TESTSET 7  data total 524288  lines 1024  blk 16384
  */
+
 
 
