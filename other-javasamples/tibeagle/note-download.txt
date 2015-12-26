@@ -1,0 +1,49 @@
+
+http://beagleboard.org/latest-images
+
+
+------------------------------------
+Recommended Debian Images
+Wheezy for BeagleBone, BeagleBone Black and Seeed BeagleBone Green via microSD card
+
+    Debian 7.9 (BeagleBone, BeagleBone Black, Seeed BeagleBone Green - 4GB SD) 2015-11-12 - more info - sha256sum: f6e67ba01ff69d20f2c655f5e429c3e6c2398123bcd3d8d548460c597275d277
+
+Jessie for BeagleBone, BeagleBone Black, Seeed BeagleBone Green and Arrow BeagleBone Black Industrial via microSD card
+
+    Debian 8.2 (BeagleBone, BeagleBone Black, Seeed BeagleBone Green, Arrow BeagleBone Black Industrial - 2GB SD) 2015-11-12 - more info - sha256sum: 4714268365500e4c733f800abe7820ff0da67dbcd2fdba5f03a5d089e6c79bbc
+
+To turn these images into eMMC flasher images, edit the /boot/uEnv.txt file on the Linux partition on the microSD card and remove the '#' on the line with 'cmdline=init=/opt/scripts/tools/eMMC/init-eMMC-flasher-v3.sh'. Enabling this will cause booting the microSD card to flash the eMMC. Images are no longer provided here for this to avoid people accidentally overwriting their eMMC flash.
+
+For testing, flasher and other Debian images, see http://elinux.org/Beagleboard:BeagleBoneBlack_Debian
+
+
+------------------------------------
+Older Debian images
+BeagleBone and BeagleBone Black via microSD card (without flashing the eMMC)
+
+    Debian 7.8 (BeagleBone, BeagleBone Black - 4GB SD) 2015-03-01 - more info - bittorrent - md5: c848627722b7a5f7bc89791cc8949e3b
+    Debian 7.5 (BeagleBone, BeagleBone Black - 2GB SD) 2014-05-14 - more info - bittorrent - md5: 35877ce21e8ed0eb1bdc6819ad71c317
+
+BeagleBone Black (eMMC flasher)
+
+    Debian 7.5 (BeagleBone Black - 2GB eMMC) 2014-05-14 - more info - bittorrent - md5: 74615fb680af8f252c034d3807c9b4ae
+
+
+------------------------------------
+Older Angstrom images
+BeagleBone and BeagleBone Black via microSD card
+
+    Angstrom Distribution (BeagleBone, BeagleBone Black - 4GB SD) 2013-06-20 - more info
+
+BeagleBone Black (eMMC flasher)
+
+    Angstrom Distribution (BeagleBone Black - 2GB eMMC) 2013-09-04 - more info - bittorrent
+
+BeagleBoard and BeagleBoard-xM
+
+    Angstrom Distribution (BeagleBoard and BeagleBoard-xM - 4GB SD) 2012-01-11 - more info
+
+
+Last updated by jkridner.wordpress.com on Thu Dec 10 2015 14:39:19 GMT-0000 (UTC).
+
+

@@ -1,0 +1,5 @@
+
+http://beagleboard.org/project/debian
+
+https://wiki.debian.org/InstallingDebianOn/TI/BeagleBone
+
