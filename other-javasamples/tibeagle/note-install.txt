@@ -1,0 +1,4 @@
+
+just  xz -d  then  dd  the image to a sd card
+
+
