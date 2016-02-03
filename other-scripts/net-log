@@ -1,0 +1,10 @@
+
+http://superuser.com/questions/604998/monitor-tcp-traffic-on-specific-port
+
+
+tcpdump port 443 and '(tcp-syn|tcp-ack)!=0'
+
+ngrep -W byline -d any port 443 -q
+
+sudo iptables -I INPUT -p tcp --dport 443 --syn -j LOG --log-prefix "HTTPS SYN: "
+

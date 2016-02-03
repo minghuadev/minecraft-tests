@@ -1,0 +1,9 @@
+
+
+    Write a ssh config file that contains the `Host`, `IdentityFile` for the deployment key, maybe the `UserKnownHostsFile`, and maybe the `User` (though I think you don't need it).
+
+    Write a ssh wrapper shell script that virtually is `ssh -F /path/to/your/config $*` 
+
+    Prepend `GIT_SSH=/path/to/your/wrapper` in front of your normal git command. Here the git remote (origin) must use the `git@github.com:user/project.git` format.
+
+
