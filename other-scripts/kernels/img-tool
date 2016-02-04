@@ -1,0 +1,47 @@
+
+http://unix.stackexchange.com/questions/113827/how-to-extract-files-from-uimage
+
+
+Will dump the information in the header.
+    mkimage -l uImage
+
+Will get the content.
+    tail -c+65 < uImage > out
+
+will get it uncompressed if it was gzip-compressed.
+    tail -c+65  < uImage | gunzip > out
+
+If that was an initramfs, you can do  
+    cpio -t < out 
+or 
+    pax < out 
+to list the content.
+
+If it's a ramdisk image, you can try and mount it with:
+    mount -ro loop out /mnt
+
+
+
+
+an example
+
+$ ls -l package/images/kernel-h3v10.img 
+-rwxr-xr-x 1  3317576 Jan 10  2012 package/images/kernel-h3v10.img
+
+$ tools/bin/pc/mkimage -l package/images/kernel-h3v10.img 
+Image Name:   Linux-2.6.35.7
+Created:      Tue Jan 10 06:50:04 2012
+Image Type:   ARM Linux Kernel Image (uncompressed)
+Data Size:    3317512 Bytes = 3239.76 kB = 3.16 MB
+Load Address: 0x80800000
+Entry Point:  0x80800000
+
+$ tail -c+65 < package/images/kernel-h3v10.img > outf
+$ ls -l outf 
+-rw-rw-r-- 1  3317512 Feb  4 06:11 outf
+
+$ file outf 
+outf: Linux kernel ARM boot executable zImage (little-endian)
+
+
+
