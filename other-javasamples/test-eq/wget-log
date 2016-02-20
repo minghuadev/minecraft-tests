@@ -1,0 +1,269 @@
+
+[test-eq]$ wget -r -N -np http://www.siliconinvestigations.com/DSONano/Dsonano.HTM
+--2016-02-20 14:41:45--  http://www.siliconinvestigations.com/DSONano/Dsonano.HTM
+Resolving www.siliconinvestigations.com (www.siliconinvestigations.com)... 72.1.8.2
+Connecting to www.siliconinvestigations.com (www.siliconinvestigations.com)|72.1.8.2|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 19771 (19K) [text/html]
+Saving to: ‘www.siliconinvestigations.com/DSONano/Dsonano.HTM’
+
+100%[======================================================>] 19,771      19.1KB/s   in 1.0s   
+
+2016-02-20 14:41:46 (19.1 KB/s) - ‘www.siliconinvestigations.com/DSONano/Dsonano.HTM’ saved [19771/19771]
+
+Loading robots.txt; please ignore errors.
+--2016-02-20 14:41:46--  http://www.siliconinvestigations.com/robots.txt
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 99 [text/plain]
+Saving to: ‘www.siliconinvestigations.com/robots.txt’
+
+100%[======================================================>] 99          --.-K/s   in 0s      
+
+2016-02-20 14:41:46 (6.25 MB/s) - ‘www.siliconinvestigations.com/robots.txt’ saved [99/99]
+
+--2016-02-20 14:41:46--  http://www.siliconinvestigations.com/DSONano/deconstruct.jpg
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 133215 (130K) [image/jpeg]
+Saving to: ‘www.siliconinvestigations.com/DSONano/deconstruct.jpg’
+
+100%[======================================================>] 133,215     7.36KB/s   in 18s    
+
+2016-02-20 14:42:05 (7.25 KB/s) - ‘www.siliconinvestigations.com/DSONano/deconstruct.jpg’ saved [133215/133215]
+
+--2016-02-20 14:42:05--  http://www.siliconinvestigations.com/DSONano/menu.map
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 302 Redirect
+Location: http://siliconinvestigations.com/home.htm [following]
+--2016-02-20 14:42:05--  http://siliconinvestigations.com/home.htm
+Resolving siliconinvestigations.com (siliconinvestigations.com)... 72.1.8.2
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 47282 (46K) [text/html]
+Saving to: ‘www.siliconinvestigations.com/DSONano/menu.map’
+
+100%[======================================================>] 47,282      15.0KB/s   in 3.1s   
+
+2016-02-20 14:42:09 (15.0 KB/s) - ‘www.siliconinvestigations.com/DSONano/menu.map’ saved [47282/47282]
+
+--2016-02-20 14:42:09--  http://www.siliconinvestigations.com/DSONano/menu.gif
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 2709 (2.6K) [image/gif]
+Saving to: ‘www.siliconinvestigations.com/DSONano/menu.gif’
+
+100%[======================================================>] 2,709       --.-K/s   in 0s      
+
+2016-02-20 14:42:10 (126 MB/s) - ‘www.siliconinvestigations.com/DSONano/menu.gif’ saved [2709/2709]
+
+--2016-02-20 14:42:10--  http://www.siliconinvestigations.com/DSONano/DS0201UserManual.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 497377 (486K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DS0201UserManual.pdf’
+
+100%[======================================================>] 497,377     7.90KB/s   in 82s    
+
+2016-02-20 14:43:32 (5.94 KB/s) - ‘www.siliconinvestigations.com/DSONano/DS0201UserManual.pdf’ saved [497377/497377]
+
+--2016-02-20 14:43:32--  http://www.siliconinvestigations.com/DSONano/PCView.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 288806 (282K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/PCView.rar’
+
+100%[======================================================>] 288,806     9.75KB/s   in 40s    
+
+2016-02-20 14:44:13 (7.00 KB/s) - ‘www.siliconinvestigations.com/DSONano/PCView.rar’ saved [288806/288806]
+
+--2016-02-20 14:44:13--  http://www.siliconinvestigations.com/DSONano/TF_Card_pre_defined_FILE.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 1432 (1.4K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/TF_Card_pre_defined_FILE.rar’
+
+100%[======================================================>] 1,432       --.-K/s   in 0s      
+
+2016-02-20 14:44:14 (88.8 MB/s) - ‘www.siliconinvestigations.com/DSONano/TF_Card_pre_defined_FILE.rar’ saved [1432/1432]
+
+--2016-02-20 14:44:14--  http://www.siliconinvestigations.com/DSONano/ARM_DSO_M.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 641537 (627K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/ARM_DSO_M.pdf’
+
+100%[======================================================>] 641,537     5.38KB/s   in 94s    
+
+2016-02-20 14:45:48 (6.65 KB/s) - ‘www.siliconinvestigations.com/DSONano/ARM_DSO_M.pdf’ saved [641537/641537]
+
+--2016-02-20 14:45:48--  http://www.siliconinvestigations.com/DSONano/DSOManual.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 781449 (763K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DSOManual.pdf’
+
+100%[======================================================>] 781,449     10.6KB/s   in 2m 2s  
+
+2016-02-20 14:47:51 (6.26 KB/s) - ‘www.siliconinvestigations.com/DSONano/DSOManual.pdf’ saved [781449/781449]
+
+--2016-02-20 14:47:51--  http://www.siliconinvestigations.com/DSONano/Paul%27s%20firmware%20manual.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 54978 (54K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/Paul's firmware manual.pdf’
+
+100%[======================================================>] 54,978      5.88KB/s   in 9.7s   
+
+2016-02-20 14:48:01 (5.52 KB/s) - ‘www.siliconinvestigations.com/DSONano/Paul's firmware manual.pdf’ saved [54978/54978]
+
+--2016-02-20 14:48:01--  http://www.siliconinvestigations.com/DSONano/DSO%20nano%20firmware%20generation%20and%20upgrade.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 1041980 (1018K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DSO nano firmware generation and upgrade.pdf’
+
+100%[======================================================>] 1,041,980   10.3KB/s   in 2m 49s 
+
+2016-02-20 14:50:50 (6.01 KB/s) - ‘www.siliconinvestigations.com/DSONano/DSO nano firmware generation and upgrade.pdf’ saved [1041980/1041980]
+
+--2016-02-20 14:50:50--  http://www.siliconinvestigations.com/DSONano/DAT2BMP.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 288806 (282K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DAT2BMP.rar’
+
+100%[======================================================>] 288,806     5.82KB/s   in 50s    
+
+2016-02-20 14:51:41 (5.60 KB/s) - ‘www.siliconinvestigations.com/DSONano/DAT2BMP.rar’ saved [288806/288806]
+
+--2016-02-20 14:51:41--  http://www.siliconinvestigations.com/DSONano/DAT2BMP_SOURCE_CODE.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 3821777 (3.6M) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DAT2BMP_SOURCE_CODE.rar’
+
+100%[======================================================>] 3,821,777   6.91KB/s   in 13m 20s
+
+2016-02-20 15:05:01 (4.67 KB/s) - ‘www.siliconinvestigations.com/DSONano/DAT2BMP_SOURCE_CODE.rar’ saved [3821777/3821777]
+
+--2016-02-20 15:05:01--  http://www.siliconinvestigations.com/DSONano/DS0201V1.6SCH.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 112946 (110K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DS0201V1.6SCH.pdf’
+
+100%[======================================================>] 112,946     10.2KB/s   in 13s    
+
+2016-02-20 15:05:14 (8.51 KB/s) - ‘www.siliconinvestigations.com/DSONano/DS0201V1.6SCH.pdf’ saved [112946/112946]
+
+--2016-02-20 15:05:14--  http://www.siliconinvestigations.com/DSONano/DS0201V1.1_PCB_T.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 190706 (186K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DS0201V1.1_PCB_T.pdf’
+
+100%[======================================================>] 190,706     6.44KB/s   in 23s    
+
+2016-02-20 15:05:38 (8.08 KB/s) - ‘www.siliconinvestigations.com/DSONano/DS0201V1.1_PCB_T.pdf’ saved [190706/190706]
+
+--2016-02-20 15:05:38--  http://www.siliconinvestigations.com/DSONano/DS0201V1.1_PCB_B.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 129601 (127K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DS0201V1.1_PCB_B.pdf’
+
+100%[======================================================>] 129,601     7.51KB/s   in 21s    
+
+2016-02-20 15:05:59 (6.09 KB/s) - ‘www.siliconinvestigations.com/DSONano/DS0201V1.1_PCB_B.pdf’ saved [129601/129601]
+
+--2016-02-20 15:05:59--  http://www.siliconinvestigations.com/DSONano/DSO%20Nano%20firmware%20v2.4%20.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 22933 (22K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DSO Nano firmware v2.4 .rar’
+
+100%[======================================================>] 22,933      14.9KB/s   in 1.5s   
+
+2016-02-20 15:06:00 (14.9 KB/s) - ‘www.siliconinvestigations.com/DSONano/DSO Nano firmware v2.4 .rar’ saved [22933/22933]
+
+--2016-02-20 15:06:00--  http://www.siliconinvestigations.com/DSONano/ds0201_app_v2.50.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 12855 (13K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/ds0201_app_v2.50.rar’
+
+100%[======================================================>] 12,855      21.7KB/s   in 0.6s   
+
+2016-02-20 15:06:01 (21.7 KB/s) - ‘www.siliconinvestigations.com/DSONano/ds0201_app_v2.50.rar’ saved [12855/12855]
+
+--2016-02-20 15:06:01--  http://www.siliconinvestigations.com/DSONano/DSO%20nano%20APP+LIB%20firmware%20v2.5e.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 23933 (23K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DSO nano APP+LIB firmware v2.5e.rar’
+
+100%[======================================================>] 23,933      3.68KB/s   in 6.3s   
+
+2016-02-20 15:06:08 (3.68 KB/s) - ‘www.siliconinvestigations.com/DSONano/DSO nano APP+LIB firmware v2.5e.rar’ saved [23933/23933]
+
+--2016-02-20 15:06:08--  http://www.siliconinvestigations.com/DSONano/DS0201_V2.5Source_Code.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 388050 (379K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DS0201_V2.5Source_Code.rar’
+
+100%[======================================================>] 388,050     9.64KB/s   in 42s    
+
+2016-02-20 15:06:51 (9.05 KB/s) - ‘www.siliconinvestigations.com/DSONano/DS0201_V2.5Source_Code.rar’ saved [388050/388050]
+
+--2016-02-20 15:06:51--  http://www.siliconinvestigations.com/DSONano/ds0201_lib_v2.21.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 10991 (11K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/ds0201_lib_v2.21.rar’
+
+100%[======================================================>] 10,991      9.28KB/s   in 1.2s   
+
+2016-02-20 15:06:52 (9.28 KB/s) - ‘www.siliconinvestigations.com/DSONano/ds0201_lib_v2.21.rar’ saved [10991/10991]
+
+--2016-02-20 15:06:52--  http://www.siliconinvestigations.com/DSONano/DS0201_LIB_V22.dfu
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 404 Not Found
+2016-02-20 15:06:53 ERROR 404: Not Found.
+
+--2016-02-20 15:06:53--  http://www.siliconinvestigations.com/DSONano/File_model.rar
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 19551 (19K) [application/octet-stream]
+Saving to: ‘www.siliconinvestigations.com/DSONano/File_model.rar’
+
+100%[======================================================>] 19,551      8.88KB/s   in 2.2s   
+
+2016-02-20 15:06:55 (8.88 KB/s) - ‘www.siliconinvestigations.com/DSONano/File_model.rar’ saved [19551/19551]
+
+--2016-02-20 15:06:55--  http://www.siliconinvestigations.com/DSONano/um0412.zip
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 6846960 (6.5M) [application/x-zip-compressed]
+Saving to: ‘www.siliconinvestigations.com/DSONano/um0412.zip’
+
+100%[======================================================>] 6,846,960   9.90KB/s   in 20m 50s
+
+2016-02-20 15:27:45 (5.35 KB/s) - ‘www.siliconinvestigations.com/DSONano/um0412.zip’ saved [6846960/6846960]
+
+--2016-02-20 15:27:45--  http://www.siliconinvestigations.com/DSONano/DFU_Manual.pdf
+Reusing existing connection to www.siliconinvestigations.com:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 147640 (144K) [application/pdf]
+Saving to: ‘www.siliconinvestigations.com/DSONano/DFU_Manual.pdf’
+
+100%[======================================================>] 147,640     7.44KB/s   in 20s    
+
+2016-02-20 15:28:05 (7.33 KB/s) - ‘www.siliconinvestigations.com/DSONano/DFU_Manual.pdf’ saved [147640/147640]
+
+FINISHED --2016-02-20 15:28:05--
+Total wall clock time: 46m 21s
+Downloaded: 25 files, 15M in 46m 9s (5.48 KB/s)
+
+
