@@ -1,0 +1,60 @@
+
+fixed array:
+
+send:
+        DBusMessage * msg;
+        //...msg...
+        DBusMessageIter args;
+        dbus_message_iter_init_append(msg, &args);
+
+        uint32_t bufdata[200]; /* data to send */
+        //...data...
+
+        /* create a array container */
+        DBusMessageIter elems; //array elements iter
+        /* create container with an element iter */
+        dbus_message_iter_open_container (
+                          &args,
+                          DBUS_TYPE_ARRAY /* container_type */,
+                          DBUS_TYPE_UINT32_AS_STRING, /* elem type */
+                          &elems);
+        uint32_t * dataarg = bufdata;
+        dbus_bool_t rc = dbus_message_iter_append_fixed_array (
+                          &elms,
+                          DBUS_TYPE_UINT32,
+                          &dataarg,
+                          200);
+        if ( !rc ) {
+            ;/* fail */
+        }
+        /* close the struct container */
+        dbus_message_iter_close_container (&args,&elems);
+
+receive:
+
+        uint32_t bufdata[300];
+        uint16_t bufdatacnt = 0; /* return number of data elements received */
+
+        if(DBUS_TYPE_ARRAY == dbus_message_iter_get_arg_type(&args)) {
+
+            DBusMessageIter subiter;
+            dbus_message_iter_recurse (&args, &subiter);
+
+            if ( dbus_message_iter_get_arg_type(&subiter) == DBUS_TYPE_UINT32 ) {
+                      
+                uint32_t *v_words = NULL;
+                int nelems = 0;
+                dbus_message_iter_get_fixed_array(&subiter, &v_words, &nelems);
+                if ( nelems <= 0 || nelems > 300 ) {
+                    ;/* fail */
+                } else {
+                    uint16_t bufnelems = (uint16_t)nelems;
+                    memcpy(bufdata, v_words, bufnelems * 4 );
+                    bufdatacnt = bufnelems;
+                }
+            } else {
+                ; /* fail */
+            }
+        }
+
+
