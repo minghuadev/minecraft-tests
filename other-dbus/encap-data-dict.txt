@@ -1,0 +1,131 @@
+
+DBus - How to pass dict as parameter 
+Thursday, November 18, 2010
+
+http://raulherbster.blogspot.ca/2010/11/dbus-how-to-pass-dict-as-parameter.html
+
+
+This tutorial is designed for those ones that need DBus but suffer a lot to find documentation even about simple things, such as how to pass a dictionary as parameter.
+
+Initially, I had to invoke a Bluez method that needs a dictionary as parameter. But how could I do it? It not easy at all to find a detailed documentation about it and I had to look for a solution at BlueZ source code.
+
+In this case, I'm using the newest BlueZ Health API (support for HDP/MCAP). The following piece of code shows
+
+```
+static char *start_health_session(DBusConnection *conn)
+{
+
+  DBusMessage *msg, *reply;
+  DBusMessageIter args;
+  DBusError err;
+  const char *reply_path;
+  char *path;
+
+  msg = dbus_message_new_method_call("org.bluez", 
+                                     "/org/bluez", 
+                                     "org.bluez.HealthManager",
+                                     "CreateApplication");
+
+  if (!msg) {
+      printf(" network:dbus Can't allocate new method call\n");
+      return NULL;
+  }
+
+  // append arguments
+
+  dbus_message_iter_init_append(msg, &args);
+
+  if ( !iter_append_dictionary(&args, DATA_TYPE_VALUE, 
+                                          ROLE_VALUE,
+                                          DESCRIPTION_VALUE, 
+                                          CHANNEL_TYPE_VALUE) ) {
+      printf(" network:dbus Can't append parameters\n");
+      dbus_message_unref(msg);
+      return NULL;
+  }
+
+  dbus_error_init(&err);
+
+....
+}
+```
+
+A DBus dict type needs a message iterator, which is properly initialised before it is used.
+
+Once the message iterator is properly created, let's open it and add tuples to it.
+
+```
+static int iter_append_dictionary(DBusMessageIter *iter, 
+                                  dbus_uint16_t dataType,
+                                  const char *role,
+                                  const char *description,
+                                  const char *channelType)
+{
+  DBusMessageIter dict;
+
+  dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY,
+            DBUS_DICT_ENTRY_BEGIN_CHAR_AS_STRING
+            DBUS_TYPE_STRING_AS_STRING DBUS_TYPE_VARIANT_AS_STRING
+            DBUS_DICT_ENTRY_END_CHAR_AS_STRING, &dict);
+
+  dict_append_entry(&dict, "DataType", DBUS_TYPE_UINT16, &dataType);
+
+  dict_append_entry(&dict, "Role", DBUS_TYPE_STRING, &role);
+
+  dict_append_entry(&dict, "Description", DBUS_TYPE_STRING, &description);
+
+  dict_append_entry(&dict, "ChannelType", DBUS_TYPE_STRING, &channelType);
+
+  dbus_message_iter_close_container(iter, &dict);
+}
+```
+
+At first, you have to open the container and specify the data type of each tuple. In this case, the dictionary consists of tuples <"DataType",uint16>, <"Role",string>, <"Description",string>, and <"ChannelType",string>. Once the value data type for each tuple varies (uint16 or string), we declare it as a variant. Therefore, the dictionary data type definition is:
+
+```
+DBUS_DICT_ENTRY_BEGIN_CHAR_AS_STRING
+DBUS_TYPE_STRING_AS_STRING DBUS_TYPE_VARIANT_AS_STRING
+DBUS_DICT_ENTRY_END_CHAR_AS_STRING
+```
+
+Finally, you simply add the basic data type to message iterator (the dictionary itself).
+
+```
+static void append_variant(DBusMessageIter *iter, int type, void *val)
+{
+  DBusMessageIter value;
+  char sig[2] = { type, '\0' };
+
+  dbus_message_iter_open_container(iter, DBUS_TYPE_VARIANT, sig, &value);
+
+  dbus_message_iter_append_basic(&value, type, val);
+
+  dbus_message_iter_close_container(iter, &value);
+}
+
+static void dict_append_entry(DBusMessageIter *dict,
+   const char *key, int type, void *val)
+{
+  DBusMessageIter entry;
+
+  if (type == DBUS_TYPE_STRING) {
+    const char *str = *((const char **) val);
+    if (str == NULL)
+      return;
+  }
+
+  dbus_message_iter_open_container(dict, DBUS_TYPE_DICT_ENTRY,
+                                   NULL, &entry);
+
+  dbus_message_iter_append_basic(&entry, DBUS_TYPE_STRING, &key);
+
+  append_variant(&entry, type, val);
+
+  dbus_message_iter_close_container(dict, &entry);
+}
+```
+
+
+
+
+
