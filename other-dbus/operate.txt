@@ -59,6 +59,7 @@ $ dbus-send --session --print-reply \
 
 bus name owner introspection
 ===============================
+http://www.kaizou.org/2014/06/dbus-command-line/
 
 dbus-send --session           \
   --dest=org.freedesktop.DBus \
