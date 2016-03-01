@@ -55,3 +55,24 @@ $ dbus-send --session --print-reply \
             /org/freedesktop/DBus \
             org.freedesktop.DBus.ListActivatableNames
 
+
+
+bus name owner introspection
+===============================
+
+dbus-send --session           \
+  --dest=org.freedesktop.DBus \
+  --type=method_call          \
+  --print-reply               \
+  /org/freedesktop/DBus       \
+  org.freedesktop.DBus.Introspectable.Introspect
+
+dbus-send --session           \
+  --dest=org.freedesktop.DBus \
+  --type=method_call          \
+  --print-reply               \
+  /org/freedesktop/DBus       \
+  org.freedesktop.DBus.GetNameOwner string:'myapp.name'
+
+
+
