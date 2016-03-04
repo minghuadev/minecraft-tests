@@ -38,7 +38,7 @@ class Example(QtGui.QWidget):
 
         lbl1 = QtGui.QLabel('ZetCode', self)
         ##btn = QtGui.QPushButton('Button', self)
-        btn = QtGui.QPushButton('Button')
+        btn = QtGui.QPushButton('Button Exit')
         btn.setToolTip('This is a <b>QPushButton</b> widget')
         btn.resize(btn.sizeHint())
         btn.move(50, 50)
@@ -54,8 +54,11 @@ class Example(QtGui.QWidget):
 
         self.setLayout(vbox)
 
+        vbox.addLayout(self.calcUI())
+        vbox.addLayout(self.reviewUI())
 
-        btn.clicked.connect(QtCore.QCoreApplication.instance().quit)
+        #btn.clicked.connect(QtCore.QCoreApplication.instance().quit)
+        btn.clicked.connect(self.onBtnExitClickedEvent)
 
         self.setWindowTitle('IconTooltips')
         self.setWindowIcon(QtGui.QIcon('web.png'))
@@ -63,9 +66,47 @@ class Example(QtGui.QWidget):
 
         self.show()
 
+    def reviewUI(self):
+        title = QtGui.QLabel('Title')
+        author = QtGui.QLabel('Author')
+        review = QtGui.QLabel('Review')
+
+        titleEdit = QtGui.QLineEdit()
+        authorEdit = QtGui.QLineEdit()
+        reviewEdit = QtGui.QTextEdit()
+
+        grid = QtGui.QGridLayout()
+        grid.setSpacing(10)
+
+        grid.addWidget(title, 1, 0)
+        grid.addWidget(titleEdit, 1, 1)
+
+        grid.addWidget(author, 2, 0)
+        grid.addWidget(authorEdit, 2, 1)
+
+        grid.addWidget(review, 3, 0)
+        grid.addWidget(reviewEdit, 3, 1, 5, 1)
+        return grid
+
+    def calcUI(self):
+        grid = QtGui.QGridLayout()
+        #self.setLayout(grid)
+        names = ['Cls', 'Bck', '', 'Close',
+                 '7', '8', '9', '/',
+                '4', '5', '6', '*',
+                 '1', '2', '3', '-',
+                '0', '.', '=', '+']
+        positions = [(i,j) for i in range(5) for j in range(4)]
+        for position, name in zip(positions, names):
+            if name == '':
+                continue
+            button = QtGui.QPushButton(name)
+            grid.addWidget(button, *position)
+        return grid
+
     def center(self, xsz, ysz):
-        self.setGeometry(300, 300, 250, 150)
-        ##self.resize(xsz, ysz)
+        ##self.setGeometry(300, 300, 250, 150)
+        self.resize(xsz, ysz)
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -74,13 +115,24 @@ class Example(QtGui.QWidget):
     def closeEvent(self, event):
 
         reply = QtGui.QMessageBox.question(self, 'Message',
-            "Are you sure to quit?", QtGui.QMessageBox.Yes |
+            "Are you double sure to quit?", QtGui.QMessageBox.Yes |
             QtGui.QMessageBox.No, QtGui.QMessageBox.No)
 
         if reply == QtGui.QMessageBox.Yes:
             event.accept()
         else:
             event.ignore()
+
+    def onBtnExitClickedEvent(self, event):
+
+        reply = QtGui.QMessageBox.question(self, 'Message',
+            "Are you sure to quit?", QtGui.QMessageBox.Yes |
+            QtGui.QMessageBox.No, QtGui.QMessageBox.No)
+
+        if reply == QtGui.QMessageBox.Yes:
+            QtCore.QCoreApplication.instance().quit()
+        else:
+            self.close()
 
 
 def main():
