@@ -1,0 +1,47 @@
+
+pyside:
+
+    6  yum install xterm
+
+   27  vi /etc/yum.repos.d/wk3.repo 
+# baseurl=http://copr-be.cloud.fedoraproject.org/results/.../wk3-update1-f20x32/fedora-20-i386/
+
+   28  vi /etc/yum.repos.d/pygo.repo 
+# baseurl=http://copr-be.cloud.fedoraproject.org/results/.../wk3-support-f20x32/fedora-20-i386/
+
+   29  yum install pygobject3 webkitgtk3
+
+   34  yum install less
+   35  yum install tree
+   38  yum install python-pyside
+   40  yum install tkinter
+   42  yum install python-pillow
+   44  yum install python-pillow-tk
+
+   48  yum install kolourpaint
+   52  yum install gnu-free-mono-fonts
+   53  yum install gnu-free-sans-fonts
+   54  yum install gnu-free-serif-fonts
+   57  yum install java-1.7.0-openjdk
+   68  yum install ps
+   71  yum install procps-ng
+   73  yum install git
+   75  yum install gcc
+
+pyec:
+
+   78  yum install libxml2-devel libxslt-devel
+   81  yum install python-devel
+   83  yum install xz
+   85  yum install file
+
+pyqt:
+
+  104  yum install PyQt4-devel
+
+  117  yum install PyQt4 PyQt4-devel PyQt4-assistant
+  123  yum install qt-assistant qt-doc
+
+note: qt-creator is too big thought it contains a nice IDE
+
+
