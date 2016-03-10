@@ -1,0 +1,85 @@
+
+forked from antlafarge/QtWebsocket
+
+
+$ git clone https://github.com/minghuadev/QtWebsocket.git
+
+$ git config -l
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/minghuadev/QtWebsocket.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
+  remotes/origin/wss
+
+$ git config user.name minghua
+$ git config user.email minghuadev@users.noreply.github.com
+$ git config push.default matching
+
+
+ups1 https://github.com/me21/QtWebsocket.git
+$ git remote add ups1 https://github.com/me21/QtWebsocket.git
+$ git fetch ups1
+From https://github.com/me21/QtWebsocket
+ * [new branch]      master     -> ups1/master
+$ git checkout -b people-me21-master ups1/master
+Branch people-me21-master set up to track remote branch master from ups1.
+Switched to a new branch 'people-me21-master'
+$ git push --all origin
+To https://github.com/minghuadev/QtWebsocket.git
+ * [new branch]      people-me21-master -> people-me21-master
+
+
+ups2 https://github.com/bvdeenen/QtWebsocket.git
+$ git remote add ups2 https://github.com/bvdeenen/QtWebsocket.git
+$ git fetch ups2
+From https://github.com/bvdeenen/QtWebsocket
+ * [new branch]      master     -> ups2/master
+ * [new branch]      wss        -> ups2/wss
+$ git checkout -b people-bvdeenen-master ups2/master
+Branch people-bvdeenen-master set up to track remote branch master from ups2.
+Switched to a new branch 'people-bvdeenen-master'
+$ git push --all origin
+To https://github.com/minghuadev/QtWebsocket.git
+ * [new branch]      people-bvdeenen-master -> people-bvdeenen-master
+
+
+ups3 https://github.com/serg-z/QtWebsocket.git
+$ git remote add ups3 https://github.com/serg-z/QtWebsocket.git
+$ git fetch ups3
+From https://github.com/serg-z/QtWebsocket
+ * [new branch]      master     -> ups3/master
+ * [new branch]      missing_args_fix -> ups3/missing_args_fix
+ * [new branch]      wss        -> ups3/wss
+$ git checkout -b people-serg-z-missing_args_fix ups3/missing_args_fix
+Branch people-serg-z-missing_args_fix set up to track remote branch missing_args_fix from ups3.
+Switched to a new branch 'people-serg-z-missing_args_fix'
+$ git push --all origin
+To https://github.com/minghuadev/QtWebsocket.git
+ * [new branch]      people-serg-z-missing_args_fix -> people-serg-z-missing_args_fix
+
+
+ups4 https://github.com/misterion/QtWebsocket.git
+people-misterion-master
+
+
+create work branch off master
+
+
+wiki: create a NewWelcome page on web. the original will appear. 
+
+
+note wiki update: 
+https://gist.github.com/larrybotha/10650410
+larrybotha/A.markdown
+Merge Wiki Changes From A Forked Github Repo
+
+
