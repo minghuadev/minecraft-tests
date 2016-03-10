@@ -1,0 +1,23 @@
+
+https://stackoverflow.com/questions/28358825/git-pull-to-merge-into-non-current-branch-for-downstream-repo-to-be-able-to-trac
+
+
+let's say current checked-out branch is master. but want to pull upstream 
+branch br1 and to have downstream repo be able to track. 
+
+modify downstream : 
+
+    remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+    branch.br1.merge=refs/heads/br1
+
+to : 
+
+    remote.origin.fetch=+refs/remotes/origin/*:refs/remotes/origin/*
+    branch.br1.merge=refs/remotes/origin/br1
+
+then use `git pull` to get upstream br1 into origin/br1 .
+
+at the downstream use `git pull` to pull from origin/br1 . and use 
+`git push` to push to this repo br1 branch.
+
+

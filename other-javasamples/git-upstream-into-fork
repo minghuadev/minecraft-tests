@@ -1,0 +1,21 @@
+
+http://stackoverflow.com/questions/4410091/github-import-upstream-branch-into-fork
+2016-3-9
+
+
+    Make sure you've pulled the new upstream branch into your local repo:
+    First, ensure your working tree is clean (commit/stash/revert any changes)
+    Then, do `git fetch upstream` to retrieve the new upstream branch
+
+    Create and switch to a local version of the new upstream branch (which is named 
+    newbranch in this example):
+    `git checkout -b newbranch upstream/newbranch`
+
+    When you're ready to push the new branch to origin:
+    `git push -u origin newbranch`
+
+    The -u switch sets up tracking to the specified remote (in this example, origin)
+
+     answered Dec 10 '10 at 15:42 urschrei
+     edited Nov 25 '15 at 12:58
+
