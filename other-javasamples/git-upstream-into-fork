@@ -22,3 +22,11 @@ http://stackoverflow.com/questions/4410091/github-import-upstream-branch-into-fo
      answered Dec 10 '10 at 15:42 urschrei
      edited Nov 25 '15 at 12:58
 
+
+http://stackoverflow.com/questions/5884784/how-to-pull-remote-branch-from-somebody-elses-repo
+
+  git remote add coworker git://path/to/coworkers/repo.git
+  git fetch coworker
+  git checkout --track coworker/foo
+
+
