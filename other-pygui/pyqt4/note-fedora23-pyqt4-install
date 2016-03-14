@@ -1,0 +1,42 @@
+
+fedora 23 pyqt4 installation
+2016-3-11
+
+
+$ dnf install PyQt4 PyQt4-devel PyQt4-assistant
+
+  Installed:
+    PyQt4.i686 4.11.4-2.fc23
+    PyQt4-assistant.i686 4.11.4-2.fc23
+    PyQt4-devel.i686 4.11.4-2.fc23
+  
+    phonon.i686 4.8.3-7.fc23
+    phonon-backend-gstreamer.i686 2:4.8.2-5.fc23
+    proj.i686 4.9.1-3.fc23
+    python-devel.i686 2.7.10-8.fc23
+    python-macros.noarch 2.7.10-8.fc23
+    qt.i686 1:4.8.7-5.fc23
+    qt-assistant-adp.i686 4.6.3-10.fc23
+    qt-common.noarch 1:4.8.7-5.fc23
+    qt-devel.i686 1:4.8.7-5.fc23
+    qt-mobility-common.i686 1.2.2-0.21.20140317git169da60c.fc23
+    qt-mobility-location.i686 1.2.2-0.21.20140317git169da60c.fc23
+    qt-mobility-sensors.i686 1.2.2-0.21.20140317git169da60c.fc23
+    qt-settings.noarch 23-11.fc23
+    qt-x11.i686 1:4.8.7-5.fc23
+    qtwebkit.i686 2.3.4-8.fc23
+    sip.i686 4.17-1.fc23
+    sip-devel.i686 4.17-1.fc23
+    sip-macros.noarch 4.17-1.fc23
+
+$ dnf install qt-assistant qt-doc
+
+$ rpm -q -l qt-devel | grep qch
+  /usr/include/Qt/qchar.h
+  /usr/include/Qt/qcheckbox.h
+  /usr/include/QtCore/qchar.h
+  /usr/include/QtGui/qcheckbox.h
+  /usr/share/doc/qt4/qch/designer.qch
+  /usr/share/doc/qt4/qch/linguist.qch
+
+
