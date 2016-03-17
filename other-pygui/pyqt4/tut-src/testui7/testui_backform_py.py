@@ -196,9 +196,15 @@ class Ui_TestBackform(QtGui.QWidget):
         self.top_tmr.timeout.connect(self.runtimerbeat)
 
     def updateNodeData(self, nkey, ndata):
-        for n in range(0,len(self.ui_node.refInnerList)):
-            subj = self.ui_node.refInnerList[n]
-            subj.subjEdit.setText("text %d %s"%((n+1),str(ndata)))
+        if len(nkey) == 0:
+            for n in range(0,len(self.ui_node.refInnerList)):
+                subj = self.ui_node.refInnerList[n]
+                subj.subjEdit.setText("text %d %s"%((n+1),str(ndata)))
+        else:
+            if nkey in self._param_node_names_index.keys():
+                n = self._param_node_names_index[nkey]
+                subj = self.ui_node.refInnerList[n]
+                subj.subjEdit.setText("text %d %s"%((n+1),str(ndata)))
     def updateSlotData(self, skey, sdata, sidx):
         if len(skey) == 0 or sidx < 0:
             print " backform update all slots data "

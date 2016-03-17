@@ -140,8 +140,8 @@ class TestDataModel(mvc_model.Mvc_Model_Interface):
         self._eval_count += 1
         rc = 0
         if self._uiref != None:
-            self._uiref.updateNodeData("node_data_2", self._eval_count)
-            self._uiref.updateSlotData("slot_data_22", self._eval_count, 2)
+            self._uiref.updateNodeData("data_2", self._eval_count)
+            self._uiref.updateSlotData("data_22", self._eval_count, 2)
             rc += 2
         return rc
 
