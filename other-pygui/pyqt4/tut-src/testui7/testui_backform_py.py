@@ -10,6 +10,9 @@ from PyQt4 import QtGui, QtCore
 from gen__testui_sect_ui import Ui_SectForm
 from gen__testui_subj_ui import Ui_SubjForm
 
+import mvc_model_if as mvc_model
+import mvc_view_if  as mvc_view
+
 import time as Ui_TestTime
 
 class Ui_TestBackform(QtGui.QWidget):
@@ -19,6 +22,8 @@ class Ui_TestBackform(QtGui.QWidget):
         self.chkInited = 0
         self._userValueInit = 255
         self.userValue = self._userValueInit
+        self._tmr_beats_run = True
+
         self.tmr_touched = 0
         self.form_name = backform_name
         self.top_tmr = top_tmr_arg
@@ -32,6 +37,9 @@ class Ui_TestBackform(QtGui.QWidget):
         self._param_node_name_mxsz = 10
         self._param_slot_name_mxsz = 10
         if self._model != None:
+            assert(issubclass(self._model.__class__,
+                              mvc_model.Mvc_Model_Interface))
+
             self._param_node_names.extend(self._model.get_node_names())
             self._param_slot_names.extend(self._model.get_slot_names())
 
@@ -187,14 +195,23 @@ class Ui_TestBackform(QtGui.QWidget):
         #self.cancelButton.clicked.connect(self.reject)
         self.top_tmr.timeout.connect(self.runtimerbeat)
 
-    def updateDataView(self, data):
+    def updateNodeData(self, nkey, ndata):
         for n in range(0,len(self.ui_node.refInnerList)):
             subj = self.ui_node.refInnerList[n]
-            subj.subjEdit.setText("text %d %d"%((n+1),data))
-        for n in range(0, self._nSlots):
-            for m in range(0,len(self.ui_slots[n].refInnerList)):
-                subj = self.ui_slots[n].refInnerList[m]
-                subj.subjEdit.setText("text %d %d"%((m+1),data))
+            subj.subjEdit.setText("text %d %s"%((n+1),str(ndata)))
+    def updateSlotData(self, skey, sdata, sidx):
+        if len(skey) == 0 or sidx < 0:
+            print " backform update all slots data "
+            for n in range(0, self._nSlots):
+                for m in range(0,len(self.ui_slots[n].refInnerList)):
+                    subj = self.ui_slots[n].refInnerList[m]
+                    subj.subjEdit.setText("text %d %s"%((m+1),str(sdata)))
+        else:
+            if skey in self._param_slot_names_index.keys():
+                m = self._param_slot_names_index[skey]
+                if m < len(self._param_slot_names) and sidx < self._nSlots:
+                    subj = self.ui_slots[sidx].refInnerList[m]
+                    subj.subjEdit.setText("text %d %s"%((m+1),str(sdata)))
 
     def callbackSubjButton(self):
         sdr = self.sender()
@@ -256,12 +273,30 @@ class Ui_TestBackform(QtGui.QWidget):
             if self.tmr_touched > 10:
                 self.top_tmr.stop()
 
+    def toggleTimerBeats(self):
+        self._tmr_beats_run = not self._tmr_beats_run
+
     def runtimerbeat(self):
+        if not self._tmr_beats_run:
+            return
         tmstart = Ui_TestTime.clock()
-        print "\n form %s enter %d  now %.3f\n" % (self.form_name,
-                                                   self.userValue, tmstart)
+        #print " enter form %s %d  now %.3f " % (self.form_name,
+        #                                           self.userValue, tmstart)
+        do_init_chkboxes = False
         if self.userValue <= self._userValueInit and self.chkInited == 0:
             self.chkInited = 1
+            do_init_chkboxes = True
+
+        self.userValue += 1
+        if self.userValue > 0xeffe:
+            self.userValue = self._userValueInit + 16
+        else:
+            if self.userValue < self._userValueInit:
+                self.userValue = self._userValueInit
+
+        self.ui_beats_label.setText(" %d " % self.userValue)
+
+        if do_init_chkboxes:
             if self.ui_node.checkBox.checkState() != 0:
                 self.ui_node.checkBox.setCheckState(0)
             for n in range(0, self._nSlots):
@@ -273,26 +308,22 @@ class Ui_TestBackform(QtGui.QWidget):
             if self.ui_node.checkBox.checkState() == 0:
                 self.ui_node.checkBox.setCheckState(2)
 
-        self.userValue += 1
-        if self.userValue > 0xeffe:
-            self.userValue = self._userValueInit + 16
-        else:
-            if self.userValue < self._userValueInit:
-                self.userValue = self._userValueInit
-
-        self.ui_beats_label.setText(" %d " % self.userValue)
-
         #if self.form_name == 'form1':
         #    print "\n form %s sleep  %d\n" % (self.form_name, self.userValue)
         #    Ui_TestTime.sleep(1.3)
-        if self.userValue > self._userValueInit and self.chkInited > 0:
+        processing_count = 0
+        if self.userValue > self._userValueInit+1 and self.chkInited:
             if self._model != None:
-                self._model.eval_from_top()
+                processing_count += self._model.eval_from_top()
 
         tmend = Ui_TestTime.clock()
         tmdiff = tmend - tmstart
-        print "\n form %s exit  %d  cost %.4f\n" % (self.form_name,
-                                                    self.userValue, tmdiff)
+        #print " exit  form %s  %d  cost %.4f" % (self.form_name,
+        #                                            self.userValue, tmdiff)
+        if processing_count or tmdiff > 0.00015:
+            print " processed form %s %d  now %.3f  cost %.4f" % (
+                        self.form_name, self.userValue-self._userValueInit,
+                        tmstart, tmdiff)
 
 def main_test():
 

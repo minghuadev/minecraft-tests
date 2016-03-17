@@ -9,6 +9,9 @@ sys.dont_write_bytecode = True
 from PyQt4 import QtGui, QtCore
 from testui_backform_py import Ui_TestBackform
 
+import mvc_model_if as mvc_model
+import mvc_view_if  as mvc_view
+
 import time as Ui_TestTime
 
 class Ui_TestApp(QtGui.QWidget):
@@ -17,9 +20,11 @@ class Ui_TestApp(QtGui.QWidget):
 
         self.top_tmr = top_tmr_arg
         self.top_tmr_intvl = top_tmr_itvl_arg
+        self._model1 = model1
         self._model2 = model2
 
-        self.form1 = Ui_TestBackform('form1', self.top_tmr, self.top_tmr_intvl)
+        self.form1 = Ui_TestBackform('form1', self.top_tmr, self.top_tmr_intvl,
+                                     self._model1)
         self.form2 = Ui_TestBackform('form2', self.top_tmr, self.top_tmr_intvl,
                                      self._model2)
 
@@ -44,6 +49,13 @@ class Ui_TestApp(QtGui.QWidget):
             self.ui_beats_label = QtGui.QLabel(" ... ... ")
             vbox.addLayout(bline_layout)
             bline_layout.addWidget(QtGui.QLabel("Front bottom line: "))
+
+            bbtn = QtGui.QPushButton()
+            bbtn.setObjectName("bbuttonButton")
+            bbtn.setText("toggle timer callbacks")
+            bline_layout.addWidget(bbtn)
+            bbtn.pressed.connect(self.bbtnPressed)
+
             bline_layout.addStretch(1)
             bline_layout.addWidget(QtGui.QLabel("Started at "))
             tmstr = " %02d:%02d:%02d " % Ui_TestTime.localtime()[3:6]
@@ -55,13 +67,37 @@ class Ui_TestApp(QtGui.QWidget):
 
         self.top_tmr.timeout.connect(self.runtimerbeat)
 
+    def bbtnPressed(self):
+        self.form1.toggleTimerBeats()
+        self.form2.toggleTimerBeats()
+
     def runtimerbeat(self):
         tmnow = " now %02d:%02d:%02d " % Ui_TestTime.localtime()[3:6]
         self.ui_beats_label.setText(tmnow)
 
-    def updateDataView(self, data):
-        self.form1.updateDataView(data)
-        self.form2.updateDataView(data)
+    def updateNodeData(self, dnam, dval, formsel=None):
+        if formsel == None:
+            self.form1.updateNodeData(dnam, dval)
+            self.form2.updateNodeData(dnam, dval)
+        elif formsel == "form1":
+            self.form1.updateNodeData(dnam, dval)
+        elif formsel == "form2":
+            self.form2.updateNodeData(dnam, dval)
+        else:
+            self.form1.updateNodeData(dnam, dval)
+            self.form2.updateNodeData(dnam, dval)
+
+    def updateSlotData(self, snam, sval, sidx, formsel=None):
+        if formsel == None:
+            self.form1.updateSlotData(snam, sval, sidx)
+            self.form2.updateSlotData(snam, sval, sidx)
+        elif formsel == "form1":
+            self.form1.updateSlotData(snam, sval, sidx)
+        elif formsel == "form2":
+            self.form2.updateSlotData(snam, sval, sidx)
+        else:
+            self.form1.updateSlotData(snam, sval, sidx)
+            self.form2.updateSlotData(snam, sval, sidx)
 
 class TestUi:
     def __init__(self, model1=None, model2=None):
@@ -84,9 +120,10 @@ class TestUi:
     def testui_mainloop(self):
         sys.exit(self._app.exec_())
 
-class TestDataModel:
-    def __init__(self, uiref=None):
+class TestDataModel(mvc_model.Mvc_Model_Interface):
+    def __init__(self, uiref=None, formsel=None):
         self._uiref = uiref
+        self._formsel = formsel
         self._nodedata = ["node_data_1", "node_data_2"]
         self._slotdata = ["slot_data_11", "slot_data_22"]
         self._eval_count = 0
@@ -101,13 +138,18 @@ class TestDataModel:
 
     def eval_from_top(self):
         self._eval_count += 1
+        rc = 0
         if self._uiref != None:
-            self._uiref.updateDataView(self._eval_count)
+            self._uiref.updateNodeData("node_data_2", self._eval_count)
+            self._uiref.updateSlotData("slot_data_22", self._eval_count, 2)
+            rc += 2
+        return rc
 
 
 if __name__ == '__main__':
     testdata = TestDataModel()
-    testui = TestUi(model1=None, model2=testdata)
+    demodata = TestDataModel()
+    testui = TestUi(model1=demodata, model2=testdata)
     testdata.setView(testui._w)
     testui.testui_mainloop()
 
