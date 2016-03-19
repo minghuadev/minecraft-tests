@@ -372,6 +372,9 @@ int dbus_selector(char *param, int altsel )
                     dbus_timeout_handle(watched_timeout);
                     printf(" HANDLING dbus handle timeout %p done\n", 
                            watched_timeout);
+                    /*TODO: 
+                     *  here need to check remain and dispatch 
+                     */
                 }
             } /* else if not the same timeout as before select() skip for now */
         }
