@@ -110,6 +110,10 @@ class Ui_TestBackform(QtGui.QWidget):
             subj.subjEdit.setFont(font)
             subj.subjButton.refSourceType = 'node'
             subj.subjButton.refSourceIdx1 = n
+            subj.refText=""
+            subj.refTextAge=0
+            #subj.subjLabel.setStyleSheet("background-color: rgb(255, 3, 36);")
+            subj.subjLabel.setStyleSheet("")
             self.ui_node.refInnerVbox.addWidget(iw)
         self.ui_node.contentWidget.setLayout( self.ui_node.refInnerVbox )
 
@@ -147,6 +151,9 @@ class Ui_TestBackform(QtGui.QWidget):
                 subj.subjButton.refSourceType = 'slot'
                 subj.subjButton.refSourceIdx1 = n
                 subj.subjButton.refSourceIdx2 = m
+                subj.refText=""
+                subj.refTextAge=0
+                subj.subjLabel.setStyleSheet("")
                 sect.refInnerVbox.addWidget(iw)
             sect.contentWidget.setLayout( sect.refInnerVbox )
 
@@ -199,6 +206,32 @@ class Ui_TestBackform(QtGui.QWidget):
         #self.cancelButton.clicked.connect(self.reject)
         self.top_tmr.timeout.connect(self.runtimerbeat)
 
+    def __compute_style_aged(self, age5):
+        newstyl = ""
+        if type(age5) == int:
+            if age5 >= 6:
+                newstyl = "background-color: rgb(255, 0, 0);"
+            elif age5 >= 5:
+                newstyl = "background-color: rgb(255, 113, 113);"
+            elif age5 >= 4:
+                newstyl = "background-color: rgb(255, 146, 146);"
+            elif age5 >= 3:
+                newstyl = "background-color: rgb(255, 179, 179);"
+            elif age5 >= 2:
+                newstyl = "background-color: rgb(255, 202, 202);"
+        return newstyl
+
+    def __updateNodeAges(self):
+        for nkey in self._param_node_names_index.keys():
+            n = self._param_node_names_index[nkey]
+            subj = self.ui_node.refInnerList[n]
+            ages = subj.refTextAge
+            if ages > 0:
+                ages -= 1
+                subj.refTextAge = ages
+                newstyl = self.__compute_style_aged(ages)
+                subj.subjLabel.setStyleSheet(newstyl)
+
     def updateNodeData(self, nkey, ndata):
         if len(nkey) == 0:
             for n in range(0,len(self.ui_node.refInnerList)):
@@ -208,7 +241,25 @@ class Ui_TestBackform(QtGui.QWidget):
             if nkey in self._param_node_names_index.keys():
                 n = self._param_node_names_index[nkey]
                 subj = self.ui_node.refInnerList[n]
-                subj.subjEdit.setText("text %d %s"%((n+1),str(ndata)))
+                newtxt = str(ndata)
+                if newtxt != subj.refText:
+                    subj.refTextAge=7
+                    subj.refText = newtxt
+                    subj.subjEdit.setText("text %d %s"%((n+1),newtxt))
+                newstyl = self.__compute_style_aged(subj.refTextAge)
+                subj.subjLabel.setStyleSheet(newstyl)
+
+    def __updateSlotsAges(self):
+        for n in range(0, self._nSlots):
+            for m in range(0,len(self.ui_slots[n].refInnerList)):
+                subj = self.ui_slots[n].refInnerList[m]
+                ages = subj.refTextAge
+                if ages > 0:
+                    ages -= 1
+                    subj.refTextAge = ages
+                    newstyl = self.__compute_style_aged(ages)
+                    subj.subjLabel.setStyleSheet(newstyl)
+
     def updateSlotData(self, skey, sdata, sidx):
         if len(skey) == 0 or sidx < 0:
             print " backform update all slots data "
@@ -221,7 +272,13 @@ class Ui_TestBackform(QtGui.QWidget):
                 m = self._param_slot_names_index[skey]
                 if m < len(self._param_slot_names) and sidx < self._nSlots:
                     subj = self.ui_slots[sidx].refInnerList[m]
-                    subj.subjEdit.setText("text %d %s"%((m+1),str(sdata)))
+                    newtxt = str(sdata)
+                    if newtxt != subj.refText:
+                        subj.refTextAge=7
+                        subj.refText = newtxt
+                        subj.subjEdit.setText("text %d %s"%((m+1),newtxt))
+                    newstyl = self.__compute_style_aged(subj.refTextAge)
+                    subj.subjLabel.setStyleSheet(newstyl)
 
     def callbackSubjButton(self):
         sdr = self.sender()
@@ -334,6 +391,8 @@ class Ui_TestBackform(QtGui.QWidget):
             print " processed form %s %d  now %.3f  cost %.4f" % (
                         self.form_name, self.userValue-self._userValueInit,
                         tmstart, tmdiff)
+        self.__updateNodeAges()
+        self.__updateSlotsAges()
 
 def main_test():
 
