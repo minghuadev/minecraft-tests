@@ -374,6 +374,12 @@ int dbus_selector(char *param, int altsel )
                            watched_timeout);
                     /*TODO: 
                      *  here need to check remain and dispatch 
+                     *  when it timeouts dbuslib composes a local message 
+                     *  for returning an error. 
+                     *  but that message does not get watched thus no selectable 
+                     *  event is generated. check remains to catch it here.  
+                     *  or maybe try using dbus_pending_call_set_notify() to 
+                     *  get a callback called. 
                      */
                 }
             } /* else if not the same timeout as before select() skip for now */
