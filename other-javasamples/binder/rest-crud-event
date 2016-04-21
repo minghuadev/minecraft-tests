@@ -1,0 +1,36 @@
+
+rest-crud-event
+
+
+toc    rest vs crud
+       rest vs event-driven
+       event driven patterns
+
+
+============================================================
+ rest vs crud
+
+http://www.infoq.com/news/2009/05/Rest
+Is CRUD Bad for REST
+
+But the biggest reason why CRUD is not an appropriate paradigm for REST 
+is an architectural one. In the heart of REST is the implementation of 
+the protocol state machine using hypermedia. 
+
+quotes Tim Ewald (http://www.pluralsight.com/community/blogs/tewald/archive/2007/04/26/46984.aspx)
+
+Here's what I came to understand. Every communication protocol has a state machine. For some protocols they are very simple, for others they are more complex. When you implement a protocol via RPC, you build methods that modify the state of the communication. That state is maintained as a black box at the endpoint. Because the protocol state is hidden, it is easy to get things wrong. For instance, you might call Process before calling Init. People have been looking for ways to avoid these problems by annotating interface type information for a long time, but I'm not aware of any mainstream solutions. The fact that the state of the protocol is encapsulated behind method invocations that modify that state in non-obvious ways also makes versioning interesting.
+
+The essence of REST is to make the states of the protocol explicit and addressable by URIs. The current state of the protocol state machine is represented by the URI you just operated on and the state representation you retrieved. You change state by operating on the URI of the state you're moving to, making that your new state. A state's representation includes the links (arcs in the graph) to the other states that you can move to from the current state. This is exactly how browser based apps work, and there is no reason that your app's protocol can't work that way too. (The ATOM Publishing protocol is the canonical example, though its easy to think that its about entities, not a state machine.)
+
+
+
+============================================================
+http://www.infoq.com/news/2009/07/CRUDREST
+
+
+============================================================
+ event driven patterns
+
+http://radar.oreilly.com/2015/02/variations-in-event-driven-architecture.html
+
