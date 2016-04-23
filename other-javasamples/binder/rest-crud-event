@@ -116,3 +116,30 @@ http://radar.oreilly.com/2015/02/variations-in-event-driven-architecture.html
 mediator and broker
 
 
+============================================================
+ rest izuzak
+
+http://ivanzuzak.info/2010/04/03/why-understanding-rest-is-hard-and-what-we-should-do-about-it-systematization-models-and-terminology-for-rest.html
+
+state: session, transaction, application, resource, control, server, steady, transient.
+
+
+============================================================
+ rest hateoas 101
+
+http://www.slideshare.net/apigee/hateoas-101-opinionated-introduction-to-a-rest-api-style
+
+The constraints of REST
+    1. Client-server
+    2. Stateless server
+    3. Cache
+    4. Uniform interface
+        a. Identification of resources 
+        b. Manipulation of resources through representations
+        c. Self-descriptive messages
+        d. Hypermedia as the engine of application state
+    5. Layered System
+    6. Code-On-Demond (optional)
+
+
+
