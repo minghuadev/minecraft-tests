@@ -54,20 +54,65 @@ of CRUD REST:
              that disregard few of the fallacies of distributed computing.
         It is just client-server in sheep's clothing.
 
-Arnon ends his post by reemphasizing that just adopting standards like HTTP, XML, JSON (although might be useful) does not constitute REST - adopting the REST architecture does.
+Arnon ends his post by reemphasizing that just adopting standards like HTTP, XML, JSON 
+(although might be useful) does not constitute REST - adopting the REST architecture does.
 
-This post is an important remainder that REST, similar to SOA, is not a set of standards and popular APIs, but rather an architectural paradigm, which needs to be understood and followed.
+This post is an important remainder that REST, similar to SOA, is not a set of standards 
+and popular APIs, but rather an architectural paradigm, which needs to be understood 
+and followed.  
 
 
 ============================================================
  rest vs event-driven
 
 http://www.infoq.com/news/2009/05/Rest
+REST – The Good, the Bad and the Ugly
 
+The top three advantages of using REST are: 
+    Relative ease of integration:
+        ...a good RESTful API is discoverable from the initial URI onward. 
+        This doesn’t suggest that a any application calling on your service will 
+        auto magically know what to do. It does mean however that the developer 
+        reading your API trying to integrate it has an easier life. Especially 
+        if since hypermedia provides you the roadmap of what to do next 
+    Use of ubiquitous standards - HTTP is the most common implementation of REST:
+        Speaking HTTP which is the protocol of the web, emitting JSON or ATOMPub 
+        means it is much easier to find a library that can connect to you on 
+        any language and platform. 
+    Scalability:
+        ...stateless communication, replicated repository make for a good scalability potential. 
+
+The two main REST drawbacks are:
+    "Lo-rest" (using just GET and POST) implementations, which are specific to REST over HTTP:
+        While technically it might still be RESTful, to me a uniform interface 
+        with 2 verbs is too small to be really helpful (which indeed makes a lot 
+        of the implementation unRESTful) 
+    Limitations of today’s programming languages:
+        ... programming languages are not resource oriented so the handling code 
+        that maps URIs to tends to get messy. On the other hand it is relatively hard 
+        to make the REST API hyper-text driven (Which is a constraint of REST) 
+
+Arnon concludes his post by stating, that:
+    REST seems simple but it isn’t - it requires a shift in thinking 
+    (e.g. identifying resources, externalizing the state transitions etc.). 
+    ... done right it can be an important and useful tool in your toolset. 
+    [but] ... as with any architecture/technology - a bad implementation can negate 
+    all the benefits 
+
+... debates ...
+For example, most REST implementations do not support asynchronous invocations and 
+events. As a result, event-driven architectural style is probably a bad fit for REST. 
+Another example, the separation of business and infrastructure concerns provided 
+by the SOAP envelope is left to the implementer in the case of REST. Consequently, 
+the implementation requires a significant number of potentially changing 
+infrastructure concerns which might be not a good fit for REST.
 
 
 ============================================================
  event driven patterns
 
 http://radar.oreilly.com/2015/02/variations-in-event-driven-architecture.html
+
+mediator and broker
+
 
