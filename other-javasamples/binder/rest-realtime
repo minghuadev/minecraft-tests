@@ -3,6 +3,20 @@ search: real time restful api
 
 
 http://resthooks.org/
+http://www.programmableweb.com/news/argument-real-time-rest-apis/2013/03/05
+http://code.realcrowd.com/restful-realtime/
+    Etag, Grip from Fanout
+  http://blog.fanout.io/2013/02/10/http-grip-proxy-hold-technique/
+
+http://www.theserverside.com/feature/REST-Alternatives-Required-for-Real-Time-Apps
+    protocols: WebSockets, MQTT, CoAP, DDP from The Meteor Project
+    building ui: Meteor, Angular, React, RabbitMQ
+    synchronized DB: Firebase, RethinkDB
+    
+https://bloggeek.me/rest-webrtc-api/
+    two sets of APIs: REST for backend, and javascript for session client
+
+https://zapier.com/learn/apis/chapter-7-real-time-communication/
 
 
 
@@ -11,6 +25,24 @@ search: rest hooks vs websockets
 
 
 http://iot-datamodels.blogspot.ca/2013/05/event-models-for-restful-apis.html
+
+http://www.slideshare.net/rossmason/realtime-apis
+    push vs streaming: 
+        push: subscription and filter, asynchronous, drawback reliability complicated
+        streaming: keep the connection open, request-response, 
+                                      drawback harder to implement durable connection 
+    realtime techs: transport: comet, websocket
+                    protocol with formal pub/sub semantics: XMPP, Bayeux, STOMP
+                    protocol adhoc: JSON
+                    push: PubSubhubbub, Web Hooks
+    real use:    salesforce    comet
+                 facebook      pubsubhubbub
+                 instagram     ad hoc (webhooks/pubsubhubbub)
+                 twitter       ad hoc (comet)
+                 pubnub        ad hoc
+                 superfeedr    XMPP
+                 pusher        ad hoc (websockets)
+    rossmason mulesoft mule-streaming-api-demo
 
 
 
