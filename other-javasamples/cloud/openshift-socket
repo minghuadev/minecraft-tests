@@ -1,0 +1,48 @@
+
+------------------------------------------------------------
+search openshift mqtt
+
+
+How can I access socket through Openshift
+http://stackoverflow.com/questions/20654119/how-can-i-access-socket-through-openshift
+
+
+https://www.openshift.com/blogs/paas-websockets
+
+
+
+------------------------------------------------------------
+site search: 
+site:https://www.openshift.com paas websockets
+in google cache
+
+
+OpenShift Online 1 User Guide
+Managing Applications in the Cloud with OpenShift Online 
+Edition 1.0
+Feb 27, 2014
+
+chapter 9...
+You can also bind to $ OPENSHIFT_Cart_Name_PORT (8080) for HTTP connectivity, 
+which reroutes externally through port 80.
+
+9.9.1. Configuring WebSocket Ports
+Because the main routing layer is currently based on Apache, WebSocket can be used by connecting to
+specific ports on an application. WebSocket connections are supported with browser based applications
+on OpenShift Online, allowing bidirectional communication without requiring multiple, open HTTP
+connections. The TCP based protocol uses HTTP as an initiation handshake which is handled as an
+upgrade request. If successful, the connection remains open and switches to the WebSocket protocol.
+For plain WebSocket connections (ws://), requests are directed to port 8000, while WebSocket Secure
+connections (wss://) use port 8443, as shown in the following example:
+http://example.example.com:8000
+https://example.example.com:8443
+
+
+
+OpenShift Online All Versions
+User Guide
+Using Openshift Online to Manage Your Applications in the Cloud
+Edition 1.0
+
+
+

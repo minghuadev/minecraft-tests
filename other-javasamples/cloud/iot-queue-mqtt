@@ -1,0 +1,67 @@
+
+
+-------------------------------------------------------------
+search openshift iot
+
+
+Set Up MQTT Broker with OpenShift
+https://www.anavi.org/article/182/
+
+Leon Anavi
+IT Tips && Tricks
+
+
+[1] install jboss fuse 6.1
+
+[2] on jboss fuse console, switch from container to fabric. 
+    click runtime tab, select mq subtab
+
+    type in a name of the broker, set its type to standalone. 
+    set minimum instances to 1. 
+    click create broker.
+
+    on the next screen, create a container for the broker.
+
+    click wiki. go to root/fabric/profiles/mq/broker/default.broker
+
+    inspect org.fusesource.mq.fabric.server-broker.properties
+
+    create broker.xml and insert the following in it and save: 
+
+        https://gist.github.com/leon-anavi/c57d5f1385d7aba2c91a
+
+    go to runtime tab and restart the container.
+
+    when the container is running click the icon on the right end of line 
+    to connect to the container and check its log files. 
+
+[3] install openshift client tools
+    run this to configure the tool: `rhc setup`
+    setup MQTT with port forwarding: `rhc port-forward <container-name>`
+
+    `npm install -g mqtt`
+
+    then run in two terminals: 
+    `mqtt sub -t 'hello' -h '127.0.0.1' -p <port>`
+    `mqtt pub -t 'hello' -h '127.0.0.1' -p <port> -m 'test'`
+
+
+to setup SNI proxy: 
+http://training.runcloudrun.com/advanced/16-Network-and-Protocols.md.html
+OpenShift Enterprise 2.2 Advanced Training
+Lab 16: Introduction to Networking and Protocols
+
+
+-------------------------------------------------------------
+search openshift mqtt
+
+
+Red Hat OpenShift xPaaS - Simple MQTT with OpenShift, Part Two, Simple client connecting to Broker on xPaaS
+
+http://planet.jboss.org/post/red_hat_openshift_xpaas_simple_mqtt_with_openshift_part_two_simple_client_connecting_to_broker_on_xpaas
+
+Jun 3, 2014
+by Christina Lin
+
+
+search openshift iot
