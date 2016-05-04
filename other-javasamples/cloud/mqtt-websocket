@@ -1,0 +1,36 @@
+
+search mosquitto websocket
+
+
+
+http://stackoverflow.com/questions/16047344/can-a-web-browser-use-mqtt
+Can a web browser use MQTT?
+
+
+websocket to tcp gateway: 
+https://github.com/stylpen/WSS
+
+
+IBM websockets based javascript client: 
+http://git.eclipse.org/c/paho/org.eclipse.paho.mqtt.javascript.git/
+https://www.ibm.com/developerworks/community/blogs/c565c720-fe84-4f63-873f-607d87787327/entry/how_to_prog_javascript?lang=en
+
+
+Mosquitto broker has a javascript client with an example running at: 
+http://test.mosquitto.org/ws.html
+
+wiki:
+http://mqtt.org/wiki/doku.php/mqtt_over_websockets
+
+
+
+http://stackoverflow.com/questions/30809894/implementing-an-mqtt-broker
+https://github.com/mqtt/mqtt.github.io/wiki/servers
+list of implementations
+
+
+
+mqtt on websocket example:
+http://mitsuruog.github.io/what-mqtt/
+
+
