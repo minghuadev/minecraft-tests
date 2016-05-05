@@ -1,0 +1,104 @@
+openshift-doc-5-www/
+├── doc5cmd
+├── doc5log
+└── docs.openshift.org
+    └── origin-m4
+        ├── files
+        │   ├── activemq.xml
+        │   └── jetty.xml
+        ├── images
+        │   ├── logo.png
+        │   └── panda.png
+        ├── index.html
+        ├── oo_administration_guide.html
+        ├── oo_cartridge_developers_guide.html
+        ├── oo_cartridge_guide.html
+        ├── oo_client_tools_installation_guide.html
+        ├── oo_contributors_guide.html
+        ├── oo_deployment_guide_comprehensive.html
+        ├── oo_deployment_guide_puppet.html
+        ├── oo_deployment_guide_vagrant.html
+        ├── oo_deployment_guide_vm.html
+        ├── oo_install_users_guide.html
+        ├── oo_m4_release_notes.html
+        ├── oo_notes_running_a_local_ddns.html
+        ├── oo_system_architecture_guide.html
+        ├── oo_troubleshooting_guide.html
+        ├── oo_user_guide.html
+        └── rest_api
+            ├── alias-response-createnewalias-1-6.html
+            ├── alias-response-deletealias-1-6.html
+            ├── alias-response-getalias-1-6.html
+            ├── alias-response-listapplicationaliases-1-6.html
+            ├── alias-response-updatealias-1-6.html
+            ├── api-response-apientrypoint-1-6.html
+            ├── application-response-createnewapplication-1-6.html
+            ├── application-response-deleteapplication-1-6.html
+            ├── application-response-deploytheapplication-1-6.html
+            ├── application-response-forcestopapplication-1-6.html
+            ├── application-response-getapplication-1-6.html
+            ├── application-response-listapplication-1-6.html
+            ├── application-response-listapplicationsbyowner-1-6.html
+            ├── application-response-listapplicationsforadomain-1-6.html
+            ├── application-response-maketheapplicationhighlyavailable(ha)-1-6.html
+            ├── application-response-reloadtheapplication-1-6.html
+            ├── application-response-resolvedns-1-6.html
+            ├── application-response-restartapplication-1-6.html
+            ├── application-response-scaledownapplication-1-6.html
+            ├── application-response-scaleupapplication-1-6.html
+            ├── application-response-startapplication-1-6.html
+            ├── application-response-stopapplication-1-6.html
+            ├── application-response-tidytheapplicationframework-1-6.html
+            ├── application-response-triggerthreaddump-1-6.html
+            ├── application-response-updateapplication-1-6.html
+            ├── authorization-response-addnewauthorization-1-6.html
+            ├── authorization-response-deleteauthorization-1-6.html
+            ├── authorization-response-getauthorization-1-6.html
+            ├── authorization-response-listauthorizations-1-6.html
+            ├── authorization-response-updateauthorization-1-6.html
+            ├── cartridge-response-addembeddedcartridge-1-6.html
+            ├── cartridge-response-deletecartridge-1-6.html
+            ├── cartridge-response-getcartridge-1-6.html
+            ├── cartridge-response-listembeddedcartridges-1-6.html
+            ├── cartridge-response-listpubliccartridges-1-6.html
+            ├── cartridge-response-reloadcartridge-1-6.html
+            ├── cartridge-response-restartcartridge-1-6.html
+            ├── cartridge-response-startcartridge-1-6.html
+            ├── cartridge-response-stopcartridge-1-6.html
+            ├── cartridge-response-updatecartridgeconfiguration-1-6.html
+            ├── deployment-response-listalldeployments-1-6.html
+            ├── deployment-response-updatedeployments(specialpermissionsisrequiredtoupdatedeployments)-1-6.html
+            ├── descriptor-response-getapplicationdescriptor-1-6.html
+            ├── domain-response-createnewdomain-1-6.html
+            ├── domain-response-getdomain-1-6.html
+            ├── domain-response-listalldomainsyouhaveaccessto-1-6.html
+            ├── domain-response-listdomainsbyowner-1-6.html
+            ├── environment_variable-response-addanenvironmentvariable-1-6.html
+            ├── environment_variable-response-deleteenvironmentvariable-1-6.html
+            ├── environment_variable-response-getenvironmentvariable-1-6.html
+            ├── environment_variable-response-listallenvironmentvariables-1-6.html
+            ├── environment_variable-response-updateenvironmentvariable-1-6.html
+            ├── gear_group-response-getapplicationgeargroups-1-6.html
+            ├── key-response-addnewsshkey-1-6.html
+            ├── key-response-deletesshkey-1-6.html
+            ├── key-response-getsshkey-1-6.html
+            ├── key-response-listsshkeys-1-6.html
+            ├── key-response-updatesshkey-1-6.html
+            ├── member-response-addmember-1-6.html
+            ├── member-response-addorremoveoneormorememberstoorfromthisteam.-1-6.html
+            ├── member-response-addorremoveoneormorememberstothisdomain.-1-6.html
+            ├── member-response-deletemember-1-6.html
+            ├── member-response-getmember-1-6.html
+            ├── member-response-listmembers-1-6.html
+            ├── member-response-listmembersofthisapplication-1-6.html
+            ├── member-response-listmembersofthisdomain-1-6.html
+            ├── member-response-updatemember-1-6.html
+            ├── rest-api-1-6.html
+            ├── team-response-createnewteam-1-6.html
+            ├── team-response-getteam-1-6.html
+            ├── team-response-listallteamsyouareamemberof-1-6.html
+            ├── team-response-listteamsbyowner-1-6.html
+            ├── team-response-searchteamsbyname-1-6.html
+            └── user-response-getuserinformation-1-6.html
+
+5 directories, 96 files

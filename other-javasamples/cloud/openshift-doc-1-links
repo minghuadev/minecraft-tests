@@ -1,0 +1,36 @@
+
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-openshift-origin-on-centos-6-5
+
+
+
+search: openshift user manual
+
+
+[PDF]OpenShift Online 1 User Guide
+https://www.openshift.com/sites/default/files/documents/OpenShift_Online-2.0-User_Guide-en-US_7.pdf
+Aug 20, 2013 - Red Hat OpenShift Documentation Team. OpenShift Online 1. 
+User Guide. Managing Applications in the Cloud with OpenShift Online.
+doc-2
+
+
+[PDF]OpenShift All Versions User Guide
+https://www.openshift.com/sites/default/files/documents/OpenShift-2.0-User_Guide-en-US.pdf
+Apr 2, 2013 - This guide provides an introduction to OpenShift and documents its ..... 
+doc-3
+
+
+https://fedoraproject.org/wiki/OpenShift_Origin
+doc-4
+
+
+https://docs.openshift.org/origin-m4/oo_administration_guide.html
+https://docs.openshift.org/origin-m4/oo_deployment_guide_vm.html
+wget -r -np -N -o doc5log https://docs.openshift.org/origin-m4/index.html
+doc-5
+
+
+https://mirror.openshift.com/pub/origin-server/release/
+https://mirror.openshift.com/pub/origin-server/release/4/images/
+
+
