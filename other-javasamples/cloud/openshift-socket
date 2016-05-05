@@ -8,7 +8,12 @@ http://stackoverflow.com/questions/20654119/how-can-i-access-socket-through-open
 
 
 https://www.openshift.com/blogs/paas-websockets
+Try Out Low-Latency Connections with WebSockets
+December 18, 2012 By Marek Jelen
 
+works with diy and node cartridge only.
+
+server, for python: https://github.com/Lawouach/WebSocket-for-Python
 
 
 ------------------------------------------------------------
