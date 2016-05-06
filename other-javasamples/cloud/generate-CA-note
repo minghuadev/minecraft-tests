@@ -1,0 +1,8 @@
+
+https://raw.githubusercontent.com/owntracks/tools/master/TLS/generate-CA.sh
+
+https://github.com/owntracks/tools/blob/master/TLS/generate-CA.sh
+
+see mqtt-websocket blog by jpmens for the example use.
+
+
