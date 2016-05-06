@@ -1,0 +1,10 @@
+
+https://gist.github.com/sadatanwer/222d4643c25f72293461
+sadatanwer commented on Jul 28, 2015
+
+I needed to implement the web-socket protocol for a simple PYTHON server that I have for a project. All I needed was to send across log messages as they happened, to make sure the UI was responsive, I looked at a few libraries, but most of them were too much, I looked around and found this python code https://gist.github.com/geoffb/616117 but due to revisions in the web-socket protocol this implementation did not work.
+So I took it upon my own to make it work. This above implementation now works, obviously I would want to give credit to https://gist.github.com/ccheaton for giving me the starting point. Also the HTML page, is completely his, without any additions from me, I included here only to make it easy for others to use the whole thing. Also please note, this example in its self will not be a practical thing, all it does s receives a message from the websocket client, decodes it, and writes back the same data 5 times. You will have to put the functions here to better use to make a more meaningful implementation.
+Also the write_frame would not have been possible without the amazing documentation at https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers and also this implementation https://github.com/Lawouach/WebSocket-for-Python/blob/master/ws4py/framing.py
+The purpose of this gist is to get a very bare-bone implementation of a web-socket up and running in no time, and then its up to you to develop it to your hearts contents.
+
+
