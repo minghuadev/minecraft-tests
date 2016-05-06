@@ -1,0 +1,17 @@
+
+
+from origin-m4 vm console: 
+
+
+htpasswd /etc/openshift/htpasswd <username>
+
+global resource setting: /etc/openshift/broker.conf
+
+default services:   -broker , -console, -gears, -tc
+default helpers:    activemq, httpd, mongod, mdns
+
+oo-diagnostics
+
+/var/log/openshift
+
+
