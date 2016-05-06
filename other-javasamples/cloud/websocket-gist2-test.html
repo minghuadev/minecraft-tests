@@ -25,7 +25,9 @@
     var output = document.getElementById("output");
     var form = document.getElementById("form");
     try {
-        var host = "ws://" + window.location.hostname + ":9876/stuff";
+        ///var host = "ws://" + window.location.hostname + ":9876/stuff";
+        ///var host = "ws://localhost:9999/stuff";
+        var host = "ws://echo.websocket.org";
         console.log("Host:", host);
 
         var s = new WebSocket(host);
