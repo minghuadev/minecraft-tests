@@ -1,4 +1,5 @@
 
+----------------------------------------------------------------------
 search mosquitto websocket
 
 
@@ -32,5 +33,81 @@ list of implementations
 
 mqtt on websocket example:
 http://mitsuruog.github.io/what-mqtt/
+
+
+
+----------------------------------------------------------------------
+search mqtt websocket
+
+
+
+http://jpmens.net/2014/07/03/the-mosquitto-mqtt-broker-gets-websockets-support/
+The Mosquitto MQTT broker gets Websockets support
+Jan-Piet Mens
+
+Websocket support must be explicitly enabled when building Mosquitto, and 
+building requires libwebsockets. Once enabled, we can add listeners with 
+the websocket protocol. For example, this mosquitto.conf provides a default 
+MQTT listener on port 1883, and two Websocket listeners, one with TLS, 
+one without:
+
+    autosave_interval 1800
+    persistence true
+    persistence_file m2.db
+    persistence_location /var/mosquitto/
+    connection_messages true
+    log_timestamp true
+    
+    acl_file /etc/mosquitto/jp.acl
+    password_file /etc/mosquitto/jp.pw
+    
+    listener 1883
+    
+    listener 9001 127.0.0.1
+    protocol websockets
+    
+    listener 9002 127.0.0.1
+    protocol websockets
+    cafile /etc/mosquitto/tls/ca.crt
+    certfile /etc/mosquitto/tls/tiggr.ww.mens.de.crt
+    keyfile /etc/mosquitto/tls/tiggr.ww.mens.de.key
+
+(In case you're interested, I create the X.509 certificates for TLS using 
+generate-CA.sh from the OwnTracks project. 
+https://raw.githubusercontent.com/owntracks/tools/master/TLS/generate-CA.sh)
+
+I've put the source to this simple example on Github, and I've verified 
+it works with Safari, Chrome, and FireFox.
+https://github.com/jpmens/simple-mqtt-websocket-example
+
+Instead of writing your own Web application, you can easily use the mqtt.io 
+or the HiveMQ Websocket clients; configure them to use the host name and 
+TCP port number (from the listener directive) of your Mosquitto broker.
+
+
+
+https://blog.benjamin-cabe.com/2015/10/01/how-to-run-your-web-server-and-mqtt-websockets-broker-on-the-same-port
+How to run your web server and MQTT WebSockets broker on the same port
+ October 1, 2015 Benjamin Cabé 2 Comments 
+
+Mosquitto as the main frontend
+
+Together with built-in WebSockets support (added in version 1.4), Mosquitto 
+also can act as basic HTTP server, and directly serve a bunch of static resources 
+for you. The config option you’re looking for is “http_dir“, that will allow 
+you to serve the content of a directory over HTTP.
+
+Granted you are running a version of Mosquitto that has WebSockets support, here 
+how your mosquitto.conf file should look like to enable WebSockets *and* regular 
+HTTP connections:
+
+	listener 80
+	protocol websockets
+	http_dir /home/johndoe/htdocs
+
+Apache front-end + mod_websocket_mosquitto
+
+https://github.com/willem4ever/mod_websocket_mosquitto
+
 
 

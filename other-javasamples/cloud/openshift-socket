@@ -16,7 +16,10 @@ December 18, 2012 By Marek Jelen
 
 works with diy and node cartridge only.
 
-server, for python: https://github.com/Lawouach/WebSocket-for-Python
+server, for python: 
+    https://github.com/Lawouach/WebSocket-for-Python
+    http://autobahn.ws/python
+    http://twistedmatrix.com/trac/
 
 
 ------------------------------------------------------------
