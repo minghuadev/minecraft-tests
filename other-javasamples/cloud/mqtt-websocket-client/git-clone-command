@@ -5,6 +5,9 @@ git clone https://github.com/jpmens/simple-mqtt-websocket-example
 git clone https://github.com/google/pywebsocket
 may 6 2016
 
+ run with debug logging level:
+   PYTHONPATH=. python mod_pywebsocket/standalone.py -p 8080 -H $OPENSHIFT_DIY_IP --log-level debug
+
 
 git clone https://github.com/google/pywebsocket
 cd pywebsocket
