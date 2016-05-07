@@ -6,3 +6,11 @@ git clone https://github.com/google/pywebsocket
 may 6 2016
 
 
+git clone https://github.com/google/pywebsocket
+cd pywebsocket
+git checkout -b wiki origin/wiki
+cd ..
+mv pywebsocket pywebsocket-wiki
+may 6 2016
+
+
