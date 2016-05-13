@@ -1,0 +1,53 @@
+
+search python debug exec block
+
+
+
+http://lucumr.pocoo.org/2011/2/1/exec-in-python/
+Be careful with exec and eval in Python
+ Armin Ronacher's Thoughts and Writings
+ written on Tuesday, February 1, 2011
+
+This post was inspired by a discussion on reddit about the use of the execfile 
+function in the web2py web framework but also applies to other projects.
+
+
+What Python roughly does if you import a module (import foo):
+
+1. it locates the module (surprise). That happens by traversing the sys.path 
+info in various ways. There is builtin import logic, there are import hooks and 
+all in all there is a lot of magic involved. If you are curious, check this 
+(http://svn.python.org/view/sandbox/trunk/import_in_py/) and this 
+(http://www.python.org/dev/peps/pep-0302/).
+
+2. Now depending on the import hook responsible it might load bytecode (.pyc) 
+or sourcecode (.py):
+
+2.1.  If bytecode is available and the magic checksum matches the current Python 
+interpreter's version, the timestamp of the bytecode file is newer or equal to 
+the source version (or the source does not exist) it will load that.
+
+2.2.  If the bytecode is missing or outdated it will load the source file and 
+compile that to bytecode. For that it checks magic comments in the file header 
+for encoding settings and decodes according to those settings. It will also check 
+if a special tab-width comment exists to treat tabs as something else 
+than 8 characters if necessary. Some import hooks will then generate .pyc files 
+or store the bytecode somewhere else (__pycache__) depending on Python version 
+and implementation.
+
+3. The Python interpreter creates a new module object (you can do that on your own 
+by calling `imp.new_module` or creating an instance of `types.ModuleType`. 
+Those are equivalent) with a proper name.  
+
+4. If the module was loaded from a file the `__file__` key is set. The import 
+system will also make sure that `__package__` and `__path__` are set properly 
+if packages are involved before the code is executed.  Import hooks will 
+furthermore set the `__loader__` variable.
+
+5. The Python interpreter executes the bytecode in the context of the dictionary 
+of the module. Thus the frame locals and frame globals for the executed code are 
+the `__dict__` attribute of that module.
+
+6. The module is inserted into `sys.modules`.
+
+
