@@ -1,0 +1,29 @@
+
+search python bytecode
+
+
+
+============================================================================
+http://akaptur.com/blog/2013/11/15/introduction-to-the-python-interpreter/
+http://akaptur.com/blog/2013/11/15/introduction-to-the-python-interpreter-2/
+http://akaptur.com/blog/2013/11/17/introduction-to-the-python-interpreter-3/
+http://akaptur.com/blog/2013/12/03/introduction-to-the-python-interpreter-4/
+ by Allison Kaptur
+
+
+https://github.com/nedbat/byterun
+
+
+============================================================================
+http://aosabook.org/en/500L/a-python-interpreter-written-in-python.html
+ A Python Interpreter Written in Python 
+ by Allison Kaptur
+
+https://github.com/aosabook/500lines/blob/master/README.md
+http://aosabook.org/blog/
+
+
+============================================================================
+http://stackoverflow.com/questions/19916729/how-exactly-is-python-bytecode-run-in-cpython
+
+
