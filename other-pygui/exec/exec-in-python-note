@@ -51,3 +51,6 @@ the `__dict__` attribute of that module.
 6. The module is inserted into `sys.modules`.
 
 
+ see pdf for the full post
+
+
