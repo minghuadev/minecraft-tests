@@ -26,4 +26,25 @@ http://aosabook.org/blog/
 ============================================================================
 http://stackoverflow.com/questions/19916729/how-exactly-is-python-bytecode-run-in-cpython
 
+  inspect module doc: 
+        a table of most important attributes of the most important internal objects. 
+
+  ceval.c https://hg.python.org/cpython/file/2.7/Python/ceval.c
+
+  http://nedbatchelder.com/blog/200804/the_structure_of_pyc_files.html
+        pyc file basically header info and module code object serialed by marshal. 
+
+  http://docs.python.org/devguide/compiler.html
+  http://docs.python.org/devguide/index.html
+
+  ast module to get the point of compiling. 
+  compile.c turns ast to bytecode. `compiler_addop` friends emit bytecode at current level. 
+
+  http://docs.python.org/devguide/grammar.html
+
+
+https://tech.blog.aknin.name/2010/09/02/pythons-innards-hello-ceval-c-2/
+
+
+
 
