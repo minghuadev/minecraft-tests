@@ -1,6 +1,6 @@
 
 ----------------------------------------------------------------------
-search mosquitto websocket
+search mqtt websocket
 
 
 
@@ -36,8 +36,13 @@ http://mitsuruog.github.io/what-mqtt/
 
 
 
+https://github.com/jpmens/simple-mqtt-websocket-example
+ see mqtt-websocket-client/
+
+
+
 ----------------------------------------------------------------------
-search mqtt websocket
+search mosquitto websocket
 
 
 
