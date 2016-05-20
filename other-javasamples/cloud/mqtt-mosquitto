@@ -2,3 +2,78 @@
 https://github.com/eclipse/mosquitto
 
 
+
+fedora build: 
+
+  install packages:
+     install libuuid-devel    | I, U           |    5   
+     install c-ares-devel     | Install        |    2   
+     install openssl-devel    | I, U           |   15   
+     install openssl          | Update         |    2   
+
+  git clone: 
+     $ git clone https://github.com/eclipse/mosquitto.git
+     $ git branch -avvv
+     * master                          f3651b8 [origin/master] Update for github.
+       remotes/origin/HEAD             -> origin/master
+       remotes/origin/coverity-develop 5bd7485 Remove unused line.
+       remotes/origin/coverity-fixes   59a0ccf Force sudo use.
+       remotes/origin/debian           7d2a301 Branch for debian packaging.
+       remotes/origin/develop          81cabb3 Update for github.
+       remotes/origin/fixes            6704df8 Bridge config parameters can now contain a space
+       remotes/origin/master           f3651b8 Update for github.
+
+  disable doc:
+     --- a/Makefile
+     +++ b/Makefile
+     @@ -36,7 +36,7 @@ test : mosquitto
+      
+      install : mosquitto
+             set -e; for d in ${DIRS}; do $(MAKE) -C $${d} install; done
+     -       set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
+     +       #set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
+             $(INSTALL) -d ${DESTDIR}/etc/mosquitto
+             $(INSTALL) -m 644 mosquitto.conf ${DESTDIR}/etc/mosquitto/mosquitto.conf.example
+             $(INSTALL) -m 644 aclfile.example ${DESTDIR}/etc/mosquitto/aclfile.example
+     diff --git a/config.mk b/config.mk
+     index c0082fb..204dc38 100644
+     --- a/config.mk
+     +++ b/config.mk
+     @@ -71,7 +71,7 @@ WITH_WEBSOCKETS:=no
+      WITH_EC:=yes
+      
+      # Build man page documentation by default.
+     -WITH_DOCS:=yes
+     +WITH_DOCS:=no
+      
+      # Build with client support for SOCK5 proxy.
+      WITH_SOCKS:=yes
+
+  build: 
+     $ vi config.mk 
+     $ vi Makefile 
+     $ mkdir ../mosrun
+     $ make
+     $ make prefix=`pwd`/../mosrun install
+     $ cp mosquitto.conf ../mosrun/sbin/
+
+  conf: 
+     $ diff ../mosquitto/mosquitto.conf ./sbin/mosquitto.conf 
+     537c537
+     < #password_file
+     ---
+     > password_file mospass
+
+  setup password: 
+     $ LD_LIBRAR_PATH=../lib ./mosquitto_passwd -c ../sbin/mospass <youruser>
+
+  run broker:
+     $ ./mosquitto -c mosquitto.conf -p 8888 -v
+
+  run subscriber:
+     $ LD_LIBRARY_PATH=../lib ./mosquitto_sub -h 127.0.0.1 -p 8888 -t <yourtopic> -u <youruser> -P <yourpass>
+
+  run publisher:
+     $ LD_LIBRARY_PATH=../lib ./mosquitto_pub -h 127.0.0.1 -p 8888 -t <yourtopic> -u <youruser> -P <yourpass> -m <yourmsg>
+
+
