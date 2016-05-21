@@ -57,7 +57,7 @@ fedora build:
      $ make prefix= DESTDIR=`pwd`/../mosrun install
      $ cp mosquitto.conf ../mosrun/sbin/
 
-  conf: 
+  conf password_file: 
      $ diff ../mosquitto/mosquitto.conf ./sbin/mosquitto.conf 
      537c537
      < #password_file
@@ -78,7 +78,8 @@ fedora build:
 
 
 alternative minimal feature disable all these in config.mk: 
-but disabling tls will not build the passwd app. any password steps above can be ignored.
+but disabling tls will not build the passwd app. any password steps above 
+and any password parameters can be ignored.
 
     ##WITH_TLS:=yes
     ##WITH_TLS_PSK:=yes
@@ -88,5 +89,16 @@ but disabling tls will not build the passwd app. any password steps above can be
     ##WITH_UUID:=yes
     ##WITH_DOCS:=yes
     ##WITH_SOCKS:=yes
+
+
+github repo version tested: 
+
+    $ git log -2
+    commit f3651b80d4ec3e96c37759c891827ef570bba6e4
+    Author: Roger A. Light <roger@atchoo.org>
+    Date:   Tue Apr 26 16:24:13 2016 +0100
+        Update for github.
+
+
 
 
