@@ -100,5 +100,23 @@ github repo version tested:
         Update for github.
 
 
+websockets configuration: 
 
+    listener 9001 127.0.0.1
+    protocol websockets
+    http_dir simpleweb
+
+  put the simpleweb directory files from ...client
+
+    diff ../../../download/simpleweb/index.html ./simpleweb/index.html
+    6c6
+    <     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    ---
+    >     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    78,79c78,79
+    <         <div>Subscribed to <input type='text' id='topic' disabled />
+    <         Status: <input type='text' id='status' size="80" disabled /></div>
+    ---
+    >         <div>Subscribed to <input type='text' id='topic' disabled="1" />
+    >         Status: <input type='text' id='status' size="80" disabled="1" /></div>
 
