@@ -8,3 +8,6 @@ search: nodejs reverse proxy openshift
 https://access.redhat.com/articles/269693
 
 
+vm m4 is based on centos 6.5. packages can be found at
+http://mirror.centos.org/centos/6/os/x86_64/Packages/
+
