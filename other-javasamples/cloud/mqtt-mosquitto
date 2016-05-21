@@ -102,13 +102,15 @@ github repo version tested:
 
 websockets configuration: 
 
+    connection_messages true
     listener 9001 127.0.0.1
     protocol websockets
     http_dir simpleweb
 
-  put the simpleweb directory files from ...client
+  put the simpleweb directory files with modifications from ...
+  mqtt-websocket-client/simple-mqtt-websocket-example/
 
-    diff ../../../download/simpleweb/index.html ./simpleweb/index.html
+    diff .../simpleweb/index.html ./simpleweb/index.html
     6c6
     <     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     ---
@@ -119,4 +121,9 @@ websockets configuration:
     ---
     >         <div>Subscribed to <input type='text' id='topic' disabled="1" />
     >         Status: <input type='text' id='status' size="80" disabled="1" /></div>
+
+  the javascript is hardcoded to port 9001 for ws:// thus configure mosquitto 
+  to port 9001 too. 
+
+
 
