@@ -1,0 +1,47 @@
+
+
+Server command line: 
+
+ [pywebsocket]\> PYTHONPATH=. python mod_pywebsocket/standalone.py -H $OPENSHIFT_DIY_IP -p $OPENSHIFT_DIY_PORT --log-level debug -d example
+
+
+
+HTTP  ws://diy-your.rhcloud.com:8000/echo  :
+
+ [DEBUG] mod_pywebsocket.handshake: Client's opening handshake resource: '/echo'
+ [DEBUG] mod_pywebsocket.handshake: Client's opening handshake headers: {
+            'origin': 'http://diy-your.rhcloud.com:8000', 
+            'upgrade': 'websocket', 
+            'sec-websocket-version': '13', 
+            'host': '127.9.91.1:8080', 
+            'sec-websocket-key': 'MTMtI1Ng==', 
+            'connection': 'Upgrade'}
+ [DEBUG] mod_pywebsocket.handshake: Trying protocol version RFC 6455
+ [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Sec-WebSocket-Key: 'MTMtzgwjAzI1Ng==' (31 33 31 34 36 32 35)
+ [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Sec-WebSocket-Accept: 'QfLmt2vhQ=' (41 f2 9a 89 76 be 14)
+ [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Protocol version is RFC 6455
+ [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Sent server's opening handshake: 'HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: QfLmt2vhQ=\r\n\r\n'
+ [INFO] mod_pywebsocket.handshake: Established (RFC 6455 protocol)
+
+
+
+SSL  wss://diy-your.rhcloud.com:8443/echo  :
+
+ [DEBUG] mod_pywebsocket.handshake: Client's opening handshake resource: '/echo'
+ [DEBUG] mod_pywebsocket.handshake: Client's opening handshake headers: {
+            'origin': 'https://diy-your.rhcloud.com:8443', 
+            'upgrade': 'websocket', 
+            'sec-websocket-version': '13', 
+            'host': '127.9.91.1:8080', 
+            'sec-websocket-key': 'MTMtgxNg==', 
+            'connection': 'Upgrade'}
+ [DEBUG] mod_pywebsocket.handshake: Trying protocol version RFC 6455
+ [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Sec-WebSocket-Key: 'MTMtgxNg==' (31 33 31 34 36 32 35)
+ [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Sec-WebSocket-Accept: 'axxD+qIISk=' (6b 1c 43 ea 88 21 29)
+ [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Protocol version is RFC 6455
+ [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Sent server's opening handshake: 'HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: axxD+qIISk=\r\n\r\n'
+ [INFO] mod_pywebsocket.handshake: Established (RFC 6455 protocol)
+
+
+
+
