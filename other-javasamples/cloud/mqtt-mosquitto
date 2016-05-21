@@ -54,7 +54,7 @@ fedora build:
      $ vi Makefile 
      $ mkdir ../mosrun
      $ make
-     $ make prefix=`pwd`/../mosrun install
+     $ make prefix=`pwd`/../mosrun DESTDIR=`pwd`/../mosrun install
      $ cp mosquitto.conf ../mosrun/sbin/
 
   conf: 
@@ -75,5 +75,17 @@ fedora build:
 
   run publisher:
      $ LD_LIBRARY_PATH=../lib ./mosquitto_pub -h 127.0.0.1 -p 8888 -t <yourtopic> -u <youruser> -P <yourpass> -m <yourmsg>
+
+
+alternative minimal feature disable all these in config.mk: 
+
+    ##WITH_TLS:=yes
+    ##WITH_TLS_PSK:=yes
+    ##WITH_THREADING:=yes
+    ##WITH_BRIDGE:=yes
+    ##WITH_SRV:=yes
+    ##WITH_UUID:=yes
+    ##WITH_DOCS:=yes
+    ##-WITH_SOCKS:=yes
 
 
