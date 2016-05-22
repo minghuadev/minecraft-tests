@@ -115,15 +115,31 @@ websockets configuration:
     <     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     ---
     >     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    54c54
+    <     function onConnectionLost(response) {
+    ---
+    >     function onConnectionLost(responseObject) {
     78,79c78,79
     <         <div>Subscribed to <input type='text' id='topic' disabled />
     <         Status: <input type='text' id='status' size="80" disabled /></div>
     ---
-    >         <div>Subscribed to <input type='text' id='topic' disabled="1" />
-    >         Status: <input type='text' id='status' size="80" disabled="1" /></div>
+    >         <div>Subscribed to <input type='text' id='topic' disabled="disabled" />
+    >         Status: <input type='text' id='status' size="80" disabled="disabled" /></div>
 
   the javascript is hardcoded to port 9001 for ws:// thus configure mosquitto 
   to port 9001 too. 
 
+  copy the index.html from simpleweb to test1.html, and modify. 
+
+    $ diff simpleweb/index.html simpleweb/test1.html 
+    13a14
+    >     topic = "/WorldTest1";
+    51a53,56
+    > 
+    >         message = new Paho.MQTT.Message("Hello");
+    >         message.destinationName = topic; //"/World";
+    >         mqtt.send(message);
+
+  browse to :9001/index.html to monitor. and to /test1.html to publish. 
 
 
