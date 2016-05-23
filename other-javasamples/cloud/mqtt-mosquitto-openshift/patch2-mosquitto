@@ -1,0 +1,111 @@
+diff --git a/Makefile b/Makefile
+index 967ba26..8e9ce26 100644
+--- a/Makefile
++++ b/Makefile
+@@ -36,7 +36,7 @@ test : mosquitto
+ 
+ install : mosquitto
+ 	set -e; for d in ${DIRS}; do $(MAKE) -C $${d} install; done
+-	set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
++	#set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
+ 	$(INSTALL) -d ${DESTDIR}/etc/mosquitto
+ 	$(INSTALL) -m 644 mosquitto.conf ${DESTDIR}/etc/mosquitto/mosquitto.conf.example
+ 	$(INSTALL) -m 644 aclfile.example ${DESTDIR}/etc/mosquitto/aclfile.example
+diff --git a/config.mk b/config.mk
+index c0082fb..21a03c0 100644
+--- a/config.mk
++++ b/config.mk
+@@ -21,21 +21,21 @@
+ # Disabling this will also mean that passwords must be stored in plain text. It
+ # is strongly recommended that you only disable WITH_TLS if you are not using
+ # password authentication at all.
+-WITH_TLS:=yes
++##WITH_TLS:=yes
+ 
+ # Comment out to disable TLS/PSK support in the broker and client. Requires
+ # WITH_TLS=yes.
+ # This must be disabled if using openssl < 1.0.
+-WITH_TLS_PSK:=yes
++##WITH_TLS_PSK:=yes
+ 
+ # Comment out to disable client client threading support.
+-WITH_THREADING:=yes
++##WITH_THREADING:=yes
+ 
+ # Comment out to remove bridge support from the broker. This allow the broker
+ # to connect to other brokers and subscribe/publish to topics. You probably
+ # want to leave this included unless you want to save a very small amount of
+ # memory size and CPU time.
+-WITH_BRIDGE:=yes
++##WITH_BRIDGE:=yes
+ 
+ # Comment out to remove persistent database support from the broker. This
+ # allows the broker to store retained messages and durable subscriptions to a
+@@ -58,23 +58,23 @@ WITH_MEMORY_TRACKING:=yes
+ WITH_SYS_TREE:=yes
+ 
+ # Build with SRV lookup support.
+-WITH_SRV:=yes
++##WITH_SRV:=yes
+ 
+ # Build using libuuid for clientid generation (Linux only - please report if
+ # supported on your platform).
+-WITH_UUID:=yes
++##WITH_UUID:=yes
+ 
+ # Build with websockets support on the broker.
+-WITH_WEBSOCKETS:=no
++WITH_WEBSOCKETS:=yes
+ 
+ # Use elliptic keys in broker
+ WITH_EC:=yes
+ 
+ # Build man page documentation by default.
+-WITH_DOCS:=yes
++WITH_DOCS:=no
+ 
+ # Build with client support for SOCK5 proxy.
+-WITH_SOCKS:=yes
++##WITH_SOCKS:=yes
+ 
+ # =============================================================================
+ # End of user configuration
+diff --git a/src/websockets.c b/src/websockets.c
+index d79fabf..17e7ef5 100644
+--- a/src/websockets.c
++++ b/src/websockets.c
+@@ -38,6 +38,7 @@ POSSIBILITY OF SUCH DAMAGE.
+ #include <stdlib.h>
+ #include <errno.h>
+ #include <sys/stat.h>
++#include <arpa/inet.h> /* for inet_pton() */
+ 
+ #ifdef WITH_SYS_TREE
+ extern uint64_t g_bytes_received;
+@@ -565,6 +566,7 @@ struct libwebsocket_context *mosq_websockets_init(struct _mqtt3_listener *listen
+ 	int protocol_count;
+ 	int i;
+ 	struct libws_mqtt_hack *user;
++  int myrc;
+ 
+ 	/* Count valid protocols */
+ 	for(protocol_count=0; protocols[protocol_count].name; protocol_count++);
+@@ -624,10 +626,17 @@ struct libwebsocket_context *mosq_websockets_init(struct _mqtt3_listener *listen
+ 
+ 	info.user = user;
+ 	listener->ws_protocol = p;
++  myrc = inet_pton(AF_INET, listener->host, &info.inet_addr);
++  if ( myrc != 1 ) {
++			_mosquitto_free(user);
++			_mosquitto_free(p);
++			_mosquitto_log_printf(NULL, MOSQ_LOG_ERR, "Error: Unable to resolve listener host \"%s\" with rc %d.", listener->host, myrc);
++			return NULL;
++  }
+ 
+ 	lws_set_log_level(log_level, log_wrap);
+ 
+-	_mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Opening websockets listen socket on port %d.", listener->port);
++	_mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Opening websockets listen socket on port %d host %s s_addr 0x%08x.", listener->port, listener->host, info.inet_addr.s_addr);
+ 	return libwebsocket_create_context(&info);
+ }
+ 

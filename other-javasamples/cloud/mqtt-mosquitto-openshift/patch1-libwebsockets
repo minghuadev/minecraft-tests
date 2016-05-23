@@ -1,0 +1,76 @@
+diff --git a/lib/client-handshake.c b/lib/client-handshake.c
+index 6892f5d..389f88b 100644
+--- a/lib/client-handshake.c
++++ b/lib/client-handshake.c
+@@ -183,7 +183,7 @@ lws_client_connect_2(struct lws *wsi)
+ 		lws_set_timeout(wsi, PENDING_TIMEOUT_AWAITING_CONNECT_RESPONSE,
+ 				AWAITING_TIMEOUT);
+ 
+-		n = lws_socket_bind(wsi->vhost, wsi->sock, 0, wsi->vhost->iface);
++		n = lws_socket_bind(wsi->vhost, wsi->sock, 0, wsi->vhost->iface,0);
+ 		if (n < 0)
+ 			goto failed;
+ 	}
+diff --git a/lib/libwebsockets.c b/lib/libwebsockets.c
+index 860dee8..7fa7265 100644
+--- a/lib/libwebsockets.c
++++ b/lib/libwebsockets.c
+@@ -1543,7 +1543,7 @@ lws_extension_callback_pm_deflate(struct lws_context *context,
+ 
+ LWS_EXTERN int
+ lws_socket_bind(struct lws_vhost *vhost, int sockfd, int port,
+-		const char *iface)
++		const char *iface, in_addr_t inet_addr)
+ {
+ #if LWS_POSIX
+ #ifdef LWS_USE_UNIX_SOCK
+@@ -1592,6 +1592,10 @@ lws_socket_bind(struct lws_vhost *vhost, int sockfd, int port,
+ 		serv_addr4.sin_addr.s_addr = INADDR_ANY;
+ 		serv_addr4.sin_family = AF_INET;
+ 
++  if (inet_addr) {
++		serv_addr4.sin_addr.s_addr = inet_addr;
++		lwsl_warn("bind to host addr: 0x%08x\n", inet_addr);
++  } else 
+ 		if (iface &&
+ 		    interface_to_sa(vhost->context, iface,
+ 				    (struct sockaddr_in *)v, n) < 0) {
+diff --git a/lib/libwebsockets.h b/lib/libwebsockets.h
+index 21debc1..b6a2be3 100644
+--- a/lib/libwebsockets.h
++++ b/lib/libwebsockets.h
+@@ -1545,6 +1545,7 @@ struct lws_context_creation_info {
+ 	const char *server_string;			/* context */
+ 	unsigned int pt_serv_buf_size;			/* context */
+ 
++        struct in_addr  inet_addr;
+ 	/* Add new things just above here ---^
+ 	 * This is part of the ABI, don't needlessly break compatibility
+ 	 *
+diff --git a/lib/private-libwebsockets.h b/lib/private-libwebsockets.h
+index ab06b9d..c08e59a 100644
+--- a/lib/private-libwebsockets.h
++++ b/lib/private-libwebsockets.h
+@@ -1310,7 +1310,7 @@ LWS_EXTERN int log_level;
+ 
+ LWS_EXTERN int
+ lws_socket_bind(struct lws_vhost *vhost, int sockfd, int port,
+-		const char *iface);
++		const char *iface, in_addr_t inetaddr);
+ 
+ LWS_EXTERN void
+ lws_close_free_wsi(struct lws *wsi, enum lws_close_status);
+diff --git a/lib/server.c b/lib/server.c
+index 52991d0..ba5c4a1 100644
+--- a/lib/server.c
++++ b/lib/server.c
+@@ -103,7 +103,8 @@ lws_context_init_server(struct lws_context_creation_info *info,
+ 	lws_plat_set_socket_options(vhost, sockfd);
+ 
+ #if LWS_POSIX
+-	n = lws_socket_bind(vhost, sockfd, info->port, info->iface);
++	n = lws_socket_bind(vhost, sockfd, info->port, info->iface, 
++  info->inet_addr.s_addr);
+ 	if (n < 0)
+ 		goto bail;
+ 	info->port = n;
