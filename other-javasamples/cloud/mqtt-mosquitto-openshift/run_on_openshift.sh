@@ -90,6 +90,12 @@ if [ "x_$uarg" == "x_stop" ]; then
         echo "Application is being stopped : upid $upid" >> $logfil
         kill $upid > /dev/null 2>&1
     fi
+    if [ "x_$run_on_openshift" == "x_yes" ]; then
+        echo  |& /usr/bin/logshifter -tag diy 
+        echo stopped mosquitto...  |& /usr/bin/logshifter -tag diy 
+        date  |& /usr/bin/logshifter -tag diy 
+        echo  |& /usr/bin/logshifter -tag diy 
+    fi
     exit 0
 fi
 
@@ -99,7 +105,7 @@ if [ "x_$uarg" == "x_" ]; then
 elif [ "x_$uarg" == "x_start" -o "x_$uarg" == "x_status" ]; then
     # user command "start" or "status"
     if [ -z "$upid" ]; then
-        echo "User pid: \<empty\>" >> $logfil
+        echo "User pid: <empty>" >> $logfil
     else
         echo "User pid: $upid" >> $logfil
     fi
@@ -151,6 +157,10 @@ if [ "x_$uarg" == "x_start" ]; then
     fi
   export LD_LIBRARY_PATH=.
   if [ "x_$run_on_openshift" == "x_yes" ]; then
+      echo  |& /usr/bin/logshifter -tag diy 
+      echo starting mosquitto...  |& /usr/bin/logshifter -tag diy 
+      date  |& /usr/bin/logshifter -tag diy 
+      echo  |& /usr/bin/logshifter -tag diy 
     nohup ./mosquitto -c mosquitto.conf  |& /usr/bin/logshifter -tag diy &
   else
     nohup ./mosquitto -c mosquitto.conf -v > ${logfil}-mosquitto & 
