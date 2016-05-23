@@ -1,0 +1,116 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+search libwebsocket bind to ip address
+
+inside mosquitto src/...
+    src/mosquitto_broker.h: 
+    src/websockets.c: 
+
+    561 struct libwebsocket_context *mosq_websockets_init(struct _mqtt3_listener *listener,
+                                                          int         log_level)
+    562 {
+    563         struct lws_context_creation_info info;
+
+  listener has a char *host, but the info does not based on viewing libwebsockets.h...
+
+https://dev.eclipse.org/mhonarc/lists/mosquitto-dev/msg00799.html
+Re: [mosquitto-dev] Bind Address For Websockets 
+On Wed, Sep 2, 2015 at 9:43 PM, Chris . <chris_flcpc@xxxxxxxxxxx> wrote:
+> OK, so I'm guessing this is never going to work for mosquitto websockets at
+> the moment because of libwebsockets.
+>
+> I've had a browse through the following and note that IP addresses are
+> suspicious by their absence in libwebsockets as the latter seems to use
+> interfaces instead:
+>
+> mosq_websockets_init()
+> libwebsocket_create_context()
+> lws_context_init_server() -> in fact does an explicit
+> "serv_addr4.sin_addr.s_addr = INADDR_ANY" by default
+>
+>
+> It would be nice, maybe, if mosquitto.conf and mosq_websockets_init
+> ()supported the use of an "iface" parameter for websockets on the listener
+> line, so I could specify the loopback or a virtual to force my bind address
+> as I wished.
+>
+>
+> Many thanks for the great software & keep up the good work,
+> Chris.
+>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mosquitto
+
+src/mosquitto_broker.h: 
+src/websockets.c: 
+    561 struct libwebsocket_context *mosq_websockets_init(struct _mqtt3_listener *listener,
+///char *host;
+ int         log_level)
+    562 {
+    563         struct lws_context_creation_info info;
+
+    631    return libwebsocket_create_context(&info);
+
+src/mosquitto_broker.h:#    define libwebsocket_create_context(A) lws_create_context((A))
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+libwebsockets  (github.com/warmcat/libwebsockets)
+
+research starting with INADDR_ANY ... backwards up the call-chain ...
+
+lib/libwebsockets.h:  the structure  lws_context_creation_info 
+lib/libwebsockets.c:
+   1545 lws_socket_bind(struct lws_vhost *vhost, int sockfd, int port,
+   1546                 const char *iface)
+
+   1555         struct sockaddr_in serv_addr4;
+
+   1588         {
+   1589                 v = (struct sockaddr *)&serv_addr4;
+   1590                 n = sizeof(serv_addr4);
+   1591                 bzero((char *) &serv_addr4, sizeof(serv_addr4));
+   1592                 serv_addr4.sin_addr.s_addr = INADDR_ANY;
+   1593                 serv_addr4.sin_family = AF_INET;
+   1595                 if (iface &&
+   1596                     interface_to_sa(vhost->context, iface,
+   1597                                     (struct sockaddr_in *)v, n) < 0) {
+   1598                         lwsl_err("Unable to find interface %s\n", iface);
+   1599                         return -1;
+   1600                 }
+   1601 
+   1602                 serv_addr4.sin_port = htons(port);
+   1603         } /* ipv4 */
+   1604 
+   1605         n = bind(sockfd, v, n);
+
+lib/server.c:
+     25 int
+     26 lws_context_init_server(struct lws_context_creation_info *info,
+     27                         struct lws_vhost *vhost)
+     28 {
+    106         n = lws_socket_bind(vhost, sockfd, info->port, info->iface);
+
+lib/context.c: 
+    283 LWS_VISIBLE struct lws_vhost *
+    284 lws_create_vhost(struct lws_context *context,
+    285                  struct lws_context_creation_info *info)
+    286 {
+    472         if (lws_context_init_server(info, vh))
+
+    558 lws_create_context(struct lws_context_creation_info *info)
+    559 {
+    772                 if (!lws_create_vhost(context, info)) {
+    814 }
+
+/usr/include/netinet/in.h:#define       INADDR_ANY              ((in_addr_t) 0x00000000)
+
+[libwebsockets]$ grep lws_socket_bind lib/*
+lib/client-handshake.c:         n = lws_socket_bind(wsi->vhost, wsi->sock, 0, wsi->vhost->iface);
+lib/libwebsockets.c:lws_socket_bind(struct lws_vhost *vhost, int sockfd, int port,
+lib/private-libwebsockets.h:lws_socket_bind(struct lws_vhost *vhost, int sockfd, int port,
+lib/server.c:   n = lws_socket_bind(vhost, sockfd, info->port, info->iface);
+
+
