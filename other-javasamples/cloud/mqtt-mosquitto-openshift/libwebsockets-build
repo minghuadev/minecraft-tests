@@ -1,9 +1,11 @@
 
+git clone https://github.com/warmcat/libwebsockets
+
 
 install cmake 2.8 or above.
 
 
-$ cd /path/to/src
+$ cd /path/to/src/of/libwebsockets
 $ mkdir build
 $ cd build
 $ cmake ..
