@@ -81,7 +81,7 @@ if [ "x_$uarg" == "x_stop" ]; then
 
     # The logic to stop your application should be put in this script.
     if [ -z "$upid" ] ; then
-        if [ ! "x_$run_on_openshift" == "x_yes" ]; then
+        if [ "x_$run_on_openshift" == "x_yes" ]; then
             client_result "Application is already stopped"
         else
             echo "Application is already stopped" >> $logfil
