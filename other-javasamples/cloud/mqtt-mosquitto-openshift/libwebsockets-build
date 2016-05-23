@@ -1,0 +1,17 @@
+
+
+install cmake 2.8 or above.
+
+
+$ cd /path/to/src
+$ mkdir build
+$ cd build
+$ cmake ..
+
+or if install to other than /usr/local: 
+$ cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr/your ..
+
+$ make
+$ make install
+
+
