@@ -89,6 +89,13 @@ Instead of writing your own Web application, you can easily use the mqtt.io
 or the HiveMQ Websocket clients; configure them to use the host name and 
 TCP port number (from the listener directive) of your Mosquitto broker.
 
+  comments: mosquitto build steps 
+            http://goochgooch.co.uk/2014/08/01/building-mosquitto-1-4/
+            dependencies: 
+                 uuid-dev xsltproc docbook-xsl
+                 http://zlib.net/zlib-1.2.8.tar.gz
+                 http://c-ares.haxx.se/download/c-ares-1.10.0.tar.gz
+
 
 
 https://blog.benjamin-cabe.com/2015/10/01/how-to-run-your-web-server-and-mqtt-websockets-broker-on-the-same-port
