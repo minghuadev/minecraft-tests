@@ -1,5 +1,10 @@
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+patches: 
+    need to patch patch2-mosquitto-new, and the build diff in patch2-mosquitto. 
+    patch1-libwebsockets is not needed because iface can be used with an IP.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 search libwebsocket bind to ip address
 
 inside mosquitto src/...
