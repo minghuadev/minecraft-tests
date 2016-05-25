@@ -1,0 +1,25 @@
+
+diff --git a/src/websockets.c b/src/websockets.c
+index d79fabf..839f314 100644
+--- a/src/websockets.c
++++ b/src/websockets.c
+@@ -627,6 +627,18 @@ struct libwebsocket_context *mosq_websockets_init(struct _mqtt3_listener *listen
+ 
+        lws_set_log_level(log_level, log_wrap);
+ 
++    if ( listener->host ) {
++        size_t sz = strnlen(listener->host, 16);
++        if ( sz >=7 && sz <= 16 ) { /* IP in string: 7 min length. 15 max. */
++            info.iface = listener->host;
++               _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, 
++                        "Listener host \"%s\" of size %zu.", listener->host, sz);
++        } else {
++               _mosquitto_log_printf(NULL, MOSQ_LOG_WARNING, 
++                        "Warning: Malformed listener host \"%s\" of size %zu.", 
++                                  listener->host, sz);
++        }
++    }
+        _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Opening websockets listen socket on port %d.", listener
+        return libwebsocket_create_context(&info);
+ }
+
