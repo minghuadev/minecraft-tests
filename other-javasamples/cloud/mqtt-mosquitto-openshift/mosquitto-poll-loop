@@ -1,0 +1,21 @@
+
+https://github.com/eclipse/mosquitto/issues/147
+
+
+The 100ms delay in handling Websocket events, coded into...
+https://github.com/eclipse/mosquitto/blob/d20355c8ac64746876bdfd0c47f9ac6096bee9dc/src/loop.c
+...as...
+
+#ifndef WIN32
+        sigprocmask(SIG_SETMASK, &sigblock, &origsig);
+        fdcount = poll(pollfds, pollfd_index, 100);
+        sigprocmask(SIG_SETMASK, &origsig, NULL);
+#else
+        fdcount = WSAPoll(pollfds, pollfd_index, 100);
+#endif
+
+
+
+https://daniel.haxx.se/docs/poll-vs-select.html
+
+
