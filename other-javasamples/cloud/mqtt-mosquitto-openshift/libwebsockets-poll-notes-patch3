@@ -1,0 +1,81 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+patches: patch3-poll-libwebsockets and patch3-poll-mosquitto
+
+result: round-trip reduced from 150+200 to 10 to 20ms
+
+web: ../mqtt-webocket-client/simpleweb-patch3-used
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+analysis
+
+lib/lws-plat-unix.c 
+
+    116 LWS_VISIBLE int
+    117 lws_plat_service_tsi(struct lws_context *context, int timeout_ms, int tsi)
+    118 {
+    119         struct lws_context_per_thread *pt = &context->pt[tsi];
+
+    148         n = poll(pt->fds, pt->fds_count, timeout_ms);
+
+    196 LWS_VISIBLE int
+    197 lws_plat_service(struct lws_context *context, int timeout_ms)
+    198 {
+    199         return lws_plat_service_tsi(context, timeout_ms, 0);
+    200 }
+
+
+lib/service.c
+
+   1114 LWS_VISIBLE int
+   1115 lws_service(struct lws_context *context, int timeout_ms)
+   1116 {
+   1117         return lws_plat_service(context, timeout_ms);
+   1118 }
+
+lib/private-libwebsockets.h
+
+    566 struct lws_context_per_thread {
+    567 #if LWS_MAX_SMP > 1
+    568         pthread_mutex_t lock;
+    569 #endif
+    570         struct lws_pollfd *fds;
+
+    574         struct lws_context *context;
+
+    617         unsigned int fds_count;
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+modification
+
+lib/libwebsockets.h
+
+   1676 LWS_VISIBLE LWS_EXTERN int
+   1677 lws_service(struct lws_context *context, int timeout_ms);
++  1678 LWS_VISIBLE LWS_EXTERN int
++  1679 lws_service_pollfds(struct lws_context *context, pollfd **, unsigned int *);
+
+lib/service.c
+
+   1114 LWS_VISIBLE int
+   1115 lws_service(struct lws_context *context, int timeout_ms)
+   1116 {
+   1117         return lws_plat_service(context, timeout_ms);
+   1118 }
++  1119 LWS_VISIBLE int
++  1120 lws_service_pollfds(struct lws_context *context, pollfd **fdsp, unsigned int *nfdsp)
++  1121 {
++  1122         return lws_plat_service_pollfds(context, fdsp, nfdsp);
++  1123 }
+
+lib/private-libwebsockets.h
+
+   1775 LWS_EXTERN int
+   1776 lws_plat_service(struct lws_context *context, int timeout_ms);
++  1777 LWS_EXTERN int
++  1778 lws_plat_service_pollfds(struct lws_context *context, pollfd ** fdsp, unsigned int *nfdsp);
+
+lib/lws-plat-unix.c
+
+

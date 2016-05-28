@@ -1,0 +1,180 @@
+diff --git a/Makefile b/Makefile
+index 967ba26..8e9ce26 100644
+--- a/Makefile
++++ b/Makefile
+@@ -36,7 +36,7 @@ test : mosquitto
+ 
+ install : mosquitto
+ 	set -e; for d in ${DIRS}; do $(MAKE) -C $${d} install; done
+-	set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
++	#set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
+ 	$(INSTALL) -d ${DESTDIR}/etc/mosquitto
+ 	$(INSTALL) -m 644 mosquitto.conf ${DESTDIR}/etc/mosquitto/mosquitto.conf.example
+ 	$(INSTALL) -m 644 aclfile.example ${DESTDIR}/etc/mosquitto/aclfile.example
+diff --git a/config.mk b/config.mk
+index c0082fb..21a03c0 100644
+--- a/config.mk
++++ b/config.mk
+@@ -21,21 +21,21 @@
+ # Disabling this will also mean that passwords must be stored in plain text. It
+ # is strongly recommended that you only disable WITH_TLS if you are not using
+ # password authentication at all.
+-WITH_TLS:=yes
++##WITH_TLS:=yes
+ 
+ # Comment out to disable TLS/PSK support in the broker and client. Requires
+ # WITH_TLS=yes.
+ # This must be disabled if using openssl < 1.0.
+-WITH_TLS_PSK:=yes
++##WITH_TLS_PSK:=yes
+ 
+ # Comment out to disable client client threading support.
+-WITH_THREADING:=yes
++##WITH_THREADING:=yes
+ 
+ # Comment out to remove bridge support from the broker. This allow the broker
+ # to connect to other brokers and subscribe/publish to topics. You probably
+ # want to leave this included unless you want to save a very small amount of
+ # memory size and CPU time.
+-WITH_BRIDGE:=yes
++##WITH_BRIDGE:=yes
+ 
+ # Comment out to remove persistent database support from the broker. This
+ # allows the broker to store retained messages and durable subscriptions to a
+@@ -58,23 +58,23 @@ WITH_MEMORY_TRACKING:=yes
+ WITH_SYS_TREE:=yes
+ 
+ # Build with SRV lookup support.
+-WITH_SRV:=yes
++##WITH_SRV:=yes
+ 
+ # Build using libuuid for clientid generation (Linux only - please report if
+ # supported on your platform).
+-WITH_UUID:=yes
++##WITH_UUID:=yes
+ 
+ # Build with websockets support on the broker.
+-WITH_WEBSOCKETS:=no
++WITH_WEBSOCKETS:=yes
+ 
+ # Use elliptic keys in broker
+ WITH_EC:=yes
+ 
+ # Build man page documentation by default.
+-WITH_DOCS:=yes
++WITH_DOCS:=no
+ 
+ # Build with client support for SOCK5 proxy.
+-WITH_SOCKS:=yes
++##WITH_SOCKS:=yes
+ 
+ # =============================================================================
+ # End of user configuration
+diff --git a/src/loop.c b/src/loop.c
+index 2a99ae7..1919b00 100644
+--- a/src/loop.c
++++ b/src/loop.c
+@@ -138,9 +138,45 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
+ #ifdef WITH_BRIDGE
+ 		context_count += db->bridge_count;
+ #endif
++#ifdef WITH_WEBSOCKETS
++		struct pollfd *wsfd = NULL;
++		unsigned int wsfd_num = 0;
++		int wsfd_found = 0; /* support 1 listener */
++		static unsigned int lastnfds = 0; /* for debug */
++		for(i=0; i<db->config->listener_count; i++){
++		    if(db->config->listeners[i].ws_context){
++		        struct pollfd *wsfd_fds = NULL;
++		        unsigned int wsfd_nfds = 0;
++		        int wrc = lws_service_pollfds(db->config->listeners[i].ws_context, 
++		        		&wsfd_fds, &wsfd_nfds);
++		        if ( wrc == 0 ) {
++		            if ( wsfd_nfds != lastnfds ) {
++			        _mosquitto_log_printf(NULL, MOSQ_LOG_ERR, 
++		        			"Great:           wsfd n %u.", wsfd_nfds);
++		                lastnfds = wsfd_nfds;
++		            }
++                            if ( wsfd_nfds <= 10 ) {
++		                if ( wsfd_found == 0 ) {
++		                    wsfd = wsfd_fds;
++		                    wsfd_num = wsfd_nfds;
++		                    wsfd_found ++;
++		                } else {
++			            _mosquitto_log_printf(NULL, MOSQ_LOG_ERR, "Error: wsfd %d.",__LINE__);
++                                    break; /* error */
++		                }
++		            } else {
++                                break; /* ignore if more than 10 fds */
++		            }
++		        } else {
++			        _mosquitto_log_printf(NULL, MOSQ_LOG_ERR, "Error: wsfd %d.",__LINE__);
++                                break; /* error */
++		        }
++		    }
++		}
++#endif
+ 
+ 		if(listensock_count + context_count > pollfd_count || !pollfds){
+-			pollfd_count = listensock_count + context_count;
++			pollfd_count = listensock_count + context_count + 10;
+ 			pollfds = _mosquitto_realloc(pollfds, sizeof(struct pollfd)*pollfd_count);
+ 			if(!pollfds){
+ 				_mosquitto_log_printf(NULL, MOSQ_LOG_ERR, "Error: Out of memory.");
+@@ -314,6 +350,25 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
+ 		}
+ 
+ #ifndef WIN32
++#ifdef WITH_WEBSOCKETS
++                if ( wsfd && pollfd_count >= 10 && pollfd_index <= pollfd_count - 10 ) {
++		   if ( wsfd_num <= 10 ) {
++		      unsigned int k;
++		      for (k=0; k<wsfd_num; k++) {
++			int xfd = wsfd[k].fd;
++			if ( xfd <= 6 ) continue;
++			pollfds[pollfd_index].fd = xfd;
++			/*pollfds[pollfd_index].events = POLLIN | POLLOUT | POLLPRI;*/
++			pollfds[pollfd_index].events = POLLIN;
++			pollfds[pollfd_index].revents = 0;
++			pollfd_index ++;
++		      }
++		   }
++		} else if ( lastnfds ) {
++			_mosquitto_log_printf(NULL, MOSQ_LOG_ERR, "Huh xfd %u %p  %u %u.", 
++				wsfd_num, wsfd, pollfd_count, pollfd_index);
++		}
++#endif
+ 		sigprocmask(SIG_SETMASK, &sigblock, &origsig);
+ 		fdcount = poll(pollfds, pollfd_index, 100);
+ 		sigprocmask(SIG_SETMASK, &origsig, NULL);
+@@ -376,6 +431,7 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
+ 			 * citizens. */
+ 			if(db->config->listeners[i].ws_context){
+ 				libwebsocket_service(db->config->listeners[i].ws_context, 0);
++				libwebsocket_service(db->config->listeners[i].ws_context, 0);
+ 			}
+ 		}
+ 		if(db->config->have_websockets_listener){
+diff --git a/src/websockets.c b/src/websockets.c
+index d79fabf..839f314 100644
+--- a/src/websockets.c
++++ b/src/websockets.c
+@@ -627,6 +627,18 @@ struct libwebsocket_context *mosq_websockets_init(struct _mqtt3_listener *listen
+ 
+ 	lws_set_log_level(log_level, log_wrap);
+ 
++    if ( listener->host ) {
++        size_t sz = strnlen(listener->host, 16);
++        if ( sz >=7 && sz <= 16 ) { /* IP in string: 7 min length. 15 max. */
++            info.iface = listener->host;
++		_mosquitto_log_printf(NULL, MOSQ_LOG_INFO, 
++                        "Listener host \"%s\" of size %zu.", listener->host, sz);
++        } else {
++		_mosquitto_log_printf(NULL, MOSQ_LOG_WARNING, 
++                        "Warning: Malformed listener host \"%s\" of size %zu.", 
++                                  listener->host, sz);
++        }
++    }
+ 	_mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Opening websockets listen socket on port %d.", listener->port);
+ 	return libwebsocket_create_context(&info);
+ }

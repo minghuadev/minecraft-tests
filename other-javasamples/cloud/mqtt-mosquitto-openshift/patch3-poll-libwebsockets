@@ -1,0 +1,73 @@
+diff --git a/lib/libwebsockets.h b/lib/libwebsockets.h
+index 21debc1..e01bb7a 100644
+--- a/lib/libwebsockets.h
++++ b/lib/libwebsockets.h
+@@ -1675,6 +1675,8 @@ lws_context_destroy(struct lws_context *context);
+ 
+ LWS_VISIBLE LWS_EXTERN int
+ lws_service(struct lws_context *context, int timeout_ms);
++LWS_VISIBLE LWS_EXTERN int
++lws_service_pollfds(struct lws_context *context, struct pollfd **, unsigned int *);
+ 
+ LWS_VISIBLE LWS_EXTERN int
+ lws_service_tsi(struct lws_context *context, int timeout_ms, int tsi);
+diff --git a/lib/lws-plat-unix.c b/lib/lws-plat-unix.c
+index e26b041..de6cb46 100644
+--- a/lib/lws-plat-unix.c
++++ b/lib/lws-plat-unix.c
+@@ -194,6 +194,26 @@ faked_service:
+ }
+ 
+ LWS_VISIBLE int
++lws_plat_service_pollfds(struct lws_context *context, struct pollfd ** fdsp, unsigned int *nfdsp)
++{
++	const int tsi=0;
++	struct lws_context_per_thread *pt = &context->pt[tsi];
++
++	if (!fdsp || !nfdsp)
++		return 1;
++	*fdsp = NULL;
++	*nfdsp = 0;
++
++	if (!context || !context->vhost_list)
++		return 1;
++
++	*fdsp = pt->fds;
++	*nfdsp = pt->fds_count;
++
++	return 0;
++}
++
++LWS_VISIBLE int
+ lws_plat_service(struct lws_context *context, int timeout_ms)
+ {
+ 	return lws_plat_service_tsi(context, timeout_ms, 0);
+diff --git a/lib/private-libwebsockets.h b/lib/private-libwebsockets.h
+index ab06b9d..6e86147 100644
+--- a/lib/private-libwebsockets.h
++++ b/lib/private-libwebsockets.h
+@@ -1774,6 +1774,8 @@ LWS_EXTERN int
+ lws_poll_listen_fd(struct lws_pollfd *fd);
+ LWS_EXTERN int
+ lws_plat_service(struct lws_context *context, int timeout_ms);
++LWS_EXTERN int
++lws_plat_service_pollfds(struct lws_context *context, struct pollfd ** fdsp, unsigned int *nfdsp);
+ LWS_EXTERN LWS_VISIBLE int
+ lws_plat_service_tsi(struct lws_context *context, int timeout_ms, int tsi);
+ LWS_EXTERN int
+diff --git a/lib/service.c b/lib/service.c
+index 8ef8215..ae7f39d 100644
+--- a/lib/service.c
++++ b/lib/service.c
+@@ -1116,6 +1116,11 @@ lws_service(struct lws_context *context, int timeout_ms)
+ {
+ 	return lws_plat_service(context, timeout_ms);
+ }
++LWS_VISIBLE int
++lws_service_pollfds(struct lws_context *context, struct pollfd **fdsp, unsigned int *nfdsp)
++{
++	return lws_plat_service_pollfds(context, fdsp, nfdsp);
++}
+ 
+ LWS_VISIBLE int
+ lws_service_tsi(struct lws_context *context, int timeout_ms, int tsi)
