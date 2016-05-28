@@ -1,0 +1,11 @@
+
+see ../mqtt-mosquitto-openshift/*patch3*
+
+
+how to test: start the mosquitto broker then 
+    browser to :9008/index.html  as a monitor
+    browser to :9008/test1.html  as a client
+    browser to :9008/test2.html  as a client
+
+    click the test1 button named TriggerTest to send to test2 and get bounced back
+
