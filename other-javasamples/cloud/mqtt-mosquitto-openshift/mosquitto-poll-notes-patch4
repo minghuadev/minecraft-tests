@@ -1,0 +1,74 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+patch: patch4-poll-mosquitto 
+       libwebsockets change not needed as in patch3
+
+result: typical screenshot: 
+
+    /WorldTest1 = Bounce 1464476544417 1464476544423 1464476544425 6 2 6 285
+    /WorldTest1 = Bounce 1464476544064 1464476544071 1464476544072 7 1 6 284
+    /WorldTest1 = Bounce 1464476543761 1464476543767 1464476543813 6 46 6 283
+    /WorldTest1 = Bounce 1464476543323 1464476543329 1464476543374 6 45 6 282
+    /WorldTest1 = Bounce 1464476543059 1464476543066 1464476543112 7 46 6 281
+    /WorldTest1 = Bounce 1464476542817 1464476542823 1464476542824 6 1 6 280
+    /WorldTest1 = Bounce 1464476542573 1464476542579 1464476542580 6 1 6 279
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+analysis
+
+$ grep get_socket_fd src/*.c
+src/websockets.c:                       easy_address(libwebsocket_get_socket_fd(wsi), mosq);
+
+
+src/websockets.c
+
+    157 #if defined(LWS_LIBRARY_VERSION_NUMBER)
+    158 static int callback_mqtt(
+    159 #else
+    160 static int callback_mqtt(struct libwebsocket_context *context,
+    161 #endif
+    162                 struct libwebsocket *wsi,
+    163                 enum libwebsocket_callback_reasons reason,
+    164                 void *user,
+    165                 void *in,
+    166                 size_t len)
+    167 {
+    168         struct mosquitto_db *db;
+    169         struct mosquitto *mosq = NULL;
+    170         struct _mosquitto_packet *packet;
+    171         int count;
+    172         struct libws_mqtt_data *u = (struct libws_mqtt_data *)user;
+
+    178         db = &int_db;
+
+    180         switch (reason) {
+    181                 case LWS_CALLBACK_ESTABLISHED:
+    182                         mosq = mqtt3_context_init(db, WEBSOCKET_CLIENT);
+    183                         if(mosq){
+    184 #if !defined(LWS_LIBRARY_VERSION_NUMBER)
+    185                                 mosq->ws_context = context;
+    186 #endif
+    187                                 mosq->wsi = wsi;
+    188                                 u->mosq = mosq;
+
+
+src/loop.c 
+    456                 if(db->config->have_websockets_listener){
+    457                         temp__expire_websockets_clients(db);
+    458                 }
+
+     62 static void temp__expire_websockets_clients(struct mosquitto_db *db)
+     63 {
+     64         struct mosquitto *context, *ctxt_tmp;
+     65         static time_t last_check = 0;
+     66         time_t now = mosquitto_time();
+     67         char *id;
+     68 
+     69         if(now - last_check > 60){
+     70                 HASH_ITER(hh_id, db->contexts_by_id, context, ctxt_tmp){
+     71                         if(context->wsi && context->sock != INVALID_SOCKET){
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
