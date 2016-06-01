@@ -1,0 +1,104 @@
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+patch: patch5-poll-mosquitto
+
+
+result typical:
+
+    /WorldTest1 = Bounce 1464760953362 1464760953367 1464760953370 5 3 5 127
+    /WorldTest1 = Bounce 1464760953090 1464760953095 1464760953122 5 27 5 126
+    /WorldTest1 = Bounce 1464760952848 1464760952854 1464760952857 6 3 5 125
+    /WorldTest1 = Bounce 1464760952536 1464760952541 1464760952544 5 3 5 124
+    /WorldTest1 = Bounce 1464760952302 1464760952308 1464760952310 6 2 5 123
+    /WorldTest1 = Bounce 1464760952068 1464760952073 1464760952076 5 3 5 122
+    /WorldTest1 = Bounce 1464760951842 1464760951847 1464760951872 5 25 5 121
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+modifications: 
+
+[1] add wsfd_sockfd to struct mosquitto in mosquitto_internal.h
+[2] add init wsfd_sockfd to context.c
+[3] add wsfd_total_num to mosquitto.c and init too
+[4] add wsfd_total_num ++/-- to websocket.c
+[5] use wsfd_total_num and wsfd_sockfd in src/loop.c
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+analysis: 
+
+
+lib/mosquitto_internal.h: 
+
+  struct mosquitto {
+	mosq_sock_t sock;
+
+	enum _mosquitto_protocol protocol;
+	char *address;
+
+	struct _mosquitto_packet *current_out_packet;
+	struct _mosquitto_packet *out_packet;
+
+	int msg_count;
+	int msg_count12;
+
+	struct _mqtt3_listener *listener;
+	time_t disconnect_t;
+
+#  ifdef WITH_WEBSOCKETS
+#    if defined(LWS_LIBRARY_VERSION_NUMBER)
+	struct lws *wsi;
+#    else
+	struct libwebsocket_context *ws_context;
+	struct libwebsocket *wsi;
+#    endif
+#  endif
+	UT_hash_handle hh_id;
+	UT_hash_handle hh_sock;
+  };
+
+
+src/mosquitto_broker.h
+
+  struct mosquitto_db *_mosquitto_get_db(void);
+
+
+src/mosquitto.c
+
+  struct mosquitto_db int_db;
+
+  main() {
+
+  };
+
+
+src/webspckets.c
+
+  extern struct mosquitto_db int_db;
+
+	switch (reason) {
+		case LWS_CALLBACK_ESTABLISHED:
+			mosq = mqtt3_context_init(db, WEBSOCKET_CLIENT);
+		case LWS_CALLBACK_CLOSED:
+
+
+src/context.c
+
+  struct mosquitto *mqtt3_context_init(struct mosquitto_db *db, mosq_sock_t sock)
+  {
+	struct mosquitto *context;
+	char address[1024];
+
+	context = _mosquitto_calloc(1, sizeof(struct mosquitto));
+	context->sock = sock;
+
+	context->msg_count = 0;
+	context->msg_count12 = 0;
+
+	if((int)context->sock >= 0){
+		HASH_ADD(hh_sock, db->contexts_by_sock, sock, sizeof(context->sock), context);
+	}
+
+
+
