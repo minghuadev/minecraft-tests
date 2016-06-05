@@ -163,7 +163,7 @@ if [ "x_$uarg" == "x_start" ]; then
       echo  |& /usr/bin/logshifter -tag diy 
     nohup ./mosquitto -c mosquitto.conf  |& /usr/bin/logshifter -tag diy &
   else
-    nohup ./mosquitto -c mosquitto.conf -v > ${logfil}-mosquitto & 
+    nohup ./mosquitto -c mosquitto.conf -v > ${logfil}-mosquitto 2>&1 & 
   fi
 fi
 
