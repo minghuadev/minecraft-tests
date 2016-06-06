@@ -1,0 +1,273 @@
+commit 3e3b0f1bbcab4806f42c47fd144572913b2f843b
+Author: you <you@example.com>
+Date:   Sat Jun 4 03:48:35 2016 +0000
+
+    work1493
+
+diff --git a/lib/mosquitto_internal.h b/lib/mosquitto_internal.h
+index 4b4cf85..575891c 100644
+--- a/lib/mosquitto_internal.h
++++ b/lib/mosquitto_internal.h
+@@ -259,6 +259,7 @@ struct mosquitto {
+ 	ares_channel achan;
+ #  endif
+ #endif
++	int wsfd_sockfd;
+ 
+ #ifdef WITH_BROKER
+ 	UT_hash_handle hh_id;
+diff --git a/src/context.c b/src/context.c
+index 20e1820..9dbc5f8 100644
+--- a/src/context.c
++++ b/src/context.c
+@@ -76,6 +76,7 @@ struct mosquitto *mqtt3_context_init(struct mosquitto_db *db, mosq_sock_t sock)
+ #ifdef WITH_TLS
+ 	context->ssl = NULL;
+ #endif
++	context->wsfd_sockfd = 0;
+ 
+ 	if((int)context->sock >= 0){
+ 		HASH_ADD(hh_sock, db->contexts_by_sock, sock, sizeof(context->sock), context);
+diff --git a/src/loop.c b/src/loop.c
+index 2a99ae7..3634dd9 100644
+--- a/src/loop.c
++++ b/src/loop.c
+@@ -86,6 +86,8 @@ static void temp__expire_websockets_clients(struct mosquitto_db *db)
+ 		last_check = mosquitto_time();
+ 	}
+ }
++/* wsfd temp the number of all the sockets with a connection */
++extern unsigned int wsfd_total_num;
+ #endif
+ 
+ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int listensock_count, int listener_max)
+@@ -139,8 +141,12 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
+ 		context_count += db->bridge_count;
+ #endif
+ 
+-		if(listensock_count + context_count > pollfd_count || !pollfds){
+-			pollfd_count = listensock_count + context_count;
++		unsigned int wsfd_num = 0;
++#ifdef WITH_WEBSOCKETS
++		wsfd_num = wsfd_total_num; 
++#endif
++		if(listensock_count + context_count + wsfd_num > pollfd_count || !pollfds){
++			pollfd_count = listensock_count + context_count + wsfd_num;
+ 			pollfds = _mosquitto_realloc(pollfds, sizeof(struct pollfd)*pollfd_count);
+ 			if(!pollfds){
+ 				_mosquitto_log_printf(NULL, MOSQ_LOG_ERR, "Error: Out of memory.");
+@@ -314,6 +320,62 @@ int mosquitto_main_loop(struct mosquitto_db *db, mosq_sock_t *listensock, int li
+ 		}
+ 
+ #ifndef WIN32
++#ifdef WITH_WEBSOCKETS
++		if ( wsfd_num && pollfd_count >= wsfd_num && 
++				pollfd_index <= pollfd_count - wsfd_num ) {
++		  struct mosquitto *context, *ctxt_tmp;
++		  unsigned int nums = 0;
++		  unsigned int added_cnt = 0;
++		  HASH_ITER(hh_id, db->contexts_by_id, context, ctxt_tmp){
++		    int added_ok = 1; /* default ok */
++		    do {
++			if ( context->wsi == NULL ) break;
++			if ( context->sock == INVALID_SOCKET) break;
++			int wxfd = context->wsfd_sockfd;
++			if ( wxfd <= 0 ) break;
++			if ( wxfd <= 6 ) break; /* 3:/dev/urandom, 4:pipe, 5:pipe, 6:socket */
++			nums ++;
++			added_ok = 0; /* switch to fail */
++			if ( nums > wsfd_num ) break;
++			if ( pollfd_index >= pollfd_count ) break;
++			pollfds[pollfd_index].fd = wxfd;
++			/*pollfds[pollfd_index].events = POLLIN | POLLOUT | POLLPRI;*/
++			pollfds[pollfd_index].events = POLLIN;
++			if( context->out_packet || context->current_out_packet )
++				pollfds[pollfd_index].events |= POLLOUT;
++			pollfds[pollfd_index].revents = 0;
++			pollfd_index ++;
++			added_cnt ++;
++			added_ok = 1; /* success */
++		    } while(0);
++		    if ( added_ok == 0 ) {
++			_mosquitto_log_printf(NULL, MOSQ_LOG_WARNING, 
++				"Warning: Drop wsfd. nums %u total %u.", nums, wsfd_num);
++		    }
++		  } /* HASH_ITER */
++		  if ( wsfd_num > 0 ) {
++			static unsigned int lasttotal=0, lastnums=0, lastcnt=0;
++			if (wsfd_num != lasttotal || nums != lastnums || added_cnt != lastcnt) {
++				if (wsfd_num != nums || nums != added_cnt) {
++					_mosquitto_log_printf(NULL, MOSQ_LOG_NOTICE, 
++						"Notice: wsfd_num %u nums %u added %u.", 
++						wsfd_num, nums, added_cnt);
++				} else {
++					_mosquitto_log_printf(NULL, MOSQ_LOG_INFO, 
++						"Info: wsfd_num %u nums %u added %u.", 
++						wsfd_num, nums, added_cnt);
++				}
++				lasttotal = wsfd_num;
++				lastnums = nums;
++				lastcnt = added_cnt;
++			}
++		  }
++		} else if ( wsfd_num ) {
++			_mosquitto_log_printf(NULL, MOSQ_LOG_ERR, 
++				"Error: Failed. wsfd_num %u pollfd_count %u pollfd_index %u.", 
++				wsfd_num, pollfd_count, pollfd_index);
++		}
++#endif
+ 		sigprocmask(SIG_SETMASK, &sigblock, &origsig);
+ 		fdcount = poll(pollfds, pollfd_index, 100);
+ 		sigprocmask(SIG_SETMASK, &origsig, NULL);
+diff --git a/src/mosquitto.c b/src/mosquitto.c
+index 55ff678..8716fe4 100644
+--- a/src/mosquitto.c
++++ b/src/mosquitto.c
+@@ -52,6 +52,7 @@ Contributors:
+ #include "util_mosq.h"
+ 
+ struct mosquitto_db int_db;
++unsigned int wsfd_total_num;
+ 
+ bool flag_reload = false;
+ #ifdef WITH_PERSISTENCE
+@@ -256,6 +257,7 @@ int main(int argc, char *argv[])
+ #endif
+ 
+ 	memset(&int_db, 0, sizeof(struct mosquitto_db));
++	wsfd_total_num = 0; 
+ 
+ 	_mosquitto_net_init();
+ 
+diff --git a/src/websockets.c b/src/websockets.c
+index ee7c5a2..0138d16 100644
+--- a/src/websockets.c
++++ b/src/websockets.c
+@@ -48,6 +48,7 @@ extern unsigned long g_pub_msgs_received;
+ extern unsigned long g_pub_msgs_sent;
+ #endif
+ extern struct mosquitto_db int_db;
++extern unsigned int wsfd_total_num;
+ 
+ #if defined(LWS_LIBRARY_VERSION_NUMBER)
+ static int callback_mqtt(
+@@ -196,6 +197,11 @@ static int callback_mqtt(struct libwebsocket_context *context,
+ 				u->mosq = NULL;
+ 				return -1;
+ 			}
++			mosq->wsfd_sockfd = libwebsocket_get_socket_fd(wsi);
++			wsfd_total_num ++;
++			_mosquitto_log_printf(NULL, MOSQ_LOG_INFO, 
++					"Info: Opened wsfd %d. Total %u.", 
++					mosq->wsfd_sockfd, wsfd_total_num);
+ 			break;
+ 
+ 		case LWS_CALLBACK_CLOSED:
+@@ -206,6 +212,21 @@ static int callback_mqtt(struct libwebsocket_context *context,
+ 			if(mosq){
+ 				mosq->wsi = NULL;
+ 				do_disconnect(db, mosq);
++				if ( wsfd_total_num > 0 ) {
++					wsfd_total_num --;
++					_mosquitto_log_printf(NULL, MOSQ_LOG_INFO, 
++						"Info: Closed wsfd %d. Total %u.", 
++						mosq->wsfd_sockfd, wsfd_total_num);
++				} else {
++					_mosquitto_log_printf(NULL, MOSQ_LOG_WARNING, 
++						"Warning: Closed wsfd %d. Total already %u.", 
++						mosq->wsfd_sockfd, wsfd_total_num);
++				}
++				mosq->wsfd_sockfd = 0;
++			} else {
++				_mosquitto_log_printf(NULL, MOSQ_LOG_ERR, 
++						"Error: Closed some wsfd. Total %u.", 
++						wsfd_total_num);
+ 			}
+ 			break;
+ 
+
+commit 989c4a565cf4417f7070f81af68ffee2af048425
+Author: you <you@example.com>
+Date:   Sat Jun 4 03:40:18 2016 +0000
+
+    work1492
+
+diff --git a/Makefile b/Makefile
+index 967ba26..b455c0d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -36,7 +36,7 @@ test : mosquitto
+ 
+ install : mosquitto
+ 	set -e; for d in ${DIRS}; do $(MAKE) -C $${d} install; done
+-	set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
++	##set -e; for d in ${DOCDIRS}; do $(MAKE) -C $${d} install; done
+ 	$(INSTALL) -d ${DESTDIR}/etc/mosquitto
+ 	$(INSTALL) -m 644 mosquitto.conf ${DESTDIR}/etc/mosquitto/mosquitto.conf.example
+ 	$(INSTALL) -m 644 aclfile.example ${DESTDIR}/etc/mosquitto/aclfile.example
+
+commit f797845e10b54c16bbd1349a31ccd628eb2d5119
+Author: you <you@example.com>
+Date:   Sat Jun 4 03:31:34 2016 +0000
+
+    work1491
+
+diff --git a/config.mk b/config.mk
+index be86df2..63e37d6 100644
+--- a/config.mk
++++ b/config.mk
+@@ -21,21 +21,21 @@
+ # Disabling this will also mean that passwords must be stored in plain text. It
+ # is strongly recommended that you only disable WITH_TLS if you are not using
+ # password authentication at all.
+-WITH_TLS:=yes
++##WITH_TLS:=yes
+ 
+ # Comment out to disable TLS/PSK support in the broker and client. Requires
+ # WITH_TLS=yes.
+ # This must be disabled if using openssl < 1.0.
+-WITH_TLS_PSK:=yes
++##WITH_TLS_PSK:=yes
+ 
+ # Comment out to disable client client threading support.
+-WITH_THREADING:=yes
++##WITH_THREADING:=yes
+ 
+ # Comment out to remove bridge support from the broker. This allow the broker
+ # to connect to other brokers and subscribe/publish to topics. You probably
+ # want to leave this included unless you want to save a very small amount of
+ # memory size and CPU time.
+-WITH_BRIDGE:=yes
++##WITH_BRIDGE:=yes
+ 
+ # Comment out to remove persistent database support from the broker. This
+ # allows the broker to store retained messages and durable subscriptions to a
+@@ -58,23 +58,23 @@ WITH_MEMORY_TRACKING:=yes
+ WITH_SYS_TREE:=yes
+ 
+ # Build with SRV lookup support.
+-WITH_SRV:=yes
++##WITH_SRV:=yes
+ 
+ # Build using libuuid for clientid generation (Linux only - please report if
+ # supported on your platform).
+-WITH_UUID:=yes
++##WITH_UUID:=yes
+ 
+ # Build with websockets support on the broker.
+-WITH_WEBSOCKETS:=no
++WITH_WEBSOCKETS:=yes
+ 
+ # Use elliptic keys in broker
+ WITH_EC:=yes
+ 
+ # Build man page documentation by default.
+-WITH_DOCS:=yes
++WITH_DOCS:=no
+ 
+ # Build with client support for SOCK5 proxy.
+-WITH_SOCKS:=yes
++##WITH_SOCKS:=yes
+ 
+ # =============================================================================
+ # End of user configuration
