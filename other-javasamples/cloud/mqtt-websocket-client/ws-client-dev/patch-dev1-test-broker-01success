@@ -1,0 +1,35 @@
+--- 01-connect-success.py	2016-06-04 21:11:40.904922356 -0700
++++ ws01-connect-success.py	2016-06-09 19:31:19.857416421 -0700
+@@ -10,6 +10,7 @@
+     sys.path.insert(0, cmd_subfolder)
+ 
+ import mosq_test
++import mosq_test_ws
+ 
+ rc = 1
+ keepalive = 10
+@@ -17,18 +18,18 @@
+ connack_packet = mosq_test.gen_connack(rc=0)
+ 
+ cmd = ['../../src/mosquitto', '-p', '1888']
+-broker = mosq_test.start_broker(filename=os.path.basename(__file__), cmd=cmd)
++##broker = mosq_test.start_broker(filename=os.path.basename(__file__), cmd=cmd)
+ 
+ try:
+-    sock = mosq_test.do_client_connect(connect_packet, connack_packet)
++    sock = mosq_test_ws.do_client_connect_ws(connect_packet, connack_packet)
+     sock.close()
+     rc = 0
+ finally:
+-    broker.terminate()
+-    broker.wait()
++    ##broker.terminate()
++    ##broker.wait()
+     if rc:
+-        (stdo, stde) = broker.communicate()
+-        print(stde)
++        pass ##(stdo, stde) = broker.communicate()
++        ##print(stde)
+ 
+ exit(rc)
+ 

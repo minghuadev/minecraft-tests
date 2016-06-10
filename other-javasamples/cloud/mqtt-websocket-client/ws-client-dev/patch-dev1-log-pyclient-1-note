@@ -1,0 +1,60 @@
+
+pyclient:
+1465530202: Info: wsfd http. Total 0. reason 17
+1465530202: Info: wsfd http. Total 0. reason 29
+1465530202: Info: wsfd http. Total 0. reason 19
+1465530202: Info: wsfd http. Total 0. reason 35
+1465530202: Info: wsfd http. Total 0. reason 32
+1465530202: Info: wsfd http. Total 0. reason 36
+1465530202: Info: wsfd http. Total 0. reason 34
+
+1465530202: Info: wsfd http. Total 0. reason 20
+1465530202: Info: wsfd http. Total 0. reason 0
+1465530202: Info: wsfd http. Total 0. reason 6   received
+
+
+js client: reconnect...
+1465530579: Info: wsfd http. Total 0. reason 17   filter_network_connection
+1465530579: Info: wsfd http. Total 0. reason 29   wsi_create
+1465530579: Info: wsfd http. Total 0. reason 19   server_new_client_installed
+1465530579: Info: wsfd http. Total 0. reason 35   lock_poll
+1465530579: Info: wsfd http. Total 0. reason 32   add_poll_fd
+1465530579: Info: wsfd http. Total 0. reason 36   unlock_poll
+1465530579: Info: wsfd http. Total 0. reason 34   change_mode_poll_fd
+
+1465530579: Info: wsfd mqtt. Total 0. reason 20   filter_protocol_connection
+1465530579: Info: wsfd mqtt. Total 0. reason 0
+1465530579: Info: wsfd mqtt. reason 0 established
+1465530579: Info: Opened wsfd 7. Total 1.
+1465530579: Notice: wsfd_num 1 nums 0 added 0.
+
+
+init:
+$ LD_LIBRARY_PATH=. ./mosquitto -c mosquitto.conf -v
+1465530578: mosquitto version 1.4.9 (build date 2016-06-09 02:00:33+0000) starting
+1465530578: Config loaded from mosquitto.conf.
+1465530578: Opening websockets listen socket on port 9008.
+1465530578: Info: wsfd http. Total 0. reason 35
+1465530578: Info: wsfd http. Total 0. reason 32
+1465530578: Info: wsfd http. Total 0. reason 36
+1465530578: Info: wsfd http. Total 0. reason 27   protocol_init
+1465530578: Info: wsfd mqtt. Total 0. reason 27
+1465530578: Info: wsfd mqtt. Total 0. reason 27
+
+
+http client page connection:
+1465534082: Info: wsfd http. Total 0. reason 17
+1465534082: Info: wsfd http. Total 0. reason 29
+1465534082: Info: wsfd http. Total 0. reason 19
+1465534082: Info: wsfd http. Total 0. reason 35
+1465534082: Info: wsfd http. Total 0. reason 32
+1465534082: Info: wsfd http. Total 0. reason 36
+1465534082: Info: wsfd http. Total 0. reason 34
+
+1465534083: Info: wsfd http. Total 0. reason 18   filter_http_connection
+1465534083: Info: wsfd http. Total 0. reason 12   
+1465534083: Info: wsfd http. reason 12 http
+1465534083: Info: Opened wsfd . Total 0.
+1465534083: http serving file "/home/stk/srv-pycache/home/stk/mqtt/mosweb/sbin/simpleweb/index.html".
+
+

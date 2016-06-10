@@ -1,0 +1,63 @@
+diff --git a/src/websockets.c b/src/websockets.c
+index 0138d16..68d85bc 100644
+--- a/src/websockets.c
++++ b/src/websockets.c
+@@ -178,8 +178,15 @@ static int callback_mqtt(struct libwebsocket_context *context,
+ 
+ 	db = &int_db;
+ 
++if ( reason != LWS_CALLBACK_GET_THREAD_ID ) { /* 31 */
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd mqtt. Total %u. reason %d", wsfd_total_num, reason);
++}
+ 	switch (reason) {
+ 		case LWS_CALLBACK_ESTABLISHED:
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd mqtt. reason %d %s", reason, "established");
++if ( in ) { char *pp=(char*)in;
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd mqtt. path %02x %02x %02x %02x %02x %02x", pp[0],pp[1],pp[2],pp[3],pp[4],pp[5]);
++} else _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd mqtt. path null");
+ 			mosq = mqtt3_context_init(db, WEBSOCKET_CLIENT);
+ 			if(mosq){
+ #if !defined(LWS_LIBRARY_VERSION_NUMBER)
+@@ -205,6 +212,7 @@ static int callback_mqtt(struct libwebsocket_context *context,
+ 			break;
+ 
+ 		case LWS_CALLBACK_CLOSED:
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd mqtt. reason %d %s", reason, "closed");
+ 			if(!u){
+ 				return -1;
+ 			}
+@@ -231,6 +239,7 @@ static int callback_mqtt(struct libwebsocket_context *context,
+ 			break;
+ 
+ 		case LWS_CALLBACK_SERVER_WRITEABLE:
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd mqtt. reason %d %s", reason, "writeable");
+ 			if(!u){
+ 				return -1;
+ 			}
+@@ -300,6 +309,7 @@ static int callback_mqtt(struct libwebsocket_context *context,
+ 			break;
+ 
+ 		case LWS_CALLBACK_RECEIVE:
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd mqtt. reason %d %s", reason, "receive");
+ 			if(!u || !u->mosq){
+ 				return -1;
+ 			}
+@@ -414,8 +424,18 @@ static int callback_http(struct libwebsocket_context *context,
+ 
+ 	/* FIXME - ssl cert verification is done here. */
+ 
++if ( reason != LWS_CALLBACK_GET_THREAD_ID ) { /* 31 */
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd http. Total %u. reason %d", wsfd_total_num, reason);
++}
+ 	switch (reason) {
+ 		case LWS_CALLBACK_HTTP:
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd http. reason %d %s", reason, "http");
++			_mosquitto_log_printf(NULL, MOSQ_LOG_INFO, 
++					"Info: Opened wsfd http. Total %u.", 
++					wsfd_total_num);
++if ( in ) { char *pp=(char*)in;
++ _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd http. path %02x %02x %02x %02x %02x %02x", pp[0],pp[1],pp[2],pp[3],pp[4],pp[5]);
++} else _mosquitto_log_printf(NULL, MOSQ_LOG_INFO, "Info: wsfd http. path null");
+ 			if(!u){
+ 				return -1;
+ 			}
