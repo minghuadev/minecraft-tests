@@ -23,12 +23,27 @@ while [ true ]; do
   if [ -f newbuild ]; then mv newbuild sbin/mosquitto; echo newbuild; fi
 
   sh run_on_openshift.sh start 
-  sleep 300
+  sleep 100
   ps -e | grep mosq
   if [ $? -eq 0 ]; then result=succ; else result=fail; fi
   echo result $result cnt $cnt
-
   killall mosquitto ; sleep 3
+
+      grep error log-runon-mosquitto > tmplogerror
+      grep unknown tmplogerror > tmplogerrorunknown
+      numerrs=$( wc -l tmplogerror | sed -e 's/ .*//')
+      numunkns=$( wc -l tmplogerrorunknown | sed -e 's/ .*//')
+      echo numbers $numerrs $numunkns
+      if [ $numerrs -eq $numunkns + 1 ]; then
+          echo
+          echo '    ' cnt $cnt timestamp $(date +%s) found error
+          echo -n '    ' ; date
+          echo '=================================';
+          touch newerror
+          echo abort the test
+          break
+      fi
+
   savefil=$(printf "save%03d_%s" $cnt $result)
   if [ ! -d savedlogs ]; then mkdir savedlogs; fi
   mv log-runon-mosquitto savedlogs/$savefil

@@ -28,6 +28,11 @@ while [ true ]; do
   echo -n '    ' ; date
   echo '=================================';
 
+  if [ -f ../mosweb/newerror ]; then 
+      echo ; echo found ../mosweb/newerror .. stop building 
+      break
+  fi
+
 done
 
 
