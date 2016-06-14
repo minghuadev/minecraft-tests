@@ -1,5 +1,5 @@
 --- mosq_test.py	2016-06-04 21:11:40.920922672 -0700
-+++ mosq_test_ws.py	2016-06-09 23:10:43.109069785 -0700
++++ mosq_test_ws.py	2016-06-13 22:38:18.274852470 -0700
 @@ -37,13 +37,15 @@
  
      return subprocess.Popen(cmd, env=env)
@@ -18,7 +18,7 @@
      return packet_matches(name, packet_recvd, expected)
  
  def packet_matches(name, recvd, expected):
-@@ -62,16 +64,21 @@
+@@ -62,16 +64,27 @@
      else:
          return 1
  
@@ -27,7 +27,12 @@
 -    sock.settimeout(timeout)
 -    sock.connect((hostname, port))
 -    sock.send(connect_packet)
-+def do_client_connect_ws(connect_packet, connack_packet, hostname="localhost", port=1888, timeout=60, connack_error="connack"):
+-
+-    if expect_packet(sock, connack_error, connack_packet):
+-        return sock
+-    else:
+-        sock.close()
++def do_client_connect_ws(connect_packet, connack_packet, hostname="localhost", port=9008, timeout=60, connack_error="connack"):
 +    import sys as wssys
 +    if "../websocket_client-0.37.0/" not in wssys.path:
 +        wssys.path.insert(0,"../websocket_client-0.37.0/")
@@ -35,16 +40,19 @@
 +    ws = wst.create_connection("ws://%s:%d/mqtt" % (hostname, port),
 +                     subprotocols=["mqtt"],
 +                     sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),) )
++    if timeout > 15: timeout = 2.5
 +    ws.settimeout(timeout)
 +    ws.send(connect_packet)
- 
--    if expect_packet(sock, connack_error, connack_packet):
--        return sock
-+    if expect_packet_ws(ws, connack_error, connack_packet):
-+        return ws
-     else:
--        sock.close()
++
++    try:
++        if expect_packet_ws(ws, connack_error, connack_packet):
++            return ws
++        else:
++            ws.close()
++            raise ValueError
++    except wskt.WebSocketTimeoutException as e:
 +        ws.close()
++        print "FAIL: websocket: ", e.message
          raise ValueError
  
  def remaining_length(packet):

@@ -2,10 +2,22 @@
 see ../mqtt-mosquitto-openshift/*patch3*
 
 
-how to test: start the mosquitto broker then 
+start the mosquitto broker: 
+    put run_on_openshift.sh into the directory that contains sbin
+    put libwebsockets.so.n file into the sbin aside with mosquitto binary
+    run `run_on_openshift.sh` to modify config.js and create mosquitto config file, 
+        and start the mosquitto
+
+how to test: 
     browser to :9008/index.html  as a monitor
     browser to :9008/test1.html  as a client
     browser to :9008/test2.html  as a client
 
     click the test1 button named TriggerTest to send to test2 and get bounced back
+
+batch message of 20 every 10 seconds: 
+    put the test101.html to simpleweb directory
+    instead of test1.html, browser browses to :9008/test101.html. it automatically sends 
+        batch of 20 messages and get them bounced back and delay measured.
+
 
