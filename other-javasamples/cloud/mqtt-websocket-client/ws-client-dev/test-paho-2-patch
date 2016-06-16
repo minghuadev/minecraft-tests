@@ -1,0 +1,34 @@
+
+$ git diff
+diff --git a/examples/pub-single.py b/examples/pub-single.py
+index d127a46..44361c3 100755
+--- a/examples/pub-single.py
++++ b/examples/pub-single.py
+@@ -29,4 +29,5 @@ except ImportError:
+         sys.path.insert(0, cmd_subfolder)
+     import paho.mqtt.publish as publish
+
+-publish.single("paho/test/single", "boo", hostname="test.mosquitto.org")
++publish.single("/HelloWorld", "boo", hostname="test.mosquitto.org",
++               port=8080, transport='websockets')
+\ No newline at end of file
+diff --git a/examples/sub-simple.py b/examples/sub-simple.py
+index 5e31d1b..e7a0722 100755
+--- a/examples/sub-simple.py
++++ b/examples/sub-simple.py
+@@ -30,9 +30,11 @@ except ImportError:
+     import paho.mqtt.subscribe as subscribe
+     import paho.mqtt.client
+
+-topics = ['#']
++topics = ['/HelloWorld']
+
+-m = subscribe.simple(topics, hostname="iot.eclipse.org", retained=False, msg_count=2)
++m = subscribe.simple(topics, hostname="test.mosquitto.org",
++                         retained=False, msg_count=2,
++                         port=8080, transport='websockets')
+ for a in m:
+     print(a.topic)
+     print(a.payload)
+
+
