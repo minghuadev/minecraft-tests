@@ -1,0 +1,36 @@
+
+filelist-lrt
+june 17 2016
+
+-rw-rw-r-- 1     2150 Feb 21  2015 arch-diagram
+-rw-rw-r-- 1     1751 Feb 24  2015 arch-scale-app
+-rw-rw-r-- 1  1953336 Feb 25  2015 expo08nyc_scalable_web_arch.pdf
+-rw-rw-r-- 1      377 Feb 25  2015 arch-web-scale-patterns
+-rw-rw-r-- 1      176 Apr 30 16:20 iot-board-minnow-openshift
+-rw-rw-r-- 1      319 Apr 30 16:46 iot-kyup
+-rw-rw-r-- 1       72 Apr 30 17:17 openshift-docker-stack
+-rw-rw-r-- 1     1846 Apr 30 18:05 iot-queue-mqtt
+-rw-rw-r-- 1   807915 May  4 20:17 openshift-doc-2-OpenShift_Online-2.0-User_Guide-en-US_7.pdf
+-rw-rw-r-- 1  1302644 May  4 20:19 openshift-doc-3-OpenShift-2.0-User_Guide-en-US.pdf
+-rw-rw-r-- 1    59057 May  4 20:34 openshift-doc-4-fedora-opwnshift-origin.pdf
+-rw-rw-r-- 1     6252 May  4 20:50 openshift-doc-5-tree
+-rw-rw-r-- 1  8059749 May  4 20:51 openshift-doc-5-www.tgz
+-rw-rw-r-- 1     1629 May  5 20:04 openshift-cartridge-diy
+-rw-rw-r-- 1      270 May  5 20:07 openshift-vm-origin-m4-tut
+-rw-rw-r-- 1     1586 May  5 21:27 websocket-gist2-comments
+-rw-rw-r-- 1    10080 May  5 21:32 websocket-gist2.py
+-rw-rw-r-- 1     1620 May  5 21:55 websocket-gist2-test.html
+-rw-rw-r-- 1      698 May  5 22:01 websocket-server-python
+-rw-rw-r-- 1     1869 May  5 22:58 openshift-socket
+-rw-rw-r-- 1     8712 May  6 06:28 generate-CA.sh
+-rw-rw-r-- 1   207774 May  6 07:10 mqtt-websocket-mosquitto.pdf
+-rw-rw-r-- 1      202 May  6 07:17 generate-CA-note
+-rw-rw-r-- 1     1205 May 19 20:11 openshift-doc-1-links
+-rw-rw-r-- 1      312 May 20 20:35 openshift-origin-m4-route
+-rw-rw-r-- 1     4747 May 21 23:07 mqtt-mosquitto
+-rw-rw-r-- 1     3855 May 24 21:40 mqtt-websocket
+drwxrwxr-x 3     4096 Jun 13 21:42 mqtt-mosquitto-openshift
+drwxrwxr-x 7     4096 Jun 13 22:02 mqtt-websocket-client
+-rw-rw-r-- 1        0 Jun 17 06:21 filelist-lrt
+
+
