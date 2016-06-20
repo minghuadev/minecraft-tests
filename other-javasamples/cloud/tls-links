@@ -1,0 +1,88 @@
+
+==============================================================================
+search tls vs ssl 
+
+
+http://stackoverflow.com/questions/3690734/difference-between-ssl-tls
+
+    ieft tls list http://thread.gmane.org/gmane.ietf.tls/5095
+
+    only 60% of sites support TLS 1.1 and 1.2 https://www.trustworthyinternet.org/ssl-pulse/
+
+
+==============================================================================
+search pass a ssl socket to another process
+
+
+http://stackoverflow.com/questions/5361108/how-to-pass-openssl-socket-to-another-process
+    no that is not possible
+
+
+OpenSSL: How to accept SSL connection in one process and reuse the same SSL context in another process
+http://stackoverflow.com/questions/23767529/openssl-how-to-accept-ssl-connection-in-one-process-and-reuse-the-same-ssl-cont?rq=1
+
+    A search online finds this discussion:
+
+    Passing TLS sessions between programs 
+        http://openssl.6102.n7.nabble.com/Passing-TLS-sessions-between-programs-td10087.html
+
+        Once you have the SSL_SESSION, convert it to ASN1 (via i2d_SSL_SESSION) and dump it 
+        to a file. Read that file in with your second program and convert it back from ASN1 
+        to SSL_SESSION(via d2i_SSL_SESSION) and add it to the SSL_SESSION cache of 
+        the SSL_CTX (via SSL_CTX_add_session).
+
+        I found in doc/ssleay.txt :
+        [...]
+        The PEM_write_SSL_SESSION(fp,x) and PEM_read_SSL_SESSION(fp,x,cb) will write to 
+        a file pointer in base64 encoding. What you can do with this, is pass session 
+        information between separate processes.
+        [...]
+
+    So you need to serialize the SSL session data from P1 and pass it to C1 to deserialize, 
+    along with the socket descriptor. You can then create new SSL and SSL_CTX objects in C1 
+    and associate them with the socket and deserialized session data so C1 can take over 
+    the conversation.
+
+     answered May 20 '14 at 19:18 Remy Lebeau
+
+
+OpenSSL: accept TLS connection and then transfer to another process
+http://stackoverflow.com/questions/12426246/openssl-accept-tls-connection-and-then-transfer-to-another-process/37900131#37900131
+
+
+shared ssl session support by mark gambino
+http://www-01.ibm.com/software/htp/tpf/tpfug/tgs02/tgs02r.pdf
+
+
+==============================================================================
+search tls kernel mode
+
+
+tls in the kernel
+https://lwn.net/Articles/666509/
+By Jake Edge December 2, 2015
+
+An RFC patch[1] from Dave Watson at Facebook proposes moving the bulk of Transport Layer 
+Security (TLS) processing into the kernel
+
+  [1]: https://lwn.net/Articles/665602/
+
+
+==============================================================================
+search openssl shared session among processes
+
+
+http://stackoverflow.com/questions/28187293/share-ssl-socket-with-child-process
+https://github.com/eduardsui/tlse
+
+
+==============================================================================
+search share ssl socket with child process
+
+
+https://github.com/bumptech/stud
+https://nacl.cr.yp.to/
+https://hitch-tls.org/
+
+
+
