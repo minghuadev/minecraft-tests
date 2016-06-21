@@ -1,0 +1,348 @@
+
+WebSockets, caution required!
+Sam Saffron 6 month ago
+
+https://samsaffron.com/archive/2015/12/29/websockets-caution-required
+
+
+When developers hear that WebSockets are going to land in the near future in Rails 
+they get all giddy with excitement. 
+
+But your users don't care if you use WebSockets:
+
+    Users want "delightful realtime web apps".
+
+    Developers want "delightfully easy to build realtime web apps".
+
+    Operations want "delightfully easy to deploy, scale and manage realtime web apps".
+
+If WebSockets get us there, great, but it is an implementation detail that comes at high cost. 
+
+
+Do we really need ultra high performance, full duplex Client-Server communication?
+
+WebSockets provides simple APIs to broadcast information to clients and simple APIs to 
+ship information from the clients to the web server.
+
+A realtime channel to send information from the server to the client is very welcome. 
+In fact it is a part of HTTP 1.1.
+
+However, a brand new API for shipping information to the server from web browsers 
+introduce a new decision point for developers:
+
+    When a user posts a message on chat, do I make a RESTful call and POST a message or 
+    do I bypass REST and use WebSockets?
+
+    If I use the new backchannel, how do I debug it? How do I log what is going on? 
+    How do I profile it? How do I ensure it does not slow down other traffic to my site? 
+    Do I also expose this endpoint in a controller action? How do I rate limit this? 
+    How do I ensure my background WebSocket thread does not exhaust my db connection limit?
+
+    :warning: If an API allows hundreds of different connections concurrent access to 
+    the database, bad stuff will happen. 
+
+Introducing this backchannel is not a clear win and comes with many caveats.
+
+I do not think the majority of web applications need a new backchannel into the web server. 
+On a technical level you would opt for such a construct if you were managing 10k interactive 
+console sessions on the web. You can transport data more efficiently to the server, in that 
+the web server no longer needs to parse HTTP headers, Rails does not need to do a middleware 
+crawl and so on.
+
+But the majority of web applications out there are predominantly read applications. Lots of 
+users benefit from live updates, but very few change information. It is incredibly rare to 
+be in a situation where the HTTP header parsing optimisation is warranted; this work is 
+done sub millisecond. Bypassing Rack middleware on the other hand can be significant, 
+especially when full stack middleware crawls are a 10-20ms affair. That however is 
+an implementation detail we can optimise and not a reason to rule out REST for client 
+to server communications.
+
+    For realtime web applications we need simple APIs to broadcast information reliably 
+    and quickly to clients. We do not need new mechanisms for shipping information to 
+    the server. 
+
+
+What's wrong with WebSockets?
+
+WebSockets had a very tumultuous ride with a super duper unstable spec during the journey. 
+The side effects of this joyride show in quite a few spots. Take a look at Ilya Grigorik's 
+very complete implementation. 5 framing protocols, 3 handshake protocols and so on.
+
+At last, today, this is all stable and we have RFC6455 which is implemented ubiquitously 
+across all major modern browsers. However, there was some collateral damage:
+
+    IE9 and earlier are not supported
+
+    Many libraries – including the most popular Ruby one – ship with multiple 
+    implementations, despite Hixie 75 being flawed.
+
+I am confident the collateral damage will, in time, be healed. That said, even the most 
+perfect implementation comes with significant technical drawbacks.
+
+
+1) Proxy servers can wreak havoc with WebSockets running over unsecured HTTP
+
+The proxy server issue is quite widespread. Our initial release of Discourse used WebSockets, 
+however reports kept coming in of "missing updates on topics" and so on. Amongst the various 
+proxy pariahs was my mobile phone network Telstra which basically let you have an open socket, 
+but did not let any data through.
+
+To work around the "WebSocket is dead but still appears open problem" WebSocket implementers 
+usually introduce a ping/pong message. This solution works fine provided you are running 
+over HTTPS, but over HTTP all bets are off and rogue proxies will break you.
+
+That said, "... but you must have HTTPS" is the weakest argument against WebSocket adoption, 
+I want all the web to be HTTPS, it is the future and it is getting cheaper every day. But 
+you should know that weird stuff will definitely happen you deploy WebSockets over unsecured 
+HTTP. Unfortunately for us at Discourse dropping support for HTTP is not an option quite yet, 
+as it would hurt adoption.
+
+
+2) Web browsers allow huge numbers of open WebSockets
+
+The infamous 6 connections per host limit does not apply to WebSockets. Instead a far bigger 
+limit holds (255 in Chrome and 200 in Firefox). This blessing is also a curse. It means 
+that end users opening lots of tabs can cause large amounts of load and consume large amounts 
+of continuous server resources. Open 20 tabs with a WebSocket based application and you are 
+risking 20 connections unless the client/server mitigates. 
+
+There are quite a few ways to mitigate:
+
+    If we have a reliable queue driving stuff, we can shut down sockets after a while 
+    (or when in a background tab) and reconnect later on and catch up.
+
+    If we have a reliable queue driving stuff, we can throttle and turn back high numbers 
+    of TCP connections at our proxy or even iptables, but it is hard to guess if we are 
+    turning away the right connections.
+
+    On Firefox and Chrome we can share a connection by using a shared web worker, which 
+    is unlikely to be supported on mobile and is absent from Microsoft's offerings. 
+    I noticed Facebook are experimenting with shared workers (Gmail and Twitter are not).
+
+    MessageBus uses browser visibility APIs to slow down communication on out-of-focus tabs, 
+    falling back to a 2 minute poll on background tabs.
+
+
+3) WebSockets and HTTP/2 transport are not unified
+
+HTTP/2 is able to cope with the multiple tab problem much more efficiently than WebSockets. 
+A single HTTP/2 connection can be multiplexed across tabs, which makes loading pages 
+in new tabs much faster and significantly reduces the cost of polling or long polling 
+from a networking point of view. Unfortunately, HTTP/2 does not play nice with WebSockets. 
+There is no way to tunnel a WebSocket over HTTP/2, they are separate protocols.
+
+There is an expired draft to unify the two protocols, but no momentum around it.
+
+HTTP/2 has the ability to stream data to clients by sending multiple DATA frames, meaning 
+that streaming data from the server to the client is fully supported.
+
+Unlike running a Socket server, which includes a fair amount of complex Ruby code, running 
+a HTTP/2 server is super easy. HTTP/2 is now in NGINX mainline, you can simply enable 
+the protocol and you are done. 
+
+
+4) Implementing WebSockets efficiently on the server side requires epoll, kqueue or 
+I/O Completion ports.
+
+Efficient long polling, HTTP streaming (or Server Sent Events) is fairly simple to implement 
+in pure Ruby since we do not need to repeatedly run IO.select. The most complicated structure 
+we need to deal with is a TimerThread
+
+Efficient Socket servers on the other hand are rather complicated in the Ruby world. 
+We need to keep track of potentially thousands of connections dispatching Ruby methods 
+when new data is available on any of the sockets.
+
+Ruby ships with IO select which allows you to watch an array of sockets for new data, 
+however it is fairly inefficient cause you force the kernel to keep walking big arrays 
+to figure out if you have any new data. Additionally, it has a hard limit of 1024 entries 
+(depending on how you compiled your kernel), you can not select on longer lists. 
+EventMachine solves this limitation by implementing epoll (and kqueue for BSD).
+
+Implementing epoll correctly is not easy.
+
+
+5) Load balancing WebSockets is complicated
+
+If you decide to run a farm of WebSockets, proper load balancing is complicated. 
+If you find out that your Socket servers are overloaded and decide to quickly add 
+a few servers to the mix, you have no clean way of re-balancing current traffic. 
+You have to terminate overloaded servers due to connections being open indefinitely. 
+At that point you are exposing yourself to a flood of connections (which can be somewhat 
+mitigated by clients). Furthermore if "on reconnect" we have to refresh the page, 
+restart a socket server and you will flood your web servers.
+
+With WebSockets you are forced to run TCP proxies as opposed to HTTP proxies. 
+TCP proxies can not inject headers, rewrite URLs or perform many of the roles 
+we traditionally let our HTTP proxies take care of.
+
+Denial of service attacks that are usually mitigated by front end HTTP proxies 
+can not be handled by TCP proxies; what happens if someone connects to a socket 
+and starts pumping messages into it that cause database reads in your Rails app? 
+A single connection can wreak enormous amounts of havoc.
+
+
+6) Sophisticated WebSocket implementations end up re-inventing HTTP
+
+Say we need to be subscribed to 10 channels on the web browser (a chat channel, 
+a notifications channel and so on), clearly we will not want to make 10 different 
+WebSocket connections. We end up multiplexing commands to multiple channels on 
+a single WebSocket.
+
+Posting "Sam said hello" to the "/chat" channel ends up looking very much like HTTP. 
+We have "routing" which specifies the channel we are posting on, this looks 
+very much like HTTP headers. We have a payload, that looks like HTTP body. 
+Unlike HTTP/2 we are unlikely to get header compression or even body compression.
+
+
+7) WebSockets give you the illusion of reliability
+
+WebSockets ship with a very appealing API.
+
+    You can connect
+    You have a reliable connection to the server due to TCP
+    You can send and receive messages
+
+But... the Internet is a very unreliable place. Laptops go offline, you turn on 
+airplane mode when you had it with all the annoying marketing calls, Internet 
+sometimes does not work. 
+
+This means that this appealing API still needs to be backed by reliable messaging, 
+you need to be able to catch up with a backlog of messages and so on.
+
+When implementing WebSockets you need to treat them just as though they are simple 
+HTTP calls that can go missing be processed at the server out-of-order and so on. 
+They only provide the illusion of reliability. 
+
+
+WebSockets are an implementation detail, not a feature
+
+At best, WebSockets are a value add. They provide yet another transport mechanism.
+
+There are very valid technical reasons many of the biggest sites on the Internet 
+have not adopted them. Twitter use HTTP/2 + polling, Facebook and Gmail use Long Polling. 
+Saying WebSockets are the only way and the way of the future, is wrongheaded. 
+HTTP/2 may end up winning this battle due to the huge amount of WebSocket connections 
+web browsers allow, and HTTP/3 may unify the protocols.
+
+    You may want to avoid running dedicated socket servers (which at scale you 
+    are likely to want to run so sockets do not interfere with standard HTTP traffic). 
+    At Discourse we run no dedicated long polling servers, adding capacity is trivial. 
+    Capacity is always balanced.
+
+    You may be happy with a 30 second delays and be fine with polling.
+
+    You may prefer the consolidated transport HTTP/2 offers and go for 
+    long polling + streaming on HTTP/2
+
+
+Messaging reliability is far more important than WebSockets
+
+MessageBus is backed by a reliable pub/sub channel. Messages are globally sequenced. 
+Messages are locally sequenced to a channel. This means that at any point you can 
+"catch up" with old messages (capped). API wise it means that when a client subscribes 
+it has the option to tell the server what position the channel is:
+
+    // subscribe to the chat channel at position 7
+    MessageBus.subscribe('/chat', function(msg){ alert(msg); }, 7);
+
+Due to the reliable underpinnings of MessageBus it is immune to a class of issues 
+that affect pure WebSocket implementations.
+
+This underpinning makes it trivial to write very efficient cross process caches 
+amongst many other uses.
+
+Reliable messaging is a well understood concept. You can use Erlang, RabbitMQ, ZeroMQ, 
+Redis, PostgreSQL or even MySQL to implement reliable messaging.
+
+With reliable messaging implemented, multiple transport mechanisms can be implemented 
+with ease. This "unlocks" the ability to do long-polling, long-polling with chunked 
+encoding, EventSource, polling, forever iframes etc in your framework.
+
+    :warning: When picking a realtime framework, prefer reliable underpinnings to WebSockets. 
+
+
+Where do I stand?
+
+Discourse does not use WebSockets. Discourse docker ships with HTTP/2 templates.
+
+We have a realtime web application. I can make a realtime chat room just fine in 200 
+lines of code. I can run it just fine in Rails 3 or 4 today by simply including the gem. 
+We handle millions of long polls a day for our hosted customers. As soon as someone posts 
+a reply to a topic in Discourse it pops up on the screen.
+
+We regard MessageBus as a fundamental and integral part of our stack. It enables reliable 
+server/server live communication and reliable server/client live communication. It is 
+transport agnostic. It has one dependency on rack and one dependency on redis, that is all.
+
+When I hear people getting excited about WebSockets, this is the picture I see in my mind. 
+(caution, sharp object, gloves required).
+
+In a world that already had HTTP/2 it is very unlikely we would see WebSockets being 
+ratified as it covers that vast majority of use cases WebSockets solves.
+
+Special thank you to Ilya, Evan, Matt, Jeff, Richard and Jeremy for reviewing this article.
+
+
+Comments
+
+
+ Sam Saffron 6 months ago 
+
+ One thing some people found confusing was that the article is lacking a bit 
+ on the "concrete recommendations" front. What do I recommend you do when you 
+ need realtime web apps?
+
+    Always prefer frameworks that provide multiple transport protocols with automatic 
+    fallback (and manual override). Examples are: socket.io , SignalR , Nchan and 
+    MessageBus for Ruby. (there are many others not listed here, feel free to mention 
+    them in comments)
+
+    Always prefer frameworks that support backing your channels with a reliable queue. 
+    socket io, SignalR, Nchan, MessageBus.
+
+    Consider avoiding WebSockets altogether and only enabling the following 3 protocols 
+    provided they fallback cleanly: long-polling with chunked encoding, long-polling 
+    and polling. EventSource is simply a convenience client API, on the server it is 
+    long-polling with chunked encoding.
+
+    Always deploy your realtime backend over SSL if possible.
+
+    Always prefer having an HTTP/2 backend for your realtime backend. (keeping in mind 
+    that setup will get complicated if you also want to enable WebSockets)
+
+    For realtime prefer using a framework / gem / library over building it yourself, 
+    there are tons of little edge cases that take many months to nut out.
+
+    In some cases WebSockets may be a good fit and the best tool for the job. 
+    Games often require ultra fast full duplex communications. Interactive SSH sessions 
+    on a web page would also be a great fit.
+ 
+
+ Thomas OR 6 months ago
+
+ Good stuff - unfortunately a lot of this knowledge is typically gathered from hindsight. 
+ Load balancing/clustering and connecting to application logic is non-trivial and most 
+ developers don't realize the implications of running an async persistent channel and 
+ how it affects application logic...
+
+ I've implemented web socket and push servers in event machine previously, and I realized 
+ getting a web socket working is just the tip of the iceberg. So for a new application 
+ we took a different strategy and used Torquebox (for exactly the reasons you point out...)
+
+ Torquebox does a good job and if you use the JMS bridge web sockets connect directly 
+ into the managed infrastructure (it also automatically passes web session to socket 
+ session, etc.). Web socket subscription channels become virtual JMS queues and we're 
+ able to leverage a lot of JEE 'goodness' (never thought I'd say that!) with queue 
+ management, multiplexing message processors, reliable messages, virtual queues, etc. 
+ (And it's all built in - all you do is start it up and it works).
+
+ Our upwards channel is REST (as you pointed out, you need the dispatch anyways), 
+ but the downwards to client is web sockets so we can manage client subscriptions and 
+ broadcast channels (via STOMP). So far it has scaled really well. We use HTTPS/nginx/wss 
+ and Sinatra/MongoDB....
+
+ For reliability we number every web socket message on the way down, and if the web client 
+ notices a skip, it tosses state and resyncs, not easy but it works well at the end of the day.
+
+
+
