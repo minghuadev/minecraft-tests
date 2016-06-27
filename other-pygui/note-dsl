@@ -1,0 +1,27 @@
+
+search dsl in python
+
+
+
+====================================================================
+http://www.slideshare.net/Siddhi/creating-domain-specific-languages-in-python
+
+dsl using pyparsing and internal classes
+
+    see parser/ directory : dsl-...
+
+
+
+====================================================================
+http://stackoverflow.com/questions/1547782/mini-languages-in-python
+
+    http://nedbatchelder.com/text/python-parsers.html
+    Ned Batchelder  Python parsing tools
+
+        http://effbot.org/zone/simple-top-down-parsing.htm
+        http://effbot.org/zone/simple-iterator-parser.htm
+
+        see parser/ directory
+
+
+

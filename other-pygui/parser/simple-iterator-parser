@@ -1,0 +1,50 @@
+
+'''http://effbot.org/zone/simple-iterator-parser.htm
+Fredrik Lundh | November 2005 | Originally posted to online.effbot.org
+
+Outline:
+
+    use an iterator to split the source into a stream of tokens or token descriptors.
+    pass the iterator’s next method and the first token to the toplevel parser class.
+    use separate functions, where appropriate, for individual grammar rules. pass the next method and the current token on to these functions as well.
+    to check the current token, inspect the token argument. to fetch the next token, call the next method. 
+
+
+'''
+
+import cStringIO, tokenize
+
+def atom(next, token):
+    if token[1] == "(":
+        out = []
+        token = next()
+        while token[1] != ")":
+            out.append(atom(next, token))
+            token = next()
+            if token[1] == ",":
+                token = next()
+        return tuple(out)
+    elif token[0] is tokenize.STRING:
+        return token[1][1:-1].decode("string-escape")
+    elif token[0] is tokenize.NUMBER:
+        try:
+            return int(token[1], 0)
+        except ValueError:
+            return float(token[1])
+    raise SyntaxError("malformed expression (%s)" % token[1])
+
+def simple_eval_v1(source):
+    src = cStringIO.StringIO(source).readline
+    src = tokenize.generate_tokens(src)
+    return atom(src.next, src.next())
+
+def simple_eval(source):
+    src = cStringIO.StringIO(source).readline
+    src = tokenize.generate_tokens(src)
+    src = (token for token in src if token[0] is not tokenize.NL)
+    res = atom(src.next, src.next())
+    if src.next()[0] is not tokenize.ENDMARKER:
+        raise SyntaxError("bogus data after expression")
+    return res
+
+

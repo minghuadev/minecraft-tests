@@ -1,0 +1,78 @@
+
+'''http://www.slideshare.net/Siddhi/creating-domain-specific-languages-in-python
+'''
+
+class HtmlElement(object):
+    default_attributes = {}
+    tag = "unknown_tag"
+
+    def __init__(self, *args, **kwargs):
+        self.attributes = kwargs
+        self.attributes.update(self.default_attributes)
+        self.children = args
+
+    def __str__(self):
+        attribute_html = " ".join(["{}='{}'".format(name, value) for name, value in self.attributes.items()])
+        if not self.children:
+            return "<{} {}/>".format(self.tag, attribute_html)
+        else:
+            children_html = "".join([str(child) for child in self.children])
+            return "<{} {}>{}</{}>".format(self.tag, attribute_html, children_html, self.tag)
+
+def test1():
+    print HtmlElement(id="test")
+    print HtmlElement(HtmlElement(name="test"), id="id")
+
+
+class InputElement(HtmlElement):
+    tag = "input"
+
+    def __init__(self, *args, **kwargs):
+        HtmlElement.__init__(self, *args, **kwargs)
+        self.label = self.attributes["label"] if "label" in self.attributes else self.attributes["name"]
+        if "label" in self.attributes: 
+            del self.attributes["label"]
+
+    def __str__(self):
+        label_html = "<label>{}</label>".format(self.label)
+        return label_html + HtmlElement.__str__(self) + "<br/>"
+
+def test2():
+    print InputElement(name="username")
+    print InputElement(name="username", label='userId')
+
+
+class Form(HtmlElement):
+    tag = 'form'
+
+class CharField(InputElement):
+    default_attributes = {'type':'text'}
+
+class EmailField(CharField):
+    pass
+
+class PasswordField(InputElement):
+    default_attributes = {'type':'password'}
+
+def test3():
+    print Form(CharField(name='user',size='25',label='ID'), id='myform')
+
+
+def render(form):
+    field_dict = {'CharField':CharField, 'EmailField':EmailField, 'PasswordField':PasswordField}
+    fields = [field_dict[field.field_type]
+         (name=field.field_name, **field[2]) for field in form.fields]
+    return Form(*fields, id=form.form_name.lower())
+
+
+if __name__ == "__main__":
+    test1()
+    test2()
+    test3()
+
+
+# http://bit.ly/pyconindia_ds
+# or https://gist.github.com/siddhi/1221363
+
+
+
