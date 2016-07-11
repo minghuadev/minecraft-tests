@@ -1,0 +1,73 @@
+
+http://www.theenterprisearchitect.eu/blog/2014/06/28/software-defined-to-metadata-driven/
+
+From Software-Defined to Metadata-Driven
+
+
+Software is eating the world! Every company is becoming a software company. 
+If companies don’t, they cease to exist. Just imagine: you are a thermostat 
+maker and suddenly you have Google as a competitor (via its Nest acquisition). 
+This is just one of the many recent examples. 
+
+Interestingly a lot of the innovations in the software industry are fuelled 
+by abstraction and automation, concepts that are well-known in the 
+[Model-Driven Development (MDD)] community. As the world is awakening 
+to these concepts there is a clear opportunity (and need!) to bring MDD 
+to a much broader audience.
+  [http://www.theenterprisearchitect.eu/blog/mdd-model-driven-development/]
+
+
+Moving towards a metadata-driven software stack
+
+In my keynote at [Code Generation 2014], titled “Software is eating the world 
+and MDD should be in the driving seat”, I analysed what’s happening on 
+all layers of the software stack. We explored how we can become more relevant 
+as an MDD community. There is a ton of knowledge and experience in our community 
+that could move the needle for a lot of companies, but are we using it?
+  [http://codegeneration.net/cg2014/]
+
+There are three ways in which Model-Driven Development can make a difference. 
+The gist of all three of them is that we need to move from “software-defined” 
+to “metadata-driven”. Let’s have a look at them:
+
+1.  Model-Driven PaaS: 
+
+In todays cloud architectures we are applying abstraction and automation on 
+each layer of the stack (for more background on the layers I use in the 
+presentation see my [earlier article that introduced this framework for 
+describing the cloud landscape]). However, the average Platform-as-a-Service 
+(PaaS) vendor has a sole focus on abstraction and automation regarding 
+deployment. Most PaaS vendors do not have a vision on application development, 
+they use the same languages as we are using for years, while most of the time 
+spend in the application lifecycle is on developing and changing the code. 
+That’s why I propose to add a layer on top of PaaS that is focused on 
+Model-Driven Development: Model-Driven PaaS (sometimes dubbed 
+“high-productivity PaaS”). In a Model-Driven PaaS the applications are 
+specified using models or metadata, developing applications is metadata-driven.
+  [http://www.theenterprisearchitect.eu/blog/2013/10/12/the-cloud-landscape-described-categorized-and-compared/]
+
+2.  Metadata-driven deployment and operations: 
+
+if we have a Model-Driven PaaS layer we can also do more from a deployment 
+and infrastructure perspective. We could derive all deployment meta information 
+and non-functional characteristics from the model and automatically generate 
+the right configuration for lower layers. Again: metadata-driven! Examples are:
+
+- Automatically adjusting the infrastructure when the Service Level Agreement 
+  (SLA) is not met (e.g. elasticity of resources, deploying close to users 
+  with high latency). 
+- Automatically configuring the network based on integration points specified 
+  in the model/metadata of the application. 
+- Characteristics and use of entities in the app model should lead to auto 
+  provisioning of the right database (type, size, scale).
+
+3.  APIs and data as first-class language concepts:
+
+if we annotate APIs and data with proper metadata they can become an integral 
+part of the app model. APIs and data extend the (modeling) language with 
+“build-in” knowledge. The [Wolfram language] is an example of this concept. 
+Another example is the concept of [Mendix App Services]: if an app service 
+is included in the application model the data and logic from this app service 
+can be used as if they are part of the application model itself.
+
+

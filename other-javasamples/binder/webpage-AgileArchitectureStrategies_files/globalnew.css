@@ -1,0 +1,77 @@
+
+	A:link {
+		font-size: 10pt;
+		color: Maroon; text-decoration:none; font-weight:normal
+	}
+
+	A:visited {
+		font-size: 10pt;
+		color: Black;text-decoration:none
+	}
+
+
+	A:hover {
+		Color : Red;
+	}
+
+    
+   	body {
+		font-size: 10pt;
+		font-family: Arial;
+		margin-left: 8px;
+		margin-top: 8px;
+	}
+
+	
+	TD.rowlabel {
+		font-size: 9pt;
+		font-weight: bold;
+		font-family: Arial, Helvetica, sans-serif;
+		background-color: #ffffcc;
+	}
+	
+	
+	
+	b.subheading {
+		font-size: 10pt;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+
+.subheading {  color: #3366CC; font-size: 12pt; font-weight: bold}
+.submenu {  font-family: Arial, Helvetica, sans-serif}
+.maintitle {  color: Maroon; font-size: 18pt; font-weight: bold}
+.titlebox { background-color: #E8E8E8 }
+
+/* START NAV MENU */
+nav {  background-color: Maroon;  height:40px;} 
+nav a:link { color: white; } 
+nav a:visited { color: white; } 
+nav ul {  font-family: Arial, Helvetica, sans-serif;  font-size: 20px;  margin: 0;  padding: 0;  list-style: none;} 
+nav ul li {  display: block;  position: relative;  float: left; } 
+nav li ul {   display: none; } 
+nav ul li a {  background: Maroon;  display: block;  text-decoration: none;  padding: 7px 15px 3px 15px;   margin-left: 1px;  white-space: nowrap;  height:30px; /* Width and height of top-level nav items */    text-align:center; } 
+nav ul li a:hover {   background: Maroon; } 
+nav li:hover ul {  display: block;  position: absolute;  height:30px;} 
+nav li:hover li {  float: none;  font-size: 11px; } 
+nav li:hover a {   background: Maroon;   height:30px; /* Height of lower-level nav items is shorter than main level */} 
+nav li:hover li a:hover { color: Maroon;  background: #E8E8E8; } 
+nav ul li ul li a {  text-align:left; /* Top-level items are centered, but nested list items are left-aligned */} 
+/* END NAV MENU */
+
+
+/* Cut after nav bar upgrade  */	
+	A.nav {
+		font-size: 10pt;
+		color: White;
+		font-family: Arial, Helvetica, sans-serif;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	
+	A.notice {
+		font-size: 8pt;
+		color: Maroon;
+		font-family: Arial, Helvetica, sans-serif;
+		text-decoration: none;
+	}
+

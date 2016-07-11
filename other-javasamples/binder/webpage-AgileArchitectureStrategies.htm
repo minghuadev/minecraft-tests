@@ -1,0 +1,4258 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="created" content="Fri, 19 Apr 2013 14:45:47 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Agile Architecture: Strategies for Scaling Agile Development</title>
+    <link rel="stylesheet" type="text/css" href="webpage-AgileArchitectureStrategies_files/globalnew.css">
+	<link rel="shortcut icon" href="http://agilemodeling.com/images/amfavicon.ico" type="image/x-icon">
+    
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+	<!-- Share this -->
+	<script type="text/javascript">var switchTo5x=false;</script>
+    <script type="text/javascript" src="webpage-AgileArchitectureStrategies_files/buttons.js"></script> 
+    <script type="text/javascript">stLight.options({publisher: "34c92769-6f09-4d16-a43a-89a633996d44", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+	<!-- Share this -->
+	
+  </head>
+
+<body bgcolor="White">
+<p>http://agilemodeling.com/essays/agileArchitecture.htm</p>
+
+<header>
+  <table class="titlebox" border="0" width="100%">
+  <tbody><tr>
+    <td width="7%">
+	<a href="http://agilemodeling.com/">
+	<img src="webpage-AgileArchitectureStrategies_files/logoAgileModeling.gif" alt="" align="right" border="0"></a></td>
+	
+    <td width="93%">
+		<p class="maintitle" align="center">Agile Architecture: Strategies for Scaling Agile Development</p></td>
+	
+  </tr>
+  </tbody></table>
+</header>
+
+ 		<!-- Nav bar -->
+  		<nav>    
+  		<ul>
+			<li><a href="http://agilemodeling.com/">Home</a></li>
+			<li><a href="http://agilemodeling.com/essays/whereDoIStart.htm">Start Here</a> 
+				<ul>
+					<li><a href="http://www.agilemodeling.com/essays/introductionToAM.htm">An Introduction to Agile Modeling</a></li>
+					<li><a href="http://www.agilemodeling.com/essays/amdd.htm">Agile Model Driven Development (AMDD)</a></li>
+					<li><a href="http://www.agilemodeling.com/essays/bestPractices.htm">Agile Modeling Best Practices</a></li>
+					<li><a href="http://www.agilemodeling.com/faq.htm">Frequently Asked Questions (FAQ)</a></li>
+					<li><a href="http://www.agilemodeling.com/values.htm">Values of AM</a></li>
+					<li><a href="http://www.agilemodeling.com/principles.htm">Principles of AM</a></li>
+					<li><a href="http://www.agilemodeling.com/practices.htm">Practices of AM</a></li>
+				</ul>	
+			</li>  
+			<li><a href="http://agilemodeling.com/essays/bestPractices.htm">Best Practices</a>  
+			    <ul>
+					<li><a href="http://agilemodeling.com/essays/activeStakeholderParticipation.htm">Active Stakeholder Participation</a></li> 
+					<li><a href="http://agilemodeling.com/essays/initialArchitectureModeling.htm">Architecture Envisioning</a></li>  
+					<li><a href="http://agilemodeling.com/essays/documentContinuously.htm">Document Continuously</a></li>  
+					<li><a href="http://agilemodeling.com/essays/documentLate.htm">Document Late</a></li> 
+					<li><a href="http://agilemodeling.com/essays/executableSpecifications.htm">Executable Specifications</a></li>
+					<li><a href="http://agilemodeling.com/essays/inclusiveModels.htm">Inclusive Tools and Techniques</a></li>
+					<li><a href="http://agilemodeling.com/essays/iterationModeling.htm">Iteration Modeling</a></li> 
+					<li><a href="http://agilemodeling.com/essays/barelyGoodEnough.html">Just Barely Good Enough(JBGE) artifacts</a></li>
+					<li><a href="http://agilemodeling.com/essays/modelAhead.htm">Look Ahead Modeling</a></li>
+					<li><a href="http://agilemodeling.com/essays/modelStorming.htm">Model Storming</a></li> 
+					<li><a href="http://agilemodeling.com/artifacts/">Multiple Models</a></li>  
+					<li><a href="http://agilemodeling.com/essays/prioritizedRequirements.htm">Prioritized Requirements</a></li> 
+					<li><a href="http://agilemodeling.com/essays/initialRequirementsModeling.htm">Requirements Envisioning</a></li> 
+					<li><a href="http://agilemodeling.com/essays/singleSourceInformation.htm">Single Source Information</a></li> 
+					<li><a href="http://agiledata.org/essays/tdd.html">Test-Driven Design (TDD)</a></li> 
+				</ul>
+			</li>				
+			<li><a href="http://agilemodeling.com/">Disciplines</a>  
+				<ul>
+					<li><a href="http://agilemodeling.com/essays/agileRequirements.htm">Requirements</a></li>  
+					<li><a href="http://agilemodeling.com/essays/agileAnalysis.htm">Analysis</a></li>  
+					<li><a href="http://agilemodeling.com/essays/agileDesign.htm">Design</a></li>  
+					<li><a href="http://agilemodeling.com/essays/agileArchitecture.htm">Architecture</a></li>  
+					<li><a href="http://agilemodeling.com/essays/agileDocumentation.htm">Documentation</a></li> 
+					<li><a href="http://agilemodeling.com/essays/enterpriseModelingAntiPatterns.htm">Enterprise Modeling</a></li>
+				</ul>
+			</li>
+			<li><a href="http://agilemodeling.com/">Artifacts</a>  
+  		 		<ul>            
+				   <li><a href="http://agilemodeling.com/artifacts">Agile Models Distilled</a></li>
+				   <li><a href="http://agilemodeling.com/style">Modeling Style</a></li>  
+				   <li><a href="http://agilemodeling.com/essays/agileDocumentation.htm">Agile Documentation</a></li> 
+				   <li><a href="http://www.agilemodeling.com/essays/umlDiagrams.htm">Introduction to UML 2.X</a> </li>
+		  		</ul>
+			</li>            
+		    <li><a href="http://agilemodeling.com/">Resources</a>        
+  		 		<ul>            
+		 		   <li><a href="http://disciplinedagiledelivery.com/">Disciplined Agile Delivery (DAD) Blog</a></li>            
+		 		   <li><a href="http://agilemodeling.com/downloads.htm">Downloads</a></li>            
+  		 		   <li><a href="https://ibm.com/developerworks/community/blogs/ambler/">Scaling agile blog</a></li>            
+		 		   <li><a href="http://agilemodeling.com/essays/">Site map</a></li>            
+		 		</ul>
+			</li>      
+			<li><a href="http://scottambler.com/">Contact Us</a></li>  
+			<li><a href="http://agilemodeling.com/announcements.htm">#AgileModeling</a></li>  
+  		</ul>
+  		</nav>
+  		<!-- Nav bar -->
+
+		<!-- SiteSearch Google -->
+		<form method="get" action="http://www.google.com/custom">
+		<input name="domains" value="AgileData.org;AgileModeling.com;www.ambysoft.com;www.enterpriseunifiedprocess.com" type="hidden">
+		<input name="cof" value="L:http://AgileModeling.com/images/logoAgileModeling.gif;BGC:#FFFFFF;AH:center;GL:0;S:http://AgileModeling.com;AWFID:9f873e648db9a709;" type="hidden">
+		<input name="hl" value="en" type="hidden">
+		<input name="safe" value="active" type="hidden">
+		<input name="oe" value="ISO-8859-1" type="hidden">
+		<input name="ie" value="ISO-8859-1" type="hidden">
+		<input name="forid" value="1" type="hidden">
+		<input name="client" value="pub-1563172974921293" type="hidden">
+		<input name="sitesearch" value="AgileModeling.com" type="hidden">
+        <input name="q" size="31" maxlength="255" type="text">
+		<input name="sa" value="Search" type="submit">
+		<!-- SiteSearch Google -->
+
+	
+  <table border="0" width="100%">
+  <tbody><tr valign="TOP">
+     <td width="95%">
+       <article>
+						
+
+						
+						
+						<p>Contrary to popular belief, architecture is an important aspect 
+						of agile software development efforts, just like traditional efforts, and is a 
+						critical part of scaling agile approaches to meet the real-world needs of modern 
+						organizations.  But, 
+						agilists approach architecture a bit differently than traditionalists do.  
+						This article addresses the following issues:</p><ol>
+							<li>
+							
+							<a href="#TowardsAgileArchitecture">Towards agile architecture</a></li>
+							<li>
+							
+							<a href="#Lifecycle">Architecture throughout the lifecycle</a></li>
+							<li>
+							
+							<a href="#Who">Who is responsible for architecture?</a></li>
+							<li>
+							
+							<a href="#ArchitectureOwner">Have an "architecture owner" role</a></li>
+							<li>
+							<a href="#ArchitectureAtScale">
+							Agile architecture at scale</a></li>
+							<li>
+							<a href="#Requirements">Base your architecture on requirements</a></li>
+							<li>
+							<a href="#Model">Model your architecture</a></li>
+							<li>
+							
+							<a href="#ConsiderSeveralAlternatives">Consider several alternatives</a></li>
+							<li>
+							
+							<a href="#RememberEnterpriseConstraints">Remember enterprise constraints</a></li>
+							<li>
+							<a href="#TravelLight">Travel
+                            light</a></li>
+							<li>
+							<a href="#ProveIt">Prove your architecture with working code</a></li>
+							<li>
+							<a href="#Communicate">Communicate your architecture</a><span></span></li>
+							<li>
+							<a href="#Future">Think about the future, just wait to act (defer commitment)</a></li>
+							<li>
+							
+							<a href="#MultiViewApproach">Take a multi-view approach</a></li>
+							<li>
+							<a href="#HowDoesItWork">How does this work?</a></li>
+							<li>
+							<a href="#DoingThis">Who is actually doing this?</a></li>
+							<li>
+							<a href="#Myths">Addressing the myths around agile and architecture</a></li>
+						</ol>
+						
+						
+						
+						<h3>1. <a name="TowardsAgileArchitecture">Towards Agile 
+						Architecture</a></h3>
+						<p>Architecture provides the
+                        foundation from which systems are built and an
+                        architectural model defines the vision on which your
+                        architecture is based. The scope of architecture can be
+                        that of a single application, of a family of
+                        applications, for an organization, or for an
+                        infrastructure such as the Internet that is shared by
+                        many organizations.Regardless of the scope, my experience is that you can take
+                        an agile approach to the modeling, development, and
+                        evolution of an architecture.</p>
+                        <p>Here are a few ideas to get you 
+						thinking:</p>
+						<ol>
+							<li>
+							<p><b>There is
+                        nothing special about architecture</b>.  Heresy you say!  Absolutely not.  Agile Modeling's value of
+							<span>
+							<a href="http://agilemodeling.com/values.htm">humility</a></span>
+                        states that everyone has equal value on a project,
+                        therefore anyone in the role of architect and their
+                        efforts are just as important but no more so than the
+                        efforts of everyone else.  Yes, good architects have a specialized skillset
+                        appropriate to the task at hand and should have the
+                        experience to apply those skills effectively.  The exact same thing can be said, however, of
+                        good developers, of good coaches, of good senior
+                        managers, and so on. Humility is an important success
+                        factor for your architecture efforts because it is what
+                        you need to avoid the development of an ivory tower
+                        architecture and to avoid the animosity of your
+                        teammates.  The
+                        role of architect is valid for most projects, it just
+                        shouldn't be a role that is fulfilled by someone atop
+                        a pedestal.</p></li>
+							<li><b>You should beware ivory tower architectures</b>.  An
+                        ivory tower architecture is one that is often developed
+                        by an architect or architectural team in relative
+                        isolation to the day-to-day development activities of
+                        your project team(s).The mighty architectural guru(s) go off and develop one or
+                        more models describing the architecture that the minions
+                        on your team is to build to for the architect(s) know
+                        best.  Ivory
+                        tower architectures are often beautiful things, usually
+                        well-documented with lots of fancy diagrams and
+                        wonderful vision statements proclaiming them to be your
+                        salvation.  In
+                        theory, which is typically what your architect(s) bases
+                        their work on, ivory tower architectures work perfectly.  However, experience shows that ivory tower
+                        architectures suffer from significant problems.
+						First, the "minion developers" are unlikely
+                        to accept the architecture because they had no say in
+                        its development. Second, ivory tower architectures are often unproven, ivory
+                        tower architects rarely dirty their hands writing code,
+                        and as a result are a significant risk to your project
+                        until you know they actually work through the concrete
+                        feedback provided by a technical prototype.  Third, ivory tower architectures will be
+                        incomplete if the architects did nothing else other than
+                        model because you can never think through everything
+                        your system needs.Fourth, ivory tower architectures promote overbuilding of
+                        software because they typically reflect every feature
+                        ever required by any system that your architect(s) were
+                        ever involved with and not just the features that your
+                        system actually needs.</li>
+							<li>
+							<p><b>Every system has an architecture</b>. 
+							BUT, it may not necessarily have architectural models
+                        describing that architecture.  For example, a small team taking the XP approach
+                        that is working together in the same room may not find
+                        any need to model their system architecture because
+                        everyone on the team knows it well enough that having a
+                        model doesn't provide sufficient value to them.  Or, if an architectural model exists it will
+                        often be a few simple 
+							<a href="http://agilemodeling.com/essays/whiteboardModeling.htm">
+							plain old whiteboard (POW)</a> sketches potentially backed by a
+                        defined project metaphor. This works because the
+                        communication aspects of XP, including
+							pair
+                        	programming and 
+							<span>
+							<a href="http://agilemodeling.com/practices.htm#CollectiveOwnership">Collective
+                        Ownership</a></span>, negate the need for architecture model(s)
+                        that need to be developed and maintained throughout the
+                        project.  Other
+                        teams - teams not following XP, larger teams, teams
+                        where people are not co-located - will find that the
+                        greater communication challenges inherent in their
+                        environment requires them to go beyond word-of-mouth
+                        architecture. These teams will choose to create
+                        architectural models to provide guidance to developers
+                        as to how they should build their software.  Fundamentally, the reason why you perform
+                        architectural modeling is to address the risk of members
+                        of your development team not working to a common vision.</p>
+							</li>
+							<li>
+							<p><b>Architecture scales agile</b>.  
+							This is true of traditional techniques as well.  
+							Have a viable and accepted architecture strategy for 
+							a project is absolutely critical to your success, 
+							particularly in the complex situations which
+							<a href="http://www.ibm.com/developerworks/blogs/page/ambler">
+							agile teams find themselves in at scale</a>.  
+							Scaling issues include team size, regulatory 
+							compliance, distributed teams, technical complexity, 
+							and so on (see The
+							<a target="_blank" href="http://disciplinedagiledelivery.wordpress.com/2013/03/15/sdcf/">
+							Software Development Context Framework (SDCF)</a> for details).  An effective approach to 
+							architecture enables you to address these scaling 
+							issues. </p>
+							</li>
+						</ol>
+                        <br>
+																		<h3>2.
+																		<a name="Lifecycle">
+																		Architecture 
+																		Throughout 
+																		the 
+																		Lifecycle</a></h3>
+																		<table id="table14" border="0" width="100%">
+																			<tbody><tr>
+																				<td><a href="#Figure1">
+												Figure 1</a><font size="2"> depicts the
+												</font>
+												<a href="http://www.ambysoft.com/essays/agileLifecycle.html">
+												lifecycle</a><font size="2"> of
+												</font>
+												<a href="http://agilemodeling.com/essays/amdd.htm">
+												Agile Model Driven Development 
+												(AMDD)</a><font size="2">.   During "</font><a href="http://www.ambysoft.com/essays/agileLifecycle.html#Cycle0">iteration 
+												0</a><font size="2">", the Inception phase in
+												<a href="http://disciplinedagiledelivery.com/">
+												Disciplined Agile Delivery (DAD)</a>, you need to 
+												get your project organized and 
+												going in the right direction.  
+												Part of that effort is the 
+												initial
+												</font>
+												<a href="http://agilemodeling.com/essays/initialRequirementsModeling.htm">
+												requirements envisioning</a><font size="2"> and
+												</font>
+												<a href="http://agilemodeling.com/essays/initialArchitectureModeling.htm">architecture 
+												envisioning</a><font size="2"> so that you are 
+												able to answer critical 
+												questions about the scope, cost, 
+												schedule, and technical strategy 
+												of your project.    
+												From an architectural point of 
+												view, during iteration 0 the 
+												goal is identify a potential 
+												technical direction for your 
+												team as well as any technical 
+												risks which you will potentially 
+												face (risks which should be 
+												addressed by </font> <a href="#ProveIt">
+												proving it with code</a><font size="2">).  
+												At this point you don't need a 
+												detailed architectural spec, in 
+												fact creating such a spec at the 
+												beginning of a software 
+												development project is a very 
+												big risk.  Instead, the
+												details are identified on 
+												a just-in-time (JIT) basis 
+												during iterations via initial </font> 
+												<a href="http://agilemodeling.com/essays/iterationModeling.htm">iteration modeling</a><font size="2"> at the 
+												beginning of each iteration or 
+												by
+												</font>
+												<a href="http://agilemodeling.com/essays/modelStorming.htm">
+												modeling storming</a><font size="2"> throughout 
+												the iteration.  The end result is that architecture emerges over
+                        time in increments, faster at first because of the
+                        greater need to set the foundation of a project, but
+                        still evolving over time to reflect the greater
+                        understanding and knowledge of the development team.
+                        This follows the practice 
+						</font> 
+						<span>
+						<a href="http://agilemodeling.com/practices.htm#ModelInSmallIncrements">Model
+                        in Small Increments</a></span><font size="2"> and reduces the technical risk
+                        of your project - you always have a firm and proven
+                        foundation from which to work.</font><span><font size="2"> In 
+												other words, you want to
+												</font>
+												<a href="#Future">think about 
+												the future but wait to act</a><font size="2">.</font></span></td>
+																				<td width="120">
+																				<p align="right">
+								
+								
+								<b>
+                        		<a href="http://www.amazon.com/exec/obidos/ASIN/0321357485/ambysoftinc" target="_blank">
+                        <img src="webpage-AgileArchitectureStrategies_files/0321357485.jpg" alt="Process of Software Architecting" border="0"></a></b></p></td>
+																			</tr>
+																		</tbody></table>
+																		<p><b>
+																		<a name="Figure1">Figure 
+																		1</a>. 
+												The Agile Model Driven 
+												Development (AMDD) lifecycle for 
+												software projects.</b>
+												
+												
+                        <map name="FPMap0">
+						<area href="http://agilemodeling.com/essays/initialRequirementsModeling.htm" shape="rect" coords="322, 12, 515, 143" target="_blank">
+						<area href="http://agilemodeling.com/essays/initialArchitectureModeling.htm" shape="rect" coords="609, 14, 804, 143" target="_blank">
+						<area href="http://agiledata.org/essays/tdd.html" shape="rect" coords="467, 421, 658, 532" target="_blank">
+						<area href="http://agilemodeling.com/essays/modelReviews.htm" shape="rect" coords="754, 293, 946, 426" target="_blank">
+						<area href="http://agilemodeling.com/essays/modelStorming.htm" shape="rect" coords="467, 321, 659, 381" target="_blank">
+						<area target="_blank" coords="467, 232, 659, 290" shape="rect" href="http://agilemodeling.com/essays/iterationModeling.htm">
+						</map>
+                        </p><p align="center">
+						<img src="webpage-AgileArchitectureStrategies_files/AMDD.gif" usemap="#FPMap0" border="0"><br>
+						</p>
+						<br>
+<a href="#FigureDAD">Figure 2</a> depicts the agile/basic lifecycle described by the
+<a href="http://disciplinedagiledelivery.com/">Disciplined Agile Delivery (DAD)</a>
+ framework.  
+The DAD framework has all of the architecture strategies
+described in this article built right in.  DAD is a hybrid that takes 
+strategies from a wide variety of sources,
+inlcuding Agile Modeling, Scrum, XP, Agile Data, and many others.  In 
+effect DAD does the "heavy lifting"
+with regard to process in that it captures how ideas from these various 
+methods fit together.  Because DAD isn't prescriptive it 
+<a target="_blank" href="http://disciplinedagiledelivery.wordpress.com/2012/12/20/a-full-agile-delivery-lifecycle/">
+supports several lifecycles</a>.  
+The lifecycle of <a href="#FigureDAD">Figure 2</a> is DAD's Scrum-based, or "basic", 
+agile delivery lifecycle but it also supports a lean/Kanban type of lifecycle and a continuous delivery
+lifecycle as well. The idea is that your team should adopt the lifecycle that makes the most sense
+for the situation that you face.  
+  
+<br>
+<p align="left"><b><a name="FigureDAD">Figure 2</a>. The DAD agile life cycle (click to expand).</b></p>
+<p align="center">
+<a href="http://www.ambysoft.com/artwork/dadLifecycleBasic.jpg">
+<img src="webpage-AgileArchitectureStrategies_files/dadLifecycleBasic.jpg" height="212" width="580"></a></p>
+<br>
+						<br>
+						<p>An alternative to this light-weight approach to initial architecture modeling,
+                        is to attempt to define your
+                        architecture completely before implementation begins.  This extreme is often referred to as 
+						<a href="http://agilemodeling.com/essays/bmuf.htm">big design up front (BDUF)</a>. Often the motivation behind this approach is that
+                        project management doesn't want anyone moving forward
+                        until a consensus has been reached as to the approach or 
+						to the
+						<a href="http://agiledata.org/essays/oneTruth.html">
+						"one data truth"</a>.  Unfortunately, this approach typically results in
+                        nobody moving forward for quite a long time, an ivory
+                        tower architecture that more often than not proves
+                        brittle in practice, an architecture that is overkill
+                        for what you actually require, and/or development
+                        subteams moving forward on their own because they
+                        can't wait for the architects to finish their work.  This approach is often the result of a serial
+                        mindset among the people involved, a legacy thought
+                        process leftover from the days of waterfall software
+                        development (the 1970s and 1980s, when many of today's
+                        managers were software developers). The reality is that the development
+                        of architecture is very hard, an effort that is key to
+                        your success, and one that you're not going to get
+                        right from the start. An evolutionary (iterative and incremental) approach addresses
+                        the risk of an inadequate or inappropriate architecture
+                        by developing it a bit at a time, and only when you need
+                        it.</p>
+																		<br>
+																		<h3>3.
+																		<a name="Who">
+																		Who is 
+																		Responsible 
+																		for 
+																		Architecture</a>?</h3>
+																		<p>This 
+																		question 
+																		is more 
+																		complex 
+																		than you 
+																		think.  
+																		The easy 
+																		answer, 
+																		one that 
+																		works 
+																		well for 
+																		small 
+																		agile 
+																		teams 
+																		(which 
+																		is the 
+																		vast 
+																		majority), 
+																		is that 
+																		everyone 
+																		on the 
+																		team is 
+																		responsible 
+																		for 
+																		architecture.  The practice 
+						<span>
+						<a href="http://agilemodeling.com/practices.htm#ModelWithOthers">Model
+                        With Others</a></span> tells you that you really don't want
+                        to be working alone, and frankly architecture is far too
+                        important to leave in the hands of a single person no
+                        matter how bright they are, therefore architecture
+                        should be a team effort.<span> 
+                        												O</span>n a small project team, say of 
+																		fifteen people or
+                        less, I prefer to include all of the developers because
+                        it allows everyone involved to have their say in the
+                        architecture.This increases everyone's understanding and acceptance of
+                        the architecture because they worked on it together as a
+                        team.  It
+                        also increases the chance that developers are willing to
+                        change aspects of the architecture when the architecture
+                        proves insufficient, perhaps it doesn't scale as well
+                        as you initially thought, because it is the group's
+                        architecture and not just theirs.  When something is developed by a single person it
+                        becomes "their baby" and nobody likes to hear that
+                        their baby is ugly - when you find a problem with
+                        their architecture they are likely to resist any
+                        criticisms of it. When an architecture is developed by
+                        the entire team then people are often far more willing
+                        to rethink their approach because it's a team issue
+                        and not a personal issue.</p>
+																		<p>
+																		However, 
+																		there 
+																		are 
+																		there 
+																		are two 
+																		basic 
+																		problems 
+																		with the 
+																		"everyone 
+																		owns the 
+																		architecture" 
+																		strategy: </p>
+																		<ol>
+																			<li>
+																			<b>
+																			Sometimes 
+																			people 
+																			don't 
+																			agree</b>.  
+																			This 
+																			strategy 
+																			can 
+																			fall 
+																			apart 
+																			dramatically 
+																			when 
+																			the 
+																			team 
+																			doesn't 
+																			come 
+																			to 
+																			agreement, 
+																			hence 
+																			you 
+																			need 
+																			someone 
+																			in 
+																			an
+																			<a href="#ArchitectureOwner">
+																			architecture 
+																			owner 
+																			role</a> 
+																			to 
+																			facilitate 
+																			agreement. 
+																			</li>
+																			<li>
+																			<b>
+																			It 
+																			doesn't 
+																			scale</b>.  
+																			When 
+																			your 
+																			team 
+																			is 
+																			large 
+																			or 
+																			geographically 
+																			distributed, 
+																			two 
+																			of 
+																			the 
+																			eight 
+																			scaling 
+																			factors 
+																			called 
+																			out 
+																			in 
+																			the
+                        
+							<a target="_blank" href="http://disciplinedagiledelivery.wordpress.com/2013/03/15/sdcf/">
+																			Software Development Context Framework (SDFC)</a>, 
+																			you 
+																			will 
+																			organize 
+																			your 
+																			team 
+																			into 
+																			a 
+																			team 
+																			of 
+																			subteams. 
+																			<a href="#ArchitectureAtScale">
+																			Architecture 
+																			at 
+																			scale</a> 
+																			requires 
+																			a 
+																			coordinating 
+																			body 
+																			in 
+																			such 
+																			situations.</li>
+																		</ol>
+																		<br>
+																		<h3>4. 
+																		Have an 
+																		"<a name="ArchitectureOwner">Architecture 
+																		Owner"
+																		</a></h3>
+																		<table id="table15" border="0" width="100%">
+																			<tbody><tr>
+																				<td><font size="2">For any 
+																		reasonably 
+																		complex 
+																		system 
+																		you're 
+																		going to 
+																		need to 
+																		invest 
+																		some 
+																		time 
+																		architecting 
+																		it.  
+																		You'll 
+																		do some
+																		</font>
+																		<a href="http://agilemodeling.com/essays/initialArchitectureModeling.htm">
+																		up front 
+																		architecture 
+																		envisioning</a><font size="2"> 
+																		to get 
+																		you 
+																		started 
+																		in the 
+																		right 
+																		direction 
+																		and then 
+																		the 
+																		architecture 
+																		will 
+																		need to 
+																		evolve 
+																		from 
+																		there.  
+																		Many 
+																		agile 
+																		teams 
+																		find 
+																		that 
+																		they 
+																		need 
+																		someone 
+																		in the 
+																		role of 
+																		"</font><a target="_blank" href="http://agilemodeling.com/essays/architectureOwner.htm">architecture 
+																		owner</a><font size="2">", sometimes called an agile solution architect.
+																		This person is
+																		often 
+																		the most 
+																		technically 
+																		experienced
+																		person 
+																		on the 
+																		team, 
+																		who is 
+																		responsible 
+																		for 
+																		facilitating 
+																		the 
+																		architectural 
+																		modeling 
+																		and 
+																		evolution 
+																		efforts.  
+																		Just 
+																		like
+																		</font>
+																		<a href="http://agilemodeling.com/essays/businessAnalysts.htm#ProductOwner">
+																		Scrum's 
+																		</a><a target="_blank" href="http://agilemodeling.com/essays/productOwner.htm">product owner</a> <font size="2"> 
+																				role 
+																		is 
+																		responsible 
+																		for the 
+																		team's 
+																		requirements, 
+																		the 
+																		architecture 
+																		owner is 
+																		responsible 
+																		for the 
+																		team's 
+																		architecture.  Architecture owner is one of the primary roles in 
+																		the <a href="http://disciplinedagiledelivery.com/">Disciplined Agile Delivery (DAD)</a> framework.
+																		
+																		
+																		</font>
+																		<p>
+																		<font size="2">Architecture 
+																		owner is 
+																		different 
+																		than the 
+																		traditional 
+																		role of 
+																		architect.  
+																		In the 
+																		past the 
+																		architect 
+																		would 
+																		often be 
+																		the 
+																		primary 
+																		creator 
+																		of the 
+																		architecture 
+																		and 
+																		would be 
+																		one of 
+																		the few 
+																		people 
+																		who 
+																		worked 
+																		on it.  
+																		They 
+																		would 
+																		often 
+																		develop 
+																		the 
+																		architecture 
+																		and then 
+																		"present 
+																		it" to, 
+																		or more 
+																		accurately 
+																		force it 
+																		upon, 
+																		the 
+																		development 
+																		team.  
+																		An 
+																		architecture 
+																		owner 
+																		collaboratively 
+																		works 
+																		with the 
+																		team to 
+																		develop 
+																		and 
+																		evolve 
+																		the 
+																		architecture.  
+																		Although 
+																		they are 
+																		the 
+																		person 
+																		with the 
+																		final 
+																		decision-making 
+																		authority 
+																		when it 
+																		comes to 
+																		the 
+																		architecture, 
+																		those 
+																		decisions 
+																		should 
+																		be made 
+																		in a 
+																		collaborative 
+																		manner 
+																		with the 
+																		team. 
+																		Effective 
+																		architecture 
+																		owners 
+																		are developers experienced in the technologies that you
+                        organization is working with and have the ability to
+                        work on architecture spikes to explore new strategies. They should also have a good understanding of the
+                        business domain and have the necessary skills to
+                        communicate the architecture to developers and to other
+                        project stakeholders.</font></p></td>
+																				<td width="126">
+								
+								
+								<b>
+                        														<a href="http://www.amazon.com/exec/obidos/ASIN/0470684208/ambysoftinc" target="_blank">
+                        <img src="webpage-AgileArchitectureStrategies_files/0470684208.jpg" alt="Lean Architecture" align="right" border="0"></a></b></td>
+																			</tr>
+																		</tbody></table>
+																		<br>
+                        <h3>5. <a name="ArchitectureAtScale">Agile Architecture 
+						at Scale</a></h3>
+                        <p>On 
+						<a target="_blank" href="https://www.ibm.com/developerworks/mydeveloperworks/blogs/ambler/entry/large_agile_teams">large 
+						agile teams</a>,
+						<a target="_blank" href="https://www.ibm.com/developerworks/mydeveloperworks/blogs/ambler/entry/agile_and_geographical_distribution15?lang=en_us">geographically distributed agile teams</a>, or for 
+						<a href="http://agiledata.org/essays/enterpriseArchitecture.html">
+						enterprise-wide architectural efforts</a>, you will 
+						require an Architecture Owner team or Enterprise Architecture team (in
+						<a target="_blank" href="http://www.ambysoft.com/books/agileModeling.html">
+						Agile Modeling</a> I originally called this a core 
+						architecture 
+						team, a term I never really liked). 
+                        Large agile teams are often organized into smaller subteams, as you can see 
+						in <a href="#Figure3">Figure 3</a>.  The <a href="#ArchitectureOwner">architecture owner</a> 
+						on each sub-team is a member of
+                        architecture owner team, which helps to increase the chance that each subteam 
+						understands
+                        and follows the overall architecture as well as increases the
+                        chance that the overall architecture strategy will 
+						address the full needs of the overall solution. There will be an an 
+						overall Chief Architecture Owner, this could be a rotating 
+						role, who is responsible for facilitating the group.  </p>
+																		<br>
+																		<p>
+																		<b>
+																		<a name="Figure3">
+																		Figure 3</a>. 
+																		Agile 
+																		teams at 
+																		scale 
+																		are 
+																		organized 
+																		into 
+																		collections 
+																		of 
+																		subteams.</b></p>
+																		<p align="center">
+<img src="webpage-AgileArchitectureStrategies_files/agileTeamLarge.jpg" longdesc="Large Agile Teams" border="0"></p>
+																		<br>
+																		<p>There 
+																		are four 
+																		basic 
+																		strategies 
+																		for 
+																		organizing 
+																		agile 
+																		teams at 
+																		scale:</p>
+																		<ol>
+																			<li>
+																			<b>
+																			Architecture-driven 
+																			approach</b>.  
+																			With 
+																			this 
+																			strategy 
+																			you 
+																			organize 
+																			your 
+																			subteams 
+																			around 
+																			the 
+																			subsystems/components 
+																			called 
+																			out 
+																			in 
+																			your 
+																			architecture.  
+																			This 
+																			strategy 
+																			works 
+																			well 
+																			when 
+																			your 
+																			architecture 
+																			is 
+																			of 
+																			high 
+																			quality 
+																			(it's 
+																			loosely 
+																			coupled 
+																			and 
+																			highly 
+																			cohesive) 
+																			and 
+																			the 
+																			interfaces 
+																			to 
+																			the 
+																			subsystems 
+																			have 
+																			been 
+																			identified 
+																			before 
+																			the 
+																			subteams 
+																			really 
+																			get 
+																			going 
+																			(the 
+																			interfaces 
+																			will 
+																			evolve 
+																			over 
+																			time, 
+																			but 
+																			you 
+																			want 
+																			to 
+																			get 
+																			a 
+																			good 
+																			start 
+																			at 
+																			them 
+																			initially).  
+																			The 
+																			challenge 
+																			with 
+																			this 
+																			strategy 
+																			is 
+																			that 
+																			it 
+																			requires 
+																			your 
+																			requirements 
+																			to 
+																			be 
+																			captured 
+																			in a 
+																			way 
+																			which 
+																			reflects 
+																			the 
+																			architecture.  
+																			For 
+																			example, 
+																			if 
+																			your 
+																			architecture 
+																			is 
+																			based 
+																			on 
+																			large-scale 
+																			business 
+																			domain 
+																			components 
+																			then 
+																			a 
+																			requirement 
+																			should 
+																			strive 
+																			to 
+																			focus 
+																			on a 
+																			single 
+																			business 
+																			domain 
+																			if 
+																			possible.  
+																			If 
+																			your 
+																			architecture 
+																			is 
+																			based 
+																			on 
+																			technical 
+																			tiers 
+																			-- 
+																			such 
+																			as a 
+																			3-tier 
+																			architecture 
+																			with 
+																			user 
+																			interface 
+																			(UI), 
+																			business, 
+																			and 
+																			data 
+																			tiers 
+																			-- 
+																			then 
+																			requirements 
+																			should 
+																			focus 
+																			on a 
+																			single 
+																			tier 
+																			if 
+																			possible.</li>
+																			<li>
+																			<b>
+																			Feature-driven 
+																			approach</b>. 
+																			With 
+																			this 
+																			strategy 
+																			each 
+																			subteam 
+																			implements 
+																			a 
+																			feature 
+																			at a 
+																			time, 
+																			a 
+																			feature 
+																			being 
+																			a 
+																			meaningful 
+																			chunk 
+																			of 
+																			functionality 
+																			to 
+																			your 
+																			stakeholders.  
+																			I 
+																			would 
+																			apply 
+																			this 
+																			strategy 
+																			in 
+																			situation 
+																			where 
+																			the 
+																			architecture 
+																			exhibits 
+																			a 
+																			lot 
+																			of 
+																			coupling 
+																			AND 
+																			where 
+																			you 
+																			have 
+																			sophisticated 
+																			development 
+																			practices 
+																			in 
+																			place.  
+																			The 
+																			challenge 
+																			with 
+																			this 
+																			approach 
+																			is 
+																			that 
+																			the 
+																			subteams 
+																			often 
+																			need 
+																			to 
+																			access 
+																			a 
+																			wide 
+																			range 
+																			of 
+																			the 
+																			source 
+																			code 
+																			to 
+																			implement 
+																			the 
+																			feature 
+																			and 
+																			thereby 
+																			run 
+																			the 
+																			risk 
+																			of 
+																			collisions 
+																			with 
+																			other 
+																			subteams.  
+																			As a 
+																			result 
+																			these 
+																			teams 
+																			sophisticated 
+																			change 
+																			management, 
+																			continuous 
+																			integration, 
+																			and 
+																			potentially 
+																			even
+																			<a target="_blank" href="http://www.ambysoft.com/essays/agileTesting.html#IndependentParallelTesting">
+																			parallel 
+																			independent 
+																			testing</a> 
+																			strategies 
+																			in 
+																			place 
+																			(to 
+																			name 
+																			a 
+																			few).</li>
+																			<li>
+																			<b>
+																			Open 
+																			source 
+																			approach</b>.  
+																			With 
+																			this 
+																			strategy 
+																			one 
+																			or 
+																			more 
+																			subsystems/components 
+																			are 
+																			developed 
+																			in 
+																			an 
+																			open 
+																			source 
+																			manner, 
+																			even 
+																			if 
+																			it 
+																			is 
+																			for 
+																			a 
+																			single 
+																			organization 
+																			(this 
+																			is 
+																			called
+																			<a target="_blank" href="http://www.drdobbs.com/architecture-and-design/184414685?cid=Ambysoft">
+																			internal 
+																			open 
+																			source</a>).  
+																			This 
+																			strategy 
+																			is 
+																			typically 
+																			used 
+																			for 
+																			subsystems/components 
+																			which 
+																			are 
+																			extensively 
+																			reused 
+																			by 
+																			many 
+																			teams, 
+																			for 
+																			example 
+																			a 
+																			security 
+																			framework, 
+																			and 
+																			which 
+																			must 
+																			evolve 
+																			quickly 
+																			to 
+																			meet 
+																			the 
+																			changing 
+																			needs 
+																			of 
+																			the 
+																			other 
+																			systems 
+																			accessing/using 
+																			them.  
+																			This 
+																			strategy 
+																			requires 
+																			you 
+																			to 
+																			adopt 
+																			tools 
+																			and 
+																			processes 
+																			which 
+																			support 
+																			open 
+																			source 
+																			approaches.</li>
+																			<li>
+																			<b>
+																			Combinations 
+																			thereof</b>.  
+																			Most 
+																			agile 
+																			teams 
+																			at 
+																			scale 
+																			will 
+																			combine 
+																			the 
+																			previous 
+																			three 
+																			strategies 
+																			as 
+																			appropriate.</li>
+																		</ol>
+																		<p>
+																		<a href="#Figure4">Figure 4</a> depicts the process for 
+						architecture activities on an agile project at scale.  
+																		You 
+																		typically 
+																		see take 
+																		this 
+																		sort of 
+																		approach 
+																		on large 
+																		projects 
+																		(often 
+																		referred 
+																		to as 
+																		programmes), 
+																		geographically 
+																		distributed 
+																		projects, 
+																		complex 
+																		(either 
+																		domain 
+																		or 
+																		technical) 
+																		projects, 
+																		or at 
+																		the 
+																		enterprise 
+																		level 
+																		(typically 
+																		to 
+																		support
+																		<a target="_blank" href="http://agiledata.org/essays/enterpriseArchitecture.html">
+																		agile 
+																		enterprise 
+																		architecture</a>).  
+																		There 
+																		are four 
+																		important 
+																		aspects 
+																		to this 
+																		approach:</p>
+																		<ol>
+																			<li>
+																			<b>
+																			Envision 
+																			the 
+																			initial 
+																			architecture</b>.  
+																			Minimally 
+																			the architecture 
+																			owner team is
+                        responsible for initial <a target="_blank" href="http://agilemodeling.com/essays/initialArchitectureModeling.htm">
+																			architecture envisioning</a> 
+																			and
+                        then bringing it to the sub teams for
+                        feedback and subsequent evolution.  In the case of 
+																			a 
+																			large 
+																			project/programme 
+																			there 
+																			are 
+																			often 
+																			other 
+																			agile 
+																			team 
+																			members 
+																			involved 
+																			with 
+																			this 
+																			initial 
+																			modeling 
+																			effort, 
+																			including 
+																			the
+																			<a target="_blank" href="http://agilemodeling.com/essays/productOwner.htm">product owner</a> 
+																			and 
+																			even 
+																			key 
+																			project 
+																			stakeholders.  
+																			The 
+																			architecture 
+																			envisioning 
+																			efforts
+																			<a target="_blank" href="http://agilemodeling.com/essays/barelyGoodEnough.html#SoonerThanYouThink">
+																			can 
+																			go 
+																			on 
+																			for 
+																			several 
+																			days</a> 
+																			and 
+																			in 
+																			the 
+																			case 
+																			of 
+																			very 
+																			large 
+																			or 
+																			complex 
+																			project 
+																			several 
+																			weeks.  
+																			For 
+																			enterprise 
+																			architecture 
+																			efforts 
+																			the 
+																			enterprise 
+																			architecture 
+																			team 
+																			will 
+																			often 
+																			include 
+																			project-level 
+																			application/solution 
+																			architects 
+																			in 
+																			their 
+																			initial 
+																			modeling 
+																			efforts 
+																			and 
+																			often 
+																			executive 
+																			stakeholders.</li>
+																			<li>
+																			<b>
+																			Working 
+																			with 
+																			the 
+																			development 
+																			teams</b>.  
+																			On 
+																			large 
+																			projects/programmes, 
+																			as 
+																			you 
+																			saw 
+																			in
+																			<a href="#Figure3">
+																			Figure 
+																			3</a>, 
+																			the members
+                        of the architecture owner team will take active roles on
+                        the various subteams on the project, communicating the
+                        architecture to the subteams and working with them to
+                        prove portions of the architecture via 
+						<span>
+						<a href="#ProveIt">concrete
+                        experiments</a></span>.<span>  
+																			For 
+																			enterprise 
+																			architecture 
+																			efforts, 
+																			t</span>he
+                        													enterprise architects 
+																			will 
+																			minimally act as consultants whose expertise is the
+                        corporate architecture, but better yet they will be active members of the 
+																			critical 
+																			project 
+																			teams 
+																			taking 
+																			on 
+																			the 
+																			role 
+																			of 
+																			architecture 
+																			owner 
+																			on 
+																			those 
+																			teams. 
+																			Due 
+																			to 
+																			the 
+																			collaborative 
+																			nature 
+																			of 
+																			agile 
+																			development 
+																			it 
+																			isn't 
+																			sufficient 
+																			for 
+																			architecture 
+																			owners 
+																			to 
+																			simply 
+																			do 
+																			initial 
+																			architecture 
+																			envisioning, 
+																			and 
+																			perhaps 
+																			"support" 
+																			project 
+																			teams 
+																			by 
+																			reviewing 
+																			their 
+																			work 
+																			occasionally, 
+																			but 
+																			instead 
+																			they 
+																			must 
+																			"roll 
+																			up 
+																			their 
+																			sleeves" 
+																			and 
+																			become 
+																			active 
+																			members 
+																			of 
+																			the 
+																			project 
+																			teams. 
+																			This 
+																			will 
+																			help 
+																			them 
+																			to 
+																			avoid 
+																			creating 
+																			"ivory 
+																			tower 
+																			architectures" 
+																			which 
+																			sound 
+																			good 
+																			on 
+																			paper 
+																			yet 
+																			prove 
+																			impractical 
+																			in 
+																			the 
+																			real 
+																			world.  
+																			It 
+																			also 
+																			helps 
+																			to 
+																			increase 
+																			the 
+																			chance 
+																			that 
+																			the 
+																			project 
+																			team(s) 
+																			will 
+																			actually 
+																			leverage 
+																			the 
+																			architecture.</li>
+																			<li>
+																			<b>
+																			Communicating 
+																			the 
+																			architecture 
+																			to 
+																			architectural 
+																			stakeholders</b>.  
+																			For 
+																			project 
+																			teams 
+																			the 
+																			architectural 
+																			stakeholders 
+																			include 
+																			the 
+																			<a target="_blank" href="http://agilemodeling.com/essays/productOwner.htm">product owner</a>(s) 
+																			working 
+																			with 
+																			the 
+																			agile 
+																			delivery team(s), 
+																			key 
+																			project 
+																			stakeholders, 
+																			and 
+																			of 
+																			course 
+																			the 
+																			rest 
+																			of 
+																			the 
+																			development 
+																			team.  
+																			These 
+																			people 
+																			need 
+																			to 
+																			understand 
+																			the 
+																			architecture 
+																			vision, 
+																			the 
+																			trade-offs 
+																			that 
+																			have 
+																			been 
+																			made, 
+																			and 
+																			the 
+																			current 
+																			status 
+																			of 
+																			where 
+																			you 
+																			are 
+																			implementing 
+																			the 
+																			architecture.  
+																			</li>
+																			<li>
+																			<b>
+																			Updating 
+																			architectural 
+																			work 
+																			products</b>.  The architecture 
+																			owner team will
+                        find that they need to get together occasionally to
+                        evolve the architecture as the project progresses,
+                        negotiating changes to the architecture and updating
+                        their architectural model(s), if any, as appropriate. These meetings will be frequent at the beginning
+                        of a project and will be needed less and less as the
+                        architecture solidifies. It will be common for members of the development
+                        subteams, who may not be members of the core
+                        architecture team, to attend some meetings to present
+                        information, perhaps they were involved with some
+                        technical prototyping and have findings to share with
+                        the architects.  The
+                        best meetings are short, often no more than an hour
+                        in length, and are often held standing up around a
+                        whiteboard - everyone should come prepared to the
+                        meetings, willing to present and discuss their issues as
+                        well as to work together as a team to quickly come to
+                        resolutions.</li>
+																		</ol>
+<p><b><a name="Figure4">Figure 4. Agile 
+architecture process at scale.</a></b></p>
+<p align="center">
+<a href="http://agiledata.org/essays/enterpriseArchitecture.html">
+<img src="webpage-AgileArchitectureStrategies_files/enterpriseArchitectureIncrementalApproach.gif" longdesc="../../agiledata/essays/Enterprise AMDD" border="0"></a></p>
+																		<br>
+                        <br>
+                        <h3>6. <a name="Requirements">Requirements-Driven
+                        Architecture</a></h3>
+                        <p>Your architecture must be based on
+                        <a href="http://agilemodeling.com/essays/initialRequirementsModeling.htm">requirements</a> otherwise you are hacking, it's as simple
+                        as that.  The
+                        practice <span>
+						<a href="http://agilemodeling.com/essays/activeStakeholderParticipation.htm">Active
+                        Stakeholder Participation</a></span> is critical to your
+                        success when it comes to identifying architectural
+                        requirements - remember, 
+						<a href="http://agilemodeling.com/essays/agileRequirements.htm">requirements</a> come from
+                        project stakeholders, not developers. Good sources for
+                        technical architecture requirements will include your
+                        users and their direct management as they will often
+                        have some insight into technical requirements and
+                        constraints.  Operations
+                        staff will definitely have requirements for you
+                        pertaining to your deployment architecture.  The best sources for business-oriented
+                        requirements are exactly who you would expect - your
+                        users, their managers. Senior management within your
+                        organization will have insights that may lead to
+                        potential change cases for your system.</p>
+                        <p>As you would expect the practices 
+						<span><a href="http://agilemodeling.com/practices.htm#ApplyTheRightArtifacts">Apply The Right Artifact(s)</a></span><i> </i>and<i>
+                        </i> 
+						<a href="http://agilemodeling.com/practices.htm#CreateSeveralModelsInParallel">
+						<span>
+                        Create Several Models in Parallel</span> </a>apply to your
+                        architectural requirements effort.  When you are working on the technical aspects of
+                        your architecture you will want to base it on technical
+                        requirements, constraints, and possibly change cases.
+                        Similarly, when you are working on business aspects of
+                        your architecture, potentially identifying software
+                        subsystems or business components, you will likely need
+                        to focus on essential use cases or user stories that
+                        describe critical usage requirements and potentially the
+                        key business rules applicable to your system.</p>
+                        <p>A common mistake that architecture
+                        teams (or for smaller projects the architecture owner) will make is to ignore existing and pertinent
+                        artifacts, such as network or deployment diagrams that
+                        describe your organizations existing technical
+                        infrastructure, enterprise-level business models (use
+                        case models, process diagrams, workflow diagrams,
+                        corporate business rules, and so on), or corporate
+                        deployment standards (for workstations, branch offices,
+                        etc.) that your system is expected to conform to. Yes, the existing artifacts may be out of date or
+                        simply not apply to your effort, but you should at least
+                        make an effort to examine them and take advantage of the
+                        existing work wherever possible. A little bit of reading or discussion with the
+                        right people is likely to save you significant effort
+                        later on.  
+						In other words, don't forget to
+						<a href="http://www.ambysoft.com/essays/typesOfReuse.html">
+						r<span>euse
+                        existing artifacts</span></a><span> 
+						whenever possible</span>.</p>
+                        <p>An important concept to understand
+                        about architectural modeling is that although it
+                        typically occurs early in your project it never occurs
+                        first.  Fundamentally,
+                        you will always invest time identifying some
+                        requirements first. Anything else is hacking, and hacking certainly
+                        isn't agile.</p>
+                        <br>
+                        <h3>7. <a name="Model">Model Your Architecture</a></h3>
+                        <p>The primary goal of architectural
+                        modeling should be to come to a common vision or
+                        understanding with respect to how you intend to build
+                        your system(s).  In
+                        other words, you will model
+                        to understand. My experience is that 99.999% of all software
+                        project teams need to invest some time modeling the
+                        architecture of their system, and that this is true even
+                        of Scrum/XP teams that rely on a metaphor to guide their
+                        development efforts. While your XP team is identifying your system's
+                        metaphor, something that you and your teammates may
+                        think about for weeks as you are developing your initial
+                        releases, that you will often draw sketches of how you
+                        think your system will work. You may not keep these sketches, following AM's
+                        practice <span>
+						<a href="http://agilemodeling.com/practices.htm#DiscardTemporaryModels">Discard
+                        Temporary Models</a></span>, often because they were ideas that
+                        didn't work out or simply because you were modeling to
+                        understand an issue and once you did so the diagram no
+                        longer had value to you. Having said that, there is nothing wrong for an
+                        XP team to develop architecture models. The models may be something as simple as a sketch
+                        that you keep around on a publicly visible white board,
+                        because although metaphors can be very effective things
+                        an architectural model often provides the greater detail
+                        that your team requires. As you would expect 
+						<a href="http://agilemodeling.com/essays/agileModelingRUP.htm">
+						Unified Process</a> teams will also do some 
+						architectural modeling, as would teams taking a
+						<a target="_blank" href="http://disciplinedagiledelivery.com/">
+						Disciplined Agile Delivery (DAD)</a> approach.</p>
+                        												<table id="table16" border="0" width="100%">
+																			<tbody><tr>
+																				<td><font size="2">How do you model your architecture
+                        in an agile manner? I typically strive to create one or more 
+						navigation diagrams, diagrams that present an overview 
+						of the "landscape" of your system. Just like a road map overviews the organization
+                        of a town, your navigation diagram(s) overviews the
+                        organization of your system. Navigation diagrams are the instantiation of your
+                        system's architectural views. When you read books and
+                        papers about architectural modeling a common theme that
+                        the authors put forward is the need for various
+                        architectural views, with each author presenting his or
+                        her own collection of critical views that you need to
+                        consider.  My
+                        experience is that no one set of architectural views is
+                        right for every project, that instead the nature of the
+                        project will help to define the types of views that you
+                        should consider creating. The implication is that the type of navigation
+                        diagram that you create depends on the nature of the
+                        system that you are building. This is conceptually
+                        consistent with AM's practice 
+						</font> 
+						<span>
+						<a href="http://agilemodeling.com/practices.htm#ApplyTheRightArtifacts">Apply
+                        the Right Artifact(s)</a></span><font size="2"> which tells you that you
+                        should use the right modeling technique for the task at
+                        hand. For example, a team building a complex business
+                        application using J2EE-based technology will likely find
+                        that a 
+						</font> 
+						<a href="http://agilemodeling.com/artifacts/componentDiagram.htm">UML component diagram</a><font size="2"> and a workflow diagram are
+                        appropriate for use as architectural navigation
+                        diagrams.  However,
+                        a team building a corporate 
+						</font> 
+						<a href="http://agiledata.org/essays/dataWarehousingBestPractices.html">data warehouse</a><font size="2"> will likely
+                        gravitate towards a data model and UML deployment
+                        diagram on which to base their architecture. Different projects, different architectural
+                        views, hence different types of navigation diagram(s). It is interesting to note that both projects 
+						needed two navigation diagrams, consistent with the</font><span>
+						<a href="http://agilemodeling.com/principles.htm#MultipleModels">Multiple
+                        Models</a><font size="2"> principle</font></span><font size="2">.  You
+                        need to be flexible in your approach because one size
+                        does not fit all.</font></td>
+																				<td width="138">
+								
+								
+								<b>
+																				<a href="http://www.amazon.com/exec/obidos/ASIN/0984618104/ambysoftinc" target="_blank">
+								<img src="webpage-AgileArchitectureStrategies_files/0984618104.jpg" alt="Just Enough Software Architecture" align="right" border="0"></a></b></td>
+																			</tr>
+																		</tbody></table>
+                        <p>A common mistake that organizations
+                        will make is to base their architectural efforts on
+                        their organization structure. For example, an organization with a strong data
+                        group will likely want to have a data model as the
+                        primary artifact for their architecture regardless of
+                        the actual nature of the system. When you have hammer specialists every problem
+                        looks like a nail to them. This problem is quite common when you are working
+                        with new technologies or attempting to develop a new
+                        class of system that your organization has little
+                        experience with - organization structures that worked
+                        well for you in the past may no longer work for you in
+                        your new environment.  For more about the implication of architecture and
+                        organization structure please refer to the
+                        organizational pattern 
+						<span><a href="http://www.amazon.com/exec/obidos/ASIN/0131467409/ambysoftinc/">Conway's Law</a></span>.</p>
+                        <p>To create a navigation diagram the 
+						primary driver of your modeling efforts should be to
+						<a href="http://agilemodeling.com/principles.htm#AssumeSimplicity">
+						a<span>ssume
+                        simplicity</span></a>. The practice 
+						<span>
+						<a href="http://agilemodeling.com/practices.htm#CreateSimpleContent">Create
+                        Simple Content</a></span> indicates that you should strive to
+                        identify the simplest architectural approach(es)
+                        possible - The more complicated your architecture the
+                        greater the chance that it won't be understood by
+                        individual developers and the greater the opportunity
+                        for error and breakdown.<span>
+                        </span>Furthermore, your architectural models should
+                        contain the right level of information, showing how
+                        various aspects of your system work together but not the
+                        details (this is what design is all about) following the
+                        practice <span>
+						<a href="http://agilemodeling.com/practices.htm#DepictModelsSimply">Depict
+                        Models Simply</a></span>. You should also 
+						<a href="http://agilemodeling.com/practices.htm#UseTheSimplestTools"> 
+						<span>Use
+                        the Simplest Tools</span> </a>to do the job, many times a
+                        whiteboard sketch is all that you need to model the
+                        critical aspects of your architecture. Don't use a CASE tool when a drawing tool will
+                        do.  Don't
+                        use a drawing tool when a 
+						plain old whiteboard (<a href="http://agilemodeling.com/essays/whiteboardModeling.htm">POW</a>) will do. Don't use a POW when paper and Post-It
+                        notes will do.</p>
+                        <p>An important point to be made is
+                        that navigation diagrams are typically sufficient to
+                        describe your architecture when all of your
+                        <a target="_blank" href="http://agilemodeling.com/essays/communication.htm">communication</a> is face-to-face. When this isn't the case, when your 
+						<a href="#ArchitectureOwner">architecture owners</a>
+                        are not able to work closely with the developers
+                        (perhaps some developers are at a distant location) then
+                        you will need to supplement your diagrams with
+                        <a target="_blank" href="http://agilemodeling.com/essays/agileDocumentation.htm">documentation</a>.</p>
+                        <p>When you are architectural modeling
+                        you should consider taking advantage of the wealth of
+                        architectural patterns available to you but you should
+                        do so in an effective manner. The book<i> </i> 
+						<span> 
+						<a href="http://www.amazon.com/exec/obidos/ASIN/0471958697/ambysoftinc/">A System of
+                        Patterns: Pattern-Oriented Software Architecture</a></span> is an excellent place to start learning
+                        about common architectural patterns such as <i>Layers</i>,
+                        <i>Pipes and Filters</i>, <i>Broker</i>,
+                        <i>Model-View-Controller</i>,
+                        and <i>Blackboard</i>.As with analysis and design patterns, you should follow the
+                        practice <span>
+						<a href="http://agilemodeling.com/practices.htm#ApplyPatternsGently">Apply
+                        Patterns Gently</a></span> - introduce them into your
+                        architecture only when they are clearly required. Until then if you suspect that an architectural
+                        pattern may be appropriate, perhaps you believe that you
+                        will have several sources of critical services that will
+                        need to be brokered, then model your architecture so
+                        that you can apply this pattern when this actually
+                        becomes the case.  Remember
+                        that you are developing your system incrementally,
+                        following the practice 
+						<span>
+						<a href="http://agilemodeling.com/practices.htm#ModelInSmallIncrements">Model
+                        in Small Increments</a></span>, and that you don't need to
+                        get your architecture right on the very first day (nor
+                        could you achieve this goal even if you wanted to).</p>
+                        <p>You should recognize that your
+                        architectural models will reveal your system's
+                        dependencies on other systems or their dependencies on
+                        yours.  For
+                        example, your system may interact with a credit-card
+                        processing service via the Internet, access data from a
+                        legacy relational database, or produce an XML data
+                        structure for another internal application. Network diagrams and UML deployment diagrams are
+                        very useful for identifying these dependencies, as are
+                        process-oriented models such as workflow diagrams, UML
+                        activity diagrams, and data-flow diagrams. The implication is that these dependencies
+                        indicate the potential need to follow the practice 
+						<span>
+						<a href="http://agilemodeling.com/practices.htm#FormalizeContractModels">Formalize
+                        Contract Models</a></span> between your team and the owner(s)
+                        of the systems that yours share dependencies with. Ideally many of these models will already be in
+                        place, the credit card processor likely has a strictly
+                        defined protocol that you must follow and the legacy
+                        database likely has a physical data model defined for
+                        it, although new functionality such as the XML data
+                        structure will require adequate definition. Sometimes you will need to perform an analysis of
+                        the existing interface to a legacy system if accurate
+                        documentation is not in place and other times you will
+                        need to design a new interface. In both cases a corresponding contract model will
+                        need to be developed, either by your team, the other
+                        team(s), or co-jointly as appropriate.</p>
+                        <p>How should you organize your
+                        architectural modeling efforts? At the beginning of a project I will typical
+                        gather the architecture team together in a single room
+                        for an 
+						<a href="http://agilemodeling.com/essays/amdd.htm#InitialModeling">initial 
+						envisioning session</a>. Ideally this session will last for no more than
+                        several hours but on some larger projects it may last
+                        for a few days or even a few weeks (I would seriously 
+						question any effort more than two weeks).  As
+                        always, the longer the modeling session the greater the
+                        chance of going off course due to lack of feedback. The goal of this modeling session will be to come
+                        to an initial agreement as to the landscape of the
+                        system that we are building, perhaps not consensus but
+                        sufficient agreement so we can start moving forward as a
+                        team.</p>
+																		<br>
+																		<h3>8.
+																		<a name="ConsiderSeveralAlternatives">
+																		Consider 
+																		Several 
+																		Alternatives</a></h3>
+																		<p>As
+																			<a target="_blank" href="http://www.amazon.com/exec/obidos/ASIN/0321437381/ambysoftinc">
+																			lean 
+																			software 
+																			development</a> 
+																			tells 
+																		us, we 
+																		shouldn't 
+																		commit 
+																		early to 
+																		an 
+																		architectural 
+																		strategy 
+																		but 
+																		instead 
+																		should 
+																		consider 
+																		several 
+																		alternatives 
+																		and to 
+																		keep 
+																		those 
+																		alternatives 
+																		"open" 
+																		to us as 
+																		long as 
+																		they 
+																		remain 
+																		viable.  
+																		The 
+																		implication 
+																		is that 
+																		when you 
+																		are 
+																		envisioning 
+																		the 
+																		architecture 
+																		early in 
+																		the 
+																		project 
+																		you 
+																		should 
+																		really 
+																		be 
+																		envisioning 
+																		several 
+																		possible 
+																		architectures.  
+																		To be 
+																		fair 
+																		this 
+																		strategy 
+																		isn't 
+																		new and 
+																		in fact 
+																		is one 
+																		that has 
+																		been 
+																		promoted, 
+																		although 
+																		not 
+																		always 
+																		followed, 
+																		within 
+																		the IT 
+																		architecture 
+																		community 
+																		for 
+																		decades.</p>
+																		<p>So 
+																		let's 
+																		work 
+																		through 
+																		an 
+																		example.  
+																		You've 
+																		joined a 
+																		project 
+																		team 
+																		which 
+																		has been 
+																		asked to 
+																		build a 
+																		customer-facing 
+																		web 
+																		portal 
+																		which 
+																		supports 
+																		Web 2.0 
+																		functionality 
+																		for a 
+																		new line 
+																		of 
+																		business 
+																		that 
+																		your 
+																		organization 
+																		is 
+																		entering.  
+																		The 
+																		first 
+																		week of 
+																		the 
+																		project 
+																		your 
+																		team, 
+																		along 
+																		with 
+																		several 
+																		key 
+																		stakeholders, 
+																		spends 
+																		the 
+																		mornings 
+																		in an
+																		<a target="_blank" href="http://agilemodeling.com/essays/agileModelingRoom.htm">
+																		agile 
+																		modeling 
+																		workroom</a> 
+																		led by 
+																		your
+																		<a target="_blank" href="http://agilemodeling.com/essays/productOwner.htm">product owner</a> 
+																		to 
+																		envision 
+																		the 
+																		requirements 
+																		for this 
+																		portal.  
+																		In the 
+																		afternoon 
+																		your 
+																		team, 
+																		including 
+																		the 
+																		product 
+																		owner, 
+																		and any 
+																		stakeholder 
+																		interested 
+																		in doing 
+																		so, are 
+																		lead by 
+																		the
+																		<a href="#ArchitectureOwner">
+																		architecture 
+																		owner</a> 
+																		to 
+																		envision 
+																		the 
+																		architecture 
+																		of the 
+																		solution.  
+																		On the 
+																		first 
+																		day you 
+																		identify 
+																		several 
+																		viable 
+																		architectural 
+																		strategies: 
+																		Building 
+																		a 
+																		hard-coded, 
+																		HTML-based 
+																		solution 
+																		with 
+																		embedded 
+																		DOJO 
+																		widgets; 
+																		Building 
+																		a 
+																		dynamic 
+																		solution 
+																		via 
+																		JavaServer 
+																		pages (JSP); 
+																		Building 
+																		a 
+																		dynamic 
+																		solution 
+																		using 
+																		Ruby on 
+																		Rails; 
+																		Building 
+																		a 
+																		dynamic 
+																		solution 
+																		via 
+																		WebSphere 
+																		Portal; 
+																		Building 
+																		a 
+																		dynamic 
+																		solution 
+																		via the 
+																		OSS 
+																		DotNetNuke 
+																		content 
+																		management 
+																		system.  
+																		All of 
+																		these 
+																		solutions 
+																		sound 
+																		viable 
+																		to the 
+																		team and 
+																		are 
+																		sketched 
+																		out on 
+																		separate 
+																		sections 
+																		of the 
+																		whiteboards 
+																		(your 
+																		organization 
+																		is smart 
+																		enough 
+																		to put 
+																		floor-to-ceiling 
+																		whiteboards 
+																		in your 
+																		team 
+																		workrooms).  </p>
+																		<p>As 
+																		the week 
+																		progresses, 
+																		and more 
+																		importantly 
+																		as the 
+																		team's 
+																		understanding 
+																		of the 
+																		requirements 
+																		evolve 
+																		due to 
+																		the 
+																		requirements 
+																		envisioning 
+																		efforts 
+																		in the 
+																		morning, 
+																		they 
+																		evolve 
+																		their 
+																		architectural 
+																		visions.  
+																		There 
+																		are some 
+																		commonalities 
+																		between 
+																		them, 
+																		for 
+																		example 
+																		they 
+																		must all 
+																		work 
+																		within 
+																		the 
+																		existing 
+																		security 
+																		infrastructure.  
+																		Strategies 
+																		around 
+																		persisting 
+																		information, 
+																		via XML 
+																		data 
+																		stores, 
+																		XML 
+																		files, 
+																		as 
+																		tables 
+																		in a 
+																		relational 
+																		database, 
+																		or 
+																		combinations 
+																		thereof 
+																		are 
+																		fiercely 
+																		debated 
+																		on a 
+																		separate 
+																		whiteboard 
+																		area as 
+																		they are 
+																		mostly 
+																		orthogonal 
+																		to the 
+																		four 
+																		architectural 
+																		strategies.  
+																		About 
+																		mid-week 
+																		DotNetNuke 
+																		is 
+																		dropped 
+																		as an 
+																		option 
+																		because 
+																		your 
+																		operations 
+																		department 
+																		wasn't 
+																		comfortable 
+																		with the 
+																		idea of 
+																		adding 
+																		another 
+																		technology 
+																		into 
+																		their 
+																		already 
+																		long 
+																		list of 
+																		technologies 
+																		which 
+																		they're 
+																		supporting 
+																		in 
+																		production 
+																		and 
+																		because 
+																		your 
+																		organization 
+																		was 
+																		already 
+																		successful 
+																		with the 
+																		other 
+																		technical 
+																		strategies 
+																		under 
+																		consideration.  
+																		On 
+																		Thursday 
+																		the 
+																		static 
+																		HTML-based 
+																		solution 
+																		is 
+																		abandoned 
+																		as being 
+																		overly 
+																		simplistic 
+																		and 
+																		unable 
+																		to 
+																		easily 
+																		support 
+																		the 
+																		personalization 
+																		requirements 
+																		which 
+																		the 
+																		business 
+																		stakeholders 
+																		believe 
+																		to be 
+																		critical 
+																		success 
+																		factors 
+																		for this 
+																		system. 
+																		That 
+																		same day 
+																		the JSP 
+																		alternative 
+																		is 
+																		deprioritized 
+																		-- 
+																		although 
+																		it's a 
+																		viable 
+																		solution 
+																		the team 
+																		feels 
+																		that 
+																		they 
+																		will be 
+																		more 
+																		productive 
+																		with 
+																		either 
+																		Ruby on 
+																		Rails or 
+																		WebSphere 
+																		Portal.  
+																		After 
+																		fierce 
+																		debate 
+																		the team 
+																		wasn't 
+																		able to 
+																		decide 
+																		which 
+																		strategy 
+																		to 
+																		follow 
+																		first, 
+																		both had 
+																		their 
+																		strengths 
+																		and 
+																		weaknesses, 
+																		so the 
+																		architecture 
+																		owner 
+																		broke 
+																		the 
+																		deadlock 
+																		and 
+																		decided 
+																		that the 
+																		team 
+																		would 
+																		work 
+																		with 
+																		Ruby on 
+																		Rails at 
+																		first, 
+																		spending 
+																		the 
+																		first 
+																		few 
+																		iterations
+																		<a href="#ProveIt">
+																		proving 
+																		the 
+																		architecture</a> 
+																		with 
+																		working 
+																		code (or 
+																		disproving 
+																		it as 
+																		the case 
+																		may be).</p>
+																		<br>
+																		<h3>9.
+																		<a name="RememberEnterpriseConstraints">
+																		Remember 
+																		Enterprise 
+																		Constraints</a></h3>
+                        												<table id="table13" border="0" width="100%">
+																			<tbody><tr>
+																				<td><font size="2">All but the newest organizations have an existing technical infrastructure in place.  More mature organizations may have:</font><ul>
+																					<li><font size="2">A "to be" vision for their technical infrastructure which they're working towards</font></li>
+																					<li><font size="2">Enterprise-level standards and 
+guidelines -- for development, data, user interfaces, security, and so 
+on -- which project teams should follow</font></li>
+																					<li><font size="2">A strategic reuse strategy for reducing overall development and operational costs </font></li>
+																					<li><a target="_blank" href="http://agiledata.org/essays/enterpriseArchitecture.html">Enterprise architecture</a><font size="2">, </font><a target="_blank" href="http://www.enterpriseunifiedprocess.com/essays/strategicReuse.html">strategic reuse</a><font size="2">, and/or similar groups tasked with evolving and promoting these things</font></li>
+																					<li><font size="2">An operations and support 
+organization(s), sometimes referred to as a systems management 
+organization, responsible for running your organization's systems in 
+production</font></li>
+																				</ul>
+																				</td>
+																				<td width="122">
+				
+								
+								<b>
+								<a href="http://www.ambysoft.com/books/enterpriseArchitecture.html">
+								<img src="webpage-AgileArchitectureStrategies_files/0131412752.jpg" alt="The Practical Guide to Enterprise Architecture" align="right" border="0"></a></b></td>
+																			</tr>
+																		</tbody></table>
+																		<p>The 
+																		point is 
+																		that 
+																		these 
+																		enterprise-level 
+																		considerations 
+																		provide 
+																		both 
+																		challenges 
+																		and 
+																		opportunities 
+																		to 
+																		development 
+																		teams.  
+																		Although 
+																		it would 
+																		be 
+																		wonderful 
+																		to start 
+																		with a 
+																		clean 
+																		architectural 
+																		slate 
+																		every 
+																		time you 
+																		build a 
+																		new 
+																		system, 
+																		the 
+																		reality 
+																		is that 
+																		strategy 
+																		would be 
+																		very 
+																		inappropriate 
+																		in the 
+																		vast 
+																		majority 
+																		of 
+																		situations.  
+																		I've 
+																		seen 
+																		several 
+																		agile 
+																		project 
+																		teams 
+																		over the 
+																		years 
+																		that 
+																		have 
+																		been 
+																		abysmal 
+																		failures 
+																		because 
+																		they 
+																		chose to 
+																		start 
+																		fresh, 
+																		claiming 
+																		that 
+																		their 
+																		architecture 
+																		emerged 
+																		over 
+																		time, 
+																		that 
+																		they had 
+																		the 
+																		courage 
+																		to worry 
+																		about 
+																		tomorrow's 
+																		problem 
+																		tomorrow, 
+																		that 
+																		they 
+																		produced 
+																		potentially 
+																		shippable 
+																		software 
+																		on a 
+																		regular 
+																		basis, 
+																		and 
+																		basically 
+																		parroting 
+																		any 
+																		other 
+																		agile 
+																		rhetoric 
+																		which 
+																		they 
+																		believed 
+																		justified 
+																		their 
+																		fooling 
+																		around.  
+																		Disciplined 
+																		teams 
+																		build 
+																		systems 
+																		whose 
+																		architecture 
+																		emerges 
+																		within 
+																		the 
+																		organizational 
+																		environment 
+																		in which 
+																		they're 
+																		working.  
+																		They 
+																		have the 
+																		humility 
+																		to 
+																		recognize 
+																		that 
+																		they're 
+																		not in a 
+																		position 
+																		to make 
+																		all of 
+																		the 
+																		technical 
+																		decisions 
+																		which 
+																		they 
+																		would 
+																		like to, 
+																		but 
+																		instead 
+																		are 
+																		constrained 
+																		by the 
+																		existing 
+																		infrastructure 
+																		and 
+																		vision 
+																		for it.  
+																		Furthermore, 
+																		they 
+																		produce 
+																		potentially 
+																		consumable 
+																		solutions 
+																		which 
+																		work 
+																		within 
+																		their 
+																		organizations 
+																		ecosystem. 
+                        </p>
+																		<p>
+																		Luckily 
+																		there 
+																		are also 
+																		many 
+																		opportunities 
+																		presented 
+																		by 
+																		having 
+																		an 
+																		enterprise 
+																		focus.  
+																		By 
+																		leveraging 
+																		the 
+																		existing 
+																		infrastructure 
+																		teams 
+																		can 
+																		deliver 
+																		faster 
+																		because 
+																		they 
+																		have 
+																		less to 
+																		build.  
+																		By using 
+																		existing 
+																		technologies, 
+																		or at 
+																		least by 
+																		using 
+																		new 
+																		technologies 
+																		(well, 
+																		new to 
+																		your 
+																		organization) 
+																		called 
+																		out in 
+																		the 
+																		enterprise 
+																		vision, 
+																		they 
+																		reduce 
+																		the 
+																		total 
+																		cost of 
+																		ownership 
+																		(TCO) of 
+																		their 
+																		system 
+																		by 
+																		helping 
+																		to 
+																		minimize 
+																		operational 
+																		costs.  
+																		By 
+																		following 
+																		corporate 
+																		development 
+																		guidelines 
+																		they 
+																		help to 
+																		increase 
+																		the 
+																		consistency 
+																		and 
+																		quality 
+																		of their 
+																		work, 
+																		increasing 
+																		the 
+																		maintainability 
+																		of it 
+																		for 
+																		people 
+																		tasked 
+																		to 
+																		evolve 
+																		and 
+																		maintain 
+																		it in 
+																		the 
+																		future.  
+																		As an 
+																		aside, 
+																		the 
+																		enterprise 
+																		discipline 
+																		scaling 
+																		factor 
+																		of the
+																		<a target="_blank" href="http://disciplinedagiledelivery.wordpress.com/2013/03/15/sdcf/">
+							Software Development Context Framework (SDFC)</a> is the only scaling 
+																		factor 
+																		of the 
+																		eight 
+																		which 
+																		has the 
+																		benefit 
+																		of 
+																		things 
+																		getting 
+																		potentially 
+																		easier 
+																		for 
+																		development 
+																		teams as 
+																		the 
+																		factor 
+																		moves 
+																		away 
+																		from a 
+																		project-level 
+																		focus 
+																		(the 
+																		"easy" 
+																		situation) 
+																		to an 
+																		enterprise-level 
+																		focus 
+																		(the 
+																		"hard" 
+																		situation).</p>
+																		<p>So 
+																		how do 
+																		you do 
+																		this?  
+																		Minimally, 
+																		the 
+																		enterprise 
+																		groups 
+																		such as 
+																		your 
+																		enterprise 
+																		architects, 
+																		operations 
+																		groups, 
+																		and so 
+																		on are 
+																		important 
+																		stakeholders 
+																		who 
+																		should 
+																		be 
+																		represented 
+																		by your 
+																		product 
+																		owner(s).  
+																		In the 
+																		case of 
+																		your 
+																		enterprise 
+																		architecture 
+																		group, 
+																		one or 
+																		more of 
+																		them may 
+																		become 
+																		active 
+																		members 
+																		of your 
+																		development 
+																		team in 
+																		the role 
+																		of
+																		<a href="#ArchitectureOwner">
+																		architecture 
+																		owner(s)</a>.  
+																		For 
+																		other 
+																		groups 
+																		the 
+																		product 
+																		owner 
+																		may 
+																		choose 
+																		to get 
+																		them 
+																		involved 
+																		with 
+																		your 
+																		team as 
+																		domain 
+																		or 
+																		technical 
+																		experts 
+																		on an 
+																		as-needed 
+																		and 
+																		as-appropriate 
+																		impromptu 
+																		basis.</p>
+																		<p align="center"> </p>
+                        <h3>10. <a name="TravelLight">Travel Light</a></h3>
+                        <p>One goal of your architectural
+                        efforts should be to 
+						<a href="http://agilemodeling.com/principles.htm#TravelLight">
+						t</a><span><a href="http://agilemodeling.com/principles.htm#TravelLight">ravel
+                        light</a></span>, to be as agile as possible. Don't create a fifty-page document when a
+                        five-page one will do. Don't create a five-page
+                        document when a diagram will do. Don't create a diagram when a metaphor will do.<span> 
+                        R</span>emember the "<a href="http://agilemodeling.com/essays/tagri.htm">They 
+						Ain't Gonna Read It (TAGRI)</a>" principle.</p>
+																		<table id="table9" border="0" width="100%">
+																			<tbody><tr>
+																				<td>N<font size="2">ot sure of how </font> 
+																		<a href="http://agilemodeling.com/essays/agileDocumentation.htm">
+																		documentation</a><font size="2"> much to create? Err on the side of not having enough because 
+																		</font> 
+																		<a href="http://agilemodeling.com/essays/agileDocumentationBestPractices.htm#Iterate">you
+                        can always go back</a><font size="2"> to the whiteboard if you need to, but
+                        the time you've wasted creating artifacts that you
+                        didn't need or adding unnecessary detail to artifacts
+                        is gone for ever.  Your
+                        goal should be to think through the critical issues
+                        faced by your project team (or organization or even
+                        industry depending on your scope), it shouldn't be to
+                        create reams of documentation. The principle 
+						</font> 
+						<span>
+						<a href="http://agilemodeling.com/principles.htm#MaximizeStakeholderInvestment">Maximize
+                        Shareholder ROI</a></span><font size="2"> tells 
+you to focus on
+                        high-value activities such as working through 
+the hard
+                        problems as a team and coming to a common 
+vision.Similarly, it tells you to avoid low-value activities such as
+                        writing detailed documentation or developing 
+scores of
+                        pretty diagrams.  These
+                        activities are often comforting because they 
+provide the
+                        illusion of progress, and provide you a source 
+of
+                        digression if you are trying to avoid dealing 
+with
+                        difficult issues, but in reality are rarely as 
+effective
+                        as you imagine because the are rarely looked at 
+by
+                        anyone other than the author(s).  The principle 
+						</font> 
+						<span>
+						<a href="http://agilemodeling.com/principles.htm#SoftwareIsYourPrimaryGoal">Software
+                        is Your Primary Goal</a></span><font size="2"> implies that you should model your
+                        architecture until the point where you believe you have
+                        a viable strategy, and at that point you should move on
+                        and start developing software instead of documentation.</font></td>
+																				<td width="128">
+								
+								
+								<b>
+								<a href="http://www.amazon.com/exec/obidos/ASIN/0470856173/ambysoftinc">
+								<img src="webpage-AgileArchitectureStrategies_files/0470856173.jpg" alt="Agile Documentation" align="right" border="0"></a></b></td>
+																			</tr>
+																		</tbody></table>
+                        <p>When will you want to write
+                        architectural 
+						<a href="http://agilemodeling.com/essays/agileDocumentation.htm">documentation</a>? There are two instances where it makes "agile
+                        sense" in my opinion. First, when you have a distributed development
+                        team and you cannot find a more effective manner of
+                        communication, such as face-to-face conversation, then
+                        documentation is an option. Second, at the end of a project when you want to
+                        leave behind sufficient documentation so that someone
+                        else can understand your approach later on. The reality is that for reasonably complex
+                        systems it's incredibly difficult, if not impossible
+                        and certainly not desirable, to document everything in
+                        your code.Sometimes the best place to describe your architecture is in
+                        a brief overview document. This document should focus on explaining the
+                        critical aspects of your architecture, likely captured
+                        by your navigation diagrams, it might include a summary
+                        of key architectural requirements, and an explanation of
+                        the critical decisions behind "questionable" aspects
+                        of what you did.  As
+                        always, if you're going to create an architecture
+                        document then it should add positive value and should
+                        ideally do so in the most effective way possible.</p>
+                        <p>A lot of people get worried when
+                        they discover that an architecture isn't "<a href="http://agilemodeling.com/essays/agileDocumentationBestPractices.htm">well
+                        documented</a>," whatever that means. I'm not so worried about this issue, but what I
+                        do worry about is whether the architecture is realistic
+                        and whether the developers understand and accept it if
+                        it is.  If
+                        you were to prioritize having your architecture
+                        documentation, having a workable architecture, having
+                        the architecture understood by your developers, and
+                        having it worked to by all the developers I suspect that
+                        documentation would come in dead last on that list. Think about it.  </p>
+                        <br>
+                        <h3>11. <a name="ProveIt">Prove Your Architecture</a></h3>
+                        <p>The practice
+						<a href="http://agilemodeling.com/practices.htm#ProveItWithCode">Prove it With Code</a> points out that a model is merely an
+                        abstraction, one that may appear to be very good may not
+                        actually be so in practice, that the only way you can
+                        know for sure is to validate your model through
+                        implementation.  
+						The implication is that you should prove that your 
+						architecture works, something that 
+						<a href="http://agilemodeling.com/essays/agileModelingXP.htm">XP</a> calls spikes and
+						<a href="http://agilemodeling.com/essays/agileModelingRUP.htm">RUP</a> calls architectural prototypes. When your architecture calls out for something
+                        that is new to you, perhaps you are using two or more
+                        products together for the first time, you should invest
+                        the time to explore whether or not this approach will
+                        work as well as how it works in accordance to the
+                        principle <span><a href="http://agilemodeling.com/principles.htm#RapidFeedback">Rapid Feedback</a></span>.  Remember
+                        to obtain permission from your project stakeholders to
+                        perform this effort because it is their money you are
+                        spending. Sometimes you will discover through your
+                        efforts that your original approach doesn't work,
+                        something that I would prefer to find out sooner rather
+                        than later, and sometimes you discover how your approach
+                        actually works (instead of how you thought it would
+                        work). The development of an architectural
+                        spike/prototype helps to reduce risk to your project
+                        because you quickly discover whether your approach is
+                        feasible, that you haven't simply produced an ivory
+                        tower architecture.</p>
+																		<p>
+																		<a href="#Figure5">
+																		Figure 5</a> 
+																		overviews 
+																		a 
+																		disciplined 
+																		approach 
+																		to the
+																		<a target="_blank" href="http://agilemodeling.com/essays/prioritizedRequirements.htm">
+																		prioritized 
+																		requirements</a> 
+																		"<a href="http://www.ambysoft.com/essays/bestPractices.html">best 
+																		practice</a>".  
+																		With a 
+																		risk-value 
+																		approach 
+																		to the 
+																		delivery 
+																		lifecycle, 
+																		an 
+																		extension 
+																		to
+																		<a target="_blank" href="http://www.implementingscrum.com/">
+																		Scrum'</a>s 
+																		value-driven 
+																		lifecycle, 
+																		you will 
+																		identify 
+																		the 
+																		handful 
+																		of 
+																		requirements 
+																		which 
+																		address 
+																		the 
+																		primary 
+																		technical 
+																		risks of 
+																		your 
+																		project.  
+																		For 
+																		example 
+																		if you 
+																		have a 
+																		requirement 
+																		which 
+																		states 
+																		that 
+																		your 
+																		system 
+																		must be 
+																		able to 
+																		process 
+																		4,000 
+																		transactions 
+																		a second 
+																		over a 
+																		period 
+																		of 10 
+																		hours 
+																		then 
+																		that 
+																		would be 
+																		a 
+																		requirement 
+																		which 
+																		clearly 
+																		encapsulates 
+																		some 
+																		technical 
+																		risk.  
+																		This is 
+																		the sort 
+																		of 
+																		requirement 
+																		that you 
+																		want to 
+																		implement 
+																		early in 
+																		the 
+																		project 
+																		to 
+																		ensure 
+																		that 
+																		your 
+																		architecture 
+																		actually 
+																		works.  
+																		My 
+																		general 
+																		rule is 
+																		that 
+																		it's 
+																		better 
+																		to find 
+																		out that 
+																		your 
+																		architecture 
+																		strategy 
+																		needs to 
+																		be 
+																		rethought 
+																		when 
+																		you're 
+																		only 18 
+																		days 
+																		into a 
+																		12-month 
+																		project 
+																		instead 
+																		of 
+																		concluding 
+																		that at 
+																		the 
+																		18-month 
+																		point of 
+																		your "12 
+																		month 
+																		project".  
+																		The 
+																		implication 
+																		is that 
+																		if the 
+																		technically 
+																		risky 
+																		requirements 
+																		aren't 
+																		at the 
+																		top of 
+																		the work 
+																		item 
+																		stack 
+																		then you 
+																		need to 
+																		work 
+																		closely 
+																		with 
+																		your 
+																		product 
+																		owner to 
+																		convince 
+																		them to 
+																		reprioritize 
+																		the few 
+																		requirements 
+																		which 
+																		aren't 
+																		at the 
+																		top.  
+																		However, 
+																		if you 
+																		can't 
+																		convince 
+																		your 
+																		product 
+																		owner to 
+																		do so 
+																		(I've 
+																		never 
+																		run into 
+																		this 
+																		problem 
+																		in 
+																		practice, 
+																		but 
+																		recognize 
+																		that it 
+																		could 
+																		happen) 
+																		then you 
+																		need to 
+																		respect 
+																		their 
+																		decision 
+																		and 
+																		accept 
+																		the risk 
+																		of 
+																		proving 
+																		your 
+																		architecture 
+																		later in 
+																		the 
+																		lifecycle.</p>
+						<p>
+						<b>
+																		<a name="Figure5">Figure 
+																		5. 
+						Disciplined agile 
+																		change 
+																		management 
+																		process</a>.</b></p>
+						<p></p>
+																								<p align="center"><img src="webpage-AgileArchitectureStrategies_files/requirementsManagement.gif" border="0"></p>
+												
+																		<br>
+                        <h3>12. <a name="Communicate">Communicate Your Architecture</a></h3>
+                        <p>There are two primary audiences for
+                        which communication of your architecture is important:
+                        your development team and your project stakeholders. To promote communication within your development
+                        team I am a firm believer that you should follow the
+                        practice <span>
+						<a href="http://agilemodeling.com/practices.htm#DisplayModelsPublicly">Display
+                        Models Publicly</a></span> for all of your architectural
+                        diagrams because an architecture that is a closely
+                        guarded secret isn't an architecture, it's merely an
+                        egotistical exercise in futility. I've worked on
+                        several projects where we have successfully maintained a
+                        whiteboard that was reserved specifically for
+                        architectural diagrams, making them visible publicly to
+                        every developer on the project as well as to anyone else
+                        who happened to walk by. We would also allow anyone who wanted to add
+                        comments or suggestions to the diagrams, along the lines
+                        of the principle 
+						<span>
+						<a href="http://agilemodeling.com/principles.htm#OpenAndHonestCommunication">Open
+                        and Honest Communication</a></span> and the practice 
+						<span>
+						<a href="http://agilemodeling.com/practices.htm#CollectiveOwnership">Collective
+                        Ownership</a></span>, because we wanted their feedback on our
+                        work. We had nothing to hide and trusted that others
+                        would be willing to help us out (and they did).</p>
+																		<table id="table10" border="0" width="100%">
+																			<tbody><tr>
+																				<td><font size="2">At the start of a project, and less
+                        so throughout your project, you will often find that you
+                        need to make your diagrams "look pretty" so you can
+                        </font>
+                        <a href="http://agilemodeling.com/essays/presentations.htm">present them to your project stakeholders</a><font size="2">.Your stakeholders want to get a good idea as to what approach
+                        you intend to take to determine whether your are
+                        investing their resources wisely, which means you'll
+                        need to m<span>odel to
+                        communicate</span> and orient some of your models so that
+                        others can understand them. This may mean you need to invest the time to
+                        clean up your models to make them presentable as well as
+                        write overview documentation for them. To remain as agile as possible the principle 
+						</font> 
+						<span>
+						<a href="http://agilemodeling.com/principles.htm#ModelWithAPurpose">Model
+                        With A Purpose</a></span><font size="2"> tells you that you should know
+                        exactly who you are developing the model(s) for and what
+                        they will use them for so you can focus on the minimum
+                        effort required.  Presentations
+                        to important project stakeholders, efforts that are
+                        often annoying and distracting for developers, are
+                        critical to your project's success as they provide
+                        opportunities for you to garner support for your project
+                        and to obtain needed resources. Furthermore, you can promote the importance of
+                        having stakeholders available to you that are able to
+                        actively participate on the project (you can't follow
+                        the practice </font> <span>
+						<a href="http://agilemodeling.com/essays/activeStakeholderParticipation.htm">Active
+                        Stakeholder Participation</a></span><font size="2"> if you don't have
+                        stakeholders available to you).</font></td>
+																				<td width="138">
+								
+								
+								<b>
+																				<a href="http://www.amazon.com/exec/obidos/ASIN/0321525655/ambysoftinc">
+								<img src="webpage-AgileArchitectureStrategies_files/0321525655.jpg" alt="Presentation Zen" align="right" height="160" border="0" width="132"></a></b></td>
+																			</tr>
+																		</tbody></table>
+                        <p>Be prepared to communicate your 
+						architecture in a presentation, and there is no reason 
+						why you cannot keep the
+						<a href="http://agilemodeling.com/essays/presentations.htm">
+						presentation agile</a>.</p>
+                        <p>  
+                        </p>
+                        <h3>13. <a name="Future">Think About The Future But Don't
+                        Overbuild</a> (Defer Commitment)</h3>
+                        <p>I suspect that the most
+                        controversial concept about agile architectural modeling
+                        is that you should consider future changes but not act
+                        on them until you actually need to. In other words, don't overbuild your system but
+                        at the same time be smart about it. The XP community is fairly blunt about the
+                        concept of overbuilding software with their belief that
+                        "You Ain't Gonna Need It Anyway" (YAGNI). The
+                        basic idea is that you cannot accurately predict the
+                        future<span><a title="" href="#Footnote1">[1]</a></span>
+                        and therefore shouldn't attempt to build for future
+                        possibilities.  Instead
+                        you should focus today on building what you need to
+                        today and building it cleanly so that your software is
+                        easy to change when you need to. Tomorrow, when you discover that you need to
+                        change your software to fulfill new requirements then
+                        change it then.  When
+                        you overbuild your software to be more general, to
+                        fulfill future potential requirements, you are actually
+                        making very serious trade-offs:</p>
+																		<ol>
+																			<li>
+																			<p>
+																			<b>
+																			It's 
+																			hard 
+																			to 
+																			estimate 
+																			the 
+																			actual 
+																			value 
+																			that 
+																			you're 
+																			producing</b>.  
+																			You are not focusing on meeting today's
+                        needs, resulting in you not producing something of
+                        immediate value to your users. I've been on several projects where the first
+                        several months, and in a few cases first several
+                        quarters, of effort focused on the development of common
+                        infrastructure (persistence frameworks, messaging
+                        frameworks, and so on). Technically interesting things, we definitely had
+                        a lot of fun building them, but of no value to our
+                        users.  </p>
+																			</li>
+																			<li>
+																			<p>
+																			<b>
+																			You're 
+																			guessing</b>.  
+																			You don't really know if you will even need whatever
+                        it is that you're building - you may be building a Porche when a Volkswagon would have been sufficient. 
+																			</p>
+																			</li>
+																			<li>
+																			<p>
+																			<b>
+																			You're 
+																			increasing 
+																			your 
+																			maintenance 
+																			burden</b>.  
+																			Anything that you overbuild today will
+                        need to be tested and maintained throughout the life of
+                        your project, violating the principle <span>
+																			<a href="http://agilemodeling.com/principles.htm#TravelLight">Travel
+                        Light</a></span>.<span>  
+																			</span>
+																			</p>
+																			</li>
+																			<li>
+																			<p>
+																			<b>
+																			It 
+																			isn't 
+																			clear 
+																			to 
+																			what 
+																			extent 
+																			it 
+																			needs 
+																			to 
+																			be 
+																			tested</b>.  
+																			When you overbuild something the only way you can
+                        accurately validate it is via imaginary feedback -
+                        nobody asked for whatever you've overbuilt so you have
+                        no one to go to that can validate your work.<span> 
+                        													Furthermore, 
+																			most 
+																			development 
+																			teams 
+																			test 
+																			to 
+																			the 
+																			risk, 
+																			but 
+																			if 
+																			you're 
+																			guessing 
+																			at 
+																			the 
+																			requirements 
+																			then 
+																			you're 
+																			also 
+																			guessing 
+																			at 
+																			the 
+																			level 
+																			of 
+																			risk.
+																			</span>
+																			.</p>
+																			</li>
+																		</ol>
+                        <p>So how can you be smart about all
+                        of this?  Although
+                        you don't want to overbuild your system based on
+                        future/mythical requirements there isn't anything
+                        wrong with thinking about the future.<span> 
+                        It is a two phase strategy:</span></p>
+																		<ol>
+																			<li>
+																			<p>
+																			<b>
+																			Initial 
+																			modeling</b>. 
+																			Do 
+																			some
+																			<a href="http://agilemodeling.com/essays/initialArchitectureModeling.htm">initial architecture 
+																			envisioning</a> 
+																			to 
+																			think 
+																			things 
+																			through, 
+																			to 
+																			explore 
+																			critical 
+																			concepts 
+																			and 
+																			thereby 
+																			get 
+																			you 
+																			going 
+																			in 
+																			the 
+																			right 
+																			direction.  
+																			This 
+																			doesn't 
+																			mean 
+																			that 
+																			you 
+																			need 
+																			to 
+																			create 
+																			mounds 
+																			of 
+																			architectural 
+																			documentation, 
+																			although 
+																			it 
+																			is 
+																			likely 
+																			that 
+																			you 
+																			will 
+																			do 
+																			some 
+																			modeling 
+																			and 
+																			yes, 
+																			egads!, 
+																			even 
+																			create 
+																			sufficient
+																			<a href="#TravelLight">
+																			architectural 
+																			documentation</a> 
+																			to 
+																			meet 
+																			your 
+																			needs. 
+																			</p>
+																			</li>
+																			<li>
+																			<p>
+																			<b>
+																			Defer 
+																			design 
+																			decisions</b>.  
+																			One 
+																			of 
+																			the 
+																			principles 
+																			of 
+																			lean 
+																			software 
+																			development 
+																			is 
+																			to 
+																			defer 
+																			commitment 
+																			to 
+																			the 
+																			last 
+																			possible 
+																			moment 
+																			that 
+																			you 
+																			need 
+																			to 
+																			make 
+																			the 
+																			decision, 
+																			thereby 
+																			increasing 
+																			your 
+																			flexibility 
+																			and 
+																			raising 
+																			your 
+																			chances 
+																			of 
+																			success. 
+																			</p>
+																			</li>
+																		</ol>
+																		<p>
+																		An 
+																		interesting 
+																		strategy 
+																		is 
+																		change 
+																		case 
+																		modeling. 
+																		<a href="http://agilemodeling.com/artifacts/changeCase.htm">Change cases</a>
+ are used to
+                        describe new POTENTIAL requirements for a system
+ or
+                        modifications to existing requirements. Change 
+cases are requirements you may, or may
+                        not, need to support in the future but you 
+definitely do
+                        not need to support today. Change cases are 
+often the result of
+                        brainstorming with your project stakeholders, 
+where
+                        questions such as "How can the business change?"
+                        "What legislation can change?" "What is
+                        your competition doing?" and "Who else might
+                        use the system and how?" are explored.On the 
+technical side developers will often ask fundamental
+                        questions such as "What technology can
+                        change?" and "What systems will we need to
+                        interact with?" that will lead to the
+                        identification of change cases. Change cases 
+should be realistic, for example
+                        "We enter the insurance business" for a bank or
+                        "We need to support the [INSERT FLASHY NEW 
+TECHNOLOGY]
+                        in our system" are reasonable change cases but 
+"Our
+                        sales staff is abducted by UFOs" isn't. 
+Furthermore, change cases typically describe
+                        requirements that are reasonably divergent from 
+what you
+                        are currently working on, requirements that 
+would
+                        potentially cause major rework to fulfill. By 
+identifying change cases you are now in a
+                        position to intelligently choose between what 
+would
+                        otherwise appear to be equal architectural or 
+design
+                        decisions.  You
+                        should only bring relevant change cases into the
+                        decision making process when your current 
+requirements
+                        are not sufficient to help you to choose between
+                        alternatives.  Another
+                        advantage is you can now explain to your project
+                        stakeholders why you chose one approach over 
+another, as
+                        I like to say you have a story to tell. However,
+ I cannot stress enough that change cases
+                        should not be used as excuses to gold plate your
+ system. Stay agile and don't overbuild your system.  So what do you do 
+when you think
+                        you have a change case that you truly believe 
+needs to
+                        be implemented now? Simple - discuss it with 
+your project
+                        stakeholders.  Ask
+                        them if the change case is an immediate 
+requirement, and
+                        if so act accordingly. If it isn't an immediate 
+requirement then
+                        accept the fact and move on. Never forget that 
+it is the project
+                        stakeholder's responsibility to 
+						<a href="http://agilemodeling.com/essays/changeManagement.htm">prioritize
+                        requirements</a>, not yours.</p>
+                        <p>Would there be harm in modeling for
+                        the future?  This
+                        is a slippery slope because I suspect that if you model
+                        it then you are much more likely to build it. It would require great discipline not to
+                        overbuild, I believe, because once you've got it
+                        captured as a collection of bubbles and lines it will be
+                        far too easy to convince yourself that there's no harm
+                        in overbuilding just this once. Having said that there's nothing wrong with
+                        drawing a few throw-away sketches as you're discussing
+                        a change case, just don't over model any models you
+                        intend to keep.</p>
+                        <br>
+																		<h3>14. 
+																		Take a
+																		<a name="MultiViewApproach">
+																		Multi-View 
+																		Approach</a></h3>
+																		<table id="table11" border="0" width="100%">
+																			<tbody><tr>
+																				<td width="118">
+								
+								
+								<b>
+																				<a href="http://www.amazon.com/exec/obidos/ASIN/0321552687/ambysoftinc">
+								<img src="webpage-AgileArchitectureStrategies_files/0321552687.jpg" alt="Documenting Software Architectures" align="left" border="0"></a></b></td>
+																				<td><font size="2">Agile 
+																		Modeling's
+																		</font>
+																		<a target="_blank" href="http://agilemodeling.com/principles.htm#MultipleModels">Multiple 
+																		Models</a><font size="2"> 
+																		principle 
+																		advises 
+																		you to 
+																		recognize 
+																		that 
+																		because 
+																		modern 
+																		systems 
+																		are 
+																		complex 
+																		that you 
+																		will 
+																		need to 
+																		consider 
+																		a range 
+																		of views 
+																		in your 
+																		architecture.  
+																		Although 
+																		they 
+																		take 
+																		different 
+																		approaches, 
+																		a 
+																		multi-view 
+																		strategy 
+																		is a 
+																		fundamental 
+																		concept 
+																		in 
+																		modern 
+																		architectural 
+																		frameworks 
+																		such as 
+																		the
+																		</font>
+																		<a target="_blank" href="http://www.enterpriseunifiedprocess.com/essays/zachmanFramework.html">Zachman 
+																		Framework</a><font size="2">, 
+																		</font> 
+																		<a target="_blank" href="http://www.opengroup.org/togaf/">TOGAF</a><font size="2">, 
+																		</font> 
+																		<a target="_blank" href="http://www.ibm.com/developerworks/wireless/library/wi-arch11/">4+1</a><font size="2">, and 
+																		so on.  
+																		Each of 
+																		these 
+																		frameworks 
+																		have 
+																		very 
+																		good 
+																		reasons 
+																		for 
+																		their 
+																		choice 
+																		of 
+																		views, 
+																		they all 
+																		seem to 
+																		work 
+																		well in 
+																		practice, 
+																		they can 
+																		all be
+																		</font>
+																		<a target="_blank" href="http://agiledata.org/essays/enterpriseArchitectureTechniques.html#ZachmanFramework">approached 
+																		in an 
+																		agile 
+																		manner</a><font size="2">, 
+																		so my 
+																		advice 
+																		is to 
+																		review 
+																		your 
+																		options 
+																		and pick 
+																		the 
+																		architectural 
+																		framework 
+																		which 
+																		best 
+																		reflects 
+																		the 
+																		culture 
+																		of your 
+																		organization.  
+																		My goal 
+																		here 
+																		isn't to 
+																		propose 
+																		yet 
+																		another 
+																		architecture 
+																		framework, 
+																		it is to 
+																		make you 
+																		aware of 
+																		them and 
+																		their 
+																		underlying 
+																		concepts.  
+																		</font> 
+																		<a href="#Figure6">Figure 
+																				6</a><font size="2"> 
+																		overviews 
+																		the 
+																		views 
+																		and 
+																		concerns 
+																		which 
+																		software/system 
+																		architects 
+																		need to 
+																		be 
+																		concerned 
+																		about.</font></td>
+																			</tr>
+																		</tbody></table>
+																		<br>
+																		<p><b>
+																		<a name="Figure6">Figure 
+																		6</a>. 
+																		Architectural 
+																		views 
+																		and 
+																		concerns.</b></p>
+																		<p align="center">
+																		<img src="webpage-AgileArchitectureStrategies_files/architectureViewsAndConcerns.jpg" border="0"></p>
+																		<p>A 
+																		view/<a target="_blank" href="http://www.viewpoints-and-perspectives.info/">viewpoint</a> 
+																		is 
+																		captured 
+																		as a 
+																		combination 
+																		of 
+																		diagrams 
+																		and text 
+																		descriptions 
+																		(such as 
+																		use 
+																		cases, 
+																		technical 
+																		specifications, 
+																		or 
+																		prose) . The 
+																		potential 
+																		issues, 
+																		which 
+																		may be 
+																		views in 
+																		and of 
+																		themselves, 
+																		which 
+																		your 
+																		views 
+																		that 
+																		your 
+																		architecture 
+																		should address 
+																		include:</p>
+																		<ul>
+																			<li>
+																			<a target="_blank" href="http://agilemodeling.com/artifacts/systemUseCase.htm">Usage</a>/<a target="_blank" href="http://agilemodeling.com/artifacts/dataFlowDiagram.htm">business 
+																			process</a></li>
+																			<li>
+																			<a target="_blank" href="http://www.ambysoft.com/essays/userInterfaceDesign.html">User 
+																			interface</a></li>
+																			<li>
+																			System 
+																			interface</li>
+																			<li>
+																			Network</li>
+																			<li>
+																			Deployment</li>
+																			<li>
+																			Hardware</li>
+																			<li>
+																			<a target="_blank" href="http://agiledata.org/essays/implementationStrategies.html">Data 
+																			storage</a></li>
+																			<li>
+																			Data 
+																			transmission</li>
+																			<li>
+																			Events</li>
+																			<li>
+																			Code/component 
+																			distribution</li>
+																			<li>
+																			Function/logic/services</li>
+																		</ul>
+																		<p>To 
+																		borrow 
+																		the 
+																		language 
+																		of 
+																		aspect 
+																		oriented 
+																		programming 
+																		(AOP), there 
+																		are also 
+																		"cross-cutting concerns" 
+																		which 
+																		your 
+																		architecture 
+																		may also 
+																		need to 
+																		take 
+																		into 
+																		account.  
+																		These 
+																		concerns/<a target="_blank" href="http://www.viewpoints-and-perspectives.info/">perspectives</a> 
+																		should 
+																		also be 
+																		addressed 
+																		by your 
+																		architectural 
+																		views 
+																		and in 
+																		some 
+																		cases 
+																		may be 
+																		specific 
+																		views in 
+																		an of 
+																		themselves.  
+																		These 
+																		concerns 
+																		are: </p>
+																		<ul>
+																			<li>
+																			<a target="_blank" href="http://www.ambysoft.com/essays/classTypeArchitecture.html">Layering/partitioning</a></li>
+																			<li>
+																			<a target="_blank" href="http://www.ambysoft.com/onlineWritings.html#Reuse">Reuse</a></li>
+																			<li>
+																			<a target="_blank" href="http://www.ambysoft.com/onlineWritings.html#Testing">Quality 
+																			and 
+																			validation</a></li>
+																			<li>
+																			Accuracy 
+																			and 
+																			timeliness</li>
+																			<li>
+																			Reliability, 
+																			Availability, 
+																			Serviceability, 
+																			and 
+																			Performance</li>
+																			<li>
+																			Environment 
+																			(green 
+																			computing 
+																			issues)</li>
+																			<li>
+																			Customization 
+																			points</li>
+																			<li>
+																			Consumability 
+																			(includes 
+																			ease 
+																			of (de)installation, 
+																			level 
+																			of 
+																			support,
+																			<a href="http://agilemodeling.com/essays/agileUsability.htm">
+																			u</a><a target="_blank" href="http://agilemodeling.com/essays/agileUsability.htm">sability</a>, 
+																			...) </li>
+																			<li>
+																			Concurrency</li>
+																			<li>
+																			<a target="_blank" href="http://agiledata.org/essays/accessControl.html">Security</a></li>
+																			<li>
+																			Internationalization</li>
+																			<li>
+																			Regulations</li>
+																			<li>
+																			<a target="_blank" href="http://www.enterpriseunifiedprocess.com/essays/operationsAndSupport.html">Maintenance, 
+																			operations, 
+																			and 
+																			support 
+																			issues</a></li>
+																		</ul>
+																		<p>The 
+																		implication 
+																		is that 
+																		anyone 
+																		in the 
+																		role of 
+																		architect 
+																		needs to 
+																		have a 
+																		wide 
+																		range of 
+																		skills 
+																		to be 
+																		effective, 
+																		that 
+																		they 
+																		need to 
+																		move 
+																		away 
+																		from the 
+																		traditional 
+																		philosophy 
+																		of over 
+																		specialization 
+																		and be 
+																		more of 
+																		a
+																		<a target="_blank" href="http://agilemodeling.com/essays/generalizingSpecialists.htm">generalizing 
+																		specialist</a>.  
+																		Minimally 
+																		they 
+																		should 
+																		move 
+																		away 
+																		from 
+																		being 
+																		simply a 
+																		data 
+																		architect, 
+																		or 
+																		security 
+																		architect, 
+																		or 
+																		network 
+																		architect 
+																		towards 
+																		being an 
+																		architect.  
+																		Being 
+																		just an 
+																		architect 
+																		is 
+																		arguably 
+																		too 
+																		specialized 
+																		as well, 
+																		but that 
+																		will 
+																		vary 
+																		depending 
+																		on the 
+																		situation.  
+																		True 
+																		professionals 
+																		strive 
+																		to have 
+																		a wide 
+																		range of 
+																		skills 
+																		as well 
+																		as one 
+																		or more 
+																		specialties.</p>
+																		<br>
+                        <h3>15. <a name="HowDoesItWork">How Does This Work?</a></h3>
+                        <p>The architectural approach that
+                        I've described is markedly different that what a lot
+                        of organizations are currently doing today. <a href="#Table1">Table 1</a>
+ compares and contrasts the
+                        architectural practices that are commonly found 
+in many
+                        organizations with their agile counterparts. 
+Clearly, there's a big difference. The agile approach works because of 
+its focus on
+                        people working together effectively as a team. 
+Agile Modeling recognizes that people are
+                        fallible, that they aren't likely to get the
+                        architecture right to begin with and therefore 
+need the
+                        opportunity for acting on feedback from 
+implementation
+                        efforts.  When
+                        agile architects are productive members of the
+                        development team, and when the development team 
+has been
+                        involved with the architectural efforts to begin
+ with,
+                        then comprehensive documentation isn't needed by
+ them,
+                        the navigation diagrams are sufficient (granted,
+ when
+                        this is not the case documentation, hopefully 
+minimal,
+                        may be required).  Architecture
+                        reviews aren't needed because the architecture 
+is
+                        being proved through the concrete feedback of
+                        architectural prototyping/spikes and because 
+people can
+                        see the architecture evolve because your models 
+are
+                        displayed publicly for everyone to see. Agile 
+architects have the courage to focus on
+                        solving today's problem today and trusting that 
+they
+                        can solve tomorrow's problem tomorrow (Beck, 
+2000),
+                        and the humility to recognize that they cannot
+                        accurately predict the future and therefore 
+choose not
+                        to overbuild their architectures.</p>
+                        <br>
+                        <b><a name="Table1">Table 1</a>. Comparing Common and Agile
+                        Architectural Practices.</b>
+                        <table border="1">
+                          <tbody><tr>
+                            <td>
+                              <p><b>Common Practice
+                              </b></p>
+                            </td>
+                            <td>
+                              <p><b>Agile Practice
+                              </b></p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><font size="2">Architects are held in high
+                              esteem and are often placed, or even worse place
+                              themselves, on pedestals</font></p>
+                            </td>
+                            <td>
+                              <p><font size="2">Agile architects have the
+                              humility to admit that they don't walk on water</font></p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><font size="2">Architects are too busy to
+                              get their hands dirty with development</font></p>
+                            </td>
+                            <td>
+                              <p><font size="2">Agile architects are active
+                              members of development teams, developing software
+                              where appropriate and acting as architectural
+                              consultants to the team</font></p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><font size="2">Architecture models are
+                              robust to enable them to fulfill future
+                              requirements</font></p>
+                            </td>
+                            <td>
+                              <p><font size="2">Agile architects have the
+                              humility to admit that they can't predict the
+                              future and instead have the courage to trust they
+                              can solve tomorrow's problem tomorrow</font></p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><font size="2">The goal is to develop a
+                              comprehensive architecture early in a project</font></p>
+                            </td>
+                            <td>
+                              <p><font size="2">You evolve your architecture
+                              incrementally and iteratively, allowing it to
+                              emerge over time</font></p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><font size="2">Well-documented architecture
+                              model(s) are required</font></p>
+                            </td>
+                            <td>
+                              <p><font size="2">Travel light and focus on
+                              navigation diagrams that overview your
+                              architecture, documenting just enough to
+                              communicate to your intended audience</font></p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><font size="2">Architecture model(s) are
+                              communicated only when they are "suitable for
+                              public consumption"</font></p>
+                            </td>
+                            <td>
+                              <p><font size="2">Architecture model(s) are
+                              displayed publicly, even when they are a work in
+                              progress, to promote feedback from others</font></p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><font size="2">Architecture reviews are held
+                              to validate your model(s) before being put into
+                              use</font></p>
+                            </td>
+                            <td>
+                              <p><font size="2">Architectures are proved
+                              through concrete experiments</font></p>
+                            </td>
+                          </tr>
+                        </tbody></table>
+                        <br>
+																		<h3>16.
+																		<a name="DoingThis">
+																		Who is 
+																		Actually 
+																		Doing 
+																		This</a>?</h3>
+																		<p>
+																		Contrary 
+																		to some 
+																		of the 
+																		agile 
+																		rhetoric, 
+																		it 
+																		appears 
+																		that the 
+																		vast 
+																		majority 
+																		of agile 
+																		teams 
+																		perform 
+																		architecture 
+																		modeling 
+																		on their 
+																		projects.  
+																		Some 
+																		evidence 
+																		includes:</p>
+																		<ul>
+																			<li>
+																			The
+																			<a target="_blank" href="http://www.ambysoft.com/surveys/projectInitiation2009.html">2009 
+																			Agile 
+																			Project 
+																			Initiation 
+																			survey
+																			</a>found 
+																			that 
+																			86% 
+																			of 
+																			respondents 
+																			indicated 
+																			that 
+																			on 
+																			their 
+																			most 
+																			recent 
+																			agile 
+																			project 
+																			they 
+																			either 
+																			did 
+																			some 
+																			sort 
+																			of 
+																			up-front 
+																			architecture/design 
+																			modeling 
+																			-OR- 
+																			had 
+																			initial 
+																			architecture/design 
+																			models 
+																			given 
+																			to 
+																			them 
+																			(sigh) 
+																			-OR- 
+																			used 
+																			reference 
+																			models.  
+																			</li>
+																			<li>
+																			The
+																			<a target="_blank" href="http://www.ambysoft.com/surveys/practicesPrinciples2008.html">
+																			2008 
+																			Agile 
+																			Practices 
+																			and 
+																			Principles</a> 
+																			survey 
+																			found 
+																			that 
+																			the 
+																			majority 
+																			of 
+																			respondents 
+																			reported 
+																			that 
+																			they 
+																			were 
+																			getting 
+																			positive 
+																			value 
+																			from 
+																			initial 
+																			architecture 
+																			envisioning 
+																			efforts 
+																			and 
+																			from 
+																			allowing 
+																			the 
+																			details 
+																			of 
+																			the 
+																			design 
+																			to 
+																			emerge 
+																			over 
+																			time 
+																			throughout 
+																			the 
+																			project.  
+																			</li>
+																			<li>
+																			The
+																			<a target="_blank" href="http://www.ambysoft.com/surveys/modelingDocumentation2008.html">
+																			Modeling 
+																			and 
+																			Documentation 
+																			Practices 
+																			on 
+																			IT 
+																			Projects 
+																			survey</a> 
+																			in 
+																			July 
+																			2008 
+																			found 
+																			that 
+																			the 
+																			most 
+																			popular 
+																			approach 
+																			to 
+																			architecture 
+																			modeling 
+																			was 
+																			to 
+																			create 
+																			high-level 
+																			diagrams.  
+																			That 
+																			survey 
+																			also 
+																			found 
+																			that 
+																			agile 
+																			teams 
+																			were 
+																			more 
+																			likely 
+																			to 
+																			model 
+																			than 
+																			traditional 
+																			teams.</li>
+																		</ul>
+																		<br>
+																		<h3>17.
+																		<a name="Myths">
+																		Addressing 
+																		the 
+																		Myths 
+																		Around 
+																		Agile 
+																		and 
+																		Architecture</a></h3>
+																		<p>I 
+																		wanted 
+																		to end 
+																		this 
+																		article 
+																		by 
+																		addressing 
+																		some of 
+																		the 
+																		common 
+																		myths 
+																		which 
+																		I'm 
+																		still 
+																		running 
+																		into 
+																		when 
+																		working 
+																		with 
+																		organizations 
+																		around 
+																		the 
+																		world. </p>
+																		<table id="table12" border="0" width="100%">
+																			<tbody><tr>
+																				<td>
+																				<ol>
+																					<li><b><font size="2">Agilists don't do architecture</font></b><font size="2">.  My hope is that this article will put that myth firmly to rest.</font></li>
+																					<li><b><font size="2">You need to do detailed up front architecture modeling</font></b><font size="2">.
+  You should do some up front architecture modeling to identify your 
+general technical strategy, to identify potential technical challenges 
+which you may run into, and to help build a consensus within your team 
+around the technical direction.  The point is that you don't need a lot 
+of detail to achieve these goals.  It's a choice to take a "</font><a target="_blank" href="http://agilemodeling.com/essays/bmuf.htm">big modeling up front (BMUF)</a><font size="2">"
+ approach, a choice which can sound great in theory, particularly if 
+you're a professional modeler, but which usually proves to be a rather 
+poor one in practice.  BMUF strategies lead to poor decisions and 
+solutions which are less likely to meet the actual needs of 
+stakeholders, reduce your ability to support evolving requirements, and 
+lead to lower morale.</font></li>
+																					<li><b><font size="2">Architects are responsible for architecture</font></b><font size="2">.
+  Although many organizations choose to support specialized architects 
+who are primarily responsible for architectural activities, this proves 
+to be a rather poor choice in practice because the developers are likely
+ to perceive the architects as "ivory tower" and will often choose to 
+ignore them.  Effective architecture strategies, as you've seen in this 
+article, are collaborative in nature, not dictatorial. </font></li>
+																				</ol>
+																				</td>
+																				<td width="136">
+					<a href="http://www.ambysoft.com/books/agileModeling.html">
+								<img src="webpage-AgileArchitectureStrategies_files/0471202827.jpg" alt="Agile Modeling" align="right" border="0"></a></td>
+																			</tr>
+																		</tbody></table>
+																		<br>
+																		<h3>18. 
+																		Acknowledgements</h3>
+																		<p>
+																		I'd like 
+																		to thank 
+																		Birol 
+																		Aygun, 
+																		Jesper 
+																		Rugard 
+																		Jensen, 
+																		Ashely 
+																		McNeile, and Paul 
+																		Oldfield 
+																		for 
+																		their 
+																		observations 
+																		which 
+																		went 
+																		into 
+																		updating 
+																		this 
+																		article.</p>
+																		<br>						                 
+					 
+       </article>
+	 </td>
+	 
+	  <!-- Ads -->
+      <td width="5%">
+      <aside>
+	  <a href="http://disciplinedagileconsortium.org/">
+	  <img src="webpage-AgileArchitectureStrategies_files/gotDiscipline.gif" alt="Disciplined Agile Certification" border="0"></a>
+      <br>
+
+	  <a href="http://scottambler.com/">
+	  <img src="webpage-AgileArchitectureStrategies_files/logoSWAA.gif" alt="Scott Ambler + Associates" border="0"></a>
+	  <br>
+
+	  <!-- DAD book -->
+	  <a href="http://www.ambysoft.com/books/dad.html">  
+	  <img src="webpage-AgileArchitectureStrategies_files/dadCover.jpg" alt="Disciplined Agile Delivery" border="0"></a>
+      <br>
+
+	  <!-- Recent Book Review -->
+	  <a href="http://www.ambysoft.com/books/reviews/current.html">  
+	  <img src="webpage-AgileArchitectureStrategies_files/current.jpg" alt="Disciplined Agile Delivery" border="0"></a>
+      <br>  
+
+	  <!-- Google Ad -->
+	    <script type="text/javascript"><!--
+	    google_ad_client = "pub-1563172974921293";
+	    google_alternate_ad_url = "http://www.ambysoft.com/redirector.html";
+	    google_ad_width = 120;
+	    google_ad_height = 90;
+		google_ad_format = "120x90_0ads_al_s";
+		google_ad_channel ="9817671336";
+		google_color_border = "800000";
+		google_color_bg = "FFFFFF";
+		google_color_link = "660033";
+		google_color_url = "800000";
+		google_color_text = "000000";
+		//--></script>
+		<script type="text/javascript" src="webpage-AgileArchitectureStrategies_files/show_ads.js">
+		</script>
+		<!-- End Google Ad -->
+		</aside>
+	 </td><!-- Ads -->
+  </tr>
+</tbody></table>			
+
+<footer>
+<!-- Share Bar -->
+  <hr size="1">
+  Share with friends:
+  <span class="st_twitter" displaytext="Tweet" st_title="Agile architecture strategies, #AgileModeling " st_url="http://AgileModeling.com/essays/agileArchitecture.htm"></span>
+  <span class="st_linkedin" displaytext="LinkedIn" st_title="Agile architecture strategies" st_url="http://AgileModeling.com/essays/agileArchitecture.htm"></span>
+  <span class="st_facebook" displaytext="Facebook" st_title="Agile architecture strategies" st_url="http://AgileModeling.com/essays/agileArchitecture.htm"></span>
+  <span class="st_stumbleupon" displaytext="StumbleUpon" st_title="Agile architecture strategies" st_url="http://AgileModeling.com/essays/agileArchitecture.htm"></span>
+  <span class="st_digg" displaytext="Digg" st_title="Agile architecture strategies" st_url="http://AgileModeling.com/essays/agileArchitecture.htm"></span>
+  <span class="st_baidu" displaytext="Baidu" st_title="Agile architecture strategies" st_url="http://AgileModeling.com/essays/agileArchitecture.htm"></span>
+  <span class="st_googleplus" displaytext="Google +" st_title="Agile architecture strategies" st_url="http://AgileModeling.com/essays/agileArchitecture.htm"></span>
+  <hr size="1">	
+
+  <!-- Bottom advertising -->
+  <br>
+  <h3>Let Us Help</h3>
+  <p>We actively work with clients around the world to improve their 
+information technology (IT) practices, 
+typically in the role of mentor/coach, team lead, or trainer.  A full 
+description of what we do, and how to contact us, can be found at <a href="http://www.scottambler.com/">Scott Ambler + Associates</a>.</p>
+  <br>
+  <h3>Recommended Reading</h3>
+  <table border="0" width="100%">
+    <!-- DAD Book -->
+    <tbody><tr>
+    <td width="5%">
+    <a href="http://www.ambysoft.com/books/dad.html" target="_blank"> <img src="webpage-AgileArchitectureStrategies_files/dadCover.jpg" alt="Disciplined Agile Delivery"></a>
+	</td>
+    <td width="95%">
+	<font size="2">This book, </font><a href="http://www.ambysoft.com/books/dad.html" target="_blank">Disciplined Agile Delivery: A Practitioner's Guide to Agile Software Delivery in the Enterprise</a>
+	<font size="2">describes the </font><a href="http://disciplinedagiledelivery.com/" target="_blank">Disciplined Agile Delivery</a>
+	<font size="2"> (DAD) process decision framework.
+	The DAD framework is a people-first, learning-oriented hybrid agile 
+approach to IT solution delivery. It has a risk-value delivery 
+lifecycle, is goal-driven, is enterprise aware, and provides the 
+foundation for</font> 
+	<font size="2"><a href="http://disciplinedagiledelivery.com/" target="_blank">scaling agile</a>.
+	This book is particularly important for anyone who wants to understand 
+how agile works from end-to-end within an enterprise setting.  
+	Data professionals will find it interesting because it shows how agile 
+modeling and agile database techniques fit into the overall solution 
+delivery process.
+	Enterprise professionals will find it interesting beause it explicitly 
+promotes the idea that disciplined agile teams should be enterprise 
+aware and therefore work closely with enterprise teams.
+	Existing agile developers will find it interesting because it shows how
+ to extend Scrum-based and Kanban-based strategies to provide a 
+coherent, end-to-end streamlined delivery process.</font> 
+	</td>
+	</tr>
+	
+	<!-- Object Primer -->
+  	<tr>
+	<td width="5%">
+	<a href="http://www.ambysoft.com/books/theObjectPrimer.html"><img src="webpage-AgileArchitectureStrategies_files/0521540186.jpg" alt="The Object Primer 3rd Edition: Agile Model Driven Development (AMDD) with UML 2"></a>
+	</td>
+    <td width="95%">
+	<a href="http://www.ambysoft.com/books/theObjectPrimer.html">The Object Primer 3rd Edition: Agile Model Driven 
+	Development with UML 2</a><font size="2"> is an important reference book for agile modelers, 
+	describing how to develop 35 </font><a href="http://agilemodeling.com/artifacts">types of agile 
+	models</a><font size="2"> including all 13 </font> 
+	<a href="http://agilemodeling.com/essays/umlDiagrams.htm">UML 2 diagrams</a><font size="2">.  
+	Furthermore, this book describes the fundamental programming and testing techniques
+	for successful agile solution delivery.  The book also shows how to move from your 
+	agile models to source code, how to succeed at implementation techniques such as </font>
+	<a href="http://agiledata.org/essays/databaseRefactoring.html">refactoring</a><font size="2"> and </font> 
+	<a href="http://agiledata.org/essays/tdd.html">test-driven development(TDD)</a><font size="2">.  
+	The Object Primer also includes a chapter overviewing the critical database development techniques (</font><a href="http://agiledata.org/essays/databaseRefactoring.html">database refactoring</a><font size="2">, </font> 
+	<a href="http://agiledata.org/essays/mappingObjects.html">object/relational mapping</a><font size="2">, </font> 
+	<a href="http://agiledata.org/essays/legacyDatabases.html">legacy analysis</a><font size="2">, and 
+	database access coding) from my award-winning </font>
+	<a href="http://www.ambysoft.com/books/agileDatabaseTechniques.html">Agile Database Techniques</a><font size="2">book.</font></td>
+	</tr>
+  </tbody></table>						
+						
+						
+  <!-- Bottom logo bar -->
+  <br>  <hr size="1">	
+  <p>
+  <a href="http://disciplinedagiledelivery.com/" target="_blank"><img src="webpage-AgileArchitectureStrategies_files/buttonDAD.gif" alt="Disciplined Agile Delivery: The Foundation for Scaling Agile" border="0"></a>
+  <a href="http://agilemodeling.com/" target="_blank"> <img src="webpage-AgileArchitectureStrategies_files/buttonAM.gif" alt="Agile Modeling: Practices for Scaling Agile" border="0"></a>
+  <a href="http://agiledata.org/" target="_blank"> <img src="webpage-AgileArchitectureStrategies_files/buttonAD.gif" alt="Agile Data: Practices for Scaling Agile" border="0"></a>
+  <a href="http://enterpriseunifiedprocess.com/" target="_blank"><img src="webpage-AgileArchitectureStrategies_files/buttonEUP.gif" alt="EnterpriseUP: Agility at Scale" border="0"></a>
+  <a href="http://www.ambysoft.com/unifiedprocess/agileUP.html" target="_blank"><img src="webpage-AgileArchitectureStrategies_files/buttonAUP.gif" alt="AgileUP: Towards Disciplined Agile Delivery" border="0"></a><a href="http://www.ambysoft.com/" target="_blank"><img src="webpage-AgileArchitectureStrategies_files/buttonAmbysoft.gif" alt="Ambysoft Inc." border="0"></a>
+  <a href="http://www.software-development-experts.com/" target="_blank"><img src="webpage-AgileArchitectureStrategies_files/buttonSDPA.gif" alt="Software Development Practices Advisor" border="0"></a>
+  <a href="http://scottambler.com/" target="_blank"><img src="webpage-AgileArchitectureStrategies_files/logoSWAA.gif" alt="Scott Ambler + Associates" border="0"></a>
+  <a href="http://twitter.com/scottwambler" target="_blank"><img src="webpage-AgileArchitectureStrategies_files/buttonSWATwitter.gif" alt="Follow @scottwambler on Twitter!" border="0"></a></p>
+
+
+  <!-- Copyright Notice -->		
+
+<hr size="1">	
+
+				
+<font size="2">
+	</font><table id="table17" width="100%">
+<tbody><tr>
+		<td>
+		<p align="left">
+<a href="http://www.ambysoft.com/licensing.html">Copyright</a><font size="2"> 2001-2012 </font> <a href="http://www.ambysoft.com/scottAmbler.html">Scott W. Ambler</a></p></td>
+		<td>
+		<p align="right"><font size="2">This site owned by </font> <a href="http://www.ambysoft.com/">Ambysoft Inc.</a><font size="2">
+		</font>
+		</p></td>
+	</tr>
+
+</tbody></table>
+
+				
+</footer>
+
+
+</form></body></html>
