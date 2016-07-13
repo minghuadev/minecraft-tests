@@ -1,0 +1,33 @@
+
+search install openshift origin on centos 7
+
+
+
+http://sudhaker.com/10/install-the-latest-openshift-v3-on-centos-7-1
+Install the latest OpenShift V3 on CentOS 7.x
+Sudhaker's Blog Be Technical By Techniques
+
+single node installation
+
+
+
+https://tobrunet.ch/articles/dive-into-openshift-v3/
+Dive into Openshift v3
+Tobias Brunner
+
+3-node Origin Cluster on CentOS 7
+
+
+
+https://sosiouxme.wordpress.com/2015/01/02/openshift-3-from-zero/
+OpenShift 3 from zero
+Posted on 2015/01/02 by Luke Meyer
+
+run docker, run a docker openshift instance, compile, 
+
+    https://blog.openshift.com/openshift-v3-deep-dive-docker-kubernetes/
+    https://blog.openshift.com/builds-deployments-services-v3/
+    https://blog.openshift.com/continuous-integration-deployment-v3/
+
+
+
