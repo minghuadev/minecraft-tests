@@ -51,3 +51,29 @@ https://github.com/docker-32bit
 
 
 
+==============================================================================
+run and export 32bit/debian
+
+
+docker pull 32bit/debian
+
+docker run -it 32bit/debian /bin/bash
+
+docker ps -a
+
+docker export -o debi32.tar <container-id>
+
+cat debi32.tar | docker import - deb32
+
+docker run -it deb32 /bin/bash
+
+  apt-get update       ## got error no public key ...
+
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <key-id>
+
+  apt-get update
+  apt-get upgrade      ## one of the 117 packages failed to fetch
+  apt-get upgrade --fix-missing
+
+
+
