@@ -9,3 +9,29 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-private-docker-
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-14-04
 
 
+
+
+search ... docker fedora image
+
+
+
+http://developers.redhat.com/blog/2014/05/15/practical-introduction-to-docker-containers/
+A Practical Introduction to Docker Containers
+Posted by Scott McCarty (fatherlinux) and two23 on May 15, 2014
+
+Create Base Image
+
+Create a tar file of the system
+
+  tar --numeric-owner --exclude=/proc --exclude=/sys -cvf centos6-base.tar /
+
+Copy the tar file to where the consuming system and Import the image
+
+  cat centos6-base.tar | docker import - centos6-base
+
+Test
+
+  docker run -i -t centos6-base cat /etc/redhat-release
+
+
+
