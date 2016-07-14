@@ -1,4 +1,5 @@
 
+==============================================================================
 search docker config hub
 
 
@@ -10,7 +11,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-c
 
 
 
-
+==============================================================================
 search ... docker fedora image
 
 
@@ -32,6 +33,21 @@ Copy the tar file to where the consuming system and Import the image
 Test
 
   docker run -i -t centos6-base cat /etc/redhat-release
+
+
+
+==============================================================================
+search docker 32 bit images
+
+
+https://hub.docker.com/r/32bit/ubuntu/
+32bit/ubuntu
+
+
+https://hub.docker.com/u/32bit/
+32bit/debian
+
+https://github.com/docker-32bit
 
 
 
