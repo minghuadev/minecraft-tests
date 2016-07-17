@@ -1,0 +1,28 @@
+
+
+github 2016 july 17
+https://github.com/NickCis/docker-build-scripts
+
+    Scripts are based on docker/docker/contrib and the arch wiki.
+    ( https://github.com/docker/docker/tree/master/contrib
+      https://wiki.archlinux.org/index.php/Docker )
+
+
+special tweaks:
+
+ $ cd /tmp
+ $ wget http://fedora.c3sl.ufpr.br/fedora/linux/releases/23/Server/i386/os/Packages/f/fedora-repos-23-1.noarch.rpm
+ $ rpm2cpio fedora-repos-23-1.noarch.rpm | cpio -idmv
+ $ sed -i 's/$releasever/23/g' /tmp/etc/yum.repos.d/*
+ $ sudo cp -r /tmp/etc/yum.repos.d /etc/yum/
+ $ sudo ln -s /etc/yum/yum.repos.d/ /etc/yum/repos.d
+ $ sudo cp -r /tmp/pki /etc/
+ $ sudo echo "i386" > /etc/yum/vars/basearch
+ $ sudo echo "23" > /etc/yum/vars/releasever
+
+
+script: 
+
+https://github.com/NickCis/docker-build-scripts/blob/master/mkimage-yum.sh
+
+
