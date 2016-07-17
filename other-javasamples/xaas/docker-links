@@ -77,3 +77,61 @@ docker run -it deb32 /bin/bash
 
 
 
+==============================================================================
+registry container
+
+
+https://github.com/docker/docker-registry/issues/518
+docker registry running with mounted volume for STORAGE-PATH fails with IntegrityError #518
+
+ $ docker pull registry:0.8.1
+ $ docker run --rm -i -t registry:0.8.1 /bin/bash
+ # cd docker-registry
+ # pip install -r requirements/test.txt
+ # DOCKER_REGISTRY_CONFIG=config_sample.yml SETTINGS_FLAVOR=test nosetests
+ # rm /tmp/docker-registry.db
+ # DOCKER_REGISTRY_CONFIG=config_sample.yml SETTINGS_FLAVOR=test docker-registry
+
+
+local inside registry:
+DOCKER_REGISTRY_CONFIG=/docker-registry/config/config_sample.yml
+
+local command:
+docker run -d -p 5001:5000 -e STORAGE_PATH=/tmp/regs \
+    -v /tmp/regs:/home/dev1334/tmp/reg3 --name reg3 127.0.0.1:5000/registry
+
+
+==============================================================================
+persistent storage
+
+http://stackoverflow.com/questions/18496940/how-to-deal-with-persistent-storage-e-g-databases-in-docker?rq=1
+
+    http://www.offermann.us/2013/12/tiny-docker-pieces-loosely-joined.html
+    http://crosbymichael.com/advanced-docker-volumes.html
+
+
+==============================================================================
+entrypoint vs cmd, add vs copy
+
+https://www.ctl.io/developers/blog/post/dockerfile-entrypoint-vs-cmd/
+Dockerfile: ENTRYPOINT vs CMD
+Brian DeHamer July 16, 2015 
+
+https://www.ctl.io/developers/blog/post/dockerfile-add-vs-copy/
+Dockerfile: ADD vs COPY
+Brian DeHamer March 10, 2015 
+
+
+==============================================================================
+layer visualize:
+
+https://docs.docker.com/engine/tutorials/dockerimages/
+
+    https://github.com/justone/dockviz
+    https://imagelayers.io/
+
+
+==============================================================================
+
+
+
