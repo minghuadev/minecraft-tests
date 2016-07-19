@@ -88,7 +88,9 @@ docker run -it deb32 /bin/bash
   apt-get upgrade --fix-missing
 
 
-from github docker readme: 32-bit images: 
+from github docker library readme: 
+https://github.com/docker-library/official-images 32-bit images (x86/i686 i386)
+
   https://hub.docker.com/u/i386/   debian gcc java ... a lot ...
 
 
