@@ -1,4 +1,16 @@
 
+
+TOC
+    search docker config hub
+    search docker fedora image
+    search docker 32 bit images
+    run and export 32bit/debian
+    registry container
+    persistent storage
+    entrypoint vs cmd, add vs copy
+    layer visualize:
+
+
 ==============================================================================
 search docker config hub
 
@@ -76,6 +88,10 @@ docker run -it deb32 /bin/bash
   apt-get upgrade --fix-missing
 
 
+from github docker readme: 32-bit images: 
+  https://hub.docker.com/u/i386/   debian gcc java ... a lot ...
+
+
 
 ==============================================================================
 registry container
@@ -97,8 +113,17 @@ local inside registry:
 DOCKER_REGISTRY_CONFIG=/docker-registry/config/config_sample.yml
 
 local command:
-docker run -d -p 5001:5000 -e STORAGE_PATH=/tmp/regs \
-    -v /tmp/regs:/home/dev1334/tmp/reg3 --name reg3 127.0.0.1:5000/registry
+docker run -d -p 5001:5000 -v /home/me/tmp/reg3:/tmp/registry 127.0.0.1:5000/registry
+
+inspect container env:
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "DOCKER_REGISTRY_CONFIG=/docker-registry/config/config_sample.yml",
+                "SETTINGS_FLAVOR=dev"
+            ],
+            "Cmd": [
+                "docker-registry"
+            ],
 
 
 ==============================================================================
