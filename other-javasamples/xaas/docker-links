@@ -110,6 +110,8 @@ docker registry running with mounted volume for STORAGE-PATH fails with Integrit
  # rm /tmp/docker-registry.db
  # DOCKER_REGISTRY_CONFIG=config_sample.yml SETTINGS_FLAVOR=test docker-registry
 
+solution: preload gunicorn using  -e GUNICORN_OPTS=[--preload]
+
 
 local inside registry:
 DOCKER_REGISTRY_CONFIG=/docker-registry/config/config_sample.yml
