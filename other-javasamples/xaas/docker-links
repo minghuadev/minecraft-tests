@@ -88,7 +88,7 @@ docker run -it deb32 /bin/bash
   apt-get upgrade --fix-missing
 
 
-from github docker library readme: 
+from github docker library official images readme: 
 https://github.com/docker-library/official-images 32-bit images (x86/i686 i386)
 
   https://hub.docker.com/u/i386/   debian gcc java ... a lot ...
@@ -111,6 +111,7 @@ docker registry running with mounted volume for STORAGE-PATH fails with Integrit
  # DOCKER_REGISTRY_CONFIG=config_sample.yml SETTINGS_FLAVOR=test docker-registry
 
 solution: preload gunicorn using  -e GUNICORN_OPTS=[--preload]
+                             or   -e GUNICORN_OPTS='[--preload]'
 
 
 local inside registry:
@@ -128,6 +129,12 @@ inspect container env:
             "Cmd": [
                 "docker-registry"
             ],
+
+
+source code 0.9.1: https://github.com/docker/docker-registry
+source code v2:    https://github.com/docker/distribution
+official images:   https://github.com/docker-library/official-images
+
 
 
 ==============================================================================
