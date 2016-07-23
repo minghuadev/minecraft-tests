@@ -1,9 +1,32 @@
 
-search  golang tutorial for c programmers
 
+search  golang tutorial for c programmers
+2016-7-20
+
+
+
+https://talks.golang.org/2012/goforc.slide
+https://talks.golang.org/2015/go4cpp.slide
+https://github.com/golang/go/wiki/GoForCPPProgrammers
+
+https://www.reddit.com/r/golang/comments/2i0nhw/learning_go_from_the_perspective_of_a_c_developer/
+    http://senko.silvrback.com/learning-go
+    Learning Go From the perspective of a C developer Senki Rasic July 18, 2014
+      a better C with: memory alloc gc, error return, bounded string and array, 
+                       improved syntax, unified coding stype by go fmt, 
+                       resource cleanup with deferred functions, 
+                       std lib, tools
 
 
 
 http://nomad.so/2015/03/why-gos-design-is-a-disservice-to-intelligent-programmers/
+
+    ranking: TIOBE, Redmonk, langpop.corger.nl
+
+    books:
+        http://www.golang-book.com/
+        http://openmymind.net/assets/go/go.pdf
+        https://www.miek.nl/downloads/Go/Learning-Go-latest.pdf
+        http://www.gopl.io/ch1.pdf
 
 
