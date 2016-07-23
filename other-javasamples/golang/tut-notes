@@ -18,6 +18,16 @@ https://www.reddit.com/r/golang/comments/2i0nhw/learning_go_from_the_perspective
                        std lib, tools
                        concurrency goroutine, bast build without preprocessor
 
+https://lwn.net/Articles/446598/
+Walter: The Go Programming Language, or: Why all C-like languages except one suck
+    https://www.syntax-k.de/projekte/go-review
+    The Go Programming Language, or: Why all C-like languages except one suck.  
+    2011-06-07 by Jörg Walter <golang@syntax-k.de> 
+      (an awesome review)
+
+http://nordicapis.com/writing-microservices-in-go/
+Writing Microservices in Go Posted by Kristopher Sandoval
+
 
 
 http://nomad.so/2015/03/why-gos-design-is-a-disservice-to-intelligent-programmers/
