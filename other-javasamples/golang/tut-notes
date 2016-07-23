@@ -16,6 +16,7 @@ https://www.reddit.com/r/golang/comments/2i0nhw/learning_go_from_the_perspective
                        improved syntax, unified coding stype by go fmt, 
                        resource cleanup with deferred functions, 
                        std lib, tools
+                       concurrency goroutine, bast build without preprocessor
 
 
 
