@@ -1,10 +1,10 @@
 
 
+===============================================================================
 search  golang tutorial for c programmers
 2016-7-20
 
-
-
+------------------------------------------------
 https://talks.golang.org/2012/goforc.slide
 https://talks.golang.org/2015/go4cpp.slide
 https://github.com/golang/go/wiki/GoForCPPProgrammers
@@ -29,7 +29,7 @@ http://nordicapis.com/writing-microservices-in-go/
 Writing Microservices in Go Posted by Kristopher Sandoval
 
 
-
+------------------------------------------------
 http://nomad.so/2015/03/why-gos-design-is-a-disservice-to-intelligent-programmers/
 
     ranking: TIOBE, Redmonk, langpop.corger.nl
@@ -39,5 +39,31 @@ http://nomad.so/2015/03/why-gos-design-is-a-disservice-to-intelligent-programmer
         http://openmymind.net/assets/go/go.pdf
         https://www.miek.nl/downloads/Go/Learning-Go-latest.pdf
         http://www.gopl.io/ch1.pdf
+
+
+https://news.ycombinator.com/item?id=7660924
+Leaving Go
+
+    http://jozefg.bitbucket.org/posts/2013-08-23-leaving-go.html
+    Leaving Go Posted on August 23, 2013
+
+        gengen: https://github.com/joeshaw/gengen
+        
+
+===============================================================================
+search golang style
+
+------------------------------------------------
+http://stackoverflow.com/questions/25550172/go-coding-style-guide
+
+
+===============================================================================
+search golang style
+
+------------------------------------------------
+https://golang.org/doc/gdb
+
+    build without dwarfv3:  go build -ldflags "-w" prog.go
+
 
 
