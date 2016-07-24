@@ -66,4 +66,22 @@ https://golang.org/doc/gdb
     build without dwarfv3:  go build -ldflags "-w" prog.go
 
 
+===============================================================================
+search golang embedded
+
+------------------------------------------------
+https://www.reddit.com/r/golang/comments/3565hd/anyone_using_go_lang_on_embedded_platform/
+    https://github.com/mitchellh/gox
+
+    https://github.com/go-qml/qml
+    http://gobot.io/documentation/platforms/
+
+
+https://github.com/golang/go/wiki/GoArm
+    ARMv7:   GOARM=7 GOARCH=arm
+
+
+https://github.com/kidoman/embd
+
+
 
