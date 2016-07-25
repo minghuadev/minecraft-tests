@@ -58,7 +58,7 @@ http://stackoverflow.com/questions/25550172/go-coding-style-guide
 
 
 ===============================================================================
-search golang style
+search golang debug
 
 ------------------------------------------------
 https://golang.org/doc/gdb
@@ -83,5 +83,12 @@ https://github.com/golang/go/wiki/GoArm
 
 https://github.com/kidoman/embd
 
+
+===============================================================================
+search golang import local package
+
+------------------------------------------------
+http://stackoverflow.com/questions/17539407/golang-how-to-import-local-packages-without-gopath
+http://thenewstack.io/understanding-golang-packages/
 
 

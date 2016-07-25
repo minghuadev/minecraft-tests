@@ -1,0 +1,35 @@
+
+
+fedora 20 golang install: 
+
+[1] Install     golang-1.4.2-2.fc20.i686                   @updates
+    Dep-Install golang-pkg-bin-linux-386-1.4.2-2.fc20.i686 @updates
+    Dep-Install golang-pkg-linux-386-1.4.2-2.fc20.noarch   @updates
+    Dep-Install golang-src-1.4.2-2.fc20.noarch             @updates
+
+[2] Install golang-godoc-1:0-2.0.hga7e14835e46b.fc20.i686 @updates
+    Install golang-gotype-0-2.0.hga7e14835e46b.fc20.i686 @updates
+    Install golang-pkg-linux-arm-1.4.2-2.fc20.noarch @updates
+
+
+go vet: 
+
+$ go vet
+go tool: no such tool "vet"; to install:
+        go get golang.org/x/tools/cmd/vet
+
+$ go get golang.org/x/tools/cmd/vet
+package golang.org/x/tools/cmd/vet
+        imports golang.org/x/tools/cmd/vet
+        imports golang.org/x/tools/cmd/vet: cannot find package "golang.org/x/tools/cmd/vet" in any of:
+        /usr/lib/golang/src/golang.org/x/tools/cmd/vet (from $GOROOT)
+        /home/me/goprojectdir/src/golang.org/x/tools/cmd/vet (from $GOPATH)
+
+
+docker nickcis/fedora-32  fedora 23 golang: 1.5.4
+upgraded to fedora 24 golang: 1.6.2
+
+
+docker i386/debian debian jessie 8 golang: 1.3.3
+
+
