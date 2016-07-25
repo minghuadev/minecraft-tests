@@ -31,5 +31,6 @@ upgraded to fedora 24 golang: 1.6.2
 
 
 docker i386/debian debian jessie 8 golang: 1.3.3
+docker i386/ubuntu ubuntu xenial 16.04 golang: 1.6.2
 
 
