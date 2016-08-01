@@ -1,0 +1,91 @@
+
+from tut-notes:
+2016-7-31
+
+
+https://news.ycombinator.com/item?id=7660924
+Leaving Go (http://jozefg.bitbucket.org/posts/2013-08-23-leaving-go.html)
+
+  pron 825 days ago [-]
+
+    It's ironic that the "better" the language (for some hazy definition 
+    of "better") the less actual work seems to get done with it. So Go can 
+    be pretty annoying at times, and so can Java (I've said before that 
+    I find the two almost identical, but that's beside the point now); and 
+    C is horrible and completely unsafe and downright dangerous. Yet more 
+    useful working code has probably been written in Java and C than all 
+    other languages combined since the invention of the computer, and more 
+    useful code has been written in, what, 5 years of Go(?) than in 20(?) 
+    years of Haskell.
+
+    Here's the thing: I am willing to accept that Haskell is the best 
+    programming language ever created. People have been telling me this for 
+    over 15 years now. And yet it seems like the most complex code written 
+    in Haskell is the Haskell compiler itself (and maybe some tooling 
+    around it). If Haskell's clear advantages really make that much of 
+    a difference, maybe its (very vocal) supporters should start doing 
+    really impressive things with it rather than write compilers. I don't 
+    know, write a really safe operating system; a novel database; some 
+    crazy Watson-like machine; a never-failing hardware controller. 
+    Otherwise, all of this is just talk.
+
+  Locke1689 825 days ago [-]
+
+    As someone who thinks that more advanced type systems and 
+    proof-carrying-code are some of the biggest advances in theoretical 
+    computer science and practical programming in the last few decades, 
+    but also is a C# compiler developer, I have also noticed this. 
+    Haskell is really interesting, but C# developers get shit done.
+
+    I'm not sure what the cause is, but it definitely gnaws at me.
+
+  pron 825 days ago [-]
+
+    > I'm not sure what the cause is, but it definitely gnaws at me.
+
+    Here's my hypothesis: programming language are made for people to use, 
+    and people spending time thinking about designing Watson, don't want 
+    to spend it thinking about expressing their program using lambda calculus. 
+    The only group for whom the stuff they develop coincides with 
+    language concepts are those writing compilers. So they get confused 
+    because their domain is the programming language, so they don't feel 
+    like they're spending their mind power on two different things. 
+    They can't imagine that someone trying to solve a tricky scheduling 
+    problem wouldn't want to spend time thinking about types.
+
+    The other group that can adopt languages like Haskell are those whose 
+    domain doesn't require too much thought: namely CRUD applications. 
+    These guys want to spend time thinking about type-driven-design. 
+    It might actually make their code quality better. They, too, can't 
+    understand why people solving a hard concurrent-data-structure problem 
+    wouldn't want to spend time thinking about expressing their ideas 
+    elegantly through types.
+
+    Both of these groups have one thing in common: expendable energy to spend 
+    thinking about programming language concepts. So to them, it seems easy; 
+    and it probably is, if you're willing to put some effort into it, which 
+    is precisely what many developers don't want to do.
+
+  Locke1689 825 days ago [-]
+
+    Or, in other words, advanced languages have some cognitive overhead that 
+    people working on extraordinarily complex applications can't spare?
+
+    Maybe. Then again, I've been using C++ again recently and I feel like 
+    the cognitive overhead there is so huge that I can barely understand 
+    my simple programs. Nonetheless, Microsoft pretty much runs on C++ (and C#).
+
+  pron 824 days ago [-]
+
+    It's not so much that they can't but that they won't. And the same people 
+    don't use C++'s confusing features (crazy template stuff) either. But 
+    the problem isn't just the cognitive overhead inherent to the language, 
+    but that of the switching cost. As I said in another comment, while Haskell 
+    certainly has some advantages, they don't easily overcome the switching cost. 
+    People writing compilers happily pay the cognitive price for the switch 
+    because that's their core business, while those doing CRUD apps can 
+    certainly afford the price.
+
+  ...
+
+
