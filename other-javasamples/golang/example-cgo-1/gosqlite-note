@@ -1,0 +1,34 @@
+
+
+2016-8-10
+
+https://golang.org/doc/
+https://blog.golang.org/c-go-cgo
+
+
+
+https://code.google.com/archive/p/gosqlite/source/default/commits
+
+Author 	Date 	Commit 	Message
+Russ Cox 	May 30, 2013 	74691fb6f837 	sqlite3: fix shadowing bug
+Russ Cox 	May 30, 2013 	97cad2774f7f 	sqlite3: new driver for database/sql
+Russ Cox 	Apr 22, 2012 	5baefb109e18 	update for go 1
+Russ Cox 	Nov 2, 2011 	a88eb4732139 	use error
+Russ Cox 	Jul 10, 2011 	b2b4926fd235 	now goinstall-friendly!
+Russ Cox 	May 26, 2011 	2728a4d41bed 	fix Typeof -> TypeOf
+Russ Cox 	Jan 24, 2011 	52d9ef67ba90 	add Stmt.Reset
+Russ Cox 	Jan 24, 2011 	86c7596573bc 	add BusyTimeout
+Russ Cox 	Jan 23, 2011 	9cd04b7e1568 	backup
+Russ Cox 	Nov 8, 2010 	c58bbd04c468 	threading, better errors
+Russ Cox 	Oct 22, 2010 	34ff1940583d 	...
+Russ Cox 	Aug 25, 2010 	e693baee322d 	fix Makefile
+Russ Cox 	Jul 18, 2010 	5be5796d0af2 	add sqlite.Version
+Russ Cox 	Jul 12, 2010 	d6ca09f93ae8 	bool
+Russ Cox 	Jul 2, 2010 	9d1b043017d2 	better errors, fix memory leak
+Russ Cox 	May 29, 2010 	cefe4afec189 	initial version
+
+
+download:
+https://storage.googleapis.com/google-code-archive-source/v2/code.google.com/gosqlite/source-archive.zip
+
+
