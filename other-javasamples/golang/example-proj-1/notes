@@ -1,0 +1,47 @@
+
+
+$ cat goenvset 
+
+export GOPATH=$(pwd)/libs
+#export GOARCH=arm
+#export GOARM=5
+#export GOBIN=$(pwd)/bins
+
+$ source goenvset 
+
+--only with GOROOT and GOPATH set
+
+
+
+http://stackoverflow.com/questions/31362332/creating-call-graph-in-golang
+
+$ go get     golang.org/x/tools/cmd/callgraph
+$ go install golang.org/x/tools/cmd/callgraph
+$ go install golang.org/x/tools/cmd/digraph
+
+$ cd apps
+
+$ ../libs/bin/callgraph -format=digraph t1.go | ../libs/bin/digraph succs main.main
+
+
+
+$ cd ..
+$ git clone https://github.com/paetzke/go-dep-graph
+
+$ go get github.com/paetzke/godot/godot
+$ go install github.com/paetzke/godot/godot
+
+$ cd go-dep-graph/
+$ cd src/
+$ go build main.go xfile.go
+
+$ ./main -p -s ./ | dot -Tpdf -O
+$ ./main -p -s ../../apps/ | dot -Tpdf -O
+
+
+
+$ go get github.com/davecheney/graphpkg
+$ go install github.com/davecheney/graphpkg
+$ libs/bin/graphpkg mypkg
+
+
