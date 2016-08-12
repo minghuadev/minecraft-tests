@@ -1,0 +1,54 @@
+
+search cygwin golang download
+2016-8-19
+
+note that the following .bashrc setup does not work. need to set through windows 
+control panel system environment. then can modify by invoking "cmd" from cygwin 
+terminal and run windows command or bat file like
+    set "GOPATH=%GOPATH%;C:\Users\me\proj\libs"
+and then can run go build run install command from cmd command line
+
+
+
+https://groups.google.com/forum/#!topic/golang-nuts/4DVgcqU3ql4
+golang-nuts ›
+go and cygwin!
+
+mcdt...@gmail.com 	08/12/2014
+
+These settings in cygwin worked for me to get the go command lines to work as indicated in the tutorial videos:
+
+1. add these 3 lines into your ~/.bashrc file:
+export GOPATH='C:\cygwin\home\your_user_name\go_workspace'
+export GOBIN='C:\cygwin\home\your_user_name\go_workspace\bin'
+export PATH=$PATH:'/cygdrive/c/cygwin/home/your_user_name/go_workspace/bin'
+
+2. source ~/.bashc
+
+3. verify GOBIN is set with "go env" (My output looks like):l
+go env
+set GOROOT=C:\Go
+set GOBIN=C:\cygwin\home\your_user_name\go_workspace\bin
+set GOARCH=amd64
+set GOCHAR=6
+set GOOS=windows
+set GOEXE=.exe
+set GOHOSTARCH=amd64
+set GOHOSTOS=windows
+set GOTOOLDIR=C:\Go\pkg\tool\windows_amd64
+set GOGCCFLAGS=-g -O2 -m64 -mthreads
+
+
+2/ Create a go workspace directory (name is optional but needs to match the export Env vars in .bashrc):
+cd ~/.
+mkdir ./go_workspace
+mkdir ./go_workspace/src
+mkdir ./go_workspace/bin
+mkdir ./go_workspace/pkg
+mkdir ./go_workspace/pkg/windows_amd64 (NOTE: GOARCH can be determined from the "go env" output... mine is amd64 and cygwin is on windows)
+
+Then the "go install", "go build", "go test" commands all worked without errors.
+
+McD
+
+
