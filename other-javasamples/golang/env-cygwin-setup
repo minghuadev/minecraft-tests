@@ -8,6 +8,36 @@ terminal and run windows command or bat file like
     set "GOPATH=%GOPATH%;C:\Users\me\proj\libs"
 and then can run go build run install command from cmd command line
 
+Set through control panel: 
+    GOPATH  %USERPROFILE%\bin\golibs
+    GOROOT  C:\godir\go1.6.3.windows-386\go
+    PATH  %PATH%;%GOROOT%\bin;%GOPATH%\bin
+  https://github.com/go-lang-plugin-org/go-lang-idea-plugin/wiki/Documentation suggests: 
+    GOPATH is set to a single directory (e.g. /home/florinp/golang)
+    GOPATH/bin and GOROOT/bin are present in you PATH
+
+  $ go env
+  set GOARCH=386
+  set GOBIN=
+  set GOEXE=.exe
+  set GOHOSTARCH=386
+  set GOHOSTOS=windows
+  set GOOS=windows
+  set GOPATH=C:\Users\...me...\bin\golibs
+  set GORACE=
+  set GOROOT=C:\godir\go1.6.3.windows-386\go
+  set GOTOOLDIR=C:\godir\go1.6.3.windows-386\go\pkg\tool\windows_386
+  set GO15VENDOREXPERIMENT=1
+  set CC=gcc
+  set GOGCCFLAGS=-m32 -mthreads -fmessage-length=0
+  set CXX=g++
+  set CGO_ENABLED=1
+
+Install delve for debuggging: 
+  $ go get github.com/derekparker/delve/cmd/dlv
+  # github.com/derekparker/delve/proc
+  ..\bin\golibs\src\github.com\derekparker\delve\proc\disasm.go:9: undefined: ArchInst
+
 
 
 https://groups.google.com/forum/#!topic/golang-nuts/4DVgcqU3ql4
