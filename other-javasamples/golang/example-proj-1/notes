@@ -2,7 +2,7 @@
 
 $ cat goenvset 
 
-export GOPATH=$(pwd)/libs
+export GOPATH=$GOPATH:$(pwd)/libs
 #export GOARCH=arm
 #export GOARM=5
 #export GOBIN=$(pwd)/bins
