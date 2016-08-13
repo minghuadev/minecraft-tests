@@ -1,4 +1,22 @@
 
+toc
+    pyc proj
+    local env
+    dep graph
+
+======================================================================
+pyc proj
+    project tab selections: project, project files, problems, scratches
+    project:
+        untitled
+            untitled (~pyc project)
+            untitled (~source dir)
+        external libraries
+            go sdk
+            gopath
+
+======================================================================
+local env
 
 $ cat goenvset 
 
@@ -11,7 +29,8 @@ $ source goenvset
 
 --only with GOROOT and GOPATH set
 
-
+======================================================================
+dep graph
 
 http://stackoverflow.com/questions/31362332/creating-call-graph-in-golang
 
