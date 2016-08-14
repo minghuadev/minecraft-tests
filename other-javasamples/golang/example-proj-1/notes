@@ -2,6 +2,7 @@
 toc
     pyc proj
     local env
+    gotour
     dep graph
 
 ======================================================================
@@ -28,6 +29,13 @@ export GOPATH=$GOPATH:$(pwd)/libs
 $ source goenvset 
 
 --only with GOROOT and GOPATH set
+
+======================================================================
+gotour 
+https://github.com/golang/tour
+
+$ go get golang.org/x/tour/gotour
+$ go tool tour
 
 ======================================================================
 dep graph
