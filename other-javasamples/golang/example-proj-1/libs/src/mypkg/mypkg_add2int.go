@@ -2,7 +2,6 @@
 
 package mypkg
 
-func Add2int(i,j int) int {
-   return i+j
+func Add2int(i, j int) int {
+	return i + j
 }
-
