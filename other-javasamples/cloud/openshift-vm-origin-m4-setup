@@ -3,9 +3,16 @@ openshift-vm-origin-m4-setup
 2016-8-15
 
 toc
+    admin
     download
     startup
     rpm -q -a output
+
+===========================================================
+admin
+
+https://docs.openshift.org/origin-m4/oo_administration_guide.html
+https://docs.openshift.org/origin-m4/oo_deployment_guide_vm.html
 
 ===========================================================
 download
