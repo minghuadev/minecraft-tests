@@ -1,0 +1,535 @@
+pydoc mod_pywebsocket.standalone
+
+
+
+Help on module mod_pywebsocket.standalone in mod_pywebsocket:
+
+NAME
+    mod_pywebsocket.standalone - Standalone WebSocket server.
+
+FILE
+    /home/.../pywebsocket/mod_pywebsocket/standalone.py
+
+DESCRIPTION
+    Use this file to launch pywebsocket without Apache HTTP Server.
+    
+    
+    BASIC USAGE
+    ===========
+    
+    Go to the src directory and run
+    
+      $ python mod_pywebsocket/standalone.py [-p <ws_port>]
+                                             [-w <websock_handlers>]
+                                             [-d <document_root>]
+    
+    <ws_port> is the port number to use for ws:// connection.
+    
+    <document_root> is the path to the root directory of HTML files.
+    
+    <websock_handlers> is the path to the root directory of WebSocket handlers.
+    If not specified, <document_root> will be used. See __init__.py (or
+    run $ pydoc mod_pywebsocket) for how to write WebSocket handlers.
+    
+    For more detail and other options, run
+    
+      $ python mod_pywebsocket/standalone.py --help
+    
+    or see _build_option_parser method below.
+    
+    For trouble shooting, adding "--log_level debug" might help you.
+    
+    
+    TRY DEMO
+    ========
+    
+    Go to the src directory and run standalone.py with -d option to set the
+    document root to the directory containing example HTMLs and handlers like this:
+    
+      $ cd src
+      $ PYTHONPATH=. python mod_pywebsocket/standalone.py -d example
+    
+    to launch pywebsocket with the sample handler and html on port 80. Open
+    http://localhost/console.html, click the connect button, type something into
+    the text box next to the send button and click the send button. If everything
+    is working, you'll see the message you typed echoed by the server.
+    
+    
+    USING TLS
+    =========
+    
+    To run the standalone server with TLS support, run it with -t, -k, and -c
+    options. When TLS is enabled, the standalone server accepts only TLS connection.
+    
+    Note that when ssl module is used and the key/cert location is incorrect,
+    TLS connection silently fails while pyOpenSSL fails on startup.
+    
+    Example:
+    
+      $ PYTHONPATH=. python mod_pywebsocket/standalone.py         -d example         -p 10443         -t         -c ../test/cert/cert.pem         -k ../test/cert/key.pem 
+    Note that when passing a relative path to -c and -k option, it will be resolved
+    using the document root directory as the base.
+    
+    
+    USING CLIENT AUTHENTICATION
+    ===========================
+    
+    To run the standalone server with TLS client authentication support, run it with
+    --tls-client-auth and --tls-client-ca options in addition to ones required for
+    TLS support.
+    
+    Example:
+    
+      $ PYTHONPATH=. python mod_pywebsocket/standalone.py -d example -p 10443 -t         -c ../test/cert/cert.pem -k ../test/cert/key.pem         --tls-client-auth         --tls-client-ca=../test/cert/cacert.pem
+    
+    Note that when passing a relative path to --tls-client-ca option, it will be
+    resolved using the document root directory as the base.
+    
+    
+    CONFIGURATION FILE
+    ==================
+    
+    You can also write a configuration file and use it by specifying the path to
+    the configuration file by --config option. Please write a configuration file
+    following the documentation of the Python ConfigParser library. Name of each
+    entry must be the long version argument name. E.g. to set log level to debug,
+    add the following line:
+    
+    log_level=debug
+    
+    For options which doesn't take value, please add some fake value. E.g. for
+    --tls option, add the following line:
+    
+    tls=True
+    
+    Note that tls will be enabled even if you write tls=False as the value part is
+    fake.
+    
+    When both a command line argument and a configuration file entry are set for
+    the same configuration item, the command line value will override one in the
+    configuration file.
+    
+    
+    THREADING
+    =========
+    
+    This server is derived from SocketServer.ThreadingMixIn. Hence a thread is
+    used for each request.
+    
+    
+    SECURITY WARNING
+    ================
+    
+    This uses CGIHTTPServer and CGIHTTPServer is not secure.
+    It may execute arbitrary Python code or external programs. It should not be
+    used outside a firewall.
+
+CLASSES
+    BaseHTTPServer.HTTPServer(SocketServer.TCPServer)
+        WebSocketServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer)
+    CGIHTTPServer.CGIHTTPRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler)
+        WebSocketRequestHandler
+    SocketServer.ThreadingMixIn
+        WebSocketServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer)
+    threading.Thread(threading._Verbose)
+        ThreadMonitor
+    
+    class ThreadMonitor(threading.Thread)
+     |  Method resolution order:
+     |      ThreadMonitor
+     |      threading.Thread
+     |      threading._Verbose
+     |      __builtin__.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, interval_in_sec)
+     |  
+     |  run(self)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  daemon = True
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from threading.Thread:
+     |  
+     |  __repr__(self)
+     |  
+     |  getName(self)
+     |  
+     |  isAlive(self)
+     |  
+     |  isDaemon(self)
+     |  
+     |  is_alive = isAlive(self)
+     |  
+     |  join(self, timeout=None)
+     |  
+     |  setDaemon(self, daemonic)
+     |  
+     |  setName(self, name)
+     |  
+     |  start(self)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from threading.Thread:
+     |  
+     |  ident
+     |  
+     |  name
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from threading._Verbose:
+     |  
+     |  __dict__
+     |      dictionary for instance variables (if defined)
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+    
+    class WebSocketRequestHandler(CGIHTTPServer.CGIHTTPRequestHandler)
+     |  CGIHTTPRequestHandler specialized for WebSocket.
+     |  
+     |  Method resolution order:
+     |      WebSocketRequestHandler
+     |      CGIHTTPServer.CGIHTTPRequestHandler
+     |      SimpleHTTPServer.SimpleHTTPRequestHandler
+     |      BaseHTTPServer.BaseHTTPRequestHandler
+     |      SocketServer.StreamRequestHandler
+     |      SocketServer.BaseRequestHandler
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, request, client_address, server)
+     |  
+     |  is_cgi(self)
+     |      Test whether self.path corresponds to a CGI script.
+     |      
+     |      Add extra check that self.path doesn't contains ..
+     |      Also check if the file is a executable file or not.
+     |      If the file is not executable, it is handled as static file or dir
+     |      rather than a CGI script.
+     |  
+     |  log_error(self, *args)
+     |      Override BaseHTTPServer.log_error.
+     |  
+     |  log_request(self, code='-', size='-')
+     |      Override BaseHTTPServer.log_request.
+     |  
+     |  parse_request(self)
+     |      Override BaseHTTPServer.BaseHTTPRequestHandler.parse_request.
+     |      
+     |      Return True to continue processing for HTTP(S), False otherwise.
+     |      
+     |      See BaseHTTPRequestHandler.handle_one_request method which calls
+     |      this method to understand how the return value will be handled.
+     |  
+     |  setup(self)
+     |      Override SocketServer.StreamRequestHandler.setup to wrap rfile
+     |      with MemorizingFile.
+     |      
+     |      This method will be called by BaseRequestHandler's constructor
+     |      before calling BaseHTTPRequestHandler.handle.
+     |      BaseHTTPRequestHandler.handle will call
+     |      BaseHTTPRequestHandler.handle_one_request and it will call
+     |      WebSocketRequestHandler.parse_request.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  MessageClass = <class httplib.HTTPMessage>
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from CGIHTTPServer.CGIHTTPRequestHandler:
+     |  
+     |  do_POST(self)
+     |      Serve a POST request.
+     |      
+     |      This is only implemented for CGI scripts.
+     |  
+     |  is_executable(self, path)
+     |      Test whether argument path is an executable file.
+     |  
+     |  is_python(self, path)
+     |      Test whether argument path is a Python script.
+     |  
+     |  run_cgi(self)
+     |      Execute a CGI script.
+     |  
+     |  send_head(self)
+     |      Version of send_head that support CGI scripts
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from CGIHTTPServer.CGIHTTPRequestHandler:
+     |  
+     |  cgi_directories = ['/cgi-bin', '/htbin']
+     |  
+     |  have_fork = True
+     |  
+     |  have_popen2 = True
+     |  
+     |  have_popen3 = True
+     |  
+     |  rbufsize = 0
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from SimpleHTTPServer.SimpleHTTPRequestHandler:
+     |  
+     |  copyfile(self, source, outputfile)
+     |      Copy all data between two file objects.
+     |      
+     |      The SOURCE argument is a file object open for reading
+     |      (or anything with a read() method) and the DESTINATION
+     |      argument is a file object open for writing (or
+     |      anything with a write() method).
+     |      
+     |      The only reason for overriding this would be to change
+     |      the block size or perhaps to replace newlines by CRLF
+     |      -- note however that this the default server uses this
+     |      to copy binary data as well.
+     |  
+     |  do_GET(self)
+     |      Serve a GET request.
+     |  
+     |  do_HEAD(self)
+     |      Serve a HEAD request.
+     |  
+     |  guess_type(self, path)
+     |      Guess the type of a file.
+     |      
+     |      Argument is a PATH (a filename).
+     |      
+     |      Return value is a string of the form type/subtype,
+     |      usable for a MIME Content-type header.
+     |      
+     |      The default implementation looks the file's extension
+     |      up in the table self.extensions_map, using application/octet-stream
+     |      as a default; however it would be permissible (if
+     |      slow) to look inside the data to make a better guess.
+     |  
+     |  list_directory(self, path)
+     |      Helper to produce a directory listing (absent index.html).
+     |      
+     |      Return value is either a file object, or None (indicating an
+     |      error).  In either case, the headers are sent, making the
+     |      interface the same as for send_head().
+     |  
+     |  translate_path(self, path)
+     |      Translate a /-separated PATH to the local filename syntax.
+     |      
+     |      Components that mean special things to the local file system
+     |      (e.g. drive or directory names) are ignored.  (XXX They should
+     |      probably be diagnosed.)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from SimpleHTTPServer.SimpleHTTPRequestHandler:
+     |  
+     |  extensions_map = {'': 'application/octet-stream', '.a': 'application/o...
+     |  
+     |  server_version = 'SimpleHTTP/0.6'
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from BaseHTTPServer.BaseHTTPRequestHandler:
+     |  
+     |  address_string(self)
+     |      Return the client address formatted for logging.
+     |      
+     |      This version looks up the full hostname using gethostbyaddr(),
+     |      and tries to find a name that contains at least one dot.
+     |  
+     |  date_time_string(self, timestamp=None)
+     |      Return the current date and time formatted for a message header.
+     |  
+     |  end_headers(self)
+     |      Send the blank line ending the MIME headers.
+     |  
+     |  handle(self)
+     |      Handle multiple requests if necessary.
+     |  
+     |  handle_one_request(self)
+     |      Handle a single HTTP request.
+     |      
+     |      You normally don't need to override this method; see the class
+     |      __doc__ string for information on how to handle specific HTTP
+     |      commands such as GET and POST.
+     |  
+     |  log_date_time_string(self)
+     |      Return the current time formatted for logging.
+     |  
+     |  log_message(self, format, *args)
+     |      Log an arbitrary message.
+     |      
+     |      This is used by all other logging functions.  Override
+     |      it if you have specific logging wishes.
+     |      
+     |      The first argument, FORMAT, is a format string for the
+     |      message to be logged.  If the format string contains
+     |      any % escapes requiring parameters, they should be
+     |      specified as subsequent arguments (it's just like
+     |      printf!).
+     |      
+     |      The client host and current date/time are prefixed to
+     |      every message.
+     |  
+     |  send_error(self, code, message=None)
+     |      Send and log an error reply.
+     |      
+     |      Arguments are the error code, and a detailed message.
+     |      The detailed message defaults to the short entry matching the
+     |      response code.
+     |      
+     |      This sends an error response (so it must be called before any
+     |      output has been generated), logs the error, and finally sends
+     |      a piece of HTML explaining the error to the user.
+     |  
+     |  send_header(self, keyword, value)
+     |      Send a MIME header.
+     |  
+     |  send_response(self, code, message=None)
+     |      Send the response header and log the response code.
+     |      
+     |      Also send two standard headers with the server software
+     |      version and the current date.
+     |  
+     |  version_string(self)
+     |      Return the server software version string.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from BaseHTTPServer.BaseHTTPRequestHandler:
+     |  
+     |  default_request_version = 'HTTP/0.9'
+     |  
+     |  error_content_type = 'text/html'
+     |  
+     |  error_message_format = '<head>\n<title>Error response</title>\n</head>...
+     |  
+     |  monthname = [None, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'A...
+     |  
+     |  protocol_version = 'HTTP/1.0'
+     |  
+     |  responses = {100: ('Continue', 'Request received, please continue'), 1...
+     |  
+     |  sys_version = 'Python/2.6.8'
+     |  
+     |  weekdayname = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from SocketServer.StreamRequestHandler:
+     |  
+     |  finish(self)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from SocketServer.StreamRequestHandler:
+     |  
+     |  wbufsize = 0
+    
+    class WebSocketServer(SocketServer.ThreadingMixIn, BaseHTTPServer.HTTPServer)
+     |  HTTPServer specialized for WebSocket.
+     |  
+     |  Method resolution order:
+     |      WebSocketServer
+     |      SocketServer.ThreadingMixIn
+     |      BaseHTTPServer.HTTPServer
+     |      SocketServer.TCPServer
+     |      SocketServer.BaseServer
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(self, options)
+     |      Override SocketServer.TCPServer.__init__ to set SSL enabled
+     |      socket object to self.socket before server_bind and server_activate,
+     |      if necessary.
+     |  
+     |  fileno(self)
+     |      Override SocketServer.TCPServer.fileno.
+     |  
+     |  get_request(self)
+     |      Override TCPServer.get_request to wrap OpenSSL.SSL.Connection
+     |      object with _StandaloneSSLConnection to provide makefile method. We
+     |      cannot substitute OpenSSL.SSL.Connection.makefile since it's readonly
+     |      attribute.
+     |  
+     |  handle_error(self, request, client_address)
+     |      Override SocketServer.handle_error.
+     |  
+     |  serve_forever(self, poll_interval=0.5)
+     |      Override SocketServer.BaseServer.serve_forever.
+     |  
+     |  server_activate(self)
+     |      Override SocketServer.TCPServer.server_activate to enable multiple
+     |      sockets listen.
+     |  
+     |  server_bind(self)
+     |      Override SocketServer.TCPServer.server_bind to enable multiple
+     |      sockets bind.
+     |  
+     |  server_close(self)
+     |      Override SocketServer.TCPServer.server_close to enable multiple
+     |      sockets close.
+     |  
+     |  shutdown(self)
+     |      Override SocketServer.BaseServer.shutdown.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes defined here:
+     |  
+     |  allow_reuse_address = True
+     |  
+     |  daemon_threads = True
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from SocketServer.ThreadingMixIn:
+     |  
+     |  process_request(self, request, client_address)
+     |      Start a new thread to process the request.
+     |  
+     |  process_request_thread(self, request, client_address)
+     |      Same as in BaseServer but as a thread.
+     |      
+     |      In addition, exception handling is done here.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from SocketServer.TCPServer:
+     |  
+     |  close_request(self, request)
+     |      Called to clean up an individual request.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from SocketServer.TCPServer:
+     |  
+     |  address_family = 2
+     |  
+     |  request_queue_size = 5
+     |  
+     |  socket_type = 1
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from SocketServer.BaseServer:
+     |  
+     |  finish_request(self, request, client_address)
+     |      Finish one request by instantiating RequestHandlerClass.
+     |  
+     |  handle_request(self)
+     |      Handle one request, possibly blocking.
+     |      
+     |      Respects self.timeout.
+     |  
+     |  handle_timeout(self)
+     |      Called if no new request arrives within self.timeout.
+     |      
+     |      Overridden by ForkingMixIn.
+     |  
+     |  verify_request(self, request, client_address)
+     |      Verify the request.  May be overridden.
+     |      
+     |      Return True if we should proceed with this request.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from SocketServer.BaseServer:
+     |  
+     |  timeout = None
+
+
+
