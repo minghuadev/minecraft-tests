@@ -1,0 +1,40 @@
+
+
+
+from f24 server i686 fresh. 
+
+
+[root@localhost ~]# yum install docker
+
+Last metadata expiration check: 2:22:50 ago on Wed Jul 13 15:51:37 2016.
+Dependencies resolved.
+==============================================================================================
+ Package                          Arch    Version                          Repository    Size
+==============================================================================================
+Installing:
+ audit-libs-python3               i686    2.6.3-1.fc24                     updates       92 k
+ checkpolicy                      i686    2.5-2.fc24                       fedora       309 k
+ device-mapper-event              i686    1.02.122-2.fc24                  updates      224 k
+ device-mapper-event-libs         i686    1.02.122-2.fc24                  updates      224 k
+ device-mapper-persistent-data    i686    0.6.2-0.1.rc6.fc24               fedora       484 k
+ docker                           i686    2:1.10.3-21.git19b5791.fc24      updates      6.3 M
+ docker-selinux                   i686    2:1.10.3-21.git19b5791.fc24      updates       73 k
+ docker-v1.10-migrator            i686    2:1.10.3-21.git19b5791.fc24      updates      1.8 M
+ libaio                           i686    0.3.110-6.fc24                   fedora        29 k
+ libcgroup                        i686    0.41-8.fc24                      fedora        67 k
+ libsemanage-python3              i686    2.5-2.fc24                       fedora       111 k
+ lvm2                             i686    2.02.150-2.fc24                  updates      1.1 M
+ lvm2-libs                        i686    2.02.150-2.fc24                  updates      974 k
+ policycoreutils-python-utils     i686    2.5-5.fc24                       fedora       215 k
+ policycoreutils-python3          i686    2.5-5.fc24                       fedora       1.8 M
+ setools-libs                     i686    3.3.8-10.fc24                    fedora       574 k
+ sqlite                           i686    3.12.2-1.fc24                    updates      500 k
+
+Transaction Summary
+==============================================================================================
+Install  17 Packages
+
+Total download size: 15 M
+Installed size: 43 M
+
+
