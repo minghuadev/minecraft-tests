@@ -1,0 +1,692 @@
+
+
+C:\HashiCorp\vms>vagrant init thesteve0/openshift-origin
+
+
+C:\HashiCorp\vms>type Vagrantfile
+Vagrant.configure("2") do |config|
+  config.vm.box = "thesteve0/openshift-origin"
+end
+
+
+C:\HashiCorp\vms>vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'thesteve0/openshift-origin' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+    default: Box Version: >= 0
+==> default: Loading metadata for box 'thesteve0/openshift-origin'
+    default: URL: https://atlas.hashicorp.com/thesteve0/openshift-origin
+==> default: Adding box 'thesteve0/openshift-origin' (v1.2.0) for provider: virtualbox
+    default: Downloading: https://atlas.hashicorp.com/thesteve0/boxes/openshift-origin/versions/1.2.0/providers/virtualbox.box
+    default: Progress: 100% (Rate: 2982k/s, Estimated time remaining: --:--:--)
+==> default: Successfully added box 'thesteve0/openshift-origin' (v1.2.0) for 'virtualbox'!
+==> default: Importing base box 'thesteve0/openshift-origin'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'thesteve0/openshift-origin' is up to date...
+==> default: Setting the name of the VM: openshift-origin
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: hostonly
+==> default: Forwarding ports...
+    default: 8443 (guest) => 8443 (host) (adapter 1)
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Remote connection disconnect. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: No guest additions were detected on the base box for this VM! Guest
+    default: additions are required for forwarded ports, shared folders, host only
+    default: networking, and more. If SSH fails on this machine, please install
+    default: the guest additions and repackage the box to continue.
+    default:
+    default: This is not an error message; everything may continue to work properly,
+    default: in which case you may ignore this message.
+==> default: Configuring and enabling network interfaces...
+==> default: Running provisioner: shell...
+    default: Running: inline script
+==> default: Successfully started and provisioned VM with 2 cores and 4 G of memory.
+==> default: To modify the number of cores and/or available memory modify your local Vagrantfile
+==> default: You can now access the OpenShift console on: https://10.2.2.2:8443/console
+==> default: Configured users are (<username>/<password>):
+==> default: admin/admin
+==> default: user/user
+==> default: But, you can also use any username and password combination you would like to create
+==> default: a new user.
+==> default: You can find links to the client libraries here: https://www.openshift.org/vm
+==> default: If you have the oc client library on your host, you can also login from your host.
+==> default: To use OpenShift CLI, run:
+==> default: $ oc login https://10.2.2.2:8443
+
+
+U:\>c:
+C:\>cd HashiCorp\vms
+C:\HashiCorp\vms>vagrant ssh
+`ssh` executable not found in any directories in the %PATH% variable. Is an
+SSH client installed? Try installing Cygwin, MinGW or Git, all of which
+contain an SSH client. Or use your favorite SSH client with the following
+authentication information shown below:
+
+Host: 127.0.0.1
+Port: 2222
+Username: vagrant
+Private key: C:/HashiCorp/vms/.vagrant/machines/default/virtualbox/private_key
+
+
+$ ssh -i /cygdrive/c/HashiCorp/vms/.vagrant/machines/default/virtualbox/private_key 127.0.0.1 -p 2222 -l vagrant
+Last login: Wed May 25 22:28:46 2016 from 10.0.2.2
+
+[vagrant@localhost ~]$ pwd
+/home/vagrant
+
+[vagrant@localhost ~]$ ls -la
+total 24
+drwx------. 3 vagrant vagrant 4096 May 25 22:32 .
+drwxr-xr-x. 6 root    root    4096 May 25 20:39 ..
+-rw-------. 1 vagrant vagrant    0 May 25 22:32 .bash_history
+-rw-r--r--. 1 vagrant vagrant   18 Aug 18  2015 .bash_logout
+-rw-r--r--. 1 vagrant vagrant  193 Aug 18  2015 .bash_profile
+-rw-r--r--. 1 vagrant vagrant  231 Aug 18  2015 .bashrc
+drwx------. 2 vagrant vagrant 4096 Jul  9 00:36 .ssh
+
+
+[root@localhost vagrant]# yum history
+Last metadata expiration check performed 0:50:08 ago on Mon Jul 11 19:00:28 2016.
+ID     | Command line             | Date a | Action | Altere
+-------------------------------------------------------------------------------
+     4 |                          | 2016-05-25 20:30 | I, U           |   87
+     3 |                          | 2015-10-30 02:08 | Erase          |    7
+     2 |                          | 2015-10-30 02:08 | Erase          |   11  <
+     1 |                          | 2015-10-30 02:04 | Install        |  281 >E
+
+
+[root@localhost vagrant]# yum history info 1
+Last metadata expiration check performed 0:50:44 ago on Mon Jul 11 19:00:28 2016.
+Transaction ID : 1
+Begin time     : Fri Oct 30 02:04:11 2015
+Begin rpmdb    : 0:da39a3ee5e6b4b0d3255bfef95601890afd80709
+End time       :            02:07:00 2015 (169 seconds)
+End rpmdb      : 281:b4451aac817457fe1c69757d66cc7468401b0a57
+User           : System <unset>
+Return-Code    : Success
+Packages Altered:
+    Install GeoIP-1.6.6-1.fc23.x86_64                               @koji-override-0
+    Install GeoIP-GeoLite-data-2015.09-1.fc23.noarch                @koji-override-0
+    Install acl-2.2.52-10.fc23.x86_64                               @koji-override-0
+    Install audit-2.4.4-2.fc23.x86_64                               @koji-override-0
+    Install audit-libs-2.4.4-2.fc23.x86_64                          @koji-override-0
+    Install audit-libs-python3-2.4.4-2.fc23.x86_64                  @koji-override-0
+    Install authconfig-6.2.10-10.fc23.x86_64                        @koji-override-0
+    Install basesystem-11-1.fc23.noarch                             @koji-override-0
+    Install bash-4.3.42-1.fc23.x86_64                               @koji-override-0
+    Install bash-completion-1:2.1-8.20150513git1950590.fc23.noarch  @koji-override-0
+    Install bind99-libs-9.9.7-7.P3.fc23.x86_64                      @koji-override-0
+    Install bind99-license-9.9.7-7.P3.fc23.noarch                   @koji-override-0
+    Install bzip2-1.0.6-17.fc23.x86_64                              @koji-override-0
+    Install bzip2-libs-1.0.6-17.fc23.x86_64                         @koji-override-0
+    Install ca-certificates-2015.2.5-1.0.fc23.noarch                @koji-override-0
+    Install checkpolicy-2.4-1.fc23.1.x86_64                         @koji-override-0
+    Install chkconfig-1.6-1.fc23.x86_64                             @koji-override-0
+    Install cloud-init-0.7.6-5.20140218bzr1060.fc23.noarch          @koji-override-0
+    Install cloud-utils-growpart-0.27-14.fc23.noarch                @koji-override-0
+    Install coreutils-8.24-4.fc23.x86_64                            @koji-override-0
+    Install cpio-2.11-36.fc23.x86_64                                @koji-override-0
+    Install cracklib-2.9.1-6.fc23.x86_64                            @koji-override-0
+    Install cracklib-dicts-2.9.1-6.fc23.x86_64                      @koji-override-0
+    Install cronie-1.5.0-3.fc23.x86_64                              @koji-override-0
+    Install cronie-anacron-1.5.0-3.fc23.x86_64                      @koji-override-0
+    Install crontabs-1.11-11.20150630git.fc23.noarch                @koji-override-0
+    Install crypto-policies-20150518-3.gitffe885e.fc23.noarch       @koji-override-0
+    Install cryptsetup-libs-1.6.8-2.fc23.x86_64                     @koji-override-0
+    Install curl-7.43.0-4.fc23.x86_64                               @koji-override-0
+    Install cyrus-sasl-lib-2.1.26-25.2.fc23.x86_64                  @koji-override-0
+    Install dbus-1:1.10.0-1.fc23.x86_64                             @koji-override-0
+    Install dbus-glib-0.104-3.fc23.x86_64                           @koji-override-0
+    Install dbus-libs-1:1.10.0-1.fc23.x86_64                        @koji-override-0
+    Install deltarpm-3.6-11.fc23.x86_64                             @koji-override-0
+    Install device-mapper-1.02.107-1.fc23.x86_64                    @koji-override-0
+    Install device-mapper-libs-1.02.107-1.fc23.x86_64               @koji-override-0
+    Install dhcp-client-12:4.3.3-1.fc23.x86_64                      @koji-override-0
+    Install dhcp-common-12:4.3.3-1.fc23.noarch                      @koji-override-0
+    Install dhcp-libs-12:4.3.3-1.fc23.x86_64                        @koji-override-0
+    Install diffutils-3.3-12.fc23.x86_64                            @koji-override-0
+    Install dnf-1.1.3-1.fc23.noarch                                 @koji-override-0
+    Install dnf-conf-1.1.3-1.fc23.noarch                            @koji-override-0
+    Install dnf-plugins-core-0.1.13-1.fc23.noarch                   @koji-override-0
+    Install dnf-yum-1.1.3-1.fc23.noarch                             @koji-override-0
+    Install dracut-043-60.git20150811.fc23.x86_64                   @koji-override-0
+    Install dracut-config-generic-043-60.git20150811.fc23.x86_64    @koji-override-0
+    Install e2fsprogs-1.42.13-3.fc23.x86_64                         @koji-override-0
+    Install e2fsprogs-libs-1.42.13-3.fc23.x86_64                    @koji-override-0
+    Install ebtables-2.0.10-17.fc23.x86_64                          @koji-override-0
+    Install elfutils-default-yama-scope-0.163-4.fc23.noarch         @koji-override-0
+    Install elfutils-libelf-0.163-4.fc23.x86_64                     @koji-override-0
+    Install elfutils-libs-0.163-4.fc23.x86_64                       @koji-override-0
+    Install emacs-filesystem-1:24.5-6.fc23.noarch                   @koji-override-0
+    Install expat-2.1.0-12.fc23.x86_64                              @koji-override-0
+    Install fedora-logos-22.0.0-2.fc23.x86_64                       @koji-override-0
+    Install fedora-release-23-1.noarch                              @koji-override-0
+    Install fedora-release-cloud-23-1.noarch                        @koji-override-0
+    Install fedora-repos-23-1.noarch                                @koji-override-0
+    Install file-5.22-5.fc23.x86_64                                 @koji-override-0
+    Install file-libs-5.22-5.fc23.x86_64                            @koji-override-0
+    Install filesystem-3.2-35.fc23.x86_64                           @koji-override-0
+    Install findutils-1:4.5.14-7.fc23.x86_64                        @koji-override-0
+    Install fipscheck-1.4.1-9.fc23.x86_64                           @koji-override-0
+    Install fipscheck-lib-1.4.1-9.fc23.x86_64                       @koji-override-0
+    Install firewalld-0.3.14.2-4.fc23.noarch                        @koji-override-0
+    Install firewalld-filesystem-0.3.14.2-4.fc23.noarch             @koji-override-0
+    Install freetype-2.6.0-3.fc23.x86_64                            @koji-override-0
+    Install gawk-4.1.3-2.fc23.x86_64                                @koji-override-0
+    Install gdbm-1.11-6.fc23.x86_64                                 @koji-override-0
+    Install gettext-0.19.6-1.fc23.x86_64                            @koji-override-0
+    Install gettext-libs-0.19.6-1.fc23.x86_64                       @koji-override-0
+    Install glib2-2.46.1-2.fc23.x86_64                              @koji-override-0
+    Install glibc-2.22-3.fc23.x86_64                                @koji-override-0
+    Install glibc-common-2.22-3.fc23.x86_64                         @koji-override-0
+    Install gmp-1:6.0.0-12.fc23.x86_64                              @koji-override-0
+    Install gnupg2-2.1.7-1.fc23.x86_64                              @koji-override-0
+    Install gnutls-3.4.5-2.fc23.x86_64                              @koji-override-0
+    Install gobject-introspection-1.46.0-1.fc23.x86_64              @koji-override-0
+    Install gpgme-1.4.3-6.fc23.x86_64                               @koji-override-0
+    Install grep-2.21-7.fc23.x86_64                                 @koji-override-0
+    Install groff-base-1.22.3-6.fc23.x86_64                         @koji-override-0
+    Install grub2-1:2.02-0.23.fc23.x86_64                           @koji-override-0
+    Install grub2-tools-1:2.02-0.23.fc23.x86_64                     @koji-override-0
+    Install grubby-8.40-2.fc23.x86_64                               @koji-override-0
+    Install gzip-1.6-9.fc23.x86_64                                  @koji-override-0
+    Install hawkey-0.6.2-1.fc23.x86_64                              @koji-override-0
+    Install heat-cfntools-1.3.0-4.fc23.noarch                       @koji-override-0
+    Install hostname-3.15-6.fc23.x86_64                             @koji-override-0
+    Install hwdata-0.281-1.fc23.noarch                              @koji-override-0
+    Install info-6.0-1.fc23.x86_64                                  @koji-override-0
+    Install initscripts-9.64-1.fc23.x86_64                          @koji-override-0
+    Install ipcalc-0.1.3-1.fc23.x86_64                              @koji-override-0
+    Install iproute-4.1.1-2.fc23.x86_64                             @koji-override-0
+    Install iptables-1.4.21-15.fc23.x86_64                          @koji-override-0
+    Install iputils-20140519-6.fc23.x86_64                          @koji-override-0
+    Install kbd-2.0.2-7.fc23.x86_64                                 @koji-override-0
+    Install kbd-legacy-2.0.2-7.fc23.noarch                          @koji-override-0
+    Install kbd-misc-2.0.2-7.fc23.noarch                            @koji-override-0
+    Install kernel-core-4.2.3-300.fc23.x86_64                       @koji-override-0
+    Install keyutils-libs-1.5.9-7.fc23.x86_64                       @koji-override-0
+    Install kmod-21-3.fc23.x86_64                                   @koji-override-0
+    Install kmod-libs-21-3.fc23.x86_64                              @koji-override-0
+    Install kpartx-0.4.9-80.fc23.x86_64                             @koji-override-0
+    Install krb5-libs-1.13.2-11.fc23.x86_64                         @koji-override-0
+    Install less-481-1.fc23.x86_64                                  @koji-override-0
+    Install libacl-2.2.52-10.fc23.x86_64                            @koji-override-0
+    Install libarchive-3.1.2-13.fc23.x86_64                         @koji-override-0
+    Install libassuan-2.3.0-1.fc23.x86_64                           @koji-override-0
+    Install libattr-2.4.47-14.fc23.x86_64                           @koji-override-0
+    Install libblkid-2.27-1.fc23.x86_64                             @koji-override-0
+    Install libcap-2.24-8.fc23.x86_64                               @koji-override-0
+    Install libcap-ng-0.7.7-2.fc23.x86_64                           @koji-override-0
+    Install libcgroup-0.41-7.fc23.x86_64                            @koji-override-0
+    Install libcom_err-1.42.13-3.fc23.x86_64                        @koji-override-0
+    Install libcomps-0.1.7-1.fc23.x86_64                            @koji-override-0
+    Install libcroco-0.6.8-7.fc23.x86_64                            @koji-override-0
+    Install libcurl-7.43.0-4.fc23.x86_64                            @koji-override-0
+    Install libdb-5.3.28-13.fc23.x86_64                             @koji-override-0
+    Install libdb-utils-5.3.28-13.fc23.x86_64                       @koji-override-0
+    Install libdrm-2.4.65-1.fc23.x86_64                             @koji-override-0
+    Install libedit-3.1-13.20150325cvs.fc23.x86_64                  @koji-override-0
+    Install libfdisk-2.27-1.fc23.x86_64                             @koji-override-0
+    Install libffi-3.1-8.fc23.x86_64                                @koji-override-0
+    Install libgcc-5.1.1-4.fc23.x86_64                              @koji-override-0
+    Install libgcrypt-1.6.4-1.fc23.x86_64                           @koji-override-0
+    Install libgomp-5.1.1-4.fc23.x86_64                             @koji-override-0
+    Install libgpg-error-1.20-1.fc23.x86_64                         @koji-override-0
+    Install libidn-1.32-1.fc23.x86_64                               @koji-override-0
+    Install libksba-1.3.3-2.fc23.x86_64                             @koji-override-0
+    Install libmetalink-0.1.2-8.fc23.x86_64                         @koji-override-0
+    Install libmnl-1.0.3-10.fc23.x86_64                             @koji-override-0
+    Install libmount-2.27-1.fc23.x86_64                             @koji-override-0
+    Install libnetfilter_conntrack-1.0.4-5.fc23.x86_64              @koji-override-0
+    Install libnfnetlink-1.0.1-7.fc23.x86_64                        @koji-override-0
+    Install libnghttp2-1.3.3-1.fc23.x86_64                          @koji-override-0
+    Install libpciaccess-0.13.4-2.fc23.x86_64                       @koji-override-0
+    Install libpipeline-1.4.0-2.fc23.x86_64                         @koji-override-0
+    Install libpng-2:1.6.17-2.fc23.x86_64                           @koji-override-0
+    Install libpwquality-1.3.0-2.fc23.x86_64                        @koji-override-0
+    Install librepo-1.7.16-2.fc23.x86_64                            @koji-override-0
+    Install libreport-filesystem-2.6.3-1.fc23.x86_64                @koji-override-0
+    Install libseccomp-2.2.3-0.fc23.x86_64                          @koji-override-0
+    Install libselinux-2.4-4.fc23.x86_64                            @koji-override-0
+    Install libselinux-python3-2.4-4.fc23.x86_64                    @koji-override-0
+    Install libselinux-utils-2.4-4.fc23.x86_64                      @koji-override-0
+    Install libsemanage-2.4-4.fc23.x86_64                           @koji-override-0
+    Install libsemanage-python3-2.4-4.fc23.x86_64                   @koji-override-0
+    Install libsepol-2.4-1.fc23.x86_64                              @koji-override-0
+    Install libsmartcols-2.27-1.fc23.x86_64                         @koji-override-0
+    Install libsolv-0.6.14-2.fc23.x86_64                            @koji-override-0
+    Install libss-1.42.13-3.fc23.x86_64                             @koji-override-0
+    Install libssh2-1.6.0-2.fc23.x86_64                             @koji-override-0
+    Install libstdc++-5.1.1-4.fc23.x86_64                           @koji-override-0
+    Install libtasn1-4.5-2.fc23.x86_64                              @koji-override-0
+    Install libtomcrypt-1.17-25.fc23.x86_64                         @koji-override-0
+    Install libtommath-0.42.0-6.fc23.x86_64                         @koji-override-0
+    Install libunistring-0.9.4-2.fc23.x86_64                        @koji-override-0
+    Install libuser-0.62-1.fc23.x86_64                              @koji-override-0
+    Install libutempter-1.1.6-7.fc23.x86_64                         @koji-override-0
+    Install libuuid-2.27-1.fc23.x86_64                              @koji-override-0
+    Install libverto-0.2.6-5.fc23.x86_64                            @koji-override-0
+    Install libxkbcommon-0.5.0-2.fc23.x86_64                        @koji-override-0
+    Install libxml2-2.9.2-7.fc23.x86_64                             @koji-override-0
+    Install libyaml-0.1.6-7.fc23.x86_64                             @koji-override-0
+    Install linux-atm-libs-2.5.1-13.fc23.x86_64                     @koji-override-0
+    Install linux-firmware-20150904-56.git6ebf5d57.fc23.noarch      @koji-override-0
+    Install lua-5.3.0-4.fc23.x86_64                                 @koji-override-0
+    Install lzo-2.08-5.fc23.x86_64                                  @koji-override-0
+    Install make-1:4.0-5.1.fc23.x86_64                              @koji-override-0
+    Install man-db-2.7.1-10.fc23.x86_64                             @koji-override-0
+    Install mtools-4.0.18-9.fc23.x86_64                             @koji-override-0
+    Install ncurses-5.9-21.20150214.fc23.x86_64                     @koji-override-0
+    Install ncurses-base-5.9-21.20150214.fc23.noarch                @koji-override-0
+    Install ncurses-libs-5.9-21.20150214.fc23.x86_64                @koji-override-0
+    Install net-tools-2.0-0.35.20150915git.fc23.x86_64              @koji-override-0
+    Install nettle-3.1.1-3.fc23.x86_64                              @koji-override-0
+    Install newt-0.52.18-3.fc23.x86_64                              @koji-override-0
+    Install newt-python3-0.52.18-3.fc23.x86_64                      @koji-override-0
+    Install npth-1.2-2.fc23.x86_64                                  @koji-override-0
+    Install nspr-4.10.8-2.fc23.x86_64                               @koji-override-0
+    Install nss-3.20.0-1.3.fc23.x86_64                              @koji-override-0
+    Install nss-softokn-3.20.0-1.0.fc23.x86_64                      @koji-override-0
+    Install nss-softokn-freebl-3.20.0-1.0.fc23.x86_64               @koji-override-0
+    Install nss-sysinit-3.20.0-1.3.fc23.x86_64                      @koji-override-0
+    Install nss-tools-3.20.0-1.3.fc23.x86_64                        @koji-override-0
+    Install nss-util-3.20.0-1.0.fc23.x86_64                         @koji-override-0
+    Install openldap-2.4.40-14.fc23.x86_64                          @koji-override-0
+    Install openssh-7.1p1-3.fc23.x86_64                             @koji-override-0
+    Install openssh-clients-7.1p1-3.fc23.x86_64                     @koji-override-0
+    Install openssh-server-7.1p1-3.fc23.x86_64                      @koji-override-0
+    Install openssl-1:1.0.2d-2.fc23.x86_64                          @koji-override-0
+    Install openssl-libs-1:1.0.2d-2.fc23.x86_64                     @koji-override-0
+    Install os-prober-1.65-3.fc23.x86_64                            @koji-override-0
+    Install p11-kit-0.23.1-4.fc23.x86_64                            @koji-override-0
+    Install p11-kit-trust-0.23.1-4.fc23.x86_64                      @koji-override-0
+    Install pam-1.2.1-2.fc23.x86_64                                 @koji-override-0
+    Install parted-3.2-11.fc23.x86_64                               @koji-override-0
+    Install passwd-0.79-6.fc23.x86_64                               @koji-override-0
+    Install pcre-8.37-4.fc23.x86_64                                 @koji-override-0
+    Install pinentry-0.9.6-3.fc23.x86_64                            @koji-override-0
+    Install pkgconfig-1:0.28-9.fc23.x86_64                          @koji-override-0
+    Install plymouth-0.8.9-10.2013.08.14.fc23.x86_64                @koji-override-0
+    Install plymouth-core-libs-0.8.9-10.2013.08.14.fc23.x86_64      @koji-override-0
+    Install plymouth-scripts-0.8.9-10.2013.08.14.fc23.x86_64        @koji-override-0
+    Install policycoreutils-2.4-14.fc23.x86_64                      @koji-override-0
+    Install policycoreutils-python3-2.4-14.fc23.x86_64              @koji-override-0
+    Install popt-1.16-6.fc23.x86_64                                 @koji-override-0
+    Install procps-ng-3.3.10-9.fc23.x86_64                          @koji-override-0
+    Install python-IPy-python3-0.81-13.fc23.noarch                  @koji-override-0
+    Install python3-3.4.3-5.fc23.x86_64                             @koji-override-0
+    Install python3-PyYAML-3.11-9.fc23.x86_64                       @koji-override-0
+    Install python3-boto-2.38.0-3.fc23.noarch                       @koji-override-0
+    Install python3-chardet-2.2.1-3.fc23.noarch                     @koji-override-0
+    Install python3-configobj-5.0.5-3.fc23.noarch                   @koji-override-0
+    Install python3-crypto-2.6.1-7.fc23.x86_64                      @koji-override-0
+    Install python3-dbus-1.2.0-8.fc23.x86_64                        @koji-override-0
+    Install python3-decorator-3.4.2-2.fc23.noarch                   @koji-override-0
+    Install python3-dnf-1.1.3-1.fc23.noarch                         @koji-override-0
+    Install python3-dnf-plugins-core-0.1.13-1.fc23.noarch           @koji-override-0
+    Install python3-firewall-0.3.14.2-4.fc23.noarch                 @koji-override-0
+    Install python3-gobject-base-3.18.0-1.fc23.x86_64               @koji-override-0
+    Install python3-hawkey-0.6.2-1.fc23.x86_64                      @koji-override-0
+    Install python3-iniparse-0.4-16.fc23.noarch                     @koji-override-0
+    Install python3-jinja2-2.8-2.fc23.noarch                        @koji-override-0
+    Install python3-jsonpatch-1.2-6.fc23.noarch                     @koji-override-0
+    Install python3-jsonpointer-1.9-2.fc23.noarch                   @koji-override-0
+    Install python3-libcomps-0.1.7-1.fc23.x86_64                    @koji-override-0
+    Install python3-librepo-1.7.16-2.fc23.x86_64                    @koji-override-0
+    Install python3-libs-3.4.3-5.fc23.x86_64                        @koji-override-0
+    Install python3-markupsafe-0.23-7.fc23.x86_64                   @koji-override-0
+    Install python3-oauthlib-0.7.2-3.20150520git514cad7.fc23.noarch @koji-override-0
+    Install python3-pip-7.1.0-1.fc23.noarch                         @koji-override-0
+    Install python3-prettytable-0.7.2-5.fc23.noarch                 @koji-override-0
+    Install python3-psutil-3.2.1-2.fc23.x86_64                      @koji-override-0
+    Install python3-pygpgme-0.3-13.fc23.x86_64                      @koji-override-0
+    Install python3-pyserial-2.7-2.fc23.noarch                      @koji-override-0
+    Install python3-requests-2.7.0-7.fc23.noarch                    @koji-override-0
+    Install python3-rsa-3.1.1-7.fc23.noarch                         @koji-override-0
+    Install python3-setuptools-18.0.1-2.fc23.noarch                 @koji-override-0
+    Install python3-six-1.9.0-3.fc23.noarch                         @koji-override-0
+    Install python3-slip-0.6.4-1.fc23.noarch                        @koji-override-0
+    Install python3-slip-dbus-0.6.4-1.fc23.noarch                   @koji-override-0
+    Install python3-sssdconfig-1.13.1-2.fc23.noarch                 @koji-override-0
+    Install python3-urllib3-1.10.4-6.fc23.noarch                    @koji-override-0
+    Install qrencode-libs-3.4.2-5.fc23.x86_64                       @koji-override-0
+    Install readline-6.3-6.fc23.x86_64                              @koji-override-0
+    Install rootfiles-8.1-18.fc23.noarch                            @koji-override-0
+    Install rpm-4.13.0-0.rc1.3.fc23.x86_64                          @koji-override-0
+    Install rpm-build-libs-4.13.0-0.rc1.3.fc23.x86_64               @koji-override-0
+    Install rpm-libs-4.13.0-0.rc1.3.fc23.x86_64                     @koji-override-0
+    Install rpm-plugin-selinux-4.13.0-0.rc1.3.fc23.x86_64           @koji-override-0
+    Install rpm-plugin-systemd-inhibit-4.13.0-0.rc1.3.fc23.x86_64   @koji-override-0
+    Install rpm-python3-4.13.0-0.rc1.3.fc23.x86_64                  @koji-override-0
+    Install rsync-3.1.1-7.fc23.x86_64                               @koji-override-0
+    Install sed-4.2.2-11.fc23.x86_64                                @koji-override-0
+    Install selinux-policy-3.13.1-152.fc23.noarch                   @koji-override-0
+    Install selinux-policy-targeted-3.13.1-152.fc23.noarch          @koji-override-0
+    Install setools-libs-3.3.8-7.fc23.x86_64                        @koji-override-0
+    Install setup-2.9.8-2.fc23.noarch                               @koji-override-0
+    Install shadow-utils-2:4.2.1-3.fc23.x86_64                      @koji-override-0
+    Install shared-mime-info-1.5-2.fc23.x86_64                      @koji-override-0
+    Install slang-2.3.0-4.fc23.x86_64                               @koji-override-0
+    Install sqlite-3.8.11.1-1.fc23.x86_64                           @koji-override-0
+    Install sudo-1.8.14p3-1.fc23.x86_64                             @koji-override-0
+    Install syslinux-6.03-6.fc23.x86_64                             @koji-override-0
+    Install syslinux-extlinux-6.03-6.fc23.x86_64                    @koji-override-0
+    Install syslinux-extlinux-nonlinux-6.03-6.fc23.noarch           @koji-override-0
+    Install syslinux-nonlinux-6.03-6.fc23.noarch                    @koji-override-0
+    Install systemd-222-7.fc23.x86_64                               @koji-override-0
+    Install systemd-libs-222-7.fc23.x86_64                          @koji-override-0
+    Install tar-2:1.28-6.fc23.x86_64                                @koji-override-0
+    Install tcp_wrappers-libs-7.6-81.fc23.x86_64                    @koji-override-0
+    Install tzdata-2015g-1.fc23.noarch                              @koji-override-0
+    Install ustr-1.0.4-18.fc22.x86_64                               @koji-override-0
+    Install util-linux-2.27-1.fc23.x86_64                           @koji-override-0
+    Install vim-minimal-2:7.4.827-1.fc23.x86_64                     @koji-override-0
+    Install which-2.20-12.fc23.x86_64                               @koji-override-0
+    Install xkeyboard-config-2.15-2.fc23.noarch                     @koji-override-0
+    Install xz-5.2.1-3.fc23.x86_64                                  @koji-override-0
+    Install xz-libs-5.2.1-3.fc23.x86_64                             @koji-override-0
+    Install zlib-1.2.8-9.fc23.x86_64                                @koji-override-0
+
+
+[root@localhost vagrant]# yum history info 2
+Last metadata expiration check performed 0:53:37 ago on Mon Jul 11 19:00:28 2016.
+Transaction ID : 2
+Begin time     : Fri Oct 30 02:08:01 2015
+Begin rpmdb    : 280:e59fc94f14fd82dd452a7fcedc974605f2512700
+End time       :            02:08:04 2015 (3 seconds)
+End rpmdb      : 269:c62e309e34ef9e71efe70d250c10a8f51338bec5
+User           : System <unset>
+Return-Code    : Success
+Transaction performed with:
+    Installed     dnf-1.1.3-1.fc23.noarch        @koji-override-0
+    Installed     rpm-4.13.0-0.rc1.3.fc23.x86_64 @koji-override-0
+Packages Altered:
+    Erase dbus-glib-0.104-3.fc23.x86_64               @koji-override-0
+    Erase ebtables-2.0.10-17.fc23.x86_64              @koji-override-0
+    Erase firewalld-0.3.14.2-4.fc23.noarch            @koji-override-0
+    Erase firewalld-filesystem-0.3.14.2-4.fc23.noarch @koji-override-0
+    Erase gobject-introspection-1.46.0-1.fc23.x86_64  @koji-override-0
+    Erase python3-dbus-1.2.0-8.fc23.x86_64            @koji-override-0
+    Erase python3-decorator-3.4.2-2.fc23.noarch       @koji-override-0
+    Erase python3-firewall-0.3.14.2-4.fc23.noarch     @koji-override-0
+    Erase python3-gobject-base-3.18.0-1.fc23.x86_64   @koji-override-0
+    Erase python3-slip-0.6.4-1.fc23.noarch            @koji-override-0
+    Erase python3-slip-dbus-0.6.4-1.fc23.noarch       @koji-override-0
+
+
+[root@localhost vagrant]# yum history info 3
+Last metadata expiration check performed 0:54:14 ago on Mon Jul 11 19:00:28 2016.
+Transaction ID : 3
+Begin time     : Fri Oct 30 02:08:05 2015
+Begin rpmdb    : 269:c62e309e34ef9e71efe70d250c10a8f51338bec5
+End time       :            02:08:07 2015 (2 seconds)
+End rpmdb      : 262:5c98abd4c2206257fbe6e00540b4318af36acff5
+User           : System <unset>
+Return-Code    : Success
+Transaction performed with:
+    Installed     dnf-1.1.3-1.fc23.noarch        @koji-override-0
+    Installed     rpm-4.13.0-0.rc1.3.fc23.x86_64 @koji-override-0
+Packages Altered:
+    Erase authconfig-6.2.10-10.fc23.x86_64        @koji-override-0
+    Erase make-1:4.0-5.1.fc23.x86_64              @koji-override-0
+    Erase newt-0.52.18-3.fc23.x86_64              @koji-override-0
+    Erase newt-python3-0.52.18-3.fc23.x86_64      @koji-override-0
+    Erase openssl-1:1.0.2d-2.fc23.x86_64          @koji-override-0
+    Erase python3-sssdconfig-1.13.1-2.fc23.noarch @koji-override-0
+    Erase slang-2.3.0-4.fc23.x86_64               @koji-override-0
+
+
+[root@localhost vagrant]# yum history info 4
+Last metadata expiration check performed 0:55:10 ago on Mon Jul 11 19:00:28 2016.
+Transaction ID : 4
+Begin time     : Wed May 25 20:30:30 2016
+Begin rpmdb    : 262:5c98abd4c2206257fbe6e00540b4318af36acff5
+End time       :            20:31:08 2016 (38 seconds)
+End rpmdb      : 347:82cc4c17fdbf04817a625f063993816f877d1145
+User           :  <vagrant>
+Return-Code    : Success
+Transaction performed with:
+    Installed     dnf-1.1.3-1.fc23.noarch        @koji-override-0
+    Installed     rpm-4.13.0-0.rc1.3.fc23.x86_64 @koji-override-0
+Packages Altered:
+    Install  bind-libs-32:9.10.3-13.P4.fc23.x86_64                    @updates
+    Install  bind-libs-lite-32:9.10.3-13.P4.fc23.x86_64               @updates
+    Install  bind-license-32:9.10.3-13.P4.fc23.noarch                 @updates
+    Install  bind-utils-32:9.10.3-13.P4.fc23.x86_64                   @updates
+    Install  binutils-2.25-17.fc23.x86_64                             @updates
+    Install  cpp-5.1.1-4.fc23.x86_64                                  @fedora
+    Install  device-mapper-event-1.02.107-1.fc23.x86_64               @fedora
+    Install  device-mapper-event-libs-1.02.107-1.fc23.x86_64          @fedora
+    Install  device-mapper-persistent-data-0.6.2-0.1.rc6.fc23.x86_64  @updates
+    Install  docker-2:1.9.1-9.gitee06d03.fc23.x86_64                  @updates
+    Install  docker-forward-journald-2:1.9.1-9.gitee06d03.fc23.x86_64 @updates
+    Install  docker-selinux-2:1.9.1-9.gitee06d03.fc23.x86_64          @updates
+    Install  gcc-5.1.1-4.fc23.x86_64                                  @fedora
+    Install  git-2.5.5-1.fc23.x86_64                                  @updates
+    Install  git-core-2.5.5-1.fc23.x86_64                             @updates
+    Install  git-core-doc-2.5.5-1.fc23.x86_64                         @updates
+    Install  glibc-devel-2.22-3.fc23.x86_64                           @fedora
+    Install  glibc-headers-2.22-3.fc23.x86_64                         @fedora
+    Install  go-srpm-macros-2-3.fc23.noarch                           @fedora
+    Install  golang-1.6.2-2.fc23.x86_64                               @jcajka-golang1.6
+    Install  golang-bin-1.6.2-2.fc23.x86_64                           @jcajka-golang1.6
+    Install  golang-src-1.6.2-2.fc23.noarch                           @jcajka-golang1.6
+    Install  gssproxy-0.4.1-4.fc23.x86_64                             @updates
+    Install  htop-2.0.1-1.fc23.x86_64                                 @updates
+    Install  isl-0.14-4.fc23.x86_64                                   @fedora
+    Install  kernel-headers-4.4.9-300.fc23.x86_64                     @updates
+    Install  keyutils-1.5.9-7.fc23.x86_64                             @fedora
+    Install  libaio-0.3.110-5.fc23.x86_64                             @fedora
+    Install  libbasicobjects-0.1.1-27.fc23.x86_64                     @fedora
+    Install  libcollection-0.7.0-27.fc23.x86_64                       @fedora
+    Install  libevent-2.0.21-7.fc23.x86_64                            @fedora
+    Install  libgnome-keyring-3.12.0-5.fc23.x86_64                    @fedora
+    Install  libini_config-1.2.0-27.fc23.x86_64                       @fedora
+    Install  libmpc-1.0.2-4.fc23.x86_64                               @fedora
+    Install  libnfsidmap-0.26-3.1.fc23.x86_64                         @fedora
+    Install  libpath_utils-0.2.1-27.fc23.x86_64                       @fedora
+    Install  libref_array-0.1.5-27.fc23.x86_64                        @fedora
+    Install  libtalloc-2.1.6-1.fc23.x86_64                            @updates
+    Install  libtevent-0.9.28-1.fc23.x86_64                           @updates
+    Install  libtirpc-0.3.2-5.rc3.fc23.x86_64                         @updates
+    Install  libverto-tevent-0.2.6-5.fc23.x86_64                      @fedora
+    Install  lvm2-2.02.130-1.fc23.x86_64                              @fedora
+    Install  lvm2-libs-2.02.130-1.fc23.x86_64                         @fedora
+    Install  mpfr-3.1.3-2.fc23.x86_64                                 @updates
+    Install  nfs-utils-1:1.3.3-8.rc5.fc23.x86_64                      @updates
+    Install  perl-4:5.22.1-351.fc23.x86_64                            @updates
+    Install  perl-Carp-1.38-1.fc23.noarch                             @updates
+    Install  perl-Encode-3:2.80-4.fc23.x86_64                         @updates
+    Install  perl-Error-1:0.17024-4.fc23.noarch                       @fedora
+    Install  perl-Exporter-5.72-347.fc23.noarch                       @fedora
+    Install  perl-File-Path-2.09-347.fc23.noarch                      @fedora
+    Install  perl-File-Temp-0.23.04-346.fc23.noarch                   @fedora
+    Install  perl-Getopt-Long-2.48-1.fc23.noarch                      @updates
+    Install  perl-Git-2.5.5-1.fc23.noarch                             @updates
+    Install  perl-HTTP-Tiny-0.056-3.fc23.noarch                       @fedora
+    Install  perl-MIME-Base64-3.15-348.fc23.x86_64                    @fedora
+    Install  perl-PathTools-3.62-1.fc23.x86_64                        @updates
+    Install  perl-Pod-Escapes-1:1.07-348.fc23.noarch                  @fedora
+    Install  perl-Pod-Perldoc-3.25-347.fc23.noarch                    @fedora
+    Install  perl-Pod-Simple-1:3.31-1.fc23.noarch                     @fedora
+    Install  perl-Pod-Usage-4:1.67-3.fc23.noarch                      @fedora
+    Install  perl-Scalar-List-Utils-2:1.43-1.fc23.x86_64              @updates
+    Install  perl-Socket-3:2.021-1.fc23.x86_64                        @updates
+    Install  perl-Storable-1:2.53-346.fc23.x86_64                     @fedora
+    Install  perl-Term-ANSIColor-4.03-346.fc23.noarch                 @fedora
+    Install  perl-Term-Cap-1.17-1.fc23.noarch                         @fedora
+    Install  perl-TermReadKey-2.33-3.fc23.x86_64                      @fedora
+    Install  perl-Text-ParseWords-3.30-346.fc23.noarch                @fedora
+    Install  perl-Text-Tabs+Wrap-2013.0523-346.fc23.noarch            @fedora
+    Install  perl-Time-HiRes-1.9728-1.fc23.x86_64                     @updates
+    Install  perl-Time-Local-1.2300-346.fc23.noarch                   @fedora
+    Install  perl-Unicode-Normalize-1.24-1.fc23.x86_64                @updates
+    Install  perl-constant-1.33-347.fc23.noarch                       @fedora
+    Install  perl-libs-4:5.22.1-351.fc23.x86_64                       @updates
+    Install  perl-macros-4:5.22.1-351.fc23.x86_64                     @updates
+    Install  perl-parent-1:0.234-3.fc23.noarch                        @fedora
+    Install  perl-podlators-2.5.3-347.fc23.noarch                     @fedora
+    Install  perl-threads-1:2.02-2.fc23.x86_64                        @fedora
+    Install  perl-threads-shared-1.48-346.fc23.x86_64                 @fedora
+    Install  policycoreutils-python-utils-2.4-14.fc23.x86_64          @fedora
+    Install  quota-1:4.02-5.fc23.x86_64                               @updates
+    Install  quota-nls-1:4.02-5.fc23.noarch                           @updates
+    Install  rpcbind-0.2.3-7.rc1.fc23.x86_64                          @updates
+    Upgraded selinux-policy-3.13.1-152.fc23.noarch                    @koji-override-0
+    Upgrade                 3.13.1-158.15.fc23.noarch                 @updates
+    Upgraded selinux-policy-targeted-3.13.1-152.fc23.noarch           @koji-override-0
+    Upgrade                          3.13.1-158.15.fc23.noarch        @updates
+    Install  tcp_wrappers-7.6-81.fc23.x86_64                          @fedora
+    Install  xfsprogs-4.5.0-1.fc23.x86_64                             @updates
+
+
+[root@localhost vagrant]# ifconfig
+docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.17.0.1  netmask 255.255.0.0  broadcast 0.0.0.0
+        inet6 fe80::42:6eff:fe7a:265f  prefixlen 64  scopeid 0x20<link>
+        ether 02:42:6e:7a:26:5f  txqueuelen 0  (Ethernet)
+        RX packets 1418233  bytes 134824624 (128.5 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1762686  bytes 5894088148 (5.4 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::5054:ff:fe65:9b2e  prefixlen 64  scopeid 0x20<link>
+        ether 52:54:00:65:9b:2e  txqueuelen 1000  (Ethernet)
+        RX packets 266202  bytes 313925176 (299.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 124319  bytes 8896302 (8.4 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.2.2.2  netmask 255.255.255.0  broadcast 10.2.2.255
+        inet6 fe80::a00:27ff:fe39:e9ef  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:39:e9:ef  txqueuelen 1000  (Ethernet)
+        RX packets 10257  bytes 1179825 (1.1 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 9449  bytes 18259994 (17.4 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 0  (Local Loopback)
+        RX packets 34412792  bytes 8559600447 (7.9 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 34412792  bytes 8559600447 (7.9 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth19dbb21: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::b49e:6dff:fe41:20f9  prefixlen 64  scopeid 0x20<link>
+        ether b6:9e:6d:41:20:f9  txqueuelen 0  (Ethernet)
+        RX packets 268579  bytes 26305450 (25.0 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 366809  bytes 30937034 (29.5 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth396a1c1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::a80d:f3ff:fe61:ab67  prefixlen 64  scopeid 0x20<link>
+        ether aa:0d:f3:61:ab:67  txqueuelen 0  (Ethernet)
+        RX packets 136  bytes 12522 (12.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 210  bytes 14694 (14.3 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth3ba59f8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::508e:1ff:feba:6938  prefixlen 64  scopeid 0x20<link>
+        ether 52:8e:01:ba:69:38  txqueuelen 0  (Ethernet)
+        RX packets 2320595  bytes 1238806066 (1.1 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1942716  bytes 6055566260 (5.6 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth468d25a: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::dc72:e5ff:fef2:8eeb  prefixlen 64  scopeid 0x20<link>
+        ether de:72:e5:f2:8e:eb  txqueuelen 0  (Ethernet)
+        RX packets 2015398  bytes 3325849825 (3.0 GiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 2659704  bytes 2130728602 (1.9 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth49f0a18: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::d4d0:95ff:fe94:968b  prefixlen 64  scopeid 0x20<link>
+        ether d6:d0:95:94:96:8b  txqueuelen 0  (Ethernet)
+        RX packets 62  bytes 10934 (10.6 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 146  bytes 22957 (22.4 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth9e0fb1d: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::f083:8bff:fe4c:422  prefixlen 64  scopeid 0x20<link>
+        ether f2:83:8b:4c:04:22  txqueuelen 0  (Ethernet)
+        RX packets 882771  bytes 964986739 (920.2 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 700063  bytes 2971489136 (2.7 GiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vetha18f436: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::9c62:53ff:fef9:9a37  prefixlen 64  scopeid 0x20<link>
+        ether 9e:62:53:f9:9a:37  txqueuelen 0  (Ethernet)
+        RX packets 157081  bytes 19785930 (18.8 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 205697  bytes 37895327 (36.1 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vethd63e571: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::1ce7:80ff:fe97:f426  prefixlen 64  scopeid 0x20<link>
+        ether 1e:e7:80:97:f4:26  txqueuelen 0  (Ethernet)
+        RX packets 76791  bytes 5040698 (4.8 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 142564  bytes 85988073 (82.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vethe0238f6: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::708a:91ff:feff:c37b  prefixlen 64  scopeid 0x20<link>
+        ether 72:8a:91:ff:c3:7b  txqueuelen 0  (Ethernet)
+        RX packets 56042  bytes 3932776 (3.7 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 105473  bytes 7195762 (6.8 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vethe49a6be: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::b094:2aff:fe4e:e54b  prefixlen 64  scopeid 0x20<link>
+        ether b2:94:2a:4e:e5:4b  txqueuelen 0  (Ethernet)
+        RX packets 455195  bytes 165037637 (157.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 516476  bytes 269274112 (256.7 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+vethe933dc2: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::e80f:9cff:fe70:4a59  prefixlen 64  scopeid 0x20<link>
+        ether ea:0f:9c:70:4a:59  txqueuelen 0  (Ethernet)
+        RX packets 508028  bytes 271337733 (258.7 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 446130  bytes 171462529 (163.5 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+[root@localhost vagrant]# uname -a
+Linux localhost.localdomain 4.2.3-300.fc23.x86_64 #1 SMP Mon Oct 5 15:42:54 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+
+
+on user console, create wildfly 10 project off https://github.com/gshipley/book-helloworld.
+
+
