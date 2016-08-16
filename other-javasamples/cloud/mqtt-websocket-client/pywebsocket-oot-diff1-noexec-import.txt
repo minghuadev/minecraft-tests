@@ -1,0 +1,177 @@
+diff --git a/mod_pywebsocket/dispatch.py b/mod_pywebsocket/dispatch.py
+index 96c91e0..06b1a29 100644
+--- a/mod_pywebsocket/dispatch.py
++++ b/mod_pywebsocket/dispatch.py
+@@ -121,6 +121,17 @@ def _enumerate_handler_file_paths(directory):
+             path = os.path.join(root, base)
+             if _SOURCE_PATH_PATTERN.search(path):
+                 yield path
++def _my_static_enumerate_handler_file_paths(directory):
++    """Returns a generator that enumerates WebSocket Handler source file names
++    in the given directory.
++    """
++    my_static_paths_composed = []
++    for root, unused_dirs, files in os.walk(directory):
++        for base in files:
++            path = os.path.join(root, base)
++            if _SOURCE_PATH_PATTERN.search(path):
++                my_static_paths_composed.append(path)
++    return my_static_paths_composed
+ 
+ 
+ class _HandlerSuite(object):
+@@ -158,6 +169,83 @@ def _source_handler_file(handler_definition):
+         _extract_handler(global_dic, _DO_EXTRA_HANDSHAKE_HANDLER_NAME),
+         _extract_handler(global_dic, _TRANSFER_DATA_HANDLER_NAME),
+         passive_closing_handshake_handler)
++def _my_static_source_handler_file_orig_ref(handler_definition_filepath):
++    """Source a handler definition string.
++
++    Args:
++        handler_definition: a string containing Python statements that define
++                            handler functions.
++    """
++
++    global_dic = {}
++    handler_definition = open(handler_definition_filepath).read()
++    try:
++        exec handler_definition in global_dic
++    except Exception:
++        raise DispatchException('Error in sourcing handler:' +
++                                util.get_stack_trace())
++    passive_closing_handshake_handler = None
++    try:
++        passive_closing_handshake_handler = _extract_handler(
++            global_dic, _PASSIVE_CLOSING_HANDSHAKE_HANDLER_NAME)
++    except Exception:
++        passive_closing_handshake_handler = (
++            _default_passive_closing_handshake_handler)
++    return _HandlerSuite(
++        _extract_handler(global_dic, _DO_EXTRA_HANDSHAKE_HANDLER_NAME),
++        _extract_handler(global_dic, _TRANSFER_DATA_HANDLER_NAME),
++        passive_closing_handshake_handler)
++def _my_static_source_handler_file(handler_definition_filepath):
++    """Source a handler definition string.
++
++    Args:
++        handler_definition: a string containing Python statements that define
++                            handler functions.
++    """
++
++    ##-global_dic = {}
++    ##-handler_definition = open(handler_definition_filepath).read()
++    ##+:
++    import sys as my_sys
++    my_sys.path.insert(1, my_sys.path[0]+"/../example")
++    print "my_sys path", my_sys.path, "\n"
++    ##.
++    try:
++        ##-exec handler_definition in global_dic
++        ##+:
++        #handler_definition_modpath = handler_definition_filepath
++        tmpf1 = handler_definition_filepath.split('.')
++        tmpf2 = tmpf1[0].split('\\')
++        tmpf3 = tmpf2[len(tmpf2)-1]
++        handler_definition_modpath = tmpf3
++        handler_definition_mod = __import__(handler_definition_modpath)
++        del my_sys.path[1]
++        ##.
++    except Exception:
++        ##+:
++        del my_sys.path[1]
++        ##.
++        raise DispatchException('Error in sourcing handler:' +
++                                util.get_stack_trace())
++    passive_closing_handshake_handler = None
++    try:
++        ##-passive_closing_handshake_handler = _extract_handler(
++        ##-    global_dic, _PASSIVE_CLOSING_HANDSHAKE_HANDLER_NAME)
++        ##+:
++        passive_closing_handshake_handler = getattr(handler_definition_mod,
++                                        _PASSIVE_CLOSING_HANDSHAKE_HANDLER_NAME)
++        ##.
++    except Exception:
++        passive_closing_handshake_handler = (
++            _default_passive_closing_handshake_handler)
++    return _HandlerSuite(
++        ##-_extract_handler(global_dic, _DO_EXTRA_HANDSHAKE_HANDLER_NAME),
++        ##-_extract_handler(global_dic, _TRANSFER_DATA_HANDLER_NAME),
++        ##+:
++        getattr(handler_definition_mod, _DO_EXTRA_HANDSHAKE_HANDLER_NAME),
++        getattr(handler_definition_mod, _TRANSFER_DATA_HANDLER_NAME),
++        ##.
++        passive_closing_handshake_handler)
+ 
+ 
+ def _extract_handler(dic, name):
+@@ -198,6 +286,7 @@ class Dispatcher(object):
+         """
+ 
+         self._logger = util.get_class_logger(self)
++        self._use_my_static_handler_suit = True
+ 
+         self._handler_suite_map = {}
+         self._source_warnings = []
+@@ -207,8 +296,12 @@ class Dispatcher(object):
+                 os.path.realpath(root_dir)):
+             raise DispatchException('scan_dir:%s must be a directory under '
+                                     'root_dir:%s.' % (scan_dir, root_dir))
+-        self._source_handler_files_in_dir(
+-            root_dir, scan_dir, allow_handlers_outside_root_dir)
++        if self._use_my_static_handler_suit:
++            self._source_handler_files_in_dir_statically(
++                root_dir, scan_dir, allow_handlers_outside_root_dir)
++        else:
++            self._source_handler_files_in_dir(
++                root_dir, scan_dir, allow_handlers_outside_root_dir)
+ 
+     def add_resource_path_alias(self,
+                                 alias_resource_path, existing_resource_path):
+@@ -388,6 +481,47 @@ class Dispatcher(object):
+                     'Path to resource conversion on %s failed' % path)
+             else:
+                 self._handler_suite_map[convert(path)] = handler_suite
++    def _source_handler_files_in_dir_statically(
++        self, root_dir, scan_dir, allow_handlers_outside_root_dir):
++        """Source all the handler source files in the scan_dir directory.
++
++        The resource path is determined relative to root_dir.
++        """
++
++        # We build a map from resource to handler code assuming that there's
++        # only one path from root_dir to scan_dir and it can be obtained by
++        # comparing realpath of them.
++
++        # Here we cannot use abspath. See
++        # https://bugs.webkit.org/show_bug.cgi?id=31603
++
++        convert = _create_path_to_resource_converter(root_dir)
++        scan_realpath = os.path.realpath(scan_dir)
++        root_realpath = os.path.realpath(root_dir)
++        ####for path in _enumerate_handler_file_paths(scan_realpath):
++        my_static_paths = _my_static_enumerate_handler_file_paths(scan_realpath)
++        self._logger.debug('nPath to ... my static %d' % len(my_static_paths))
++        for path in my_static_paths:
++            self._logger.debug(
++                    'Path to resource conversion on %s ... my static ' % path)
++            if (not allow_handlers_outside_root_dir and
++                (not os.path.realpath(path).startswith(root_realpath))):
++                self._logger.debug(
++                    'Canonical path of %s is not under root directory' %
++                    path)
++                continue
++            try:
++                ####handler_suite = _source_handler_file(open(path).read())
++                handler_suite = _my_static_source_handler_file(path)
++            except DispatchException, e:
++                self._source_warnings.append('%s: %s' % (path, e))
++                continue
++            resource = convert(path)
++            if resource is None:
++                self._logger.debug(
++                    'Path to resource conversion on %s failed' % path)
++            else:
++                self._handler_suite_map[convert(path)] = handler_suite
+ 
+ 
+ # vi:sts=4 sw=4 et
