@@ -1,0 +1,67 @@
+
+
+origin-m4 failed: 
+
+[2016-05-06 17:39:32,694] [DEBUG] mod_pywebsocket.handshake: Client's opening handshake headers: 
+{
+'origin': 'http://diy-origin.openshift.local', 
+
+'x-client-ip': '192.168.56.1', 
+
+'accept-language': 'en-US,en;q=0.5', 
+'accept-encoding': 'gzip, deflate', 
+
+'x-forwarded-host': 'diy-origin.openshift.local', 
+'x-forwarded-port': '80', 
+'x-forwarded-for': '192.168.56.1', 
+
+'sec-websocket-version': '13', 
+'host': 'diy-origin.openshift.local', 
+'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0', 
+
+'x-request-start': 't=1462570772690886', 
+
+'connection': 'Keep-Alive', 
+
+'x-forwarded-proto': 'http', 
+
+'sec-websocket-key': 'pC4JL3nZ403WOuPFVPSBgw==', 
+'pragma': 'no-cache', 
+'cache-control': 'no-cache', 
+'sec-websocket-extensions': 'permessage-deflate', 
+
+'x-forwarded-server': 'broker.openshift.local'
+}
+[2016-05-06 17:39:32,694] [DEBUG] mod_pywebsocket.handshake: Trying protocol version RFC 6455
+[2016-05-06 17:39:32,695] [DEBUG] mod_pywebsocket.handshake: Failed to complete opening handshake as RFC 6455 protocol: HandshakeException('Header Upgrade is not defined',)
+
+
+
+local ok: 
+
+[2016-05-06 14:38:53,716] [DEBUG] mod_pywebsocket.handshake: Client's opening handshake headers: 
+{
+'origin': 'http://127.0.0.1:8080', 
+
+'upgrade': 'websocket', 
+
+'accept-language': 'en-US,en;q=0.5', 
+'accept-encoding': 'gzip, deflate', 
+
+'sec-websocket-version': '13', 
+'host': '127.0.0.1:8080', 
+'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+'user-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0', 
+
+'connection': 'keep-alive, Upgrade', 
+
+'sec-websocket-key': 'SidFkseQNpbboY3qYaUTAQ==', 
+'pragma': 'no-cache', 
+'cache-control': 'no-cache', 
+'sec-websocket-extensions': 'permessage-deflate'
+}
+[2016-05-06 14:38:53,717] [DEBUG] mod_pywebsocket.handshake: Trying protocol version RFC 6455
+[2016-05-06 14:38:53,717] [DEBUG] mod_pywebsocket.handshake.hybi.Handshaker: Extensions requested: ['permessage-deflate']
+
+
