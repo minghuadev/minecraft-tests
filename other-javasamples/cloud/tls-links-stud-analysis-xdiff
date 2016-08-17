@@ -1,0 +1,30 @@
+diff --git a/Makefile b/Makefile
+index eba3e9c..3f0f41e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -8,11 +8,25 @@ BINDIR  = $(PREFIX)/bin
+ MANDIR  = $(PREFIX)/share/man
+ 
+ CFLAGS  = -O2 -g -std=c99 -fno-strict-aliasing -Wall -W -D_GNU_SOURCE -I/usr/local/include
++
++CFLAGS += -I$(HOME)/stud/stk-pycache-include/libev
++CFLAGS += -I$(HOME)/stud/stk-pycache-include
++# copy standard /usr/include/  openssl, libev, krb5*, et* 
++#                     et*:    libcom_err-devel
++#                     krb5*:  krb5-devel
++
+ LDFLAGS = -lssl -lcrypto -lev -L/usr/local/lib
++LDFLAGS += -L$(HOME)/../stk/srv-pycache/usr/lib
+ OBJS    = stud.o ringbuffer.o configuration.o
+ 
+ all: realall
+ 
++#note: this .c.o target can only generate .d files. 
++#      the compilation does not work thus commented out.
++.c.o:
++	$(CC) $(CFLAGS) -MM -MF $@.d -v -o $@ $<
++#	$(CC) $(CFLAGS) -v -o $@ $<
++
+ # Shared cache feature
+ ifneq ($(USE_SHARED_CACHE),)
+ CFLAGS += -DUSE_SHARED_CACHE -DUSE_SYSCALL_FUTEX
