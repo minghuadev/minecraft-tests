@@ -1,0 +1,39 @@
+
+search  golang avoid gc
+
+
+http://stackoverflow.com/questions/12277426/how-to-minimize-the-garbage-collection-in-go
+
+
+To minimize garbage collection in Go, you must minimize heap allocations. To minimize heap allocations, you must understand when allocations happen.
+
+The following things always cause allocations (at least in the gc compiler as of Go 1):
+
+    Using the `new` built-in function
+    Using the `make` built-in function (except in a few unlikely corner cases)
+    Composite literals when the value type is a slice, map, or a struct with the & operator
+    Putting a value larger than a machine word into an interface. (For example, strings, slices, and some structs are larger than a machine word.)
+    Converting between `string`, `[]byte`, and `[]rune`
+        As of Go 1.3, the compiler special cases this expression to not allocate: m[string(b)], where m is a map and b is a []byte
+    Converting a non-constant integer value to a `string`
+    `defer` statements
+    `go` statements
+    Function literals that capture local variables
+
+The following things can cause allocations, depending on the details:
+
+    Taking the address of a variable. Note that addresses can be taken implicitly. For example a.b() might take the address of a if a isn't a pointer and the b method has a pointer receiver type.
+    Using the append built-in function
+    Calling a variadic function or method
+    Slicing an array
+    Adding an element to a map
+
+The list is intended to be complete and I'm reasonably confident in it, but am happy to consider additions or corrections.
+
+edited Jan 26 '15 at 21:55    answered Sep 5 '12 at 21:38 Evan Shaw
+
+
+You can use go build -gcflags="-m" to see the compiler's escape analysis. It's gotten much better at putting things like x := make([]byte, 42) on the stack when possible. – Dave C Apr 3 '15 at 7:15 
+
+
+
