@@ -1,0 +1,12 @@
+
+https://blog.gopheracademy.com/advent-2015/symmetric-api-testing-in-go/
+
+
+gojson  https://github.com/ChimeraCoder/gojson
+
+place this comment in any .go file in the repository, and when we run go generate, 
+the struct definition will be written to tweet.go.
+
+    //go:generate gojson -o tweet.go -name "Tweet" -pkg "anaconda" -input json/statuses/show.json
+
+
