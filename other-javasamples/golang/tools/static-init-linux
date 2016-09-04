@@ -1,0 +1,34 @@
+
+https://blog.gopheracademy.com/advent-2015/building-static-linuxes/
+Tiny Linux OSes with Go
+Contributed by Ian Chiles (fortytw2)   2015-12-24
+
+
+New “cloud” OSes crop up, like CoreOS and RancherOS. These two both simply 
+marry docker+linux to create a magic docker runtime.
+
+First off, grab mainline from kernel.org, run make menuconfig and then make bzImage. 
+The default config should work, just ensure that EXT4 is compiled not as a module.
+
+
+boot to qemu but get a kernel panic because no rootfs: 
+
+    qemu-system-x86_64 -curses -kernel src/linux/arch/x86_64/
+
+
+using `virt-make-fs` from `libguestfs`, create `.qcow2` from a directory
+
+    virt-make-fs --type=ext3 ./null avalon.qcows
+    qemu-system-x86_64 -curses -kernel src/linux/arch/x86_64/boot/bzImage \
+                       -append 'root=/dev/sda' -hda avalon.qcow2
+
+build termboy-go with: 
+
+    go build -a --ldflags="-s -X -linkmode external -extldflags -static"
+
+run
+
+    qemu-system-x86_64 -curses -kernel src/linux/arch/x86_64/boot/bzImage \
+                       -append 'init=/termboy-go root=/dev/sda' -hda avalon.qcow2
+    
+
