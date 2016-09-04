@@ -1,0 +1,33 @@
+
+orchestration-notes
+
+
+===========================================================
+wikipedia:
+https://en.wikipedia.org/wiki/Orchestration_(computing)
+
+
+===========================================================
+zookeeper etcd 
+
+
+===========================================================
+search apache zookeeper alternative
+
+
+https://technologyconversations.com/2015/09/08/service-discovery-zookeeper-vs-etcd-vs-consul/
+
+https://github.com/coreos/etcd
+https://github.com/gliderlabs/registrator
+https://github.com/kelseyhightower/confd
+
+https://www.consul.io/
+https://github.com/gliderlabs/registrator
+https://github.com/hashicorp/consul-template
+http://golang.org/pkg/text/template/
+
+
+http://stackoverflow.com/questions/3662995/explaining-apache-zookeeper
+
+
+
