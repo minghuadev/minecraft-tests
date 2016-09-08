@@ -4,6 +4,7 @@ toc
     local env
     gotour
     dep graph
+    directory structure
 
 ======================================================================
 pyc proj
@@ -70,5 +71,56 @@ $ ./main -p -s ../../apps/ | dot -Tpdf -O
 $ go get github.com/davecheney/graphpkg
 $ go install github.com/davecheney/graphpkg
 $ libs/bin/graphpkg mypkg
+
+
+======================================================================
+directory structure
+
+$ tree bin/ pkg/
+bin/
+├── callgraph
+├── digraph
+├── gotour
+└── graphpkg
+pkg/
+└── linux_386
+    ├── github.com
+    │   ├── paetzke
+    │   │   └── godot
+    │   │       └── godot.a
+    │   └── pkg
+    │       └── browser.a
+    └── golang.org
+        └── x
+            ├── net
+            │   └── websocket.a
+            ├── tools
+            │   ├── container
+            │   │   └── intsets.a
+            │   ├── go
+            │   │   ├── ast
+            │   │   │   └── astutil.a
+            │   │   ├── buildutil.a
+            │   │   ├── callgraph
+            │   │   │   ├── cha.a
+            │   │   │   ├── rta.a
+            │   │   │   └── static.a
+            │   │   ├── callgraph.a
+            │   │   ├── loader.a
+            │   │   ├── pointer.a
+            │   │   ├── ssa
+            │   │   │   └── ssautil.a
+            │   │   ├── ssa.a
+            │   │   └── types
+            │   │       └── typeutil.a
+            │   ├── godoc
+            │   │   └── static.a
+            │   ├── playground
+            │   │   └── socket.a
+            │   └── present.a
+            └── tour
+                ├── pic.a
+                ├── tree.a
+                └── wc.a
 
 
