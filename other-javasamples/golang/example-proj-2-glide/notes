@@ -1,0 +1,15 @@
+
+go glide project source tree setup
+2016-9-8
+
+
+mkdir -p top/libs/src/github.com/Masterminds
+export GOPATH=$GOPATH:$(pwd)/top/libs
+
+cd top/libs/src/github.com/Masterminds
+git clone github.com/Masterminds/glide
+
+cd glide
+go build -v glide.go
+
+
