@@ -27,7 +27,7 @@ python do_listtasks() {
 			bb.warn("python DO_LISTTASKS key task %s" % e)
 }
 
-addtask build after do_fetch
+addtask build after do_unpack
 do_build[dirs] = "${TOPDIR}"
 do_build[nostamp] = "1"
 python base_do_build () {
@@ -43,4 +43,11 @@ python base_do_fetch() {
     bb.warn("BASE_DO_FETCH")
 }
 
-EXPORT_FUNCTIONS do_clean do_mrproper do_build do_fetch
+addtask unpack after do_fetch
+python base_do_unpack() {
+    bb.note("BASE_DO_UNPACK")
+    bb.warn("BASE_DO_UNPACK")
+}
+
+
+EXPORT_FUNCTIONS do_clean do_mrproper do_build do_fetch do_unpack
