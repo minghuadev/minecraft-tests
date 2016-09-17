@@ -1,0 +1,8 @@
+
+run under testdir/ : 
+
+    bitbake firstrecipe
+    bitbake firstrecipe -vDD
+    bitbake firstrecipe -vDD -c listtasks
+    bitbake firstrecipe -c showdata
+

@@ -1,0 +1,14 @@
+
+BBPATH=$(pwd)/bitbake-1.17.0
+
+if [ ! -d $BBPATH ]; then
+    echo failed finding BBPATH $BBPATH
+else
+
+export PATH=$BBPATH/bin:$PATH
+export PYTHONPATH=$BBPATH/lib:$PATHONPATH
+
+fi
+
+unset BBPATH
+
