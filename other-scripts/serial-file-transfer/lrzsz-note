@@ -1,0 +1,14 @@
+
+download lrzsz: 
+
+  http://ohse.de/uwe/software/lrzsz.html
+  https://ohse.de/uwe/releases/lrzsz-0.12.20.tar.gz
+
+
+cross compile example: 
+
+  CC=arm-linux-uclibc-gcc ./configure --host=arm-linux-uclibc
+
+  ref: http://andylinuxblog.blogspot.ca/2014/10/zmodem-and-minicom.html
+
+
