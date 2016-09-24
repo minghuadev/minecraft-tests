@@ -6,3 +6,11 @@ run under testdir/ :
     bitbake firstrecipe -vDD -c listtasks
     bitbake firstrecipe -c showdata
 
+    bitbake secondrecipe
+
+  debug dependency ref http://www.openembedded.org/wiki/Inspect_DEPENDS
+
+    bitbake -g secondrecipe && less task-depends.dot
+    bitbake -g secondrecipe -u depexp 
+
+
