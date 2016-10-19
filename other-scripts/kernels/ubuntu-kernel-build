@@ -1,0 +1,29 @@
+
+
+http://askubuntu.com/questions/28047/where-can-i-get-the-11-04-kernel-config-file
+http://kernel.ubuntu.com/~kernel-ppa/configs/xenial/linux/4.4.0-31.50/amd64-config.flavour.generic
+
+
+https://wiki.ubuntu.com/Kernel/BuildYourOwnKernel
+
+
+git clone git://kernel.ubuntu.com/ubuntu/ubuntu-xenial.git
+sudo apt-get build-dep linux-image-$(uname -r)
+
+cp /boot/config... .config
+change apparmor to smack: 
+ CONFIG_DEFAULT_SECURITY="smack"
+
+chmod a+x debian/rules
+chmod a+x debian/scripts/*
+chmod a+x debian/scripts/misc/*
+
+cp .config dot-conf1
+
+make oldconfig
+ >>answer n to all new questions.
+ >> manually change default apparmor to smack
+
+fakeroot debian/rules clean
+
+

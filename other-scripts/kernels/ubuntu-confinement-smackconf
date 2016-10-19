@@ -1,0 +1,283 @@
+
+https://help.ubuntu.com/community/SmackConfiguration
+2016-10-15
+
+  Unsupported Version
+  Candidate for Deletion
+
+
+Contents
+
+    1. Introduction
+    2. Smack Resources
+    3. Mandatory Access Control Background
+    4. The Smack MAC Model
+    5. The Trivial Configuration
+    6. The System Separation Configuration
+    7. A Single Special Service
+    8. Services Under the System Separation Configuration
+
+
+This page describes how to go about configuring a system to use the Simplified 
+Mandatory Access Control Kernel (Smack) LSM on your system.
+
+
+1. Introduction
+----------------
+
+Smack is a Mandatory Access Control (MAC) mechanism that is available in mainline 
+Linux kernels as of the 2.6.25 release. A system with Smack enabled should be 
+indistinguishable from a system without Smack unless the MAC facility is explicitly 
+used. This page describes how to take advantage of MAC using Smack. 
+
+
+2. Smack Resources
+-------------------
+
+The Smack home page contains a Smack white paper and current application components. 
+The package smack-util contains new programs
+
+    1. smackload
+    2. smackcipso
+    3. smackpolyport 
+
+a sample start up script
+
+    1. etc-init.d-smack 
+
+a small static library
+
+    1. libsmack.a 
+
+work in progress patches for
+
+    1. sshd
+    2. ls
+    3. busybox 
+
+a Makefile and a README. 
+
+
+3. Mandatory Access Control Background
+---------------------------------------
+
+Mandatory Access Control is conceptually simple. Any scheme that controls access 
+by subjects to objects and that does not allow users any discretion over which 
+subjects get access to which objects is a Mandatory Access Control mechanism. 
+A subject is any active entity, on Linux a task or process. An object is any 
+passive entity, examples of which include files, directories, message queues, 
+and in the case of signals other processes. An access is any attempt made by 
+a subject to observe or manipulate an object.
+
+Many MAC systems, including both SELinux and Smack, are label based. This means 
+that every subject and every object on the system is given an attribute called 
+a label, and access control decisions are made based on the label of the subject 
+and the label of the object. Some other MAC systems, such as AppArmor, are path 
+name based. This means that the object attribute used to make the access control 
+decision is the name by which the object is accessed.
+
+In the twentieth century all MAC systems were label based and all implemented 
+the Bell & LaPadula (B&L) sensitivity model. This model is derived from the 
+United States Department of Defense scheme for marking classified paper documents. 
+It was not considered widely applicable outside the intelligence community. 
+
+
+4. The Smack MAC Model
+-----------------------
+
+Smack enforces the policy that a subject can only access an object if their 
+labels match or if there is an explicit rule allowing the requested access.
+
+Access rules are expressed
+
+    <subject-label> <object-label> <access> 
+
+where access describes the access permitted using the traditional Linux read 
+(R or r) access, write (W or w) access, execute (X or x) access, or append 
+(A or a) access. A dash (-) can be used as a place holder or to express that 
+no access be permitted if use by itself.
+
+There are some labels used by the system,
+
+    _ pronounced floor
+    * pronounced star
+    ^ pronounced hat 
+
+There are a limited number of pre-defined rules: 
+
+    Subject Label       Object Label       Access
+    *                   any                -
+    any                 *                  rwxa
+    ordinary            ordinary           rwxa
+    any                 _                  rx
+    ^                   any                rx
+
+the third rule use ordinary to refer to any label except * and describes 
+the case where the subject label and the object label are the same.
+
+
+5. The Trivial Configuration
+-----------------------------
+
+Smack kernels are built with the configuration options `CONFIG_SECURITY_SMACK`, 
+`CONFIG_SECURITY_NETWORK`, and `CONFIG_NETLABEL`.
+
+To enable Smack you need to add `security=smack` to the kernel line in 
+`/boot/grub/menu.lst`
+
+Create the directories `/smack` and `/etc/smack`. Add this line to the `/etc/fstab` file:
+
+    smackfs /smack smackfs defaults 0 0 
+
+to get the Smack control interface mounted at boot.
+
+Smack will create the init process with the floor label and will use the floor 
+label as the default for all filesystems unless instructed otherwise using mount 
+options. Because processes inherit the label of their parent all processes will 
+run with the floor label unless explicitly set otherwise. Because all processes 
+will have the floor label and all files will have the floor label Smack will 
+never fail an access check in this configuration.
+
+
+6. The System Separation Configuration
+---------------------------------------
+
+The single most common use of MAC is to separate system processes and data from 
+user processes and data by giving system processes different labels than those 
+used by user processes. Some systems, including SELinux, use MAC to further 
+divide system processes into subsystems, giving each subsystem its own label or 
+set of labels. The greatest value by far comes from the simple split between 
+the system and users. Arguments will be made for finer granularity of protection 
+within the system but the fact remains that interference between uncompromised 
+system processes is extremely rare.
+
+The most natural way to provide simple separation between the system and users 
+under Smack is to run the system with the floor label (_) and users at another, 
+in this example Rabble will be used, although just about any name will do. 
+The floor label is the right choice for system processes and data because 
+it allows users at any label to read system data but precludes them writing it. 
+System processes running without privilege will be unable to access any user 
+data because the labels will not match and there is no rule that allows floor 
+subjects unusual access. This is exactly the scheme that has been used for 
+decades on Unix based Multi-Level Secure systems, which run system processes 
+at system_low and basic users at unclassified labels.
+
+The version of sshd and the login from busybox in the `smack-util` get user 
+Smack information from `/etc/smack/user`. This file lists the user, the user's 
+default label, and any labels other than the default the user is allowed. 
+A list of allowed labels that includes a single `+` indicates that the user is 
+allowed to run at any label. This version of `sshd` always logs the user in 
+at her default label. This version of `busybox` always uses the default label 
+for login. This version of `busybox` enforces the allowed label list for `su` 
+and `newlabel`. A sample from `/etc/smack/user` might be: 
+
+ root _ +
+ casper Ghost
+ casey Rogue Scoundrel Cheat
+
+With processes running at multiple labels there are a small number of labeling 
+issues. The device files `/dev/null` and `/dev/zero` are used by many programs 
+and are known never to pass information between processes. These devices are 
+exactly why the *star* label is defined. A start up script should give these 
+files the *star* label thus: 
+
+ /usr/bin/attr -S -s SMACK64 -V '*' /dev/null
+ /usr/bin/attr -S -s SMACK64 -V '*' /dev/zero
+
+Finally, the labels of `/tmp`, `/usr/tmp`, and `/var/tmp` need to be addressed. 
+Like the other system files, these directories will be given the floor label 
+unless explicitly labeled otherwise. Because system processes are run with 
+the floor label there is only an issue for user processes that may expect 
+to use one of these shared resources. Well behaved applications will use 
+the `TMPDIR` environment variable and this value can be set somewhere with 
+the right label, perhaps under the user's home directory. While security 
+purists will rightly cringe at the notion, giving these directories the star 
+label is a convenient approach to the situation.
+
+
+7. A Single Special Service
+----------------------------
+
+There may be a case where there is a service that requires special protection 
+in an environment for which usual Linux controls are otherwise sufficient. 
+To accomplish this using Smack the service needs to be run at a label that is 
+not used by other processes and needs any data that it writes to be given that 
+same label. There also need to be rules that allow tasks running with other 
+labels to communicate with the service while protecting the data. 
+
+Assume a game server `tictactoe-server` that maintains its scores in 
+`/usr/share/tictactoe` and a user application {tictactoe-client that talks 
+to the server on a well known port, in this case 4380. Assume that the server 
+is started by `init` and runs as user `tictac`. The label `TicTacToe` is as 
+good as any for this purpose. To label all of the server's files 
+
+  # find /usr/share/tictactoe -exec attr -S -s SMACK64 -V TicTacToe {} \;
+
+Note that it is not necessary to label the application binary. The server needs 
+to run at `TicTacToe`, and changing labels is a privileged operation. One way 
+to achieve this would be 
+
+  # This echo must be the shell built-in!
+  echo TicTacToe > /proc/self/attr/current
+  su - tictac -c tictactoe-server &
+
+Finally, there need to be rules that allow the clients to write to the server 
+and the server to write back. These rules go in `/etc/smack/accesses`
+
+  _ TicTacToe w
+  TicTacToe _ w
+
+and they allow write access but not read, execute, or append access. This is 
+sufficient to allow network communications, but not file access because file 
+access, even for write, has to read the file attributes. It will be necessary 
+to load these rules into the kernel using smackload, whose sole purpose is 
+to ensure that the rules are properly formatted before writing them to 
+`/smack/load`. 
+
+
+8. Services Under the System Separation Configuration
+------------------------------------------------------
+
+The most sophisticated configuration will be one in which services are provided 
+to users at multiple Smack labels, combining the schemes above. Continuing with 
+the game server from the previous example casper can be given access by adding 
+these rules to `/etc/smack/accesses`.
+
+  Ghost TicTacToe w
+  TicTacToe Ghost w
+
+The user casey could be allowed when running at Rogue.
+
+  Rogue TicTacToe w
+  TicTacToe Rogue w
+
+Note that while Ghost can write to TicTacToe and that TicTacToe can write to Rogue 
+Ghost can not write directly to Rogue. This is important because unless 
+tictactoe-server has been programmed to deal with clients at different Smack labels 
+it will provide a channel through which Ghosts and Rogues can communicate.
+
+The utility smackpolyport is designed to address this issue. This program redirects 
+connections to multiple servers based on the label of the client connecting. 
+A safer way to allow Ghosts and Rogues to use the service would be to make no 
+explicit access rules and invoke the service thus: 
+
+  #
+  smackpolyport --client 4380 --server 4381:Ghost --server 4382:Rogue &
+  
+  # This echo must be the shell built-in!
+  echo Ghost > /proc/self/attr/current
+  su - tictac -c "tictactoe-server --data /usr/share/tictactoe-ghost --port 4381" &
+  
+  echo Rogue > /proc/self/attr/current
+  su - tictac -c "tictactoe-server --data /usr/share/tictactoe-rogue --port 4382" &
+
+The labeling on the directories `/usr/share/tictactoe-ghost` and 
+`/usr/share/tictactoe-rogue` will of course need to match that of the servers 
+using them. The `smackpolyport` program also provides a `--master` option, which 
+identifies a server to be used for all labels that are not identified with a `--server` 
+option. Needless to say, this has all the dangers of unlabeled communications, 
+but there are cases where it can be handy.
+
+SmackConfiguration (last edited 2011-05-23 02:56:04 by rocket2dmn)
+
+

@@ -1,0 +1,27 @@
+
+search  switch apparmor to smack
+
+https://wiki.ubuntu.com/Security/Features
+https://wiki.ubuntu.com/SecurityTeam/Specifications/ApplicationConfinement
+
+
+
+enable smack on ubuntu: 
+
+by default ubuntu uses apparmor security: 
+
+  # mkdir smack
+  # mount -t smackfs smack smack
+  mount: unknown filesystem type 'smackfs'
+
+modify /etc/default/grub to  
+  GRUB_CMDLINE_LINUX_DEFAULT="quiet splash security=smack"
+run 
+  update-grub
+then reboot
+
+
+
+https://help.ubuntu.com/community/SmackConfiguration
+
+
