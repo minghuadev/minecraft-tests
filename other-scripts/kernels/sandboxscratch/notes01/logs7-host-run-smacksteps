@@ -1,0 +1,176 @@
+
+[tmp]$ cat log-steps 
+
+
+[1] install ubuntu 16.04.1 LTS. update all packages. 
+    install docker.io version 1.12.1.
+
+# apt-get update
+# apt-get upgrade
+# apt-get install docker.io
+# docker --version
+Docker version 1.12.1, build 23cf638
+
+
+[2] create a normal user. add it to the docker group. 
+    login as the normal user. 
+    pull a ubuntu image and run it in a container. 
+
+$ docker pull ubuntu
+$ docker run -it -d --privileged ubuntu /bin/bash
+
+$ docker ps -a
+>>it shows the container is running under name cranky_roentgen
+
+
+[3] run an exec session from the host to the container. 
+    mounting smackfs fails. the same fails on the host too. 
+
+$ docker exec -it  cranky_roentgen /bin/bash
+root@0b39c06e5135:/# mkdir smk
+root@0b39c06e5135:/# mount -t smackfs smack smk
+mount: unknown filesystem type 'smackfs'
+
+
+[4] reboot host. start the container and verify the same as [3]. 
+
+$ docker start cranky_roentgen
+$ docker exec -it cranky_roentgen /bin/bash
+root@0b39c06e5135:/# mount -t smackfs smack smk
+mount: unknown filesystem type 'smackfs'
+
+
+[5] modify grub so it contains "security=smack' for kernel cmdline
+    run "update-grub" then reboot. 
+
+# vi /etc/default/grub
+
+>>the file will contain: 
+###GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_CMDLINE_LINUX_DEFAULT="security=smack"
+
+
+# update-grub
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-4.4.0-31-generic
+Found initrd image: /boot/initrd.img-4.4.0-31-generic
+done
+
+
+[6] reboot and mount smack as smackfs on host
+    it works. 
+
+root@ubuntu:~# mkdir smk
+root@ubuntu:~# mount -t smackfs smack smk
+
+
+[7] login as the normal user, check docker images
+
+$ docker ps -a 
+>>it works. it shows cranky_roentgen was stopped
+
+[8] continue from [7] try to start an existing container or start a new.
+    it hangs.
+    strace shows the last call to futex never return. 
+
+$ docker start cranky_roentgen
+>>it hangs here forever. 
+
+$ docker images
+>>it works
+
+$ docker run -it -d --privileged ubuntu /bin/bash
+>>it hangs forever
+
+$ docker run -it -d --cap-add=MAC_OVERRIDE --cap-add=MAC_ADMIN ubuntu /bin/bash
+>>it hangs
+
+$ strace docker run -it -d --cap-add=MAC_OVERRIDE --cap-add=MAC_ADMIN ubuntu /bin/bash
+>>a call to futex() never returns
+
+
+
+note: when smack seciruty is enabled, apparmor would fail to start at boot time: 
+[FAILED] Failed to start LSB: AppArmor initialization.
+See 'systemctl status apparmor.service' for details.
+
+
+dkr@ubuntu:~$ tail -40 log-hang
+mprotect(0x7fdb8e6ac000, 4096, PROT_NONE) = 0
+clone(child_stack=0x7fdb8eeabff0, flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, parent_tidptr=0x7fdb8eeac9d0, tls=0x7fdb8eeac700, child_tidptr=0x7fdb8eeac9d0) = 1606
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+futex(0x12fe988, FUTEX_WAIT, 0, NULL)   = 0
+ioctl(2, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+openat(AT_FDCWD, "/proc/sys/net/core/somaxconn", O_RDONLY|O_CLOEXEC) = 3
+read(3, "128\n", 4096)                  = 4
+read(3, "", 4092)                       = 0
+close(3)                                = 0
+socket(PF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+close(3)                                = 0
+socket(PF_INET6, SOCK_STREAM, IPPROTO_TCP) = 3
+setsockopt(3, SOL_IPV6, IPV6_V6ONLY, [1], 4) = 0
+bind(3, {sa_family=AF_INET6, sin6_port=htons(0), inet_pton(AF_INET6, "::1", &sin6_addr), sin6_flowinfo=0, sin6_scope_id=0}, 28) = 0
+socket(PF_INET6, SOCK_STREAM, IPPROTO_TCP) = 4
+setsockopt(4, SOL_IPV6, IPV6_V6ONLY, [0], 4) = 0
+bind(4, {sa_family=AF_INET6, sin6_port=htons(0), inet_pton(AF_INET6, "::ffff:127.0.0.1", &sin6_addr), sin6_flowinfo=0, sin6_scope_id=0}, 28) = 0
+close(4)                                = 0
+close(3)                                = 0
+mmap(0xc820100000, 1048576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc820100000
+mmap(0xc81fff0000, 32768, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc81fff0000
+mmap(0xc820200000, 1048576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc820200000
+mmap(0xc81ffe8000, 32768, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc81ffe8000
+getrandom("\31", 1, GRND_NONBLOCK)      = 1
+futex(0x12fe988, FUTEX_WAIT, 0, NULL)   = 0
+getrandom("\364\224+\5\\\216-/", 8, 0)  = 8
+futex(0x12fe988, FUTEX_WAIT, 0, NULL)   = 0
+mmap(0xc820300000, 1048576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc820300000
+mmap(0xc81ffe0000, 32768, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc81ffe0000
+stat("/home/dkr/.docker/config.json", 0xc8203385e8) = -1 ENOENT (No such file or directory)
+futex(0x12fe988, FUTEX_WAIT, 0, NULL
+^Cstrace: Process 1603 detached
+ <detached ...>
+
+
+
+dkr@ubuntu:~$ tail -40 log-nohang-nosmack
+mmap(NULL, 8392704, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x7f5e74687000
+mprotect(0x7f5e74687000, 4096, PROT_NONE) = 0
+clone(child_stack=0x7f5e74e86ff0, flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, parent_tidptr=0x7f5e74e879d0, tls=0x7f5e74e87700, child_tidptr=0x7f5e74e879d0) = 1519
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+mmap(NULL, 262144, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f5e755f8000
+rt_sigprocmask(SIG_SETMASK, ~[RTMIN RT_1], [], 8) = 0
+mmap(NULL, 8392704, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_STACK, -1, 0) = 0x7f5e73e86000
+mprotect(0x7f5e73e86000, 4096, PROT_NONE) = 0
+clone(child_stack=0x7f5e74685ff0, flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, parent_tidptr=0x7f5e746869d0, tls=0x7f5e74686700, child_tidptr=0x7f5e746869d0) = 1520
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+futex(0x12fe988, FUTEX_WAIT, 0, NULL)   = 0
+ioctl(2, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+openat(AT_FDCWD, "/proc/sys/net/core/somaxconn", O_RDONLY|O_CLOEXEC) = 3
+read(3, "128\n", 4096)                  = 4
+read(3, "", 4092)                       = 0
+close(3)                                = 0
+socket(PF_INET, SOCK_STREAM, IPPROTO_TCP) = 3
+close(3)                                = 0
+socket(PF_INET6, SOCK_STREAM, IPPROTO_TCP) = 3
+setsockopt(3, SOL_IPV6, IPV6_V6ONLY, [1], 4) = 0
+bind(3, {sa_family=AF_INET6, sin6_port=htons(0), inet_pton(AF_INET6, "::1", &sin6_addr), sin6_flowinfo=0, sin6_scope_id=0}, 28) = 0
+socket(PF_INET6, SOCK_STREAM, IPPROTO_TCP) = 4
+setsockopt(4, SOL_IPV6, IPV6_V6ONLY, [0], 4) = 0
+bind(4, {sa_family=AF_INET6, sin6_port=htons(0), inet_pton(AF_INET6, "::ffff:127.0.0.1", &sin6_addr), sin6_flowinfo=0, sin6_scope_id=0}, 28) = 0
+close(4)                                = 0
+close(3)                                = 0
+mmap(0xc820100000, 1048576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc820100000
+mmap(0xc81fff0000, 32768, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc81fff0000
+mmap(0xc820200000, 1048576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc820200000
+mmap(0xc81ffe8000, 32768, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc81ffe8000
+getrandom("\4", 1, GRND_NONBLOCK)       = 1
+futex(0x12fe988, FUTEX_WAIT, 0, NULL)   = 0
+getrandom("\230\340#`\7\34w3", 8, 0)    = 8
+mmap(0xc820300000, 1048576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc820300000
+mmap(0xc81ffe0000, 32768, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xc81ffe0000
+stat("/home/dkr/.docker/config.json", 0xc82032ec68) = -1 ENOENT (No such file or directory)
+futex(0x12fe988, FUTEX_WAIT, 0, NULL429a8b947b46cc17323fbad9268e5f653e4811d0e9cc05717782af717fa93e01
+ <unfinished ...>
++++ exited with 0 +++
+
+

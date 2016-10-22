@@ -1,0 +1,15 @@
+
+docker run -d -t --privileged -v /home/mee/tmp/ubtdata/home:/home ubuntu /bin/bash
+
+
+docker logs: 
+
+root@4b0661fe4935:/# Oct 15 02:26:06 : =ERR= | _UNKNOWN_[48]/framework T=main | LE_FILENAME FindNewestSystemIndex() 1083 | No systems yet exist in '/legato/systems'
+Oct 15 02:26:06 : =ERR= | _UNKNOWN_[48]/framework T=main | LE_FILENAME ReadIndexFile() 803 | Unable to read from file '/legato/systems/current/index' (No such file or directory).
+Oct 15 02:26:06 :  INFO | _UNKNOWN_[48]/framework T=main | LE_FILENAME ShouldInstallGolden() 1168 | No systems are installed yet.
+Oct 15 02:26:06 : =ERR= | _UNKNOWN_[48]/framework T=main | LE_FILENAME DeleteAllButCurrent() 507 | Failed to read directory entry from '/legato/systems': No such file or directory
+Oct 15 02:26:07 :  INFO | _UNKNOWN_[48]/framework T=main | LE_FILENAME GetStatus() 965 | Status of system 'current' is 'good'.
+Oct 15 02:26:07 : *EMR* | supervisor[51]/framework T=main | LE_FILENAME smack_Init() 286 | Could not mount SMACK file system.  No such device.
+sh: 1: logread: not found
+root@4b0661fe4935:/# exit
+

@@ -1,0 +1,18 @@
+
+RASPI_TOOLCHAIN_DIR=/opt/swi/y17-ext
+RASPI_TOOLCHAIN_PREFIX=arm-poky-linux-gnuabi-
+
+
+r@ba7beaaf9b19:~/workspace/legato$ cat stamp1 stamp2 
+Sat Oct  8 22:50:17 UTC 2016
+Sat Oct  8 22:55:26 UTC 2016
+
+
+after build: 
+
+  build/             -- 279M
+  build/doc/         -- 192M
+  build/localhost/   --  48M -- 500 .o files
+  build/tools/       --  41M --  60 .o files
+
+

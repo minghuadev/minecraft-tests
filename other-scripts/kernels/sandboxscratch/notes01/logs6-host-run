@@ -1,0 +1,37 @@
+
+[tmp]$ cat log-start 
+
+
+root@dev07:/home/r/tmp# mkdir /mnt/legato
+root@dev07:/home/r/tmp# mkdir /mnt/legato/system
+root@dev07:/home/r/tmp# cd legato/build/localhost/system/staging/
+root@dev07:/home/r/tmp/legato/build/localhost/system/staging# cp -a * /mnt/legato/system/
+
+root@dev07:/# cd /mnt
+root@dev07:/mnt# cd legato/
+root@dev07:/mnt/legato# mkdir /legato
+root@dev07:/mnt/legato# ./system/bin/start
+
+
+LEGATO_SYSTEM_PATH="/legato/systems/current/bin"
+
+
+root@dev07:/mnt/legato/system# mkdir /legato/systems
+root@dev07:/mnt/legato/system# mkdir /legato/systems/current
+root@dev07:/mnt/legato/system# cp -a * /legato/systems/current
+
+
+https://en.wikipedia.org/wiki/Smack_(software)
+http://www.webcitation.org/6AqsXTUx0
+
+
+
+https://help.ubuntu.com/community/SmackConfiguration
+
+
+search  smack labels
+
+https://wiki.tizen.org/wiki/Security:Smack
+
+
+

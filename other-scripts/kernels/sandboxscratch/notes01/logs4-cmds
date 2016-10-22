@@ -1,0 +1,23 @@
+
+build.ninja:
+
+ 940 build /home/r/workspace/legato/build/localhost/system.$target.update: 
+        PackSystem 
+        $builddir/app/atClient/atClient.$target.update 
+        $builddir/app/atServer/atServer.$target.update 
+        $builddir/app/audioService/audioService.$target.update 
+        $builddir/app/avcService/avcService.$target.update 
+        $builddir/app/cellNetService/cellNetService.$target.update 
+        $builddir/app/dataConnectionService/dataConnectionService.$target.update 
+        $builddir/app/fwupdateService/fwupdateService.$target.update 
+        $builddir/app/gpioService/gpioService.$target.update 
+        $builddir/app/modemService/modemService.$target.update 
+        $builddir/app/positioningService/positioningService.$target.update 
+        $builddir/app/powerMgr/powerMgr.$target.update 
+        $builddir/app/secStore/secStore.$target.update 
+        $builddir/app/smsInboxService/smsInboxService.$target.update 
+        $builddir/app/tools/tools.$target.update 
+        $builddir/app/voiceCallService/voiceCallService.$target.update 
+        | 
+        $builddir/staging/config/users.cfg /home/r/workspace/legato/build/$target/framework/md5
+

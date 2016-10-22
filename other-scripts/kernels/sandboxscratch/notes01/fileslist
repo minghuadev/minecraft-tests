@@ -1,0 +1,25 @@
+total 5392
+-rw-rw-r-- 1 guest guest     365 Oct  8 16:56 analysis
+-rw-rw-r-- 1 guest guest   32907 Oct 13 22:49 analysis-build-localhost
+-rw-rw-r-- 1 guest guest    2886 Oct  8 16:57 analysis-build-tools
+-rw-rw-r-- 1 guest guest    2153 Oct 16 12:42 analysis-make-localhost
+-rw-rw-r-- 1 guest guest       0 Oct 22 15:03 fileslist
+-rw-r--r-- 1 guest guest  964309 Oct 21 21:13 logr1-build-v
+-rw-r--r-- 1 guest guest  562942 Oct 21 21:13 logr1-build-v-m1
+-rw-r--r-- 1 guest guest    2356 Oct 22 14:18 logr1-post-patch-note
+-rw-r--r-- 1 guest guest  230261 Oct 22 14:18 logr2-build-log
+-rw-r--r-- 1 guest guest  255293 Oct 22 14:18 logr2-build-log-m1
+-rw-r--r-- 1 guest guest  112292 Oct 22 14:18 logr2-build-log-m2
+-rw-r--r-- 1 guest guest    2719 Oct 22 14:18 logr2-build-log-m3
+-rw-rw-r-- 1 guest guest    6653 Oct 22 14:18 logr2-patch-ccstr
+-rw-r--r-- 1 guest guest  761761 Oct  8 14:11 logs1
+-rw-rw-r-- 1 guest guest     955 Oct  8 14:34 logs1-gits
+-rw-r--r-- 1 guest guest 1103076 Oct  8 17:33 logs4
+-rw-rw-r-- 1 guest guest    1181 Oct 13 22:46 logs4-cmds
+-rw-rw-r-- 1 guest guest 1032293 Oct  9 10:33 logs4-mod1
+-rw-r--r-- 1 guest guest  376566 Oct  9 19:04 logs4-mod2
+-rw-r--r-- 1 guest guest    7547 Oct  9 19:04 logs4-mod2-makelevels
+-rw-rw-r-- 1 guest guest    1078 Oct 14 22:15 logs5-docker-run
+-rw-rw-r-- 1 guest guest     846 Oct 22 14:44 logs6-host-run
+-rw-rw-r-- 1 guest guest    7663 Oct 22 14:45 logs7-host-run-smacksteps
+-rw-rw-r-- 1 guest guest    2006 Oct 22 14:47 logs8-host-build-run

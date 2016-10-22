@@ -1,0 +1,782 @@
+
+logr2-build-log-m2
+
+$ cat -n logr2-build-log > logr2-build-log-m1
+$ grep CC logr2-build-log-m1 > logr2-build-log-m2
+replace /home/r/work/legato-af/ by /~~/
+
+
+    25	CCPRE in /~~/framework/tools/mkTools/mkTools.h out /~~/build/tools/mkTools.h.gch
+    30	CC in /~~/framework/tools/mkTools/buildParams.cpp
+    34	CC in /~~/framework/tools/mkTools/conceptualModel/process.cpp
+    38	CC in /~~/framework/tools/mkTools/conceptualModel/app.cpp
+    42	CC in /~~/framework/tools/mkTools/conceptualModel/watchdogTimeout.cpp
+    46	CC in /~~/framework/tools/mkTools/conceptualModel/javaPackage.cpp
+    50	CC in /~~/framework/tools/mkTools/parseTree/content.cpp
+    54	CC in /~~/framework/tools/mkTools/conceptualModel/component.cpp
+    58	CC in /~~/framework/tools/mkTools/parseTree/defFile.cpp
+    62	CC in /~~/framework/tools/mkTools/parseTree/compoundItem.cpp
+    66	CC in /~~/framework/tools/mkTools/parseTree/token.cpp
+    70	CC in /~~/framework/tools/mkTools/conceptualModel/priority.cpp
+    74	CC in /~~/framework/tools/mkTools/conceptualModel/processEnvironment.cpp
+    78	CC in /~~/framework/tools/mkTools/conceptualModel/system.cpp
+    82	CC in /~~/framework/tools/mkTools/conceptualModel/watchdogAction.cpp
+    86	CC in /~~/framework/tools/mkTools/conceptualModel/faultAction.cpp
+    90	CC in /~~/framework/tools/mkTools/path.cpp
+    94	CC in /~~/framework/tools/mkTools/conceptualModel/nonNegativeIntLimit.cpp
+    98	CC in /~~/framework/tools/mkTools/conceptualModel/positiveIntLimit.cpp
+   102	CC in /~~/framework/tools/mkTools/conceptualModel/boolLimit.cpp
+   106	CC in /~~/framework/tools/mkTools/conceptualModel/module.cpp
+   110	CC in /~~/framework/tools/mkTools/exception.cpp
+   114	CC in /~~/framework/tools/mkTools/conceptualModel/api.cpp
+   118	CC in /~~/framework/tools/mkTools/parser/lexer.cpp
+   122	CC in /~~/framework/tools/mkTools/conceptualModel/exe.cpp
+   126	CC in /~~/framework/tools/mkTools/commandLineInterpreter/mkexe.cpp
+   130	CC in /~~/framework/tools/mkTools/commandLineInterpreter/mkcomp.cpp
+   134	CC in /~~/framework/tools/mkTools/configGenerator/configGenerator.cpp
+   138	CC in /~~/framework/tools/mkTools/file.cpp
+   142	CC in /~~/framework/tools/mkTools/commandLineInterpreter/mkCommon.cpp
+   146	CC in /~~/framework/tools/mkTools/commandLineInterpreter/mk.cpp
+   150	CC in /~~/framework/tools/mkTools/commandLineInterpreter/mksys.cpp
+   154	CC in /~~/framework/tools/mkTools/commandLineInterpreter/mkapp.cpp
+   158	CC in /~~/framework/tools/mkTools/commandLineInterpreter/args.cpp
+   162	CC in /~~/framework/tools/mkTools/parser/cdefParser.cpp
+   166	CC in /~~/framework/tools/mkTools/md5.cpp
+   170	CC in /~~/framework/tools/mkTools/codeGenerator/javaComponentMainGenerator.cpp
+   174	CC in /~~/framework/tools/mkTools/parser/mdefParser.cpp
+   178	CC in /~~/framework/tools/mkTools/parser/apiParser.cpp
+   182	CC in /~~/framework/tools/mkTools/parser/adefParser.cpp
+   186	CC in /~~/framework/tools/mkTools/parser/sdefParser.cpp
+   190	CC in /~~/framework/tools/mkTools/parser/parser.cpp
+   194	CC in /~~/framework/tools/mkTools/codeGenerator/codeGenerator.cpp
+   198	CC in /~~/framework/tools/mkTools/codeGenerator/componentMainGenerator.cpp
+   202	CC in /~~/framework/tools/mkTools/codeGenerator/javaExeMainGenerator.cpp
+   206	CC in /~~/framework/tools/mkTools/codeGenerator/exeMainGenerator.cpp
+   210	CC in /~~/framework/tools/mkTools/codeGenerator/interfacesHeaderGenerator.cpp
+   214	CC in /~~/framework/tools/mkTools/modeller/modellerCommon.cpp
+   218	CC in /~~/framework/tools/mkTools/modeller/systemModeller.cpp
+   222	CC in /~~/framework/tools/mkTools/modeller/moduleModeller.cpp
+   226	CC in /~~/framework/tools/mkTools/modeller/componentModeller.cpp
+   230	CC in /~~/framework/tools/mkTools/buildScriptGenerator/toolChain.cpp
+   234	CC in /~~/framework/tools/mkTools/modeller/appModeller.cpp
+   238	CC in /~~/framework/tools/mkTools/buildScriptGenerator/appBuildScript.cpp
+   242	CC in /~~/framework/tools/mkTools/buildScriptGenerator/moduleBuildScript.cpp
+   246	CC in /~~/framework/tools/mkTools/buildScriptGenerator/componentBuildScript.cpp
+   250	CC in /~~/framework/tools/mkTools/buildScriptGenerator/systemBuildScript.cpp
+   254	CC in /~~/framework/tools/mkTools/buildScriptGenerator/exeBuildScript.cpp
+   258	CC in /~~/framework/tools/mkTools/buildScriptGenerator/buildScriptCommon.cpp
+   262	CC in /~~/framework/tools/mkTools/avManifestGenerator/avManifestGenerator.cpp
+   265	CC in /~~/framework/tools/mkTools/envVars.cpp
+   269	CCLD out /~~/build/tools/mk 
+in /~~/build/tools/obj/parseTree/defFile.cpp.o /~~/build/tools/obj/parseTree/content.cpp.o /~~/build/tools/obj/parseTree/compoundItem.cpp.o /~~/build/tools/obj/parseTree/token.cpp.o /~~/build/tools/obj/exception.cpp.o /~~/build/tools/obj/conceptualModel/api.cpp.o /~~/build/tools/obj/conceptualModel/watchdogAction.cpp.o /~~/build/tools/obj/conceptualModel/module.cpp.o /~~/build/tools/obj/conceptualModel/faultAction.cpp.o /~~/build/tools/obj/conceptualModel/watchdogTimeout.cpp.o /~~/build/tools/obj/conceptualModel/app.cpp.o /~~/build/tools/obj/conceptualModel/process.cpp.o /~~/build/tools/obj/conceptualModel/positiveIntLimit.cpp.o /~~/build/tools/obj/conceptualModel/boolLimit.cpp.o /~~/build/tools/obj/conceptualModel/javaPackage.cpp.o /~~/build/tools/obj/conceptualModel/priority.cpp.o /~~/build/tools/obj/conceptualModel/processEnvironment.cpp.o /~~/build/tools/obj/conceptualModel/exe.cpp.o /~~/build/tools/obj/conceptualModel/nonNegativeIntLimit.cpp.o /~~/build/tools/obj/conceptualModel/system.cpp.o /~~/build/tools/obj/conceptualModel/component.cpp.o /~~/build/tools/obj/path.cpp.o /~~/build/tools/obj/configGenerator/configGenerator.cpp.o /~~/build/tools/obj/commandLineInterpreter/mkcomp.cpp.o /~~/build/tools/obj/commandLineInterpreter/mkCommon.cpp.o /~~/build/tools/obj/commandLineInterpreter/mkexe.cpp.o /~~/build/tools/obj/commandLineInterpreter/mk.cpp.o /~~/build/tools/obj/commandLineInterpreter/mksys.cpp.o /~~/build/tools/obj/commandLineInterpreter/mkapp.cpp.o /~~/build/tools/obj/commandLineInterpreter/args.cpp.o /~~/build/tools/obj/file.cpp.o /~~/build/tools/obj/md5.cpp.o /~~/build/tools/obj/buildParams.cpp.o /~~/build/tools/obj/parser/cdefParser.cpp.o /~~/build/tools/obj/parser/adefParser.cpp.o /~~/build/tools/obj/parser/mdefParser.cpp.o /~~/build/tools/obj/parser/apiParser.cpp.o /~~/build/tools/obj/parser/lexer.cpp.o /~~/build/tools/obj/parser/sdefParser.cpp.o /~~/build/tools/obj/parser/parser.cpp.o /~~/build/tools/obj/codeGenerator/codeGenerator.cpp.o /~~/build/tools/obj/codeGenerator/javaComponentMainGenerator.cpp.o /~~/build/tools/obj/codeGenerator/componentMainGenerator.cpp.o /~~/build/tools/obj/codeGenerator/exeMainGenerator.cpp.o /~~/build/tools/obj/codeGenerator/interfacesHeaderGenerator.cpp.o /~~/build/tools/obj/codeGenerator/javaExeMainGenerator.cpp.o /~~/build/tools/obj/modeller/componentModeller.cpp.o /~~/build/tools/obj/modeller/modellerCommon.cpp.o /~~/build/tools/obj/modeller/moduleModeller.cpp.o /~~/build/tools/obj/modeller/systemModeller.cpp.o /~~/build/tools/obj/modeller/appModeller.cpp.o /~~/build/tools/obj/buildScriptGenerator/toolChain.cpp.o /~~/build/tools/obj/buildScriptGenerator/appBuildScript.cpp.o /~~/build/tools/obj/buildScriptGenerator/componentBuildScript.cpp.o /~~/build/tools/obj/buildScriptGenerator/systemBuildScript.cpp.o /~~/build/tools/obj/buildScriptGenerator/moduleBuildScript.cpp.o /~~/build/tools/obj/buildScriptGenerator/exeBuildScript.cpp.o /~~/build/tools/obj/buildScriptGenerator/buildScriptCommon.cpp.o /~~/build/tools/obj/avManifestGenerator/avManifestGenerator.cpp.o /~~/build/tools/obj/envVars.cpp.o
+
+   290	CC in /~~/framework/c/src/addr.c
+   294	CC in /~~/framework/c/src/file.c
+   298	CC in /~~/framework/c/src/daemon.c
+   302	CC in /~~/framework/c/src/args.c
+   306	CC in /~~/framework/c/src/clock.c
+   310	CC in /~~/framework/c/src/doublyLinkedList.c
+   314	CC in /~~/framework/c/src/fdMonitor.c
+   318	CC in /~~/framework/c/src/eventLoop.c
+   322	CC in /~~/framework/c/src/fileDescriptor.c
+   326	CC in /~~/framework/c/src/dir.c
+   330	CC in /~~/framework/c/src/cgroups.c
+   334	CC in /~~/framework/c/src/fileLock.c
+   338	CC in /~~/framework/c/src/fileSystem.c
+   342	CC in /~~/framework/c/src/hashmap.c
+   346	CC in /~~/framework/c/src/hex.c
+   350	CC in /~~/framework/c/src/hsieh_hash.c
+   354	CC in /~~/framework/c/src/init.c
+   358	CC in /~~/framework/c/src/installer.c
+   362	CC in /~~/framework/c/src/json.c
+   366	CC in /~~/framework/c/src/killProc.c
+   370	CC in /~~/framework/c/src/log.c
+   374	CC in /~~/framework/c/src/mem.c
+   378	CC in /~~/framework/c/src/messaging.c
+   382	CC in /~~/framework/c/src/messagingMessage.c
+   386	CC in /~~/framework/c/src/messagingInterface.c
+   390	CC in /~~/framework/c/src/messagingProtocol.c
+   394	CC in /~~/framework/c/src/mutex.c
+   398	CC in /~~/framework/c/src/messagingSession.c
+   402	CC in /~~/framework/c/src/path.c
+   406	CC in /~~/framework/c/src/pathIter.c
+   410	CC in /~~/framework/c/src/pipeline.c
+   414	CC in /~~/framework/c/src/properties.c
+   418	CC in /~~/framework/c/src/safeRef.c
+   422	CC in /~~/framework/c/src/semaphores.c
+   426	CC in /~~/framework/c/src/singlyLinkedList.c
+   430	CC in /~~/framework/c/src/signals.c
+   434	CC in /~~/framework/c/src/sysStatus.c
+   438	CC in /~~/framework/c/src/smack.c
+   442	CC in /~~/framework/c/src/test.c
+   446	CC in /~~/framework/c/src/thread.c
+   450	CC in /~~/framework/c/src/timer.c
+   454	CC in /~~/framework/c/src/tty.c
+   458	CC in /~~/framework/c/src/unixSocket.c
+   462	CC in /~~/framework/c/src/user.c
+   465	CC in /~~/framework/c/src/utf8.c
+   469	CCLD out /~~/build/localhost/framework/lib/liblegato.so 
+in /~~/build/localhost/framework/obj/addr.c.o /~~/build/localhost/framework/obj/args.c.o /~~/build/localhost/framework/obj/cgroups.c.o /~~/build/localhost/framework/obj/clock.c.o /~~/build/localhost/framework/obj/daemon.c.o /~~/build/localhost/framework/obj/dir.c.o /~~/build/localhost/framework/obj/doublyLinkedList.c.o /~~/build/localhost/framework/obj/eventLoop.c.o /~~/build/localhost/framework/obj/fdMonitor.c.o /~~/build/localhost/framework/obj/file.c.o /~~/build/localhost/framework/obj/fileDescriptor.c.o /~~/build/localhost/framework/obj/fileLock.c.o /~~/build/localhost/framework/obj/fileSystem.c.o /~~/build/localhost/framework/obj/hashmap.c.o /~~/build/localhost/framework/obj/hex.c.o /~~/build/localhost/framework/obj/hsieh_hash.c.o /~~/build/localhost/framework/obj/init.c.o /~~/build/localhost/framework/obj/installer.c.o /~~/build/localhost/framework/obj/json.c.o /~~/build/localhost/framework/obj/killProc.c.o /~~/build/localhost/framework/obj/log.c.o /~~/build/localhost/framework/obj/mem.c.o /~~/build/localhost/framework/obj/messaging.c.o /~~/build/localhost/framework/obj/messagingInterface.c.o /~~/build/localhost/framework/obj/messagingMessage.c.o /~~/build/localhost/framework/obj/messagingProtocol.c.o /~~/build/localhost/framework/obj/messagingSession.c.o /~~/build/localhost/framework/obj/mutex.c.o /~~/build/localhost/framework/obj/path.c.o /~~/build/localhost/framework/obj/pathIter.c.o /~~/build/localhost/framework/obj/pipeline.c.o /~~/build/localhost/framework/obj/properties.c.o /~~/build/localhost/framework/obj/safeRef.c.o /~~/build/localhost/framework/obj/semaphores.c.o /~~/build/localhost/framework/obj/signals.c.o /~~/build/localhost/framework/obj/singlyLinkedList.c.o /~~/build/localhost/framework/obj/smack.c.o /~~/build/localhost/framework/obj/sysStatus.c.o /~~/build/localhost/framework/obj/test.c.o /~~/build/localhost/framework/obj/thread.c.o /~~/build/localhost/framework/obj/timer.c.o /~~/build/localhost/framework/obj/tty.c.o /~~/build/localhost/framework/obj/unixSocket.c.o /~~/build/localhost/framework/obj/user.c.o /~~/build/localhost/framework/obj/utf8.c.o
+
+   489	CC in /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/src/_componentMain.c
+   493	CC in /~~/build/localhost/framework/supervisor/src/supervisor/_main.c
+   497	CCIFGEN in /~~/interfaces/le_limit.api outdir /~~/build/localhost/framework/supervisor/api/b3786cb0745f8d7b0998d2ac41e78b34/server
+   501	CCIFGEN in /~~/interfaces/le_limit.api outdir /~~/build/localhost/framework/supervisor/api/b3786cb0745f8d7b0998d2ac41e78b34/client
+   505	CCIFGEN in /~~/interfaces/logDaemon/logFd.api outdir /~~/build/localhost/framework/supervisor/api/0a0c1f0fd7a01b992958a6c2902d204a/client
+   509	CCIFGEN in /~~/interfaces/le_instStat.api outdir /~~/build/localhost/framework/supervisor/api/808078d2b5e19e7798b036ebc6caaa62/client
+   513	CC in /~~/build/localhost/framework/supervisor/api/0a0c1f0fd7a01b992958a6c2902d204a/client/logFd_client.c
+   517	CCIFGEN in /~~/interfaces/supervisor/le_sup_wdog.api outdir /~~/build/localhost/framework/supervisor/api/f01b4e99d072b0606ef3f59ac8456432/async_server
+   521	CC in /~~/build/localhost/framework/supervisor/api/f01b4e99d072b0606ef3f59ac8456432/async_server/le_sup_wdog_server.c
+   525	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/supervisor/api/847438fb24bcf98de16130e4ed1eb39f/client
+   529	CC in /~~/build/localhost/framework/supervisor/api/808078d2b5e19e7798b036ebc6caaa62/client/le_instStat_client.c
+   533	CCIFGEN in /~~/interfaces/supervisor/le_sup_ctrl.api outdir /~~/build/localhost/framework/supervisor/api/9ceb410edeed3a970a184b318ce23e52/async_server
+   537	CC in /~~/build/localhost/framework/supervisor/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c
+   541	CC in /~~/build/localhost/framework/supervisor/api/9ceb410edeed3a970a184b318ce23e52/async_server/le_sup_ctrl_server.c
+   545	CCIFGEN in /~~/interfaces/supervisor/le_appInfo.api outdir /~~/build/localhost/framework/supervisor/api/0ec471cd25ecd4e125138fdf45bdc9b7/server
+   549	CCIFGEN in /~~/interfaces/supervisor/le_appProc.api outdir /~~/build/localhost/framework/supervisor/api/746d98f126970d4c28ea79b4361df1b0/server
+   553	CC in /~~/build/localhost/framework/supervisor/api/0ec471cd25ecd4e125138fdf45bdc9b7/server/le_appInfo_server.c
+   557	CC in /~~/framework/c/src/supervisor/supervisor.c
+   561	CC in /~~/framework/c/src/supervisor/kernelModules.c
+   565	CC in /~~/framework/c/src/supervisor/proc.c
+   569	CC in /~~/framework/c/src/supervisor/watchdogAction.c
+   573	CC in /~~/framework/c/src/supervisor/app.c
+   577	CC in /~~/framework/c/src/supervisor/resourceLimits.c
+   581	CC in /~~/framework/c/src/supervisor/frameworkDaemons.c
+   585	CC in /~~/framework/c/src/supervisor/wait.c
+   589	CC in /~~/framework/c/src/supervisor/apps.c
+   593	CC in /~~/framework/c/src/supervisor/devSmack.c
+   596	CC in /~~/build/localhost/framework/supervisor/api/746d98f126970d4c28ea79b4361df1b0/server/le_appProc_server.c
+   600	CCLD out /~~/build/localhost/framework/lib/libComponent_supervisor.so in /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/6f5f4c04704b7ced333bbb05472cfde0.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/a9cd6d66dce92f435a557c5487d82817.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/430d25e98a24b9ba0d967df1e26e0ede.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/346f900ef6114804747619fb58eb856d.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/3a7ff4153c5dc04764c1e1c0d05503c9.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/38880ff3898d8d26bfede5262ef254d7.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/7123240f2e8ef4688e03c358909468e0.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/2708b80e30e8cc7c4e6dfd77e0e8791c.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/34061e8f213507d3aea2605e483587e5.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/2d73e4e46735fa21a31146544fd502a0.o /~~/build/localhost/framework/supervisor/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/supervisor/api/0a0c1f0fd7a01b992958a6c2902d204a/client/logFd_client.c.o /~~/build/localhost/framework/supervisor/api/808078d2b5e19e7798b036ebc6caaa62/client/le_instStat_client.c.o /~~/build/localhost/framework/supervisor/api/9ceb410edeed3a970a184b318ce23e52/async_server/le_sup_ctrl_server.o /~~/build/localhost/framework/supervisor/api/f01b4e99d072b0606ef3f59ac8456432/async_server/le_sup_wdog_server.o /~~/build/localhost/framework/supervisor/api/0ec471cd25ecd4e125138fdf45bdc9b7/server/le_appInfo_server.o /~~/build/localhost/framework/supervisor/api/746d98f126970d4c28ea79b4361df1b0/server/le_appProc_server.o /~~/build/localhost/framework/supervisor/component/a5853eb46747ea62d9d3a95ebda32428/obj/_componentMain.c.o
+   604	CCLDEXE out /~~/build/localhost/framework/bin/supervisor 
+in /~~/build/localhost/framework/supervisor/obj/supervisor/_main.c.o
+
+   615	CC in /~~/build/localhost/framework/serviceDirectory/src/serviceDirectory/_main.c
+   618	CC in /~~/framework/c/src/serviceDirectory/serviceDirectory.c
+   622	CCLDEXE out /~~/build/localhost/framework/bin/serviceDirectory 
+in /~~/build/localhost/framework/serviceDirectory/obj/serviceDirectory/_main.c.o /~~/build/localhost/framework/serviceDirectory/obj/5c9e07503ab0d07834f74b09a46cf1b2.o
+
+   631	CC in /~~/build/localhost/framework/logCtrlDaemon/component/06b9b9030386c228667d83d9f5893ffe/src/_componentMain.c
+   635	CC in /~~/build/localhost/framework/logCtrlDaemon/src/logCtrlDaemon/_main.c
+   639	CCIFGEN in /~~/interfaces/le_limit.api outdir /~~/build/localhost/framework/logCtrlDaemon/api/b3786cb0745f8d7b0998d2ac41e78b34/server
+   642	CCIFGEN in /~~/interfaces/logDaemon/logFd.api outdir /~~/build/localhost/framework/logCtrlDaemon/api/0a0c1f0fd7a01b992958a6c2902d204a/server
+   647	CC in /~~/build/localhost/framework/logCtrlDaemon/api/0a0c1f0fd7a01b992958a6c2902d204a/server/logFd_server.c
+   650	CC in /~~/framework/c/src/logDaemon/logDaemon.c
+   654	CCLD out /~~/build/localhost/framework/lib/libComponent_logDaemon.so in /~~/build/localhost/framework/logCtrlDaemon/component/06b9b9030386c228667d83d9f5893ffe/obj/ee8dcb2b0364cc93c41a4b36d972df6b.o /~~/build/localhost/framework/logCtrlDaemon/api/0a0c1f0fd7a01b992958a6c2902d204a/server/logFd_server.o /~~/build/localhost/framework/logCtrlDaemon/component/06b9b9030386c228667d83d9f5893ffe/obj/_componentMain.c.o
+   658	CCLDEXE out /~~/build/localhost/framework/bin/logCtrlDaemon 
+in /~~/build/localhost/framework/logCtrlDaemon/obj/logCtrlDaemon/_main.c.o
+
+   667	CC in /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/src/_componentMain.c
+   671	CC in /~~/build/localhost/framework/configTree/src/configTree/_main.c
+   675	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/configTree/api/847438fb24bcf98de16130e4ed1eb39f/server
+   679	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/configTree/api/847438fb24bcf98de16130e4ed1eb39f/async_server
+   683	CCIFGEN in /~~/interfaces/le_cfgAdmin.api outdir /~~/build/localhost/framework/configTree/api/8d067eddb64e1a9f4cec1fe5f5b36119/async_server
+   687	CC in /~~/build/localhost/framework/configTree/api/847438fb24bcf98de16130e4ed1eb39f/async_server/le_cfg_server.c
+   691	CC in /~~/framework/c/src/configTree/configTree.c
+   695	CC in /~~/framework/c/src/configTree/configTreeAdminApi.c
+   699	CC in /~~/framework/c/src/configTree/configTreeApi.c
+   703	CC in /~~/framework/c/src/configTree/treePath.c
+   707	CC in /~~/framework/c/src/configTree/nodeIterator.c
+   711	CC in /~~/framework/c/src/configTree/treeDb.c
+   715	CC in /~~/framework/c/src/configTree/dynamicString.c
+   719	CC in /~~/framework/c/src/configTree/requestQueue.c
+   723	CC in /~~/framework/c/src/configTree/treeIterator.c
+   727	CC in /~~/framework/c/src/configTree/treeUser.c
+   731	CC in /~~/framework/c/src/configTree/internalConfig.c
+   734	CC in /~~/build/localhost/framework/configTree/api/8d067eddb64e1a9f4cec1fe5f5b36119/async_server/le_cfgAdmin_server.c
+   738	CCLD out /~~/build/localhost/framework/lib/libComponent_configTree.so in /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/c44827006f02114202cd47dc91391796.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/ad56534a2e57de0cc4b486dc0cb821c8.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/e22643480efba8d69139630561560ae2.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/d92927412ba69d7179aa99bf0c8a9cfe.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/7e36058b8f1f005d544aad8543432153.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/538423179ff81c558b25873c8900c292.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/c374ebcd92c0c523ad35ce84a347f4e1.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/55e18c185fcdff59e1da95d9fb4dd076.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/fe82d2403c13d25259cf2f20c881967b.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/69c1ca0f9e1ead3a2eca1fc0da905d96.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/c328334d7f9c3ba56842c8fcf18f83c2.o /~~/build/localhost/framework/configTree/api/847438fb24bcf98de16130e4ed1eb39f/async_server/le_cfg_server.o /~~/build/localhost/framework/configTree/api/8d067eddb64e1a9f4cec1fe5f5b36119/async_server/le_cfgAdmin_server.o /~~/build/localhost/framework/configTree/component/5f93f1a18c97396fd6b657d1c326785a/obj/_componentMain.c.o
+   742	CCLDEXE out /~~/build/localhost/framework/bin/configTree 
+in /~~/build/localhost/framework/configTree/obj/configTree/_main.c.o
+
+   749	CC in /~~/build/localhost/framework/watchdog/component/5b14d1446d4452b8115f1c2c21114554/src/_componentMain.c
+   753	CC in /~~/build/localhost/framework/watchdog/src/watchdog/_main.c
+   757	CCIFGEN in /~~/interfaces/supervisor/le_sup_wdog.api outdir /~~/build/localhost/framework/watchdog/api/f01b4e99d072b0606ef3f59ac8456432/client
+   761	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/watchdog/api/847438fb24bcf98de16130e4ed1eb39f/client
+   765	CC in /~~/build/localhost/framework/watchdog/api/f01b4e99d072b0606ef3f59ac8456432/client/le_sup_wdog_client.c
+   769	CCIFGEN in /~~/interfaces/le_wdog.api outdir /~~/build/localhost/framework/watchdog/api/f608f06afbe4de4fed343c3a157c78cb/server
+   773	CC in /~~/build/localhost/framework/watchdog/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c
+   777	CC in /~~/framework/c/src/watchdog/watchdog.c
+   780	CC in /~~/build/localhost/framework/watchdog/api/f608f06afbe4de4fed343c3a157c78cb/server/le_wdog_server.c
+   784	CCLD out /~~/build/localhost/framework/lib/libComponent_watchdog.so in /~~/build/localhost/framework/watchdog/component/5b14d1446d4452b8115f1c2c21114554/obj/7d8a227b6f077d790ce804564219487a.o /~~/build/localhost/framework/watchdog/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/watchdog/api/f01b4e99d072b0606ef3f59ac8456432/client/le_sup_wdog_client.c.o /~~/build/localhost/framework/watchdog/api/f608f06afbe4de4fed343c3a157c78cb/server/le_wdog_server.o /~~/build/localhost/framework/watchdog/component/5b14d1446d4452b8115f1c2c21114554/obj/_componentMain.c.o
+   788	CCLDEXE out /~~/build/localhost/framework/bin/watchdog 
+in /~~/build/localhost/framework/watchdog/obj/watchdog/_main.c.o
+
+   801	CC in /~~/build/localhost/framework/updateDaemon/src/updateDaemon/_main.c
+   805	CC in /~~/build/localhost/framework/updateDaemon/component/beb7b7ea3dbf04e5d576add54ea14b6c/src/_componentMain.c
+   809	CC in /~~/build/localhost/framework/updateDaemon/component/aacb9703f6c35dc60fb98d52a2c33e02/src/_componentMain.c
+   813	CCIFGEN in /~~/interfaces/le_instStat.api outdir /~~/build/localhost/framework/updateDaemon/api/808078d2b5e19e7798b036ebc6caaa62/server
+   817	CCIFGEN in /~~/interfaces/le_limit.api outdir /~~/build/localhost/framework/updateDaemon/api/b3786cb0745f8d7b0998d2ac41e78b34/server
+   821	CCIFGEN in /~~/interfaces/le_appRemove.api outdir /~~/build/localhost/framework/updateDaemon/api/e20f92a4a38419c699875546f5030e28/server
+   825	CC in /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/src/_componentMain.c
+   829	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/updateDaemon/api/847438fb24bcf98de16130e4ed1eb39f/client
+   833	CCIFGEN in /~~/interfaces/le_limit.api outdir /~~/build/localhost/framework/updateDaemon/api/b3786cb0745f8d7b0998d2ac41e78b34/client
+   837	CC in /~~/framework/c/src/appUser/appUser.c
+   841	CC in /~~/framework/c/src/appCfg/appCfg.c
+   845	CC in /~~/build/localhost/framework/updateDaemon/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c
+   849	CCLD out /~~/build/localhost/framework/lib/libComponent_appUser.so in /~~/build/localhost/framework/updateDaemon/component/beb7b7ea3dbf04e5d576add54ea14b6c/obj/0715cee87d9752676dd26b0b794ba7d1.o /~~/build/localhost/framework/updateDaemon/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/updateDaemon/component/beb7b7ea3dbf04e5d576add54ea14b6c/obj/_componentMain.c.o
+   853	CCLD out /~~/build/localhost/framework/lib/libComponent_appCfg.so in /~~/build/localhost/framework/updateDaemon/component/aacb9703f6c35dc60fb98d52a2c33e02/obj/579f0f89049a63c1f9ebb5460f4e3d64.o /~~/build/localhost/framework/updateDaemon/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/updateDaemon/component/aacb9703f6c35dc60fb98d52a2c33e02/obj/_componentMain.c.o
+   857	CCIFGEN in /~~/interfaces/le_cfgAdmin.api outdir /~~/build/localhost/framework/updateDaemon/api/8d067eddb64e1a9f4cec1fe5f5b36119/client
+   861	CCIFGEN in /~~/interfaces/le_fwupdate.api outdir /~~/build/localhost/framework/updateDaemon/api/822245b486a9b86c9af9f3281a14d3ce/client
+   865	CC in /~~/build/localhost/framework/updateDaemon/api/8d067eddb64e1a9f4cec1fe5f5b36119/client/le_cfgAdmin_client.c
+   869	CC in /~~/build/localhost/framework/updateDaemon/api/822245b486a9b86c9af9f3281a14d3ce/client/le_fwupdate_client.c
+   873	CCIFGEN in /~~/interfaces/supervisor/le_sup_ctrl.api outdir /~~/build/localhost/framework/updateDaemon/api/9ceb410edeed3a970a184b318ce23e52/client
+   877	CC in /~~/build/localhost/framework/updateDaemon/api/e20f92a4a38419c699875546f5030e28/server/le_appRemove_server.c
+   881	CC in /~~/build/localhost/framework/updateDaemon/api/9ceb410edeed3a970a184b318ce23e52/client/le_sup_ctrl_client.c
+   885	CCIFGEN in /~~/interfaces/le_update.api outdir /~~/build/localhost/framework/updateDaemon/api/f209faf010d4096c5430d62370877d32/server
+   889	CC in /~~/build/localhost/framework/updateDaemon/api/808078d2b5e19e7798b036ebc6caaa62/server/le_instStat_server.c
+   893	CCIFGEN in /~~/interfaces/le_updateCtrl.api outdir /~~/build/localhost/framework/updateDaemon/api/5de7f88bb5573306821a97c4c316f05e/server
+   897	CC in /~~/build/localhost/framework/updateDaemon/api/f209faf010d4096c5430d62370877d32/server/le_update_server.c
+   901	CC in /~~/framework/c/src/updateDaemon/app.c
+   905	CC in /~~/framework/c/src/updateDaemon/instStat.c
+   909	CC in /~~/framework/c/src/updateDaemon/updateDaemon.c
+   913	CC in /~~/framework/c/src/updateDaemon/updateUnpack.c
+   917	CC in /~~/framework/c/src/updateDaemon/system.c
+   921	CC in /~~/framework/c/src/updateDaemon/updateCtrl.c
+   925	CC in /~~/framework/c/src/updateDaemon/supCtrl.c
+   928	CC in /~~/build/localhost/framework/updateDaemon/api/5de7f88bb5573306821a97c4c316f05e/server/le_updateCtrl_server.c
+   932	CCLD out /~~/build/localhost/framework/lib/libComponent_updateDaemon.so in /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/obj/0bf71fd6a2f7a3d9fde5b02c41753ad7.o /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/obj/7a9113cb9c843b00d02b5b0db9f491b2.o /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/obj/1ad446cdd9f856251be5956d971e2de2.o /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/obj/a2036c5a4c8331160c0350c7fff6e5de.o /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/obj/95edbdb3c6ceefeb8c77481e80d15896.o /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/obj/068f40baac4f0171c0c989d1328928b8.o /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/obj/23b37a29a18133e9167ce7c503cc650b.o /~~/build/localhost/framework/updateDaemon/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/updateDaemon/api/8d067eddb64e1a9f4cec1fe5f5b36119/client/le_cfgAdmin_client.c.o /~~/build/localhost/framework/updateDaemon/api/822245b486a9b86c9af9f3281a14d3ce/client/le_fwupdate_client.c.o /~~/build/localhost/framework/updateDaemon/api/9ceb410edeed3a970a184b318ce23e52/client/le_sup_ctrl_client.c.o /~~/build/localhost/framework/updateDaemon/api/f209faf010d4096c5430d62370877d32/server/le_update_server.o /~~/build/localhost/framework/updateDaemon/api/e20f92a4a38419c699875546f5030e28/server/le_appRemove_server.o /~~/build/localhost/framework/updateDaemon/api/808078d2b5e19e7798b036ebc6caaa62/server/le_instStat_server.o /~~/build/localhost/framework/updateDaemon/api/5de7f88bb5573306821a97c4c316f05e/server/le_updateCtrl_server.o /~~/build/localhost/framework/updateDaemon/component/03c82438a55bc64adc0a0849a1a0ad30/obj/_componentMain.c.o
+   936	CCLDEXE out /~~/build/localhost/framework/bin/updateDaemon 
+in /~~/build/localhost/framework/updateDaemon/obj/updateDaemon/_main.c.o
+
+   937	export TARGET_CC && \
+  1387	CC in /~~/build/localhost/framework/tools/config/component/72a1390a4047e2959699616548e992b6/src/_componentMain.c
+  1391	CC in /~~/build/localhost/framework/tools/config/src/config/_main.c
+  1395	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/tools/config/api/847438fb24bcf98de16130e4ed1eb39f/client
+  1399	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/tools/config/api/847438fb24bcf98de16130e4ed1eb39f/client
+  1403	CCIFGEN in /~~/interfaces/le_cfgAdmin.api outdir /~~/build/localhost/framework/tools/config/api/8d067eddb64e1a9f4cec1fe5f5b36119/client
+  1407	CC in /~~/build/localhost/framework/tools/config/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c
+  1411	CC in /~~/framework/tools/config/config.c
+  1414	CC in /~~/build/localhost/framework/tools/config/api/8d067eddb64e1a9f4cec1fe5f5b36119/client/le_cfgAdmin_client.c
+  1418	CCLD out /~~/build/localhost/framework/lib/libComponent_config.so in /~~/build/localhost/framework/tools/config/component/72a1390a4047e2959699616548e992b6/obj/87dbfe63f4429cc83f9cd72ea42f42f1.o /~~/build/localhost/framework/tools/config/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/tools/config/api/8d067eddb64e1a9f4cec1fe5f5b36119/client/le_cfgAdmin_client.c.o /~~/build/localhost/framework/tools/config/component/72a1390a4047e2959699616548e992b6/obj/_componentMain.c.o
+  1422	CCLDEXE out /~~/build/localhost/framework/bin/config in /~~/build/localhost/framework/tools/config/obj/config/_main.c.o
+
+  1439	CC in /~~/build/localhost/framework/tools/execInApp/src/execInApp/_main.c
+  1443	CCIFGEN in /~~/interfaces/le_limit.api outdir /~~/build/localhost/framework/tools/execInApp/api/b3786cb0745f8d7b0998d2ac41e78b34/client
+  1447	CC in /~~/build/localhost/framework/tools/execInApp/component/547e4e247429d7fd5682ad7270e67f93/src/_componentMain.c
+  1451	CCIFGEN in /~~/interfaces/supervisor/le_appInfo.api outdir /~~/build/localhost/framework/tools/execInApp/api/0ec471cd25ecd4e125138fdf45bdc9b7/client
+  1455	CC in /~~/build/localhost/framework/tools/execInApp/api/0ec471cd25ecd4e125138fdf45bdc9b7/client/le_appInfo_client.c
+  1458	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/tools/execInApp/api/847438fb24bcf98de16130e4ed1eb39f/client
+  1463	CC in /~~/framework/tools/execInApp/app.c
+  1467	CC in /~~/build/localhost/framework/tools/execInApp/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c
+  1471	CC in /~~/framework/tools/execInApp/devSmack.c
+  1475	CC in /~~/framework/tools/execInApp/proc.c
+  1478	CC in /~~/framework/tools/execInApp/execInApp.c
+  1482	CCLD out /~~/build/localhost/framework/lib/libComponent_execInApp.so in /~~/build/localhost/framework/tools/execInApp/component/547e4e247429d7fd5682ad7270e67f93/obj/a289f1dcd9e22663cca691086438f2ce.o /~~/build/localhost/framework/tools/execInApp/component/547e4e247429d7fd5682ad7270e67f93/obj/24c75a2666db940c087dfcd143c1645a.o /~~/build/localhost/framework/tools/execInApp/component/547e4e247429d7fd5682ad7270e67f93/obj/235739247dcef7065aaf4577224d3451.o /~~/build/localhost/framework/tools/execInApp/component/547e4e247429d7fd5682ad7270e67f93/obj/a509d230ff2c2976e0365662a1c34aec.o /~~/build/localhost/framework/tools/execInApp/api/0ec471cd25ecd4e125138fdf45bdc9b7/client/le_appInfo_client.c.o /~~/build/localhost/framework/tools/execInApp/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/tools/execInApp/component/547e4e247429d7fd5682ad7270e67f93/obj/_componentMain.c.o
+  1486	CCLDEXE out /~~/build/localhost/framework/bin/execInApp in /~~/build/localhost/framework/tools/execInApp/obj/execInApp/_main.c.o
+
+  1496	CC in /~~/build/localhost/framework/tools/log/src/log/_main.c
+  1499	CC in /~~/framework/tools/logTool/logTool.c
+  1503	CCLDEXE out /~~/build/localhost/framework/bin/log in /~~/build/localhost/framework/tools/log/obj/log/_main.c.o /~~/build/localhost/framework/tools/log/obj/924ab44bf86d921ff105f747772b8a43.o
+
+  1513	CC in /~~/build/localhost/framework/tools/sdir/src/sdir/_main.c
+  1517	CC in /~~/build/localhost/framework/tools/sdir/component/0a7bd276a9acfc463e105a5cf4637dee/src/_componentMain.c
+  1520	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/tools/sdir/api/847438fb24bcf98de16130e4ed1eb39f/client
+  1525	CC in /~~/framework/tools/sdirTool/sdirTool.c
+  1528	CC in /~~/build/localhost/framework/tools/sdir/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c
+  1532	CCLD out /~~/build/localhost/framework/lib/libComponent_sdirTool.so in /~~/build/localhost/framework/tools/sdir/component/0a7bd276a9acfc463e105a5cf4637dee/obj/1333fa44ac25e7dcd02c1316a17bb262.o /~~/build/localhost/framework/tools/sdir/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/tools/sdir/component/0a7bd276a9acfc463e105a5cf4637dee/obj/_componentMain.c.o
+  1536	CCLDEXE out /~~/build/localhost/framework/bin/sdir in /~~/build/localhost/framework/tools/sdir/obj/sdir/_main.c.o
+
+  1549	CC in /~~/build/localhost/framework/tools/inspect/src/inspect/_main.c
+  1552	CC in /~~/framework/tools/inspect/inspect.c
+  1556	CCLDEXE out /~~/build/localhost/framework/bin/inspect in /~~/build/localhost/framework/tools/inspect/obj/inspect/_main.c.o /~~/build/localhost/framework/tools/inspect/obj/b3385535395e2e51808853c0d77fb00f.o
+
+  1565	CC in /~~/build/localhost/framework/tools/xattr/src/xattr/_main.c
+  1568	CC in /~~/framework/tools/xattr/xattr.c
+  1572	CCLDEXE out /~~/build/localhost/framework/bin/xattr in /~~/build/localhost/framework/tools/xattr/obj/xattr/_main.c.o /~~/build/localhost/framework/tools/xattr/obj/4f0713d62a0ead83a6a46f8881dae15b.o
+
+  1582	CC in /~~/build/localhost/framework/tools/app/src/app/_main.c
+  1586	CC in /~~/build/localhost/framework/tools/app/component/524084edb26982dfee0e2faa895dc063/src/_componentMain.c
+  1590	CCIFGEN in /~~/interfaces/le_limit.api outdir /~~/build/localhost/framework/tools/app/api/b3786cb0745f8d7b0998d2ac41e78b34/client
+  1594	CCIFGEN in /~~/interfaces/supervisor/le_sup_ctrl.api outdir /~~/build/localhost/framework/tools/app/api/9ceb410edeed3a970a184b318ce23e52/client
+  1598	CCIFGEN in /~~/interfaces/supervisor/le_appInfo.api outdir /~~/build/localhost/framework/tools/app/api/0ec471cd25ecd4e125138fdf45bdc9b7/client
+  1602	CC in /~~/build/localhost/framework/tools/app/api/9ceb410edeed3a970a184b318ce23e52/client/le_sup_ctrl_client.c
+  1606	CC in /~~/build/localhost/framework/tools/app/api/0ec471cd25ecd4e125138fdf45bdc9b7/client/le_appInfo_client.c
+  1610	CCIFGEN in /~~/interfaces/le_cfg.api outdir /~~/build/localhost/framework/tools/app/api/847438fb24bcf98de16130e4ed1eb39f/client
+  1614	CCIFGEN in /~~/interfaces/supervisor/le_appProc.api outdir /~~/build/localhost/framework/tools/app/api/746d98f126970d4c28ea79b4361df1b0/client
+  1618	CC in /~~/framework/tools/appCtrl/appCtrl.c
+  1622	CC in /~~/build/localhost/framework/tools/app/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c
+  1625	CC in /~~/build/localhost/framework/tools/app/api/746d98f126970d4c28ea79b4361df1b0/client/le_appProc_client.c
+  1629	CCLD out /~~/build/localhost/framework/lib/libComponent_appCtrl.so in /~~/build/localhost/framework/tools/app/component/524084edb26982dfee0e2faa895dc063/obj/45a544ba36e5027a6984fa28251bf164.o /~~/build/localhost/framework/tools/app/api/9ceb410edeed3a970a184b318ce23e52/client/le_sup_ctrl_client.c.o /~~/build/localhost/framework/tools/app/api/0ec471cd25ecd4e125138fdf45bdc9b7/client/le_appInfo_client.c.o /~~/build/localhost/framework/tools/app/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o /~~/build/localhost/framework/tools/app/api/746d98f126970d4c28ea79b4361df1b0/client/le_appProc_client.c.o /~~/build/localhost/framework/tools/app/component/524084edb26982dfee0e2faa895dc063/obj/_componentMain.c.o
+  1633	CCLDEXE out /~~/build/localhost/framework/bin/app in /~~/build/localhost/framework/tools/app/obj/app/_main.c.o
+
+  1641	CC in /~~/build/localhost/framework/tools/update/component/f25eadad3a99704c335035965be58619/src/_componentMain.c
+  1645	CC in /~~/build/localhost/framework/tools/update/src/update/_main.c
+  1649	CCIFGEN in /~~/interfaces/le_limit.api outdir /~~/build/localhost/framework/tools/update/api/b3786cb0745f8d7b0998d2ac41e78b34/client
+  1653	CCIFGEN in /~~/interfaces/le_updateCtrl.api outdir /~~/build/localhost/framework/tools/update/api/5de7f88bb5573306821a97c4c316f05e/client
+  1657	CC in /~~/build/localhost/framework/tools/update/api/5de7f88bb5573306821a97c4c316f05e/client/le_updateCtrl_client.c
+  1661	CCIFGEN in /~~/interfaces/le_update.api outdir /~~/build/localhost/framework/tools/update/api/f209faf010d4096c5430d62370877d32/client
+  1665	CCIFGEN in /~~/interfaces/le_appRemove.api outdir /~~/build/localhost/framework/tools/update/api/e20f92a4a38419c699875546f5030e28/client
+  1669	CC in /~~/build/localhost/framework/tools/update/api/f209faf010d4096c5430d62370877d32/client/le_update_client.c
+  1673	CC in /~~/framework/tools/update/update.c
+  1676	CC in /~~/build/localhost/framework/tools/update/api/e20f92a4a38419c699875546f5030e28/client/le_appRemove_client.c
+  1680	CCLD out /~~/build/localhost/framework/lib/libComponent_update.so in /~~/build/localhost/framework/tools/update/component/f25eadad3a99704c335035965be58619/obj/f40780bb576d37cc61e5b0a65b25e89c.o /~~/build/localhost/framework/tools/update/api/f209faf010d4096c5430d62370877d32/client/le_update_client.c.o /~~/build/localhost/framework/tools/update/api/5de7f88bb5573306821a97c4c316f05e/client/le_updateCtrl_client.c.o /~~/build/localhost/framework/tools/update/api/e20f92a4a38419c699875546f5030e28/client/le_appRemove_client.c.o /~~/build/localhost/framework/tools/update/component/f25eadad3a99704c335035965be58619/obj/_componentMain.c.o
+  1684	CCLDEXE out /~~/build/localhost/framework/bin/update in /~~/build/localhost/framework/tools/update/obj/update/_main.c.o
+
+  1692	CC in /~~/components/uartMode/platformAdaptor/default/le_pa_uartMode_default/pa_uartMode_default.c
+  1696	CC in /~~/build/localhost/framework/tools/uartMode/src/uartMode/_main.c
+  1700	CC in /~~/build/localhost/framework/tools/uartMode/component/c4920411ad0776d2dc141f65abc83336/src/_componentMain.c
+  1704	CC in /~~/build/localhost/framework/tools/uartMode/component/e06dd148cd8a94e0db212bfe825a4daa/src/_componentMain.c
+  1708	CCLD out /~~/build/localhost/framework/lib/libComponent_le_pa_uartMode_default.so in /~~/build/localhost/framework/tools/uartMode/component/e06dd148cd8a94e0db212bfe825a4daa/obj/a600b6dc75513a399fa8c206d02606c2.o /~~/build/localhost/framework/tools/uartMode/component/e06dd148cd8a94e0db212bfe825a4daa/obj/_componentMain.c.o
+  1711	CC in /~~/components/uartMode/uartMode/uartMode.c
+  1715	CCLD out /~~/build/localhost/framework/lib/libComponent_uartMode.so in /~~/build/localhost/framework/tools/uartMode/component/c4920411ad0776d2dc141f65abc83336/obj/2592858e652fcec59f081fe619fe3f68.o /~~/build/localhost/framework/tools/uartMode/component/c4920411ad0776d2dc141f65abc83336/obj/_componentMain.c.o
+  1719	CCLDEXE out /~~/build/localhost/framework/bin/uartMode in /~~/build/localhost/framework/tools/uartMode/obj/uartMode/_main.c.o
+
+  1741	CC in build/localhost/system/app/audioService/src/audioDaemon/_main.c
+  1745	CC in build/localhost/system/app/atClient/src/atClientDaemon/_main.c
+  1749	CC in build/localhost/system/app/cellNetService/src/cellNetService/_main.c
+  1753	CC in build/localhost/system/app/atServer/src/atServerDaemon/_main.c
+  1757	CC in build/localhost/system/app/fwupdateService/src/fwupdateDaemon/_main.c
+  1761	CC in build/localhost/system/app/dataConnectionService/src/dcsDaemon/_main.c
+  1765	CC in build/localhost/system/app/modemService/src/modemDaemon/_main.c
+  1769	CC in build/localhost/system/app/gpioService/src/gpioService/_main.c
+  1779	CC in build/localhost/system/app/positioningService/src/posDaemon/_main.c
+  1783	CC in build/localhost/system/app/powerMgr/src/powerManagerService/_main.c
+  1787	CC in build/localhost/system/app/secStore/src/secStore/_main.c
+  1791	CC in build/localhost/system/component/22996a8eedbf9195176792950565e5a8/src/_componentMain.c
+  1795	CC in build/localhost/system/app/smsInboxService/src/smsInboxService/_main.c
+  1799	CC in build/localhost/system/app/tools/src/fwupdate/_main.c
+  1803	CC in build/localhost/system/app/tools/src/cm/_main.c
+  1807	CC in build/localhost/system/app/tools/src/gnss/_main.c
+  1811	CC in build/localhost/system/app/tools/src/secstore/_main.c
+  1815	CC in build/localhost/system/app/tools/src/pmtool/_main.c
+  1819	CC in build/localhost/system/component/2ceeb432191d4ea30a1842cf97f05a59/src/_componentMain.c
+  1823	CC in build/localhost/system/app/voiceCallService/src/voiceCallService/_main.c
+  1827	CC in build/localhost/system/component/6f97d69f69e10cf3b257267c0375b058/src/_componentMain.c
+  1831	CC in build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/src/_componentMain.c
+  1835	CC in build/localhost/system/component/87e2fce65a698710427570cc8da2cc7e/src/_componentMain.c
+  1839	CC in build/localhost/system/component/b424a623eba03e56d19df17e760d359d/src/_componentMain.c
+  1843	CC in build/localhost/system/component/7c964b9d8ed08fc6e3de966f2a130158/src/_componentMain.c
+  1847	CC in build/localhost/system/component/48cbfaed4242e7d69d610289b27f9e4e/src/_componentMain.c
+  1851	CC in build/localhost/system/component/71ff82ebbbae63c216a98c64df70b407/src/_componentMain.c
+  1855	CC in build/localhost/system/component/a9b2d5cd122c984900590d621ecd1e12/src/_componentMain.c
+  1859	CC in build/localhost/system/component/ffa92f0d3c89ee25e877d1480ad5c137/src/_componentMain.c
+  1863	CCIFGEN in /~~/interfaces/le_bootReason.api outdir build/localhost/system/api/8914e5a5ce78740f6bc020955f08bab9/client
+  1867	CC in build/localhost/system/component/b225b306016a859acdf2c394dbd4be1e/src/_componentMain.c
+  1871	CC in build/localhost/system/component/0241541aac7586b8f2401a55a768768b/src/_componentMain.c
+  1875	CC in build/localhost/system/component/f1ef6893826da04496fa2fe5804df183/src/_componentMain.c
+  1879	CC in build/localhost/system/component/ec9e84554e4ff40a6c64aadfa4d3637a/src/_componentMain.c
+  1883	CC in build/localhost/system/component/af0f91ea81ca473aa4683bf886458e6a/src/_componentMain.c
+  1887	CC in build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/src/_componentMain.c
+  1891	CC in build/localhost/system/component/ec37560dee8deff132261b914d159fa8/src/_componentMain.c
+  1895	CCIFGEN in /~~/interfaces/le_secStore.api outdir build/localhost/system/api/c993a50e33d16f020d3fbab240675d4b/client
+  1899	CC in build/localhost/system/component/a244f163b93a13b42977124f8104a79d/src/_componentMain.c
+  1903	CC in build/localhost/system/component/9cbd4412f02c0becfed8c10ee59d757e/src/_componentMain.c
+  1907	CC in build/localhost/system/component/4ba9268c02cf760d92a12e8f1cdd91c7/src/_componentMain.c
+  1911	CC in build/localhost/system/component/f1e539ddb2bd44d0419193d23724c6f7/src/_componentMain.c
+  1915	CC in build/localhost/system/component/da8ac6215679f9af055823cc81e5e2a1/src/_componentMain.c
+  1919	CC in /~~/components/secStore/platformAdaptor/default/le_pa_secStore_default/pa_secStore_default.c
+  1923	CCLD out build/localhost/system/component/4ba9268c02cf760d92a12e8f1cdd91c7/obj/libComponent_le_pa_secStore_default.so in build/localhost/system/component/4ba9268c02cf760d92a12e8f1cdd91c7/obj/6887a6bcbef12e2ff541148884467794.o build/localhost/system/component/4ba9268c02cf760d92a12e8f1cdd91c7/obj/_componentMain.c.o
+  1927	CCLN in build/localhost/system/component/4ba9268c02cf760d92a12e8f1cdd91c7/obj/libComponent_le_pa_secStore_default.so out build/localhost/system/app/secStore/staging/read-only/lib/libComponent_le_pa_secStore_default.so
+  1931	CC in build/localhost/system/component/83a4e5038d80eb68ef86b214340d9d83/src/_componentMain.c
+  1935	CC in build/localhost/system/component/aacb9703f6c35dc60fb98d52a2c33e02/src/_componentMain.c
+  1939	CCIFGEN in /~~/interfaces/le_cfg.api outdir build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client
+  1943	CCIFGEN in /~~/interfaces/modemServices/le_sim.api outdir build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/client
+  1947	CC in /~~/framework/c/src/appCfg/appCfg.c
+  1951	CCIFGEN in /~~/interfaces/le_data.api outdir build/localhost/system/api/b62f72f297a937e1faac5054994e52f7/client
+  1955	CCIFGEN in /~~/interfaces/modemServices/le_mrc.api outdir build/localhost/system/api/225458b8f956bc59d460fcef1f7e04f4/client
+  1959	CC in build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c
+  1963	CCLD out build/localhost/system/component/aacb9703f6c35dc60fb98d52a2c33e02/obj/libComponent_appCfg.so in build/localhost/system/component/aacb9703f6c35dc60fb98d52a2c33e02/obj/579f0f89049a63c1f9ebb5460f4e3d64.o build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o build/localhost/system/component/aacb9703f6c35dc60fb98d52a2c33e02/obj/_componentMain.c.o
+  1967	CCLN in build/localhost/system/component/aacb9703f6c35dc60fb98d52a2c33e02/obj/libComponent_appCfg.so out build/localhost/system/app/secStore/staging/read-only/lib/libComponent_appCfg.so
+  1971	CC in build/localhost/system/api/b62f72f297a937e1faac5054994e52f7/client/le_data_client.c
+  1975	CCIFGEN in /~~/interfaces/modemServices/le_mdmDefs.api outdir build/localhost/system/api/2c13a68406e60b1f3e36779f3854906b/client
+  1979	CC in build/localhost/system/api/225458b8f956bc59d460fcef1f7e04f4/client/le_mrc_client.c
+  1983	CC in build/localhost/system/component/2dd890c89a974a029049cc2405e68ba7/src/_componentMain.c
+  1987	CC in build/localhost/system/component/1f9730d155db92d21f1eac262924fcc2/src/_componentMain.c
+  1991	CCIFGEN in /~~/interfaces/modemServices/le_mdc.api outdir build/localhost/system/api/4f1e1ea08de2b139267b8a8c0a87f8a6/client
+  1995	CCIFGEN in /~~/interfaces/modemServices/le_sim.api outdir build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/client
+  1999	CC in build/localhost/system/api/4f1e1ea08de2b139267b8a8c0a87f8a6/client/le_mdc_client.c
+  2003	CC in build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/client/le_sim_client.c
+  2007	CCIFGEN in /~~/interfaces/modemServices/le_info.api outdir build/localhost/system/api/649f72df0217a832e6dbb5f4fe25265c/client
+  2011	CC in build/localhost/system/api/649f72df0217a832e6dbb5f4fe25265c/client/le_info_client.c
+  2015	CCIFGEN in /~~/interfaces/modemServices/le_sms.api outdir build/localhost/system/api/85a9b9f9d09f05868e13e35090032e92/client
+  2019	CCIFGEN in /~~/interfaces/modemServices/le_adc.api outdir build/localhost/system/api/d0cf781321acc47850de89122826de52/client
+  2023	CC in build/localhost/system/api/d0cf781321acc47850de89122826de52/client/le_adc_client.c
+  2027	CC in build/localhost/system/api/85a9b9f9d09f05868e13e35090032e92/client/le_sms_client.c
+  2031	CCIFGEN in /~~/interfaces/modemServices/le_temp.api outdir build/localhost/system/api/e9a1d246697f1418d1028ab4b7b50024/client
+  2035	CCIFGEN in /~~/interfaces/modemServices/le_ips.api outdir build/localhost/system/api/1a49dcddf4622e7fa32749e5eaa1af4a/client
+  2039	CC in build/localhost/system/api/e9a1d246697f1418d1028ab4b7b50024/client/le_temp_client.c
+  2043	CC in build/localhost/system/api/1a49dcddf4622e7fa32749e5eaa1af4a/client/le_ips_client.c
+  2047	CCIFGEN in /~~/interfaces/modemServices/le_rtc.api outdir build/localhost/system/api/637926babae1f678139d17141e428cae/client
+  2051	CC in build/localhost/system/api/637926babae1f678139d17141e428cae/client/le_rtc_client.c
+  2055	CC in build/localhost/system/api/8914e5a5ce78740f6bc020955f08bab9/client/le_bootReason_client.c
+  2059	CCIFGEN in /~~/interfaces/le_cellnet.api outdir build/localhost/system/api/0feeeac1eab565654abe16cf2ea0f096/client
+  2063	CCIFGEN in /~~/interfaces/le_fwupdate.api outdir build/localhost/system/api/822245b486a9b86c9af9f3281a14d3ce/client
+  2067	CC in /~~/apps/tools/cm/cm_temp.c
+  2071	CC in /~~/apps/tools/fwupdate/fwupdate.c
+  2075	CC in /~~/apps/tools/cm/cm_sim.c
+  2079	CC in /~~/apps/tools/cm/cm_info.c
+  2083	CC in /~~/apps/tools/cm/cm_mrc.c
+  2087	CC in /~~/apps/tools/cm/cmodem.c
+  2091	CC in /~~/apps/tools/cm/cm_adc.c
+  2095	CC in /~~/apps/tools/cm/cm_ips.c
+  2099	CC in /~~/apps/tools/cm/cm_data.c
+  2103	CC in /~~/apps/tools/cm/cm_sms.c
+  2107	CC in /~~/apps/tools/cm/cm_common.c
+  2111	CC in /~~/apps/tools/cm/cm_rtc.c
+  2115	CC in /~~/components/fwupdate/platformAdaptor/default/le_pa_fwupdate_default/pa_fwupdate_default.c
+  2119	CCLD out build/localhost/system/component/ec9e84554e4ff40a6c64aadfa4d3637a/obj/libComponent_le_pa_fwupdate_default.so in build/localhost/system/component/ec9e84554e4ff40a6c64aadfa4d3637a/obj/1db9bbeeba31ec37674dd52e559fb567.o build/localhost/system/component/ec9e84554e4ff40a6c64aadfa4d3637a/obj/_componentMain.c.o
+  2123	CCLN in build/localhost/system/component/ec9e84554e4ff40a6c64aadfa4d3637a/obj/libComponent_le_pa_fwupdate_default.so out build/localhost/system/app/fwupdateService/staging/read-only/lib/libComponent_le_pa_fwupdate_default.so
+  2127	CC in build/localhost/system/api/0feeeac1eab565654abe16cf2ea0f096/client/le_cellnet_client.c
+  2131	CCLD out build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/libComponent_cm.so in build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/370db834229d848c46ff68c929a6adb8.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/45af651b13579ace99d0d91395aadbb3.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/e1122022d2aa127ca570b8c53076dfb3.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/624f52b6fa51215d424c9d999971fa04.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/961f5221522fe00ce0af732ce82f5227.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/6409ad090dcd26632ad36f8bebd56296.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/28e1d925bf918f9f35bea42a59d0a67a.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/34328debbee19f0c195a75c6c199b9b5.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/1cb248da4171066fe72e0899ea012a6a.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/0e346c790ad34d548fa5e2393c8f036d.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/93aafcb64f88e14897ffd6f3a0e93bbc.o build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o build/localhost/system/api/b62f72f297a937e1faac5054994e52f7/client/le_data_client.c.o build/localhost/system/api/225458b8f956bc59d460fcef1f7e04f4/client/le_mrc_client.c.o build/localhost/system/api/4f1e1ea08de2b139267b8a8c0a87f8a6/client/le_mdc_client.c.o build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/client/le_sim_client.c.o build/localhost/system/api/85a9b9f9d09f05868e13e35090032e92/client/le_sms_client.c.o build/localhost/system/api/649f72df0217a832e6dbb5f4fe25265c/client/le_info_client.c.o build/localhost/system/api/d0cf781321acc47850de89122826de52/client/le_adc_client.c.o build/localhost/system/api/e9a1d246697f1418d1028ab4b7b50024/client/le_temp_client.c.o build/localhost/system/api/1a49dcddf4622e7fa32749e5eaa1af4a/client/le_ips_client.c.o build/localhost/system/api/637926babae1f678139d17141e428cae/client/le_rtc_client.c.o build/localhost/system/api/0feeeac1eab565654abe16cf2ea0f096/client/le_cellnet_client.c.o build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/_componentMain.c.o
+  2135	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/cm in build/localhost/system/app/tools/obj/cm/_main.c.o
+
+  2139	CCLN in build/localhost/system/component/8f4f15e3a3b63564ba4963cff7d23fbe/obj/libComponent_cm.so out build/localhost/system/app/tools/staging/read-only/lib/libComponent_cm.so
+  2143	CC in build/localhost/system/api/822245b486a9b86c9af9f3281a14d3ce/client/le_fwupdate_client.c
+  2147	CCLD out build/localhost/system/component/6f97d69f69e10cf3b257267c0375b058/obj/libComponent_fwupdate.so in build/localhost/system/component/6f97d69f69e10cf3b257267c0375b058/obj/a5852bc1c78fdf443f483b0f13bc33cd.o build/localhost/system/api/822245b486a9b86c9af9f3281a14d3ce/client/le_fwupdate_client.c.o build/localhost/system/component/6f97d69f69e10cf3b257267c0375b058/obj/_componentMain.c.o
+  2151	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/fwupdate in build/localhost/system/app/tools/obj/fwupdate/_main.c.o
+
+  2155	CCLN in build/localhost/system/component/6f97d69f69e10cf3b257267c0375b058/obj/libComponent_fwupdate.so out build/localhost/system/app/tools/staging/read-only/lib/libComponent_fwupdate.so
+  2159	CCIFGEN in /~~/interfaces/positioning/le_gnss.api outdir build/localhost/system/api/53581761f6fca0e27e415f5292ff08e1/client
+  2163	CCIFGEN in /~~/interfaces/positioning/le_pos.api outdir build/localhost/system/api/2a4665ff982cdb83fae7ef27092a2880/client
+  2167	CC in /~~/components/positioning/platformAdaptor/default/le_pa_gnss_default/pa_gnss_default.c
+  2171	CCLD out build/localhost/system/component/9cbd4412f02c0becfed8c10ee59d757e/obj/libComponent_le_pa_gnss_default.so in build/localhost/system/component/9cbd4412f02c0becfed8c10ee59d757e/obj/ba5ff15c0e7de7b9eb64e4ab59c6f4a5.o build/localhost/system/component/9cbd4412f02c0becfed8c10ee59d757e/obj/_componentMain.c.o
+  2175	CCLN in build/localhost/system/component/9cbd4412f02c0becfed8c10ee59d757e/obj/libComponent_le_pa_gnss_default.so out build/localhost/system/app/positioningService/staging/read-only/lib/libComponent_le_pa_gnss_default.so
+  2179	CC in build/localhost/system/api/53581761f6fca0e27e415f5292ff08e1/client/le_gnss_client.c
+  2183	CC in build/localhost/system/api/2a4665ff982cdb83fae7ef27092a2880/client/le_pos_client.c
+  2187	CCIFGEN in /~~/interfaces/le_secStore.api outdir build/localhost/system/api/c993a50e33d16f020d3fbab240675d4b/client
+  2191	CCIFGEN in /~~/interfaces/positioning/le_posCtrl.api outdir build/localhost/system/api/da06df384f641af90a048c7e8bbbedc4/client
+  2195	CCIFGEN in /~~/interfaces/le_ulpm.api outdir build/localhost/system/api/ec9127a9a47fa182eaa6e093b0a1538d/client
+  2199	CC in build/localhost/system/api/da06df384f641af90a048c7e8bbbedc4/client/le_posCtrl_client.c
+  2203	CC in /~~/apps/tools/gnss/gnss.c
+  2207	CCLD out build/localhost/system/component/b424a623eba03e56d19df17e760d359d/obj/libComponent_gnss.so in build/localhost/system/component/b424a623eba03e56d19df17e760d359d/obj/cd305cf45aa5be1a07a2e0783d1e9d00.o build/localhost/system/api/53581761f6fca0e27e415f5292ff08e1/client/le_gnss_client.c.o build/localhost/system/api/2a4665ff982cdb83fae7ef27092a2880/client/le_pos_client.c.o build/localhost/system/api/da06df384f641af90a048c7e8bbbedc4/client/le_posCtrl_client.c.o build/localhost/system/component/b424a623eba03e56d19df17e760d359d/obj/_componentMain.c.o
+  2211	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/gnss in build/localhost/system/app/tools/obj/gnss/_main.c.o
+
+  2215	CCLN in build/localhost/system/component/b424a623eba03e56d19df17e760d359d/obj/libComponent_gnss.so out build/localhost/system/app/tools/staging/read-only/lib/libComponent_gnss.so
+  2219	CC in build/localhost/system/api/ec9127a9a47fa182eaa6e093b0a1538d/client/le_ulpm_client.c
+  2223	CCIFGEN in /~~/interfaces/le_pm.api outdir build/localhost/system/api/899db4aeaae4de5a854869294660717c/client
+  2227	CCIFGEN in /~~/interfaces/modemServices/le_sim.api outdir build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/server
+  2231	CC in /~~/apps/tools/pmtool/pmTool.c
+  2235	CC in build/localhost/system/api/899db4aeaae4de5a854869294660717c/client/le_pm_client.c
+  2239	CCLD out build/localhost/system/component/87e2fce65a698710427570cc8da2cc7e/obj/libComponent_pmtool.so in build/localhost/system/component/87e2fce65a698710427570cc8da2cc7e/obj/fae74a70c353e639ffb5858f19b997b2.o build/localhost/system/api/ec9127a9a47fa182eaa6e093b0a1538d/client/le_ulpm_client.c.o build/localhost/system/api/8914e5a5ce78740f6bc020955f08bab9/client/le_bootReason_client.c.o build/localhost/system/api/899db4aeaae4de5a854869294660717c/client/le_pm_client.c.o build/localhost/system/component/87e2fce65a698710427570cc8da2cc7e/obj/_componentMain.c.o
+  2243	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/pmtool in build/localhost/system/app/tools/obj/pmtool/_main.c.o
+
+  2247	CCLN in build/localhost/system/component/87e2fce65a698710427570cc8da2cc7e/obj/libComponent_pmtool.so out build/localhost/system/app/tools/staging/read-only/lib/libComponent_pmtool.so
+  2251	CCIFGEN in /~~/interfaces/secureStorage/secStoreAdmin.api outdir build/localhost/system/api/2ca9bcc207a2f1845e5e06a5fcb714ed/client
+  2255	CC in /~~/apps/tools/secstore/secStoreTool.c
+  2259	CCIFGEN in /~~/interfaces/le_audio.api outdir build/localhost/system/api/875cc0ace3970e986491688d62653508/client
+  2263	CC in build/localhost/system/api/2ca9bcc207a2f1845e5e06a5fcb714ed/client/secStoreAdmin_client.c
+  2267	CCLD out build/localhost/system/component/48cbfaed4242e7d69d610289b27f9e4e/obj/libComponent_secstore.so in build/localhost/system/component/48cbfaed4242e7d69d610289b27f9e4e/obj/4a72192ad40bdebc52b3163ef05cf8c4.o build/localhost/system/api/2ca9bcc207a2f1845e5e06a5fcb714ed/client/secStoreAdmin_client.c.o build/localhost/system/component/48cbfaed4242e7d69d610289b27f9e4e/obj/_componentMain.c.o
+  2271	CC in /~~/components/audio/platformAdaptor/default/le_pa_amr_default/pa_amr_default.c
+  2275	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/secstore in build/localhost/system/app/tools/obj/secstore/_main.c.o
+
+  2279	CCLN in build/localhost/system/component/48cbfaed4242e7d69d610289b27f9e4e/obj/libComponent_secstore.so out build/localhost/system/app/tools/staging/read-only/lib/libComponent_secstore.so
+  2283	CCLD out build/localhost/system/component/22996a8eedbf9195176792950565e5a8/obj/libComponent_le_pa_amr_default.so in build/localhost/system/component/22996a8eedbf9195176792950565e5a8/obj/9eea701182f270781a80a7f12521212b.o build/localhost/system/component/22996a8eedbf9195176792950565e5a8/obj/_componentMain.c.o
+  2287	CCLN in build/localhost/system/component/22996a8eedbf9195176792950565e5a8/obj/libComponent_le_pa_amr_default.so out build/localhost/system/app/audioService/staging/read-only/lib/libComponent_le_pa_amr_default.so
+  2295	CC in /~~/components/audio/platformAdaptor/default/le_pa_audio_default/pa_audio_default.c
+  2299	CCLD out build/localhost/system/component/ffa92f0d3c89ee25e877d1480ad5c137/obj/libComponent_le_pa_audio_default.so in build/localhost/system/component/ffa92f0d3c89ee25e877d1480ad5c137/obj/ca2c8076db63009f9e2487c141f0e1b6.o build/localhost/system/component/ffa92f0d3c89ee25e877d1480ad5c137/obj/_componentMain.c.o
+  2303	CCLN in build/localhost/system/component/ffa92f0d3c89ee25e877d1480ad5c137/obj/libComponent_le_pa_audio_default.so out build/localhost/system/app/audioService/staging/read-only/lib/libComponent_le_pa_audio_default.so
+  2307	CC in /~~/components/audio/platformAdaptor/default/le_pa_pcm_default/pa_pcm_default.c
+  2311	CCLD out build/localhost/system/component/b225b306016a859acdf2c394dbd4be1e/obj/libComponent_le_pa_pcm_default.so in build/localhost/system/component/b225b306016a859acdf2c394dbd4be1e/obj/ef0b5d69d07b1e86323462246c5e8ea8.o build/localhost/system/component/b225b306016a859acdf2c394dbd4be1e/obj/_componentMain.c.o
+  2315	CCLN in build/localhost/system/component/b225b306016a859acdf2c394dbd4be1e/obj/libComponent_le_pa_pcm_default.so out build/localhost/system/app/audioService/staging/read-only/lib/libComponent_le_pa_pcm_default.so
+  2319	CCIFGEN in /~~/interfaces/atServices/le_atServer.api outdir build/localhost/system/api/f1d80a566a7e7a5053f8c956bde6d764/server
+  2323	CCIFGEN in /~~/interfaces/atServices/le_atClient.api outdir build/localhost/system/api/2cfd98ae67d23b6f609df1362272c0f0/server
+  2327	CC in /~~/components/atServices/atServer/le_atServer.c
+  2331	CC in /~~/components/atServices/atClient/le_atClient.c
+  2335	CC in /~~/components/atServices/Common/le_dev.c
+  2339	CC in /~~/components/atServices/Common/le_dev.c
+  2343	CC in build/localhost/system/api/2cfd98ae67d23b6f609df1362272c0f0/server/le_atClient_server.c
+  2347	CCLD out build/localhost/system/component/7c964b9d8ed08fc6e3de966f2a130158/obj/libComponent_atClient.so in build/localhost/system/component/7c964b9d8ed08fc6e3de966f2a130158/obj/449f561e946a01b9115ec760ff719569.o build/localhost/system/component/7c964b9d8ed08fc6e3de966f2a130158/obj/3370619cd4a944b2bc0b5a1262f1295d.o build/localhost/system/api/2cfd98ae67d23b6f609df1362272c0f0/server/le_atClient_server.o build/localhost/system/component/7c964b9d8ed08fc6e3de966f2a130158/obj/_componentMain.c.o
+  2351	CCLDEXE out build/localhost/system/app/atClient/staging/read-only/bin/atClientDaemon in build/localhost/system/app/atClient/obj/atClientDaemon/_main.c.o
+
+  2355	CCLN in build/localhost/system/component/7c964b9d8ed08fc6e3de966f2a130158/obj/libComponent_atClient.so out build/localhost/system/app/atClient/staging/read-only/lib/libComponent_atClient.so
+  2359	CC in build/localhost/system/api/f1d80a566a7e7a5053f8c956bde6d764/server/le_atServer_server.c
+  2367	CCLD out build/localhost/system/component/a9b2d5cd122c984900590d621ecd1e12/obj/libComponent_atServer.so in build/localhost/system/component/a9b2d5cd122c984900590d621ecd1e12/obj/0b7fe7203eeda6ff19d0b29a7b235c83.o build/localhost/system/component/a9b2d5cd122c984900590d621ecd1e12/obj/3370619cd4a944b2bc0b5a1262f1295d.o build/localhost/system/api/f1d80a566a7e7a5053f8c956bde6d764/server/le_atServer_server.o build/localhost/system/component/a9b2d5cd122c984900590d621ecd1e12/obj/_componentMain.c.o
+  2371	CCLN in build/localhost/system/component/a9b2d5cd122c984900590d621ecd1e12/obj/libComponent_atServer.so out build/localhost/system/app/atServer/staging/read-only/lib/libComponent_atServer.so
+  2375	CCLDEXE out build/localhost/system/app/atServer/staging/read-only/bin/atServerDaemon in build/localhost/system/app/atServer/obj/atServerDaemon/_main.c.o
+
+  2383	CCIFGEN in /~~/interfaces/wifi/le_wifiDefs.api outdir build/localhost/system/api/fdc9e562ef581c642898644f8d3052b9/client
+  2387	CC in build/localhost/system/api/c993a50e33d16f020d3fbab240675d4b/client/le_secStore_client.c
+  2391	CCIFGEN in /~~/interfaces/modemServices/le_mdmDefs.api outdir build/localhost/system/api/2c13a68406e60b1f3e36779f3854906b/server
+  2395	CCIFGEN in /~~/interfaces/le_audio.api outdir build/localhost/system/api/875cc0ace3970e986491688d62653508/server
+  2399	CCIFGEN in /~~/interfaces/le_cellnet.api outdir build/localhost/system/api/0feeeac1eab565654abe16cf2ea0f096/server
+  2403	CC in /~~/components/audio/le_media.c
+  2407	CC in /~~/components/audio/le_audio.c
+  2411	CC in /~~/components/cellNetService/cellNetServiceServer.c
+  2415	CC in build/localhost/system/api/0feeeac1eab565654abe16cf2ea0f096/server/le_cellnet_server.c
+  2419	CCLD out build/localhost/system/component/0241541aac7586b8f2401a55a768768b/obj/libComponent_cellNetService.so in build/localhost/system/component/0241541aac7586b8f2401a55a768768b/obj/c06e41f2b15be7947831835c45ecef1a.o build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/client/le_sim_client.c.o build/localhost/system/api/225458b8f956bc59d460fcef1f7e04f4/client/le_mrc_client.c.o build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o build/localhost/system/api/c993a50e33d16f020d3fbab240675d4b/client/le_secStore_client.c.o build/localhost/system/api/0feeeac1eab565654abe16cf2ea0f096/server/le_cellnet_server.o build/localhost/system/component/0241541aac7586b8f2401a55a768768b/obj/_componentMain.c.o
+  2423	CCLDEXE out build/localhost/system/app/cellNetService/staging/read-only/bin/cellNetService in build/localhost/system/app/cellNetService/obj/cellNetService/_main.c.o
+
+  2427	CCLN in build/localhost/system/component/0241541aac7586b8f2401a55a768768b/obj/libComponent_cellNetService.so out build/localhost/system/app/cellNetService/staging/read-only/lib/libComponent_cellNetService.so
+  2435	CC in build/localhost/system/api/875cc0ace3970e986491688d62653508/server/le_audio_server.c
+  2439	CCLD out build/localhost/system/component/71ff82ebbbae63c216a98c64df70b407/obj/libComponent_audio.so in build/localhost/system/component/71ff82ebbbae63c216a98c64df70b407/obj/a80f49b7137bd896a66446339a4d261f.o build/localhost/system/component/71ff82ebbbae63c216a98c64df70b407/obj/8bcc59b640424ff368b790cf5b7d1a70.o build/localhost/system/api/875cc0ace3970e986491688d62653508/server/le_audio_server.o build/localhost/system/component/71ff82ebbbae63c216a98c64df70b407/obj/_componentMain.c.o
+  2443	CCLN in build/localhost/system/component/71ff82ebbbae63c216a98c64df70b407/obj/libComponent_audio.so out build/localhost/system/app/audioService/staging/read-only/lib/libComponent_audio.so
+  2447	CCLDEXE out build/localhost/system/app/audioService/staging/read-only/bin/audioDaemon in build/localhost/system/app/audioService/obj/audioDaemon/_main.c.o
+
+  2455	CCIFGEN in /~~/interfaces/wifi/le_wifiClient.api outdir build/localhost/system/api/9b26169e9433942e46f6caee5971c163/client
+  2459	CCIFGEN in /~~/interfaces/le_data.api outdir build/localhost/system/api/b62f72f297a937e1faac5054994e52f7/server
+  2463	CC in build/localhost/system/api/9b26169e9433942e46f6caee5971c163/client/le_wifiClient_client.c
+  2467	CC in build/localhost/system/api/b62f72f297a937e1faac5054994e52f7/server/le_data_server.c
+  2471	CC in /~~/components/dataConnectionService/dcsServer.c
+  2475	CCLD out build/localhost/system/component/f1ef6893826da04496fa2fe5804df183/obj/libComponent_dataConnectionService.so in build/localhost/system/component/f1ef6893826da04496fa2fe5804df183/obj/0e0ecc0bbd1d0605bfb59c52fc6abe27.o build/localhost/system/api/4f1e1ea08de2b139267b8a8c0a87f8a6/client/le_mdc_client.c.o build/localhost/system/api/225458b8f956bc59d460fcef1f7e04f4/client/le_mrc_client.c.o build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/client/le_sim_client.c.o build/localhost/system/api/0feeeac1eab565654abe16cf2ea0f096/client/le_cellnet_client.c.o build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o build/localhost/system/api/9b26169e9433942e46f6caee5971c163/client/le_wifiClient_client.c.o build/localhost/system/api/b62f72f297a937e1faac5054994e52f7/server/le_data_server.o build/localhost/system/component/f1ef6893826da04496fa2fe5804df183/obj/_componentMain.c.o
+  2479	CCLDEXE out build/localhost/system/app/dataConnectionService/staging/read-only/bin/dcsDaemon in build/localhost/system/app/dataConnectionService/obj/dcsDaemon/_main.c.o
+
+  2483	CCLN in build/localhost/system/component/f1ef6893826da04496fa2fe5804df183/obj/libComponent_dataConnectionService.so out build/localhost/system/app/dataConnectionService/staging/read-only/lib/libComponent_dataConnectionService.so
+  2491	CCIFGEN in /~~/interfaces/modemServices/le_mcc.api outdir build/localhost/system/api/4a50c7ddd303214d7a34b300156b4fd5/server
+  2495	CCIFGEN in /~~/interfaces/le_fwupdate.api outdir build/localhost/system/api/822245b486a9b86c9af9f3281a14d3ce/server
+  2499	CCIFGEN in /~~/interfaces/modemServices/le_info.api outdir build/localhost/system/api/649f72df0217a832e6dbb5f4fe25265c/server
+  2503	CC in /~~/components/fwupdate/fwupdateDaemon/fwupdateServer.c
+  2507	CC in build/localhost/system/api/822245b486a9b86c9af9f3281a14d3ce/server/le_fwupdate_server.c
+  2511	CCLD out build/localhost/system/component/af0f91ea81ca473aa4683bf886458e6a/obj/libComponent_fwupdateDaemon.so in build/localhost/system/component/af0f91ea81ca473aa4683bf886458e6a/obj/c407e453cc979da52e9ce60f49d03241.o build/localhost/system/api/822245b486a9b86c9af9f3281a14d3ce/server/le_fwupdate_server.o build/localhost/system/component/af0f91ea81ca473aa4683bf886458e6a/obj/_componentMain.c.o
+  2515	CCLDEXE out build/localhost/system/app/fwupdateService/staging/read-only/bin/fwupdateDaemon in build/localhost/system/app/fwupdateService/obj/fwupdateDaemon/_main.c.o
+
+  2519	CCLN in build/localhost/system/component/af0f91ea81ca473aa4683bf886458e6a/obj/libComponent_fwupdateDaemon.so out build/localhost/system/app/fwupdateService/staging/read-only/lib/libComponent_fwupdateDaemon.so
+  2523	CC in build/localhost/system/api/649f72df0217a832e6dbb5f4fe25265c/server/le_info_server.c
+  2531	CCIFGEN in /~~/interfaces/modemServices/le_mrc.api outdir build/localhost/system/api/225458b8f956bc59d460fcef1f7e04f4/server
+  2535	CCIFGEN in /~~/interfaces/modemServices/le_sms.api outdir build/localhost/system/api/85a9b9f9d09f05868e13e35090032e92/server
+  2539	CC in build/localhost/system/api/225458b8f956bc59d460fcef1f7e04f4/server/le_mrc_server.c
+  2543	CC in build/localhost/system/api/85a9b9f9d09f05868e13e35090032e92/server/le_sms_server.c
+  2547	CCIFGEN in /~~/interfaces/modemServices/le_sim.api outdir build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/server
+  2551	CCIFGEN in /~~/interfaces/modemServices/le_mcc.api outdir build/localhost/system/api/4a50c7ddd303214d7a34b300156b4fd5/server
+  2555	CC in build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/server/le_sim_server.c
+  2559	CCIFGEN in /~~/interfaces/modemServices/le_mdc.api outdir build/localhost/system/api/4f1e1ea08de2b139267b8a8c0a87f8a6/server
+  2563	CC in build/localhost/system/api/4a50c7ddd303214d7a34b300156b4fd5/server/le_mcc_server.c
+  2567	CC in build/localhost/system/api/4f1e1ea08de2b139267b8a8c0a87f8a6/server/le_mdc_server.c
+  2571	CCIFGEN in /~~/interfaces/modemServices/le_ips.api outdir build/localhost/system/api/1a49dcddf4622e7fa32749e5eaa1af4a/server
+  2575	CC in build/localhost/system/api/1a49dcddf4622e7fa32749e5eaa1af4a/server/le_ips_server.c
+  2579	CCIFGEN in /~~/interfaces/modemServices/le_ecall.api outdir build/localhost/system/api/cfc850a0208769c31ba1df780301ed43/server
+  2583	CCIFGEN in /~~/interfaces/modemServices/le_temp.api outdir build/localhost/system/api/e9a1d246697f1418d1028ab4b7b50024/server
+  2587	CC in build/localhost/system/api/e9a1d246697f1418d1028ab4b7b50024/server/le_temp_server.c
+  2591	CC in build/localhost/system/api/cfc850a0208769c31ba1df780301ed43/server/le_ecall_server.c
+  2595	CCIFGEN in /~~/interfaces/modemServices/le_riPin.api outdir build/localhost/system/api/7a09a542ac8dc2ad2260aef135ab0bea/server
+  2599	CCIFGEN in /~~/interfaces/modemServices/le_antenna.api outdir build/localhost/system/api/80cfbbedcb2a9af2aabddc905387fe11/server
+  2603	CC in build/localhost/system/api/7a09a542ac8dc2ad2260aef135ab0bea/server/le_riPin_server.c
+  2607	CC in build/localhost/system/api/80cfbbedcb2a9af2aabddc905387fe11/server/le_antenna_server.c
+  2611	CCIFGEN in /~~/interfaces/modemServices/le_antenna.api outdir build/localhost/system/api/80cfbbedcb2a9af2aabddc905387fe11/client
+  2615	CCIFGEN in /~~/interfaces/modemServices/le_adc.api outdir build/localhost/system/api/d0cf781321acc47850de89122826de52/server
+  2619	CC in build/localhost/system/api/d0cf781321acc47850de89122826de52/server/le_adc_server.c
+  2623	CCIFGEN in /~~/interfaces/positioning/le_pos.api outdir build/localhost/system/api/2a4665ff982cdb83fae7ef27092a2880/server
+  2627	CC in build/localhost/system/api/2a4665ff982cdb83fae7ef27092a2880/server/le_pos_server.c
+  2631	CCIFGEN in /~~/interfaces/modemServices/le_mcc.api outdir build/localhost/system/api/4a50c7ddd303214d7a34b300156b4fd5/client
+  2635	CCIFGEN in /~~/interfaces/modemServices/le_rtc.api outdir build/localhost/system/api/637926babae1f678139d17141e428cae/server
+  2639	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_riPin_default.c
+  2643	CC in /~~/components/modemServices/modemDaemon/le_ms.c
+  2647	CC in /~~/components/modemServices/modemDaemon/le_info.c
+  2651	CC in /~~/components/modemServices/modemDaemon/le_ecall.c
+  2655	CC in /~~/components/modemServices/modemDaemon/le_rtc.c
+  2659	CC in /~~/components/modemServices/modemDaemon/le_temp.c
+  2663	CC in /~~/components/modemServices/modemDaemon/le_mcc.c
+  2667	CC in /~~/components/modemServices/modemDaemon/le_riPin.c
+  2671	CC in /~~/components/modemServices/modemDaemon/asn1Msd.c
+  2675	CC in /~~/components/modemServices/modemDaemon/le_mrc.c
+  2679	CC in /~~/components/modemServices/modemDaemon/le_sim.c
+  2683	CC in /~~/components/modemServices/modemDaemon/le_mdc.c
+  2687	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_mdc_default.c
+  2691	CC in /~~/components/modemServices/modemDaemon/cdmaPdu.c
+  2695	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_info_default.c
+  2699	CC in /~~/components/modemServices/modemDaemon/smsPdu.c
+  2703	CC in /~~/components/modemServices/modemDaemon/le_sms.c
+  2707	CC in /~~/components/modemServices/modemDaemon/le_ips.c
+  2711	CC in /~~/components/modemServices/modemDaemon/le_antenna.c
+  2715	CC in /~~/components/modemServices/modemDaemon/le_adc.c
+  2719	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_mcc_default.c
+  2723	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_sim_default.c
+  2727	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_adc_default.c
+  2731	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_mrc_default.c
+  2735	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_default.c
+  2739	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_rtc_default.c
+  2743	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_antenna_default.c
+  2747	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_sms_default.c
+  2751	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_ips_default.c
+  2755	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_default/pa_temp_default.c
+  2759	CCLD out build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/libComponent_le_pa_default.so in build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/e5a9973d2362cb77bddcc3a680cc7a19.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/0e4bb4644e5cd0e39f3769fdb62cd04d.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/44e5418c9a8482c89910f51b7ff0a09f.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/6eadf1b099f964a9abfd4ebc3edcb4ae.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/5b81ab1459ee74793d2c8b5334db4bf8.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/dc83b75d231e5bd86b7efbcb9d2b4841.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/c83679624879b152ee795c7c10796a79.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/08cd418fab2884b7018470b44746deaa.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/5e6080e3946d31a5919274b900888799.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/4d690f72cb88ac2170915f6d5d69feac.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/f87ed27b54c39c80a200520fe2d085e0.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/9b9dbfd5d72b5c8135203f277e3bbd19.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/e3f389d27926be71ee0397b17076ac42.o build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/_componentMain.c.o
+  2763	CCLN in build/localhost/system/component/ec37560dee8deff132261b914d159fa8/obj/libComponent_le_pa_default.so out build/localhost/system/app/modemService/staging/read-only/lib/libComponent_le_pa_default.so
+  2767	CC in build/localhost/system/api/637926babae1f678139d17141e428cae/server/le_rtc_server.c
+  2771	CCIFGEN in /~~/interfaces/positioning/le_gnss.api outdir build/localhost/system/api/53581761f6fca0e27e415f5292ff08e1/server
+  2775	CC in build/localhost/system/api/53581761f6fca0e27e415f5292ff08e1/server/le_gnss_server.c
+  2779	CCIFGEN in /~~/interfaces/modemServices/le_ecall.api outdir build/localhost/system/api/cfc850a0208769c31ba1df780301ed43/client
+  2783	CC in /~~/components/modemServices/platformAdaptor/default/le_pa_ecall_default/pa_ecall_default.c
+  2787	CCIFGEN in /~~/interfaces/le_ulpm.api outdir build/localhost/system/api/ec9127a9a47fa182eaa6e093b0a1538d/server
+  2791	CCLD out build/localhost/system/component/a244f163b93a13b42977124f8104a79d/obj/libComponent_le_pa_ecall_default.so in build/localhost/system/component/a244f163b93a13b42977124f8104a79d/obj/f23048394e631f57d0c767288b08627b.o build/localhost/system/component/a244f163b93a13b42977124f8104a79d/obj/_componentMain.c.o
+  2795	CCLN in build/localhost/system/component/a244f163b93a13b42977124f8104a79d/obj/libComponent_le_pa_ecall_default.so out build/localhost/system/app/modemService/staging/read-only/lib/libComponent_le_pa_ecall_default.so
+  2799	CCLD out build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/libComponent_modemDaemon.so in build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/9ddefd1e6a79c836844a1f3263904465.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/c93a27d42b1bde332de9c5699835cf46.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/2f96bc73360115bd80e3becde436aac9.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/bcaeca80143bef7f2df3f3c88f6c3474.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/a2d283246ce1886a03692a500b2b3584.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/d093e7a2b86dccb29f0eedc8a7f68e1b.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/4549f8af47b272a78f6b9cf7b8efcda7.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/a50137ae5ce8a98e72a30234e3971ec7.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/99e967d078baeb4ff4e75eb6c2a32666.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/5f088f8ff6701f56a681eeafec3a714f.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/b405a795e52405024fe4aa0e05b8bdf6.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/7be94eb93d7f7bfe25f89ad95098cd34.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/46bf1c4f9e539a9841884ec54b817e29.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/d2511dd0720da9bb02cae4fa31bc2bfb.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/daf0c58a5c2ee1d87ef278620d69e326.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/ee5af2e7bade29cb661f6a1de1badfeb.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/fa12dce9f5d5ed9788f6a35e2023c920.o build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o build/localhost/system/api/899db4aeaae4de5a854869294660717c/client/le_pm_client.c.o build/localhost/system/api/649f72df0217a832e6dbb5f4fe25265c/server/le_info_server.o build/localhost/system/api/85a9b9f9d09f05868e13e35090032e92/server/le_sms_server.o build/localhost/system/api/225458b8f956bc59d460fcef1f7e04f4/server/le_mrc_server.o build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/server/le_sim_server.o build/localhost/system/api/4f1e1ea08de2b139267b8a8c0a87f8a6/server/le_mdc_server.o build/localhost/system/api/4a50c7ddd303214d7a34b300156b4fd5/server/le_mcc_server.o build/localhost/system/api/cfc850a0208769c31ba1df780301ed43/server/le_ecall_server.o build/localhost/system/api/1a49dcddf4622e7fa32749e5eaa1af4a/server/le_ips_server.o build/localhost/system/api/e9a1d246697f1418d1028ab4b7b50024/server/le_temp_server.o build/localhost/system/api/80cfbbedcb2a9af2aabddc905387fe11/server/le_antenna_server.o build/localhost/system/api/7a09a542ac8dc2ad2260aef135ab0bea/server/le_riPin_server.o build/localhost/system/api/d0cf781321acc47850de89122826de52/server/le_adc_server.o build/localhost/system/api/637926babae1f678139d17141e428cae/server/le_rtc_server.o build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/_componentMain.c.o
+  2803	CCLN in build/localhost/system/component/03276d41a096ed51cec2748cd46b2a7c/obj/libComponent_modemDaemon.so out build/localhost/system/app/modemService/staging/read-only/lib/libComponent_modemDaemon.so
+  2807	CCLDEXE out build/localhost/system/app/modemService/staging/read-only/bin/modemDaemon in build/localhost/system/app/modemService/obj/modemDaemon/_main.c.o
+
+  2813	CCIFGEN in /~~/interfaces/positioning/le_posCtrl.api outdir build/localhost/system/api/da06df384f641af90a048c7e8bbbedc4/server
+  2817	CC in /~~/components/positioning/posDaemon/le_gnss.c
+  2823	CC in build/localhost/system/api/da06df384f641af90a048c7e8bbbedc4/server/le_posCtrl_server.c
+  2827	CC in /~~/components/positioning/posDaemon/le_pos.c
+  2831	CCLD out build/localhost/system/component/f1e539ddb2bd44d0419193d23724c6f7/obj/libComponent_posDaemon.so in build/localhost/system/component/f1e539ddb2bd44d0419193d23724c6f7/obj/8c6d4549ec8ba0f8299f137ab191d8b8.o build/localhost/system/component/f1e539ddb2bd44d0419193d23724c6f7/obj/8fca750eac10bb0cb819b039f279b0ca.o build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o build/localhost/system/api/53581761f6fca0e27e415f5292ff08e1/server/le_gnss_server.o build/localhost/system/api/2a4665ff982cdb83fae7ef27092a2880/server/le_pos_server.o build/localhost/system/api/da06df384f641af90a048c7e8bbbedc4/server/le_posCtrl_server.o build/localhost/system/component/f1e539ddb2bd44d0419193d23724c6f7/obj/_componentMain.c.o
+  2835	CCLDEXE out build/localhost/system/app/positioningService/staging/read-only/bin/posDaemon in build/localhost/system/app/positioningService/obj/posDaemon/_main.c.o
+
+  2839	CCLN in build/localhost/system/component/f1e539ddb2bd44d0419193d23724c6f7/obj/libComponent_posDaemon.so out build/localhost/system/app/positioningService/staging/read-only/lib/libComponent_posDaemon.so
+  2847	CC in build/localhost/system/api/ec9127a9a47fa182eaa6e093b0a1538d/server/le_ulpm_server.c
+  2851	CCIFGEN in /~~/interfaces/le_pm.api outdir build/localhost/system/api/899db4aeaae4de5a854869294660717c/server
+  2855	CC in build/localhost/system/api/899db4aeaae4de5a854869294660717c/server/le_pm_server.c
+  2859	CCIFGEN in /~~/interfaces/le_limit.api outdir build/localhost/system/api/b3786cb0745f8d7b0998d2ac41e78b34/client
+  2863	CCIFGEN in /~~/interfaces/le_smsInbox1.api outdir build/localhost/system/api/df8836476797f60ca36b1bfb15b8c66c/server
+  2867	CCIFGEN in /~~/interfaces/le_bootReason.api outdir build/localhost/system/api/8914e5a5ce78740f6bc020955f08bab9/server
+  2871	CCIFGEN in /~~/interfaces/le_secStore.api outdir build/localhost/system/api/c993a50e33d16f020d3fbab240675d4b/server
+  2875	CC in /~~/components/powerMgr/le_pm.c
+  2879	CC in /~~/components/powerMgr/le_ulpm.c
+  2883	CC in /~~/components/powerMgr/le_bootReason.c
+  2887	CC in build/localhost/system/api/8914e5a5ce78740f6bc020955f08bab9/server/le_bootReason_server.c
+  2891	CCLD out build/localhost/system/component/2ceeb432191d4ea30a1842cf97f05a59/obj/libComponent_powerMgr.so in build/localhost/system/component/2ceeb432191d4ea30a1842cf97f05a59/obj/8d94b6fad8f24f05322521868f2729ee.o build/localhost/system/component/2ceeb432191d4ea30a1842cf97f05a59/obj/a788df2a9015af4388470d7a9cd29947.o build/localhost/system/component/2ceeb432191d4ea30a1842cf97f05a59/obj/a7a5a61582166ada1a3f8aabeee4c94a.o build/localhost/system/api/899db4aeaae4de5a854869294660717c/server/le_pm_server.o build/localhost/system/api/ec9127a9a47fa182eaa6e093b0a1538d/server/le_ulpm_server.o build/localhost/system/api/8914e5a5ce78740f6bc020955f08bab9/server/le_bootReason_server.o build/localhost/system/component/2ceeb432191d4ea30a1842cf97f05a59/obj/_componentMain.c.o
+  2895	CCLN in build/localhost/system/component/2ceeb432191d4ea30a1842cf97f05a59/obj/libComponent_powerMgr.so out build/localhost/system/app/powerMgr/staging/read-only/lib/libComponent_powerMgr.so
+  2899	CCLDEXE out build/localhost/system/app/powerMgr/staging/read-only/bin/powerManagerService in build/localhost/system/app/powerMgr/obj/powerManagerService/_main.c.o
+
+  2907	CCIFGEN in /~~/interfaces/le_secStore.api outdir build/localhost/system/api/c993a50e33d16f020d3fbab240675d4b/server
+  2911	CC in build/localhost/system/api/c993a50e33d16f020d3fbab240675d4b/server/le_secStore_server.c
+  2915	CCIFGEN in /~~/interfaces/supervisor/le_appInfo.api outdir build/localhost/system/api/0ec471cd25ecd4e125138fdf45bdc9b7/client
+  2919	CC in build/localhost/system/api/df8836476797f60ca36b1bfb15b8c66c/server/le_smsInbox1_server.c
+  2923	CC in build/localhost/system/api/0ec471cd25ecd4e125138fdf45bdc9b7/client/le_appInfo_client.c
+  2927	CCIFGEN in /~~/interfaces/le_update.api outdir build/localhost/system/api/f209faf010d4096c5430d62370877d32/client
+  2931	CCIFGEN in /~~/interfaces/secureStorage/secStoreAdmin.api outdir build/localhost/system/api/2ca9bcc207a2f1845e5e06a5fcb714ed/server
+  2935	CC in build/localhost/system/api/f209faf010d4096c5430d62370877d32/client/le_update_client.c
+  2939	CC in /~~/components/secStore/secStoreDaemon/secStoreServer.c
+  2943	CC in build/localhost/system/api/2ca9bcc207a2f1845e5e06a5fcb714ed/server/secStoreAdmin_server.c
+  2947	CCLD out build/localhost/system/component/83a4e5038d80eb68ef86b214340d9d83/obj/libComponent_secStoreDaemon.so in build/localhost/system/component/83a4e5038d80eb68ef86b214340d9d83/obj/5993529a3a72b6464ab2f1c1002df5df.o build/localhost/system/api/0ec471cd25ecd4e125138fdf45bdc9b7/client/le_appInfo_client.c.o build/localhost/system/api/f209faf010d4096c5430d62370877d32/client/le_update_client.c.o build/localhost/system/api/c993a50e33d16f020d3fbab240675d4b/server/le_secStore_server.o build/localhost/system/api/2ca9bcc207a2f1845e5e06a5fcb714ed/server/secStoreAdmin_server.o build/localhost/system/component/83a4e5038d80eb68ef86b214340d9d83/obj/_componentMain.c.o
+  2951	CCLN in build/localhost/system/component/83a4e5038d80eb68ef86b214340d9d83/obj/libComponent_secStoreDaemon.so out build/localhost/system/app/secStore/staging/read-only/lib/libComponent_secStoreDaemon.so
+  2955	CCLDEXE out build/localhost/system/app/secStore/staging/read-only/bin/secStore in build/localhost/system/app/secStore/obj/secStore/_main.c.o
+
+  2963	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  2967	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin1_server.c
+  2971	CCIFGEN in /~~/interfaces/le_smsInbox1.api outdir build/localhost/system/api/df8836476797f60ca36b1bfb15b8c66c/server
+  2975	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  2979	CC in /~~/components/smsInboxService/smsInbox.c
+  2983	CC in /~~/components/smsInboxService/le_smsInbox.c
+  2987	CC in build/localhost/system/api/df8836476797f60ca36b1bfb15b8c66c/server/le_smsInbox2_server.c
+  2991	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin2_server.c
+  2995	CCLD out build/localhost/system/component/da8ac6215679f9af055823cc81e5e2a1/obj/libComponent_smsInboxService.so in build/localhost/system/component/da8ac6215679f9af055823cc81e5e2a1/obj/cb3990a8f5e8fa7edf77e1537f29c101.o build/localhost/system/component/da8ac6215679f9af055823cc81e5e2a1/obj/68ec8cf8b6843ab2652f360477d73b95.o build/localhost/system/api/6ff80cbc610f53d16acdbd8aba7bd111/client/le_sim_client.c.o build/localhost/system/api/85a9b9f9d09f05868e13e35090032e92/client/le_sms_client.c.o build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o build/localhost/system/api/df8836476797f60ca36b1bfb15b8c66c/server/le_smsInbox1_server.o build/localhost/system/api/df8836476797f60ca36b1bfb15b8c66c/server/le_smsInbox2_server.o build/localhost/system/component/da8ac6215679f9af055823cc81e5e2a1/obj/_componentMain.c.o
+  2999	CCLDEXE out build/localhost/system/app/smsInboxService/staging/read-only/bin/smsInboxService in build/localhost/system/app/smsInboxService/obj/smsInboxService/_main.c.o
+
+  3003	CCLN in build/localhost/system/component/da8ac6215679f9af055823cc81e5e2a1/obj/libComponent_smsInboxService.so out build/localhost/system/app/smsInboxService/staging/read-only/lib/libComponent_smsInboxService.so
+  3011	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3015	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3019	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin3_server.c
+  3023	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin4_server.c
+  3027	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3031	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3035	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin5_server.c
+  3039	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin8_server.c
+  3043	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3047	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3051	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin6_server.c
+  3055	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin7_server.c
+  3059	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3063	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3067	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin9_server.c
+  3071	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin10_server.c
+  3075	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3079	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3083	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin11_server.c
+  3087	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin12_server.c
+  3091	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3095	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3099	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin13_server.c
+  3103	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin14_server.c
+  3107	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3111	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3115	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin16_server.c
+  3119	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin15_server.c
+  3123	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3127	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3131	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin17_server.c
+  3135	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin18_server.c
+  3139	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3143	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3147	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin19_server.c
+  3151	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin20_server.c
+  3155	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3159	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3163	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin21_server.c
+  3167	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin22_server.c
+  3171	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3175	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3179	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin23_server.c
+  3183	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin24_server.c
+  3187	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3191	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3195	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin25_server.c
+  3199	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin26_server.c
+  3203	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3207	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3211	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin27_server.c
+  3215	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin28_server.c
+  3219	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3223	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3227	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin29_server.c
+  3231	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin30_server.c
+  3235	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3239	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3243	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin31_server.c
+  3247	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin32_server.c
+  3251	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3255	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3259	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin33_server.c
+  3263	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin34_server.c
+  3267	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3271	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3275	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin35_server.c
+  3279	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin36_server.c
+  3283	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3287	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3291	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin37_server.c
+  3295	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin38_server.c
+  3299	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3303	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3307	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin39_server.c
+  3311	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin40_server.c
+  3315	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3319	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3323	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin41_server.c
+  3327	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin42_server.c
+  3331	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3335	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3339	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin43_server.c
+  3343	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin44_server.c
+  3347	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3351	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3355	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin45_server.c
+  3359	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin46_server.c
+  3363	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3367	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3371	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin47_server.c
+  3375	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin48_server.c
+  3379	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3383	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3387	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin49_server.c
+  3391	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin50_server.c
+  3395	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3399	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3403	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin51_server.c
+  3407	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin52_server.c
+  3411	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3415	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3419	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin53_server.c
+  3423	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin54_server.c
+  3427	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3431	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3435	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin55_server.c
+  3439	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin56_server.c
+  3443	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3447	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3451	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin57_server.c
+  3455	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin58_server.c
+  3459	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3463	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3467	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin59_server.c
+  3471	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin60_server.c
+  3475	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3479	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3483	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin61_server.c
+  3487	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin62_server.c
+  3491	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3495	CCIFGEN in /~~/interfaces/le_gpio.api outdir build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server
+  3499	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin63_server.c
+  3503	CC in /~~/components/sysfsGpio/gpioSysfsUtils.c
+  3507	CC in build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin64_server.c
+  3511	CCIFGEN in /~~/interfaces/modemServices/le_mcc.api outdir build/localhost/system/api/4a50c7ddd303214d7a34b300156b4fd5/client
+  3515	CC in build/localhost/system/api/4a50c7ddd303214d7a34b300156b4fd5/client/le_mcc_client.c
+  3519	CC in /~~/components/sysfsGpio/gpioSysfs.c
+  3523	CCIFGEN in /~~/interfaces/le_audio.api outdir build/localhost/system/api/875cc0ace3970e986491688d62653508/client
+  3527	CCLD out build/localhost/system/component/2dd890c89a974a029049cc2405e68ba7/obj/libComponent_sysfsGpio.so in build/localhost/system/component/2dd890c89a974a029049cc2405e68ba7/obj/3d2d4b2afcd4e7d5802a306d40334f1a.o build/localhost/system/component/2dd890c89a974a029049cc2405e68ba7/obj/af7c6b20b0809229323726a99ec4c164.o build/localhost/system/api/847438fb24bcf98de16130e4ed1eb39f/client/le_cfg_client.c.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin1_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin2_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin3_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin4_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin5_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin6_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin7_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin8_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin9_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin10_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin11_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin12_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin13_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin14_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin15_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin16_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin17_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin18_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin19_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin20_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin21_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin22_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin23_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin24_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin25_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin26_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin27_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin28_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin29_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin30_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin31_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin32_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin33_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin34_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin35_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin36_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin37_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin38_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin39_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin40_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin41_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin42_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin43_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin44_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin45_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin46_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin47_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin48_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin49_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin50_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin51_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin52_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin53_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin54_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin55_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin56_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin57_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin58_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin59_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin60_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin61_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin62_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin63_server.o build/localhost/system/api/5a93ea4dae1cfa3614b034030691df9f/server/le_gpioPin64_server.o build/localhost/system/component/2dd890c89a974a029049cc2405e68ba7/obj/_componentMain.c.o
+  3531	CCLN in build/localhost/system/component/2dd890c89a974a029049cc2405e68ba7/obj/libComponent_sysfsGpio.so out build/localhost/system/app/gpioService/staging/read-only/lib/libComponent_sysfsGpio.so
+  3535	CCLDEXE out build/localhost/system/app/gpioService/staging/read-only/bin/gpioService in build/localhost/system/app/gpioService/obj/gpioService/_main.c.o
+
+  3543	CC in build/localhost/system/api/875cc0ace3970e986491688d62653508/client/le_audio_client.c
+  3546	CCIFGEN in /~~/interfaces/le_voicecall.api outdir build/localhost/system/api/7a2bb4d0502ce4846cc838ec35285cd7/server
+  3551	CC in build/localhost/system/api/7a2bb4d0502ce4846cc838ec35285cd7/server/le_voicecall_server.c
+  3554	CC in /~~/components/voiceCallService/voiceCallServiceServer.c
+  3558	CCLD out build/localhost/system/component/1f9730d155db92d21f1eac262924fcc2/obj/libComponent_voiceCallService.so in build/localhost/system/component/1f9730d155db92d21f1eac262924fcc2/obj/4eefe61190bcbd530792dbe247cf35a6.o build/localhost/system/api/4a50c7ddd303214d7a34b300156b4fd5/client/le_mcc_client.c.o build/localhost/system/api/875cc0ace3970e986491688d62653508/client/le_audio_client.c.o build/localhost/system/api/7a2bb4d0502ce4846cc838ec35285cd7/server/le_voicecall_server.o build/localhost/system/component/1f9730d155db92d21f1eac262924fcc2/obj/_componentMain.c.o
+  3563	CCLN in build/localhost/system/component/1f9730d155db92d21f1eac262924fcc2/obj/libComponent_voiceCallService.so out build/localhost/system/app/voiceCallService/staging/read-only/lib/libComponent_voiceCallService.so
+  3566	CCLDEXE out build/localhost/system/app/voiceCallService/staging/read-only/bin/voiceCallService in build/localhost/system/app/voiceCallService/obj/voiceCallService/_main.c.o

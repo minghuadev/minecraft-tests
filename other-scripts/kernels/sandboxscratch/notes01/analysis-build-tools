@@ -1,0 +1,76 @@
+
+r@ba7beaaf9b19:~/workspace/legato/build$ du -sh doc
+192M    doc
+
+r@ba7beaaf9b19:~/workspace/legato/build$ du -sh localhost/
+48M     localhost/
+
+r@ba7beaaf9b19:~/workspace/legato/build$ du -sh tools/
+41M     tools/
+
+
+r@ba7beaaf9b19:~/workspace/legato/build$ find tools -type f -name '*.o'
+tools/obj/codeGenerator/codeGenerator.cpp.o
+tools/obj/codeGenerator/interfacesHeaderGenerator.cpp.o
+tools/obj/codeGenerator/componentMainGenerator.cpp.o
+tools/obj/codeGenerator/exeMainGenerator.cpp.o
+tools/obj/codeGenerator/javaExeMainGenerator.cpp.o
+tools/obj/codeGenerator/javaComponentMainGenerator.cpp.o
+tools/obj/md5.cpp.o
+tools/obj/avManifestGenerator/avManifestGenerator.cpp.o
+tools/obj/commandLineInterpreter/mksys.cpp.o
+tools/obj/commandLineInterpreter/mkexe.cpp.o
+tools/obj/commandLineInterpreter/mk.cpp.o
+tools/obj/commandLineInterpreter/mkcomp.cpp.o
+tools/obj/commandLineInterpreter/mkCommon.cpp.o
+tools/obj/commandLineInterpreter/mkapp.cpp.o
+tools/obj/commandLineInterpreter/args.cpp.o
+tools/obj/envVars.cpp.o
+tools/obj/parser/sdefParser.cpp.o
+tools/obj/parser/adefParser.cpp.o
+tools/obj/parser/cdefParser.cpp.o
+tools/obj/parser/lexer.cpp.o
+tools/obj/parser/parser.cpp.o
+tools/obj/parser/apiParser.cpp.o
+tools/obj/parser/mdefParser.cpp.o
+tools/obj/buildScriptGenerator/buildScriptCommon.cpp.o
+tools/obj/buildScriptGenerator/toolChain.cpp.o
+tools/obj/buildScriptGenerator/componentBuildScript.cpp.o
+tools/obj/buildScriptGenerator/systemBuildScript.cpp.o
+tools/obj/buildScriptGenerator/moduleBuildScript.cpp.o
+tools/obj/buildScriptGenerator/appBuildScript.cpp.o
+tools/obj/buildScriptGenerator/exeBuildScript.cpp.o
+tools/obj/path.cpp.o
+tools/obj/buildParams.cpp.o
+tools/obj/file.cpp.o
+tools/obj/configGenerator/configGenerator.cpp.o
+tools/obj/modeller/componentModeller.cpp.o
+tools/obj/modeller/appModeller.cpp.o
+tools/obj/modeller/modellerCommon.cpp.o
+tools/obj/modeller/systemModeller.cpp.o
+tools/obj/modeller/moduleModeller.cpp.o
+tools/obj/conceptualModel/exe.cpp.o
+tools/obj/conceptualModel/app.cpp.o
+tools/obj/conceptualModel/watchdogTimeout.cpp.o
+tools/obj/conceptualModel/api.cpp.o
+tools/obj/conceptualModel/javaPackage.cpp.o
+tools/obj/conceptualModel/process.cpp.o
+tools/obj/conceptualModel/system.cpp.o
+tools/obj/conceptualModel/processEnvironment.cpp.o
+tools/obj/conceptualModel/component.cpp.o
+tools/obj/conceptualModel/module.cpp.o
+tools/obj/conceptualModel/faultAction.cpp.o
+tools/obj/conceptualModel/watchdogAction.cpp.o
+tools/obj/conceptualModel/positiveIntLimit.cpp.o
+tools/obj/conceptualModel/nonNegativeIntLimit.cpp.o
+tools/obj/conceptualModel/boolLimit.cpp.o
+tools/obj/conceptualModel/priority.cpp.o
+tools/obj/parseTree/defFile.cpp.o
+tools/obj/parseTree/compoundItem.cpp.o
+tools/obj/parseTree/token.cpp.o
+tools/obj/parseTree/content.cpp.o
+tools/obj/exception.cpp.o
+
+r@ba7beaaf9b19:~/workspace/legato/build$ find tools -type f -name '*.o' | wc
+     60      60    2494
+

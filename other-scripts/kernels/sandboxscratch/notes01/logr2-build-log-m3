@@ -1,0 +1,39 @@
+
+logr2-build-log-m3
+$ grep CCLDEXE logr2-build-log-m2 | sed -e 's/ in .*//' > logr2-build-log-m3
+
+
+   604	CCLDEXE out /~~/build/localhost/framework/bin/supervisor 
+   622	CCLDEXE out /~~/build/localhost/framework/bin/serviceDirectory 
+   658	CCLDEXE out /~~/build/localhost/framework/bin/logCtrlDaemon 
+   742	CCLDEXE out /~~/build/localhost/framework/bin/configTree 
+   788	CCLDEXE out /~~/build/localhost/framework/bin/watchdog 
+   936	CCLDEXE out /~~/build/localhost/framework/bin/updateDaemon 
+  1422	CCLDEXE out /~~/build/localhost/framework/bin/config
+  1486	CCLDEXE out /~~/build/localhost/framework/bin/execInApp
+  1503	CCLDEXE out /~~/build/localhost/framework/bin/log
+  1536	CCLDEXE out /~~/build/localhost/framework/bin/sdir
+  1556	CCLDEXE out /~~/build/localhost/framework/bin/inspect
+  1572	CCLDEXE out /~~/build/localhost/framework/bin/xattr
+  1633	CCLDEXE out /~~/build/localhost/framework/bin/app
+  1684	CCLDEXE out /~~/build/localhost/framework/bin/update
+  1719	CCLDEXE out /~~/build/localhost/framework/bin/uartMode
+
+  2135	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/cm
+  2151	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/fwupdate
+  2211	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/gnss
+  2243	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/pmtool
+  2275	CCLDEXE out build/localhost/system/app/tools/staging/read-only/bin/secstore
+  2351	CCLDEXE out build/localhost/system/app/atClient/staging/read-only/bin/atClientDaemon
+  2375	CCLDEXE out build/localhost/system/app/atServer/staging/read-only/bin/atServerDaemon
+  2423	CCLDEXE out build/localhost/system/app/cellNetService/staging/read-only/bin/cellNetService
+  2447	CCLDEXE out build/localhost/system/app/audioService/staging/read-only/bin/audioDaemon
+  2479	CCLDEXE out build/localhost/system/app/dataConnectionService/staging/read-only/bin/dcsDaemon
+  2515	CCLDEXE out build/localhost/system/app/fwupdateService/staging/read-only/bin/fwupdateDaemon
+  2807	CCLDEXE out build/localhost/system/app/modemService/staging/read-only/bin/modemDaemon
+  2835	CCLDEXE out build/localhost/system/app/positioningService/staging/read-only/bin/posDaemon
+  2899	CCLDEXE out build/localhost/system/app/powerMgr/staging/read-only/bin/powerManagerService
+  2955	CCLDEXE out build/localhost/system/app/secStore/staging/read-only/bin/secStore
+  2999	CCLDEXE out build/localhost/system/app/smsInboxService/staging/read-only/bin/smsInboxService
+  3535	CCLDEXE out build/localhost/system/app/gpioService/staging/read-only/bin/gpioService
+  3566	CCLDEXE out build/localhost/system/app/voiceCallService/staging/read-only/bin/voiceCallService

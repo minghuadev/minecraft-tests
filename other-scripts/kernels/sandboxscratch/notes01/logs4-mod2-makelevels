@@ -1,0 +1,152 @@
+     2	make localhost
+     3	make[1]: Entering directory '/home/r/workspace/legato'
+--
+     6	make -f Makefile.hostTools
+     7	make[2]: Entering directory '/home/r/workspace/legato'
+    85	make[2]: Leaving directory '/home/r/workspace/legato'
+--
+    94	make -f Makefile.framework
+    95	make[2]: Entering directory '/home/r/workspace/legato'
+--
+   474	make -C /..../build/localhost/framework/libjansson
+   475	make[3]: Entering directory '/..../build/localhost/framework/libjansson'
+
+   724	make[5]: Leaving directory '/..../build/localhost/framework/libjansson'
+   725	[100%] Built target test_memory_funcs
+   726	make[4]: Leaving directory '/..../build/localhost/framework/libjansson'
+   727	/usr/bin/cmake -E cmake_progress_start /..../build/localhost/framework/libjansson/CMakeFiles 0
+   728	make[3]: Leaving directory '/..../build/localhost/framework/libjansson'
+--
+   729	make -f Makefile.targetTools
+   730	make[3]: Entering directory '/home/r/workspace/legato'
+   856	make[3]: Leaving directory '/home/r/workspace/legato'
+--
+   866	echo "$md5" > /..../build/localhost/framework/md5
+   867	make[2]: Leaving directory '/home/r/workspace/legato'
+--
+  1383	[512/512] Packaging system
+  1384	make[1]: Leaving directory '/home/r/workspace/legato'
+--
+  1385	make docs
+  1386	make[1]: Entering directory '/home/r/workspace/legato'
+--
+  1389	make -f Makefile.hostTools
+  1390	make[2]: Entering directory '/home/r/workspace/legato'
+  1405	make[2]: Leaving directory '/home/r/workspace/legato'
+--
+  1414	make -f Makefile.framework
+  1415	make[2]: Entering directory '/home/r/workspace/legato'
+--
+  1476	make -C /..../build/localhost/framework/libjansson
+  1477	make[3]: Entering directory '/..../build/localhost/framework/libjansson'
+  1685	make[3]: Leaving directory '/..../build/localhost/framework/libjansson'
+--
+  1686	make -f Makefile.targetTools
+  1687	make[3]: Entering directory '/home/r/workspace/legato'
+  1749	make[3]: Leaving directory '/home/r/workspace/legato'
+--
+  1759	echo "$md5" > /..../build/localhost/framework/md5
+  1760	make[2]: Leaving directory '/home/r/workspace/legato'
+--
+  1933	make -C build/localhost user_docs
+  1934	make[2]: Entering directory '/..../build/localhost'
+--
+  1936	make -f CMakeFiles/Makefile2 user_docs
+  1937	make[3]: Entering directory '/..../build/localhost'
+--
+  1940	make -f CMakeFiles/Makefile2 framework/doc/CMakeFiles/user_docs.dir/all
+  1941	make[4]: Entering directory '/..../build/localhost'
+--
+  1942	make -f framework/doc/CMakeFiles/mkdoc_gen.dir/build.make framework/doc/CMakeFiles/mkdoc_gen.dir/depend
+  1943	make[5]: Entering directory '/..../build/localhost'
+  1948	make[5]: Leaving directory '/..../build/localhost'
+--
+  1949	make -f framework/doc/CMakeFiles/mkdoc_gen.dir/build.make framework/doc/CMakeFiles/mkdoc_gen.dir/build
+  1950	make[5]: Entering directory '/..../build/localhost'
+  1967	make[5]: Leaving directory '/..../build/localhost'
+--
+  1969	make -f interfaces/CMakeFiles/le_wifiClient_if.dir/build.make interfaces/CMakeFiles/le_wifiClient_if.dir/depend
+  1970	make[5]: Entering directory '/..../build/localhost'
+  1975	make[5]: Leaving directory '/..../build/localhost'
+--
+  1976	make -f interfaces/CMakeFiles/le_wifiClient_if.dir/build.make interfaces/CMakeFiles/le_wifiClient_if.dir/build
+  1977	make[5]: Entering directory '/..../build/localhost'
+  1980	make[5]: Leaving directory '/..../build/localhost'
+--
+  1982	make -f interfaces/CMakeFiles/le_mdc_if.dir/build.make interfaces/CMakeFiles/le_mdc_if.dir/depend
+  1983	make[5]: Entering directory '/..../build/localhost'
+  1988	make[5]: Leaving directory '/..../build/localhost'
+--
+  1989	make -f interfaces/CMakeFiles/le_mdc_if.dir/build.make interfaces/CMakeFiles/le_mdc_if.dir/build
+  1990	make[5]: Entering directory '/..../build/localhost'
+  1993	make[5]: Leaving directory '/..../build/localhost'
+--
+  2580	make -f CMakeFiles/api_headers.dir/build.make CMakeFiles/api_headers.dir/depend
+  2581	make[5]: Entering directory '/..../build/localhost'
+  2586	make[5]: Leaving directory '/..../build/localhost'
+--
+  2587	make -f CMakeFiles/api_headers.dir/build.make CMakeFiles/api_headers.dir/build
+  2588	make[5]: Entering directory '/..../build/localhost'
+  2589	make[5]: Nothing to be done for 'CMakeFiles/api_headers.dir/build'.
+  2590	make[5]: Leaving directory '/..../build/localhost'
+--
+  2592	make -f framework/doc/CMakeFiles/user_docs.dir/build.make framework/doc/CMakeFiles/user_docs.dir/depend
+  2593	make[5]: Entering directory '/..../build/localhost'
+  2598	make[5]: Leaving directory '/..../build/localhost'
+--
+  2599	make -f framework/doc/CMakeFiles/user_docs.dir/build.make framework/doc/CMakeFiles/user_docs.dir/build
+  2600	make[5]: Entering directory '/..../build/localhost'
+  5824	make[5]: Leaving directory '/..../build/localhost'
+
+  5825	[100%] Built target user_docs
+  5826	make[4]: Leaving directory '/..../build/localhost'
+
+  5827	/usr/bin/cmake -E cmake_progress_start /..../build/localhost/CMakeFiles 0
+  5828	make[3]: Leaving directory '/..../build/localhost'
+  5829	make[2]: Leaving directory '/..../build/localhost'
+--
+  5964	make -C build/localhost implementation_docs
+  5965	make[2]: Entering directory '/..../build/localhost'
+--
+  5967	make -f CMakeFiles/Makefile2 implementation_docs
+  5968	make[3]: Entering directory '/..../build/localhost'
+--
+  5971	make -f CMakeFiles/Makefile2 framework/doc/CMakeFiles/implementation_docs.dir/all
+  5972	make[4]: Entering directory '/..../build/localhost'
+--
+  5973	make -f framework/doc/CMakeFiles/mkdoc_gen.dir/build.make framework/doc/CMakeFiles/mkdoc_gen.dir/depend
+  5974	make[5]: Entering directory '/..../build/localhost'
+  5976	make[5]: Leaving directory '/..../build/localhost'
+--
+  5977	make -f framework/doc/CMakeFiles/mkdoc_gen.dir/build.make framework/doc/CMakeFiles/mkdoc_gen.dir/build
+  5978	make[5]: Entering directory '/..../build/localhost'
+  5995	make[5]: Leaving directory '/..../build/localhost'
+--
+  5997	make -f interfaces/CMakeFiles/le_wifiClient_if.dir/build.make interfaces/CMakeFiles/le_wifiClient_if.dir/depend
+  5998	make[5]: Entering directory '/..../build/localhost'
+  6000	make[5]: Leaving directory '/..../build/localhost'
+
+  6001	make -f interfaces/CMakeFiles/le_wifiClient_if.dir/build.make interfaces/CMakeFiles/le_wifiClient_if.dir/build
+  6002	make[5]: Entering directory '/..../build/localhost'
+  6003	make[5]: Nothing to be done for 'interfaces/CMakeFiles/le_wifiClient_if.dir/build'.
+  6004	make[5]: Leaving directory '/..../build/localhost'
+--
+  6429	make -f framework/doc/CMakeFiles/implementation_docs.dir/build.make framework/doc/CMakeFiles/implementation_docs.dir/depend
+  6430	make[5]: Entering directory '/..../build/localhost'
+--
+  6434	Scanning dependencies of target implementation_docs
+  6435	make[5]: Leaving directory '/..../build/localhost'
+  6436	make -f framework/doc/CMakeFiles/implementation_docs.dir/build.make framework/doc/CMakeFiles/implementation_docs.dir/build
+  6437	make[5]: Entering directory '/..../build/localhost'
+--
+ 13718	cd /..../build/localhost/framework/doc && cp /..../framework/doc/static/search.css /..../build/doc/implementation/html/search
+ 13719	make[5]: Leaving directory '/..../build/localhost'
+ 13720	[100%] Built target implementation_docs
+ 13721	make[4]: Leaving directory '/..../build/localhost'
+
+ 13722	/usr/bin/cmake -E cmake_progress_start /..../build/localhost/CMakeFiles 0
+ 13723	make[3]: Leaving directory '/..../build/localhost'
+
+ 13724	make[2]: Leaving directory '/..../build/localhost'
+
+ 13725	make[1]: Leaving directory '/home/r/workspace/legato'

@@ -1,0 +1,70 @@
+
+supervisor ninja rules:
+
+rule CompileC
+  description = Compiling C source
+  depfile = $out.d
+  command = gcc --sysroot=/ -MMD -MF $out.d -c $in -o $out $
+      -DLE_FILENAME=`basename $in` -Wall -fPIC -Werror -fvisibility=hidden $
+      -DMK_TOOLS_BUILD $cFlags
+
+rule CompileCxx
+  description = Compiling C++ source
+  depfile = $out.d
+  command = g++ --sysroot=/ -MMD -MF $out.d -c $in -o $out $
+      -DLE_FILENAME=`basename $in` -Wall -fPIC -Werror -fvisibility=hidden  $
+      -DMK_TOOLS_BUILD $cxxFlags
+
+rule LinkCLib
+  description = Linking C library
+  command = gcc --sysroot=/ -shared -o $out $in $ldFlags
+
+rule LinkCxxLib
+  description = Linking C++ library
+  command = g++ --sysroot=/ -shared -o $out $in $ldFlags
+
+rule LinkCExe
+  description = Linking C executable
+  command = gcc --sysroot=/ -o $out $in $ldFlags
+
+rule LinkCxxExe
+  description = Linking C++ executable
+  command = g++ --sysroot=/ -o $out $in $ldFlags
+
+rule CompileJava
+  description = Compiling Java source
+  command = javac -cp $classPath -d $classDestPath $in && $
+            jar -cf $out -C $classDestPath .
+
+rule GenInterfaceCode
+  description = Generating IPC interface code
+  command = ifgen --output-dir $outputDir $ifgenFlags $in
+
+rule MakeDir
+  description = Creating directory
+  command = mkdir -p "$out" || [ -d "$out" ]
+
+rule HardLink
+  description = Creating hard link
+  command = ln -T -f $in $out
+
+rule CopyF
+  description = Copying file
+  command = cp -d -f -T $in $out && $
+            chmod $modeFlags $out
+
+
+from lgato-af/framework/tools/mkTools
+$ grep -r CompileC *
+legato-af/framework/tools/mkTools/buildScriptGenerator/
+buildScriptCommon.cpp:    script << "rule CompileC\n"
+buildScriptCommon.cpp:    script << "rule CompileCxx\n"
+buildScriptCommon.cpp:    " CompileC $builddir/" << cFiles.sourceFile;
+buildScriptCommon.cpp:    " CompileC $builddir/" << cFiles.sourceFile;
+componentBuildScript.cpp: " CompileC " << objFilePtr->sourceFilePath;
+componentBuildScript.cpp: " CompileCxx " << objFilePtr->sourceFilePath;
+componentBuildScript.cpp: " CompileC $builddir/" << componentPtr->workingDir + "/src/_componentMain.c"
+exeBuildScript.cpp:       " CompileC " << objFilePtr->sourceFilePath << "\n"
+exeBuildScript.cpp:       " CompileCxx " << objFilePtr->sourceFilePath << "\n"
+exeBuildScript.cpp:       " CompileC " << mainObjectFile.sourceFilePath << "\n"
+

@@ -1,0 +1,28 @@
+
+4323 r@ba7beaaf9b19:~/workspace/legato$ git config -l
+4324 user.email=you@example.com
+4325 user.name=yourname
+4326 color.ui=auto
+4327 core.repositoryformatversion=0
+4328 core.filemode=true
+4329 filter.lfs.smudge=git-lfs smudge --skip -- %f
+4330 remote.legato.url=git://github.com/legatoproject/legato-af
+4331 remote.legato.projectname=legato-af
+4332 remote.legato.fetch=+refs/heads/*:refs/remotes/legato/*
+
+4333 r@ba7beaaf9b19:~/workspace/legato$ du -sh .
+4334 35M     .
+4335 r@ba7beaaf9b19:~/workspace/legato$ find . -type d -name '.git'
+4336 ./platformAdaptor/simu/.git
+4337 ./platformAdaptor/audio/.git
+4338 ./platformAdaptor/at/.git
+4339 ./platformAdaptor/qmi/bin/wp750x/.git
+4340 ./platformAdaptor/qmi/bin/ar759x/.git
+4341 ./platformAdaptor/qmi/bin/ar7/.git
+4342 ./platformAdaptor/qmi/bin/wp85/.git
+4343 ./platformAdaptor/qmi/bin/wp76xx/.git
+4344 ./platformAdaptor/qmi/bin/ar758x/.git
+4345 ./.git
+4346 ./modules/Raspi/.git
+4347 ./modules/WiFi/.git
+

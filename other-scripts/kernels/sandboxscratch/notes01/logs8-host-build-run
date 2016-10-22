@@ -1,0 +1,59 @@
+
+[tmp]$ cat log-build 
+
+
+$ sudo apt-get install build-essential ninja-build cmake python-jinja2
+
+
+$ sudo apt-get install gcc make ninja-build cmake python-jinja2 g++
+
+
+
+root@ubuntu:~/legato-af# mkdir /legato
+root@ubuntu:~/legato-af# mkdir /mnt/legato
+root@ubuntu:~/legato-af# mkdir /mnt/legato/system
+root@ubuntu:~/legato-af# cd build/localhost/system/staging/
+root@ubuntu:~/legato-af/build/localhost/system/staging# cp -a * /mnt/legato/system
+
+
+
+windows install ubuntu to qemu guest: 
+  $ qemu-system-i386.exe -hda ubuntu1.img -boot d -cdrom ./ubuntu-16.04.1-server-i386.iso -m 1024
+
+windows convert image format: 
+  $ qemu-img.exe  convert -O qcow2 ubt1.img ubt1-converted.qcow
+
+windows try redirect: 
+$ qemu-system-i386.exe -hda ubt1.img -boot c -m 1024 -redir tcp:5022::22
+C:\cygwin\qemu\qemu-system-i386.exe: -redir tcp:5022::22: The -redir option is deprecated. Please use '-netdev user,hostfwd=...' instead.
+
+
+centos 64: 
+
+build 2.6.2: first install libcap-devel and libattr-devel 
+  [qemu-2.6.2]$ ./configure --prefix=/home/r/vm1/bin --target-list=i386-softmmu --enable-virtfs
+                make 
+                make install
+
+start with ssh redirect:
+  $ bin/bin/qemu-system-i386 -hda ubt1.qcow -boot c -m 1024 -nographic -redir tcp:5022::22
+
+cat /proc/cmdline from inside the guest ubuntu: 
+  BOOT_IMAGE=/boot/vmlinuz-4.4.0-31-generic root=UUID=bdb6b218-5a82-4b29-a5ff-e108b3163713 ro
+
+start with ttyS0 console: 
+  $ bin/bin/qemu-system-i386 -hda ubt1.qcow -boot c -m 1024 -nographic \
+    -serial mon:stdio -append 'console=ttyS0 root=/dev/sda1 ro' -kernel vmlinuz-4.4.0-31-generic
+
+start with virtfs: 
+  $ bin/bin/qemu-system-i386 -hda ubt1.qcow -boot c -m 1024 -nographic \
+     -serial mon:stdio -append 'console=ttyS0 root=/dev/sda1 ro'   \
+     -kernel vmlinuz-4.4.0-31-generic  \
+     -virtfs local,path=./sharedvol,mount_tag=host0,security_model=passthrough,id=host0
+
+  then inside the guest fstab: 
+    host0 /mnt/sharedvol 9p trans-virtio,version=9p2000.L,rw,user,exec,noauto 0 0
+
+
+
+

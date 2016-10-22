@@ -1,0 +1,134 @@
+diff --git a/framework/c/src/ninja-generator b/framework/c/src/ninja-generator
+index b059f1a..cf85e13 100755
+--- a/framework/c/src/ninja-generator
++++ b/framework/c/src/ninja-generator
+@@ -75,7 +75,7 @@ builddir = $BUILD_DIR
+ rule Compile
+   description = Compiling liblegato source file
+   depfile = \$out.d
+-  command = $TARGET_CC -MMD -MF \$out.d -c \$in -o \$out -Wall -fPIC -Werror \$flags \$
++  command = echo CC in \$in && $TARGET_CC -MMD -MF \$out.d -c \$in -o \$out -Wall -fPIC -Werror \$flags \$
+             -DLE_COMPONENT_NAME=framework \$
+             -I$LEGATO_ROOT/framework/c/inc \$
+             -DLE_SVCDIR_SERVER_SOCKET_NAME="\"$LE_SVCDIR_SERVER_SOCKET_NAME\"" \$
+@@ -84,7 +84,7 @@ rule Compile
+ 
+ rule Link
+   description = Linking liblegato
+-  command = $TARGET_CC -shared -o \$out \$in -lpthread -lrt
++  command = echo CCLD out \$out in \$in && $TARGET_CC -shared -o \$out \$in -lpthread -lrt
+ 
+ build $LIBLEGATO : Link $LIBLEGATO_OBJECTS
+ 
+diff --git a/framework/tools/mkTools/buildScriptGenerator/buildScriptCommon.cpp b/framework/tools/mkTools/buildScriptGenerator/buildScriptCommon.cpp
+index ad04d7c..a1b2288 100644
+--- a/framework/tools/mkTools/buildScriptGenerator/buildScriptCommon.cpp
++++ b/framework/tools/mkTools/buildScriptGenerator/buildScriptCommon.cpp
+@@ -118,7 +118,7 @@ void GenerateBuildRules
+     script << "rule CompileC\n"
+               "  description = Compiling C source\n"
+               "  depfile = $out.d\n" // Tell ninja where gcc will put the dependencies.
+-              "  command = " << cCompilerPath << " " << sysrootOption <<
++              "  command = echo CC in \\$in && " << cCompilerPath << " " << sysrootOption <<
+               " -MMD -MF $out.d -c $in -o $out"
+               " -DLE_FILENAME=`basename $in`" // Define the file name for the log macros.
+               " -Wall" // Enable all warnings.
+@@ -137,7 +137,7 @@ void GenerateBuildRules
+     script << "rule CompileCxx\n"
+               "  description = Compiling C++ source\n"
+               "  depfile = $out.d\n" // Tell ninja where gcc will put the dependencies.
+-              "  command = " << cxxCompilerPath << " " << sysrootOption <<
++              "  command = echo CCXX in \\$in && " << cxxCompilerPath << " " << sysrootOption <<
+               " -MMD -MF $out.d -c $in -o $out"
+               " -DLE_FILENAME=`basename $in`" // Define the file name for the log macros.
+               " -Wall" // Enable all warnings.
+@@ -155,39 +155,39 @@ void GenerateBuildRules
+     // Generate rules for linking C and C++ object code files into shared libraries.
+     script << "rule LinkCLib\n"
+               "  description = Linking C library\n"
+-              "  command = " << cCompilerPath << " " << sysrootOption <<
++              "  command = echo CCLD out \\$out in \\$in && " << cCompilerPath << " " << sysrootOption <<
+               " -shared -o $out $in $ldFlags\n"
+               "\n";
+ 
+     script << "rule LinkCxxLib\n"
+               "  description = Linking C++ library\n"
+-              "  command = " << cxxCompilerPath << " " << sysrootOption <<
++              "  command = echo CCXXLD out \\$out in \\$in && " << cxxCompilerPath << " " << sysrootOption <<
+               " -shared -o $out $in $ldFlags\n"
+               "\n";
+ 
+     script << "rule LinkCExe\n"
+               "  description = Linking C executable\n"
+-              "  command = " << cCompilerPath << " " << sysrootOption <<
++              "  command = echo CCLDEXE out \\$out in \\$in && " << cCompilerPath << " " << sysrootOption <<
+               " -o $out $in $ldFlags\n"
+               "\n";
+ 
+     script << "rule LinkCxxExe\n"
+               "  description = Linking C++ executable\n"
+-              "  command = " << cxxCompilerPath << " " << sysrootOption <<
++              "  command = echo CCXXLDEXE out \\$out in \\$in && " << cxxCompilerPath << " " << sysrootOption <<
+               " -o $out $in $ldFlags\n"
+               "\n";
+ 
+     // Generate rules for compiling Java code.
+     script << "rule CompileJava\n"
+               "  description = Compiling Java source\n"
+-              "  command = javac -cp $classPath -d $classDestPath $in && $\n"
++              "  command = echo CCJAVA in \\$in && javac -cp $classPath -d $classDestPath $in && $\n"
+               "            jar -cf $out -C $classDestPath .\n"
+               "\n";
+ 
+     // Generate a rule for running ifgen.
+     script << "rule GenInterfaceCode\n"
+               "  description = Generating IPC interface code\n"
+-              "  command = ifgen --output-dir $outputDir $ifgenFlags $in\n"
++              "  command = echo CCIFGEN in \\$in outdir \\$outputDir && ifgen --output-dir $outputDir $ifgenFlags $in\n"
+               "\n";
+ 
+     // Generate a rule for creating a directory.
+@@ -198,13 +198,13 @@ void GenerateBuildRules
+     // Generate a rule for creating a hard link.
+     script << "rule HardLink\n"
+               "  description = Creating hard link\n"
+-              "  command = ln -T -f $in $out\n"
++              "  command = echo CCLN in \\$in out \\$out && ln -T -f $in $out\n"
+               "\n";
+ 
+     // Generate a rule for copying a file.
+     script << "rule CopyF\n"
+               "  description = Copying file\n"
+-              "  command = cp -d -f -T $in $out && $\n"
++              "  command = echo CCCP in \\$in out \\$out && cp -d -f -T $in $out && $\n"
+               "            chmod $modeFlags $out\n"
+               "\n";
+ 
+diff --git a/framework/tools/mkTools/ninja-generator b/framework/tools/mkTools/ninja-generator
+index 74db980..e1008be 100755
+--- a/framework/tools/mkTools/ninja-generator
++++ b/framework/tools/mkTools/ninja-generator
+@@ -67,12 +67,12 @@ precompiledHeader = \$builddir/mkTools.h.gch
+ 
+ rule Link
+   description = Linking mk tools
+-  command = $COMPILER $TOOLS_ARCH_FLAGS -o \$out \$in
++  command = echo CCLD out \$out in \$in && $COMPILER $TOOLS_ARCH_FLAGS -o \$out \$in
+ 
+ rule Compile
+   description = Compiling mk tools sources
+   depfile = \$out.d
+-  command = mkdir -p \`dirname \$out\` && \$
++  command = mkdir -p \`dirname \$out\` && echo CC in \$in && \$
+             $COMPILER -MMD -MF \$out.d $TOOLS_ARCH_FLAGS -Wall -Werror \$
+                       -include $BUILD_DIR/mkTools.h \$
+                       -I$SOURCE_DIR \$
+@@ -82,7 +82,7 @@ rule Compile
+ rule PreCompile
+   description = Generating pre-compiled header for mk tools.
+   depfile = \$out.d
+-  command = $COMPILER -MMD -MF \$out.d $TOOLS_ARCH_FLAGS -g -o \$out \$in
++  command = echo CCPRE in \$in out \$out && $COMPILER -MMD -MF \$out.d $TOOLS_ARCH_FLAGS -g -o \$out \$in
+ 
+ build \$builddir/mk : Link $OBJECTS
+ 
