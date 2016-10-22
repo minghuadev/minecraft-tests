@@ -1,0 +1,7 @@
+
+
+to build legato for localhost target, install only these to ubuntu 16.04.1 server release: 
+
+apt-get install gcc make ninja-build cmake python-jinja2 g++
+
+
