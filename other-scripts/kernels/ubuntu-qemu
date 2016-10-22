@@ -1,6 +1,10 @@
 
+ubuntu-qemu
+see also: https://wiki.archlinux.org/index.php/QEMU
+
 
 windows install ubuntu to qemu guest:
+  $ qemu-img create -f raw ubuntu1.img 20G
   $ qemu-system-i386.exe -hda ubuntu1.img -boot d -cdrom ./ubuntu-16.04.1-server-i386.iso -m 1024
 
 windows convert image format:
@@ -13,7 +17,7 @@ windows try redirect:
 
 centos 64:
 
-build 2.6.2: first install libcap-devel and libattr-devel
+build 2.6.2: (first install libcap-devel and libattr-devel. enable virtfs for folder sharing.)
   [qemu-2.6.2]$ ./configure --prefix=/home/dev124/vm1/bin --target-list=i386-softmmu --enable-virtfs
                 make
                 make install
@@ -24,7 +28,7 @@ start with ssh redirect:
 cat /proc/cmdline from inside the guest ubuntu:
   BOOT_IMAGE=/boot/vmlinuz-4.4.0-31-generic root=UUID=bdb6b218-5a82-4b29-a5ff-e108b3163713 ro
 
-start with ttyS0 console:
+start with ttyS0 console: (first copy the kernel out. then use it to boot.)
   $ bin/bin/qemu-system-i386 -hda ubt1.qcow -boot c -m 1024 -nographic \
     -serial mon:stdio -append 'console=ttyS0 root=/dev/sda1 ro' -kernel vmlinuz-4.4.0-31-generic
 
