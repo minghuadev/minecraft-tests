@@ -1,0 +1,20 @@
+
+git clone https://chromium.googlesource.com/chromiumos/third_party/kernel.git
+ remote sending approximately 1.33GiB ...
+
+
+see 
+
+https://www.chromium.org/chromium-os/quick-start-guide
+quick start guide -the chromium projects
+
+repo init -u https://chromium.googlesource.com/chromiumos/manifest.git
+https://chromium.googlesource.com/chromiumos
+https://chromium.googlesource.com/chromiumos/manifest
+https://chromium.googlesource.com/chromiumos/manifest/+/master/full.xml
+
+
+
+https://www.chromium.org/chromium-os/how-tos-and-troubleshooting/kernel-configuration
+
+
