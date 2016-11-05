@@ -1,0 +1,17 @@
+
+notes-emulator-ia32
+2016-11-4
+
+
+https://wiki.tizen.org/wiki/Emulator
+https://wiki.tizen.org/wiki/Emulator#Tizen:Common_on_qemu-yagl_:_ia32
+
+download directory: 
+http://download.tizen.org/releases/daily/tizen/common/tizen-common_20150518.3/images/emulator32-wayland/common-emulator-wayland-mbr-i586/
+
+files: 
+http://download.tizen.org/releases/daily/tizen/common/tizen-common_20150518.3/images/emulator32-wayland/common-emulator-wayland-mbr-i586/tizen-common_20150518.3_common-emulator-wayland-mbr-i586-vmlinuz-3.12.18-3.26-common-i386-emulator
+http://download.tizen.org/releases/daily/tizen/common/tizen-common_20150518.3/images/emulator32-wayland/common-emulator-wayland-mbr-i586/tizen-common_20150518.3_common-emulator-wayland-mbr-i586.tar.gz
+http://download.tizen.org/releases/daily/tizen/common/tizen-common_20150518.3/images/emulator32-wayland/common-emulator-wayland-mbr-i586/MD5SUMS
+
+
