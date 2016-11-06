@@ -1,0 +1,43 @@
+
+https://www.doulos.com/content/training/emblinux_security_sandboxes.php
+
+
+ "Hardening" Linux systems to make them more resistant to attack is possible and is something that should be performed for every connected product. Our courses cover three aspects of system hardening:
+
+    Hardening the Linux operating system itself
+    Protecting applications running under Linux
+    Running applications in sandboxes (this course) - more detail on a specialised approach to protecting systems and the applications running on them 
+
+
+The course contains a mix of theory and practical sessions. Using a practical example system, it teaches each participant to increase the security step-by-step by:
+
+    Understanding security requirements and what needs to be protected
+    Analysing the system and software architecture with respect to security
+    Understanding how systems are attacked
+    Hardening the software environment to resist commonly used attacks
+    Restricting access to and from the network
+    Protecting sensitive data on the filesystem
+    Isolating and sandboxing vulnerable software components
+    Using advanced techniques such as Linux Security Modules (including SELinux) to limit the impact of a successful attack 
+
+
+Structure and Content
+Security fundamentals
+What is security and why is it necessary? • Security concepts and terminology • Defense-in-depth approach • Why are devices attacked and who attacks them? • The guiding principles of securing a system
+
+Threat modelling
+Introduction to the Secure Software Development Lifecycle process • Why built-in-by-design security is important • Identifying what to protect • Security design and architecture • Threat modelling and mitigation design • Practicals: Creating a threat model, defining security requirements
+
+Application security
+Access models • The Unix security model • Process privileges and capabilities • Process resources and execution limits • Sandboxes • Securing inter-process communication • Practical: Implementing an LXC sandbox
+
+Linux Security Modules
+The origin and role of LSMs • Mandatory Access Control • LSMs used in embedded systems • Performance impacts of LSMs • Practical: creating a sandbox using LSM • Practical: adding LSM hardening to an LXC sandbox
+
+Securing the software environment
+Dynamic loading • Limiting resources • Limiting kernel access • Practical: Dynamic linking
+
+Network security
+Data in motion • The internet protocol suite • Link layer protection • Internet and transport layer protection • Application layer protection • Network domains, firewalls and port forwarding • Wireless security • Other digital connectivity threats • Practicals: Port scanning, implementing a firewall
+
+
