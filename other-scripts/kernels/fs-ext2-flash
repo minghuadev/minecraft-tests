@@ -1,0 +1,17 @@
+
+search ext4 on nand flash
+2016-11-08
+
+
+
+http://arstechnica.com/civis/viewtopic.php?f=2&t=1131931
+Ext4 filesystem hits Android, no need to fear data loss 
+
+to avoid data loss: app calls fsync() and mount turns off delayed allocation with -o nodelalloc.
+
+
+
+http://forum.xda-developers.com/showthread.php?t=900041
+[REF] The truth about flash [RFS][EXT4][Bad Blocks][Real Numbers][noatime]
+
+
