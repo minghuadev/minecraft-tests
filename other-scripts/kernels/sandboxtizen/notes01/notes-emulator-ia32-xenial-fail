@@ -1,0 +1,241 @@
+
+
+https://wiki.tizen.org/wiki/Emulator#Tizen:Common_on_qemu-yagl_:_ia32
+
+
+
+build on xenial 16.04.1 LTS: 
+apt-get install libxen-dev libpixman-1-dev libcap-dev libcurl4-openssl-dev libv4l-dev
+apt-get install zlib1g-dev
+apt-get install libsdl1.2-dev
+
+needed to run: 
+apt-get install openjdk-8-jdk
+
+
+mkdir $HOME/tizen
+cd $HOME/tizen
+
+
+##wget http://download.tizen.org/releases/weekly/tizen/common/tizen-common_20161020.2/images/emulator32-wayland/common-emulator-wayland-mbr-i586/tizen-common_20161020.2_common-emulator-wayland-mbr-i586.tar.gz
+##tar zxf tizen-common_20161020.2_common-emulator-wayland-mbr-i586.tar.gz
+##mv tizen-common.img ./
+##when run this version has an error: 
+##Error: Unable to access jarfile /home/tzbuild/tizen/qemu/i386-softmmu/emulator-skin.jar
+
+
+wget http://download.tizen.org/releases/daily/tizen/common/tizen-common_20150518.3/images/emulator32-wayland/common-emulator-wayland-mbr-i586/tizen-common_20150518.3_common-emulator-wayland-mbr-i586-vmlinuz-3.12.18-3.26-common-i386-emulator
+wget http://download.tizen.org/releases/daily/tizen/common/tizen-common_20150518.3/images/emulator32-wayland/common-emulator-wayland-mbr-i586/tizen-common_20150518.3_common-emulator-wayland-mbr-i586.tar.gz
+
+tar zxf tizen-common_20150518.3_common-emulator-wayland-mbr-i586.tar.gz
+mv tizen-common.img ./
+
+
+touch $HOME/tizen/swap.x86
+
+
+
+git clone git://review.tizen.org/sdk/emulator/qemu
+
+./configure \
+  --target-list=i386-softmmu \
+  --enable-werror --disable-gtk \
+  --audio-drv-list=alsa \
+  --disable-vnc --disable-pie \
+  --enable-sdl --with-sdlabi=1.2 \
+  --enable-vigs --enable-yagl \
+  --enable-maru --enable-libpng \
+  --enable-xen --enable-virtfs
+
+
+make -C tizen/src build_info && make
+
+
+fail one: 
+    vl.c:3062:5: error: ‘g_mem_set_vtable’ is deprecated [-Werror=deprecated-declarations]
+         g_mem_set_vtable(&mem_trace);
+         ^
+    In file included from /usr/include/glib-2.0/glib/glist.h:32:0,
+                     from /usr/include/glib-2.0/glib/ghash.h:33,
+                     from /usr/include/glib-2.0/glib.h:50,
+                     from vl.c:69:
+    /usr/include/glib-2.0/glib/gmem.h:357:7: note: declared here
+     void  g_mem_set_vtable (GMemVTable *vtable);
+           ^
+    cc1: all warnings being treated as errors
+    /home/tzbuild/tizen/qemu/rules.mak:33: recipe for target 'vl.o' failed
+    make: *** [vl.o] Error 1
+
+
+add extra cflags to configure: 
+
+    --extra-cflags=-Wno-deprecated-declarations
+
+
+fail two:
+    hw/virtio/virtio-rng.c: In function ‘virtio_rng_device_realize’:
+    hw/virtio/virtio-rng.c:143:31: error: logical not is only applied to the left hand side of comparison [-Werror=logical-not-parentheses]
+         if (!vrng->conf.period_ms > 0) {
+                                   ^
+    cc1: all warnings being treated as errors
+    /home/tzbuild/tizen/qemu/rules.mak:33: recipe for target 'hw/virtio/virtio-rng.o' failed
+    make: *** [hw/virtio/virtio-rng.o] Error 1
+
+add extra cflags to configure: 
+
+    --extra-cflags=-Wno-logical-not-parentheses
+
+
+cd ..
+cat > info.ini <<EOCC
+[[QEMU_OPTIONS]]
+-M pc
+-m 1024
+-drive file=/home/tzbuild/tizen/tizen-common.img,if=virtio,index=1
+-drive file=/home/tzbuild/tizen/swap.x86,if=virtio,index=2
+-boot c
+-append "console=ttyS0 root=/dev/vda rw video=LVDS-1:1366x768-32@60 ip=10.0.2.15::10.0.2.2:255.255.255.0::eth0:none vm_name=tizen sdb_port=26100"
+-serial "file://dev/stderr"
+-kernel /home/tzbuild/tizen/tizen-common_20150518.3_common-emulator-wayland-mbr-i586-vmlinuz-3.12.18-3.26-common-i386-emulator
+-enable-kvm
+-smp 8
+-vga none
+-display sdl
+-soundhw all
+-vigs-backend gl
+-yagl-backend vigs
+-enable-vigs
+-enable-yagl
+-device virtio-esm-pci
+-device virtio-hwkey-pci
+-device maru-brightness
+-device maru-camera
+-device virtio-touchscreen-pci,max_point=10
+-usb
+-usbdevice tablet
+-net nic
+-net user
+-redir tcp:22122::22
+EOCC
+
+
+./qemu/./i386-softmmu/qemu-system-i386 -c info.ini --resolution 1366x768
+
+....
+~/tizen$ ./qemu/./i386-softmmu/qemu-system-i386 -c info.ini --resolution 1366x768
+11:12:45.214153(23712) [INFO:emul_state] emulator graphic resolution : 1366x768
+11:12:45.214461(23712) [INFO:main] Start emulator...
+11:12:45.214659(23712) [INFO:main] * Board name : Maru
+11:12:45.214861(23712) [INFO:main] * Package Version: 2.0.12
+11:12:45.215042(23712) [INFO:main] * Package Maintainer: Yeong-Kyoon Lee<yeongkyoon.lee@samsung.com>
+11:12:45.215202(23712) [INFO:main] * Git Head : 68a0efd8c1079a8063caa33f4d94a64d491ea15c
+11:12:45.215397(23712) [INFO:main] * Latest Git Tag : 2.1b_release (Tizen 2.1b Release)
+11:12:45.216317(23712) [INFO:main] * User name :
+11:12:45.216511(23712) [INFO:main] * Host name : tzmach
+11:12:45.216692(23712) [INFO:main] * Build date : 2016-11-04 15:46:56 PDT
+11:12:45.216877(23712) [INFO:main] * Current time : 2016-11-05 11:12:45
+11:12:45.217064(23712) [INFO:main] * Host sdl version : (1, 2, 15)
+11:12:45.217226(23712) [INFO:osutil] * Linux
+11:12:45.217426(23712) [INFO:osutil] * LibPNG Version : 1.2.54
+11:12:45.217645(23712) [INFO:osutil] * QEMU build machine linux kernel version : (4, 4, 21)
+11:12:45.217815(23712) [INFO:osutil] * Host machine uname : Linux tzmach 4.4.0-45-generic #66-Ubuntu SMP Wed Oct 19 14:12:37 UTC 2016 x86_64
+11:12:45.218035(23712) [INFO:osutil] * Total Ram : 1016276 kB, Free: 93812 kB
+11:12:45.218222(23712) [INFO:osutil] * Linux distribution infomation :
+Description:    Ubuntu 16.04.1 LTS
+Release:        16.04
+Codename:       xenial
+11:12:45.306845(23712) [INFO:osutil] * Host PCI devices :
+00:00.0 Host bridge: Intel Corporation 440BX/ZX/DX - 82443BX/ZX/DX Host bridge (rev 01)
+00:01.0 PCI bridge: Intel Corporation 440BX/ZX/DX - 82443BX/ZX/DX AGP bridge (rev 01)
+00:07.0 ISA bridge: Intel Corporation 82371AB/EB/MB PIIX4 ISA (rev 08)
+00:07.1 IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE (rev 01)
+00:07.3 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI (rev 08)
+00:07.7 System peripheral: VMware Virtual Machine Communication Interface (rev 10)
+00:0f.0 VGA compatible controller: VMware SVGA II Adapter
+00:10.0 SCSI storage controller: LSI Logic / Symbios Logic 53c1030 PCI-X Fusion-MPT Dual Ultra320 SCSI (rev 01)
+00:11.0 PCI bridge: VMware PCI bridge (rev 02)
+00:15.0 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:15.1 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:15.2 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:15.3 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:15.4 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:15.5 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:15.6 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:15.7 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:16.0 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:16.1 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:16.2 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:16.3 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:16.4 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:16.5 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:16.6 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:16.7 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:17.0 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:17.1 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:17.2 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:17.3 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:17.4 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:17.5 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:17.6 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:17.7 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:18.0 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:18.1 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:18.2 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:18.3 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:18.4 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:18.5 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:18.6 PCI bridge: VMware PCI Express Root Port (rev 01)
+00:18.7 PCI bridge: VMware PCI Express Root Port (rev 01)
+03:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
+qemu args: =========================================
+./qemu/./i386-softmmu/qemu-system-i386 -M pc -m 1024 -drive file=/home/tzbuild/tizen/tizen-common.img,if=virtio,index=1 -drive file=/home/tzbuild/tizen/swap.x86,if=virtio,index=2 -boot c -append console=ttyS0 root=/dev/vda rw video=LVDS-1:1366x768-32@60 ip=10.0.2.15::10.0.2.2:255.255.255.0::eth0:none vm_name=tizen sdb_port=26100 -serial file://dev/stderr -kernel /home/tzbuild/tizen/tizen-common_20150518.3_common-emulator-wayland-mbr-i586-vmlinuz-3.12.18-3.26-common-i386-emulator -enable-kvm -smp 8 -vga none -display sdl -soundhw all -vigs-backend gl -yagl-backend vigs -enable-vigs -enable-yagl -device virtio-esm-pci -device virtio-hwkey-pci -device maru-brightness -device maru-camera -device virtio-touchscreen-pci,max_point=10 -usb -usbdevice tablet -net nic -net user -redir tcp:22122::22
+====================================================
+skin args: =========================================
+
+====================================================
+11:12:45.342129(23712) [INFO:main] socket initialize...
+11:12:45.342165(23712) [INFO:main] qemu main start...
+
+(process:23712): GLib-WARNING **: /build/glib2.0-7IO_Yw/glib2.0-2.48.1/./glib/gmem.c:483: custom memory allocation vtable not supported
+11:12:45.343710(23712) [INFO:main] Prepare maru specified feature
+11:12:45.343750(23712) [INFO:main] Prepare_basic_features
+11:12:45.343804(23712) [INFO:sdb] port(26101) listen success
+11:12:45.343841(23712) [INFO:sdb] sdb port is 26100
+11:12:45.343906(23712) [INFO:osutil] shared memory key: 26100 value:
+11:12:45.344292(23712) [INFO:sdb] start sdb noti server thread.
+11:12:45.344534(23712) [INFO:sdb] success to bind port[127.0.0.1:26103/udp] for sdb noti server in host
+11:12:45.344803(23712) [INFO:sdb] SDBD established on port 26101
+11:12:45.344912(23712) [INFO:sdb] redirect [tcp:26101::26101] success
+11:12:45.344967(23712) [INFO:sdb] Port(26101/tcp) listen for SDB
+11:12:45.346889(23717) [INFO:ecs] ecs starts initializing.
+11:12:45.347267(23717) [INFO:ecs] ecs port: 26103
+11:12:45.347716(23717) [INFO:ecs] Listen fd is 10
+11:12:45.360705(23712) [INFO:osutil] DIRECT PROXY MODE
+11:12:45.361658(23712) [INFO:main] Prepare_opengl_acceleration
+ERROR - Unable to find suitable FB config
+11:12:46.445237(23712) [WARNING:main] GL acceleration was disabled due to the fail of GL check!
+11:12:46.445424(23712) [INFO:main] kernel command : console=ttyS0 root=/dev/vda rw video=LVDS-1:1366x768-32@60 ip=10.0.2.15::10.0.2.2:255.255.255.0::eth0:none vm_name=tizen sdb_port=26100 sdb_port=26100, http_proxy= https_proxy= ftp_proxy= socks_proxy= dns1=10.0.2.3 vm_resolution=1366x768 yagl=0
+Could not access KVM kernel module: No such file or directory
+failed to initialize KVM: No such file or directory
+The error message is registered = 0 : No accelerator found.
+11:12:46.446679(23712) [INFO:sdb] shutdown sdb notification server.
+11:12:46.446920(23712) [INFO:ecs] ecs is closing.
+11:12:46.449773(23717) [INFO:ecs] ### Good bye! ECS ###
+11:12:46.449830(23717) [INFO:ecs] close listen_fd: 10
+11:12:46.450079(23712) [INFO:main] Exit emulator...
+11:12:46.450252(23712) [INFO:skin_client] run simple client
+11:12:46.450408(23712) [INFO:skin_client] bin directory : /home/tzbuild/tizen/qemu/i386-softmmu/
+11:12:46.450559(23712) [INFO:skin_client] skin command length : 164
+11:12:46.450739(23712) [INFO:skin_client] command for swt : java -jar -Djava.library.path="/home/tzbuild/tizen/qemu/i386-softmmu/" "/home/tzbuild/tizen/qemu/i386-softmmu/emulator-skin.jar" simple.msg="No accelerator found."
+Error: Unable to access jarfile /home/tzbuild/tizen/qemu/i386-softmmu/emulator-skin.jar
+11:12:46.454249(23712) [INFO:skin_client] child return value : 256
+11:12:46.454378(23712) [INFO:backtrace] normal exit called
+11:12:46.454517(23712) [SEVERE:backtrace] Backtrace depth is 7.
+./qemu/./i386-softmmu/qemu-system-i386[0x6aa518]
+/lib/x86_64-linux-gnu/libc.so.6(+0x39fe8)[0x7fcab50d5fe8]
+/lib/x86_64-linux-gnu/libc.so.6(+0x3a035)[0x7fcab50d6035]
+./qemu/./i386-softmmu/qemu-system-i386[0x56504e]
+./qemu/./i386-softmmu/qemu-system-i386(main+0x3a1)[0x410481]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf0)[0x7fcab50bc830]
+./qemu/./i386-softmmu/qemu-system-i386[0x410929]
+
