@@ -1,0 +1,33 @@
+
+search thread core affinity
+
+
+http://stackoverflow.com/questions/1407786/how-to-set-cpu-affinity-of-a-particular-pthread
+2017-1-17
+
+// core_id = 0, 1, ... n-1, where n is the system's number of cores
+
+int stick_this_thread_to_core(int core_id) {
+   int num_cores = sysconf(_SC_NPROCESSORS_ONLN);
+   if (core_id < 0 || core_id >= num_cores)
+      return EINVAL;
+
+   cpu_set_t cpuset;
+   CPU_ZERO(&cpuset);
+   CPU_SET(core_id, &cpuset);
+
+   pthread_t current_thread = pthread_self();    
+   return pthread_setaffinity_np(current_thread, sizeof(cpu_set_t), &cpuset);
+}
+
+It's needed to add #define _GNU_SOURCE and #include <sched.h> to work on gcc 4.7.2. 
+	
+Also, #include <unistd.h> is needed for sysconf with gcc 4.8.1.
+
+For some reason it works on my computer with two cores, however on my other computer 
+with 4 cores it gives the following error: <pre>Segmentation fault (core dumped)</pre>
+
+Nice. Rather than failing when core_id > num_cores, another parameter could specify 
+the default in that case: core_id = default_core; -1 as the default could mean to fail. 
+
+
