@@ -1,0 +1,14 @@
+
+copy os osdir/toolchain files to the container shared directory
+
+edit the install script: 
+
+    change /etc/profile to ./etc-profile
+
+touch ./etc-profile
+
+run: 
+
+    bash arm-cross-linux.install force
+
+

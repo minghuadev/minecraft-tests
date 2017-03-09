@@ -1,0 +1,59 @@
+
+===========================================================
+Host Setup
+
+install ubuntu 14.04.5 LTS from a usb stick
+run: `do-release-upgrade` upgrade to 16.04.2 LTS
+run: `apt-get install git`
+install git-lfs by adding repo and run `apt-get install git-lfs`
+
+run: `apt-get install docker.io`
+add current user to the docker group 
+
+
+ref: hub.docker.com/r/library/ubuntu/tags/
+     tag: xenial-20170214
+
+
+docker pull: `docker pull ubuntu:xenial-20170214`
+docker save: `docker save ubuntu:xenial-20170214 > ubt01base.tar`
+
+docker run: `cd $HOME/tmpfiles`
+            `docker run -dit -v $HOME/tmpfiles/opt-cross-linux-x86-arm:/opt/cross-linux/x86-arm \
+                        --network bridge \
+                        --name ubt1 ubuntu:xenial-20170214`
+  note: unnecessary --network bridge?
+ 
+docker exec: `docker exec -it ubt1 /bin/bash`
+
+docker update and package install: 
+
+    apt-get update
+    apt-get install iputils-ping net-tools vim bzip2 make
+
+    add user to /etc/passwd, group, shadow: testuser:testuser with same id as host user
+
+    apt-get install make
+    dpkg --add-architecture i386
+    apt-get update
+    apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 
+    apt-get install zlib1g:i386 zlib1g-dev:i386
+    apt-get install gcc
+
+    change default sh from dash to bash
+
+docker exec: `docker exec -it -u testuser ubt1 /bin/bash`
+
+commit and name the image ubt2base: 
+
+    docker commit -m 'ubt2base image' ubt1
+    docker tag e67fb7b4ba2a ubt2base`
+
+save: `docker save ubt2base > ubt2base.tar`
+
+ubt2: 
+    docker run -dit -v $HOME/tmpfiles/opt-cross-linux-x86-arm:/opt/cross-linux/x86-arm \
+                -v $HOME/tmpfiles/testhome:/home/testuser/testhome \
+                        --name ubt2 ubt2base
+
+

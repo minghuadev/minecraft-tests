@@ -1,0 +1,54 @@
+
+cd osdir/opensource/u-boot/^M
+tar -xf u-boot-2010.06.tgz^M
+cd u-boot-2010.06^M
+make ARCH=arm CROSS_COMPILE=arm-cross-linux- cross18ev200_config^M
+make ARCH=arm CROSS_COMPILE=arm-cross-linux-^M
+cp ../../osdir/tools/pc/uboot_tools/mkboot.sh .^M
+cp ../../osdir/tools/pc/uboot_tools/reg_info_cross18ev200.bin .^M
+./mkboot.sh reg_info_cross18ev200.bin u-boot-final.bin^M
+
+
+
+
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+
