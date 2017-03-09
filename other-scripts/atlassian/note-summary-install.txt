@@ -1,0 +1,37 @@
+
+install
+
+[1] jdk to C:\atlassian\bitbucket\Program\Java\jdk1.8.0_121\
+    jre to C:\atlassian\bitbucket\Program\Java\jre1.8.0_121\
+            (original jre to C:\Program Files\Java\jre1.8.0_121\)
+
+[2] git to C:\atlassian\bitbucket\Program\Git 
+    chose:  no components
+            checkout as-is, commit as-is
+            no git credential manager
+
+[3] hmailserver to C:\atlassian\bitbucket\Program\hMailServer
+    password: hmailadmin
+
+    setup 
+      smtp  smtp.sendgrid.net
+      port  587
+      user  apikey
+      pass  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
+      connection  STARTTLS required
+
+[4] apache extract to "C:/atlassian/bitbucket/Program/Apache24"
+    edit etc/httpd.conf:
+         Define SRVROOT "/atlassian/bitbucket/Program/Apache24"
+         Listen 8080
+    run "httpd -k install" followed by "httpd -k start" 
+
+[5] postgre to C:\atlassian\bitbucket\Program\PostgreSQL\9.5
+    data: C:\atlassian\bitbucket\Program\PostgreSQL\9.5\data
+    password: postgreadmin
+    port : 5432 (default 5432)
+
+    db: jiradb   owner: jiraowner   pass: bitbucket  (lc, co: c, template 0, utf8)
+    db: bitbucketdb   owner: bitbucketowner   pass: bitbucket  (template 0, utf8)
+ 
+

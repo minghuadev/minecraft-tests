@@ -1,0 +1,150 @@
+
+=============================================================
+requirements for bitbucket server 4.12
+https://confluence.atlassian.com/bitbucketserver/supported-platforms-776640981.html
+
+java:  oracle java 1.8u65+  or  openjdk 1.8u65+  ---use oracle 1.8u111 x64
+database: PostgreSQL 9.4-9.6                     ---use 9.5.5-1 x64
+
+git client: 1.6.6+ or 1.8.2+ with lfs
+git lfs client: 1.1.0+
+
+git server: 2.11+ not good
+            2.10+ ok             ---use git 2.10.2 64bit
+
+also jira software 7.3.0 x64: 
+
+
+=============================================================
+windows install prefix:  C:\atlassian\bitbucket\Program
+windows install git: 
+  uncheck all components
+  check   checkout as-is, commit as-is
+  uncheck filesystem caching, git credential manager
+
+windows install postgre: 
+  suerpuser (postgres) password: postgreadmin. port 8432 (default 5432). 
+  role: bitbuckowner password bitbucket
+  db:   bitbuckdb  owner bitbuckowner
+
+windows install bitbucket: http port 7990, control 8006
+                           service account altbitbucket
+
+butbucket admin user: bitbucketadmin, password: evaluate
+
+    skip integrate with jira...
+
+Licsense: 
+  Expires      08 Apr 2017
+
+
+jira: port 8080 8005
+      postgre db utf8 lc_ctype c lc_collation c template0
+
+hmailserver: password bitbucket
+
+
+=============================================================
+administration: 
+  user directories:
+    Active Directory, Crowd, LDAP and JIRA
+  ssh port: 7999
+
+  email setup
+
+=============================================================
+jira admin notes: 
+
+  create project type: software .. scrum, kanban, basic
+                       business .. pm, tm, process
+       create with shared configuration 
+       create sample data
+
+  admin groups and labels, description: 
+    site-admins [access][admin] 
+       Grants access to all applications, their administration features and 
+       Site administration, which includes managing users and bills
+    jira-administrators [admin]
+       <no description>
+    administrators [access][admin]
+       Grants access to all applications and their administration features 
+       (excluding Site administration)
+
+  site administration menu items: 
+    users, groups, application apccess, sing up options
+    password policy, domain, saml, google apps
+    billing overview, payment details, billing history, manage applications
+    discover new applications
+
+=============================================================
+apache reverse proxy 
+
+install apache from httpd-2.4.25-x86-vc14.zip
+    unzip and place in a directory. set SRVROOT . link shortcut to bin/...Monitor...
+
+#search apache server reverse proxy configuration
+#https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension
+# <VirtualHost...
+
+#from Apache24/conf/extra/httpd-proxy-html.conf
+#http://www.apachetutor.org/admin/reverseproxies
+
+jira document on apache integration: 
+https://confluence.atlassian.com/kb/proxying-atlassian-server-applications-with-apache-http-server-mod_proxy_http-806032611.html
+
+ use context path such as  http://ourcompany.com/<contextpath>
+
+  jira, bitbucket server, confluence, bamboo: locate the tomcat server.xml, 
+  change  <Context path="" ...  into <Context path="/<contextpath>" ...  
+
+  apache 2.4 windows: httpd.conf uncomment 
+     LoadModule proxy_module modules/mod_proxy.so 
+     LoadModule proxy_connect_module modules/mod_proxy_connect.so 
+     LoadModule proxy_http_module modules/mod_proxy_http.so
+    Confluence 6.0 or later with Synchrony, also mod_proxy_wstunnel and mod_rewrite 
+
+    single name based configuration
+    <VirtualHost *:80>
+        ServerName mycompany.com
+        ProxyRequests Off
+        ProxyVia Off
+        <Proxy *>
+             Require all granted
+        </Proxy>
+        ProxyPass /jira http://<internal_domain>:8080/jira
+        ProxyPassReverse /jira http://<internal_domain>:8080/jira
+        ProxyPass /bitbucket http://<internal_domain>:7990/bitbucket
+        ProxyPassReverse /bitbucket http://<internal_domain>:7990/bitbucket
+    </VirtualHost>
+
+  Note: testing shows also need proxy_html_module and xml2enc_model
+
+actual exact copy:
+<VirtualHost *:80>
+    ServerName localhost
+    ProxyRequests Off
+    ProxyVia Off
+    <Proxy *>
+          Require all granted
+    </Proxy>
+
+    ProxyPass /jira http://localhost:8080/jira
+    ProxyPassReverse /jira http://localhost:8080/jira
+
+</VirtualHost>
+
+https://confluence.atlassian.com/jirakb/unable-to-view-dashboard-urlportmismatchexception-due-to-apache-tomcat-connector-218268069.html?utm_medium=logScan&utm_source=STP
+change server.xml:
+      <Connector port="XXXX"
+      ...........
+      proxyName="mycompany.com" proxyPort="80" /
+https://answers.atlassian.com/questions/11992128/using-a-reverse-proxy-with-jira-mismatched-url-port
+change base url to http://localhost/jira
+
+https://confluence.atlassian.com/kb/integrating-apache-http-server-reverse-proxy-with-bitbucket-server-753894395.html
+        <Connector port="7990" protocol="HTTP/1.1"
+      ...........
+      proxyName="localhost" proxyPort="80" scheme="http"
+change base url to http://localhost/bitbucket
+
+

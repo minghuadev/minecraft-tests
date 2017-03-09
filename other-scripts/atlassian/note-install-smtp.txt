@@ -1,0 +1,72 @@
+
+
+smtp setting:
+
+
+https://www.siteground.com/kb/google_free_smtp_server/
+
+  Outgoing Mail (SMTP) Server: smtp.gmail.com
+  Use Authentication: Yes
+  Use Secure Connection: Yes (this can be TLS or SSL depending on your mail client)
+  Username: your GMail account, i.e. user@gmail.com
+  Password: your GMail password
+  Port: 465 or 587
+
+https://www.digitalocean.com/community/tutorials/how-to-use-google-s-smtp-server
+
+  Google's SMTP server requires authentication, so here's how to set it up:
+
+    SMTP server (i.e., outgoing mail): smtp.gmail.com
+    SMTP username: Your full Gmail or Google Apps email address 
+                           (e.g. example@gmail.com or example@yourdomain.com)
+    SMTP password: Your Gmail or Google Apps email password
+    SMTP port: 465
+    SMTP TLS/SSL required: yes
+
+    In order to store a copy of outgoing emails in your Gmail or Google Apps Sent folder, 
+          log into your Gmail or Google Apps email Settings and:
+    Click on the Forwarding/IMAP tab and scroll down to the IMAP Access section: 
+          IMAP must be enabled in order for emails to be properly copied to your sent folder.
+
+NOTE: Google automatically rewrites the From line of any email you send via its SMTP 
+ server to the default Send mail as email address in your Gmail or Google Apps email 
+ account Settings. You need to be aware of this nuance because it affects 
+ the presentation of your email, from the point of view of the recepient, and it may 
+ also affect the Reply-To setting of some programs.
+
+Workaround: In your Google email Settings, go to the Accounts tab/section and make 
+ "default" an account other than your Gmail/Google Apps account. This will cause 
+ Google's SMTP server to re-write the From field with whatever address you enabled 
+ as the default Send mail as address.
+
+
+https://www.hmailserver.com/forum/viewtopic.php?t=27317
+Any free SMTP relay services??
+
+
+smtp.sendgrid.net
+465 (not working)    587 works with TLS in jira, and hmailserver 5.6.7 beta b2405
+apikey
+SG.5gMVSfSKMTVaqg.uEdD5b04gZA9oYEeuBKfyu5ayxIXdxQ8s0
+STARTTLS (required)
+
+
+jira email setting smtp user name: use full user name such as  smith@yourcompany.com
+
+
+https://www.microsoft.com/en-us/download/confirmation.aspx?id=48145
+Visual C++ Redistributable for Visual Studio 2015
+vc_redist.x86.exe vc_redist.x64.exe
+
+
+IIS role and feature wizard ---when removing iis
+  dependent features: 
+     * Remote Access
+           DirectAccess and VPN (RAS)
+     * Remote Server Adminstration Tools
+        * Role Adminstration Tools
+           * Remote Access Management Tools
+                 Remote Access GUI and Command-Line Tools
+                 [Tools] Remote Access module for Windows PowerShell
+
+ 

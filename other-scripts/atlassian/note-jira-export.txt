@@ -1,0 +1,51 @@
+
+
+https://confluence.atlassian.com/adminjiraserver071/backing-up-data-802592964.html
+
+https://confluence.atlassian.com/adminjiraserver071/migrating-from-jira-cloud-to-server-applications-802592270.html
+https://confluence.atlassian.com/adminjiraserver071/exporting-issues-802592919.html
+
+
+
+create export: (3/2/2017 7:50pm, 109 attachments)
+  system -->> backup manager : 
+      check include additional files (attachments, avatars, and logs) 
+      click create backup for server
+
+  it takes about 2 minuts with 109 attachments. ~75MB. file saved on server for 7 days.
+  https://yourcompany.atlassian.net/plugins/servlet/ondemandbackupmanager/download/bbf3d1-ca62-416b-a43d-927bdafdf2/jira_export_20170302_194932.zip
+
+
+create user export: 
+  site administration -->> users : 
+      click export users
+      check all three of: group membership, application, inactive users
+
+
+install jira server
+  step 1, install windows program. 
+      launch in browser, select "I'll set it up myself".
+      configure database
+
+  step2, import your existing data
+      copy the backup file to the $JIRA_HOME/import/ directory
+      enter the file name and import.
+
+  step3, copy attachments
+      Extract the backup file that was downloaded.
+      Copy across the contents of the attachments folder to the $JIRA_HOME/data/attachments directory for JIRA Server
+      Copy also the avatars
+
+  step4: login
+      stop and start jira server
+      clear browser cache
+      Use the following credentials to log in: 
+        user: sysadmin
+        password: sysadmin
+
+
+admin: 
+  delete autowatch and upwork user -- eventually caused problems. 
+
+
+
