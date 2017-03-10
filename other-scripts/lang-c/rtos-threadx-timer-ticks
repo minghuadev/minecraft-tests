@@ -1,0 +1,13 @@
+
+http://electronics.stackexchange.com/questions/13293/change-timer-tick-of-rtos-threadx
+    http://ftp1.digi.com/support/training/SW_APIS/ThreadXKernelAPIs.ppt
+
+slide 66 in the PPT which says:
+
+    The System Tick Rate is set with #define
+    BSP_TICKS_PER_SECOND which defaults to 100
+
+go to tx_initialize_low_level.s, and in line 56 change 100 to 1000 to set SYSYTICK_CYCLES to 1000MHz (1 tick = 1 ms).
+
+
+
