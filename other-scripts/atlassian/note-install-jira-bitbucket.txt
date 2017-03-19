@@ -23,7 +23,7 @@ windows install git:
   uncheck filesystem caching, git credential manager
 
 windows install postgre: 
-  suerpuser (postgres) password: postgreadmin. port 8432 (default 5432). 
+  suerpuser (postgres) password: postgreadmin. port 5432 (default 5432). 
   role: bitbuckowner password bitbucket
   db:   bitbuckdb  owner bitbuckowner
 
