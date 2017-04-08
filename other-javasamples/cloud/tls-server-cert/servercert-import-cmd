@@ -1,0 +1,9 @@
+
+C:\<path-to-jre>>bin\keytool.exe -importcert -keystore .\lib\security\cacerts -file C:\<path-to-cert-dir>\servercert.crt
+
+
+ref: 
+
+https://confluence.atlassian.com/adminjiraserver072/configuring-an-ssl-connection-to-active-directory-828787694.html
+
+

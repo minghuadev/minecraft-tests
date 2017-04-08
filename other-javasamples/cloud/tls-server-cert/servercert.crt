@@ -1,0 +1,13 @@
+
+
+Server certificate
+-----BEGIN CERTIFICATE-----
+aHR0cDovL2NlcnRzLnN0YXJmaWVsZHRlY2guY29tL3JlcG9zaXRvcnkvMTQwMgYD
+Tr+5ds2ZIF/j8W4fLGcmT/Eqz59TYuXaxCuxNMwzFufn21hBpW5Bak6dy/Q1xeiK
+5vce7pHfJ/8rCIZJvaqSILZ6W/e85hnEW9zPYAX95IwXEuf9NUEevQ+aundNqx/N
+fmTC19XdJzfB4Iz3VAGc4rhEgOcW5inp2Lu/rcLon3fOj8t5Dr2zju07wSpHpQtJ
+7dkiT/RdZjjkt6BLihQQ/ly9jOvHB0Q=
+-----END CERTIFICATE-----
+subject=/C=US/ST=Texas/L=Austin/O=VIP Domain Services, LLC./CN=*.prod1234.securesvr.<your-company>.net
+issuer=/C=US/ST=Texas/L=Austin/O=Systech, Inc./OU=http://certs.systec.<your-cert-agency>.com/repository//CN=Systech Certificate Authority - G2
+

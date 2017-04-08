@@ -1,0 +1,66 @@
+
+$ openssl s_client -connect apln5678.prod1234.securesvr.<your-company>.net:465
+CONNECTED(00000003)
+depth=2 C = US, ST = Texas, L = Austin, O = "Systech, Inc.", CN = Systech Root Certificate Authority - G2
+verify return:1
+depth=1 C = US, ST = Texas, L = Austin, O = "Systech, Inc.", OU = http://certs.systech.<your-cert-agency>.com/repository/, CN = Systech Certificate Authority - G2
+verify return:1
+depth=0 C = US, ST = Texas, L = Austin, O = "VIP Domain Services, LLC.", CN = *.prod1234.securesvr.<your-company>.net
+verify return:1
+---
+Certificate chain
+ 0 s:/C=US/ST=Texas/L=Austin/O=VIP Domain Services, LLC./CN=*.prod1234.securesvr.<your-company>.net
+   i:/C=US/ST=Texas/L=Austin/O=Systech, Inc./OU=http://certs.starfieldtech.com/repository//CN=Systech Secure Certificate Authority - G2
+ 1 s:/C=US/ST=Texas/L=Austin/O=Systech, Inc./OU=http://certs.starfieldtech.com/repository//CN=Systech Secure Certificate Authority - G2
+   i:/C=US/ST=Texas/L=Austin/O=Systech, Inc./CN=Systech Root Certificate Authority - G2
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+aHR0cDovL2NlcnRzLnN0YXJmaWVsZHRlY2guY29tL3JlcG9zaXRvcnkvMTQwMgYD
+e2tM8+NChqyTqUPsQAUaP2KOHNb86uXZOpto7Sx8i/AvYkrQBmwwTdHx6i+4nao8
+HIbZe8i5x5FL+2+5FDx9SA0ijYE5Fca0+8Ww6Jjkp25ScOGK4ZEGcQF5t1jKsgYJ
+7dkiT/RdZjjkt6BLihQQ/ly9jOvHB0Q=
+-----END CERTIFICATE-----
+subject=/C=US/ST=Texas/L=Austin/O=vIP Domain Services, LLC./CN=*.prod1234.securesvr.<your-company>.net
+issuer=/C=US/ST=Texas/L=Austin/O=Systech, Inc./OU=http://certs.systech.<your-cert-agency>.com/repository//CN=Systech Secure Certificate Authority - G2
+---
+No client certificate CA names sent
+Peer signing digest: SHA512
+Server Temp Key: ECDH, P-256, 256 bits
+---
+SSL handshake has read 3409 bytes and written 434 bytes
+---
+New, TLSv1/SSLv3, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: DECDD1EC2D39382E4512E67AFBE03DF817ABD673109FB60CDF36A6C295C84E8F
+    Session-ID-ctx:
+    Master-Key: B390ECDAA59C12995A60CCA9B9378C7A155B051AB5E7167E185A235B914E735CEF07362CBF129634235BB7B7C10CE65E
+    Key-Arg   : None
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 200 (seconds)
+    TLS session ticket:
+    0010 - d1 23 0e 77 9e d1 a7 84-06 d4 0d ae ef e7 78 9a   .#.w..........x.
+    0030 - 9d f6 d8 42 a1 91 4d 6f-f1 99 36 52 7a c8 85 5a   ...B..Mo..6Rz..Z
+    0050 - 08 10 a9 c8 49 d6 a4 e2-a8 46 e4 53 4c 1b 98 2f   ....I....F.SL../
+    0070 - 2d 78 73 27 03 63 40 4c-67 bd 12 5e 31 23 34 26   -xs'.c@Lg..^1#4&
+
+    Start Time: 14877282
+    Timeout   : 300 (sec)
+    Verify return code: 0 (ok)
+---
+220-apln5678.prod1234.securesvr.<your-company>.net ESMTP Exim 4.87 #1 Thu, 16 Feb 2017 16:21:26 -0700
+220-We do not authorize the use of this system to transport unsolicited,
+220 and/or bulk e-mail.
+421 apln5678.prod1234.securesvr.<your-company>.net: SMTP command timeout - closing connection
+read:errno=0
+
+

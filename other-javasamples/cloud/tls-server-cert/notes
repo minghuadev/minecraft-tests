@@ -1,0 +1,33 @@
+
+
+===========================================================================
+search  how is the trust chain verified
+
+[1] https://security.stackexchange.com/questions/130847/how-tls-certificate-chain-is-verified
+
+[2] http://stackoverflow.com/questions/25482199/verify-a-certificate-chain-using-openssl-verify
+
+    openssl verify -verbose -CAfile RootCert.pem -untrusted Intermediate.pem UserCert.pem
+
+
+===========================================================================
+search  how to fetch intermediate certificate
+
+[1] http://serverfault.com/questions/605643/getting-an-intermediate-ssl-certificate
+
+    DigiCert Enterprise lets you pre-validate your domain and then do large-scale subdomain 
+    certificate generation. (Disclosure: I do not work for DigiCert, but my employer uses their 
+    certificate services.) – Moshe Katz Jun 19 '14 at 23:12 
+
+[2] https://ca.godaddy.com/help/what-is-an-intermediate-certificate-868
+
+[3] http://stackoverflow.com/questions/5188371/obtaining-all-certificates-in-a-chain-both-intermediate-and-root
+
+    to authenticate an SSL connection you do NOT want to add the certificate of the endpoint 
+    you are connecting to in your keystore. You only want the intermediate and root 
+    Certificate Authorities. In some cases, only the root CA or else you will get 
+    an exception. See this great blog post for more info.
+
+    $ openssl s_client -connect graph.facebook.com:443 -showcerts
+
+
