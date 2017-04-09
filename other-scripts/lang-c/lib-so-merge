@@ -1,0 +1,7 @@
+
+search link two .so files
+http://stackoverflow.com/questions/915128/merge-multiple-so-shared-libraries
+Merge multiple .so shared libraries
+gcc -shared -o c.so -Wl,--whole-archive a.a b.a -Wl,--no-whole-archive
+
+
