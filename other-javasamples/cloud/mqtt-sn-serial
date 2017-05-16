@@ -1,0 +1,35 @@
+
+search mqtt over udp
+
+
+http://stackoverflow.com/questions/28639182/mqtt-sn-over-udp
+MQTT-SN over UDP
+
+https://stackoverflow.com/questions/28558038/mqtt-sn-with-windows
+MQTT-SN with Windows
+
+
+Really Small Message Broker (RSMB) has support for MQTT-SN over UDP. Source is available from git on http://git.eclipse.org/c/mosquitto/org.eclipse.mosquitto.rsmb.git. To build it use MS Visual Studio and make from Cygwin.
+
+Then you need a MQTT-SN serial to UDP bridge. I use https://github.com/njh/mqtt-sn-tools , works very well. Build it in Cygwin.
+
+RSMB might completely replace your MQTT broker, but if you want to keep Mosquito, then bridge RSMB to push all messages to Mosquito. Here is simple configuration file 'broker.cfg':
+
+# will show you packets being sent and received
+trace_output protocol
+
+# normal MQTT listener
+listener 1884 INADDR_ANY    
+
+# MQTT-S listener
+listener 1885 INADDR_ANY mqtts
+
+# MQTT-S outgoing multicast bridge (QoS -1)
+connection Bridge_2_Mosquito
+address mosquito_host_name:1883
+# publish all messages
+topic # out
+
+answered Feb 25 '15 at 21:44
+Michal Foksa
+
