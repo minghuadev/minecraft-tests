@@ -1,0 +1,11 @@
+
+search compile python script to binary
+
+http://stackoverflow.com/questions/12339671/how-to-compile-python-script-to-binary-executable
+http://www.pyinstaller.org/
+http://cython.readthedocs.io/en/latest/src/tutorial/cython_tutorial.html
+http://cython.readthedocs.io/en/latest/src/reference/compilation.html
+
+http://blog.biicode.com/bii-internals-compiling-your-python-application-with-cython/
+f9cb5a17f8db6d21b13d1085213f987d *p2c-test.tgz
+

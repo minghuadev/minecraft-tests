@@ -1,0 +1,8 @@
+
+do the p2c inside a virtualenv: 
+
+  pip install Cython
+
+on host install python-dev on ubuntu 16.04
+
+
