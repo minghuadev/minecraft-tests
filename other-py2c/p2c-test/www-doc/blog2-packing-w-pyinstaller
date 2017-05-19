@@ -1,0 +1,53 @@
+
+http://blog.biicode.com/bii-internals-packaging-a-compiled-app-with-pyinstaller/
+
+bii internals: Packaging a compiled app with PyInstaller
+Posted on May 23, 2014 by julia
+
+
+In a previous post we talked about how we compiled biicode into c extensions. Today we are going to talk about how we prepare it for execution with PyInstaler. PyInstaller is a program that converts (packages) Python programs into stand-alone executables, under Windows, Linux, Mac OS X, Solaris and AIX. It does so by packaging together your code with all third party libraries your code is using along with python runtime libraries. Third party libraries are discovered inspecting imports in your code but this is a problem when your code is in binary extension.
+
+So we have defined the following process to package our app:
+
+1. First we create an artificial main that will contain all needed imports for the project, we take them by parsing requirements.txt files and put them under “if False” to avoid execution overhead, you can also use hidden imports for this, whatever you prefer.
+
+```
+import biicode.client.shell.bii
+import biicode.client
+if False:
+    # Third party imports
+biicode.client.shell.bii.main(sys.argv[1:])
+```
+
+Sometimes importing a package is not enough and you need to import the specific subpackage.
+
+This artificial main is put in the binary extensions folder
+
+2. Then we autogenerate a spec file for the project
+
+```
+python $PYINSTALLER_PATH/utils/makespec.py $ARTIFICIAL_MAIN_PATH
+```
+
+3. Then we add to the spec file folders that are not automatically included: folders with binary data or packages that pyinstaller fail to import correctly
+
+```
+a.datas += Tree('BII_SRC_PATH/biicode/client/setups/images', prefix = 'images')
+dict_tree = Tree('MIMER_PATH', prefix = 'mimer', excludes=["*.pyc"])
+          # This package is a gittler non pypip dependency
+          # It contains dynamically loadable resources that are not
+          # automatically included by pyinstaller
+a.datas += dict_tree
+a.datas += Tree('CRYPTO_PATH', prefix='Crypto', excludes=["*.pyc"])
+a.binaries += Tree('BII_COMPILED_PATH/biicode', prefix='biicode')
+```
+
+4. Now we are ready to create the executable with pyinstaller
+
+```
+python pyinstaller.py -p $BII_COMPILED_PATH $SPEC_FILE
+```
+
+This generates a folder with an executable and everything we need to run our app.
+
+

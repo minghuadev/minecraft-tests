@@ -1,0 +1,118 @@
+
+http://blog.biicode.com/bii-internals-compiling-your-python-application-with-cython/
+
+bii internals: Compiling your python application with Cython
+Posted on May 13, 2014 by julia
+
+
+Cython is a static compiler for both Python and their own extended Cython programming language that allows us creating C extensions for Python. I generates C code taking your source python code as input and then compiles it into python extensions with all major C/C++ compilers. We are using clang, gcc and MS Visual 9.0 for our different clients.
+
+Compiling your app with cython is an easy task, you just need to know what do you want to include and what do you want to exclude from your build.
+
+In biicode, for example, we just compile code under biicode.client and biicode.common modules, we want to exclude tests and also we want to keep __init__.py files as python files because we later package the app with PyInstaller. We need to define following variables:
+
+```
+biicode_pkg_path = PATH_TO_BIICODE_MODULE
+biicode_python_path = os.path.dirname(biicode_pkg_path)
+build_dir = FOLDER_OF_YOUR_CHOICE
+src_dir = os.path.abspath(os.path.join(build_dir, 'src'))
+if not os.path.exists(src_dir):
+   os.makedirs(src_dir)
+ignored_files = ['__init__.py']
+included_dirs = [os.path.join(biicode_pkg_path, dir_) for dir_ in ['client', 'common']]
+```
+
+Then you can traverse your source tree, for every file cython will analyze it’s dependencies tree and recompile only if needed.
+
+```
+from Cython.Build import cythonize
+def bii_cythonize(force_compile):
+   '''
+   Creates c files from your source python
+   Params:
+       force_compile: boolean, if true compiles regardeless
+                      of whether the file has changed or not
+   Returns:
+       list of c files relative to biicode_pkg_path
+   '''
+   c_files = []
+   for dir_ in included_dirs:
+       for dirname, dirnames, filenames in os.walk(dir_):
+           if 'test' in dirnames:
+               dirnames.remove('test')
+           for filename in filenames:
+               file_ = os.path.join(dirname, filename)
+               stripped_name = os.path.relpath(file_, biicode_python_path)
+               file_name, extension = os.path.splitext(stripped_name)
+               if extension == '.py':
+                   target_file = os.path.join(src_dir, file_name + '.c')
+                   if filename not in ignored_files:
+                       c_files.append(stripped_name.replace('.py', '.c'))
+                       file_dir = os.path.dirname(target_file)
+                       if not os.path.exists(file_dir):
+                           os.makedirs(file_dir)
+                       extension = cythonize(stripped_name,
+                                             force=force_compile,
+                                             build_dir=src_dir)
+   return c_files
+```
+
+After this function executes you will have a source tree equivalent to your python one but in C inside your build_dir/src. Then c files that do not longer match to an existing py file need to be deleted (that’s an easy one to automate as you have the list of c_files). You can avoid that last step if you don’t need incremental builds and you always clean your build dir before recompiling.
+
+Now that we have the list of c files we want to compile them into python extensions but before we may want to ignore python asserts and remove debug flags:
+
+```
+   from distutils import sysconfig
+   modules = []
+   for c_file in abs_path_c_files:
+       relfile = os.path.relpath(c_file, src_dir)
+       filename = os.path.splitext(relfile)[0]
+       extName = filename.replace(os.path.sep, ".")
+       extension = Extension(extName,
+                             sources=[c_file],
+                             define_macros=[('PYREX_WITHOUT_ASSERTIONS',
+                                             None)]  # ignore asserts in code
+                             )
+       modules.append(extension)
+   if platform.system() != 'Windows':
+       cflags = sysconfig.get_config_var('CFLAGS')
+       opt = sysconfig.get_config_var('OPT')
+       sysconfig._config_vars['CFLAGS'] = cflags.replace(' -g ', ' ')
+       sysconfig._config_vars['OPT'] = opt.replace(' -g ', ' ')
+   if platform.system() == 'Linux':
+       ldshared = sysconfig.get_config_var('LDSHARED')
+       sysconfig._config_vars['LDSHARED'] = ldshared.replace(' -g ', ' ')
+   elif platform.system() == 'Darwin':
+       #-mno-fused-madd is a deprecated flag that now causes a hard error
+       # but distuitls still keeps it
+       # it was used to disable the generation of the fused multiply/add instruction
+       for flag, flags_line in sysconfig._config_vars.iteritems():
+           if ' -g' in str(flags_line):
+               sysconfig._config_vars[flag] = flags_line.replace(' -g', '')
+       for key in ['CONFIG_ARGS', 'LIBTOOL', 'PY_CFLAGS', 'CFLAGS']:
+           value = sysconfig.get_config_var(key)
+           if value:
+               sysconfig._config_vars[key] = value.replace('-mno-fused-madd', '')
+               sysconfig._config_vars[key] = value.replace('-DENABLE_DTRACE',  '')
+```
+
+Now you are ready to compile your native extensions!
+
+```
+ from distutils.extension import Extension
+ from distutils.core import setup
+ abs_path_c_files = [os.path.join(src_dir, c) for c in c_files]
+ setup(
+       name="bii",
+       version=VERSION,
+       script_name='setup.py',
+       script_args=['build_ext'],
+       packages=['biicode'],
+       ext_modules=modules,
+       )
+```
+
+Now you have your python extensions in build_dir/lib.ARCHITECTURE If you wish to later package them with PyInstaller you now need to copy all your __init__.py to their correspondant folders in build_dir/src but we will cover it in a future post.
+If you liked this post please comment below. If you want to try biicode just click on the sidebar button and if you have any doubts check our docs, forum, Stackoverflow tag and Github repos.
+
+
