@@ -1,0 +1,22 @@
+
+http://stackoverflow.com/questions/15607979/how-to-click-a-next-button-of-a-window-using-python
+How to click a 'next' button of a window using python
+
+e.g.
+    app2 = application.Application()
+    app2.connect(title_re = u'abc')
+    dialog = app2.abc
+    print dialog
+    next =dialog.Next
+    print next
+    next.Click()
+
+non-standard control
+    dialog.Click(coords=(x, y))
+or
+    dialog.ClickInput(coords=(x, y))
+
+
+https://media.readthedocs.org/pdf/pywinauto/latest/pywinauto.pdf
+
+

@@ -1,0 +1,26 @@
+#
+
+from pywinauto.application import Application
+
+# a qt app:
+app1 = Application()
+app1.connect(title_re='^Qt Prime Application.*$')
+#app1.Properties.print_control_identifiers() # error shows attrs
+app1[u'Qt Prime Application Lite Edition - [Untitled1.doc]'].print_control_identifiers()
+
+win1 = app1[u'Qt Prime Application Lite Edition - [Untitled1.doc]']
+win1.Click(coords=(70,200))
+
+app2 = Application()
+app2.connect(title_re='^C\+\+ Windows Application.*$')
+
+#app2[u'C++ Windows ApplicationDialog'].print_control_identifiers() # ok
+app2.dialog.print_control_identifiers()
+
+app2.dialog.Test2Button.Click(coords=(7,2))
+
+#app.UntitledNotepad.menu_select("Help->About Notepad")
+#app.AboutNotepad.OK.click()
+#app.UntitledNotepad.Edit.type_keys("pywinauto Works!", with_spaces = True)
+
+
