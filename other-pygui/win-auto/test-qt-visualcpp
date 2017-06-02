@@ -10,6 +10,7 @@ app1[u'Qt Prime Application Lite Edition - [Untitled1.doc]'].print_control_ident
 
 win1 = app1[u'Qt Prime Application Lite Edition - [Untitled1.doc]']
 win1.Click(coords=(70,200))
+# or win1.press_mouse_input(coords=(70,200)) then win1.release_mouse_input()
 
 app2 = Application()
 app2.connect(title_re='^C\+\+ Windows Application.*$')
