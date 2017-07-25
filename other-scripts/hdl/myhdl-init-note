@@ -1,0 +1,40 @@
+
+the init support is started by hash 87784ad
+
+    commit 87784ad24095f7009b8567833841fe8808dccd75
+    Author: Christopher Felton <chris.felton@gmail.com>
+    Date:   Fri Jun 12 10:53:43 2015 -0500
+
+        enabled initial value support
+
+and eventually fixed by the tip on master
+
+    commit 29069ae4774fd42c8f076a625889a60052b2c658
+    Merge: 8ca7a87 1794e95
+    Author: jandecaluwe <jan@jandecaluwe.com>
+    Date:   Sun Apr 9 10:20:07 2017 +0200
+
+        Merge pull request #200 from hgomersall/initial_value_support
+    
+        [FIX] fixed initial value support for bool lists and list of wires
+
+
+[myhdl]$ git branch -avvv
+* master                         29069ae [origin/master] Merge pull request #200 from hgomersall/initial_value_support
+  remotes/origin/0.8-maintenance 524a2ae Solved github issue #12
+  remotes/origin/0.9-maintenance b726eb8 Merge pull request #133 from clade/0.9-maintenance
+  remotes/origin/HEAD            -> origin/master
+  remotes/origin/gsoc            29069ae Merge pull request #200 from hgomersall/initial_value_support
+  remotes/origin/master          29069ae Merge pull request #200 from hgomersall/initial_value_support
+  remotes/origin/mep-114         e4550bc Rename BlockInstance to Block
+
+[myhdl]$ git branch --contains 87784ad
+* master
+
+[myhdl]$ git branch --contains 87784ad -av
+* master                29069ae Merge pull request #200 from hgomersall/initial_value_support
+  remotes/origin/HEAD   -> origin/master
+  remotes/origin/gsoc   29069ae Merge pull request #200 from hgomersall/initial_value_support
+  remotes/origin/master 29069ae Merge pull request #200 from hgomersall/initial_value_support
+
+
