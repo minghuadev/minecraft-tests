@@ -1,0 +1,14 @@
+
+code in sample3-tests
+
+
+t1.go: golang tls
+
+t2.go: golang https download to a file
+
+t4.go: golang https download to a file full test code
+
+t5.go: function table and args
+
+t6.go: function table with map key access into the table
+

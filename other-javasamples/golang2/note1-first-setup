@@ -1,0 +1,10 @@
+
+
+after installing go package, set up: 
+
+GOROOT=<golang-install-path>
+GOPATH=<where-to-hold-libs>
+
+PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+
