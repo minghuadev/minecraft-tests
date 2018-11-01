@@ -1,0 +1,13 @@
+
+list-files-sample3
+
+
+ls -lrt sample3...
+
+-rw-r--r--    459 Sep  1 14:52 t5.go
+-rw-r--r--    458 Sep  2 21:17 t6.go
+-rw-r--r--    727 Sep  2 21:17 t2.go
+-rw-r--r--    602 Sep  3 00:43 t1.go
+-rw-r--r--   1036 Sep  3 00:51 t4.go
+
+

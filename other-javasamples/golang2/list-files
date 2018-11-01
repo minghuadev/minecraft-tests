@@ -1,0 +1,20 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-r--r--    136 Sep  3 00:19 note1-first-setup
+-rw-r--r--     76 Sep  3 00:20 note2-bitbucket-download
+-rw-r--r--    229 Sep  3 00:56 note3-samples
+drwxr-xr-x      0 Sep 20 21:52 sample2-bitbucket-download/
+-rw-r--r--    194 Sep 24 22:05 note4-users
+-rw-r--r--    370 Sep 25 07:48 note5-gui
+-rw-r--r--   1741 Sep 26 21:02 note6-logging
+-rw-r--r--   1020 Sep 26 21:05 note7-logging
+-rw-r--r--    678 Oct  4 23:04 note8-baremetal
+-rw-r--r--    256 Oct  4 23:12 note9-reflect-clear-struct
+drwxr-xr-x      0 Oct 31 23:24 sample3-tests/
+-rw-r--r--      0 Oct 31 23:27 list-files
+
+

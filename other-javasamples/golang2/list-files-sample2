@@ -1,0 +1,17 @@
+
+list-files-sample2
+
+
+ls -lrt sample2...
+
+-rwxr-xr-x    540 Sep  2 00:48 cc.sh*
+-rw-r--r--   4200 Sep  2 21:17 packagecmd.go
+-rw-r--r--    884 Sep  2 21:17 getpass_dummy.go
+-rw-r--r--   1109 Sep  2 21:17 bitbnames.go
+-rw-r--r--   1373 Sep  2 21:44 packageinstall.go
+-rw-r--r--    924 Sep  3 00:27 bitbids.go
+-rw-r--r--   2496 Sep  3 00:30 download.go
+-rw-r--r--   1889 Sep  3 00:37 getpass.go
+-rw-r--r--   2175 Sep  3 00:38 packagecli.go
+
+
