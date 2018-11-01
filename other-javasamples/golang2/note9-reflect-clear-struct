@@ -1,0 +1,12 @@
+
+https://stackoverflow.com/questions/29168905/can-i-clear-values-of-a-instance-of-a-type-struct-in-golang-dynamically
+
+
+func clear(v interface{}) {
+    p := reflect.ValueOf(v).Elem()
+    p.Set(reflect.Zero(p.Type()))
+}
+
+v should be a pointer to a struct
+
+

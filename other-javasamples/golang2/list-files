@@ -18,3 +18,10 @@ drwxr-xr-x      0 Oct 31 23:24 sample3-tests/
 -rw-r--r--      0 Oct 31 23:27 list-files
 
 
+-rw-r--r--    601 Oct 31 23:31 list-files
+-rw-r--r--    440 Oct 31 23:32 list-files-sample2
+-rw-r--r--    229 Oct 31 23:34 list-files-sample3
+-rw-r--r--    201 Oct 31 23:41 note1-win-cygwin-setup
+-rw-r--r--    152 Oct 31 23:44 notea-golang-org-x-net
+
+

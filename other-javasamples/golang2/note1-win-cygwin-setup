@@ -1,0 +1,11 @@
+
+note1-win-cygwin-setup
+
+
+$ cat envset-win-cygwin-d
+#!/bin/bash
+
+# cygwin /home mounted on D:\home :
+GOPATH=`pwd | sed -e 's/^\/home/D:\\\\\\\\home/' | sed -e 's/\//\\\\\\\\/g'`\\\\libs
+export GOPATH
+

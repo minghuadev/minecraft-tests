@@ -1,0 +1,11 @@
+
+for use by github.com/pin/tftp : 
+
+
+run under $GOPATH/src/
+  
+   mkdir golang.org/x
+   cd golang.org/x/
+   git clone https://go.googlesource.com/net
+
+
