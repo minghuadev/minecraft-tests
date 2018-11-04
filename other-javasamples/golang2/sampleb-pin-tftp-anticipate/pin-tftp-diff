@@ -1,0 +1,73 @@
+diff --git a/sender.go b/sender.go
+old mode 100644
+new mode 100755
+index e426ff5..09ef02c
+--- a/sender.go
++++ b/sender.go
+@@ -36,6 +36,7 @@ type sender struct {
+ 	localIP net.IP
+ 	tid     int
+ 	send    []byte
++	sendA   senderAnticipate
+ 	receive []byte
+ 	retry   *backoff
+ 	timeout time.Duration
+@@ -89,6 +90,9 @@ func (s *sender) ReadFrom(r io.Reader) (n int64, err error) {
+ 			return 0, err
+ 		}
+ 	}
++	if s.sendA.enabled { /* senderAnticipate */
++		return readFromAnticipate(s, r)
++	}
+ 	s.block = 1 // start data transmission with block 1
+ 	binary.BigEndian.PutUint16(s.send[0:2], opDATA)
+ 	for {
+@@ -163,6 +167,9 @@ func (s *sender) setBlockSize(blksize string) error {
+ 		return fmt.Errorf("blksize too large: %d", n)
+ 	}
+ 	s.send = make([]byte, n+4)
++	if s.sendA.enabled { /* senderAnticipate */
++		sendAInit(&s.sendA, uint(n+4), s.sendA.winsz)
++	}
+ 	return nil
+ }
+ 
+diff --git a/server.go b/server.go
+old mode 100644
+new mode 100755
+index 3b913fb..c2bce73
+--- a/server.go
++++ b/server.go
+@@ -45,6 +45,13 @@ type Server struct {
+ 	wg           sync.WaitGroup
+ 	timeout      time.Duration
+ 	retries      int
++	sendAEnable  bool /* senderAnticipate enable by server */
++	sendAWinSz   uint
++}
++
++func (s *Server) SetAnticipate(en bool, winsz uint) {
++	s.sendAEnable = en
++	s.sendAWinSz = winsz
+ }
+ 
+ // SetTimeout sets maximum time server waits for single network
+@@ -254,6 +261,7 @@ func (s *Server) handlePacket(localAddr net.IP, remoteAddr *net.UDPAddr, buffer
+ 		}
+ 		rf := &sender{
+ 			send:    make([]byte, datagramLength),
++			sendA:   senderAnticipate{enabled:false},
+ 			receive: make([]byte, datagramLength),
+ 			tid:     remoteAddr.Port,
+ 			conn:    conn,
+@@ -265,6 +273,10 @@ func (s *Server) handlePacket(localAddr net.IP, remoteAddr *net.UDPAddr, buffer
+ 			mode:    mode,
+ 			opts:    opts,
+ 		}
++		if s.sendAEnable { /* senderAnticipate if enabled in server */
++			rf.sendA.enabled = true /* pass enable from server to sender */
++			sendAInit(&rf.sendA, datagramLength, s.sendAWinSz)
++		}
+ 		s.wg.Add(1)
+ 		go func() {
+ 			if s.readHandler != nil {

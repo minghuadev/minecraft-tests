@@ -1,0 +1,14 @@
+
+list-files-sampleb
+
+
+find sampleb-pin-tftp-anticipate/ -type f | xargs ls -l
+
+-rw-r--r--   2069 Nov  3 18:21 sampleb-pin-tftp-anticipate/pin-tftp-diff
+-rw-r--r--   4527 Nov  3 23:32 sampleb-pin-tftp-anticipate/sender_anticipate.go
+-rw-r--r--   1724 Nov  3 17:36 sampleb-pin-tftp-anticipate/tst/clt.go
+-rw-r--r--   1701 Nov  4 00:19 sampleb-pin-tftp-anticipate/tst/clt.go1
+-rw-r--r--   1562 Nov  3 18:19 sampleb-pin-tftp-anticipate/tst/svr.go
+-rw-r--r--   1293 Nov  3 08:47 sampleb-pin-tftp-anticipate/tst/svr.go1
+
+

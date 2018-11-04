@@ -1,0 +1,5 @@
+
+feature from tftpd32, called anticipation-window. basically sends more data packets 
+without waiting for the ack for the previous one. 
+
+
