@@ -11,6 +11,9 @@ notec-ssl-cert
 
     pip install: python-socketio eventlet Flask
 
+    search flask download file
+    https://stackoverflow.com/questions/27628053/uploading-and-downloading-files-with-flask
+
 
 [2] search golang tls handshake tiemout with self signed certificate
     https://github.com/minio/minio-go/issues/782
