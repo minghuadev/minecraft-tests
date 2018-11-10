@@ -1,0 +1,38 @@
+
+notec-ssl-cert
+2018-11-9
+
+
+[1] search python wsgi server ssl
+    https://github.com/miguelgrinberg/python-socketio/issues/69
+
+    one line change to the sample code
+    wsgi.server(eventlet.wrap_ssl(eventlet.listen(('', 8090)), certfile='cert.crt', keyfile='private.key', server_side=True), app)
+
+    pip install: python-socketio eventlet Flask
+
+
+[2] search golang tls handshake tiemout with self signed certificate
+    https://github.com/minio/minio-go/issues/782
+
+    load a cert.crt from file and create a transport for a http client. 
+
+
+[3] search cannot validate certificate for 127.0.0.1 because it doesn't contain any IP SANs
+    https://serverfault.com/questions/611120/failed-tls-handshake-does-not-contain-any-ip-sans
+
+    edit your /etc/ssl/openssl.cnf , add `subjectAltName = IP:192.168.2.107` in `[ v3_ca ]` section . 
+    recreate certs. 
+
+    or use https://raw.githubusercontent.com/driskell/log-courier/1.x/src/lc-tlscert/lc-tlscert.g
+
+
+[4] search openssl create certificate with subject alternative name
+    https://www.endpoint.com/blog/2014/10/30/openssl-csr-with-alternative-names-one
+
+    linking to by a comment: 
+    http://apetec.com/support/GenerateSAN-CSR.htm
+
+    command to verify: openssl req -text -noout -verify -in cert.crt
+
+

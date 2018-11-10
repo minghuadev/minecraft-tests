@@ -1,0 +1,40 @@
+
+https://github.com/minio/minio-go/issues/782
+
+
+the solution for minio client
+
+	caCert, err := ioutil.ReadFile("/home/vadmeste/.minio/certs/public.crt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	rootCAs := x509.NewCertPool()
+	rootCAs.AppendCertsFromPEM(caCert)
+
+	transport := &http.Transport{
+		TLSClientConfig: &tls.Config{RootCAs: rootCAs},
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   30 * time.Second,
+			KeepAlive: 30 * time.Second,
+		}).DialContext,
+		MaxIdleConns:          100,
+		IdleConnTimeout:       90 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+		DisableCompression:    true,
+	}
+	minioClient.SetCustomTransport(transport)
+
+
+the code 
+
+    http.Get(url) 
+
+would become
+
+    client := &http.Client{}
+    client.Transport = transport
+    cleint.Get(url)
+
+

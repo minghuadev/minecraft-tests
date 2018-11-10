@@ -1,0 +1,57 @@
+
+http://apetec.com/support/GenerateSAN-CSR.htm
+multiple names on one certificate
+
+
+
+in the openssl.cnf req section enable v3 subject alternative names
+
+  [req]
+  distinguished_name = req_distinguished_name
+  req_extensions = v3_req
+
+the v3req section
+
+  [req_distinguished_name]
+  countryName = Country Name (2 letter code)
+  countryName_default = US
+  stateOrProvinceName = State or Province Name (full name)
+  stateOrProvinceName_default = MN
+  localityName = Locality Name (eg, city)
+  localityName_default = Minneapolis
+  organizationalUnitName	= Organizational Unit Name (eg, section)
+  organizationalUnitName_default	= Domain Control Validated
+  commonName = Internet Widgits Ltd
+  commonName_max	= 64
+  
+  [ v3_req ]
+  # Extensions to add to a certificate request
+  basicConstraints = CA:FALSE
+  keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+  subjectAltName = @alt_names
+  
+  [alt_names]
+  DNS.1 = kb.example.com
+  DNS.2 = helpdesk.example.org
+  DNS.3 = systems.example.net
+  IP.1 = 192.168.1.1
+  IP.2 = 192.168.69.14
+
+
+generate the private key
+
+  openssl genrsa -out san_domain_com.key 2048
+
+generate the csr and verify
+
+  openssl req -new -out san_domain_com.csr -key san_domain_com.key -config openssl.cnf
+  openssl req -text -noout -in san_domain_com.csr
+
+self sign and create the certificate
+
+  openssl x509 -req -days 3650 -in san_domain_com.csr -signkey san_domain_com.key \
+    -out san_domain_com.crt-extensions v3_req -extfile openssl.cnf
+
+
+
+
