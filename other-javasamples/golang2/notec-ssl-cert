@@ -20,6 +20,8 @@ notec-ssl-cert
 
     load a cert.crt from file and create a transport for a http client. 
 
+    see sample3/download-https.go for an example
+
 
 [3] search cannot validate certificate for 127.0.0.1 because it doesn't contain any IP SANs
     https://serverfault.com/questions/611120/failed-tls-handshake-does-not-contain-any-ip-sans
@@ -37,5 +39,34 @@ notec-ssl-cert
     http://apetec.com/support/GenerateSAN-CSR.htm
 
     command to verify: openssl req -text -noout -verify -in cert.crt
+
+    samplec/doc4 have a SANS DNS and IP cert procedure
+
+
+[5] search golang x509 skip sans
+    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/sssd-ldap-domain-ip
+
+
+[6] search python socketserver over ssl
+    https://stackoverflow.com/questions/8582766/adding-ssl-support-to-socketserver
+    ssl socket server
+
+    samplec/doc6 has an example
+
+
+[7] python ssl server example
+    https://stackoverflow.com/questions/11255530/python-simple-ssl-socket-server
+    a simple ssl server
+
+
+[8] linked from [7] to fetch a certificate
+    https://stackoverflow.com/questions/46735347/how-can-i-fetch-a-certificate-from-a-url
+
+    samplec/doc8 has an example
+
+
+[9] search ssl certificate content
+    https://www.sslshopper.com/certificate-decoder.html
+    an online decoder
 
 

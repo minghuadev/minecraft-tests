@@ -1,0 +1,64 @@
+
+
+
+$ cat simple2.py
+#!/usr/bin/env python
+# simple2.py
+
+import os
+import SimpleHTTPServer as shsvr
+import SocketServer as sksvr
+
+
+class SSLTCPServer(sksvr.TCPServer):
+    def __init__(self, server_address, RequestHandlerClass, bind_and_activate=True):
+        """Constructor. May be extended, do not override."""
+        sksvr.TCPServer.__init__(self, server_address, RequestHandlerClass, False)
+
+        dir = os.path.dirname(__file__)
+        key_file = os.path.join(dir, 'cert.key')
+        cert_file = os.path.join(dir, 'cert.crt')
+
+        import ssl
+        self.socket = ssl.wrap_socket(self.socket, keyfile=key_file, certfile=cert_file, cert_reqs=ssl.CERT_NONE)
+
+        if bind_and_activate:
+            self.server_bind()
+            self.server_activate()
+
+class ThreadSSLTcpServer(sksvr.ThreadingMixIn, SSLTCPServer): pass
+
+
+class ThreadTcpServer(sksvr.ThreadingMixIn, sksvr.TCPServer): pass
+
+
+PORT = 9000
+
+Handler = shsvr.SimpleHTTPRequestHandler
+
+
+def test1(): # simple http server
+    httpd = sksvr.TCPServer(("", PORT), Handler)
+
+    print "serving at port", PORT
+    httpd.serve_forever()
+
+
+def test2(): # threading http server
+    httpd = ThreadTcpServer(("", PORT), Handler)
+
+    print "serving at port", PORT
+    httpd.serve_forever()
+
+
+def test3(): # ssl threading http server
+    httpd = ThreadSSLTcpServer(("", PORT), Handler)
+
+    print "serving at port", PORT
+    httpd.serve_forever()
+
+test3()
+#test2()
+#test1()
+
+

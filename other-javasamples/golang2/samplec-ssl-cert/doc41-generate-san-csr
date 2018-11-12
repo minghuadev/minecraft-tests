@@ -32,3 +32,37 @@ EOF
 openssl req -new -sha256 -nodes -out \*.your-new-domain.com.csr -newkey rsa:2048 -keyout \*.your-new-domain.com.key -config <( cat csr_details.txt )
 
 
+
+working sample with both DNS and IP, v3_ca mod by looking at ubuntu /etc/ssl/openssl.cnf:
+
+openssl req -x509 -newkey rsa:4096 -keyout private.key -out cert.crt -days 365 -nodes -config dnsconf.txt
+
+$ cat dnsconf.txt
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+#req_extensions = req_ext
+x509_extensions = v3_ca
+distinguished_name = dn
+
+[ dn ]
+C=US
+ST=New York
+L=Rochester
+O=End Point
+OU=Testing Domain
+emailAddress=your-administrative-address@your-awesome-existing-domain.com
+CN = subdomain.maindomain.company.com
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = subdomain.maindomain.company.com
+IP.1 = 127.0.0.1
+
+[ v3_ca ]
+subjectAltName = @alt_names
+
+

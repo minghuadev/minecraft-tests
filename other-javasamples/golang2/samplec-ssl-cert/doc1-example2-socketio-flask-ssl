@@ -1,9 +1,4 @@
 
-https://github.com/miguelgrinberg/python-socketio/issues/69
-
-
-example:
-
 
 import socketio
 import eventlet
@@ -36,32 +31,7 @@ if __name__ == '__main__':
     app = socketio.Middleware(sio, app)
 
     # deploy as an eventlet WSGI server
-    ##eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
+    #eventlet.wsgi.server(eventlet.listen(('', 8000)), app)
     eventlet.wsgi.server(eventlet.wrap_ssl(eventlet.listen(('', 8090)), certfile='cert.crt', keyfile='private.key', server_side=True), app)
-
-
-
-virtual env: pip installed python-socketio, eventlet, Flask
-
-(penvsocketio) C:\Users\me\pysocketio\example>pip list
-Package         Version
---------------- -------
-Click           7.0
-dnspython       1.15.0
-enum34          1.1.6
-eventlet        0.24.1
-Flask           1.0.2
-greenlet        0.4.15
-itsdangerous    1.1.0
-Jinja2          2.10
-MarkupSafe      1.1.0
-monotonic       1.5
-pip             18.1
-python-engineio 2.3.2
-python-socketio 2.0.0
-setuptools      40.5.0
-six             1.11.0
-Werkzeug        0.14.1
-wheel           0.32.2
 
 
