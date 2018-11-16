@@ -1,0 +1,76 @@
+
+
+search golang http server
+https://gowebexamples.com/http-server/
+
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	http.HandleFunc("/", func (w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Welcome to my website!")
+	})
+
+	fs := http.FileServer(http.Dir("static/"))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
+	http.ListenAndServe(":80", nil)
+}
+
+
+
+search golang http listenandserve shutdown
+https://stackoverflow.com/questions/39320025/how-to-stop-http-listenandserve
+
+package main
+
+import (
+    "log"
+    "io"
+    "time"
+    "net/http"
+)
+
+func startHttpServer() *http.Server {
+    srv := &http.Server{Addr: ":8080"}
+
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        io.WriteString(w, "hello world\n")
+    })
+
+    go func() {
+        if err := srv.ListenAndServe(); err != nil {
+            // cannot panic, because this probably is an intentional close
+            log.Printf("Httpserver: ListenAndServe() error: %s", err)
+        }
+    }()
+
+    // returning reference so caller can call Shutdown()
+    return srv
+}
+
+func main() {
+    log.Printf("main: starting HTTP server")
+
+    srv := startHttpServer()
+
+    log.Printf("main: serving for 10 seconds")
+
+    time.Sleep(10 * time.Second)
+
+    log.Printf("main: stopping HTTP server")
+
+    // now close the server gracefully ("shutdown")
+    // timeout could be given instead of nil as a https://golang.org/pkg/context/
+    if err := srv.Shutdown(nil); err != nil {
+        panic(err) // failure/timeout shutting down the server gracefully
+    }
+
+    log.Printf("main: done. exiting")
+}
+
+
