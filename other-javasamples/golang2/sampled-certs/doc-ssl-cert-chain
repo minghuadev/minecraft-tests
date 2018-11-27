@@ -1,0 +1,136 @@
+
+https://www.slashroot.in/how-does-ssltls-chain-certificates-and-its-validation-work
+how does ssl/tls chain certificates and its validation work
+
+ root ca: 
+
+  create a private key for root ca
+
+    openssl genrsa -out rootca.key 4096
+
+  create an openssl.cnf configuration file: 
+
+    [ req ]
+    default_bits        = 4096
+    default_md          = sha384
+    prompt            = yes
+    distinguished_name  = req_distinguished_name
+    x509_extensions     = v3_ca
+     
+    [ req_distinguished_name ]
+    countryName                     = Country Name (2 letter code)
+    stateOrProvinceName             = State or Province Name
+    localityName                    = Locality Name
+    0.organizationName              = Organization Name
+    organizationalUnitName          = Organizational Unit Name
+    commonName                      = Common Name
+    emailAddress                    = Email Address
+    countryName_default             = IN
+    stateOrProvinceName_default     = TELANGANA
+    localityName_default            = Hyderabad
+    0.organizationName_default      = ExampleCA, Inc.
+    organizationalUnitName_default  = ExampleCA Root
+    emailAddress_default            = ops@example.com
+     
+    [ v3_ca ]
+    subjectKeyIdentifier = hash
+    authorityKeyIdentifier = keyid:always,issuer
+    basicConstraints = critical, CA:true
+    keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+
+  create the self-signed cert for the root ca:
+
+    openssl req -config openssl.cnf -new -x509 -days 3650 -sha384 -extensions v3_ca -key rootca.key -out rootca.crt
+
+
+ sign a client ca: 
+  create the private key and csr: 
+
+    openssl genrsa -out example.com.key 2048
+    openssl req -new -days 365 -key example.com.key -out example.com.csr
+
+  sign the client ca: 
+
+    openssl x509 -req -days 365 -in example.com.csr -CA rootca.crt -CAkey rootca.key -set_serial 100 -out example.com.crt
+
+
+ intermediate ca: 
+  create the intermediate key and csr: 
+
+    openssl genrsa -out intermediateca.key 4096
+    openssl req -new -key intermediateca.key -out intermediateca.csr
+
+  configurtion file with new sections intermediate_ca, default_settings, ca, and out_policy:
+
+    [ req ]
+    default_bits        = 4096
+    default_md          = sha384
+    prompt            = yes
+    distinguished_name  = req_distinguished_name
+    x509_extensions     = v3_ca
+      
+    [ ca ]
+    default_ca       = default_settings
+      
+    [ default_settings ]
+    dir          = /root
+    private_key       = $dir/rootca.key
+    certificate       = $dir/rootca.crt
+    new_certs_dir     = $dir/certs
+    database          = $dir/index.txt
+    serial            = $dir/serial
+    policy            = our_policy
+      
+    [ our_policy ]
+    countryName             = match
+    stateOrProvinceName     = match
+    organizationName        = optional
+    organizationalUnitName  = optional
+    commonName              = supplied
+    emailAddress            = optional
+      
+    [ req_distinguished_name ]
+    countryName                     = Country Name (2 letter code)
+    stateOrProvinceName             = State or Province Name
+    localityName                    = Locality Name
+    0.organizationName              = Organization Name
+    organizationalUnitName          = Organizational Unit Name
+    commonName                      = Common Name
+    emailAddress                    = Email Address
+    countryName_default             = IN
+    stateOrProvinceName_default     = TELANGANA
+    localityName_default            = Hyderabad
+    0.organizationName_default      = ExampleCA, Inc.
+    organizationalUnitName_default  = ExampleCA Root
+    emailAddress_default            = ops@example.com
+      
+    [ v3_ca ]
+    subjectKeyIdentifier = hash
+    authorityKeyIdentifier = keyid:always,issuer
+    basicConstraints = critical, CA:true
+    keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+      
+    [ intermediate_ca ]
+    subjectKeyIdentifier = hash
+    authorityKeyIdentifier = keyid:always,issuer
+    basicConstraints = critical, CA:true, pathlen:0
+    keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+
+  create directory structure for signing records:
+
+    mkdir certs
+    touch index.txt
+    echo 1000 > serial
+
+  sign the intermediate ca with root ca: 
+    openssl ca -config openssl.cnf -days 2920 -extensions intermediate_ca -md sha384 -in intermediateca.csr -out intermediateca.crt
+
+
+ using intermediate ca to sign client ca: 
+    openssl x509 -req -days 365 -in example.com.csr -CA intermediateca.crt -CAkey intermediateca.key -set_serial 1003 -out example.com.crt
+
+
+ create the chain:
+    cat exmple.com.crt intermediateca.crt rootca.crt > chain.crt
+
+
