@@ -25,9 +25,22 @@ drwxr-xr-x      0 Oct 31 23:24 sample3-tests/
 -rw-r--r--    152 Oct 31 23:44 notea-golang-org-x-net
 
 
--rw-r--r-- 1 cxm 197121  853 Oct 31 23:45 list-files
--rw-r--r-- 1 cxm 197121  139 Nov  4 00:09 noteb-pin-tftp-anticipate
-drwxr-xr-x 1 cxm 197121    0 Nov  4 00:16 sampleb-pin-tftp-anticipate/
--rw-r--r-- 1 cxm 197121  516 Nov  4 00:23 list-files-sampleb
+-rw-r--r--     853 Oct 31 23:45 list-files
+-rw-r--r--     139 Nov  4 00:09 noteb-pin-tftp-anticipate
+drwxr-xr-x       0 Nov  4 00:16 sampleb-pin-tftp-anticipate/
+-rw-r--r--     516 Nov  4 00:23 list-files-sampleb
+
+
+-rw-r--r--     139 Nov  4 00:09 noteb-pin-tftp-anticipate
+drwxr-xr-x       0 Nov  4 00:16 sampleb-pin-tftp-anticipate/
+-rw-r--r--     516 Nov  4 00:23 list-files-sampleb
+-rw-r--r--    1108 Nov  4 00:24 list-files
+drwxr-xr-x       0 Nov 11 20:26 sample3-tests/
+-rw-r--r--    2348 Nov 15 22:16 notec-ssl-cert
+drwxr-xr-x       0 Nov 15 22:18 samplec-ssl-cert/
+-rw-r--r--    1609 Nov 15 22:26 notec-http-server
+drwxr-xr-x       0 Nov 27 08:38 sampled-certs/
+-rw-r--r--    5907 Nov 27 08:39 noted-certs
+-rw-r--r--     775 Dec 11 23:53 note9-reflect-struct-iterate
 
 

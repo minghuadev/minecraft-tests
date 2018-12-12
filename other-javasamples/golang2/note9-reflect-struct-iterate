@@ -1,0 +1,51 @@
+
+search golang iterate over struct elements
+https://stackoverflow.com/questions/18926303/iterate-through-the-fields-of-a-struct-in-go
+
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+type T struct {
+	Foo string
+	Bar int
+}
+
+func main() {
+	x := T{"foo", 2}
+
+	v := reflect.ValueOf(x)
+	t := reflect.TypeOf(x)
+	fmt.Println(t.Name())
+
+	values := make([]interface{}, v.NumField())
+	typs := make([]interface{}, v.NumField())
+	kinds := make([]interface{}, v.NumField())
+
+	for i := 0; i < v.NumField(); i++ {
+		values[i] = v.Field(i).Interface()
+		typs[i] = reflect.TypeOf(values[i])
+		kinds[i] = typs[i].(reflect.Type).Kind()
+	}
+
+	fmt.Println(values)
+	fmt.Println(typs)
+	for _,k := range kinds {
+		fmt.Printf(" kinds %d\n", k)
+	}
+}
+
+
+output:
+
+T
+[foo 2]
+[string int]
+ kinds 24
+ kinds 2
+
+
