@@ -44,3 +44,9 @@ drwxr-xr-x       0 Nov 27 08:38 sampled-certs/
 -rw-r--r--     775 Dec 11 23:53 note9-reflect-struct-iterate
 
 
+-rw-r--r--    1629 Dec 11 23:55 list-files
+-rw-r--r--     971 Dec 15 19:29 note9-reflect-struct-iterate
+-rw-r--r--     365 Dec 15 20:25 notee-rsa-signing
+-rw-r--r--     824 Dec 15 21:36 notec-http-server-file-json
+
+
