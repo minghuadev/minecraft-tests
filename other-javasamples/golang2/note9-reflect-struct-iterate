@@ -2,6 +2,9 @@
 search golang iterate over struct elements
 https://stackoverflow.com/questions/18926303/iterate-through-the-fields-of-a-struct-in-go
 
+  be careful: v.Field(i).Interface() panics if you try to access non exported private fields. 
+              using v.Field(i).CanInterface() one can avoid the panic in case of unexported fields.
+
 
 package main
 
