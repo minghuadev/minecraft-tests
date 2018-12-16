@@ -1,0 +1,27 @@
+
+
+golang http server serve json response
+https://stackoverflow.com/questions/31622052/how-to-serve-up-a-json-response-using-go
+
+    w.Header().Set("Content-Type", "application/json")
+
+    // get a payload p := Payload{d}
+    json.NewEncoder(w).Encode(p)
+
+
+
+golang fileserver vs servefile
+https://stackoverflow.com/questions/28793619/golang-what-to-use-http-servefile-or-http-fileserver/28798174
+
+    // This works and strip "/static/" fragment from path
+    fs := http.FileServer(http.Dir("static"))
+    http.Handle("/static/", http.StripPrefix("/static/", fs))
+
+    // This works too, but "/static2/" fragment remains and need to be striped manually
+    http.HandleFunc("/static2/", func(w http.ResponseWriter, r *http.Request) {
+        http.ServeFile(w, r, r.URL.Path[1:])
+    })
+
+    http.ListenAndServe(":8080", nil)
+
+
