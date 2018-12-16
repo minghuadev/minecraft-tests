@@ -1,0 +1,8 @@
+
+
+https://stackoverflow.com/questions/19840811/list-of-serialports-queried-using-wmi-differs-from-devicemanager
+List of SerialPorts queried using WMI differs from devicemanager
+
+  wmic path Win32_PnPEntity Get DeviceID,Name
+
+
