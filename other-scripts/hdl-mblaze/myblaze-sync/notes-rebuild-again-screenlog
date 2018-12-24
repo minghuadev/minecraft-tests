@@ -1,0 +1,327 @@
+
+
+build failed at the last step due to out of disk space. 
+restarted the build for the last step.
+
+
+~/sharedfolder/crosstool-ng$ ./ct-ng build.1
+[INFO ]  Performing some trivial sanity checks
+[INFO ]  Build started 20181223.181437
+[INFO ]  Building environment variables
+[EXTRA]  Preparing working directories
+[EXTRA]  Installing user-supplied crosstool-NG configuration
+[EXTRA]  =================================================================
+[EXTRA]  Dumping internal crosstool-NG configuration
+[EXTRA]    Building a toolchain for:
+[EXTRA]      build  = x86_64-unknown-linux-gnu
+[EXTRA]      host   = x86_64-unknown-linux-gnu
+[EXTRA]      target = microblaze-xilinx-elf
+[EXTRA]  Dumping internal crosstool-NG configuration: done in 0.07s (at 00:02)
+[INFO ]  =================================================================
+[INFO ]  Retrieving needed toolchain components' tarballs
+[EXTRA]    Using 'binutils-custom' from custom location
+[EXTRA]    Using 'gcc-custom' from custom location
+[EXTRA]    Using 'newlib-custom' from custom location
+[INFO ]  Retrieving needed toolchain components' tarballs: done in 0.08s (at 00:02)
+[INFO ]  =================================================================
+[INFO ]  Extracting and patching toolchain components
+[EXTRA]    Extracting 'gmp-5.0.1'
+[EXTRA]    Patching 'gmp-5.0.1'
+[EXTRA]    Extracting 'mpfr-3.0.1'
+[EXTRA]    Patching 'mpfr-3.0.1'
+[EXTRA]    Extracting 'mpc-0.9'
+[EXTRA]    Patching 'mpc-0.9'
+[INFO ]  Extracting and patching toolchain components: done in 1.21s (at 00:03)
+[EXTRA]  Saving state to restart at step 'libc_check_config'...
+[EXTRA]  Saving state to restart at step 'companion_libs_for_build'...
+[EXTRA]  Saving state to restart at step 'binutils_for_build'...
+[EXTRA]  Saving state to restart at step 'companion_libs_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing GMP for host
+[EXTRA]    Configuring GMP
+[EXTRA]    Building GMP
+[EXTRA]    Installing GMP
+[INFO ]  Installing GMP for host: done in 75.66s (at 01:19)
+[INFO ]  =================================================================
+[INFO ]  Installing MPFR for host
+[EXTRA]    Configuring MPFR
+[EXTRA]    Building MPFR
+[EXTRA]    Installing MPFR
+[INFO ]  Installing MPFR for host: done in 37.23s (at 01:56)
+[INFO ]  =================================================================
+[INFO ]  Installing MPC for host
+[EXTRA]    Configuring MPC
+[EXTRA]    Building MPC
+[EXTRA]    Installing MPC
+[INFO ]  Installing MPC for host: done in 12.31s (at 02:08)
+[EXTRA]  Saving state to restart at step 'binutils_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing binutils for host
+[EXTRA]    Configuring binutils
+[EXTRA]    Building binutils
+[EXTRA]    Installing binutils
+[INFO ]  Installing binutils for host: done in 349.01s (at 07:58)
+[EXTRA]  Saving state to restart at step 'cc_core_pass_1'...
+[INFO ]  =================================================================
+[INFO ]  Installing pass-1 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[EXTRA]    Installing gcc
+[EXTRA]    gcc configured with these multilibs (besides the default):
+[EXTRA]        -mxl-barrel-shift  -->  bs/
+[EXTRA]        -mno-xl-soft-mul  -->  m/
+[EXTRA]        -mlittle-endian  -->  le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high  -->  m/mh/
+[EXTRA]        -mno-xl-soft-mul -mlittle-endian  -->  m/le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  m/mh/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul  -->  bs/m/
+[EXTRA]        -mxl-barrel-shift -mlittle-endian  -->  bs/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high  -->  bs/m/mh/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mlittle-endian  -->  bs/m/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  bs/m/mh/le/
+[INFO ]  Installing pass-1 core C compiler: done in 919.29s (at 23:21)
+[EXTRA]  Saving state to restart at step 'kernel_headers'...
+[EXTRA]  Saving state to restart at step 'libc_start_files'...
+[INFO ]  =================================================================
+[INFO ]  Installing C library headers & start files
+[INFO ]  Installing C library headers & start files: done in 0.10s (at 23:40)
+[EXTRA]  Saving state to restart at step 'cc_core_pass_2'...
+[INFO ]  =================================================================
+[INFO ]  Installing pass-2 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[EXTRA]    Installing gcc
+[EXTRA]    gcc configured with these multilibs (besides the default):
+[EXTRA]        -mxl-barrel-shift  -->  bs/
+[EXTRA]        -mno-xl-soft-mul  -->  m/
+[EXTRA]        -mlittle-endian  -->  le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high  -->  m/mh/
+[EXTRA]        -mno-xl-soft-mul -mlittle-endian  -->  m/le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  m/mh/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul  -->  bs/m/
+[EXTRA]        -mxl-barrel-shift -mlittle-endian  -->  bs/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high  -->  bs/m/mh/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mlittle-endian  -->  bs/m/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  bs/m/mh/le/
+[INFO ]  Installing pass-2 core C compiler: done in 1056.26s (at 41:25)
+[EXTRA]  Saving state to restart at step 'libc'...
+[INFO ]  =================================================================
+[INFO ]  Installing C library
+[EXTRA]    Configuring C library
+[EXTRA]    Building C library
+[EXTRA]    Installing C library
+[INFO ]  Installing C library: done in 666.98s (at 52:41)
+[EXTRA]  Saving state to restart at step 'cc_for_build'...
+[EXTRA]  Saving state to restart at step 'cc_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing final compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[EXTRA]    Installing gcc
+[EXTRA]    gcc configured with these multilibs (besides the default):
+[EXTRA]        -mxl-barrel-shift  -->  bs/
+[EXTRA]        -mno-xl-soft-mul  -->  m/
+[EXTRA]        -mlittle-endian  -->  le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high  -->  m/mh/
+[EXTRA]        -mno-xl-soft-mul -mlittle-endian  -->  m/le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  m/mh/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul  -->  bs/m/
+[EXTRA]        -mxl-barrel-shift -mlittle-endian  -->  bs/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high  -->  bs/m/mh/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mlittle-endian  -->  bs/m/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  bs/m/mh/le/
+[INFO ]  Installing final compiler: done in 1072.65s (at 71:06)
+[EXTRA]  Saving state to restart at step 'libelf_for_target'...
+[EXTRA]  Saving state to restart at step 'binutils_for_target'...
+[ERROR]
+[ERROR]  >>
+[ERROR]  >>  Build failed in step '(top-level)'
+[ERROR]  >>
+[ERROR]  >>  Error happened in: CT_DoTarballIfExists[scripts/functions@1230]
+[ERROR]  >>        called from: CT_DoSaveState[scripts/functions@1291]
+[ERROR]  >>        called from: main[scripts/crosstool-NG.sh@625]
+
+
+Current command (unknown), exited with error code: 1
+Please fix it up and finish by exiting the shell with one of these values:
+    1  fixed, continue with next build command
+    3  abort build
+
+ct-ng:~/sharedfolder/crosstool-ng> exit 3
+exit
+[ERROR]  >>
+[ERROR]  >>  For more info on this error, look at the file: 'build.log'
+[ERROR]  >>  There is a list of known issues, some with workarounds, in:
+[ERROR]  >>      'docs/B - Known issues.txt'
+[ERROR]
+[ERROR]  (elapsed: 77:39.46)
+ct-ng:148: recipe for target 'build' failed
+make[1]: *** [build] Error 1
+ct-ng:151: recipe for target 'build.1' failed
+make: *** [build.1] Error 2
+hdler@3c7a68b2a8d5:~/sharedfolder/crosstool-ng$
+
+
+
+hdler@3c7a68b2a8d5:~/sharedfolder/crosstool-ng$ ./ct-ng cc_for_host
+[INFO ]  Performing some trivial sanity checks
+[INFO ]  Build started 20181223.193237
+[INFO ]  Building environment variables
+[EXTRA]  Preparing working directories
+[EXTRA]  Restoring state at step 'cc_for_host', as requested.
+[INFO ]  =================================================================
+[INFO ]  Installing final compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+
+
+...
+
+
+run ./ct-ng distclean
+re-clone the crosstool-ng and 
+redo the process again:
+
+
+hdler@3c7a68b2a8d5:~/sharedfolder/crosstool-ng$ ./ct-ng build.1
+[INFO ]  Performing some trivial sanity checks
+[INFO ]  Build started 20181223.201438
+[INFO ]  Building environment variables
+[EXTRA]  Preparing working directories
+[EXTRA]  Installing user-supplied crosstool-NG configuration
+[EXTRA]  =================================================================
+[EXTRA]  Dumping internal crosstool-NG configuration
+[EXTRA]    Building a toolchain for:
+[EXTRA]      build  = x86_64-unknown-linux-gnu
+[EXTRA]      host   = x86_64-unknown-linux-gnu
+[EXTRA]      target = microblaze-xilinx-elf
+[EXTRA]  Dumping internal crosstool-NG configuration: done in 0.06s (at 00:01)
+[INFO ]  =================================================================
+[INFO ]  Retrieving needed toolchain components' tarballs
+[EXTRA]    Using 'binutils-custom' from custom location
+[EXTRA]    Using 'gcc-custom' from custom location
+[EXTRA]    Using 'newlib-custom' from custom location
+[INFO ]  Retrieving needed toolchain components' tarballs: done in 0.12s (at 00:01)
+[INFO ]  =================================================================
+[INFO ]  Extracting and patching toolchain components
+[EXTRA]    Extracting 'gmp-5.0.1'
+[EXTRA]    Patching 'gmp-5.0.1'
+[EXTRA]    Extracting 'mpfr-3.0.1'
+[EXTRA]    Patching 'mpfr-3.0.1'
+[EXTRA]    Extracting 'mpc-0.9'
+[EXTRA]    Patching 'mpc-0.9'
+[INFO ]  Extracting and patching toolchain components: done in 1.14s (at 00:02)
+[EXTRA]  Saving state to restart at step 'libc_check_config'...
+[EXTRA]  Saving state to restart at step 'companion_libs_for_build'...
+[EXTRA]  Saving state to restart at step 'binutils_for_build'...
+[EXTRA]  Saving state to restart at step 'companion_libs_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing GMP for host
+[EXTRA]    Configuring GMP
+[EXTRA]    Building GMP
+[EXTRA]    Installing GMP
+[INFO ]  Installing GMP for host: done in 71.62s (at 02:03)
+[INFO ]  =================================================================
+[INFO ]  Installing MPFR for host
+[EXTRA]    Configuring MPFR
+[EXTRA]    Building MPFR
+[EXTRA]    Installing MPFR
+[INFO ]  Installing MPFR for host: done in 35.86s (at 02:39)
+[INFO ]  =================================================================
+[INFO ]  Installing MPC for host
+[EXTRA]    Configuring MPC
+[EXTRA]    Building MPC
+[EXTRA]    Installing MPC
+[INFO ]  Installing MPC for host: done in 12.24s (at 02:51)
+[EXTRA]  Saving state to restart at step 'binutils_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing binutils for host
+[EXTRA]    Configuring binutils
+[EXTRA]    Building binutils
+[EXTRA]    Installing binutils
+[INFO ]  Installing binutils for host: done in 349.97s (at 08:53)
+[EXTRA]  Saving state to restart at step 'cc_core_pass_1'...
+[INFO ]  =================================================================
+[INFO ]  Installing pass-1 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[EXTRA]    Installing gcc
+[EXTRA]    gcc configured with these multilibs (besides the default):
+[EXTRA]        -mxl-barrel-shift  -->  bs/
+[EXTRA]        -mno-xl-soft-mul  -->  m/
+[EXTRA]        -mlittle-endian  -->  le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high  -->  m/mh/
+[EXTRA]        -mno-xl-soft-mul -mlittle-endian  -->  m/le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  m/mh/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul  -->  bs/m/
+[EXTRA]        -mxl-barrel-shift -mlittle-endian  -->  bs/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high  -->  bs/m/mh/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mlittle-endian  -->  bs/m/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  bs/m/mh/le/
+[INFO ]  Installing pass-1 core C compiler: done in 915.90s (at 24:22)
+[EXTRA]  Saving state to restart at step 'kernel_headers'...
+[EXTRA]  Saving state to restart at step 'libc_start_files'...
+[INFO ]  =================================================================
+[INFO ]  Installing C library headers & start files
+[INFO ]  Installing C library headers & start files: done in 0.17s (at 25:01)
+[EXTRA]  Saving state to restart at step 'cc_core_pass_2'...
+[INFO ]  =================================================================
+[INFO ]  Installing pass-2 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[EXTRA]    Installing gcc
+[EXTRA]    gcc configured with these multilibs (besides the default):
+[EXTRA]        -mxl-barrel-shift  -->  bs/
+[EXTRA]        -mno-xl-soft-mul  -->  m/
+[EXTRA]        -mlittle-endian  -->  le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high  -->  m/mh/
+[EXTRA]        -mno-xl-soft-mul -mlittle-endian  -->  m/le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  m/mh/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul  -->  bs/m/
+[EXTRA]        -mxl-barrel-shift -mlittle-endian  -->  bs/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high  -->  bs/m/mh/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mlittle-endian  -->  bs/m/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  bs/m/mh/le/
+[INFO ]  Installing pass-2 core C compiler: done in 1063.33s (at 43:04)
+[EXTRA]  Saving state to restart at step 'libc'...
+[INFO ]  =================================================================
+[INFO ]  Installing C library
+[EXTRA]    Configuring C library
+[EXTRA]    Building C library
+[EXTRA]    Installing C library
+[INFO ]  Installing C library: done in 666.65s (at 54:31)
+[EXTRA]  Saving state to restart at step 'cc_for_build'...
+[EXTRA]  Saving state to restart at step 'cc_for_host'...
+[INFO ]  =================================================================
+[INFO ]  Installing final compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[EXTRA]    Installing gcc
+[EXTRA]    gcc configured with these multilibs (besides the default):
+[EXTRA]        -mxl-barrel-shift  -->  bs/
+[EXTRA]        -mno-xl-soft-mul  -->  m/
+[EXTRA]        -mlittle-endian  -->  le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high  -->  m/mh/
+[EXTRA]        -mno-xl-soft-mul -mlittle-endian  -->  m/le/
+[EXTRA]        -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  m/mh/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul  -->  bs/m/
+[EXTRA]        -mxl-barrel-shift -mlittle-endian  -->  bs/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high  -->  bs/m/mh/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mlittle-endian  -->  bs/m/le/
+[EXTRA]        -mxl-barrel-shift -mno-xl-soft-mul -mxl-multiply-high -mlittle-endian  -->  bs/m/mh/le/
+[INFO ]  Installing final compiler: done in 1063.76s (at 73:00)
+[EXTRA]  Saving state to restart at step 'libelf_for_target'...
+[EXTRA]  Saving state to restart at step 'binutils_for_target'...
+[EXTRA]  Saving state to restart at step 'debug'...
+[EXTRA]  Saving state to restart at step 'test_suite'...
+[EXTRA]  Saving state to restart at step 'finish'...
+[INFO ]  =================================================================
+[INFO ]  Cleaning-up the toolchain's directory
+[EXTRA]    Creating toolchain aliases
+[EXTRA]    Removing access to the build system tools
+[INFO ]  Cleaning-up the toolchain's directory: done in 0.31s (at 74:44)
+[INFO ]  Build completed at 20181223.212922
+[INFO ]  (elapsed: 74:44.28)
+[INFO ]  Finishing installation (may take a few seconds)...
+
+

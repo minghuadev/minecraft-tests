@@ -1,0 +1,4 @@
+
+install also: 
+gperf wget libtool libtool-bin automake
+

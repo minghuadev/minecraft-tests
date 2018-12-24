@@ -1,0 +1,14 @@
+
+ls -lrt
+
+-rw-rw-r--+    1239 Dec 20 17:39 notes-docker-container-dkf1
+-rw-r--r--+    1097 Dec 20 19:03 dot0-samples-microblaze-xilinx-elf-crosstool.config
+-rw-rw-r--+      57 Dec 20 20:06 notes-docker-container-dkf3
+-rw-r--r--+    9149 Dec 21 08:39 log5-dot-config
+-rw-r--r--+    9162 Dec 21 08:56 log7-dot-config
+-rw-rw-r--+     867 Dec 21 18:57 notes-docker-container-dkf2
+-rw-rw-r--+   10069 Dec 21 19:46 xdiff-0to5
+-rw-rw-r--+    3948 Dec 21 19:53 xdiff-0to5-mod
+-rw-rw-r--+       0 Dec 22 15:45 list-files
+
+

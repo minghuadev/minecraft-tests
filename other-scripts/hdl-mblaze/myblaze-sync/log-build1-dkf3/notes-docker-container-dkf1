@@ -1,0 +1,51 @@
+#!/bin/bash
+# dkf1.bash
+
+curr_uid=`id -u`
+curr_gid=`id -g`
+
+rm the.dockerfile
+
+cat << EOF_DOCKERFILE > the.dockerfile
+ FROM ubuntu:bionic-20181112
+
+ ARG USERNAME=hdler
+ ARG UID=1999
+ ARG GID=1999
+
+ RUN groupadd -g \$GID \$USERNAME
+ RUN useradd -m -u \$UID -g \$GID -s /bin/bash \$USERNAME
+
+ RUN rm /bin/sh && ln -s bash /bin/sh
+ RUN cp -a /etc /etc-original && chmod a+rw /etc
+
+ RUN apt-get update
+ RUN apt-get install -y git tree openssh-client make
+ RUN apt-get install -y bzip2 gcc libncurses5-dev bc
+ RUN apt-get install -y file vim zlib1g-dev g++ libssl-dev
+
+ RUN apt-get install -y lib32z1 lib32stdc++6 ncurses-term libncursesw5-dev
+ RUN apt-get install -y texinfo texlive gawk
+
+ RUN dpkg --add-architecture i386
+ RUN apt-get update
+ RUN apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386
+ RUN apt-get install -y u-boot-tools:i386
+
+ RUN apt-get install -y pkg-config bison flex
+
+ USER \$USERNAME
+ CMD /bin/bash
+EOF_DOCKERFILE
+
+echo; echo build dkf1.img
+docker build --build-arg UID=${curr_uid} --build-arg GID=${curr_gid} \
+    -f the.dockerfile -t dkf1.img .
+echo; echo build dkf1.img done
+
+
+#docker run -td \
+#    -v "$(dirname "$(pwd)")"/sharedfolder:/home/hdler/sharedfolder \
+#    --name dkf1 dkf1.img
+
+

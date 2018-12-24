@@ -1,0 +1,41 @@
+
+content of ~/sharedfolder/ :
+
+
+~/sharedfolder$ ls -l
+drwxrwxr-x. 13 hdler hdler 4096 Dec 23 08:46 crosstool-ng
+drwxrwxr-x.  2 hdler hdler 4096 Dec 21 09:19 downloads
+-rw-r--r--.  1 hdler hdler 9291 Dec 22 18:06 logb-dot-config
+drwxrwxr-x.  8 hdler hdler 4096 Dec 21 08:49 sources
+drwxrwxr-x.  2 hdler hdler 4096 Dec 23 00:33 srcpkgs
+drwxr-xr-x.  8 hdler hdler 4096 Dec 23 10:03 tool-build
+
+
+~/sharedfolder$ ls -l downloads/
+-rw-r--r--. 1 hdler hdler 2006109 Dec 21 09:04 gmp-5.0.1.tar.bz2
+-rw-r--r--. 1 hdler hdler  565953 Nov 22 09:25 mpc-0.9.tar.gz
+-rw-r--r--. 1 hdler hdler 1016096 Apr  4  2011 mpfr-3.0.1.tar.xz
+
+
+~/sharedfolder$ ls -l sources/
+drwxr-xr-x. 21 hdler hdler      4096 Mar  6  2017 binutils
+-rw-r--r--.  1 hdler hdler  52535254 Dec 21 08:49 binutils-2.27.tar.gz
+drwxr-xr-x. 38 hdler hdler      4096 Mar  6  2017 gcc
+-rw-r--r--.  1 hdler hdler 117995279 Dec 21 08:49 gcc-6.2.tar.gz
+drwxr-xr-x. 22 hdler hdler      4096 Mar  6  2017 gdb
+-rw-r--r--.  1 hdler hdler  52315052 Dec 21 08:49 gdb-7.12.tar.gz
+drwxr-xr-x. 67 hdler hdler      4096 Mar  6  2017 glibc
+-rw-r--r--.  1 hdler hdler  26796012 Dec 21 08:49 glibc-2.23.tar.gz
+drwxr-xr-x. 24 hdler hdler      4096 Mar  6  2017 linux
+-rw-r--r--.  1 hdler hdler 143976673 Dec 21 08:49 linux-4.9.tar.gz
+drwxr-xr-x.  9 hdler hdler      4096 Mar  6  2017 newlib
+-rw-r--r--.  1 hdler hdler  20533660 Dec 21 08:49 newlib-2.4.tar.gz
+
+
+
+the gcc 6.2 download: 
+
+-rw-r--r--. 1   414156800 Mar 23  2017 mb-gnu-20170306.tar.gz
+
+
+

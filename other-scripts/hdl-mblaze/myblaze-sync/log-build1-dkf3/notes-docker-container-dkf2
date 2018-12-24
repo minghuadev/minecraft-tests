@@ -1,0 +1,42 @@
+#!/bin/bash
+# dkf2.bash
+
+curr_uid=`id -u`
+curr_gid=`id -g`
+
+rm the.dockerfile
+
+cat << EOF_DOCKERFILE > the.dockerfile
+ FROM dkf1.img:latest
+
+ ARG USERNAME=hdler
+ ARG UID=1999
+ ARG GID=1999
+
+ RUN mkdir -p /home/\$USERNAME/sharedfolder
+ RUN chown \$USERNAME:\$USERNAME /home/\$USERNAME/sharedfolder
+
+ USER \$USERNAME
+ CMD /bin/bash
+EOF_DOCKERFILE
+
+echo; echo build dkf2.img
+docker build --build-arg UID=${curr_uid} --build-arg GID=${curr_gid} \
+    -f the.dockerfile -t dkf2.img .
+echo; echo build dkf2.img done
+
+
+
+#!/bin/bash
+# dkf2-create.sh
+
+docker run -td \
+    -v $(pwd)/sharedfolder:/home/hdler/sharedfolder \
+    --name dkf2 dkf2.img
+
+# search docker volume bind permission denied
+# https://stackoverflow.com/questions/24288616/permission-denied-on-accessing-host-directory-in-docker
+# on host run: 
+# chcon -Rt svirt_sandbox_file_t /host/path/to/sharedfolder
+
+

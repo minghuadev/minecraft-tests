@@ -1,0 +1,53 @@
+
+
+list-files
+
+
+ls -lrt
+
+-rw-rw-r--+     6434 Dec 20 15:43 readme-sync
+-rw-rw-r--+     1239 Dec 20 17:39 notes-docker-container-dkf1
+-rw-rw-r--+       57 Dec 20 20:06 notes-docker-container-dkf3
+-rw-rw-r--+      867 Dec 21 18:57 notes-docker-container-dkf2
+-rw-rw-r--+     2632 Dec 21 19:01 notes-links-crosstool-ng-fixes
+-rw-rw-r--+     2246 Dec 21 19:13 notes-links
+-rwxrwxr-x+   457304 Dec 21 19:19 myblaze-toolchain-build.pdf
+-rw-rw-r--+        0 Dec 21 19:21 list-files
+
+
+ls -lrt
+
+-rw-rw-r--+     6434 Dec 20 15:43 readme-sync
+-rw-rw-r--+     2632 Dec 21 19:01 notes-links-crosstool-ng-fixes
+-rw-rw-r--+     2246 Dec 21 19:13 notes-links
+-rwxrwxr-x+   457304 Dec 21 19:19 myblaze-toolchain-build.pdf
+-rw-rw-r--+      476 Dec 21 19:22 list-files
+drwxrwxr-x+        0 Dec 22 15:46 log-build1-dkf3
+drwxrwxr-x+        0 Dec 22 16:01 log-build2-dkf4
+
+
+ls -lrt
+
+-rw-rw-r--+     6434 Dec 20 15:43 readme-sync
+-rw-rw-r--+     2632 Dec 21 19:01 notes-links-crosstool-ng-fixes
+-rw-rw-r--+      851 Dec 22 16:02 list-files
+-rwxrwxr-x+   457304 Dec 22 16:03 myblaze-toolchain-build.pdf
+drwxrwxr-x+        0 Dec 22 16:36 log-build2-dkf4
+drwxrwxr-x+        0 Dec 22 16:39 log-build1-dkf3
+-rw-rw-r--+      474 Dec 22 17:04 notes-builds
+-rw-rw-r--+     1735 Dec 23 11:18 notes-rebuild-again
+drwxrwxr-x+        0 Dec 23 11:34 log-build3-dkf5
+-rw-rw-r--+     3347 Dec 23 11:42 notes-links
+-rw-rw-r--+    16116 Dec 23 15:27 notes-rebuild-again-screenlog
+
+
+ls -lrt
+
+-rw-rw-r--+     16116 Dec 23 15:27 notes-rebuild-again-screenlog
+-rw-rw-r--+      1441 Dec 23 15:34 list-files
+-rwxrwxr-x+   3315074 Dec 24 00:42 xilinx-mb_ref_guide.pdf
+-rwxrwxr-x+   9385774 Dec 24 00:56 xilinx-ug984-vivado-microblaze-ref.pdf
+-rw-rw-r--+       306 Dec 24 09:42 xilinx-mb-docs
+
+
+

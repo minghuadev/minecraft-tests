@@ -1,0 +1,179 @@
+
+
+* Initial
+ - Create the git repo
+    <with this readme-sync file>
+
+ - Create the svn tracking branch
+
+    git branch --no-track syncsvn
+    git checkout syncsvn
+    git svn init http://your-svn-server/your-repo
+    git svn fetch
+    git reset --hard remotes/git-svn
+
+* Sync from svn to git
+
+    git checkout syncsvn
+    git svn fetch
+    git svn rebase
+    git checkout master
+    git merge syncsvn
+                # add `--allow-unrelated-histories` to the first merge
+
+* Sync from git to svn
+
+    git checkout master
+    git pull origin master
+    git checkout syncsvn
+    git svn rebase
+    git merge --no-ff master
+    git commit
+    git svn dcommit
+
+
+
+
+$ git svn init https://opencores.org/ocsvn/myblaze/myblaze
+
+
+$ git svn fetch
+W: +empty_dir: branches
+W: +empty_dir: tags
+W: +empty_dir: trunk
+r1 = 3123dd26d4708dabf23c6a60082a1d31b6542ec6 (refs/remotes/git-svn)
+        A       trunk/rtl/uart.py
+        A       trunk/rtl/test.py
+        A       trunk/rtl/bram.py
+        A       trunk/rtl/uart_test_top.ucf
+        A       trunk/rtl/debug.py
+        A       trunk/model/emulator.py
+        A       trunk/model/rom.vmem
+        A       trunk/model/ina.ods
+        A       trunk/tools/srec2vram
+        A       trunk/tools/bin2rom
+        A       trunk/tools/bin2mem
+        A       trunk/tools/bin2mem4
+        A       trunk/rtl/core.py
+        A       trunk/rtl/test
+        A       trunk/rtl/rom0.vmem
+        A       trunk/rtl/fetch.py
+        A       trunk/rtl/rom1.vmem
+        A       trunk/rtl/rtl.log
+        A       trunk/rtl/rom2.vmem
+        A       trunk/rtl/rom3.vmem
+        A       trunk/rtl/gprf.py
+        A       trunk/rtl/execute.py
+        A       trunk/rtl/top.py
+        A       trunk/rtl/lut.py
+        A       trunk/rtl/decoder.py
+        A       trunk/rtl/dsram.py
+        A       trunk/rtl/test.asm
+        A       trunk/rtl/memory.py
+        A       trunk/rtl/functions.py
+        A       trunk/rtl/testbench.c
+        A       trunk/rtl/defines.py
+        A       trunk/rtl/TopBench.v
+        A       trunk/rtl/stdio.h
+        A       trunk/rtl/Makefile
+        A       trunk/rtl/TopBench.vcd
+r2 = 389acab0c427cb7ca13afe017ad5266a0e9950a1 (refs/remotes/git-svn)
+        M       trunk/model/emulator.py
+        M       trunk/rtl/core.py
+        M       trunk/rtl/fetch.py
+        M       trunk/rtl/gprf.py
+        M       trunk/rtl/top.py
+        M       trunk/rtl/execute.py
+        M       trunk/rtl/lut.py
+        M       trunk/rtl/decoder.py
+        M       trunk/rtl/dsram.py
+        M       trunk/rtl/memory.py
+        M       trunk/rtl/functions.py
+        M       trunk/rtl/uart.py
+        M       trunk/rtl/defines.py
+        M       trunk/rtl/test.py
+        M       trunk/rtl/bram.py
+        M       trunk/rtl/debug.py
+r3 = be5630ad4890f77c518aab13a3ac2da8ad95a0f6 (refs/remotes/git-svn)
+        A       trunk/LICENSE
+        A       trunk/LGPL-2.1
+r4 = 36260db73487347457c7950290f942abbe931e49 (refs/remotes/git-svn)
+        M       trunk/rtl/fetch.py
+        M       trunk/rtl/lut.py
+        M       trunk/rtl/memory.py
+        M       trunk/rtl/defines.py
+        M       trunk/rtl/Makefile
+        M       trunk/rtl/gprf.py
+        M       trunk/rtl/decoder.py
+        M       trunk/rtl/functions.py
+        M       trunk/rtl/bram.py
+        M       trunk/rtl/core.py
+        M       trunk/rtl/execute.py
+        M       trunk/rtl/dsram.py
+        M       trunk/rtl/uart.py
+        M       trunk/rtl/debug.py
+r5 = 5bf51355552416f8d687924623cd4c188f966a40 (refs/remotes/git-svn)
+        D       trunk/rtl/TopBench.vcd
+        D       trunk/rtl/TopBench.v
+        M       trunk/rtl/fetch.py
+        M       trunk/rtl/rom2.vmem
+        M       trunk/rtl/top.py
+        M       trunk/rtl/dsram.py
+        M       trunk/rtl/bram.py
+        M       trunk/rtl/Makefile
+        A       trunk/system/uart_test_top/SysTop_summary.html
+        A       trunk/system/uart_test_top/rom3.vmem
+        A       trunk/system/uart_test_top/SysTop.prj
+        M       trunk/rtl/core.py
+        M       trunk/rtl/rom1.vmem
+        M       trunk/rtl/gprf.py
+        M       trunk/rtl/decoder.py
+        M       trunk/rtl/defines.py
+        M       trunk/rtl/debug.py
+        A       trunk/system/uart_test_top/rom1.vmem
+        A       trunk/system/uart_test_top/SysTop.twx
+        A       trunk/system/uart_test_top/SysTop_map.xrpt
+        A       trunk/system/uart_test_top/SysTop.xpi
+        A       trunk/system/uart_test_top/SysTop_ngdbuild.xrpt
+        A       trunk/system/uart_test_top/uart_test_top.restore
+        A       trunk/system/uart_test_top/rom2.vmem
+        A       trunk/system/uart_test_top/SysTop_map.mrp
+        M       trunk/model/emulator.py
+        M       trunk/rtl/rom0.vmem
+        M       trunk/rtl/rom3.vmem
+        M       trunk/rtl/execute.py
+        M       trunk/rtl/testbench.c
+        M       trunk/rtl/stdio.h
+        A       trunk/system/uart_test_top/SysTop_pad.csv
+        A       trunk/system/uart_test_top/SysTop_prev_built.ngd
+        A       trunk/system/uart_test_top/SysTop_map.ncd
+        A       trunk/system/uart_test_top/uart_test_top.ipf
+        A       trunk/system/uart_test_top/SysTop_guide.ncd
+        A       trunk/system/uart_test_top/SysTop.ut
+        A       trunk/system/uart_test_top/SysTop_xst.xrpt
+        A       trunk/system/uart_test_top/SysTop.pad
+        A       trunk/system/uart_test_top/Makefile
+        A       trunk/system/uart_test_top/rom0.vmem
+        A       trunk/system/uart_test_top/SysTop.twr
+        A       trunk/system/uart_test_top/uart_test_top.ise
+        A       trunk/system/uart_test_top/SysTop.stx
+        A       trunk/system/uart_test_top/SysTop.par
+        A       trunk/system/uart_test_top/SysTop_par.xrpt
+        A       trunk/system/uart_test_top/SysTop.ptwx
+        A       trunk/system/uart_test_top/SysTop_map.map
+        A       trunk/system/uart_test_top/SysTop.xst
+        A       trunk/system/uart_test_top/SysTop_map.ngm
+        A       trunk/system/uart_test_top/SysTop.ngr
+        A       trunk/system/uart_test_top/rom.vmem
+        A       trunk/system/uart_test_top/SysTop_pad.txt
+        A       trunk/system/uart_test_top/SysTop.syr
+W: -empty_dir: trunk/rtl/TopBench.v
+W: -empty_dir: trunk/rtl/TopBench.vcd
+r6 = fc2e62e8ec3b4590d9075e5b45959c4752384667 (refs/remotes/git-svn)
+
+
+$ git reset --hard remotes/git-svn
+HEAD is now at fc2e62e 1. add Project file for Xilinx Spartan-3E Starter Kit
+
+
+

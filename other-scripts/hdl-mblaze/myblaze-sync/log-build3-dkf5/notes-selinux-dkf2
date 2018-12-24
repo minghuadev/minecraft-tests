@@ -1,0 +1,9 @@
+
+from dkf2 log file:
+
+# search docker volume bind permission denied
+# https://stackoverflow.com/questions/24288616/permission-denied-on-accessing-host-directory-in-docker
+# on host run: 
+# chcon -Rt svirt_sandbox_file_t /host/path/to/sharedfolder
+
+

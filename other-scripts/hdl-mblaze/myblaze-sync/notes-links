@@ -1,0 +1,85 @@
+
+notes-links
+
+
+============================================================================
+myhdl
+
+search myhdl work flow
+https://github.com/xesscorp/myhdl-resources
+
+https://github.com/wware/myblaze
+
+
+============================================================================
+microblaze gcc
+
+
+search microblaze gcc
+https://yurovsky.github.io/2017/03/30/build-microblaze-toolchain.html
+
+
+https://github.com/Xilinx/crosstool-ng
+use `samples/microblaze-xilinx-elf/crosstool.config` as `.config`
+run `make menuconfig` to enable experimental support CT_EXPERIMENTAL ---no need
+then 
+ modify the source to fix two errors     ---patch (see separate notes file)
+    ./configure --enable-local
+    make
+the `ct-ng` binary will be run to use crosstool-ng
+
+
+https://www.xilinx.com/guest_resources/gnu/
+https://www.xilinx.com/guest_resources/member/mb_gnu/mb-gnu-20161303.tgz    --- gcc 5.2
+https://www.xilinx.com/guest_resources/member/mb_gnu/mb-gnu-20170306.tar.gz --- gcc 6.2
+
+
+download and extract the gcc 6.2 tarball to ~/sharedfolder/sources/     ---do this
+modify  scripts/build/companion_libs/140-mpc.sh  line 16, change        ---patch this
+    from    http://www.multiprecision.org/mpc/download
+    to      http://www.multiprecision.org/downloads
+
+
+                                       ---ref log-build3-dkf5/
+                                       ---    selinux: notes-selinux-dkf2
+                                       ---    populate ~sharedfolder/: notes-initial-content
+                                       ---                  or see the notes-rebuild-again
+                                       ---    patch gcc: notes-patch-gcc-extended-location  
+use ./ct-ng menuconfig to config       ---    use logb-dot-config  
+and ./ct-ng build to build
+                                       ---keep files for next build in ~/sharedfolder/downloads/
+                                       ---    gmp-5.0.1.tar.bz2  mpc-0.9.tar.gz  mpfr-3.0.1.tar.xz
+
+
+configurtion: 
+    no MMU
+    set endianness to match your synthesized target (the default is big-endian)
+    build a multilib toolchain (that way you can adjust compilation based on 
+        selected Microblaze CPU options, for example the barrel shifter is optional)
+    build a sysrooted toolchain using cross-compilation
+    the target operating system is  `bare-metal`
+    the target binary format is ELF
+    for  `binutils`, configure with  `--disable-sim`, the simulator will not build 
+        for microblaze and you’re unlikely to need it, so turn it off.
+    for  `gcc`, enable LTO support but disable graphite: unfortunately 
+        the library graphite needs to do its work will not build for microblaze 
+        at this time.
+    for  `newlib`, enable space savings
+
+    Also for each of the tools (gcc, binutils, gdb, etc) configure the source location 
+        to point to the absolute path to your extracted Xilinx source snapshots.
+
+                                       --- disable c++
+                                       --- enable ct_debug interative term, enable restart, 
+
+
+trying things out: 
+  need to link to libxil.a from xilinx sdk. 
+ 
+    microblaze-xilinx-elf-gcc -L/path/to/libs foo.c -o foo.elf
+    microblaze-xilinx-elf-objcopy -S -I elf32-big foo.elf -O binary foo.bin
+
+
+============================================================================
+
+

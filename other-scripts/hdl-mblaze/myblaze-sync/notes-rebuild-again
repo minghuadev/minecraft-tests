@@ -1,0 +1,58 @@
+
+
+redo the build: 
+
+  ~/tmpdk5/sharedfolder/               a previous build with patched gcc and config file
+  ~/tmpdk4/sharedfolder/crosstool-ng   the patched ct-ng
+
+  run from ~/:
+     mkdir tmpdk
+     cd tmpdk
+     cp ../tmpdk5/dkf5.bash .
+
+     mkdir sharedfolder
+     cp ../tmpdk5/sharedfolder/logb-dot-config sharedfolder/
+     cp -a ../tmpdk5/sharedfolder/downloads/ sharedfolder/
+     cp -a ../tmpdk5/sharedfolder/sources/ sharedfolder/
+
+     cd sharedfolder
+     mkdir srcpkgs
+     git clone ../../tmpdk4/sharedfolder/crosstool-ng-build-dkf4-logb crosstool-ng
+     cd crosstool-ng/
+     git log -1
+        commit 11be67048754abd5294ca16a64a9df415f45c636 (HEAD -> xlnx/master, origin/xlnx/master, origin/HEAD)
+        Date:   Sat Dec 22 05:07:47 2018 +0000
+            local fixes part 1
+
+     cd ../sources
+     rm *.gz
+     ls -l
+        drwxr-xr-x. 21   4096 Mar  5  2017 binutils
+        drwxr-xr-x. 38   4096 Mar  5  2017 gcc
+        drwxr-xr-x. 22   4096 Mar  5  2017 gdb
+        drwxr-xr-x. 67   4096 Mar  5  2017 glibc
+        drwxr-xr-x. 24   4096 Mar  5  2017 linux
+        drwxr-xr-x.  9   4096 Mar  5  2017 newlib
+     ls -F
+        binutils/  gcc/  gdb/  glibc/  linux/  newlib/
+     du -sh .
+        2.6G    .
+
+  run from ~/tmpdk/:
+     echo '#!/bin/bash' > dkf5again-create.bash
+     tail -6 dkf5.bash | sed -e 's/^#//' >> dkf5again-create.bash
+     sed -i -e 's/ dkf5 / dkf5again /' dkf5again-create.bash
+     sudo chcon -Rt svirt_sandbox_file_t $(pwd)/sharedfolder
+
+     bash dkf5again-create.bash
+     docker exec -it dkf5again /bin/bash
+
+  inside docker container:
+     cd
+     cd sharedfolder/crosstool-ng/
+     cp ../logb-dot-config .config
+     ./configure --enable-local
+     make
+     ./ct-ng build.1
+
+

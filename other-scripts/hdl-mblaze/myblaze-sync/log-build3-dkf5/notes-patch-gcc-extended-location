@@ -1,0 +1,68 @@
+
+
+error: 
+
+[EXTRA]  Saving state to restart at step 'cc_core_pass_1'...
+[INFO ]  =================================================================
+[INFO ]  Installing pass-1 core C compiler
+[EXTRA]    Configuring gcc
+[EXTRA]    Building gcc
+[ERROR]    /home/hdler/sharedfolder/crosstool-ng/targets/src/gcc-custom/gcc/ubsan.c:1472:23: error: ISO C++ forbids comparison between pointer and integer [-fpermissive]
+[ERROR]    make[2]: *** [ubsan.o] Error 1
+[ERROR]    make[1]: *** [all-gcc] Error 2
+[ERROR]
+[ERROR]  >>
+[ERROR]  >>  Build failed in step 'Installing pass-1 core C compiler'
+[ERROR]  >>        called in step '(top-level)'
+[ERROR]  >>
+[ERROR]  >>  Error happened in: CT_DoExecLog[scripts/functions@257]
+[ERROR]  >>        called from: do_cc_core_backend[scripts/build/cc/gcc.sh@455]
+[ERROR]  >>        called from: do_cc_core_pass_1[scripts/build/cc/gcc.sh@101]
+[ERROR]  >>        called from: main[scripts/crosstool-NG.sh@632]
+
+
+Current command:
+  'make' '-j2' '-l' 'all-gcc'
+exited with error code: 2
+Please fix it up and finish by exiting the shell with one of these values:
+    1  fixed, continue with next build command
+    2  repeat this build command
+    3  abort build
+
+ct-ng:~/sharedfolder/crosstool-ng/targets/microblaze-xilinx-elf/build/build-cc-core-pass-1>
+
+
+source:
+   1455 /* Determine if we can propagate given LOCATION to ubsan_data descriptor to use
+   1456    new style handlers.  Libubsan uses heuristics to destinguish between old and
+   1457    new styles and relies on these properties for filename:
+   1458
+   1459    a) Location's filename must not be NULL.
+   1460    b) Location's filename must not be equal to "".
+   1461    c) Location's filename must not be equal to "\1".
+   1462    d) First two bytes of filename must not contain '\xff' symbol.  */
+   1463
+   1464 static bool
+   1465 ubsan_use_new_style_p (location_t loc)
+   1466 {
+   1467   if (loc == UNKNOWN_LOCATION)
+   1468     return false;
+   1469
+   1470   expanded_location xloc = expand_location (loc);
+   1471   if (xloc.file == NULL || strncmp (xloc.file, "\1", 2) == 0
+   1472       || xloc.file == '\0' || xloc.file[0] == '\xff'
+   1473       || xloc.file[1] == '\xff')
+   1474     return false;
+   1475
+   1476   return true;
+   1477 }
+   1478
+"ubsan.c" line 1472 of 2031 --72%-- col 7
+
+
+change:
+
+  - 1472       || xloc.file == '\0' || xloc.file[0] == '\xff'
+  + 1472       || xloc.file[0] == '\0' || xloc.file[0] == '\xff'
+
+

@@ -1,0 +1,22 @@
+
+notes-builds
+
+
+dkf1, dkf2, dkf3: 
+    container off ubuntu bionic
+    with i386 architecture too
+    unsuccessful due to failed zlib configuration or building
+
+dkf4:
+    container off trusty
+    changed to using only necessary ubuntu packages
+    changed to using system zlib
+    changed to ct_debug and interactive
+    success in building by either zlib-bin or zlib1g-dev
+
+dkf5:
+    container off bionic
+    same ct-ng config as dkf4
+    add zlib1g-dev, and libtool-bin
+
+

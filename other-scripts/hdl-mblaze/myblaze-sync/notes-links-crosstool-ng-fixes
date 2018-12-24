@@ -1,0 +1,93 @@
+
+
+[1] recursion
+
+https://github.com/crosstool-ng/crosstool-ng/issues/972
+replace this section in Makefile.in 
+
+# Use neither builtin rules, nor builtin variables
+# Note: dual test, because if -R and -r are given on the command line
+# (who knows?), MAKEFLAGS contains 'Rr' instead of '-Rr', while adding
+# '-Rr' to MAKEFLAGS adds it literaly ( and does not add 'Rr' )
+# Further: quad test because the flags 'rR' and '-rR' can be reordered.
+ifeq ($(filter Rr,$(MAKEFLAGS)),)
+ifeq ($(filter -Rr,$(MAKEFLAGS)),)
+ifeq ($(filter rR,$(MAKEFLAGS)),)
+ifeq ($(filter -rR,$(MAKEFLAGS)),)
+CT_MAKEFLAGS += -Rr
+endif # No -rR
+endif # No rR
+endif # No -Rr
+endif # No Rr
+
+
+[2]  unsigned int or size_t error
+
+In file included from zconf.tab.c:213:0:
+zconf.hash.c:163:1: error: conflicting types for 'kconf_id_lookup'
+ kconf_id_lookup (register const char *str, register size_t len)
+ ^~~~~~~~~~~~~~~
+zconf.hash.c:34:25: note: previous declaration of 'kconf_id_lookup' was here
+ static struct kconf_id *kconf_id_lookup(register const char *str, register unsigned int len);
+                         ^~~~~~~~~~~~~~~
+
+change line 12 of kconfig/zconf.gperf to size_t
+
+
+[3]  mpc download failed. 
+     change the download link inside scripts/build/companion_libs/140-mpc.sh
+
+
+
+diff 1 2: 
+
+hdler@8796342733ca:~/sharedfolder/crosstool-ng$ git diff
+diff --git a/Makefile.in b/Makefile.in
+index 29aff1c5..1ad1be47 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -26,7 +26,11 @@ endif
+ # '-Rr' to MAKEFLAGS adds it literaly ( and does not add 'Rr' )
+ ifeq ($(filter Rr,$(MAKEFLAGS)),)
+ ifeq ($(filter -Rr,$(MAKEFLAGS)),)
++  ifeq ($(filter rR,$(MAKEFLAGS)),)
++  ifeq ($(filter -rR,$(MAKEFLAGS)),)
+ CT_MAKEFLAGS += -Rr
++  endif
++  endif
+ endif # No -Rr
+ endif # No Rr
+
+diff --git a/kconfig/zconf.gperf b/kconfig/zconf.gperf
+index c9e690eb..d7c8e84f 100644
+--- a/kconfig/zconf.gperf
++++ b/kconfig/zconf.gperf
+@@ -9,7 +9,7 @@
+
+ struct kconf_id;
+
+-static struct kconf_id *kconf_id_lookup(register const char *str, register unsigned int len);
++static struct kconf_id *kconf_id_lookup(register const char *str, register size_t len);
+
+ %%
+ mainmenu,      T_MAINMENU,     TF_COMMAND
+
+
+diff 3:
+
+diff --git a/scripts/build/companion_libs/140-mpc.sh b/scripts/build/companion_libs/140-mpc.sh
+index 9ceb7e50..f7dbabde 100644
+--- a/scripts/build/companion_libs/140-mpc.sh
++++ b/scripts/build/companion_libs/140-mpc.sh
+@@ -13,7 +13,7 @@ if [ "${CT_MPC}" = "y" ]; then
+ # Download MPC
+ do_mpc_get() {
+     CT_GetFile "mpc-${CT_MPC_VERSION}" .tar.gz      \
+-        http://www.multiprecision.org/mpc/download
++        http://www.multiprecision.org/downloads
+ }
+
+ # Extract MPC
+
+
+
