@@ -26,7 +26,7 @@ cat << EOF_DOCKERFILE > the.dockerfile
  RUN apt-get install -y libncurses5-dev pkg-config bison flex
  RUN apt-get install -y build-essential
  RUN apt-get install -y gperf texinfo wget gawk libtool automake
- RUN apt-get install -y zlib1g-dev
+ RUN apt-get install -y zlib1g-dev libtool-bin
 
  USER \$USERNAME
  CMD /bin/bash
