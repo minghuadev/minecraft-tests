@@ -50,4 +50,15 @@ ls -lrt
 -rw-rw-r--+       306 Dec 24 09:42 xilinx-mb-docs
 
 
+ls -lrt
+-rw-rw-r--+       306 Dec 24 09:42 xilinx-mb-docs
+-rw-rw-r--+      1747 Dec 24 09:44 list-files
+drwxrwxr-x+         0 Dec 25 00:47 log-build3-dkf5
+drwxrwxr-x+         0 Dec 25 11:59 log-build4-dkf5-config-again
+-rw-rw-r--+      2628 Dec 25 12:00 notes-redo-config
+
+
+ls -lrt log-build4-dkf5-config-again/
+-rw-r--r--+   9280 Dec 25 11:54 logc-dot-config
+
 

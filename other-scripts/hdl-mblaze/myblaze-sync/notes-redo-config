@@ -1,0 +1,65 @@
+
+notes-redo-config
+
+
+============================================================================
+microblaze gcc
+
+
+search microblaze gcc
+https://yurovsky.github.io/2017/03/30/build-microblaze-toolchain.html
+
+
+use `samples/microblaze-xilinx-elf/crosstool.config` as `.config`
+run `make menuconfig` to enable experimental support CT_EXPERIMENTAL ---no need
+
+
+use ./ct-ng menuconfig to config       ---    use logb-dot-config  
+                                       --- or use logc-dot-config that is with LTO for gcc
+                                       --- note: logb-dot-config was done on ubuntu 14
+                                       ---       logc-dot-config is done on ubuntu 18
+
+
+configurtion: 
+    no MMU
+    set endianness to match your synthesized target (the default is big-endian)
+    build a multilib toolchain (that way you can adjust compilation based on 
+        selected Microblaze CPU options, for example the barrel shifter is optional)
+    build a sysrooted toolchain using cross-compilation
+    the target operating system is  `bare-metal`
+    the target binary format is ELF
+    for  `binutils`, configure with  `--disable-sim`, the simulator will not build 
+        for microblaze and you’re unlikely to need it, so turn it off.
+    for  `gcc`, enable LTO support but disable graphite: unfortunately 
+        the library graphite needs to do its work will not build for microblaze 
+        at this time.
+    for  `newlib`, enable space savings
+
+    Also for each of the tools (gcc, binutils, gdb, etc) configure the source location 
+        to point to the absolute path to your extracted Xilinx source snapshots.
+
+                                       --- disable c++
+                                       --- enable ct_debug interative term, enable restart, 
+
+      --- reverify the configuration below:
+      --- change target/no-mmu
+      --- change binitils/{source path, extra config}
+      --- change gcc/{source path, no c++, use system zlib, enable LTO}
+      --- change lib/{newlib, optimize for size}
+      --- change debug/no-gdb
+      --- change options/{debug ct, save, interactive, local tarball path, local source components}
+      --- change lib/{again optimize for size later somehow this is lost}
+      --- save config to logc-dot-config with new LTO settings compared to logb-dot-config
+
+
+
+trying things out: 
+  need to link to libxil.a from xilinx sdk. 
+ 
+    microblaze-xilinx-elf-gcc -L/path/to/libs foo.c -o foo.elf
+    microblaze-xilinx-elf-objcopy -S -I elf32-big foo.elf -O binary foo.bin
+
+
+============================================================================
+
+
