@@ -1,0 +1,45 @@
+diff --git a/trunk/rtl/bram.py b/trunk/rtl/bram.py
+old mode 100644
+new mode 100755
+index 561566e..65a791c
+--- a/trunk/rtl/bram.py
++++ b/trunk/rtl/bram.py
+@@ -14,7 +14,7 @@
+ from myhdl import *
+ from defines import *
+ from functions import *
+-from debug import *
++###from debug import *
+ 
+ def BRAMInitial(ram, filename, clock):
+     __verilog__ = """
+diff --git a/trunk/rtl/top.py b/trunk/rtl/top.py
+old mode 100644
+new mode 100755
+index 75b9cfb..dd906d3
+--- a/trunk/rtl/top.py
++++ b/trunk/rtl/top.py
+@@ -337,7 +337,7 @@ def SysTop(txd_line, rxd_line, txd_line2, rxd_line2, leds, reset, clock,
+     return imem, dmem, core, uart, uart2, glue, run
+ 
+ import sys
+-from numpy import log2
++from local_numpy import log2
+ 
+ def TopBench():
+     prepare()
+diff --git a/trunk/rtl/uart.py b/trunk/rtl/uart.py
+old mode 100644
+new mode 100755
+index a400fb7..7bf3f98
+--- a/trunk/rtl/uart.py
++++ b/trunk/rtl/uart.py
+@@ -240,7 +240,7 @@ def uart_test_top(txd_line, rxd_line, debug_txd_line, debug_rxd_line, leds, rese
+     return instances()
+ 
+ import sys
+-from numpy import log2
++from local_numpy import log2
+     
+ if __name__ == '__main__':
+     #rx_data = Signal(intbv(0)[8:])

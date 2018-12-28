@@ -1,0 +1,15 @@
+
+list-files
+
+
+ls -lrt
+
+-rwxrwxr-x+      6144 Dec 27 02:27 rom0.vmem
+-rwxrwxr-x+      6144 Dec 27 02:27 rom1.vmem
+-rwxrwxr-x+      6144 Dec 27 02:28 rom2.vmem
+-rwxrwxr-x+      6144 Dec 27 02:28 rom3.vmem
+-rwxrwxr-x+   1846876 Dec 27 15:15 TopBench-original.vcd
+-rw-rw-r--+         0 Dec 28 01:37 list-files
+
+
+

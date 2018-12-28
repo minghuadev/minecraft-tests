@@ -1,0 +1,32 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-rw-r--+    4974 Dec 25 19:30 logcmdl
+-rw-rw-r--+     189 Dec 26 19:49 linker.lds
+-rw-rw-r--+     313 Dec 27 04:00 test-2.c
+-rw-rw-r--+     331 Dec 27 04:03 test-3.c
+-rw-rw-r--+     367 Dec 27 04:18 test-4.c
+-rw-rw-r--+     367 Dec 27 13:36 test-5.c
+-rw-rw-r--+     214 Dec 27 15:26 test-6.c
+-rwxrwxr-x+     271 Dec 27 15:27 ccc.bash
+-rw-rw-r--+     280 Dec 27 21:12 test-7.c
+-rw-rw-r--+     335 Dec 27 21:14 test.c
+-rw-rw-r--+     763 Dec 28 00:51 test-7-1.S
+-rw-rw-r--+     830 Dec 28 00:58 start.S
+-rw-rw-r--+     616 Dec 28 01:06 start.o
+-rw-rw-r--+     868 Dec 28 01:06 test.o
+-rwxrwxr-x+    5572 Dec 28 01:06 foo.elf
+-rwxrwxr-x+    1032 Dec 28 01:06 bar.bin
+-rwxrwxr-x+     764 Dec 28 01:06 foo.srec
+-rw-rw-r--+   18432 Dec 28 01:06 rom.vmem
+-rw-rw-r--+       0 Dec 28 01:28 list-files
+
+
+copy start.S to start-8.S
+copy test.c to test-8.c
+copy rom.vmem to rom-8.vmem
+
+

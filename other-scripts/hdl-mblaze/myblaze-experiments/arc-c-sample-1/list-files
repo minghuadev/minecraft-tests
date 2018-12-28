@@ -1,0 +1,20 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-rw-r--+     763 Dec 25 13:26 start.S
+-rw-rw-r--+      49 Dec 25 13:26 test.c
+-rw-rw-r--+    4974 Dec 25 19:30 logcmdl
+-rw-rw-r--+     189 Dec 26 19:49 linker.lds
+-rwxrwxr-x+     269 Dec 26 19:51 ccc.bash
+-rw-rw-r--+     600 Dec 26 19:51 start.o
+-rw-rw-r--+     500 Dec 26 19:51 test.o
+-rwxrwxr-x+    4488 Dec 26 19:51 foo.elf
+-rwxrwxr-x+      76 Dec 26 19:51 bar.bin
+-rwxrwxr-x+     252 Dec 26 19:51 foo.srec
+-rw-rw-r--+   18432 Dec 26 19:51 rom.vmem
+-rw-rw-r--+       0 Dec 28 01:23 list-files
+
+

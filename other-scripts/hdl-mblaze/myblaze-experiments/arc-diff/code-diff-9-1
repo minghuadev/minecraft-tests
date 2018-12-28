@@ -1,0 +1,27 @@
+commit 71862b677582c7e18565d8ae249b5e5c52a2144d
+Date:   Fri Dec 28 02:05:16 2018 -0800
+
+    top bench fix uart monitoring
+
+diff --git a/trunk/rtl/top.py b/trunk/rtl/top.py
+index 0840988..55d9617 100755
+--- a/trunk/rtl/top.py
++++ b/trunk/rtl/top.py
+@@ -542,10 +542,15 @@ def TopBench():
+             if debug_dmem_addr_out == 0xffffffc0:
+                 #if debug_dmem_sel_out == 0b1000:
+                 if debug_dmem_we_out:
+-                    sys.stdout.write(chr(int(debug_dmem_data_out[8:])))
+-                    sys.stdout.flush()
++                    ### sys.stdout.write(chr(int(debug_dmem_data_out[8:])))
++                    ### sys.stdout.flush()
++                    pass ### local_mod: replace the above two lines with two lines after this ...
+                     #print int(debug_dmem_data_out[8:])
+                     #print 'output: %d' % debug_dmem_data_out[8:]
++                if debug_dmem_we_out: ### local_mod: new logic, fix uart monitoring
++                    if debug_dmem_ena_in: # TODO: which one? ena, ena_in, ena_out?
++                        sys.stdout.write(chr(int(debug_dmem_data_out[8:])))
++                        sys.stdout.flush()
+ 
+ 
+ 

@@ -1,0 +1,12 @@
+
+list-files
+
+ls -lrt
+
+-rw-r--r--+     267 Dec 26 13:47 srec2vram-mkf
+-rw-r--r--+    3479 Dec 26 13:51 srec2vram.c
+-rwxr-xr-x+   13376 Dec 26 13:51 srec2vram
+-rw-rw-r--+       0 Dec 28 01:36 list-files
+
+
+

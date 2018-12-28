@@ -1,0 +1,23 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-rw-r--+   18432 Dec 27 03:15 rom-2.vmem
+-rw-rw-r--+     313 Dec 27 04:00 test-2.c
+-rw-rw-r--+   18432 Dec 27 04:03 rom-3.vmem
+-rw-rw-r--+     331 Dec 27 04:03 test-3.c
+-rw-rw-r--+   18432 Dec 27 04:17 rom-4.vmem
+-rw-rw-r--+     367 Dec 27 04:18 test-4.c
+-rw-rw-r--+     367 Dec 27 13:36 test-5.c
+-rw-rw-r--+   18432 Dec 27 13:36 rom-5.vmem
+-rw-rw-r--+     214 Dec 27 15:26 test-6.c
+-rw-rw-r--+   18432 Dec 27 15:26 rom-6.vmem
+-rw-rw-r--+     280 Dec 27 21:12 test-7.c
+-rw-rw-r--+   18432 Dec 27 21:12 rom-7.vmem
+-rw-rw-r--+     763 Dec 28 00:51 test-7-1.S
+-rw-rw-r--+       0 Dec 28 01:25 list-files
+
+
+

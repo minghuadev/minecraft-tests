@@ -1,0 +1,24 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-rw-r--+   1167 Dec 27 02:13 code-diff-1
+-rwxrwxr-x+    459 Dec 27 02:13 local_numpy.py
+-rw-rw-r--+   2243 Dec 28 01:21 code-diff-8
+-rwxrwxr-x+    265 Dec 28 01:22 top_sample11.py
+-rw-rw-r--+      0 Dec 28 01:26 list-files
+
+
+ls -lrt 
+
+-rw-rw-r--+   1167 Dec 27 02:13 code-diff-1
+-rwxrwxr-x+    459 Dec 27 02:13 local_numpy.py
+-rw-rw-r--+   2243 Dec 28 01:21 code-diff-8
+-rwxrwxr-x+    265 Dec 28 01:22 top_sample11.py
+-rw-rw-r--+    251 Dec 28 01:26 list-files
+-rw-rw-r--+   1180 Dec 28 02:53 code-diff-9-1
+
+
+

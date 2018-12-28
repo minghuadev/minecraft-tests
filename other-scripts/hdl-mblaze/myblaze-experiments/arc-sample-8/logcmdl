@@ -1,0 +1,40 @@
+
+
++ mb-gcc -### -c -o start.o start.S
+Using built-in specs.
+COLLECT_GCC=mb-gcc
+Target: microblaze-xilinx-elf
+
+Configured with: /home/hdler/sharedfolder/crosstool-ng/targets/src/gcc-custom/configure --build=x86_64-build_unknown-linux-gnu --host=x86_64-build_unknown-linux-gnu --target=microblaze-xilinx-elf --prefix=/home/hdler/sharedfolder/crosstool-ng/../tool-build --with-local-prefix=/home/hdler/sharedfolder/crosstool-ng/../tool-build/microblaze-xilinx-elf/sysroot --disable-libmudflap --with-sysroot=/home/hdler/sharedfolder/crosstool-ng/../tool-build/microblaze-xilinx-elf/sysroot --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG 1.18.0' --disable-__cxa_atexit --with-gmp=/home/hdler/sharedfolder/crosstool-ng/targets/microblaze-xilinx-elf/buildtools --with-mpfr=/home/hdler/sharedfolder/crosstool-ng/targets/microblaze-xilinx-elf/buildtools --with-mpc=/home/hdler/sharedfolder/crosstool-ng/targets/microblaze-xilinx-elf/buildtools --with-ppl=no --with-cloog=no --with-libelf=no --disable-lto --enable-target-optspace --without-long-double-128 --disable-libgomp --disable-libmudflap --disable-nls --disable-libstdcxx-pch --with-system-zlib --enable-multilib --enable-languages=c
+
+Thread model: single
+gcc version 6.2.0 (crosstool-NG 1.18.0) 
+COLLECT_GCC_OPTIONS='-c' '-o' 'start.o'
+
+cc1:
+ /home/.../bin/tool-build/bin/../libexec/gcc/microblaze-xilinx-elf/6.2.0/cc1 -E -lang-asm -quiet -iprefix /home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/ -isysroot /home/.../bin/tool-build/bin/../microblaze-xilinx-elf/sysroot start.S -fno-directives-only -o /tmp/ccjZhQrO.s
+
+COLLECT_GCC_OPTIONS='-c' '-o' 'start.o'
+
+as:
+ /home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/../../../../microblaze-xilinx-elf/bin/as -o start.o /tmp/ccjZhQrO.s
+
+COMPILER_PATH=/home/.../bin/tool-build/bin/../libexec/gcc/microblaze-xilinx-elf/6.2.0/:/home/.../bin/tool-build/bin/../libexec/gcc/:/home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/../../../../microblaze-xilinx-elf/bin/
+LIBRARY_PATH=/home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/:/home/.../bin/tool-build/bin/../lib/gcc/:/home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/../../../../microblaze-xilinx-elf/lib/:/home/.../bin/tool-build/bin/../microblaze-xilinx-elf/sysroot/lib/:/home/.../bin/tool-build/bin/../microblaze-xilinx-elf/sysroot/usr/lib/
+COLLECT_GCC_OPTIONS='-c' '-o' 'start.o'
++ mb-gcc -### -c -o test.o test.c
+Using built-in specs.
+COLLECT_GCC=mb-gcc
+Target: microblaze-xilinx-elf
+Configured with: /home/hdler/sharedfolder/crosstool-ng/targets/src/gcc-custom/configure --build=x86_64-build_unknown-linux-gnu --host=x86_64-build_unknown-linux-gnu --target=microblaze-xilinx-elf --prefix=/home/hdler/sharedfolder/crosstool-ng/../tool-build --with-local-prefix=/home/hdler/sharedfolder/crosstool-ng/../tool-build/microblaze-xilinx-elf/sysroot --disable-libmudflap --with-sysroot=/home/hdler/sharedfolder/crosstool-ng/../tool-build/microblaze-xilinx-elf/sysroot --with-newlib --enable-threads=no --disable-shared --with-pkgversion='crosstool-NG 1.18.0' --disable-__cxa_atexit --with-gmp=/home/hdler/sharedfolder/crosstool-ng/targets/microblaze-xilinx-elf/buildtools --with-mpfr=/home/hdler/sharedfolder/crosstool-ng/targets/microblaze-xilinx-elf/buildtools --with-mpc=/home/hdler/sharedfolder/crosstool-ng/targets/microblaze-xilinx-elf/buildtools --with-ppl=no --with-cloog=no --with-libelf=no --disable-lto --enable-target-optspace --without-long-double-128 --disable-libgomp --disable-libmudflap --disable-nls --disable-libstdcxx-pch --with-system-zlib --enable-multilib --enable-languages=c
+Thread model: single
+gcc version 6.2.0 (crosstool-NG 1.18.0) 
+COLLECT_GCC_OPTIONS='-c' '-o' 'test.o'
+ /home/.../bin/tool-build/bin/../libexec/gcc/microblaze-xilinx-elf/6.2.0/cc1 -quiet -iprefix /home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/ -isysroot /home/.../bin/tool-build/bin/../microblaze-xilinx-elf/sysroot test.c -quiet -dumpbase test.c -auxbase-strip test.o -o /tmp/ccuWiAhO.s
+COLLECT_GCC_OPTIONS='-c' '-o' 'test.o'
+ /home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/../../../../microblaze-xilinx-elf/bin/as -o test.o /tmp/ccuWiAhO.s
+COMPILER_PATH=/home/.../bin/tool-build/bin/../libexec/gcc/microblaze-xilinx-elf/6.2.0/:/home/.../bin/tool-build/bin/../libexec/gcc/:/home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/../../../../microblaze-xilinx-elf/bin/
+LIBRARY_PATH=/home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/:/home/.../bin/tool-build/bin/../lib/gcc/:/home/.../bin/tool-build/bin/../lib/gcc/microblaze-xilinx-elf/6.2.0/../../../../microblaze-xilinx-elf/lib/:/home/.../bin/tool-build/bin/../microblaze-xilinx-elf/sysroot/lib/:/home/.../bin/tool-build/bin/../microblaze-xilinx-elf/sysroot/usr/lib/
+COLLECT_GCC_OPTIONS='-c' '-o' 'test.o'
++ mb-ld -Tlinker.lds start.o test.o -o foo.elf
++ mb-objcopy -S -I elf32-big foo.elf -O binary bar.bin

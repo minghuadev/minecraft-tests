@@ -1,0 +1,16 @@
+#
+# srec2vram-mkf
+#   from https://raw.githubusercontent.com/das-labor/legacy/master/fpga/farbborg/tools/srec2vram/Makefile
+#
+
+CC   ?= gcc
+CFLAGS ?= -O2 -Wall
+
+all: srec2vram
+
+srec2vram: srec2vram.c
+	$(CC) $(CFLAGS) -o srec2vram srec2vram.c
+
+clean:
+	rm -f srec2vram
+
