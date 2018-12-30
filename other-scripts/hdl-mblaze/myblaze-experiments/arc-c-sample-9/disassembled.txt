@@ -1,0 +1,87 @@
+
+
+$ mb-objdump -S foo.elf
+
+foo.elf:     file format elf32-microblaze
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:   20200800        addi    r1, r0, 2048
+   4:   9401c802        mts     rshr, r1
+   8:   2021fffc        addi    r1, r1, -4
+   c:   b000b000        imm     -20480
+  10:   20400000        addi    r2, r0, 0
+  14:   b000b808        imm     -18424
+  18:   20600000        addi    r3, r0, 0
+  1c:   b0000000        imm     0
+  20:   b9fc0038        bralid  r15, 56 // 38 <main>
+  24:   80000000        or      r0, r0, r0
+  28:   80000000        or      r0, r0, r0
+  2c:   b8000000        bri     0               // 2c
+  30:   80000000        or      r0, r0, r0
+  34:   80000000        or      r0, r0, r0
+
+00000038 <main>:
+  38:   3021ffec        addik   r1, r1, -20
+  3c:   fa610010        swi     r19, r1, 16
+  40:   12610000        addk    r19, r1, r0
+  44:   30600041        addik   r3, r0, 65
+  48:   f073000c        sbi     r3, r19, 12
+  4c:   f8130004        swi     r0, r19, 4
+  50:   b80000a8        bri     168             // f8
+  54:   b0000000        imm     0
+  58:   e8800410        lwi     r4, r0, 1040    // 410 <cumuloops>
+  5c:   e8730004        lwi     r3, r19, 4
+  60:   10641800        addk    r3, r4, r3
+  64:   b0000000        imm     0
+  68:   f8600410        swi     r3, r0, 1040    // 410 <cumuloops>
+  6c:   b0000000        imm     0
+  70:   e8600400        lwi     r3, r0, 1024    // 400 <uart_tx_send_ptr>
+  74:   e8930004        lwi     r4, r19, 4
+  78:   a48400ff        andi    r4, r4, 255
+  7c:   e0b3000c        lbui    r5, r19, 12
+  80:   10842800        addk    r4, r4, r5
+  84:   a48400ff        andi    r4, r4, 255
+  88:   f0830000        sbi     r4, r3, 0
+  8c:   b0000000        imm     0
+  90:   f800040c        swi     r0, r0, 1036    // 40c <uart_tx_done>
+  94:   f8130008        swi     r0, r19, 8
+  98:   b8000044        bri     68              // dc
+  9c:   b0000000        imm     0
+  a0:   e8600404        lwi     r3, r0, 1028    // 404 <uart_tx_busy_ptr>
+  a4:   e8630000        lwi     r3, r3, 0
+  a8:   b0000000        imm     0
+  ac:   f8600408        swi     r3, r0, 1032    // 408 <uart_tx_busy>
+  b0:   b0000000        imm     0
+  b4:   e8600408        lwi     r3, r0, 1032    // 408 <uart_tx_busy>
+  b8:   a4630001        andi    r3, r3, 1
+  bc:   bc230014        bnei    r3, 20          // d0
+  c0:   30600001        addik   r3, r0, 1
+  c4:   b0000000        imm     0
+  c8:   f860040c        swi     r3, r0, 1036    // 40c <uart_tx_done>
+  cc:   b8000020        bri     32              // ec
+  d0:   e8730008        lwi     r3, r19, 8
+  d4:   30630001        addik   r3, r3, 1
+  d8:   f8730008        swi     r3, r19, 8
+  dc:   e8930008        lwi     r4, r19, 8
+  e0:   30600013        addik   r3, r0, 19
+  e4:   16441801        cmp     r18, r4, r3
+  e8:   bcb2ffb4        bgei    r18, -76                // 9c
+  ec:   e8730004        lwi     r3, r19, 4
+  f0:   30630001        addik   r3, r3, 1
+  f4:   f8730004        swi     r3, r19, 4
+  f8:   e8930004        lwi     r4, r19, 4
+  fc:   30600003        addik   r3, r0, 3
+ 100:   16441801        cmp     r18, r4, r3
+ 104:   bcb2ff50        bgei    r18, -176               // 54
+ 108:   b0000000        imm     0
+ 10c:   e8600410        lwi     r3, r0, 1040    // 410 <cumuloops>
+ 110:   10330000        addk    r1, r19, r0
+ 114:   ea610010        lwi     r19, r1, 16
+ 118:   30210014        addik   r1, r1, 20
+ 11c:   b60f0008        rtsd    r15, 8
+ 120:   80000000        or      r0, r0, r0
+
+

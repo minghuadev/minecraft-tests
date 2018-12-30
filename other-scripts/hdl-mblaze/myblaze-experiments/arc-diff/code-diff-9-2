@@ -1,0 +1,31 @@
+commit 71dd7e98777aab1e4fa6e602ad56c668583bd79d
+Date:   Sat Dec 29 16:29:34 2018 -0800
+
+    sample-9 part 2 fix bram enable and uart-tx-busy readback
+
+diff --git a/trunk/rtl/bram.py b/trunk/rtl/bram.py
+index 189c7ba..577db5b 100755
+--- a/trunk/rtl/bram.py
++++ b/trunk/rtl/bram.py
+@@ -118,6 +118,8 @@ def BankedBRAM(
+             bank_in[1].next = data_in[16:8]
+             bank_in[2].next = data_in[24:16]
+             bank_in[3].next = data_in[32:24]
++            if not enable: ### local_mod: do not drive data_out when not enabled.
++                return
+             data_out.next = concat(bank_out[3], bank_out[2],
+                                    bank_out[1], bank_out[0])
+             
+diff --git a/trunk/rtl/top.py b/trunk/rtl/top.py
+index 55d9617..ff50fde 100755
+--- a/trunk/rtl/top.py
++++ b/trunk/rtl/top.py
+@@ -302,6 +302,8 @@ def SysTop(txd_line, rxd_line, txd_line2, rxd_line2, leds, reset, clock,
+ 
+             #if write_en and not tx_busy:
+                 #led_reg.next = concat(led_reg[31:], led_reg[31])
++            if dmem_addr_out[28:] == 0xFFFFFA0 and dmem_ena_out: ### local_mod case: uart tx_busy at 0xffffffa0
++                dmem_data_in.next = concat(Signal(intbv(0x38003800)[31:]), tx_busy) # 0x7000700x
+             if dmem_we_out and dmem_addr_out[28:] == 0xFFFFFB0:
+                 led_reg.next = dmem_data_out
+             else:

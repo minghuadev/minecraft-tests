@@ -1,0 +1,30 @@
+
+viewing code 9 using gtkwave to list signals:
+
+
+  all prefixed with TopBench.top. 
+
+    reset
+    core.ftch.imem_addr_out
+    debug_imem_data_in
+    core.ftch.of_hazart
+    core.exeu.ex_instruction
+
+    tx_busy
+    uart.write_en
+    uart.tx_bitcount
+    uart.uart_txd
+
+    clock
+    debug_if_program_counter
+    dmem_addr_out
+    dmem_data_out
+    dmem_data_in
+    dmem_we_out
+    dmem_ena_out
+    dmem_ena
+    dmem_ena_in
+    dmem_sel
+    dmem_sel_out
+
+
