@@ -1,0 +1,111 @@
+
+search gcc adding an architecture
+
+
+https://stackoverflow.com/questions/44904644/gcc-how-to-add-support-to-a-new-architecture
+
+https://gcc.gnu.org/ml/gcc-cvs/2017-02/
+see r245224 ... r245231 for the introduction of the riscv port
+
+245224:
+Added:
+    trunk/gcc/common/config/riscv/
+    trunk/gcc/common/config/riscv/riscv-common.c
+    trunk/gcc/config/riscv/
+    trunk/gcc/config/riscv/constraints.md
+    trunk/gcc/config/riscv/elf.h
+    trunk/gcc/config/riscv/generic.md
+    trunk/gcc/config/riscv/linux.h
+    trunk/gcc/config/riscv/multilib-generator   (with props)
+    trunk/gcc/config/riscv/peephole.md
+    trunk/gcc/config/riscv/pic.md
+    trunk/gcc/config/riscv/predicates.md
+    trunk/gcc/config/riscv/riscv-builtins.c
+    trunk/gcc/config/riscv/riscv-c.c
+    trunk/gcc/config/riscv/riscv-ftypes.def
+    trunk/gcc/config/riscv/riscv-modes.def
+    trunk/gcc/config/riscv/riscv-opts.h
+    trunk/gcc/config/riscv/riscv-protos.h
+    trunk/gcc/config/riscv/riscv.c
+    trunk/gcc/config/riscv/riscv.h
+    trunk/gcc/config/riscv/riscv.md
+    trunk/gcc/config/riscv/riscv.opt
+    trunk/gcc/config/riscv/sync.md
+    trunk/gcc/config/riscv/t-elf-multilib
+    trunk/gcc/config/riscv/t-linux
+    trunk/gcc/config/riscv/t-linux-multilib
+    trunk/gcc/config/riscv/t-riscv
+Modified:
+    trunk/gcc/ChangeLog
+    trunk/gcc/config.gcc
+    trunk/gcc/configure.ac
+    trunk/gcc/doc/contrib.texi
+    trunk/gcc/doc/install.texi
+    trunk/gcc/doc/invoke.texi
+    trunk/gcc/doc/md.texi
+
+245225:
+Modified:
+    trunk/gcc/ChangeLog
+    trunk/gcc/configure
+
+245226:
+Added:
+    trunk/libgcc/config/riscv/
+    trunk/libgcc/config/riscv/atomic.c
+    trunk/libgcc/config/riscv/crti.S
+    trunk/libgcc/config/riscv/crtn.S
+    trunk/libgcc/config/riscv/div.S
+    trunk/libgcc/config/riscv/linux-unwind.h
+    trunk/libgcc/config/riscv/muldi3.S
+    trunk/libgcc/config/riscv/multi3.S
+    trunk/libgcc/config/riscv/save-restore.S
+    trunk/libgcc/config/riscv/sfp-machine.h
+    trunk/libgcc/config/riscv/t-elf
+    trunk/libgcc/config/riscv/t-elf32
+    trunk/libgcc/config/riscv/t-elf64
+    trunk/libgcc/config/riscv/t-softfp32
+    trunk/libgcc/config/riscv/t-softfp64
+Modified:
+    trunk/libgcc/ChangeLog
+    trunk/libgcc/config.host
+
+245227:
+Modified:
+    trunk/libatomic/ChangeLog
+    trunk/libatomic/configure.tgt
+
+245228:
+Modified:
+    trunk/gcc/testsuite/ChangeLog
+    trunk/gcc/testsuite/g++.dg/cpp0x/constexpr-rom.C
+    trunk/gcc/testsuite/gcc.c-torture/execute/20101011-1.c
+    trunk/gcc/testsuite/gcc.dg/20020312-2.c
+    trunk/gcc/testsuite/gcc.dg/builtin-apply2.c
+    trunk/gcc/testsuite/gcc.dg/ifcvt-4.c
+    trunk/gcc/testsuite/gcc.dg/loop-8.c
+    trunk/gcc/testsuite/gcc.dg/sibcall-10.c
+    trunk/gcc/testsuite/gcc.dg/sibcall-9.c
+    trunk/gcc/testsuite/gcc.dg/stack-usage-1.c
+    trunk/gcc/testsuite/gcc.dg/torture/stackalign/builtin-apply-2.c
+    trunk/gcc/testsuite/gcc.dg/tree-ssa/20040204-1.c
+    trunk/gcc/testsuite/gcc.dg/tree-ssa/ssa-dom-cse-2.c
+    trunk/gcc/testsuite/gcc.dg/tree-ssa/ssa-fre-3.c
+    trunk/gcc/testsuite/lib/target-supports.exp
+
+245229:
+Modified:
+    trunk/contrib/ChangeLog
+    trunk/contrib/config-list.mk
+
+245230:
+Modified:
+    trunk/gcc/ChangeLog
+    trunk/gcc/doc/invoke.texi
+
+245231:
+Modified:
+    trunk/gcc/ChangeLog
+    trunk/gcc/doc/invoke.texi
+
+
