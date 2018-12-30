@@ -1,6 +1,11 @@
 
 search gcc adding an architecture
 
+toc: riscv change set
+     linked three questions with optional details and approaches
+     a blog
+
+
 
 https://stackoverflow.com/questions/44904644/gcc-how-to-add-support-to-a-new-architecture
 
@@ -107,5 +112,82 @@ Modified:
 Modified:
     trunk/gcc/ChangeLog
     trunk/gcc/doc/invoke.texi
+
+
+
+linked question
+https://stackoverflow.com/questions/10617215/how-to-write-your-own-code-generator-backend-for-gcc?noredirect=1&lq=1
+
+one example: 
+
+    [1] Download gcc 4.9 source
+    [2] Add your architecture name to  `config.sub`  around line 250 look 
+        for  `# Decode aliases for certain CPU-COMPANY combinations` . 
+	In that list add  `| my_processor \` 
+    [3] In that same file look for  `# Recognize the basic CPU types with company name` . 
+        add yourself to the list:  `| my_processor-* \`
+
+    [4] Search for the file  `gcc/config.gcc` , in the file look for 
+        case ${target} it is around line 880, add yourself in the following way:
+
+          ;;
+        my_processor*-*-*)
+          c_target_objs="my_processor-c.o"
+          cxx_target_objs="my_processor-c.o"
+          target_has_targetm_common=no
+          tmake_file="${tmake_file} my_processor/t-my_processor"
+          ;;
+
+    [5] Create a folder  `gcc-4.9.0\gcc\config\my_processor`
+    [6] Copy files from an existing project and just edit it, or create 
+        your own from scratch. In our project we had copied all the files 
+	from the msp430 project and edited it all
+    [7] You should have the following files (not all files are mandatory):
+        my_processor.c
+        my_processor.h
+        my_processor.md
+        my_processor.opt
+        my_processor-c.c
+        my_processor.def
+        my_processor-protos.h
+        constraints.md
+        predicates.md
+        README.txt
+        t-my_processor
+    [8] create a path  `gcc-4.9.0/build/object` 
+    [9] run  `../../configure --target=my_processor --prefix=path for my compiler --enable-languages="c"`
+    [10] make
+    [11] make install
+    [12] Do a lot of research and debugging.
+    [13] Have fun.
+
+
+
+linked question
+https://stackoverflow.com/questions/48149147/how-to-tell-gcc-not-to-generate-particular-instructions?noredirect=1&lq=1
+
+    it may be as easy as removing a define_insn (or define_expand or...) block 
+    in gcc/config/mips/*.md
+
+    For the specific case of MUL you can force ISA_HAS_R6MUL to be 0 
+    in config/mips/mips.h, but in the general case. as Marc Gilisse said, 
+    disabling the define_insn and define_expand statements that 
+    that generate a given instruction will prevent that instruction 
+    from being emitted. Instead GCC will either emit some 
+    other instruction(s), emit a library call, or crash with a fatal error.
+
+
+
+linked question
+https://stackoverflow.com/questions/8696229/how-to-create-a-c-compiler-for-custom-cpu
+
+options: 
+    llvm, http://llvm.org/releases/2.2/docs/WritingAnLLVMBackend.html
+    vbcc, http://www.compilers.de/vbcc.html
+
+
+
+a blog:
+https://kristerw.blogspot.com/2017/08/writing-gcc-backend_4.html
 
 
