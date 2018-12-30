@@ -1,0 +1,160 @@
+
+toolchain-gcc-arch-backend-blog
+https://kristerw.blogspot.com/2017/08/writing-gcc-backend_4.html
+friday august 4 2017
+
+[1] the structure of a gcc backend
+  *  which file you need to write/modify
+[2] getting started with a gcc backend
+  *  pointers to reasources descripbing how to set up the initial backend
+[3] low-level IR and basic code generation
+  *  how the low-level IR works
+  *  how the IR is lowered to instructions
+  *  how to write simple instruction patterns
+[4] target description macros and functions
+  *  working with the RTL
+  *  describing the registerns (names, register classes, allocation order, ...)
+  *  addressing modes
+[5] more about instruction patterns
+  *   `define_expand`
+  *  the  `unspec`  and  `unspec_volatile`  expression codes
+  *  attributes
+[6] improving the performance
+  *  cost model
+  *  peephole optimization
+  *  tuning the optimization passes
+[7] instruction scheduling
+  *  describing the processor pipeline
+
+
+
+https://kristerw.blogspot.com/2017/08/the-structure-of-gcc-back-end.html
+sunday august 6 2017
+
+the gcc backend is configured in 
+    gcc/config.host
+and the implementation is placed in directories
+    gcc/config/machine
+    gcc/common/config/machine
+where  `machine`  is the name of the backend.
+
+the backend places some functionalities in  `libgcc`. for example, architectures 
+that do not have an instruction for integer division will instead generate a call 
+to function  `__divsi3`  in  `libgcc`.  `libgcc`  is configured in 
+    libgcc/config.host
+and the target-specific files are located in a directorory
+    libgcc/config/machine
+
+gcc/config.gcc
+---------------
+`config.gcc`  is a shell script that parses the target string (e.g. x86_64-linux-gnu) 
+and sets variables pointing out where to find the rest of the backend and how to 
+compile it. the variables that can be set are document at the top of  `config.gcc` file.
+
+The only variable that must be set is  `cpu_type`  that specifies  `machine`. 
+Most targets also set  `extra_objs`  that specifies extra object files 
+that should be linked into the compiler,  `tmake_file`  that contains makefile 
+fragments that compiles those extra objects (or sets makefile variables 
+modifying the build), and  `tm_file`  that adds header files containing 
+target-specific information.
+
+A typical configuration for a simple target (such as `ft32-unknown-elf`) looks something like
+
+    cpu_type=ft32
+    tm_file="dbxelf.h elfos.h newlib-stdint.h ${tm_file}"
+
+gcc/config/machine
+-------------------
+The main part of the back end is located in  `gcc/config/machine` . It consists of 
+eight different components, each implemented in a separate file:
+
+  *  `machine.h` is included all over the compiler and contains macros 
+     defining properties of the target, such as the size of integers and pointers, 
+     number of registers, data alignment rules, etc.
+  *  GCC implements a generic backend where  `machine.c`  can override most of 
+     the functionality. The backend is written in C so the virtual functions are 
+     handled manually with function pointers in a structure, and  `machine.c`  
+     overrides the defaults using code of the form
+
+        #undef TARGET_FRAME_POINTER_REQUIRED
+        #define TARGET_FRAME_POINTER_REQUIRED ft32_frame_pointer_required
+        static bool
+        ft32_frame_pointer_required (void)
+        {
+          return cfun->calls_alloca;
+        }
+
+  *  `machine-protos.h`  contains prototypes for the external functions defined 
+     in  `machine.c` .
+  *  `machine.opt`  adds target-specific command-line options to the compiler 
+     using a record format specifying the option name, properties, and 
+     a documentation string for the  `--help`  output. For example,
+
+        msmall-data-limit=
+        Target Joined Separate UInteger Var(g_switch_value) Init(8)
+        -msmall-data-limit=N    Put global and static data smaller than <number> bytes into a special section.
+
+     adds a command-line option  `-msmall-data-limit`  that has a default value 8, 
+     and is generated as an unsigned variable named  `g_switch_value` .
+
+  *  `machine.md`, `predicates.md`, and `constraints.md` contains the machine 
+     description consisting of rules for instruction selection and register alocation, 
+     pipeline description, and peephole optimizations. These will be convered in detail
+     in part 3-7 of this series. 
+  *  `mahcine-modes.def`  defines extra machine modes for use in the low-level IR 
+     (a “machine mode” in the GCC terminology defines the size and representation 
+     of a data object. That is, it is a data type.). This is typically used 
+     for condition codes and vectors.
+
+The GCC configuration is very flexible and everything can be overridden, so some 
+backends look slightly different as they, for example, add several  `.opt`  files 
+by setting  `extra_options`  in  `config.gcc`.
+
+gcc/common/config/machine
+--------------------------
+The  `gcc/common/config/machine`  directory contains a file  `machine-common.c` 
+that can add/remove optimization passes, change the defaults for `--param` values, etc.
+
+Many back ends do not need to do anything here, and this file can be disabled by setting
+        target_has_targetm_common=no
+in  `config.gcc`.
+
+libgcc/config.host
+-------------------
+The libgcc  `config.host`  works in the same way as  `config.gcc`, but with 
+different variables. 
+
+The only variable that must be set is  `cpu_type`  that specifies  `machine`. 
+Most targets also set  `extra_parts`  that specifies extra object files 
+to include in the library and  `tmake_file`  that contains makefile fragments 
+that add extra functionality (such as soft-float support).
+
+A typical configuration for a simple target looks something like
+
+        cpu_type=ft32
+        tmake_file="$tmake_file t-softfp"
+        extra_parts="$extra_parts crti.o crtn.o crtbegin.o crtend.o"
+
+libgcc/config/machine
+----------------------
+The  `libgcc/config/machine`  directory contains extra files that may be 
+needed for the target architecture. Simple implementations typically only 
+contain a  `crti.S`  and  `crtn.S`  (`crtbegin`/`crtend` and the makefile 
+support for building all of these have default implementation) and a file 
+`sfp-machine.h`  containing defaults for the soft-float implementation.
+
+
+
+https://kristerw.blogspot.com/2017/08/getting-started-with-gcc-back-end.html
+sunday august 13 2017
+
+better to start from one of the minimal backends, the Moxie architecture 
+[http://moxielogic.org/blog/pages/architecture.html]. it also has a blog 
+series "How to retarget the gnu toolchain in 21 patches"[http://atgreen.github.io/ggx/].
+
+one thing about building and running the test-suite, but blogged a whie back 
+in "running the gcc test-suite for epiphany-sim"
+[https://kristerw.blogspot.se/2015/05/running-gcc-testsuite-for-epiphany-sim.html].
+
+
+
