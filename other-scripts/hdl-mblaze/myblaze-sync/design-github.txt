@@ -1,0 +1,10 @@
+
+https://github.com/muhd7rosli/mb-lite
+
+
+mb-lite
+
+MB-Lite is a small microprocessor for the Xilinx MicroBlaze architecture developed in VHDL. It is originally developed by Tamar Kranenburg for his master thesis entitle "Designing of a Portable and Customizable Microprocessor for Rapid System Prototyping". The design is meant to be simple, flexible and portable across different custom SOC manufacturer. The system is not intended to be a replacement microcontroller for Xilinx (c) MicroBlaze but aim to be Xilinx (c) MicroBlaze compatible in order to utilize the MicroBlaze com- piler to allow rapid prototyping without the burden of having to create another com- piler for the custom microcontroller.
+
+The microcontroller use Wishbone architecture as its On-Chip communication bus.
+

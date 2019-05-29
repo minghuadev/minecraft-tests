@@ -1,0 +1,101 @@
+
+https://opencores.org/projects/mblite
+
+
+MB-Lite :: Overview
+====================
+
+
+Details
+---------
+
+Name: mblite
+Created: Jun 19, 2009
+Updated: Jan 4, 2017
+SVN Updated: May 15, 2011
+SVN: Browse
+Latest version: download (might take a bit to start...)
+Statistics: View
+Bugs: 13 reported / 12 solved
+
+
+Other project properties
+--------------------------
+
+Category:Processor
+Language:VHDL
+Development status:Stable
+Additional info:ASIC proven, Design done, FPGA proven, Specification done
+WishBone compliant: No
+WishBone version: n/a
+License: LGPL
+
+
+Introduction
+--------------
+
+The MB-Lite microprocessor is a ligth-weight implementation of the Microblaze Instruction Set Architecture. It is instruction and cycle compatible with the Microblaze EDK 10.1i. It is successfully tested on older and newer Xilinx platforms (EDK 9 and 11). The design has been successfully synthesized for an Altera board as well to show platform independence.
+
+
+Features
+----------
+
+MB-Lite is a highly modular design and is therefore very simple to understand and modify. Features of the MicroBlaze architecture and MB-Lite implementation are:
+
+    32-bit data- and instruction bus
+    Harvard architecture
+    Five pipeline stages
+    Cycle as well as instruction compatible with the MicroBlaze Instruction Set Architecture
+    Optional interrupt support
+    Optional wishbone bus
+    Optional multiplier
+    Optional barrel shifter
+
+The following instructions are currently not implemented. All of these instructions are not used by the compiler (mb-gcc) or can be replaced by software libraries.
+
+    MULH, MULHU, MULHSU
+    IDIV, IDIVU (Integer Division)
+    TN* (Fast Simplex Link instructions)
+    F* (Floating point instructions)
+    PCM* (Pattern Compare)
+    WIC, WDC (Cache instructions)
+    MTS, MFS, MSR* (Special purpose register instructions)
+    RTBD, RTED (Return from break / exception)
+
+
+Included design examples
+--------------------------
+
+    Integer unit directly connected to instruction- and datamemory
+    Integer unit with wishbone bus wrapper
+    Integer unit with address decoder
+    Integer unit with address decoder and wishbone bus adapter
+    SOC for synthesis purposes
+
+
+Methodology
+-------------
+
+The core is designed using the [two-process design methodology of Jiri Gaisler](http://www.gaisler.com/doc/vhdl2proc.pdf design-vhdl2proc.pdf). All modules use inferred components, the design is not targeted specificly to any platform. However, currently it is only tested on a Xilinx Spartan 3 FPGA. All memory blocks and registers will synthesize to BRAM on xilinx devices.
+
+
+Organization
+--------------
+
+The organization of the hardware corresponds closely to the implementation of the classic RISC pipeline of Hennesy & Patterson (Computer Organization and Design: The Hardware/Software Approach).
+
+coreSignalNaming <picture design-pipeline-1250759293.jpg>
+
+
+Performance
+-------------
+
+MB-Lite is tested on a Virtex 5 development board (XC5VLX110-3FF 1760). It is able to obtain 229 MHz (c.f. the original implementation obtains 227 MHz). Furthermore, MB-Lite has a lower Cycles Per Instruction (CPI) than MicroBlaze since MicroBlaze has a prefetch buffer which reduces the rate of instructions which can be fed into the processor. The execution time of MB-Lite is therefore approximately 10% lower than MicroBlaze.
+
+
+TODO / Wishlist
+-----------------
+
+    Modify wishbone bus to support single cycle transfers
+    Add Fast Simplex Link (FSL)
+

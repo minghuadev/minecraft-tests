@@ -62,3 +62,20 @@ ls -lrt log-build4-dkf5-config-again/
 -rw-r--r--+   9280 Dec 25 11:54 logc-dot-config
 
 
+ls -lrt
+-rw-r--r--       2108 Dec 25 12:04 list-files
+-rw-r--r--       1588 Dec 25 13:29 notes-sample1
+drwxr-xr-x          0 Dec 25 20:09 log-build4-dkf5-config-again/
+
+
+ls -lrt
+-rw-r--r--     703536 Jan 18 21:28 design-thesis.pdf
+-rw-r--r--      32821 Jan 19 09:14 design-vhdl2proc.pdf
+-rw-r--r--     139305 Jan 19 09:15 design-pipeline-1250759293.jpg
+-rw-r--r--       3558 Jan 19 09:17 design-opencores.txt
+-rw-r--r--        796 Jan 19 09:29 design-github.txt
+-rw-r--r--   14450169 Jan 19 20:27 de0nano-tidu737.pdf
+-rw-r--r--     979774 Jan 19 21:27 de0nano-Using_the_SDRAM.pdf
+-rw-r--r--       2279 May 28 21:04 list-files
+
+

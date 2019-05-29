@@ -1,0 +1,10 @@
+
+ls -lrt
+
+drwxr-xr-x   0 Dec 25 21:37 myblaze-sync/
+drwxr-xr-x   0 Dec 29 17:46 myblaze-experiments/
+drwxr-xr-x   0 Dec 30 01:05 tpu/
+-rw-r--r--   0 Jan  9 21:34 list-files
+
+
+
