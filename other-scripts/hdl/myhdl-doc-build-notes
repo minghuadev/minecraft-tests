@@ -1,0 +1,86 @@
+
+how to build doc for myhdl with sphinx
+aug 11 of 2019
+
+
+$ git log -1 -v
+commit 29069ae4774fd42c8f076a625889a60052b2c658 (HEAD -> master, origin/master, origin/gsoc, origin/HEAD)
+Merge: 8ca7a87 1794e95
+Author: jandecaluwe <jan@jandecaluwe.com>
+Date:   Sun Apr 9 10:20:07 2017 +0200
+
+    Merge pull request #200 from hgomersall/initial_value_support
+
+    [FIX] fixed initial value support for bool lists and list of wires
+
+
+$ pip list | grep Sphinx
+Sphinx (1.8.5)
+
+~/myhdl-copy/src-myhdl-github/doc
+$ cat bb.bash
+#!/bin/bash
+
+SPHINXOPTS=
+SPHINXBUILD="sphinx-build"
+PAPER=
+BUILDDIR="build"
+
+# Internal variables.
+PAPEROPT_a4="-D latex_paper_size=a4"
+PAPEROPT_letter="-D latex_paper_size=letter"
+ALLSPHINXOPTS="-d ${BUILDDIR}/doctrees ${PAPEROPT_letter} ${SPHINXOPTS} source"
+# the i18n builder cannot share the environment and doctrees with the others
+I18NSPHINXOPTS="${PAPEROPT_letter} ${SPHINXOPTS} source"
+
+set -ex
+        mkdir -p build/html build/doctrees
+        ${SPHINXBUILD} -b html ${ALLSPHINXOPTS} build/html
+        echo
+        echo "Build finished. The HTML pages are in build/html."
+
+
+$ git diff
+diff --git a/doc/source/myhdldoctools.py b/doc/source/myhdldoctools.py
+index cf57e98..67d4548
+--- a/doc/source/myhdldoctools.py
++++ b/doc/source/myhdldoctools.py
+@@ -2,7 +2,8 @@ import subprocess
+
+ from docutils import nodes
+
+-from sphinx.util.compat import Directive
++#from sphinx.util.compat import Directive
++from docutils.parsers.rst import Directive
+ from sphinx.directives.code import LiteralInclude
+
+ example_dir = '/../../example/manual/'
+@@ -22,7 +23,7 @@ class RunExample(Directive):
+         env = document.settings.env
+         _ , wd = env.relfn2path(example_dir)
+         prog = self.arguments[0]
+-        out = subprocess.check_output(['python3', '-u', prog], cwd=wd,
++        out = subprocess.check_output(['python', '-u', prog], cwd=wd,
+                                       stderr=subprocess.STDOUT,
+                                       universal_newlines=True)
+         out = '$ python {}\n{}'.format(prog, out)
+diff --git a/example/manual/tb_Inc.v b/example/manual/tb_Inc.v
+index 4ed3708..c0cf480 100644
+--- a/example/manual/tb_Inc.v
++++ b/example/manual/tb_Inc.v
+@@ -1,4 +1,4 @@
+-module tb_Inc;
++module tb_inc;
+
+ wire [7:0] count;
+ reg enable;
+@@ -16,7 +16,7 @@ initial begin
+     );
+ end
+
+-Inc dut(
++inc dut(
+     count,
+     enable,
+     clock,
+
