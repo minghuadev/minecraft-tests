@@ -1,0 +1,19 @@
+
+
+clone scripts from  git://git.ti.com/wilink8-wlan/build-utilites.git
+
+
+change setup-env
+
+
+change configuration.sh to point to the ssl: 
+   openssl
+   ssh://git@git.ti.com/wilink8-wlan/tiwl-openssl.git
+   OpenSSL_1_0_2d
+
+
+build: 
+    ./build_wl18xx.sh init
+    ./build_wl18xx.sh openssl
+
+

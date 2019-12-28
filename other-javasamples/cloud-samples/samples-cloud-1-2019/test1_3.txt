@@ -1,0 +1,65 @@
+
+
+sample for get_media that a payload is in webm format:
+
+https://stackoverflow.com/questions/50061634/boto3-kinesis-video-getmedia-and-opencv
+
+
+
+for put_media, no boto3 example. a java sample:
+
+https://github.com/awslabs/amazon-kinesis-video-streams-producer-sdk-java/issues/26
+
+Python Example of PutMedia API
+
+
+ nicklee1990 commented on Feb 19, 2018 •
+
+I know the Python SDK is on the roadmap, but do you have any example code for using the PutMedia API with Python?
+I am trying to put something together, but there are few unknowns such as the format of
+the x-amzn-producer-start-timestamp header, content type header, what to use as payload when signing the request etc.
+
+Even just a few pointers would be helpful on how we can use the API with Python
+
+
+ bdhandap commented on Feb 19, 2018
+
+x-amzn-producer-start-timestamp is an optional start timestamp which you can use to set the relative producer
+timestamp offset for the PutMedia input. Say you have different input MKV files that are starting with cluster
+timecode '0' and you want the categorize each input MKV with different start timestamp, then you can do that
+by setting the x-amzn-fragment-timecode-type to RELATIVE and pass the different producer timestamp values
+to x-amzn-producer-start-timestamp for each PutMedia session. Later, you can use these producer timestamp
+values to search for a particular fragment in GetMedia API.
+
+payload is the input data in MKV format which you need to send it as HTTP body in PutMedia request. The response
+which you get for PutMedia will contain a series of acknowledgements with fragment timecode and fragment number.
+You can use the requests module to parse the chunked response of PutMedia API.
+
+For more details about PutMedia API please refer :
+https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html
+
+I don't have a Python example for now. I'll update this thread once I have it. I hope I answered your questions.
+Let me know if you need more clarification.
+
+
+ nicklee1990 commented on Feb 20, 2018
+
+thanks for the assistance - very useful information! regarding the payload, what I meant was when generating
+a v4 signature for the request
+[the guide](https://docs.aws.amazon.com/general/latest/gr/sigv4-signed-request-examples.html#sig-v4-examples-post)
+states that the payload should be hashed to form part of the signature.
+So I was asking what do we do in this case? create a hash of the mkv payload?
+
+I'll try work on a Python example as well. The 2 bits I'm struggling with currently are keeping open a duplex
+connection using the requests library, and generating the auth signature
+
+
+ bdhandap commented on Feb 22, 2018
+
+You dont have to create a hash for mkv payload as KinesisVideoStreams input can be real-time streaming input and
+signing the payload is impossible in this case. You have to send a special header x-amz-content-sha256:UNSIGNED-PAYLOAD
+to let KVS know that you are sending unsigned payload. Please refer this similar
+[java example](https://github.com/awslabs/amazon-kinesis-video-streams-producer-sdk-java/blob/master/src/main/java/com/amazonaws/kinesisvideo/client/signing/KinesisVideoAWS4Signer.java#L88)
+which sets the header while signing the PutMedia request.
+
+

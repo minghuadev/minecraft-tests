@@ -1,0 +1,80 @@
+
+
+~/src/vendor/github.com/quadrifoglio/go-mkv
+$ git diff
+diff --git a/ebml.go b/ebml.go
+index 0c73198..3f031be 100644
+--- a/ebml.go
++++ b/ebml.go
+@@ -1,12 +1,12 @@
+ package mkv
+
+ import (
+-       "io"
++       io "github.com/quadrifoglio/go-mkv/debug" /*"io"*/
+ )
+
+ // Document represents a WebM file
+ type Document struct {
+-       r io.Reader
++       r *io.Reader
+ }
+
+ // ElementRegister contains the ID, type and name of the
+diff --git a/parser.go b/parser.go
+index 4b27bb3..ba740c2 100644
+--- a/parser.go
++++ b/parser.go
+@@ -2,7 +2,8 @@ package mkv
+
+ import (
+        "errors"
+-       "io"
++       io "github.com/quadrifoglio/go-mkv/debug" /*"io"*/
++       o_io "io"
+ )
+
+ var (
+@@ -12,13 +13,19 @@ var (
+
+ // InitDocument creates a MKV/WebM document containing the file data
+ // It does not do any parsing
+-func InitDocument(r io.Reader) *Document {
++func InitDocument(r o_io.Reader) *Document {
+        doc := new(Document)
+-       doc.r = r
++       doc.r = new(io.Reader)
++       doc.r.R = r
++       doc.r.BytesCount = 0
+
+        return doc
+ }
+
++func (doc *Document) GetReadOffset() uint64 {
++       return doc.r.BytesCount
++}
++
+ // ParseAll parses the entire MKV/WebM document
+ // When an EBML/WebM element is encountered, it calls the provided function
+ // and passes the newly parsed element
+
+
+
+$ cat debug/debug.go
+package debug
+
+import (
+        o_io "io"
+)
+
+type Reader struct {
+        R o_io.Reader
+        BytesCount uint64
+}
+
+/* re-define io.ReadFull */
+func ReadFull(r *Reader, buf []byte) (n int, err error) {
+        r.BytesCount += uint64(len(buf))
+        return o_io.ReadAtLeast(r.R, buf, len(buf))
+}
+

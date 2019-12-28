@@ -1,0 +1,143 @@
+
+
+search  arm9 python 
+
+
+https://bugs.python.org/issue33938
+https://bugs.python.org/issue31710
+
+
+arm-arago-linux-
+
+
+
+search  cross compile python 2.7.15
+https://unix.stackexchange.com/questions/342925/cross-compiling-python
+
+  wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz
+  tar xf Python-2.7.13.tar.xz
+  cd Python-2.7.13
+  echo ac_cv_file__dev_ptmx=no > config.site
+  echo ac_cv_file__dev_ptc=no  >> config.site
+  CONFIG_SITE=config.site ./configure --host=arm-arago-linux --prefix=/home/YOUR_USER/MY_BOARD_python --build=x86_64-linux-gnu --disable-ipv6
+  make
+  make install
+
+ some logs
+
+  configuration tails
+
+    configure: creating ./config.status
+    config.status: creating Makefile.pre
+    config.status: creating Modules/Setup.config
+    config.status: creating Misc/python.pc
+    config.status: creating Modules/ld_so_aix
+    config.status: creating pyconfig.h
+    creating Modules/Setup
+    creating Modules/Setup.local
+    creating Makefile
+
+  build tails
+
+    Python build finished, but the necessary bits to build these modules were not found:
+    _bsddb             _curses            _curses_panel
+    _sqlite3           _ssl               _tkinter
+    bsddb185           bz2                dbm
+    dl                 gdbm               imageop
+    linuxaudiodev      ossaudiodev        readline
+    sunaudiodev        zlib
+    To find the necessary bits, look in setup.py in detect_modules() for the module's name.
+    
+    running build_scripts
+    creating build/scripts-2.7
+    copying and adjusting /home/tmp/Python-2.7.13/Tools/scripts/pydoc -> build/scripts-2.7
+    copying and adjusting /home/tmp/Python-2.7.13/Tools/scripts/idle -> build/scripts-2.7
+    copying and adjusting /home/tmp/Python-2.7.13/Tools/scripts/2to3 -> build/scripts-2.7
+    copying and adjusting /home/tmp/Python-2.7.13/Lib/smtpd.py -> build/scripts-2.7
+    changing mode of build/scripts-2.7/pydoc from 644 to 755
+    changing mode of build/scripts-2.7/idle from 644 to 755
+    changing mode of build/scripts-2.7/2to3 from 644 to 755
+    changing mode of build/scripts-2.7/smtpd.py from 644 to 755
+    /usr/bin/install -c -m 644 ./Tools/gdb/libpython.py python-gdb.py
+
+  install
+
+    tar: can't create symlink from ./lib/pkgconfig/python2.pc to python-2.7.pc: Operation not permitted
+    tar: can't create symlink from ./lib/pkgconfig/python.pc to python2.pc: Operation not permitted
+    tar: can't create symlink from ./bin/python2 to python2.7: Operation not permitted
+    tar: can't create symlink from ./bin/python to python2: Operation not permitted
+    tar: can't create symlink from ./bin/python-config to python2-config: Operation not permitted
+    tar: can't create symlink from ./bin/python2-config to python2.7-config: Operation not permitted
+    tar: can't create symlink from ./share/man/man1/python2.1 to python2.7.1: Operation not permitted
+    tar: can't create symlink from ./share/man/man1/python.1 to python2.1: Operation not permitted
+
+
+search  python cross compile missing _struct
+https://www.reddit.com/r/Python/comments/80usdi/importerror_no_module_named_struct_on_cross/
+https://bugs.python.org/issue28444
+
+  I think that should be the standard procedure for cross-compilation:
+    * Configure the python source, for example update Modules/Setup.
+    * Build python natively out of the source tree [1].
+    * Set the new interpreter first on the PATH.
+    * Cross-build python out of the same source tree, in another directory.
+
+  [1] Out of the source tree:
+  For example, assuming the source tree is at 'src' and the current working directory is its parent, 
+  to build python in the 'build' directory without modifying any file in the 'src' directory:
+    $ mkdir build
+    $ cd build
+    $ $(cd ../src && pwd)/configure arg1 arg2 ... && make
+
+
+
+build native and compare with the host install
+
+  $ /home/tmp/Python-2.7.13/../py2713native/bin/python
+  Python 2.7.13 (default, Dec 21 2019, 22:34:23)
+  >>> import sys
+  >>> sys.builtin_module_names
+  ('__builtin__', '__main__', '_ast', '_codecs', '_sre', '_symtable', '_warnings', '_weakref', 'errno', 'exceptions', 'gc', 'imp', 'marshal', 'posix', 'pwd', 'signal', 'sys', 'thread', 'xxsubtype', 'zipimport')
+
+  $ python
+  Python 2.7.15+ (default, Nov 27 2018, 23:36:35)
+  >>> import sys
+  >>> sys.builtin_module_names
+  ('__builtin__', '__main__', '_ast', '_bisect', '_codecs', '_collections', '_functools', '_heapq', '_io', '_locale', '_md5', '_random', '_sha', '_sha256', '_sha512', '_socket', '_sre', '_struct', '_symtable', '_warnings', '_weakref', 'array', 'binascii', 'cPickle', 'cStringIO', 'cmath', 'datetime', 'errno', 'exceptions', 'fcntl', 'gc', 'grp', 'imp', 'itertools', 'marshal', 'math', 'operator', 'posix', 'pwd', 'select', 'signal', 'spwd', 'strop', 'sys', 'syslog', 'thread', 'time', 'unicodedata', 'xxsubtype', 'zipimport', 'zlib')
+
+
+
+search  python modules/setup.local
+
+https://chromium.googlesource.com/webports/+/pepper_47/ports/python-static/Setup.local
+
+
+
+build again with the original steps and enabled essential modules in Setup.local
+
+~/py2713$ find . -type l | xargs ls -l
+lrwxrwxrwx    7 Dec 22 00:31 ./bin/python -> python2
+lrwxrwxrwx   14 Dec 22 00:31 ./bin/python-config -> python2-config
+lrwxrwxrwx    9 Dec 22 00:31 ./bin/python2 -> python2.7
+lrwxrwxrwx   16 Dec 22 00:31 ./bin/python2-config -> python2.7-config
+lrwxrwxrwx   10 Dec 22 00:31 ./lib/pkgconfig/python.pc -> python2.pc
+lrwxrwxrwx   13 Dec 22 00:31 ./lib/pkgconfig/python2.pc -> python-2.7.pc
+lrwxrwxrwx    9 Dec 22 00:31 ./share/man/man1/python.1 -> python2.1
+lrwxrwxrwx   11 Dec 22 00:31 ./share/man/man1/python2.1 -> python2.7.1
+
+
+
+cross compile zlib: 
+  https://stackoverflow.com/questions/53885273/cross-compile-zlib-for-arm
+
+    CHOST=arm \
+    CC=<PATH_TO_CROSS_GCC> \
+    AR=<PATH_TO_CROSS_AR> \
+    RANLIB=<PATH_TO_CROSS_RANLIB> \
+    ./configure \
+    --prefix=<INSTALL_PATH>
+
+    https://github.com/madler/zlib
+
+
+

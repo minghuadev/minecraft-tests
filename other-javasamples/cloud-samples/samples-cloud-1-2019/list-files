@@ -1,0 +1,39 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-rw-r--       74 Dec 20 21:22 confs_sample.bat
+-rwxrwxr-x      355 Dec 20 22:45 kinesis_create_streams.sh
+-rwxrwxr-x     8325 Dec 20 22:55 test2_sample.py
+-rwxrwxr-x      108 Dec 20 22:55 configs_sample
+-rwxrwxr-x      735 Dec 21 00:46 test3_kinesis_data_put.py
+-rw-r--r--     4073 Dec 22 00:34 cross-python-Setup.local-experimental-16
+-rw-rw-r--     5915 Dec 22 00:41 cross-python-2-7-13
+-rw-r--r--     2974 Dec 22 00:49 cross-python-Setup.local-experimental-16-shortened
+-rw-rw-r--      290 Dec 22 17:42 cross-python-ssl
+-rwxrwxr-x     1280 Dec 23 10:29 test3_kinesis_data_get.py
+-rw-rw-r--     2307 Dec 25 01:34 go_example_k1_get.go
+-rwxrwxr-x      590 Dec 25 10:35 go_sample_ssl_certs
+-rwxrwxr-x     3300 Dec 25 15:47 test1_3.txt
+-rwxrwxr-x     2001 Dec 25 15:48 test1_sample.py
+-rwxrwxr-x     1305 Dec 25 15:48 test1_2_sample.py
+-rwxrwxr-x     1006 Dec 25 15:52 go_example_s3.go
+-rwxrwxr-x     1511 Dec 25 15:54 go_example_k1_put.go
+-rwx------   434151 Dec 26 17:05 matroska.pdf
+-rwxrwxr-x     5440 Dec 26 18:40 test1_4.txt
+-rwxrwxr-x     6150 Dec 26 23:45 test1_4.py
+-rwxrwxr-x     1500 Dec 27 02:08 video_codec_github
+-rw-rw-r--      803 Dec 27 02:11 go_example_mkv1.go
+-rwxrwxr-x     1787 Dec 27 02:16 test1_2_2.py
+-rw-rw-r--        0 Dec 27 02:19 list-files
+
+-rw-rw-r--     2571 Dec 27 10:53 kinesis_build_container
+-rw-rw-r--     1296 Dec 27 13:00 list-files
+-rwxrwxr-x     3222 Dec 27 14:20 test1_2_3.py
+-rw-rw-r--      840 Dec 27 17:44 go_example_mkv1_2.go
+-rwxrwxr-x     2190 Dec 27 18:36 go_example_mkv1-seg1
+-rwxrwxr-x     2000 Dec 27 21:41 test1_sample.py
+-rwxrwxr-x     1703 Dec 27 21:56 go_example_mkv1_2-diff
+

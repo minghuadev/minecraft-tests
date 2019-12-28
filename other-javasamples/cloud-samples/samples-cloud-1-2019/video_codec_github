@@ -1,0 +1,54 @@
+
+video_codec_github
+
+
+search  webm example page
+search  goland mkv
+
+https://github.com/remko/go-mkvparse
+https://github.com/quadrifoglio/go-mkv
+https://github.com/pixelbender/go-matroska
+
+
+search  matroska container where is the video data
+
+https://www.loc.gov/preservation/digital/formats/fdd/fdd000342.shtml
+https://www.matroska.org/files/matroska.pdf
+
+
+search  stackoverflow kinesis video putmedia
+
+https://stackoverflow.com/questions/52033203/amazon-kinesis-video-putmedia-using-python
+https://stackoverflow.com/questions/51991401/how-to-implement-amazon-kinesis-putmedia-method-using-python
+    saved to test1_4.txt and derived to test1_4.py
+
+
+search  matroska example file
+https://github.com/Matroska-Org/matroska-test-files
+
+
+matroska example file
+https://matroska.org/technical/streaming/index.html
+
+
+kinesis video gst launch commands
+
+    $ cat run_demo_264.bash
+    #!/bin/bash
+
+    gst-launch-1.0 rtspsrc \
+    location="rtsp://<ip>:<port>/<h265path>" ! decodebin ! x264enc ! \
+    kvssink stream-name="<video-stream-name>" storage-size=512 \
+    access-key="<access-key>" \
+    secret-key="<secret-key>" aws-region="<aws-region>"
+
+    $ cat run_demo_265.bash
+    #!/bin/bash
+
+    gst-launch-1.0 rtspsrc \
+    location="rtsp://<ip>:<port>/<h265path>" \
+    short-header=TRUE ! rtph265depay ! h265parse ! video/x-h265, alignment=au ! \
+    kvssink stream-name="<video-stream-name>" storage-size=512 \
+    access-key="<access-key>" \
+    secret-key="<secret-key>" aws-region="<aws-region>"
+

@@ -1,0 +1,94 @@
+
+kinesis_build_container
+
+
+$ cat bb.bash
+#!/bin/bash
+# bb.bash
+
+# current uid and gid
+curr_uid=`id -u`
+curr_gid=`id -g`
+
+echo Removing old bb.dockerfile
+
+rm bb.dockerfile
+
+echo Creating bb.dockerfile ...
+
+# create bb.dockerfile:
+cat << EOF1 > bb.dockerfile
+
+ FROM ubuntu:bionic-20190718
+
+ RUN apt-get update
+ RUN apt-get install -y git tree openssh-client make
+ RUN apt-get install -y bzip2 gcc libncurses5-dev bc
+ RUN apt-get install -y file vim
+ RUN apt-get install -y zlib1g-dev g++
+ RUN apt-get install -y libssl-dev
+
+ # from "1.2.3 Installing the software package" of "Description of the installation
+ # and upgrade of the sdk.pdf", Issue 0abcd (2018-04-04)
+ #RUN apt-get install -y make zlib1g-dev libncurses5-dev g++ bc libssl-dev
+ RUN apt-get install -y lib32z1 lib32stdc++6  ncurses-term libncursesw5-dev
+ RUN apt-get install -y texinfo texlive gawk
+ RUN apt-get install -y u-boot-tools
+
+ RUN dpkg --add-architecture i386
+ RUN apt-get update
+ RUN apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386
+ # from "1.2.3 Installing the software package"
+ #RUN apt-get install -y libc6:i386
+ ##RUN apt-get install -y u-boot-tools:i386
+ RUN apt-get install -y dh-autoreconf
+ RUN apt-get install -y pkg-config
+ RUN apt-get install -y bison
+ RUN apt-get install -y flex
+
+ # for awslabs amazon-kinesis-video-streams-producer-sdk-cpp
+ RUN apt-get update
+ RUN apt-get install -y cmake
+ RUN apt-get install -y python
+ RUN apt-get install -y python3
+ RUN apt-get install -y libssl-dev libcurl4-openssl-dev liblog4cplus-1.1-9 liblog4cplus-dev
+ RUN apt-get install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base-apps
+ RUN apt-get install -y gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly gstreamer1.0-tools
+
+ ARG UNAME=kvsuser
+
+ ARG UID=9999
+ ARG GID=9999
+
+ RUN groupadd -g \$GID \$UNAME
+ RUN useradd -m -u \$UID -g \$GID -s /bin/bash \$UNAME
+
+ RUN rm /bin/sh && ln -s bash /bin/sh
+ RUN cp -a /etc /etc-original && chmod a+rw /etc
+ RUN cp -a /opt /opt-original && chmod a+rw /opt
+
+ USER \$UNAME
+
+ CMD /bin/bash
+EOF1
+
+echo Docker image build off bb.dockerfile ...
+docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) \
+     -f bb.dockerfile  -t kvsbase .
+
+echo Docker image build finished ...
+
+exit 0
+
+# below is the script used to create the container from image above
+# using container name kvsbuild
+# off image name kvsbase
+
+    mkdir docker_mount
+    docker run -td \
+         -v "$(pwd)/docker_mount":/home/kvsuser/docker_mount \
+         --name kvsbuild  \
+         kvsbase
+
+
+
