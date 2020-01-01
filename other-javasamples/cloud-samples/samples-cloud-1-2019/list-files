@@ -37,3 +37,22 @@ ls -lrt
 -rwxrwxr-x     2000 Dec 27 21:41 test1_sample.py
 -rwxrwxr-x     1703 Dec 27 21:56 go_example_mkv1_2-diff
 
+-rwxrwxr-x     1655 Dec 27 22:15 list-files
+-rwxrwxr-x     6300 Dec 31 00:14 test1_4_2.py
+-rwxrwxr-x     1444 Dec 31 10:21 test1_4-link-python-chunked
+-rwxrwxr-x     8221 Jan  1 00:11 test1_4_3.py
+-rwxrwxr-x     9108 Jan  1 00:12 test1_4_4.py
+-rw-rw-r--     5300 Jan  1 01:01 test1_4_5-kvsdiff
+-rwxrwxr-x    10153 Jan  1 01:12 test1_4_5.py
+-rwxrwxr-x      947 Jan  1 01:32 list-content
+
+-rw-rw-r--     6782 Dec 27 18:44 out28-6782.webm
+-rwxrwxr-x     3226 Dec 27 21:46 test1_2_3.py
+-rwxrwxr-x     9108 Jan  1 01:13 test1_4_4.py
+-rwxrwxr-x     8221 Jan  1 01:26 test1_4_3.py
+-rwxrwxr-x      947 Jan  1 01:32 list-content
+-rwxrwxr-x     2042 Jan  1 01:37 list-files
+-rwxrwxr-x    10413 Jan  1 01:54 test1_4_5.py
+
+-rwxrwxr-x     2411 Jan  1 10:51 list-files
+

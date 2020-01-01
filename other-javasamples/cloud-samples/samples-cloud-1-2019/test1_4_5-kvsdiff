@@ -1,0 +1,113 @@
+diff --git a/kinesis-video-c-producer/samples/KvsVideoOnlyStreamingSample.c b/kinesis-video-c-producer/samples/KvsVideoOnlyStreamingSample.c
+index 1390edb..d943207 100644
+--- a/kinesis-video-c-producer/samples/KvsVideoOnlyStreamingSample.c
++++ b/kinesis-video-c-producer/samples/KvsVideoOnlyStreamingSample.c
+@@ -131,11 +131,16 @@ INT32 main(INT32 argc, CHAR *argv[])
+         frameIndex++;
+         fileIndex++;
+         fileIndex = fileIndex % NUMBER_OF_FRAME_FILES;
++        if (frameIndex >= 45) {
++            defaultLogPrint(LOG_LEVEL_INFO, "", "Ok done 45 frames\n");
++            break;
++        }
+     }
+ 
+     CHK_STATUS(stopKinesisVideoStreamSync(streamHandle));
+     CHK_STATUS(freeKinesisVideoStream(&streamHandle));
+     CHK_STATUS(freeKinesisVideoClient(&clientHandle));
++    defaultLogPrint(LOG_LEVEL_INFO, "", "Ok done closed\n");
+ 
+ CleanUp:
+ 
+diff --git a/kinesis-video-c-producer/src/source/AwsV4Signer.c b/kinesis-video-c-producer/src/source/AwsV4Signer.c
+index a52dad3..b03567c 100644
+--- a/kinesis-video-c-producer/src/source/AwsV4Signer.c
++++ b/kinesis-video-c-producer/src/source/AwsV4Signer.c
+@@ -39,6 +39,7 @@ STATUS signCurlRequest(PCurlRequest pCurlRequest)
+     // Get the request length and allocate enough space and package the request
+     CHK(NULL != (pScratchBuf = (PCHAR) MEMALLOC(scratchLen * SIZEOF(CHAR))), STATUS_NOT_ENOUGH_MEMORY);
+     CHK_STATUS(generateCanonicalRequestString(pCurlRequest, pScratchBuf, &requestLen));
++    printf("\n****%d GenCanonicalRequest %u : %s****\nlen %u %u\n", __LINE__, requestLen, pScratchBuf, strnlen(pScratchBuf, scratchLen), scratchLen);
+ 
+     // Calculate the hex encoded SHA256 of the canonical request
+     CHK_STATUS(hexEncodedSha256((PBYTE) pScratchBuf, requestLen * SIZEOF(CHAR), requestHexSha256));
+@@ -65,6 +66,7 @@ STATUS signCurlRequest(PCurlRequest pCurlRequest)
+     curSize = SNPRINTF(pSignedStr, signedStrLen, SIGNED_STRING_TEMPLATE, AWS_SIG_V4_ALGORITHM, dateTimeStr,
+                        pCredentialScope, requestHexSha256);
+     CHK(curSize > 0 && curSize < signedStrLen, STATUS_BUFFER_TOO_SMALL);
++    pSignedStr[curSize] = '\0'; printf("\n****%d GenSignedString %u : %s****\nlen %u %u\n", __LINE__, curSize, pSignedStr, strnlen(pSignedStr, signedStrLen), signedStrLen);
+ 
+     // Set the actual size
+     signedStrLen = curSize;
+@@ -225,6 +227,7 @@ STATUS generateCanonicalRequestString(PCurlRequest pCurlRequest, PCHAR pRequestS
+     pCurPtr += len;
+     *pCurPtr++ = '\n';
+     curLen += len + 1;
++    *pCurPtr = '\0'; printf("\n****%d curLen %u : %s****\n", __LINE__, curLen, pRequestStr);
+ 
+     // Generate the hex encoded hash
+     len = SHA256_DIGEST_LENGTH * 2;
+@@ -232,9 +235,11 @@ STATUS generateCanonicalRequestString(PCurlRequest pCurlRequest, PCHAR pRequestS
+     if (pCurlRequest->streaming) {
+         // Streaming treats this portion as if the body were empty
+         CHK_STATUS(hexEncodedSha256((PBYTE) EMPTY_STRING, 0, pCurPtr));
++        printf("\n****%d hash stream ****\n", __LINE__);
+     } else {
+         // standard signing
+         CHK_STATUS(hexEncodedSha256((PBYTE) pCurlRequest->body, pCurlRequest->bodySize, pCurPtr));
++        printf("\n****%d hash body ****\n", __LINE__);
+     }
+ 
+     pCurPtr += len;
+diff --git a/kinesis-video-c-producer/src/source/Response.c b/kinesis-video-c-producer/src/source/Response.c
+index ccf472c..df1158d 100644
+--- a/kinesis-video-c-producer/src/source/Response.c
++++ b/kinesis-video-c-producer/src/source/Response.c
+@@ -68,6 +68,9 @@ STATUS createCurlResponse(PCurlRequest pCurlRequest, PCurlResponse* ppCurlRespon
+     pCurlResponse->pCurl = curl_easy_init();
+     CHK(pCurlResponse->pCurl != NULL, STATUS_CURL_INIT_FAILED);
+ 
++    /* ask libcurl to show us the verbose output */
++    curl_easy_setopt(pCurlResponse->pCurl, CURLOPT_VERBOSE, 1L);
++
+     // set up the friendly error message buffer
+     pCurlResponse->errorBuffer[0] = '\0';
+     curl_easy_setopt(pCurlResponse->pCurl, CURLOPT_ERRORBUFFER, pCurlResponse->errorBuffer);
+diff --git a/kinesis-video-native-build/CMakeLists.txt b/kinesis-video-native-build/CMakeLists.txt
+index 3d70ad2..967bd63 100644
+--- a/kinesis-video-native-build/CMakeLists.txt
++++ b/kinesis-video-native-build/CMakeLists.txt
+@@ -4,6 +4,8 @@ project(start)
+ 
+ set(EXEC_NAME start)
+ 
++set(CMAKE_VERBOSE_MAKEFILE on)
++
+ set(CMAKE_CXX_STANDARD 11)
+ 
+ if(DEFINED ENV{KINESIS_VIDEO_PIC_SRC})
+@@ -99,6 +101,7 @@ STRING(TOLOWER "${CMAKE_BUILD_TYPE}" CMAKE_BUILD_TYPE_LOWER)
+ 
+ # Uncomment below line for very verbose logging
+ #add_definitions(-DLOG_STREAMING)
++add_definitions(-DLOG_STREAMING)
+ 
+ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+diff --git a/kinesis-video-native-build/min-install-script b/kinesis-video-native-build/min-install-script
+index f9109c3..9162699 100755
+--- a/kinesis-video-native-build/min-install-script
++++ b/kinesis-video-native-build/min-install-script
+@@ -15,10 +15,10 @@ fi
+ source $KINESIS_VIDEO_ROOT/install-script-common.sh
+ 
+ # --------- process args -----------------------------------------------------
+-max_parallel=2
++max_parallel=1
+ build_type=Release
+ build_test=FALSE
+-build_gst_artifact=TRUE
++build_gst_artifact=FALSE
+ build_jni_only=FALSE
+ build_producer=TRUE
+ env_var=""

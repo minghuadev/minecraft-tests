@@ -1,0 +1,53 @@
+
+
+https://stackoverflow.com/questions/17661962/how-to-post-chunked-encoded-data-in-python
+
+import httplib
+import time
+
+chunk1 = "custname=bob&custtel=11111&custemail=bob%40email.com&si"
+chunk2 = "ze=medium&topping=bacon&delivery=11%3A00&comments=if+you%27re+late+we+get+it+free"
+
+if __name__ == "__main__":
+    conn = httplib.HTTPConnection('httpbin.org')
+    conn.connect()
+    conn.putrequest('POST', '/post')
+    conn.putheader('Transfer-Encoding', 'chunked')
+    conn.putheader('Content-Type', 'application/x-www-form-urlencoded')
+    conn.endheaders()
+
+    conn.send("%s\r\n" % hex(len(chunk1))[2:])
+    conn.send("%s\r\n" % chunk1)
+
+    time.sleep(1)
+
+    conn.send("%s\r\n" % hex(len(chunk2))[2:])
+    conn.send("%s\r\n" % chunk2)
+
+    time.sleep(1)
+    /* last chunk */
+    conn.send("0\r\n\r\n")
+
+    r = conn.getresponse()
+    print r.status, r.reason, r.read()
+
+
+
+search  http requests python chunked
+https://requests.readthedocs.io/en/master/user/advanced/
+
+def gen():
+    yield 'hi'
+    yield 'there'
+
+requests.post('http://some.url/chunked', data=gen())
+
+For chunked encoded responses, it’s best to iterate over the data using
+Response.iter_content(). In an ideal situation you’ll have set stream=True
+on the request, in which case you can iterate chunk-by-chunk by calling
+iter_content with a chunk_size parameter of None. If you want to set
+a maximum size of the chunk, you can set a chunk_size parameter
+to any integer.
+
+
+

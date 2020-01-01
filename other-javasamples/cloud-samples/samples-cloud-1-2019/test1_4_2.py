@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# test1_4.txt
+# test1_4_2.txt
 # https://stackoverflow.com/questions/51991401/how-to-implement-amazon-kinesis-putmedia-method-using-python
 
 
@@ -10,14 +10,14 @@ import datetime
 import hashlib
 import hmac
 import time
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
 
 # from test1_2
 your_stream_name = 'my-video-stream-test'
 def test1_2():
     import boto3
-    import pprint
-
-    pp = pprint.PrettyPrinter(indent=4)
 
     client = boto3.client('kinesisvideo')
     response = client.get_data_endpoint(
@@ -60,7 +60,8 @@ start_tmstp = repr(time.time())
 ##localfile = '6-step_example.webm.360p.webm'
 ##localfile = 'big-buck-bunny_trailer.webm'
 ##localfile = 'test1.mkv'
-localfile = 'out.webm'
+##localfile = 'out.webm'
+localfile = 'out28-6782.webm'
 
 with open(localfile, 'rb') as image:
     request_parameters = image.read()
@@ -85,7 +86,7 @@ date_stamp = t.strftime('%Y%m%d')  # Date w/o time, used in credential scope
 
 # Step 2: Create canonical URI--the part of the URI from domain to query
 # string (use '/' if no path)
-canonical_uri = '/'
+canonical_uri = '/putMedia'
 
 ## Step 3: Create the canonical query string. In this example, request
 # parameters are passed in the body of the request and the query string
@@ -95,7 +96,12 @@ canonical_querystring = ''
 # Step 4: Create the canonical headers. Header names must be trimmed
 # and lowercase, and sorted in code point order from low to high.
 # Note that there is a trailing \n.
-canonical_headers = 'content-type:' + content_type + '\n' + 'host:' + host + '\n' + 'x-amz-content-sha256:' + 'UNSIGNED-PAYLOAD' + '\n' + 'x-amz-date:' + amz_date + '\n' + 'x-amzn-fragment-timecode-type:' + 'ABSOLUTE' + '\n' + 'x-amzn-producer-start-timestamp:' + start_tmstp + '\n' + 'x-amzn-stream-name:' + your_stream_name + '\n'
+#'host:' + host + '\n' +
+canonical_headers = 'x-amz-content-sha256:' + 'UNSIGNED-PAYLOAD' + '\n' + \
+                    'x-amz-date:' + amz_date + '\n' + \
+                    'x-amzn-fragment-timecode-type:' + 'RELATIVE' + '\n' + \
+                    'x-amzn-producer-start-timestamp:' + start_tmstp + '\n' + \
+                    'x-amzn-stream-name:' + your_stream_name + '\n'
 
 # Step 5: Create the list of signed headers. This lists the headers
 # in the canonical_headers list, delimited with ";" and in alpha order.
@@ -103,7 +109,10 @@ canonical_headers = 'content-type:' + content_type + '\n' + 'host:' + host + '\n
 # signed_headers include those that you want to be included in the
 # hash of the request. "Host" and "x-amz-date" are always required.
 # For DynamoDB, content-type and x-amz-target are also required.
-signed_headers = 'content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target;x-amzn-fragment-timecode-type;x-amzn-producer-start-timestamp;x-amzn-stream-name'
+#
+#in original sample  after x-amz-date :  + 'x-amz-target;'
+signed_headers = 'x-amz-content-sha256;x-amz-date;' + \
+                 'x-amzn-fragment-timecode-type;x-amzn-producer-start-timestamp;x-amzn-stream-name'
 
 # Step 6: Create payload hash. In this example, the payload (body of
 # the request) contains the request parameters.
