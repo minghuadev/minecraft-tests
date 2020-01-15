@@ -37,6 +37,7 @@ class StateMachineWs:
         self._recv_cnt = 0
         try:
             self._ws = create_connection(self._baseurl,
+                                         header = {'user_access_token': 'abcd'},
                             sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY, 1),))
             self._open_ok = True
             self._recv_failed = False

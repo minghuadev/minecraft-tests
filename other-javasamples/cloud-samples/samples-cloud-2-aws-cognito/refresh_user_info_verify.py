@@ -12,31 +12,42 @@ CLIENT_ID = ''
 CLIENT_SECRET = ''
 
 
+reqRec = []
+
 def error_message(msg):
     return {'message': msg, "error": True, "success": False, "data": None}
 
-def lambda_handler(event, context):
 
-    '''{    "type":"TOKEN",
+def lambda_handler(event, context):
+    reqRec.append({'event': event})
+
+    '''Output from an Amazon API Gateway Lambda Authorizer 
+       https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-lambda-authorizer-output.html
+       {    "type":"TOKEN",
             "authorizationToken":"{caller-supplied-token}",
             "methodArn":"arn:aws:execute-api:{regionId}:{accountId}:{apiId}/{stage}/{httpVerb}/[{resource}/[{child-resources}]]"
     }'''
     etype = event.get('type', None)
-    etoken = event.get('authorizationToken', None)
-    if etype == "TOKEN" and etoken is not None:
+    eheader = event.get('headers', None)
+    etoken = None
+    if eheader is not None:
+        etoken = eheader.get('user_access_token', None)
+    if etype == "REQUEST" and etoken is not None:
         return {
-                  "principalId": "user",
-                  "policyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                      {
+            "principalId": "user",
+            "policyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {
                         "Action": "execute-api:Invoke",
                         "Effect": "Allow",
                         "Resource": "*"
-                      }
-                    ]
-                  }
-                }
+                    }
+                ]
+            }
+        }
+
+    #return {'reqrec': json.dumps(reqRec)}
 
     any_field_ok = False
     for field in ["user_access_token"]:

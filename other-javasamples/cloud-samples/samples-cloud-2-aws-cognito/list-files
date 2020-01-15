@@ -29,3 +29,9 @@ ls -lrt
 -rwxrwxr-x   989 Jan 14 21:43 ws_gateway_lambda.py
 -rwxrwxr-x  4831 Jan 14 22:06 testws1.py
 
+-rwxrwxr-x  1139 Jan 14 22:13 list-files
+-rwxrwxr-x  4913 Jan 15 00:58 testws1.py
+-rwxrwxr-x   391 Jan 15 01:04 test_test.py
+-rwxrwxr-x  2482 Jan 15 01:04 refresh_user_info_verify.py
+
+
