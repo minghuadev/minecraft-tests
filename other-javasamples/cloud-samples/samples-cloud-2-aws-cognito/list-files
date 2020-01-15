@@ -24,4 +24,8 @@ ls -lrt
 -rwxrwxr-x  1365 Jan 12 21:59 refresh_user_info.py
 -rwxrwxr-x  1793 Jan 12 22:02 test_login_info.py
 
+-rwxrwxr-x   948 Jan 12 22:07 list-files
+-rwxrwxr-x  2155 Jan 13 22:54 refresh_user_info_verify.py
+-rwxrwxr-x   989 Jan 14 21:43 ws_gateway_lambda.py
+-rwxrwxr-x  4831 Jan 14 22:06 testws1.py
 
