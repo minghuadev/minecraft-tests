@@ -1,0 +1,65 @@
+
+repo-track-yum-fedora
+on centos 7
+
+toc
+    [1] script to download python and requirements
+    [2] script to download strace and reqqquirements
+    [3] yum.conf
+
+
+#!/bin/bash
+
+repotrack \
+    -c $HOME/repoconf/yum.conf \
+    -a aarch64  \
+    -r fc25aa64 \
+    --repofrompath=fc25aa64,https://mirrors.kernel.org/fedora-buffet/archive/fedora-secondary/updates/25/aarch64 \
+    -r fc25aa64os \
+    --repofrompath=fc25aa64os,https://mirrors.kernel.org/fedora-buffet/archive/fedora-secondary/releases/25/Everything/aarch64/os \
+    -p $HOME/repolocal/repodest  \
+    python
+
+
+#!/bin/bash
+
+repotrack \
+    -c $HOME/repoconf/yum.conf \
+    -a aarch64  \
+    -r fc25aa64 \
+    --repofrompath=fc25aa64,https://mirrors.kernel.org/fedora-buffet/archive/fedora-secondary/updates/25/aarch64 \
+    -r fc25aa64os \
+    --repofrompath=fc25aa64os,https://mirrors.kernel.org/fedora-buffet/archive/fedora-secondary/releases/25/Everything/aarch64/os \
+    -p $HOME/repolocal/repodest-f25strace  \
+    strace
+
+
+[main]
+cachedir=/home/repos/repolocal/repocache/yum/$basearch/$releasever
+keepcache=1
+debuglevel=2
+logfile=/home/repos/repolocal/repolog/yum.log
+exactarch=1
+obsoletes=1
+gpgcheck=1
+plugins=1
+installonly_limit=5
+bugtracker_url=http://bugs.centos.org/set_project.php?project_id=23&ref=http://bugs.centos.org/bug_report_page.php?category=yum
+distroverpkg=centos-release
+
+#  This is the default, if you make this bigger yum won't see if the metadata
+# is newer on the remote and so you'll "gain" the bandwidth of not having to
+# download the new metadata and "pay" for it by yum not having correct
+# information.
+#  It is esp. important, to have correct metadata, for distributions like
+# Fedora which don't keep old packages around. If you don't like this checking
+# interupting your command line usage, it's much better to have something
+# manually check the metadata once an hour (yum-updatesd will do this).
+# metadata_expire=90m
+metadata_expire=15000m
+
+# PUT YOUR REPOS HERE OR IN separate files named file.repo
+# in /etc/yum.repos.d
+
+
+
