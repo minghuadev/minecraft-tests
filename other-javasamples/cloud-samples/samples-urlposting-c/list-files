@@ -1,0 +1,14 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-r--r--   2495 Oct 28 15:34 prog1.c
+-rw-r--r--   5525 Oct 28 15:35 prog2.c
+-rwxr-xr-x   9097 Oct 29 13:18 example2.c
+-rwxr-xr-x   2539 Oct 29 15:42 sample1.py
+-rwxr-xr-x   5181 Oct 29 15:43 example3.c
+-rw-rw-r--      0 Jan 23 00:16 list-files
+
+
