@@ -1,0 +1,25 @@
+
+~ # mkfs.ext4 /dev/mmcblk0p4
+
+# mkdir root-new
+# mount -t ext4 /dev/mmcblk0p4  root-new
+# cd root-new
+
+# cp -a /bin /lib /sbin /usr .
+# mkdir proc sys dev tmp var
+# mkdir root-old root
+
+# mount -o bind /proc $(pwd)/proc
+# mount -o bind /dev  $(pwd)/dev
+
+# unshare -m --propagation slave 
+# pivot_root . root-old
+
+# sh
+
+  31 rpm -i bash-4.3.43-4.fc25.aarch64.rpm
+  35 rpm -i ncurses-base-6.0-6.20160709.fc25.noarch.rpm
+  37 rpm -i ncurses-libs-6.0-6.20160709.fc25.aarch64.rpm
+  41 rpm -i glibc-common-2.24-8.fc25.aarch64.rpm
+
+

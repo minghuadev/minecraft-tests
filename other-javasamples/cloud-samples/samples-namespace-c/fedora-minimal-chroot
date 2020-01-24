@@ -1,0 +1,59 @@
+
+https://nmilosev.svbtle.com/quick-and-easy-fedora-minimal-chroot
+sept 15 2016
+
+
+copy docker image 
+    https://download.fedoraproject.org/pub/fedora/linux/releases/24/Docker/
+
+ # make sure you are root
+ sudo su
+
+ # create a directory for Fedora
+ mkdir -p /fedora 
+ cd /fedora
+
+ # get the Docker image
+ wget https://download.fedoraproject.org/pub/fedora/linux/releases/24/Docker/armhfp/images/Fedora-Docker-Base-24-1.2.armhfp.tar.xz
+
+
+unpack image: 
+
+ # unpack Docker image
+ tar xvf Fedora-Docker-Base-24-1.2.armhfp.tar.xz --strip-components=1
+
+ # unpack the main tar
+ tar xvpf layer.tar
+
+ # cleanup
+ rm layer.tar
+ rm Fedora-Docker-Base-24-1.2.armhfp.tar.xz
+ rm json
+ rm VERSION
+
+
+script to enter chroot:
+
+ #!/bin/sh
+
+ echo "Entering Fedora chroot"
+
+ mount -t proc proc /fedora/proc/
+ mount -t sysfs sys /fedora/sys/
+ mount -o bind /dev /fedora/dev/
+ mount -o bind /dev /fedora/dev/pts
+
+ chroot /fedora /bin/env -i \
+    HOME=/root TERM="$TERM" PS1='[\u@f24chroot \W]\$ ' \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/bin \
+    /bin/bash --login
+
+ echo "Exiting Fedora chroot"
+ umount /fedora/dev/
+ umount /fedora/dev/pts
+ umount /fedora/sys/
+ umount /fedora/proc/
+
+ echo "Cleaned up"
+
+

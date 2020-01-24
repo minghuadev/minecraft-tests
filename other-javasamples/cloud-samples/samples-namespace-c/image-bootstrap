@@ -1,0 +1,43 @@
+
+https://blog.hartwork.org/posts/creating-fedora-chroots-on-debian-gentoo-easily/
+
+
+# apt install python-pip db-util lsb-release rpm yum
+# pip install image-bootstrap pychroot
+
+
+# directory-bootstrap fedora --release 25 /var/lib/fedora_25_chroot
+
+
+# pychroot /var/lib/fedora_25_chroot dnf -y install redhat-lsb
+# pychroot /var/lib/fedora_25_chroot lsb_release -a
+
+
+
+chroot setup: 
+
+ yum --downloadonly --downloaddir=/mnt/chrdsk1/ada reinstall fedora-release
+ rpm --root /mnt/chrdsk1/ada --initdb
+ rpm --root /mnt/chrdsk1/ada -i fedora-release-19-4.noarch.rpm
+ yum --installroot=/mnt/chrdsk1/ada install bash yum
+
+Optional packages for ifconfig and ping: 
+
+ yum --installroot=/mnt/chrdsk1/ada install net-tools iputils
+
+
+Run: 
+ schroot -c ada
+
+
+Mounts on host for chroot jail:
+  /proc    /chroot/devel/proc   rw,bind 0 0
+  /sys
+  /dev
+  /dev/pts
+  /tmp
+  /run
+  /run/lock
+  /dev/shm
+  /run/shm
+
