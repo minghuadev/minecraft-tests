@@ -1,0 +1,43 @@
+
+from the full dnf repotrack download directory: 
+
+
+rm  coreutils-8.31-6.fc30.armv7hl.rpm 
+    glibc-all-langpacks-2.29-27.fc30.armv7hl.rpm
+    glibc-langpack-*
+    curl-7.65.3-4.fc30.armv7hl.rpm
+    libcurl-7.65.3-4.fc30.armv7hl.rpm
+
+
+bash-5.0# rpm --root $(pwd)/altroot --reinstall -v *.rpm
+warning: acl-2.2.53-3.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+error: Failed dependencies:
+
+        curl conflicts with curl-minimal-7.65.3-4.fc30.armv7hl
+        system-release conflicts with fedora-release-30-6.noarch
+        system-release conflicts with fedora-release-cinnamon-30-6.noarch
+        system-release conflicts with fedora-release-cloud-30-6.noarch
+        system-release conflicts with fedora-release-container-30-6.noarch
+        system-release conflicts with fedora-release-coreos-30-6.noarch
+        system-release conflicts with fedora-release-iot-30-6.noarch
+        system-release conflicts with fedora-release-kde-30-6.noarch
+        system-release conflicts with fedora-release-matecompiz-30-6.noarch
+        system-release conflicts with fedora-release-server-30-6.noarch
+        system-release conflicts with fedora-release-silverblue-30-6.noarch
+        system-release conflicts with fedora-release-snappy-30-6.noarch
+        system-release conflicts with fedora-release-soas-30-6.noarch
+        system-release conflicts with fedora-release-workstation-30-6.noarch
+        system-release conflicts with fedora-release-xfce-30-6.noarch
+        fedora-release conflicts with generic-release-30-0.3.noarch
+        system-release conflicts with generic-release-30-0.3.noarch
+        fedora-release-common conflicts with generic-release-common-30-0.3.noarch
+        libcurl conflicts with libcurl-minimal-7.65.3-4.fc30.armv7hl
+
+keep only the fedora-release-30-6.noarch and fedora-release-common and remove others
+remove generic-release-common
+
+
+create a new namespace under root-n2. use the newly altroot-2 as the root directory. 
+copy /lib/rpm from previous root-n1 to root-n2 to resolve the rpm error. 
+
+

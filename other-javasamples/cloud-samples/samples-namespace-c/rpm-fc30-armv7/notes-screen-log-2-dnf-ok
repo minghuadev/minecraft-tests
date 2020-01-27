@@ -1,0 +1,2820 @@
+
+bash-5.0# 
+bash-5.0# pwd
+/root
+bash-5.0# uname -a
+Linux (none) 4.9.37 #1 SMP Wed Jan 22 00:18:41 UTC 2020 armv7l armv7l armv7l GNU/Linux
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls
+altroot  i1.bash  i2.bash  i3.bash  repof30  repof302  repof303  repof304
+bash-5.0# 
+bash-5.0# 
+bash-5.0# cat i3.bash
+#!/bin/bash
+
+rpm --root $(pwd)/altroot --reinstall -v repof30/*.rpm repof303/*.rpm repof302/*.rpm repof302/xtra/*.rpm
+
+
+
+bash-5.0# ls repof304
+dnf-4.2.17-1.fc30.noarch.rpm
+dnf-data-4.2.17-1.fc30.noarch.rpm
+libcomps-0.1.14-1.fc30.armv7hl.rpm
+libdnf-0.39.1-1.fc30.armv7hl.rpm
+libmodulemd-2.8.3-1.fc30.armv7hl.rpm
+libmodulemd1-1.8.16-1.fc30.armv7hl.rpm
+librepo-1.11.1-1.fc30.armv7hl.rpm
+libreport-filesystem-2.11.3-1.fc30.noarch.rpm
+libsolv-0.7.10-1.fc30.armv7hl.rpm
+libstdc++-9.2.1-1.fc30.armv7hl.rpm
+libyaml-0.2.1-5.fc30.armv7hl.rpm
+python3-dnf-4.2.17-1.fc30.noarch.rpm
+python3-gpg-1.12.0-1.fc30.armv7hl.rpm
+python3-hawkey-0.39.1-1.fc30.armv7hl.rpm
+python3-libcomps-0.1.14-1.fc30.armv7hl.rpm
+python3-libdnf-0.39.1-1.fc30.armv7hl.rpm
+python3-rpm-4.14.2.1-5.fc30.armv7hl.rpm
+zchunk-libs-1.1.4-1.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls 
+altroot  i1.bash  i2.bash  i3.bash  repof30  repof302  repof303  repof304
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot --reinstall -v repof304/*.rpm
+warning: repof304/dnf-4.2.17-1.fc30.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+error: Failed dependencies:
+	libpython3.7m.so.1.0 is needed by python3-gpg-1.12.0-1.fc30.armv7hl
+	libpython3.7m.so.1.0 is needed by python3-hawkey-0.39.1-1.fc30.armv7hl
+	libpython3.7m.so.1.0 is needed by python3-libcomps-0.1.14-1.fc30.armv7hl
+	libpython3.7m.so.1.0 is needed by python3-libdnf-0.39.1-1.fc30.armv7hl
+	libpython3.7m.so.1.0 is needed by python3-rpm-4.14.2.1-5.fc30.armv7hl
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -1 repof30/*.rpm repof302/*.rpm l repof303 2/xtra/*.rpm repof303/*.rpm  | wc
+    154     154    7128
+bash-5.0# rpm -q -a | wc
+      0       0       0
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot/ -q -q a | wc
+    138     138    4530
+bash-5.0# pwd
+/root
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -l
+total 60
+dr-xr-xr-x 17 root   root    4096 Jan  4 17:59 altroot
+-rwx------  1 root   root     155 Jan  4 17:46 i1.bash
+-rwx------  1 root   root      68 Jan  4 17:52 i2.bash
+-rwx------  1 root   root     121 Jan  4 17:59 i3.bash
+drwxr-xr-x  3 197609 197121 20480 Jan  5 18:31 repodest-f30bash
+drwxr-xr-x  2 197609 197121  4096 Jan  3 22:20 repof30
+drwxr-xr-x  3 197609 197121  8192 Jan  4 04:15 repof302
+drwx------  2 root   root    4096 Jan  4 00:52 repof303
+drwxr-xr-x  2 197609 197121  4096 Jan  4 03:36 repof304
+bash-5.0# 
+bash-5.0# 
+bash-5.0# du -sh altroot
+173M	altroot
+bash-5.0# 
+bash-5.0# 
+bash-5.0# du -sh repodest-f30bash
+254M	repodest-f30bash
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -1 repodest-f30bash | wc
+    386     386   15495
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -1 repodest-f30bash/*.rpm | wc
+    385     385   22019
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -1 repodest-f30bash/ | grep -v rpm
+xsave-glibc-langpack
+bash-5.0# 
+bash-5.0# 
+bash-5.0# cd repodest-f30bash
+bash-5.0# ls coreutils*
+coreutils-8.31-6.fc30.armv7hl.rpm
+coreutils-common-8.31-6.fc30.armv7hl.rpm
+coreutils-single-8.31-6.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rm coreutils-8.31-6.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# cat ../i3.bash
+#!/bin/bash
+
+rpm --root $(pwd)/altroot --reinstall -v repof30/*.rpm repof303/*.rpm repof302/*.rpm repof302/xtra/*.rpm
+
+
+
+bash-5.0# 
+bash-5.0# pwd
+/root/repodest-f30bash
+bash-5.0# 
+bash-5.0# ls *langpack*
+glibc-all-langpacks-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-aa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-af-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-agr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-am-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-an-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-anp-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ar-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-as-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ast-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ayc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-az-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-be-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bem-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ber-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bhb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bho-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-br-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-brx-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-byn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ca-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ce-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-chr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cmn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-crh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-csb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-da-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-de-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-doi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-el-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-en-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-es-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-et-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ff-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fil-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ga-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gez-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ha-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-he-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hif-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ht-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ia-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-id-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ik-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-is-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-it-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-iu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ja-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ka-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kab-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-km-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ko-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kok-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ks-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ku-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ky-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-li-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lij-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ln-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lzh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mag-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mai-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mfe-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mhr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-miq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mjw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ml-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mni-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ms-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-my-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nan-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nds-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nhn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-niu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nso-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-oc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-om-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-or-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-os-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pap-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ps-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-quz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-raj-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ro-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ru-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-rw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sah-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sat-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-se-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sgs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-si-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sid-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-so-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ss-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-st-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-szl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ta-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tcy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-te-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-th-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-the-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ti-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-to-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tpi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ts-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ug-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-unm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ve-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-vi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wae-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wal-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-xh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yue-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yuw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zu-2.29-27.fc30.armv7hl.rpm
+glibc-minimal-langpack-2.29-27.fc30.armv7hl.rpm
+
+xsave-glibc-langpack:
+glibc-langpack-aa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-af-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-agr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-am-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-an-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-anp-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ar-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-as-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ast-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ayc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-az-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-be-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bem-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ber-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bhb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bho-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-br-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-brx-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-byn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ca-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ce-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-chr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cmn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-crh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-csb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-da-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-de-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-doi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-el-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-en-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-es-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-et-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ff-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fil-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ga-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gez-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ha-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-he-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hif-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ht-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ia-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-id-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ik-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-is-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-it-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-iu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ja-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ka-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kab-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-km-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ko-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kok-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ks-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ku-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ky-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-li-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lij-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ln-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lzh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mag-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mai-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mfe-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mhr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-miq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mjw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ml-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mni-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ms-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-my-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nan-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nds-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nhn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-niu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nso-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-oc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-om-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-or-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-os-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pap-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ps-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-quz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-raj-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ro-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ru-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-rw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sah-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sat-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-se-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sgs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-si-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sid-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-so-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ss-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-st-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-szl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ta-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tcy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-te-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-th-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-the-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ti-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-to-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tpi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ts-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ug-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-unm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ve-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-vi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wae-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wal-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-xh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yue-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yuw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zu-2.29-27.fc30.armv7hl.rpm
+bash-5.0# rm glibc-langpback-*
+rm: cannot remove 'glibc-langpback-*': No such file or directory
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls *langpack*
+glibc-all-langpacks-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-aa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-af-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-agr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-am-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-an-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-anp-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ar-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-as-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ast-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ayc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-az-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-be-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bem-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ber-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bhb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bho-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-br-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-brx-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-byn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ca-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ce-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-chr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cmn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-crh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-csb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-da-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-de-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-doi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-el-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-en-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-es-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-et-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ff-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fil-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ga-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gez-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ha-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-he-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hif-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ht-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ia-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-id-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ik-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-is-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-it-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-iu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ja-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ka-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kab-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-km-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ko-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kok-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ks-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ku-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ky-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-li-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lij-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ln-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lzh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mag-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mai-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mfe-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mhr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-miq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mjw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ml-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mni-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ms-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-my-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nan-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nds-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nhn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-niu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nso-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-oc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-om-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-or-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-os-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pap-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ps-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-quz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-raj-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ro-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ru-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-rw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sah-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sat-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-se-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sgs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-si-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sid-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-so-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ss-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-st-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-szl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ta-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tcy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-te-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-th-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-the-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ti-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-to-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tpi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ts-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ug-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-unm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ve-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-vi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wae-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wal-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-xh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yue-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yuw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zu-2.29-27.fc30.armv7hl.rpm
+glibc-minimal-langpack-2.29-27.fc30.armv7hl.rpm
+
+xsave-glibc-langpack:
+glibc-langpack-aa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-af-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-agr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-am-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-an-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-anp-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ar-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-as-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ast-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ayc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-az-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-be-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bem-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ber-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bhb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bho-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-br-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-brx-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-byn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ca-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ce-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-chr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cmn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-crh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-csb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-da-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-de-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-doi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-el-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-en-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-es-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-et-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ff-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fil-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ga-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gez-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ha-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-he-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hif-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ht-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ia-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-id-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ik-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-is-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-it-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-iu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ja-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ka-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kab-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-km-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ko-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kok-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ks-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ku-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ky-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-li-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lij-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ln-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lzh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mag-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mai-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mfe-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mhr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-miq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mjw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ml-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mni-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ms-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-my-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nan-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nds-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nhn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-niu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nso-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-oc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-om-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-or-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-os-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pap-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ps-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-quz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-raj-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ro-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ru-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-rw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sah-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sat-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-se-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sgs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-si-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sid-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-so-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ss-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-st-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-szl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ta-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tcy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-te-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-th-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-the-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ti-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-to-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tpi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ts-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ug-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-unm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ve-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-vi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wae-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wal-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-xh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yue-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yuw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zu-2.29-27.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rm glibc-langpack-*
+bash-5.0# ls glibc-langpack-*
+ls: cannot access 'glibc-langpack-*': No such file or directory
+bash-5.0# 
+bash-5.0# ls *langpack-*  *
+glibc-all-langpacks-2.29-27.fc30.armv7hl.rpm
+glibc-minimal-langpack-2.29-27.fc30.armv7hl.rpm
+
+xsave-glibc-langpack:
+glibc-langpack-aa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-af-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-agr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-am-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-an-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-anp-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ar-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-as-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ast-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ayc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-az-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-be-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bem-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ber-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bhb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bho-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-br-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-brx-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-bs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-byn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ca-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ce-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-chr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cmn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-crh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-csb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-cy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-da-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-de-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-doi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-dz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-el-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-en-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-es-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-et-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-eu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ff-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fil-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-fy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ga-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gez-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-gv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ha-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hak-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-he-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hif-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hsb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ht-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-hy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ia-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-id-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ik-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-is-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-it-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-iu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ja-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ka-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kab-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-km-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ko-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kok-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ks-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ku-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-kw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ky-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-li-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lij-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ln-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-lzh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mag-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mai-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mfe-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mhr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-miq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mjw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ml-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mni-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ms-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-mt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-my-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nan-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nb-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nds-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ne-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nhn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-niu-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-nso-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-oc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-om-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-or-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-os-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pap-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ps-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-pt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-quz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-raj-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ro-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ru-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-rw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sah-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sat-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sc-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sd-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-se-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sgs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-shs-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-si-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sid-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-so-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sq-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ss-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-st-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sv-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-sw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-szl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ta-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tcy-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-te-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tg-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-th-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-the-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ti-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tig-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tl-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tn-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-to-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tpi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tr-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ts-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-tt-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ug-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uk-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-unm-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ur-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-uz-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-ve-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-vi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wa-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wae-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wal-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-wo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-xh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yi-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yo-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yue-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-yuw-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zh-2.29-27.fc30.armv7hl.rpm
+glibc-langpack-zu-2.29-27.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rm -r xsave-glibc-langpack
+bash-5.0# 
+bash-5.0# rm -r xsave-glibc-langpackbash-5.0# ls *langpack*bash-5.0# rm -r xsave-glibc-langpackbash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls *langpack*
+glibc-all-langpacks-2.29-27.fc30.armv7hl.rpm
+glibc-minimal-langpack-2.29-27.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# rm glibc-all-langpacks-*
+bash-5.0# 
+bash-5.0# 
+bash-5.0# cat ../i3.bash
+#!/bin/bash
+
+rpm --root $(pwd)/altroot --reinstall -v repof30/*.rpm repof303/*.rpm repof302/*.rpm repof302/xtra/*.rpm
+
+
+
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot --reinstall -v r *.rpm
+error: open of r failed: No such file or directory
+warning: acl-2.2.53-3.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot --reinstall -v *.rpm
+warning: acl-2.2.53-3.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+error: Failed dependencies:
+	curl conflicts with curl-minimal-7.65.3-4.fc30.armv7hl
+	system-release conflicts with fedora-release-30-6.noarch
+	system-release conflicts with fedora-release-cinnamon-30-6.noarch
+	system-release conflicts with fedora-release-cloud-30-6.noarch
+	system-release conflicts with fedora-release-container-30-6.noarch
+	system-release conflicts with fedora-release-coreos-30-6.noarch
+	system-release conflicts with fedora-release-iot-30-6.noarch
+	system-release conflicts with fedora-release-kde-30-6.noarch
+	system-release conflicts with fedora-release-matecompiz-30-6.noarch
+	system-release conflicts with fedora-release-server-30-6.noarch
+	system-release conflicts with fedora-release-silverblue-30-6.noarch
+	system-release conflicts with fedora-release-snappy-30-6.noarch
+	system-release conflicts with fedora-release-soas-30-6.noarch
+	system-release conflicts with fedora-release-workstation-30-6.noarch
+	system-release conflicts with fedora-release-xfce-30-6.noarch
+	fedora-release conflicts with generic-release-30-0.3.noarch
+	system-release conflicts with generic-release-30-0.3.noarch
+	fedora-release-common conflicts with generic-release-common-30-0.3.noarch
+	libcurl conflicts with libcurl-minimal-7.65.3-4.fc30.armv7hl
+bash-5.0# 
+bash-5.0# ls curl*
+curl-7.65.3-4.fc30.armv7hl.rpm	curl-minimal-7.65.3-4.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# rm curl-7.65.3-4.fc30.armv7hl.rpm
+bash-5.0# rm fedora-release-cinnamon-30-6.noarch fedora-release-cloud-30-6.noarchh fedora-release-cloud-30-6.noarch fedora-release-container-30-6.noarc fedora-rellease-coreos-30-6.noarch fedora-release-iot-30-6.noarch fedora-release-kde-30-6. noarch fedora-release-matecompiz-30-6.noarch fedora-release-server-30-6.noarch feedora-release-silverblue-30-6.noarch fedora-release-snappy-30-6.noarch fedora-rellease-soas-30-6.noarch fedora-release-workstation-30-6.noarch fedora-release-xfcee-30-6.noarch generic-release-30-0.3.noarch generic-release-30-0.3.noarch
+rm: cannot remove 'fedora-release-cinnamon-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-cloud-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-cloud-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-container-30-6.noarc': No such file or directory
+rm: cannot remove 'fedora-release-coreos-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-iot-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-kde-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-matecompiz-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-server-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-silverblue-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-snappy-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-soas-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-workstation-30-6.noarch': No such file or directory
+rm: cannot remove 'fedora-release-xfce-30-6.noarch': No such file or directory
+rm: cannot remove 'generic-release-30-0.3.noarch': No such file or directory
+rm: cannot remove 'generic-release-30-0.3.noarch': No such file or directory
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rm libcurl-7.65.3-4.fc30.armv7hl.rpm
+bash-5.0# rpm -q -a | grep fedora-release
+bash-5.0# 
+bash-5.0# rpm -q -a | grep system-release
+bash-5.0# rpm -q -a | wc
+      0       0       0
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm -q --whatprofi  vides system-release -p *.rpm
+rpm: one type of query/verify may be performed at a time
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm -q --whatprovides system-release *.rpm
+no package provides system-release
+no package provides acl-2.2.53-3.fc30.armv7hl.rpm
+no package provides alternatives-1.11-4.fc30.armv7hl.rpm
+no package provides audit-libs-3.0-0.15.20191104git1c2f876.fc30.armv7hl.rpm
+no package provides basesystem-11-7.fc30.noarch.rpm
+no package provides bash-5.0.11-1.fc30.armv7hl.rpm
+no package provides brotli-1.0.7-3.fc30.armv7hl.rpm
+no package provides bzip2-libs-1.0.6-29.fc30.armv7hl.rpm
+no package provides ca-certificates-2018.2.26-3.fc30.noarch.rpm
+no package provides coreutils-common-8.31-6.fc30.armv7hl.rpm
+no package provides coreutils-single-8.31-6.fc30.armv7hl.rpm
+no package provides cpio-2.12-10.fc30.armv7hl.rpm
+no package provides cracklib-2.9.6-19.fc30.armv7hl.rpm
+no package provides crypto-policies-20190527-1.git0b3add8.fc30.noarch.rpm
+no package provides cryptsetup-libs-2.2.2-1.fc30.armv7hl.rpm
+no package provides curl-minimal-7.65.3-4.fc30.armv7hl.rpm
+no package provides cyrus-sasl-lib-2.1.27-0.6rc7.fc30.armv7hl.rpm
+no package provides dbus-1.12.16-1.fc30.armv7hl.rpm
+no package provides dbus-broker-21-3.fc30.armv7hl.rpm
+no package provides dbus-common-1.12.16-1.fc30.noarch.rpm
+no package provides device-mapper-1.02.154-3.fc30.armv7hl.rpm
+no package provides device-mapper-libs-1.02.154-3.fc30.armv7hl.rpm
+no package provides diffutils-3.7-2.fc30.armv7hl.rpm
+no package provides dnf-4.2.17-1.fc30.noarch.rpm
+no package provides dnf-data-4.2.17-1.fc30.noarch.rpm
+no package provides elfutils-default-yama-scope-0.177-1.fc30.noarch.rpm
+no package provides elfutils-libelf-0.177-1.fc30.armv7hl.rpm
+no package provides elfutils-libs-0.177-1.fc30.armv7hl.rpm
+no package provides expat-2.2.8-1.fc30.armv7hl.rpm
+no package provides fedora-gpg-keys-30-2.noarch.rpm
+no package provides fedora-release-30-6.noarch.rpm
+no package provides fedora-release-cinnamon-30-6.noarch.rpm
+no package provides fedora-release-cloud-30-6.noarch.rpm
+no package provides fedora-release-common-30-6.noarch.rpm
+no package provides fedora-release-container-30-6.noarch.rpm
+no package provides fedora-release-coreos-30-6.noarch.rpm
+no package provides fedora-release-iot-30-6.noarch.rpm
+no package provides fedora-release-kde-30-6.noarch.rpm
+no package provides fedora-release-matecompiz-30-6.noarch.rpm
+no package provides fedora-release-server-30-6.noarch.rpm
+no package provides fedora-release-silverblue-30-6.noarch.rpm
+no package provides fedora-release-snappy-30-6.noarch.rpm
+no package provides fedora-release-soas-30-6.noarch.rpm
+no package provides fedora-release-workstation-30-6.noarch.rpm
+no package provides fedora-release-xfce-30-6.noarch.rpm
+no package provides fedora-repos-30-2.noarch.rpm
+no package provides file-libs-5.36-5.fc30.armv7hl.rpm
+no package provides filesystem-3.10-1.fc30.armv7hl.rpm
+no package provides gawk-4.2.1-6.fc30.armv7hl.rpm
+no package provides gdbm-1.18-4.fc30.armv7hl.rpm
+no package provides gdbm-libs-1.18-4.fc30.armv7hl.rpm
+no package provides generic-release-30-0.3.noarch.rpm
+no package provides generic-release-common-30-0.3.noarch.rpm
+no package provides glib2-2.60.7-2.fc30.armv7hl.rpm
+no package provides glibc-2.29-27.fc30.armv7hl.rpm
+no package provides glibc-common-2.29-27.fc30.armv7hl.rpm
+no package provides glibc-minimal-langpack-2.29-27.fc30.armv7hl.rpm
+no package provides gmp-6.1.2-10.fc30.armv7hl.rpm
+no package provides gnupg2-2.2.18-2.fc30.armv7hl.rpm
+no package provides gnutls-3.6.10-1.fc30.armv7hl.rpm
+no package provides gpgme-1.12.0-1.fc30.armv7hl.rpm
+no package provides grep-3.1-9.fc30.armv7hl.rpm
+no package provides gzip-1.9-9.fc30.armv7hl.rpm
+no package provides ima-evm-utils-1.1-5.fc30.armv7hl.rpm
+no package provides iptables-libs-1.8.2-3.fc30.armv7hl.rpm
+no package provides iputils-20180629-4.fc30.armv7hl.rpm
+no package provides json-c-0.13.1-8.fc30.armv7hl.rpm
+no package provides keyutils-libs-1.6-2.fc30.armv7hl.rpm
+no package provides kmod-libs-26-3.fc30.armv7hl.rpm
+no package provides krb5-libs-1.17-15.fc30.armv7hl.rpm
+no package provides libacl-2.2.53-3.fc30.armv7hl.rpm
+no package provides libarchive-3.3.3-6.fc30.armv7hl.rpm
+no package provides libargon2-20161029-8.fc30.armv7hl.rpm
+no package provides libassuan-2.5.2-2.fc30.armv7hl.rpm
+no package provides libattr-2.4.48-5.fc30.armv7hl.rpm
+no package provides libblkid-2.33.2-2.fc30.armv7hl.rpm
+no package provides libcap-2.26-5.fc30.armv7hl.rpm
+no package provides libcap-ng-0.7.9-7.fc30.armv7hl.rpm
+no package provides libcom_err-1.44.6-1.fc30.armv7hl.rpm
+no package provides libcomps-0.1.14-1.fc30.armv7hl.rpm
+no package provides libcurl-minimal-7.65.3-4.fc30.armv7hl.rpm
+no package provides libdb-5.3.28-37.fc30.armv7hl.rpm
+no package provides libdb-utils-5.3.28-37.fc30.armv7hl.rpm
+no package provides libdnf-0.39.1-1.fc30.armv7hl.rpm
+no package provides libfdisk-2.33.2-2.fc30.armv7hl.rpm
+no package provides libffi-3.1-19.fc30.armv7hl.rpm
+no package provides libgcc-9.2.1-1.fc30.armv7hl.rpm
+no package provides libgcrypt-1.8.5-1.fc30.armv7hl.rpm
+no package provides libgpg-error-1.33-2.fc30.armv7hl.rpm
+no package provides libidn2-2.3.0-1.fc30.armv7hl.rpm
+no package provides libksba-1.3.5-9.fc30.armv7hl.rpm
+no package provides libmetalink-0.1.3-8.fc30.armv7hl.rpm
+no package provides libmodulemd-2.8.3-1.fc30.armv7hl.rpm
+no package provides libmodulemd1-1.8.16-1.fc30.armv7hl.rpm
+no package provides libmount-2.33.2-2.fc30.armv7hl.rpm
+no package provides libnghttp2-1.39.2-1.fc30.armv7hl.rpm
+no package provides libnsl2-1.2.0-4.20180605git4a062cf.fc30.armv7hl.rpm
+no package provides libpcap-1.9.1-1.fc30.armv7hl.rpm
+no package provides libpsl-0.20.2-6.fc30.armv7hl.rpm
+no package provides libpwquality-1.4.0-12.fc30.armv7hl.rpm
+no package provides librepo-1.11.1-1.fc30.armv7hl.rpm
+no package provides libreport-filesystem-2.11.3-1.fc30.noarch.rpm
+no package provides libseccomp-2.4.2-2.fc30.armv7hl.rpm
+no package provides libselinux-2.9-3.1.fc30.armv7hl.rpm
+no package provides libsemanage-2.9-1.fc30.armv7hl.rpm
+no package provides libsepol-2.9-1.fc30.armv7hl.rpm
+no package provides libsigsegv-2.11-7.fc30.armv7hl.rpm
+no package provides libsmartcols-2.33.2-2.fc30.armv7hl.rpm
+no package provides libsolv-0.7.10-1.fc30.armv7hl.rpm
+no package provides libssh-0.9.3-1.fc30.armv7hl.rpm
+no package provides libssh-config-0.9.3-1.fc30.noarch.rpm
+no package provides libstdc++-9.2.1-1.fc30.armv7hl.rpm
+no package provides libtasn1-4.13-7.fc30.armv7hl.rpm
+no package provides libtirpc-1.2.5-0.fc30.armv7hl.rpm
+no package provides libunistring-0.9.10-5.fc30.armv7hl.rpm
+no package provides libusbx-1.0.22-2.fc30.armv7hl.rpm
+no package provides libutempter-1.1.6-16.fc30.armv7hl.rpm
+no package provides libuuid-2.33.2-2.fc30.armv7hl.rpm
+no package provides libverto-0.3.0-7.fc30.armv7hl.rpm
+no package provides libxcrypt-4.4.10-2.fc30.armv7hl.rpm
+no package provides libxml2-2.9.9-2.fc30.armv7hl.rpm
+no package provides libyaml-0.2.1-5.fc30.armv7hl.rpm
+no package provides libzstd-1.4.4-1.fc30.armv7hl.rpm
+no package provides lua-libs-5.3.5-5.fc30.armv7hl.rpm
+no package provides lz4-libs-1.9.1-1.fc30.armv7hl.rpm
+no package provides mpfr-3.1.6-4.fc30.armv7hl.rpm
+no package provides ncurses-6.1-10.20180923.fc30.armv7hl.rpm
+no package provides ncurses-base-6.1-10.20180923.fc30.noarch.rpm
+no package provides ncurses-libs-6.1-10.20180923.fc30.armv7hl.rpm
+no package provides net-tools-2.0-0.54.20160912git.fc30.armv7hl.rpm
+no package provides nettle-3.4.1rc1-2.fc30.armv7hl.rpm
+no package provides npth-1.6-2.fc30.armv7hl.rpm
+no package provides openldap-2.4.47-1.fc30.armv7hl.rpm
+no package provides openssl-libs-1.1.1d-2.fc30.armv7hl.rpm
+no package provides p11-kit-0.23.16.1-1.fc30.armv7hl.rpm
+no package provides p11-kit-trust-0.23.16.1-1.fc30.armv7hl.rpm
+no package provides pam-1.3.1-17.fc30.armv7hl.rpm
+no package provides pcre-8.43-2.fc30.armv7hl.rpm
+no package provides pcre2-10.33-16.fc30.armv7hl.rpm
+no package provides popt-1.16-17.fc30.armv7hl.rpm
+no package provides publicsuffix-list-dafsa-20190128-2.fc30.noarch.rpm
+no package provides pyliblzma-0.5.3-25.fc30.armv7hl.rpm
+no package provides python-pip-wheel-19.0.3-6.fc30.noarch.rpm
+no package provides python-setuptools-wheel-40.8.0-2.fc30.noarch.rpm
+no package provides python-unversioned-command-2.7.17-1.fc30.noarch.rpm
+no package provides python2-2.7.17-1.fc30.armv7hl.rpm
+no package provides python2-gpg-1.12.0-1.fc30.armv7hl.rpm
+no package provides python2-iniparse-0.4-33.fc30.noarch.rpm
+no package provides python2-libs-2.7.17-1.fc30.armv7hl.rpm
+no package provides python2-pycurl-7.43.0.2-6.fc30.armv7hl.rpm
+no package provides python2-pyxattr-0.6.1-1.fc30.armv7hl.rpm
+no package provides python2-rpm-4.14.2.1-5.fc30.armv7hl.rpm
+no package provides python2-six-1.12.0-1.fc30.noarch.rpm
+no package provides python2-urlgrabber-4.0.0-3.fc30.noarch.rpm
+no package provides python3-3.7.6-1.fc30.armv7hl.rpm
+no package provides python3-dnf-4.2.17-1.fc30.noarch.rpm
+no package provides python3-gpg-1.12.0-1.fc30.armv7hl.rpm
+no package provides python3-hawkey-0.39.1-1.fc30.armv7hl.rpm
+no package provides python3-libcomps-0.1.14-1.fc30.armv7hl.rpm
+no package provides python3-libdnf-0.39.1-1.fc30.armv7hl.rpm
+no package provides python3-libs-3.7.6-1.fc30.armv7hl.rpm
+no package provides python3-pycurl-7.43.0.2-6.fc30.armv7hl.rpm
+no package provides python3-rpm-4.14.2.1-5.fc30.armv7hl.rpm
+no package provides python3-six-1.12.0-1.fc30.noarch.rpm
+no package provides python3-urlgrabber-4.0.0-3.fc30.noarch.rpm
+no package provides qrencode-libs-3.4.4-8.fc30.armv7hl.rpm
+no package provides readline-8.0-2.fc30.armv7hl.rpm
+no package provides rpm-4.14.2.1-5.fc30.armv7hl.rpm
+no package provides rpm-build-libs-4.14.2.1-5.fc30.armv7hl.rpm
+no package provides rpm-libs-4.14.2.1-5.fc30.armv7hl.rpm
+no package provides rpm-sign-libs-4.14.2.1-5.fc30.armv7hl.rpm
+no package provides sed-4.5-3.fc30.armv7hl.rpm
+no package provides setup-2.13.6-1.fc30.noarch.rpm
+no package provides shadow-utils-4.6-8.fc30.armv7hl.rpm
+no package provides sqlite-libs-3.26.0-7.fc30.armv7hl.rpm
+no package provides systemd-241-12.git323cdf4.fc30.armv7hl.rpm
+no package provides systemd-libs-241-12.git323cdf4.fc30.armv7hl.rpm
+no package provides systemd-pam-241-12.git323cdf4.fc30.armv7hl.rpm
+no package provides systemd-rpm-macros-241-12.git323cdf4.fc30.noarch.rpm
+no package provides tzdata-2019c-1.fc30.noarch.rpm
+no package provides util-linux-2.33.2-2.fc30.armv7hl.rpm
+no package provides xz-libs-5.2.4-5.fc30.armv7hl.rpm
+no package provides yum-3.4.3-522.fc30.noarch.rpm
+no package provides yum-metadata-parser-1.1.4-22.fc29.armv7hl.rpm
+no package provides zchunk-libs-1.1.4-1.fc30.armv7hl.rpm
+no package provides zlib-1.2.11-19.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm -q --whatprovides system-release *.rpm | wc
+    186     744   10579
+bash-5.0# 
+bash-5.0# ls fedora-release*
+fedora-release-30-6.noarch.rpm
+fedora-release-cinnamon-30-6.noarch.rpm
+fedora-release-cloud-30-6.noarch.rpm
+fedora-release-common-30-6.noarch.rpm
+fedora-release-container-30-6.noarch.rpm
+fedora-release-coreos-30-6.noarch.rpm
+fedora-release-iot-30-6.noarch.rpm
+fedora-release-kde-30-6.noarch.rpm
+fedora-release-matecompiz-30-6.noarch.rpm
+fedora-release-server-30-6.noarch.rpm
+fedora-release-silverblue-30-6.noarch.rpm
+fedora-release-snappy-30-6.noarch.rpm
+fedora-release-soas-30-6.noarch.rpm
+fedora-release-workstation-30-6.noarch.rpm
+fedora-release-xfce-30-6.noarch.rpm
+bash-5.0# 
+bash-5.0# ls fedora-release* | wc
+     15      15     570
+bash-5.0# 
+bash-5.0# ls *release*
+fedora-release-30-6.noarch.rpm
+fedora-release-cinnamon-30-6.noarch.rpm
+fedora-release-cloud-30-6.noarch.rpm
+fedora-release-common-30-6.noarch.rpm
+fedora-release-container-30-6.noarch.rpm
+fedora-release-coreos-30-6.noarch.rpm
+fedora-release-iot-30-6.noarch.rpm
+fedora-release-kde-30-6.noarch.rpm
+fedora-release-matecompiz-30-6.noarch.rpm
+fedora-release-server-30-6.noarch.rpm
+fedora-release-silverblue-30-6.noarch.rpm
+fedora-release-snappy-30-6.noarch.rpm
+fedora-release-soas-30-6.noarch.rpm
+fedora-release-workstation-30-6.noarch.rpm
+fedora-release-xfce-30-6.noarch.rpm
+generic-release-30-0.3.noarch.rpm
+generic-release-common-30-0.3.noarch.rpm
+bash-5.0# 
+bash-5.0# rm 'fedora-release-cinnamon-30-6.noarch.rpm
+> fedora-release-cloud-30-6.noarch.rpm
+> fedora-release-common-30-6.noarch.rpm
+> fedora-release-container-30-6.noarch.rpm
+> fedora-release-coreos-30-6.noarch.rpm
+> fedora-release-iot-30-6.noarch.rpm
+> fedora-release-kde-30-6.noarch.rpm
+> fedora-release-matecompiz-30-6.noarch.rpm
+> fedora-release-server-30-6.noarch.rpm
+> fedora-release-silverblue-30-6.noarch.rpm
+> fedora-release-snappy-30-6.noarch.rpm
+> fedora-release-soas-30-6.noarch.rpm
+> fedora-release-workstation-30-6.noarch.rpm
+> fedora-release-xfce-30-6.noarch.rpm
+> generic-release-30-0.3.noarch.rpm
+> generic-release-common-30-0.3.noarch.rpm
+> '
+rm: cannot remove 'fedora-release-cinnamon-30-6.noarch.rpm'$'\n''fedora-release-cloud-30-6.noarch.rpm'$'\n''fedora-release-common-30-6.noarch.rpm'$'\n''fedora-release-container-30-6.noarch.rpm'$'\n''fedora-release-coreos-30-6.noarch.rpm'$'\n''fedora-release-iot-30-6.noarch.rpm'$'\n''fedora-release-kde-30-6.noarch.rpm'$'\n''fedora-release-matecompiz-30-6.noarch.rpm'$'\n''fedora-release-server-30-6.noarch.rpm'$'\n''fedora-release-silverblue-30-6.noarch.rpm'$'\n''fedora-release-snappy-30-6.noarch.rpm'$'\n''fedora-release-soas-30-6.noarch.rpm'$'\n''fedora-release-workstation-30-6.noarch.rpm'$'\n''fedora-release-xfce-30-6.noarch.rpm'$'\n''generic-release-30-0.3.noarch.rpm'$'\n''generic-release-common-30-0.3.noarch.rpm'$'\n': File name too long
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rm $(cat 'fedora-release-cinnamon-30-6.noarch.rpm
+> fedora-release-cloud-30-6.noarch.rpm
+> fedora-release-common-30-6.noarch.rpm
+> fedora-release-container-30-6.noarch.rpm
+> fedora-release-coreos-30-6.noarch.rpm
+> fedora-release-iot-30-6.noarch.rpm
+> fedora-release-kde-30-6.noarch.rpm
+> fedora-release-matecompiz-30-6.noarch.rpm
+> fedora-release-server-30-6.noarch.rpm
+> fedora-release-silverblue-30-6.noarch.rpm
+> fedora-release-snappy-30-6.noarch.rpm
+> fedora-release-soas-30-6.noarch.rpm
+> fedora-release-workstation-30-6.noarch.rpm
+> fedora-release-xfce-30-6.noarch.rpm
+> generic-release-30-0.3.noarch.rpm
+> generic-release-common-30-0.3.noarch.rpm
+> |   '|xargs`)
+> '
+> `
+> ^C
+bash-5.0# 
+bash-5.0# rm fedora-release-cinnamon-30-6.noarch.rpm
+bash-5.0# rm fedora-release-cloud-30-6.noarch.rpm
+bash-5.0# rm fedora-release-common-30-6.noarch.rpm
+bash-5.0# rm fedora-release-container-30-6.noarch.rpm
+bash-5.0# xargs
+bash: xargs: command not found
+bash-5.0# ls *release*
+fedora-release-30-6.noarch.rpm
+fedora-release-coreos-30-6.noarch.rpm
+fedora-release-iot-30-6.noarch.rpm
+fedora-release-kde-30-6.noarch.rpm
+fedora-release-matecompiz-30-6.noarch.rpm
+fedora-release-server-30-6.noarch.rpm
+fedora-release-silverblue-30-6.noarch.rpm
+fedora-release-snappy-30-6.noarch.rpm
+fedora-release-soas-30-6.noarch.rpm
+fedora-release-workstation-30-6.noarch.rpm
+fedora-release-xfce-30-6.noarch.rpm
+generic-release-30-0.3.noarch.rpm
+generic-release-common-30-0.3.noarch.rpm
+bash-5.0# 
+bash-5.0# mv fedora-release-30-6.noarch.rpm ff-fedora-release-30-6.noarch.rpm
+bash-5.0# rm fedora-release-*
+bash-5.0# ls ff*
+ff-fedora-release-30-6.noarch.rpm
+bash-5.0# mv ff* fedora-release-30-6.noarch.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# history | tail
+  544  rm fedora-release-cloud-30-6.noarch.rpm
+  545  rm fedora-release-common-30-6.noarch.rpm
+  546  rm fedora-release-container-30-6.noarch.rpm
+  547  xargs
+  548  ls *release*
+  549  mv fedora-release-30-6.noarch.rpm ff-fedora-release-30-6.noarch.rpm
+  550  rm fedora-release-*
+  551  ls ff*
+  552  mv ff* fedora-release-30-6.noarch.rpm
+  553  history | tail
+bash-5.0# 
+bash-5.0# history | grep rpm | tail
+fedora-release-xfce-30-6.noarch.rpm
+generic-release-30-0.3.noarch.rpm
+generic-release-common-30-0.3.noarch.rpm
+  543  rm fedora-release-cinnamon-30-6.noarch.rpm
+  544  rm fedora-release-cloud-30-6.noarch.rpm
+  545  rm fedora-release-common-30-6.noarch.rpm
+  546  rm fedora-release-container-30-6.noarch.rpm
+  549  mv fedora-release-30-6.noarch.rpm ff-fedora-release-30-6.noarch.rpm
+  552  mv ff* fedora-release-30-6.noarch.rpm
+  554  history | grep rpm | tail
+bash-5.0# 
+bash-5.0# 
+bash-5.0# history | grep 'rpm --' | tail
+  474  rpm --root $(pwd)/altroot -q -a
+  478  rpm --root $(pwd)/altroot -q -a
+  479  rpm --root $(pwd)/altroot -q -a | wc
+  490  rpm --root $(pwd)/altroot -q -a | wc
+  491  rpm --version
+  500  rpm --root $(pwd)/altroot --reinstall -v repof304/*.rpm
+  503  rpm --root $(pwd)/altroot/ -q -a | wc
+  526  rpm --root $(pwd)/altroot --reinstall -v r *.rpm
+  527  rpm --root $(pwd)/altroot --reinstall -v *.rpm
+  555  history | grep 'rpm --' | tail
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot --reinstall -v *.rpm
+warning: acl-2.2.53-3.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+error: Failed dependencies:
+	fedora-release-common = 30-6 is needed by fedora-release-30-6.noarch
+	system-release conflicts with fedora-release-30-6.noarch
+	fedora-release conflicts with generic-release-30-0.3.noarch
+	system-release conflicts with generic-release-30-0.3.noarch
+bash-5.0# rm generic-release-30*
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot --reinstall -v *.rpm
+warning: acl-2.2.53-3.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+error: Failed dependencies:
+	fedora-release-common = 30-6 is needed by fedora-release-30-6.noarch
+	generic-release-variant = 30-0.3 is needed by generic-release-common-30-0.3.noarch
+bash-5.0# 
+bash-5.0# rm generic-release-common-30-0.3.noarch
+rm: cannot remove 'generic-release-common-30-0.3.noarch': No such file or directory
+bash-5.0# 
+bash-5.0# 
+bash-5.0# cp tt/reposd  dest-f30bash/fedora-release-common* .
+cp: cannot stat 'tt/repodest-f30bash/fedora-release-common*': No such file or directory
+bash-5.0# 
+bash-5.0# cp ../tt/repodest-f30bash/fedora-release-common* .
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot --reinstall -v *.rpm
+warning: acl-2.2.53-3.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+error: Failed dependencies:
+	generic-release-variant = 30-0.3 is needed by generic-release-common-30-0.3.noarch
+	fedora-release-common conflicts with generic-release-common-30-0.3.noarch
+bash-5.0# 
+bash-5.0# rm generic-release-common-30-0.3.noarch.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot --reinstall -v *.rpm
+warning: acl-2.2.53-3.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+Verifying packages...
+Preparing packages...
+python-setuptools-wheel-40.8.0-2.fc30.noarch
+tzdata-2019c-1.fc30.noarch
+systemd-rpm-macros-241-12.git323cdf4.fc30.noarch
+publicsuffix-list-dafsa-20190128-2.fc30.noarch
+ncurses-base-6.1-10.20180923.fc30.noarch
+libssh-config-0.9.3-1.fc30.noarch
+libreport-filesystem-2.11.3-1.fc30.noarch
+dnf-data-4.2.17-1.fc30.noarch
+fedora-gpg-keys-30-2.noarch
+fedora-release-30-6.noarch
+fedora-repos-30-2.noarch
+fedora-release-common-30-6.noarch
+setup-2.13.6-1.fc30.noarch
+filesystem-3.10-1.fc30.armv7hl
+basesystem-11-7.fc30.noarch
+coreutils-common-8.31-6.fc30.armv7hl
+libgcc-9.2.1-1.fc30.armv7hl
+pcre2-10.33-16.fc30.armv7hl
+libselinux-2.9-3.1.fc30.armv7hl
+ncurses-libs-6.1-10.20180923.fc30.armv7hl
+glibc-minimal-langpack-2.29-27.fc30.armv7hl
+glibc-common-2.29-27.fc30.armv7hl
+glibc-2.29-27.fc30.armv7hl
+bash-5.0.11-1.fc30.armv7hl
+libsepol-2.9-1.fc30.armv7hl
+zlib-1.2.11-19.fc30.armv7hl
+xz-libs-5.2.4-5.fc30.armv7hl
+bzip2-libs-1.0.6-29.fc30.armv7hl
+libdb-5.3.28-37.fc30.armv7hl
+libcap-2.26-5.fc30.armv7hl
+libxcrypt-4.4.10-2.fc30.armv7hl
+libzstd-1.4.4-1.fc30.armv7hl
+elfutils-libelf-0.177-1.fc30.armv7hl
+libgpg-error-1.33-2.fc30.armv7hl
+libuuid-2.33.2-2.fc30.armv7hl
+libxml2-2.9.9-2.fc30.armv7hl
+sqlite-libs-3.26.0-7.fc30.armv7hl
+expat-2.2.8-1.fc30.armv7hl
+popt-1.16-17.fc30.armv7hl
+readline-8.0-2.fc30.armv7hl
+gmp-1:6.1.2-10.fc30.armv7hl
+libcom_err-1.44.6-1.fc30.armv7hl
+libffi-3.1-19.fc30.armv7hl
+lua-libs-5.3.5-5.fc30.armv7hl
+p11-kit-0.23.16.1-1.fc30.armv7hl
+libgcrypt-1.8.5-1.fc30.armv7hl
+file-libs-5.36-5.fc30.armv7hl
+gdbm-libs-1:1.18-4.fc30.armv7hl
+libattr-2.4.48-5.fc30.armv7hl
+libacl-2.2.53-3.fc30.armv7hl
+coreutils-single-8.31-6.fc30.armv7hl
+libblkid-2.33.2-2.fc30.armv7hl
+sed-4.5-3.fc30.armv7hl
+libmount-2.33.2-2.fc30.armv7hl
+libcap-ng-0.7.9-7.fc30.armv7hl
+audit-libs-3.0-0.15.20191104git1c2f876.fc30.armv7hl
+libsmartcols-2.33.2-2.fc30.armv7hl
+libstdc++-9.2.1-1.fc30.armv7hl
+libunistring-0.9.10-5.fc30.armv7hl
+libidn2-2.3.0-1.fc30.armv7hl
+lz4-libs-1.9.1-1.fc30.armv7hl
+libassuan-2.5.2-2.fc30.armv7hl
+diffutils-3.7-2.fc30.armv7hl
+json-c-0.13.1-8.fc30.armv7hl
+keyutils-libs-1.6-2.fc30.armv7hl
+libtasn1-4.13-7.fc30.armv7hl
+libyaml-0.2.1-5.fc30.armv7hl
+pcre-8.43-2.fc30.armv7hl
+glib2-2.60.7-2.fc30.armv7hl
+grep-3.1-9.fc30.armv7hl
+systemd-libs-241-12.git323cdf4.fc30.armv7hl
+crypto-policies-20190527-1.git0b3add8.fc30.noarch
+libusbx-1.0.22-2.fc30.armv7hl
+libmodulemd1-1.8.16-1.fc30.armv7hl
+libsemanage-2.9-1.fc30.armv7hl
+shadow-utils-2:4.6-8.fc30.armv7hl
+error: unpacking of archive failed on file /usr/bin/newgidmap;000651a4: cpio: cap_set_file failed - No such file or directory
+error: shadow-utils-2:4.6-8.fc30.armv7hl: install failed
+/var/tmp/rpm-tmp.OjHlCZ: line 2: /usr/sbin/groupadd: No such file or directory
+/var/tmp/rpm-tmp.OjHlCZ: line 3: /usr/sbin/groupadd: No such file or directory
+libutempter-1.1.6-16.fc30.armv7hl
+warning: group utempter does not exist - using root
+warning: group utmp does not exist - using root
+libfdisk-2.33.2-2.fc30.armv7hl
+gzip-1.9-9.fc30.armv7hl
+cracklib-2.9.6-19.fc30.armv7hl
+acl-2.2.53-3.fc30.armv7hl
+gdbm-1:1.18-4.fc30.armv7hl
+mpfr-3.1.6-4.fc30.armv7hl
+nettle-3.4.1rc1-2.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/93/5d0fa93001e25472a131840c061081eb7ce07a;000651a4: cpio: symlink failed - No such file or directory
+error: nettle-3.4.1rc1-2.fc30.armv7hl: install failed
+libcomps-0.1.14-1.fc30.armv7hl
+libksba-1.3.5-9.fc30.armv7hl
+libdb-utils-5.3.28-37.fc30.armv7hl
+alternatives-1.11-4.fc30.armv7hl
+p11-kit-trust-0.23.16.1-1.fc30.armv7hl
+ca-certificates-2018.2.26-3.fc30.noarch
+python-pip-wheel-19.0.3-6.fc30.noarch
+openssl-libs-1:1.1.1d-2.fc30.armv7hl
+ima-evm-utils-1.1-5.fc30.armv7hl
+zchunk-libs-1.1.4-1.fc30.armv7hl
+gnutls-3.6.10-1.fc30.armv7hl
+kmod-libs-26-3.fc30.armv7hl
+libarchive-3.3.3-6.fc30.armv7hl
+cpio-2.12-10.fc30.armv7hl
+libargon2-20161029-8.fc30.armv7hl
+libnghttp2-1.39.2-1.fc30.armv7hl
+libpcap-14:1.9.1-1.fc30.armv7hl
+iptables-libs-1.8.2-3.fc30.armv7hl
+libseccomp-2.4.2-2.fc30.armv7hl
+libsigsegv-2.11-7.fc30.armv7hl
+gawk-4.2.1-6.fc30.armv7hl
+libverto-0.3.0-7.fc30.armv7hl
+krb5-libs-1.17-15.fc30.armv7hl
+libcurl-minimal-7.65.3-4.fc30.armv7hl
+libtirpc-1.2.5-0.fc30.armv7hl
+libnsl2-1.2.0-4.20180605git4a062cf.fc30.armv7hl
+python-unversioned-command-2.7.17-1.fc30.noarch
+python2-2.7.17-1.fc30.armv7hl
+python2-libs-2.7.17-1.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/67/3456539973fc95ac6081fda9e9d31960ee4aa1;000651a4: cpio: symlink failed - No such file or directory
+error: python2-libs-2.7.17-1.fc30.armv7hl: install failed
+python3-3.7.6-1.fc30.armv7hl
+python3-libs-3.7.6-1.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/9a/34ab9e0c2cf8174d15c1774f2dd647bc28c94d;000651a4: cpio: symlink failed - No such file or directory
+error: python3-libs-3.7.6-1.fc30.armv7hl: install failed
+libpwquality-1.4.0-12.fc30.armv7hl
+pam-1.3.1-17.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/31/c82dd4caae6158c64f034e1119f1691761924a;000651a4: cpio: symlink failed - No such file or directory
+error: pam-1.3.1-17.fc30.armv7hl: install failed
+python2-six-1.12.0-1.fc30.noarch
+python2-iniparse-0.4-33.fc30.noarch
+python3-six-1.12.0-1.fc30.noarch
+util-linux-2.33.2-2.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/8f/8824b24bbb8c49a402b3103814e3df2e0f49d6;000651a4: cpio: symlink failed - No such file or directory
+error: util-linux-2.33.2-2.fc30.armv7hl: install failed
+python3-libcomps-0.1.14-1.fc30.armv7hl
+python3-pycurl-7.43.0.2-6.fc30.armv7hl
+python3-urlgrabber-4.0.0-3.fc30.noarch
+pyliblzma-0.5.3-25.fc30.armv7hl
+python2-pycurl-7.43.0.2-6.fc30.armv7hl
+python2-urlgrabber-4.0.0-3.fc30.noarch
+python2-pyxattr-0.6.1-1.fc30.armv7hl
+yum-metadata-parser-1.1.4-22.fc29.armv7hl
+curl-minimal-7.65.3-4.fc30.armv7hl
+rpm-4.14.2.1-5.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/ac/f0325160ca8e0feeede1cd168eac9ef918667c;000651a4: cpio: symlink failed - No such file or directory
+error: rpm-4.14.2.1-5.fc30.armv7hl: install failed
+rpm-libs-4.14.2.1-5.fc30.armv7hl
+libmodulemd-2.8.3-1.fc30.armv7hl
+libsolv-0.7.10-1.fc30.armv7hl
+cyrus-sasl-lib-2.1.27-0.6rc7.fc30.armv7hl
+openldap-2.4.47-1.fc30.armv7hl
+npth-1.6-2.fc30.armv7hl
+gnupg2-2.2.18-2.fc30.armv7hl
+gpgme-1.12.0-1.fc30.armv7hl
+rpm-sign-libs-4.14.2.1-5.fc30.armv7hl
+librepo-1.11.1-1.fc30.armv7hl
+libdnf-0.39.1-1.fc30.armv7hl
+python3-libdnf-0.39.1-1.fc30.armv7hl
+python3-hawkey-0.39.1-1.fc30.armv7hl
+python2-gpg-1.12.0-1.fc30.armv7hl
+python3-gpg-1.12.0-1.fc30.armv7hl
+qrencode-libs-3.4.4-8.fc30.armv7hl
+device-mapper-1.02.154-3.fc30.armv7hl
+device-mapper-libs-1.02.154-3.fc30.armv7hl
+cryptsetup-libs-2.2.2-1.fc30.armv7hl
+elfutils-default-yama-scope-0.177-1.fc30.noarch
+elfutils-libs-0.177-1.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/fb/053f57333800a224cea233e6c407dffdad271c;000651a4: cpio: symlink failed - No such file or directory
+error: elfutils-libs-0.177-1.fc30.armv7hl: install failed
+dbus-1:1.12.16-1.fc30.armv7hl
+systemd-pam-241-12.git323cdf4.fc30.armv7hl
+/var/tmp/rpm-tmp.i7PLNZ: line 8: groupadd: command not found
+/var/tmp/rpm-tmp.i7PLNZ: line 10: groupadd: command not found
+/var/tmp/rpm-tmp.i7PLNZ: line 13: groupadd: command not found
+/var/tmp/rpm-tmp.i7PLNZ: line 16: groupadd: command not found
+systemd-241-12.git323cdf4.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/99/83fcc2f515a5c6e0f15ab7dc1aa28985bff52e;000651a4: cpio: symlink failed - No such file or directory
+error: systemd-241-12.git323cdf4.fc30.armv7hl: install failed
+dbus-common-1:1.12.16-1.fc30.noarch
+/var/tmp/rpm-tmp.Sw00m6: line 4: /usr/sbin/groupadd: No such file or directory
+/var/tmp/rpm-tmp.Sw00m6: line 8: /usr/sbin/useradd: No such file or directory
+error: %prein(dbus-broker-21-3.fc30.armv7hl) scriptlet failed, exit status 127
+error: dbus-broker-21-3.fc30.armv7hl: install failed
+rpm-build-libs-4.14.2.1-5.fc30.armv7hl
+python2-rpm-4.14.2.1-5.fc30.armv7hl
+python3-rpm-4.14.2.1-5.fc30.armv7hl
+python3-dnf-4.2.17-1.fc30.noarch
+dnf-4.2.17-1.fc30.noarch
+yum-3.4.3-522.fc30.noarch
+iputils-20180629-4.fc30.armv7hl
+error: unpacking of archive failed on file /usr/bin/ping;000651a4: cpio: cap_set_file failed - No such file or directory
+error: iputils-20180629-4.fc30.armv7hl: install failed
+net-tools-2.0-0.54.20160912git.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/af/d32ba0ae937be959f7c6f2d074655955accf26;000651a4: cpio: symlink failed - No such file or directory
+error: net-tools-2.0-0.54.20160912git.fc30.armv7hl: install failed
+libssh-0.9.3-1.fc30.armv7hl
+libpsl-0.20.2-6.fc30.armv7hl
+libmetalink-0.1.3-8.fc30.armv7hl
+brotli-1.0.7-3.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/fe/a7db7765def4b1593f288331127ac585537e7a;000651a4: cpio: symlink failed - No such file or directory
+error: brotli-1.0.7-3.fc30.armv7hl: install failed
+ncurses-6.1-10.20180923.fc30.armv7hl
+error: unpacking of archive failed on file /usr/lib/.build-id/ae/b6f843dfd6875aabb4bdfbe4a698af3bc66118;000651a4: cpio: symlink failed - No such file or directory
+error: ncurses-6.1-10.20180923.fc30.armv7hl: install failed
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf help
+bash: dnf: command not found
+bash-5.0# 
+bash-5.0# rpm -q -a | wc
+      0       0       0
+bash-5.0# rpm -q -a     --root $(pwd)/altroot -q -a | wc
+    156     156    5124
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm --root $(pwd)/altroot -q -a | grep dnf
+dnf-data-4.2.17-1.fc30.noarch
+python3-libdnf-0.39.1-1.fc30.armv7hl
+dnf-4.2.17-1.fc30.noarch
+libdnf-0.39.1-1.fc30.armv7hl
+python3-dnf-4.2.17-1.fc30.noarch
+bash-5.0# 
+bash-5.0# 
+bash-5.0# exit
+exit
+~ # pwd
+/root
+~ # ls /
+bin   current-root-n1  etc   lib    mnt  proc  root-old-n1  sbin  sys  usr
+boot  dev	       home  media  opt  root  run	    srv   tmp  var
+~ # 
+~ # 
+~ # exit
+~/root-n1 # 
+~/root-n1 # 
+~/root-n1 # ls /
+bin                komod              nfsroot            sys
+boot               lib                opt                tmp
+current-root-root  linuxrc            proc               usr
+dev                lost+found         root               var
+etc                mkimg.rootfs       sbin
+home               mknod_console      share
+init               mnt                sharefs
+~/root-n1 # 
+~/root-n1 # 
+~/root-n1 # ls -l
+total 56
+lrwxrwxrwx    1 root     root             7 Jan  4 17:30 bin -> usr/bin
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 boot
+-rw-------    1 root     root             0 Jan  3 19:36 current-root-n1
+drwxr-xr-x    8 root     root          3000 Feb 11  2019 dev
+drwxr-xr-x   43 root     root          4096 Jan  4 06:53 etc
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 home
+lrwxrwxrwx    1 root     root             7 Jan  4 17:30 lib -> usr/lib
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 media
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 mnt
+drwxr-xr-x    6 root     root          4096 Feb 11  2019 opt
+dr-xr-xr-x   87 root     root             0 Feb 11  2019 proc
+dr-xr-x---    9 root     root          4096 Jan  5 19:04 root
+drwx------    2 root     root          4096 Jan  3 19:45 root-old-n1
+drwxr-xr-x    4 root     root          4096 Jan  4 06:33 run
+lrwxrwxrwx    1 root     root             8 Jan  4 17:30 sbin -> usr/sbin
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 srv
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 sys
+drwxrwxrwt    2 root     root          4096 Feb 11  2019 tmp
+drwxr-xr-x   11 root     root          4096 Jan  4 06:20 usr
+drwxr-xr-x   19 root     root          4096 Jan  4 06:56 var
+~/root-n1 # pwd
+/root/root-n1
+~/root-n1 # 
+~/root-n1 # 
+~/root-n1 # df -h .
+Filesystem                Size      Used Available Use% Mounted on
+/dev/root                 2.9G      1.4G      1.5G  48% /
+~/root-n1 # 
+~/root-n1 # 
+~/root-n1 # 
+~/root-n1 # ls -l
+total 56
+lrwxrwxrwx    1 root     root             7 Jan  4 17:30 bin -> usr/bin
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 boot
+-rw-------    1 root     root             0 Jan  3 19:36 current-root-n1
+drwxr-xr-x    8 root     root          3000 Feb 11  2019 dev
+drwxr-xr-x   43 root     root          4096 Jan  4 06:53 etc
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 home
+lrwxrwxrwx    1 root     root             7 Jan  4 17:30 lib -> usr/lib
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 media
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 mnt
+drwxr-xr-x    6 root     root          4096 Feb 11  2019 opt
+dr-xr-xr-x   87 root     root             0 Feb 11  2019 proc
+dr-xr-x---    9 root     root          4096 Jan  5 19:04 root
+drwx------    2 root     root          4096 Jan  3 19:45 root-old-n1
+drwxr-xr-x    4 root     root          4096 Jan  4 06:33 run
+lrwxrwxrwx    1 root     root             8 Jan  4 17:30 sbin -> usr/sbin
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 srv
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 sys
+drwxrwxrwt    2 root     root          4096 Feb 11  2019 tmp
+drwxr-xr-x   11 root     root          4096 Jan  4 06:20 usr
+drwxr-xr-x   19 root     root          4096 Jan  4 06:56 var
+~/root-n1 # 
+~/root-n1 # 
+~/root-n1 # cd ..
+~ # ls -l
+total 319820
+-rw-------    1 root     root       1048576 Jan  1 00:01 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1 00:02 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4 17:46 i1.bash
+-rwx------    1 root     root            68 Jan  4 17:52 i2.bash
+-rwx------    1 root     root           109 Jan  4 17:55 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+drwx------    2 root     root          4096 Jan  5 18:23 repof303
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4 00:21 root
+drwx------   18 root     root          4096 Jan  4 17:32 root-n1
+dr-xr-xr-x   18 root     root          4096 Jan  4 06:20 root-new
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1 19:37 stream_chn0.h265
+-rw-------    1 root     root       3485400 Jan  1 00:04 uImage
+~ # df -h .
+Filesystem                Size      Used Available Use% Mounted on
+/dev/root                 2.9G      1.4G      1.5G  48% /
+~ # 
+~ # 
+~ # tar zcf root
+~ # 
+~ # cd root-n1
+~/root-n1 # umount dev
+~/root-n1 # umount proc
+~/root-n1 # 
+~/root-n1 # 
+~/root-n1 # mount
+/dev/root on / type ext4 (rw,relatime,data=ordered)
+devtmpfs on /dev type devtmpfs (rw,relatime,size=52320k,nr_inodes=13080,mode=755)
+devpts on /dev/pts type devpts (rw,relatime,mode=600,ptmxmode=000)
+proc on /proc type proc (rw,nosuid,nodev,relatime)
+sysfs on /sys type sysfs (rw,nosuid,nodev,relatime)
+/dev/mmcblk0p4 on /root/root-new type ext4 (rw,relatime,data=ordered)
+/dev/root on /root/root-n1 type ext4 (rw,relatime,data=ordered)
+~/root-n1 # 
+~/root-n1 # cd ..
+~ # ls -l
+total 319820
+-rw-------    1 root     root       1048576 Jan  1 00:01 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1 00:02 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4 17:46 i1.bash
+-rwx------    1 root     root            68 Jan  4 17:52 i2.bash
+-rwx------    1 root     root           109 Jan  4 17:55 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+drwx------    2 root     root          4096 Jan  5 18:23 repof303
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4 00:21 root
+drwx------   18 root     root          4096 Jan  4 17:32 root-n1
+dr-xr-xr-x   18 root     root          4096 Jan  4 06:20 root-new
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1 19:37 stream_chn0.h265
+-rw-------    1 root     root       3485400 Jan  1 00:04 uImage
+~ # 
+~ # 
+~ # tar zcf root-new.tgz root-new/
+~ # ls -l root-new.tgz
+-rw-------    1 root     root     149044167 Jan  5 19:10 root-new.tgz
+~ # du -sh root-new
+344.5M	root-new
+~ # 
+~ # 
+~ # du -sh root-n1
+767.2M	root-n1
+~ # 
+~ # 
+~ # mv /mnt/root-n1/root/altroot .
+~ # du -sh altroot
+172.8M	altroot
+~ # tar zxcf altroot .tgz altroot/
+~ # ls -l altroot.tgz
+-rw-------    1 root     root      51932797 Jan  5 19:17 altroot.tgz
+~ # ls -l
+total 516092
+dr-xr-xr-x   17 root     root          4096 Jan  4 17:59 altroot
+-rw-------    1 root     root      51932797 Jan  5 19:17 altroot.tgz
+-rw-------    1 root     root       1048576 Jan  1 00:01 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1 00:02 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4 17:46 i1.bash
+-rwx------    1 root     root            68 Jan  4 17:52 i2.bash
+-rwx------    1 root     root           109 Jan  4 17:55 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+drwx------    2 root     root          4096 Jan  5 18:23 repof303
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4 00:21 root
+drwx------   18 root     root          4096 Jan  4 17:32 root-n1
+dr-xr-xr-x   18 root     root          4096 Jan  4 06:20 root-new
+-rw-------    1 root     root     149044167 Jan  5 19:10 root-new.tgz
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1 19:37 stream_chn0.h265
+-rw-------    1 root     root       3485400 Jan  1 00:04 uImage
+~ # mv altroot altroot-1
+~ # mv altroot.tgz altroot-1.tgz
+~ # 
+~ # mv /mnt/root-n1/root/repodest-f30bash/altroot .
+~ # mv altroot altroot-2
+~ # du -sh altroot-2
+187.7M	altroot-2
+~ # 
+~ # tar zcf altroot-2.tgz altroot-2/
+~ # ls -l altroot-2.tgz
+-rw-------    1 root     root      56665412 Jan  5 19:22 altroot-2.tgz
+~ # 
+~ # 
+~ # ls -l
+total 571436
+dr-xr-xr-x   17 root     root          4096 Jan  4 17:59 altroot-1
+-rw-------    1 root     root      51932797 Jan  5 19:17 altroot-1.tgz
+dr-xr-xr-x   17 root     root          4096 Jan  5 19:02 altroot-2
+-rw-------    1 root     root      56665412 Jan  5 19:22 altroot-2.tgz
+-rw-------    1 root     root       1048576 Jan  1 00:01 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1 00:02 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4 17:46 i1.bash
+-rwx------    1 root     root            68 Jan  4 17:52 i2.bash
+-rwx------    1 root     root           109 Jan  4 17:55 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+drwx------    2 root     root          4096 Jan  5 18:23 repof303
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4 00:21 root
+drwx------   18 root     root          4096 Jan  4 17:32 root-n1
+dr-xr-xr-x   18 root     root          4096 Jan  4 06:20 root-new
+-rw-------    1 root     root     149044167 Jan  5 19:10 root-new.tgz
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1 19:37 stream_chn0.h265
+-rw-------    1 root     root       3485400 Jan  1 00:04 uImage
+~ # du -sh root-new
+344.5M	root-new
+~ # 
+~ # 
+~ # ta rr zcf root-new.tgz root-new/
+~ # 
+~ # ls -l root-new-t.tgz
+-rw-------    1 root     root     149044167 Jan  5 19:28 root-new.tgz
+~ # 
+~ # ls -l *.tgz
+-rw-------    1 root     root      51932797 Jan  5 19:17 altroot-1.tgz
+-rw-------    1 root     root      56665412 Jan  5 19:22 altroot-2.tgz
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root     149044167 Jan  5 19:28 root-new.tgz
+~ # 
+~ # 
+~ # tar zcf
+~ # 
+~ # du -sh root-new
+344.5M	root-new
+~ # du -sh root-n1
+406.8M	root-n1
+~ # 
+~ # 
+~ # tar zcf root-n1.tgz root-n1/
+~ # ls -l root-n1.tgz
+-rw-------    1 root     root     209831700 Jan  5 19:37 root-n1.tgz
+~ # 
+~ # 
+~ # 
+~ # echo tftp -p -l altroot-1.tgz -r h6d3f30bash/altroot-1.tgz
+tftp -p -l altroot-1.tgz -r h6d3f30bash/altroot-1.tgz
+~ # echo tftp -p -l altroot-2.tgz -r h6d3f30bash/altroot-2.tgz
+tftp -p -l altroot-2.tgz -r h6d3f30bash/altroot-2.tgz
+~ # echo tftp -p -l root-n1.tgz -r h6d3f30bash/root-n1.tgz
+tftp -p -l root-n1.tgz -r h6d3f30bash/root-n1.tgz
+~ # echo tftp -p -l root-new.tgz -r h6d3f30bash/root-new.tgz
+tftp -p -l root-new.tgz -r h6d3f30bash/root-new.tgz
+~ # 
+~ # sha256sum altroot-1.tgz altroot-2.tgz root-n1.tgz root-new.tgz
+59c27cb8972a54f5d64d9ba73f7162e05168a5a2f30198fc61f46f1fdab5cda3  altroot-1.tgz
+37227ed8f0629589f3283d829bc20e49e426a9478f3d2e885c97cbd3a5a36545  altroot-2.tgz
+f60fcdfd898d5432ba00bc481afd721fc591a18a9ae963b329aff5266bae33dc  root-n1.tgz
+4e13611e28a3aa72e3b7d90046b14ad30d0a251946d6c8a7aa530ac105df919e  root-new.tgz
+~ # 
+~ # 
+~ # echo tftp -p -l altroot-sha256-sums -r h6d3f30bash/altroot-sha256-sums
+tftp -p -l altroot-sha256-sums -r h6d3f30bash/altroot-sha256-sums
+~ # 
+~ # 
+~ # 
+~ # 
+~ # 
+~ # 
+~ # 
+~ # 
+~ # ls -l
+total 776364
+dr-xr-xr-x   17 root     root          4096 Jan  4 17:59 altroot-1
+-rw-------    1 root     root      51932797 Jan  5 19:17 altroot-1.tgz
+dr-xr-xr-x   17 root     root          4096 Jan  5 19:02 altroot-2
+-rw-------    1 root     root      56665412 Jan  5 19:22 altroot-2.tgz
+-rw-------    1 root     root           318 Jan  5 20:21 altroot-sha256-sums
+-rw-------    1 root     root       1048576 Jan  1 00:01 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1 00:02 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4 17:46 i1.bash
+-rwx------    1 root     root            68 Jan  4 17:52 i2.bash
+-rwx------    1 root     root           109 Jan  4 17:55 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+drwx------    2 root     root          4096 Jan  5 18:23 repof303
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4 00:21 root
+drwx------   18 root     root          4096 Jan  4 17:32 root-n1
+-rw-------    1 root     root     209831700 Jan  5 19:37 root-n1.tgz
+dr-xr-xr-x   18 root     root          4096 Jan  4 06:20 root-new
+-rw-------    1 root     root     149044167 Jan  5 19:28 root-new.tgz
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1 19:37 stream_chn0.h265
+-rw-------    1 root     root       3485400 Jan  1 00:04 uImage
+~ # 
+~ # 
+~ # 
+~ # 
+~ # mkdir /mnt/root-n2
+~ # mkdir root-n2
+~ # mount -o bind /mnt/root-n2 root-n2
+~ # cd root-n2
+~/root-n2 # cp -a ../altroot-2 .
+~/root-n2 # cd altroot-2
+~/root-n2/altroot-2 # ls
+bin    dev    home   media  opt    root   sbin   sys    usr
+boot   etc    lib    mnt    proc   run    srv    tmp    var
+~/root-n2/altroot-2 # ls -l proc dev
+dev:
+total 0
+-rw-r--r--    1 root     root             0 Jan  5 19:03 null
+
+proc:
+total 0
+~/root-n2/altroot-2 # rm 
+~/root-n2/altroot-2 # 
+~/root-n2/altroot-2 # mv * ..
+~/root-n2/altroot-2 # ls -la
+total 8
+dr-xr-xr-x    2 root     root          4096 Jan  5 20:27 .
+drwx------   18 root     root          4096 Jan  5 20:27 ..
+~/root-n2/altroot-2 # cd ..
+~/root-n2 # rmdir altroot-2
+~/root-n2 # ls
+bin    dev    home   media  opt    root   sbin   sys    usr
+boot   etc    lib    mnt    proc   run    srv    tmp    var
+~/root-n2 # ls opt
+~/root-n2 # ls -a opt
+.   ..
+~/root-n2 # cd opt
+~/root-n2/opt # cp -a /bin /bisbin /lib /usr .
+cp: can't create symlink './lib/modules/4.9.37/build': No such file or directory
+cp: can't create symlink './lib/modules/4.9.37/source': No such file or directory
+~/root-n2/opt # du -sh .
+28.8M	.
+~/root-n2/opt # cd ..
+~/root-n2 # ls -l
+total 60
+lrwxrwxrwx    1 root     root             7 Jan  5 20:26 bin -> usr/bin
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 boot
+drwxr-xr-x    2 root     root          4096 Jan  5 19:02 dev
+drwxr-xr-x   47 root     root          4096 Jan  5 19:03 etc
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 home
+lrwxrwxrwx    1 root     root             7 Jan  5 20:26 lib -> usr/lib
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 media
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 mnt
+drwxr-xr-x    6 root     root          4096 Jan  5 20:27 opt
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 proc
+dr-xr-x---    2 root     root          4096 Feb 11  2019 root
+drwxr-xr-x    5 root     root          4096 Jan  5 19:02 run
+lrwxrwxrwx    1 root     root             8 Jan  5 20:26 sbin -> usr/sbin
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 srv
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 sys
+drwxrwxrwt    2 root     root          4096 Feb 11  2019 tmp
+drwxr-xr-x   11 root     root          4096 Jan  5 19:02 usr
+drwxr-xr-x   18 root     root          4096 Jan  5 19:02 var
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # mount -o bind /proc proc
+~/root-n2 # mount -o bind /dev dev
+~/root-n2 # du -sh var
+4.8M	var
+~/root-n2 # du -sh tmp
+4.0K	tmp
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # ls
+bin    dev    home   media  opt    root   sbin   sys    usr
+boot   etc    lib    mnt    proc   run    srv    tmp    var
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # unshare -m --propagation slave
+Welcome to Linux.
+None of nfsroot found in cmdline.
+~/root-n2 # pivotr_root~/root-n2 # pivot_root . 
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # mkdir root-old-n2
+~/root-n2 # touch current-root-n2
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # pivot_root . root-old-n2
+/ # bash
+/ # 
+/ # pwd
+/root/root-n2
+/ # echo $PATH
+/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+/ # echo $LD_LIBRARY_PATH
+/usr/local/lib:/usr/lib
+/ # 
+/ # 
+/ # bash
+bash-5.0# pwd
+/
+bash-5.0# cd
+bash-5.0# pwd
+/root
+bash-5.0# ls -l
+total 0
+bash-5.0# dnf
+/usr/bin/python3: error while loading shared libraries: libpython3.7m.so.1.0: cannot open shared object file: No such file or directory
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm -q -a | wc
+error: Unable to open /usr/lib/rpm/rpmrc for reading: No such file or directory.
+      0       0       0
+bash-5.0# 
+bash-5.0# 
+bash-5.0# echo /mnt # cp -a root-n1/lib/rpm root-n2/lib/
+/mnt
+bash-5.0# rpm -q -a | wc
+    156     156    5124
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm -q -a | grep python3
+python3-libcomps-0.1.14-1.fc30.armv7hl
+python3-urlgrabber-4.0.0-3.fc30.noarch
+python3-libdnf-0.39.1-1.fc30.armv7hl
+python3-rpm-4.14.2.1-5.fc30.armv7hl
+python3-3.7.6-1.fc30.armv7hl
+python3-six-1.12.0-1.fc30.noarch
+python3-pycurl-7.43.0.2-6.fc30.armv7hl
+python3-hawkey-0.39.1-1.fc30.armv7hl
+python3-gpg-1.12.0-1.fc30.armv7hl
+python3-dnf-4.2.17-1.fc30.noarch
+bash-5.0# 
+bash-5.0# pwd
+/root
+bash-5.0# echo /mnt # cp root-n1/root/repodest-f30bash/python3-libs-3.7.6-1.fc30..armv7hl.rpm root-n2/root/
+/mnt
+bash-5.0# 
+bash-5.0# !!
+echo /mnt # cp root-n1/root/repodest-f30bash/python3-libs-3.7.6-1.fc30.armv7hl.rpm root-n2/root/
+/mnt
+bash-5.0# ls
+python3-libs-3.7.6-1.fc30.armv7hl.rpm
+bash-5.0# rpm -q -        
+bash-5.0# 
+bash-5.0# rpm -i -v python3-libs-3.7.6-1.fc30.armv7hl.rpm
+warning: python3-libs-3.7.6-1.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+Verifying packages...
+Preparing packages...
+python3-libs-3.7.6-1.fc30.armv7hl
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf
+usage: dnf [options] COMMAND
+
+List of Main Commands:
+
+alias                     List or create command aliases
+autoremove                remove all unneeded packages that were originally installed as dependencies
+check                     check for problems in the packagedb
+check-update              check for available package upgrades
+clean                     remove cached data
+deplist                   List package's dependencies and what packages provide them
+distro-sync               synchronize installed packages to the latest available versions
+downgrade                 Downgrade a package
+group                     display, or use, the groups information
+help                      display a helpful usage message
+history                   display, or use, the transaction history
+info                      display details about a package or group of packages
+install                   install a package or packages on your system
+list                      list a package or groups of packages
+makecache                 generate the metadata cache
+mark                      mark or unmark installed packages as installed by user.
+module                    Interact with Modules.
+provides                  find what package provides the given value
+reinstall                 reinstall a package
+remove                    remove a package or packages from your system
+repolist                  display the configured software repositories
+repoquery                 search for packages matching keyword
+repository-packages       run commands on top of all packages in given repository
+search                    search package details for the given string
+shell                     run an interactive DNF shell
+swap                      run an interactive DNF mod for remove and install one spec
+updateinfo                display advisories about packages
+upgrade                   upgrade a package or packages on your system
+upgrade-minimal           upgrade, but only 'newest' package match which fixes a problem that affects your system
+
+General DNF options:
+  -c [config file], --config [config file]
+                        config file location
+  -q, --quiet           quiet operation
+  -v, --verbose         verbose operation
+  --version             show DNF version and exit
+  --installroot [path]  set install root
+  --nodocs              do not install documentations
+  --noplugins           disable all plugins
+  --enableplugin [plugin]
+                        enable plugins by name
+  --disableplugin [plugin]
+                        disable plugins by name
+  --releasever RELEASEVER
+                        override the value of $releasever in config and repo
+                        files
+  --setopt SETOPTS      set arbitrary config and repo options
+  --skip-broken         resolve depsolve problems by skipping packages
+  -h, --help, --help-cmd
+                        show command help
+  --allowerasing        allow erasing of installed packages to resolve
+                        dependencies
+  -b, --best            try the best available package versions in
+                        transactions.
+  --nobest              do not limit the transaction to the best candidate
+  -C, --cacheonly       run entirely from system cache, don't update cache
+  -R [minutes], --randomwait [minutes]
+                        maximum command wait time
+  -d [debug level], --debuglevel [debug level]
+                        debugging output level
+  --debugsolver         dumps detailed solving results into files
+  --showduplicates      show duplicates, in repos, in list/search commands
+  -e ERRORLEVEL, --errorlevel ERRORLEVEL
+                        error output level
+  --obsoletes           enables dnf's obsoletes processing logic for upgrade
+                        or display capabilities that the package obsoletes for
+                        info, list and repoquery
+  --rpmverbosity [debug level name]
+                        debugging output level for rpm
+  -y, --assumeyes       automatically answer yes for all questions
+  --assumeno            automatically answer no for all questions
+  --enablerepo [repo]   Enable additional repositories. List option. Supports
+                        globs, can be specified multiple times.
+  --disablerepo [repo]  Disable repositories. List option. Supports globs, can
+                        be specified multiple times.
+  --repo [repo], --repoid [repo]
+                        enable just specific repositories by an id or a glob,
+                        can be specified multiple times
+  --enable, --set-enabled
+                        enable repos with config-manager command
+                        (automatically saves)
+  --disable, --set-disabled
+                        disable repos with config-manager command
+                        (automatically saves)
+  -x [package], --exclude [package], --excludepkgs [package]
+                        exclude packages by name or glob
+  --disableexcludes [repo], --disableexcludepkgs [repo]
+                        disable excludepkgs
+  --repofrompath [repo,path]
+                        label and path to an additional repository to use
+                        (same path as in a baseurl), can be specified multiple
+                        times.
+  --noautoremove        disable removal of dependencies that are no longer
+                        used
+  --nogpgcheck          disable gpg signature checking (if RPM policy allows)
+  --color COLOR         control whether color is used
+  --refresh             set metadata as expired before running the command
+  -4                    resolve to IPv4 addresses only
+  -6                    resolve to IPv6 addresses only
+  --destdir DESTDIR, --downloaddir DESTDIR
+                        set directory to copy packages to
+  --downloadonly        only download packages
+  --comment COMMENT     add a comment to transaction
+  --bugfix              Include bugfix relevant packages, in updates
+  --enhancement         Include enhancement relevant packages, in updates
+  --newpackage          Include newpackage relevant packages, in updates
+  --security            Include security relevant packages, in updates
+  --advisory ADVISORY, --advisories ADVISORY
+                        Include packages needed to fix the given advisory, in
+                        updates
+  --bz BUGZILLA, --bzs BUGZILLA
+                        Include packages needed to fix the given BZ, in
+                        updates
+  --cve CVES, --cves CVES
+                        Include packages needed to fix the given CVE, in
+                        updates
+  --sec-severity {Critical,Important,Moderate,Low}, --secseverity {Critical,Important,Moderate,Low}
+                        Include security relevant packages matching the
+                        severity, in updates
+  --forcearch ARCH      Force the use of an architecture
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf update
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:00    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (6): Couldn't resolve host name for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [Could not resolve host: mirrors.fedoraproject.org]
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (6): Couldn't resolve host name for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [Could not resolve host: mirrors.fedoraproject.org]
+bash-5.0# 
+bash-5.0# 
+bash-5.0# echo      cat /etc/resolv.conf
+cat: /etc/resolv.conf: No such file or directory
+bash-5.0# echo nameserver 8.8.8.8 > /etc/resolv.conf
+bash-5.0# 
+bash-5.0# dnf update
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:00    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (6): Couldn't resolve host name for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [Could not resolve host: mirrors.fedoraproject.org]
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (6): Couldn't resolve host name for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [Could not resolve host: mirrors.fedoraproject.org]
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ping google.ca
+bash: ping: command not found
+bash-5.0# 
+bash-5.0# 
+bash-5.0# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+bash-5.0# 
+bash-5.0# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+209.132.181.15 mirrors.fedoraproject.org
+
+bash-5.0# dnf update
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:00    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf -v update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: downloading from remote: fedora-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:00    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf -vv update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: downloading from remote: fedora-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:00    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+209.132.181.15 mirrors.fedoraproject.org
+209.132.181.16 download.fedoraproject.org
+
+bash-5.0# 
+bash-5.0# dnf -v update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: downloading from remote: fedora-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:00    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+bash-5.0# 
+bash-5.0# dnf clean
+usage: dnf clean [-c [config file]] [-q] [-v] [--version]
+                 [--installroot [path]] [--nodocs] [--noplugins]
+                 [--enableplugin [plugin]] [--disableplugin [plugin]]
+                 [--releasever RELEASEVER] [--setopt SETOPTS] [--skip-broken]
+                 [-h] [--allowerasing] [-b | --nobest] [-C] [-R [minutes]]
+                 [-d [debug level]] [--debugsolver] [--showduplicates]
+                 [-e ERRORLEVEL] [--obsoletes]
+                 [--rpmverbosity [debug level name]] [-y] [--assumeno]
+                 [--enablerepo [repo]] [--disablerepo [repo] | --repo [repo]]
+                 [--enable | --disable] [-x [package]]
+                 [--disableexcludes [repo]] [--repofrompath [repo,path]]
+                 [--noautoremove] [--nogpgcheck] [--color COLOR] [--refresh]
+                 [-4] [-6] [--destdir DESTDIR] [--downloadonly]
+                 [--comment COMMENT] [--bugfix] [--enhancement] [--newpackage]
+                 [--security] [--advisory ADVISORY] [--bz BUGZILLA]
+                 [--cve CVES]
+                 [--sec-severity {Critical,Important,Moderate,Low}]
+                 [--forcearch ARCH]
+                 {metadata,packages,dbcache,expire-cache,all}
+                 [{metadata,packages,dbcache,expire-cache,all} ...]
+dnf clean: error: the following arguments are required: type
+bash-5.0# dnf clean all
+0 files removed
+bash-5.0# dnf -v updt  date
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: downloading from remote: fedora-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:00    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf -v update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: downloading from remote: fedora-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:00    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (7): Couldn't connect to server for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp []
+bash-5.0# ping google.ca
+bash: ping: command not found
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ping google.cabash-5.0# dnf -v update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: downloading from remote: fedora-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 -      [   ===              ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 -      [      ===           ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 -      [         ===        ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 -      [            ===     ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 -      [               ===  ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+error: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAerror: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid] (https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp).
+Fedora Modular 30 - armhfp                      0.0  B/s |   0  B     00:02    
+Errors during downloading metadata for repository 'fedora-modular':
+  - Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid]
+Error: Failed to download metadata for repo 'fedora-modular': Cannot prepare internal mirrorlist: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirrors.fedoraproject.org/metalink?repo=fedora-modular-30&arch=armhfp [SSL certificate problem: certificate is not yet valid]
+bash-5.0# date
+Mon Jan  5 21:56:53 UTC 1970
+bash-5.0# daet -s 201 200126T2200
+bash: daet: command not found
+bash-5.0# date
+Mon Jan  5 21:57:23 UTC 1970
+bash-5.0# date help
+date: invalid date 'help'
+bash-5.0# date --help
+Usage: date [OPTION]... [+FORMAT]
+  or:  date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]
+Display the current time in the given FORMAT, or set the system date.
+
+Mandatory arguments to long options are mandatory for short options too.
+  -d, --date=STRING          display time described by STRING, not 'now'
+      --debug                annotate the parsed date,
+                              and warn about questionable usage to stderr
+  -f, --file=DATEFILE        like --date; once for each line of DATEFILE
+  -I[FMT], --iso-8601[=FMT]  output date/time in ISO 8601 format.
+                               FMT='date' for date only (the default),
+                               'hours', 'minutes', 'seconds', or 'ns'
+                               for date and time to the indicated precision.
+                               Example: 2006-08-14T02:34:56-06:00
+  -R, --rfc-email            output date and time in RFC 5322 format.
+                               Example: Mon, 14 Aug 2006 02:34:56 -0600
+      --rfc-3339=FMT         output date/time in RFC 3339 format.
+                               FMT='date', 'seconds', or 'ns'
+                               for date and time to the indicated precision.
+                               Example: 2006-08-14 02:34:56-06:00
+  -r, --reference=FILE       display the last modification time of FILE
+  -s, --set=STRING           set time described by STRING
+  -u, --utc, --universal     print or set Coordinated Universal Time (UTC)
+      --help     display this help and exit
+      --version  output version information and exit
+
+FORMAT controls the output.  Interpreted sequences are:
+
+  %%   a literal %
+  %a   locale's abbreviated weekday name (e.g., Sun)
+  %A   locale's full weekday name (e.g., Sunday)
+  %b   locale's abbreviated month name (e.g., Jan)
+  %B   locale's full month name (e.g., January)
+  %c   locale's date and time (e.g., Thu Mar  3 23:05:25 2005)
+  %C   century; like %Y, except omit last two digits (e.g., 20)
+  %d   day of month (e.g., 01)
+  %D   date; same as %m/%d/%y
+  %e   day of month, space padded; same as %_d
+  %F   full date; like %+4Y-%m-%d
+  %g   last two digits of year of ISO week number (see %G)
+  %G   year of ISO week number (see %V); normally useful only with %V
+  %h   same as %b
+  %H   hour (00..23)
+  %I   hour (01..12)
+  %j   day of year (001..366)
+  %k   hour, space padded ( 0..23); same as %_H
+  %l   hour, space padded ( 1..12); same as %_I
+  %m   month (01..12)
+  %M   minute (00..59)
+  %n   a newline
+  %N   nanoseconds (000000000..999999999)
+  %p   locale's equivalent of either AM or PM; blank if not known
+  %P   like %p, but lower case
+  %q   quarter of year (1..4)
+  %r   locale's 12-hour clock time (e.g., 11:11:04 PM)
+  %R   24-hour hour and minute; same as %H:%M
+  %s   seconds since 1970-01-01 00:00:00 UTC
+  %S   second (00..60)
+  %t   a tab
+  %T   time; same as %H:%M:%S
+  %u   day of week (1..7); 1 is Monday
+  %U   week number of year, with Sunday as first day of week (00..53)
+  %V   ISO week number, with Monday as first day of week (01..53)
+  %w   day of week (0..6); 0 is Sunday
+  %W   week number of year, with Monday as first day of week (00..53)
+  %x   locale's date representation (e.g., 12/31/99)
+  %X   locale's time representation (e.g., 23:13:48)
+  %y   last two digits of year (00..99)
+  %Y   year
+  %z   +hhmm numeric time zone (e.g., -0400)
+  %:z  +hh:mm numeric time zone (e.g., -04:00)
+  %::z  +hh:mm:ss numeric time zone (e.g., -04:00:00)
+  %:::z  numeric time zone with : to necessary precision (e.g., -04, +05:30)
+  %Z   alphabetic time zone abbreviation (e.g., EDT)
+
+By default, date pads numeric fields with zeroes.
+The following optional flags may follow '%':
+
+  -  (hyphen) do not pad the field
+  _  (underscore) pad with spaces
+  0  (zero) pad with zeros
+  +  pad with zeros, and put '+' before future years with >4 digits
+  ^  use upper case if possible
+  #  use opposite case if possible
+
+After any flags comes an optional field width, as a decimal number;
+then an optional modifier, which is either
+E to use the locale's alternate representations if available, or
+O to use the locale's alternate numeric symbols if available.
+
+Examples:
+Convert seconds since the epoch (1970-01-01 UTC) to a date
+  $ date --date='@2147483647'
+
+Show the time on the west coast of the US (use tzselect(1) to find TZ)
+  $ TZ='America/Los_Angeles' date
+
+Show the local time for 9AM next Friday on the west coast of the US
+  $ date --date='TZ="America/Los_Angeles" 09:00 next Fri'
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Report any translation bugs to <https://translationproject.org/team/>
+Full documentation <https://www.gnu.org/software/coreutils/date>
+or available locally via: info '(coreutils) date invocation'
+bash-5.0# date -s 20200126-2200
+date: invalid date '20200126-2200'
+bash-5.0# 
+bash-5.0# date -s 2020-1-26
+Sun Jan 26 00:00:00 UTC 2020
+bash-5.0# date
+Sun Jan 26 00:00:03 UTC 2020
+bash-5.0# date -s 22:00  27
+Sun Jan 26 22:27:00 UTC 2020
+bash-5.0# date
+Sun Jan 26 22:27:01 UTC 2020
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf -v update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: downloading from remote: fedora-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 - 100% [====================]  49 kB/s |  16 kB     00:00 ETAFedora Modular 30 -   0% [                    ]  49 kB/s |   0  B     00:00 ETAFedora Modular 30 -  42% [========-           ]  42 kB/s | 6.7 kB     00:00 ETAFedora Modular 30 -  37% [=======             ]  44 kB/s |  27 kB     00:01 ETAFedora Modular 30 -   6% [=                   ]  47 kB/s |  69 kB     00:20 ETAFedora Modular 30 -  31% [======              ] 211 kB/s | 902 kB     00:09 ETAFedora Modular 30 -  49% [=========-          ] 294 kB/s | 1.4 MB     00:04 ETAFedora Modular 30 -  58% [===========-        ] 324 kB/s | 1.6 MB     00:03 ETAFedora Modular 30 -  58% [===========-        ] 306 kB/s | 1.6 MB     00:03 ETAFedora Modular 30 -  67% [=============       ] 314 kB/s | 1.9 MB     00:02 ETAFedora Modular 30 -  67% [=============-      ] 269 kB/s | 1.9 MB     00:03 ETAFedora Modular 30 -  74% [==============-     ] 293 kB/s | 2.1 MB     00:02 ETAFedora Modular 30 -  76% [===============     ] 247 kB/s | 2.1 MB     00:02 ETAFedora Modular 30 -  76% [===============     ] 230 kB/s | 2.1 MB     00:02 ETAFedora Modular 30 -  84% [================-   ] 256 kB/s | 2.3 MB     00:01 ETAFedora Modular 30 -  88% [=================-  ] 265 kB/s | 2.5 MB     00:01 ETAFedora Modular 30 - armhfp                      345 kB/s | 2.6 MB     00:07    
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: downloading from remote: updates-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -      [   ===              ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -   0% [                    ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -   0% [                    ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -  50% [==========          ]  60 kB/s |  41 kB     00:00 ETAFedora Modular 30 -   1% [                    ]  60 kB/s |  41 kB     00:47 ETAFedora Modular 30 -   8% [=-                  ]  99 kB/s | 274 kB     00:28 ETAFedora Modular 30 -  23% [====-               ] 233 kB/s | 973 kB     00:13 ETAFedora Modular 30 -  38% [=======-            ] 345 kB/s | 1.6 MB     00:07 ETAFedora Modular 30 -  55% [===========         ] 456 kB/s | 2.3 MB     00:04 ETAFedora Modular 30 -  67% [=============       ] 521 kB/s | 2.7 MB     00:02 ETAFedora Modular 30 -  75% [===============     ] 560 kB/s | 3.1 MB     00:01 ETAFedora Modular 30 -  84% [================-   ] 594 kB/s | 3.4 MB     00:01 ETAFedora Modular 30 - armhfp - Updates            721 kB/s | 3.7 MB     00:05    
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: downloading from remote: updates
+Fedora 30 - armhfp -     [      ===           ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp -100% [====================]  25 kB/s | 8.1 kB     00:00 ETAFedora 30 - armhfp -  0% [                    ]  25 kB/s |   0  B     00:08 ETAFedora 30 - armhfp - 49% [=========-          ]  44 kB/s | 105 kB     00:02 ETAFedora 30 - armhfp - 57% [===========         ]  38 kB/s | 120 kB     00:02 ETAFedora 30 - armhfp -  6% [=                   ]  57 kB/s | 322 kB     01:15 ETAFedora 30 - armhfp -  3% [-                   ] 114 kB/s | 626 kB     02:54 ETAFedora 30 - armhfp -  3% [-                   ] 142 kB/s | 802 kB     02:18 ETAFedora 30 - armhfp -  7% [=-                  ] 287 kB/s | 1.5 MB     01:05 ETAFedora 30 - armhfp - 11% [==                  ] 433 kB/s | 2.3 MB     00:41 ETAFedora 30 - armhfp - 12% [==-                 ] 428 kB/s | 2.5 MB     00:41 ETAFedora 30 - armhfp - 16% [===                 ] 620 kB/s | 3.6 MB     00:30 ETAFedora 30 - armhfp - 20% [====                ] 771 kB/s | 4.5 MB     00:23 ETAFedora 30 - armhfp - 24% [====-               ] 904 kB/s | 5.4 MB     00:19 ETAFedora 30 - armhfp - 28% [=====-              ] 1.0 MB/s | 6.4 MB     00:15 ETAFedora 30 - armhfp - 32% [======-             ] 1.2 MB/s | 7.3 MB     00:12 ETAFedora 30 - armhfp - 37% [=======             ] 1.3 MB/s | 8.3 MB     00:10 ETAFedora 30 - armhfp - 37% [=======             ] 1.2 MB/s | 8.4 MB     00:11 ETAFedora 30 - armhfp - 39% [=======-            ] 1.2 MB/s | 8.8 MB     00:11 ETAFedora 30 - armhfp - 40% [========            ] 1.1 MB/s | 8.9 MB     00:12 ETAFedora 30 - armhfp - 43% [========-           ] 1.2 MB/s | 9.7 MB     00:10 ETAFedora 30 - armhfp - 44% [========-           ] 1.2 MB/s |  10 MB     00:10 ETAFedora 30 - armhfp - 45% [=========           ] 1.1 MB/s |  10 MB     00:10 ETAFedora 30 - armhfp - 46% [=========           ] 1.1 MB/s |  10 MB     00:10 ETAFedora 30 - armhfp - 47% [=========           ] 1.0 MB/s |  11 MB     00:11 ETAFedora 30 - armhfp - 48% [=========-          ] 1.0 MB/s |  11 MB     00:11 ETAFedora 30 - armhfp - 49% [=========-          ] 1.0 MB/s |  11 MB     00:11 ETAFedora 30 - armhfp - 50% [==========          ] 998 kB/s |  11 MB     00:11 ETAFedora 30 - armhfp - 51% [==========          ] 992 kB/s |  11 MB     00:11 ETAFedora 30 - armhfp - 52% [==========          ] 962 kB/s |  12 MB     00:11 ETAFedora 30 - armhfp - 53% [==========-         ] 961 kB/s |  12 MB     00:11 ETAFedora 30 - armhfp - 54% [==========-         ] 951 kB/s |  12 MB     00:10 ETAFedora 30 - armhfp - 55% [===========         ] 939 kB/s |  12 MB     00:10 ETAFedora 30 - armhfp - 56% [===========         ] 937 kB/s |  13 MB     00:10 ETAFedora 30 - armhfp - 58% [===========-        ] 937 kB/s |  13 MB     00:10 ETAFedora 30 - armhfp - 59% [===========-        ] 941 kB/s |  13 MB     00:09 ETAFedora 30 - armhfp - 60% [============        ] 944 kB/s |  14 MB     00:09 ETAFedora 30 - armhfp - 62% [============        ] 951 kB/s |  14 MB     00:09 ETAFedora 30 - armhfp - 63% [============-       ] 964 kB/s |  14 MB     00:08 ETAFedora 30 - armhfp - 63% [============-       ] 892 kB/s |  14 MB     00:09 ETAFedora 30 - armhfp - 64% [============-       ] 860 kB/s |  14 MB     00:09 ETAFedora 30 - armhfp - 66% [=============       ] 882 kB/s |  15 MB     00:08 ETAFedora 30 - armhfp - 67% [=============-      ] 912 kB/s |  15 MB     00:08 ETAFedora 30 - armhfp - 69% [=============-      ] 907 kB/s |  16 MB     00:07 ETAFedora 30 - armhfp - 70% [==============      ] 856 kB/s |  16 MB     00:07 ETAFedora 30 - armhfp - 71% [==============      ] 836 kB/s |  16 MB     00:07 ETAFedora 30 - armhfp - 73% [==============-     ] 840 kB/s |  16 MB     00:07 ETAFedora 30 - armhfp - 74% [==============-     ] 843 kB/s |  17 MB     00:06 ETAFedora 30 - armhfp - 75% [===============     ] 847 kB/s |  17 MB     00:06 ETAFedora 30 - armhfp - 76% [===============     ] 850 kB/s |  17 MB     00:06 ETAFedora 30 - armhfp - 78% [===============-    ] 862 kB/s |  17 MB     00:05 ETAFedora 30 - armhfp - 79% [===============-    ] 877 kB/s |  18 MB     00:05 ETAFedora 30 - armhfp - 80% [================    ] 851 kB/s |  18 MB     00:05 ETAFedora 30 - armhfp - 81% [================    ] 854 kB/s |  18 MB     00:04 ETAFedora 30 - armhfp - 83% [================-   ] 860 kB/s |  19 MB     00:04 ETAFedora 30 - armhfp - 84% [================-   ] 869 kB/s |  19 MB     00:04 ETAFedora 30 - armhfp - 85% [=================   ] 876 kB/s |  19 MB     00:03 ETAFedora 30 - armhfp - 87% [=================   ] 888 kB/s |  19 MB     00:03 ETAFedora 30 - armhfp - 88% [=================-  ] 905 kB/s |  20 MB     00:02 ETAFedora 30 - armhfp - 90% [==================  ] 901 kB/s |  20 MB     00:02 ETAFedora 30 - armhfp - 91% [==================  ] 902 kB/s |  20 MB     00:02 ETAFedora 30 - armhfp - 92% [==================- ] 908 kB/s |  21 MB     00:01 ETAFedora 30 - armhfp - 93% [==================- ] 894 kB/s |  21 MB     00:01 ETAFedora 30 - armhfp - 94% [==================- ] 888 kB/s |  21 MB     00:01 ETAFedora 30 - armhfp - Updates                    843 kB/s |  21 MB     00:25    
+dnf invoked oom-killer: gfp_mask=0x24200ca(GFP_HIGHUSER_MOVABLE), nodemask=0, order=0, oom_score_adj=0
+CPU: 0 PID: 1636 Comm: dnf Not tainted 4.9.37 #1
+Hardware name: Generic DT based system
+[<c010fd78>] (unwind_backtrace) from [<c010bb20>] (show_stack+0x10/0x14)
+[<c010bb20>] (show_stack) from [<c033dcec>] (dump_stack+0x84/0x98)
+[<c033dcec>] (dump_stack) from [<c01da904>] (dump_header.constprop.4+0x68/0x17c)
+[<c01da904>] (dump_header.constprop.4) from [<c019de40>] (oom_kill_process+0x310/0x4e8)
+[<c019de40>] (oom_kill_process) from [<c019e334>] (out_of_memory+0x100/0x438)
+[<c019e334>] (out_of_memory) from [<c01a2a78>] (__alloc_pages_nodemask+0xbd0/0xbf0)
+[<c01a2a78>] (__alloc_pages_nodemask) from [<c01c2334>] (handle_mm_fault+0xc50/0x1144)
+[<c01c2334>] (handle_mm_fault) from [<c01123b4>] (do_page_fault+0x218/0x294)
+[<c01123b4>] (do_page_fault) from [<c0101318>] (do_DataAbort+0x50/0xe8)
+[<c0101318>] (do_DataAbort) from [<c010ca5c>] (__dabt_usr+0x3c/0x40)
+Exception stack(0xc0a13fb0 to 0xc0a13ff8)
+3fa0:                                     6567616b 81dfd5f4 81dfd5f4 81e04ffe
+3fc0: 81e05029 2f372e33 30313031 30313031 000002e8 0000008b 0000008d 81e04f9c
+3fe0: 6361702d beded408 65746973 b541d574 200b0010 ffffffff
+Mem-Info:
+active_anon:27077 inactive_anon:0 isolated_anon:0
+ active_file:67 inactive_file:85 isolated_file:0
+ unevictable:0 dirty:82 writeback:0 unstable:0
+ slab_reclaimable:584 slab_unreclaimable:1068
+ mapped:30 shmem:1 pagetables:137 bounce:0
+ free:1021 free_pcp:51 free_cma:0
+Node 0 active_anon:108308kB inactive_anon:0kB active_file:268kB inactive_file:212kB unevictable:0kB isolated(anon):0kB isolated(file):128kB mapped:120kB dirty:328kB writeback:0kB shmem:4kB writeback_tmp:0kB unstable:0kB pages_scanned:1680660 all_unreclaimable? yes
+Normal free:4084kB min:4096kB low:5120kB high:6144kB active_anon:108308kB inactive_anon:0kB active_file:268kB inactive_file:332kB unevictable:0kB writepending:328kB present:131072kB managed:122048kB mlocked:0kB slab_reclaimable:2336kB slab_unreclaimable:4272kB kernel_stack:616kB pagetables:548kB bounce:0kB free_pcp:204kB local_pcp:48kB free_cma:0kB
+lowmem_reserve[]: 0 0 0
+Normal: 127*4kB (UME) 231*8kB (UE) 108*16kB (UE) 0*32kB 0*64kB 0*128kB 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 4084kB
+153 total pagecache pages
+32768 pages RAM
+0 pages HighMem/MovableOnly
+2256 pages reserved
+4096 pages cma reserved
+[ pid ]   uid  tgid total_vm      rss nr_ptes nr_pmds swapents oom_score_adj name
+[   87]     0    87      466       53       4       0        0         -1000 udevd
+[  123]     0   123      466       54       5       0        0         -1000 udevd
+[  124]     0   124      466       55       5       0        0         -1000 udevd
+[  129]     0   129      771       25       5       0        0             0 sh
+[  142]     0   142      888       30       6       0        0             0 telnetd
+[  143]     0   143      771       34       4       0        0             0 sh
+[  668]     0   668      771       27       6       0        0             0 sh
+[ 1496]     0  1496      771       26       6       0        0             0 sh
+[ 1502]     0  1502      888       86       6       0        0             0 bash
+[ 1636]     0  1636    43221    26744      85       0        0             0 dnf
+Out of memory: Kill process 1636 (dnf) score 852 or sacrifice child
+Killed process 1636 (dnf) total-vm:172884kB, anon-rss:106856kB, file-rss:120kB, shmem-rss:0kB
+oom_reaper: reaped process 1636 (dnf), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+Killed
+bash-5.0# free
+bash: free: command not found
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 

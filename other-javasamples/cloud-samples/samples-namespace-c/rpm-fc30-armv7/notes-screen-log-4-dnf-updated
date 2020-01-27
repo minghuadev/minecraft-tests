@@ -1,0 +1,838 @@
+uname -a
+Linux (none) 4.9.37 #2 SMP Sun Jan 26 23:43:58 UTC 2020 armv7l GNU/Linux
+~ # 
+~ # 
+~ # ls -l
+total 897464
+dr-xr-xr-x   17 root     root          4096 Jan  4 17:59 altroot-1
+-rw-------    1 root     root      51932797 Jan  5 19:17 altroot-1.tgz
+dr-xr-xr-x   17 root     root          4096 Jan  5 19:02 altroot-2
+-rw-------    1 root     root      56665412 Jan  5 19:22 altroot-2.tgz
+-rw-------    1 root     root           318 Jan  5 20:21 altroot-sha256-sums
+-rw-------    1 root     root       1048576 Jan  1 00:01 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1 00:02 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4 17:46 i1.bash
+-rwx------    1 root     root            68 Jan  4 17:52 i2.bash
+-rwx------    1 root     root           109 Jan  4 17:55 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+drwx------    2 root     root          4096 Jan  5 18:23 repof303
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4 00:21 root
+drwx------    2 root     root          4096 Jan  4 17:25 root-n1
+-rw-------    1 root     root     209831700 Jan  5 19:37 root-n1.tgz
+drwx------    2 root     root          4096 Jan  5 20:25 root-n2
+drwx------   18 root     root          4096 Jan random: fast init done
+ 5 20:29 root-n2-snapshot1
+-rw-------    1 root     root     120505276 Jan  5 22:10 root-n2-snapshot1.tgz
+drwx------    2 root     root          4096 Jan  2 18:46 root-new
+-rw-------    1 root     root     149044167 Jan  5 19:28 root-new.tgz
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1 19:37 stream_chn0.h265
+-rw-------    1 root     root       3484952 Jan 26  2020 uImage
+-rw-------    1 root     root       3485400 Jan  1 00:04 uImage-jan22
+~ # 
+~ # 
+~ # mount -o bind /mnt/root-n2 root-n2
+~ # cd root-n2
+~/root-n2 # mount /rproc proc
+~/root-n2 # mount /dev dev
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # unshare -m --propagation slave
+Welcome to Linux.
+None of nfsroot found in cmdline.
+~/root-n2 # 
+~/root-n2 # pivot_root . root-old-n2
+/ # bash
+bash-5.0# cd
+bash-5.0# ls
+python3-libs-3.7.6-1.fc30.armv7hl.rpm  shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# rpm -iv shadow-utils-4.6-8.fc30.armv7hl.rpm
+Verifying packages...
+Preparing packages...
+shadow-utils-2:4.6-8.fc30.armv7hl
+bash-5.0# 
+bash-5.0# dnf -v update             exit
+exit
+/ # exit
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # cd
+~ # telnet 
+~ # 
+~ # ip link set up dev th0
+ip: SIOCGIFFLAGS: No such device
+~ # 
+~ # ip link set up dev eth0
+IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+~ # 
+~ # hisi-femac 10010000.ethernet eth0: Link is Up - 100Mbps/Full - flow control rx/tx
+IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+
+~ # 
+~ # 
+~ # ifconfig eth0 192.168.1.8
+~ # 
+~ # telnetd
+~ # 
+~ # login[133]: root login on 'pts/0'
+
+~ # 
+~ # 
+~ # ls -l
+total 897464
+dr-xr-xr-x   17 root     root          4096 Jan  4 17:59 altroot-1
+-rw-------    1 root     root      51932797 Jan  5 19:17 altroot-1.tgz
+dr-xr-xr-x   17 root     root          4096 Jan  5 19:02 altroot-2
+-rw-------    1 root     root      56665412 Jan  5 19:22 altroot-2.tgz
+-rw-------    1 root     root           318 Jan  5 20:21 altroot-sha256-sums
+-rw-------    1 root     root       1048576 Jan  1 00:01 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1 00:02 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4 17:46 i1.bash
+-rwx------    1 root     root            68 Jan  4 17:52 i2.bash
+-rwx------    1 root     root           109 Jan  4 17:55 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+drwx------    2 root     root          4096 Jan  5 18:23 repof303
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4 00:21 root
+drwx------    2 root     root          4096 Jan  4 17:25 root-n1
+-rw-------    1 root     root     209831700 Jan  5 19:37 root-n1.tgz
+drwx------   18 root     root          4096 Jan  5 20:29 root-n2
+drwx------   18 root     root          4096 Jan  5 20:29 root-n2-snapshot1
+-rw-------    1 root     root     120505276 Jan  5 22:10 root-n2-snapshot1.tgz
+drwx------    2 root     root          4096 Jan  2 18:46 root-new
+-rw-------    1 root     root     149044167 Jan  5 19:28 root-new.tgz
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1 19:37 stream_chn0.h265
+-rw-------    1 root     root       3484952 Jan 26  2020 uImage
+-rw-------    1 root     root       3485400 Jan  1 00:04 uImage-jan22
+~ # cd root-n2
+~/root-n2 # unshare -m --propagation slave
+Welcome to Linux.
+None of nfsroot found in cmdline.
+~/root-n2 # pivot_root . root-old-n2
+/ # bash
+bash-5.0# cd
+bash-5.0# 
+bash-5.0# 
+bash-5.0# d date 1 2020-1-26
+date: invalid date '2020-1-26'
+bash-5.0# date -s 2020-1-26
+Sun Jan 26 00:00:00 UTC 2020
+bash-5.0# random: crng init done
+
+bash-5.0# date -s 23:59:55
+Sun Jan 26 23:59:55 UTC 2020
+bash-5.0# date
+Sun Jan 26 23:59:56 UTC 2020
+bash-5.0# 
+bash-5.0# date
+Mon Jan 27 00:00:00 UTC 2020
+bash-5.0# 
+bash-5.0# date s -s 0:02
+Mon Jan 27 00:02:00 UTC 2020
+bash-5.0# date
+Mon Jan 27 00:02:01 UTC 2020
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -l
+total 8468
+-rw------- 1 root root 7512288 Jan  5  1970 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+-rw------- 1 root root 1151960 Jan 26 22:57 shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf -v update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:47:00 ago on Sun Jan 26 23:15:31 2020.
+--> Starting dependency resolution
+--> Finished dependency resolution
+Dependencies resolved.
+Nothing to do.
+Complete!
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf -v install nettle python2-libs                                    
+bash-5.0# 
+bash-5.0# rpm -     dnf -v install         res install rpm iputils netto  -tools ncurses
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:54:13 ago on Sun Jan 26 23:15:31 2020.
+Package rpm available, but not installed.
+No match for argument: rpm
+Package iputils available, but not installed.
+No match for argument: iputils
+Package net-tools available, but not installed.
+No match for argument: net-tools
+Package ncurses available, but not installed.
+No match for argument: ncurses
+Error: No packages marked for reinstall.
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf -v reinstall rpm iputils net-tools ncursesinstall rpm iputils net-tools ncursesbash-5.0# dnf -v rinstall rpm iputils net-tools ncursesbash-5.0# dnf -v 
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:55:04 ago on Sun Jan 26 23:15:31 2020.
+--> Starting dependency resolution
+---> Package rpm.armv7hl 4.14.2.1-5.fc30 will be installed
+---> Package iputils.armv7hl 20180629-4.fc30 will be installed
+---> Package ncurses.armv7hl 6.1-10.20180923.fc30 will be installed
+---> Package net-tools.armv7hl 2.0-0.54.20160912git.fc30 will be installed
+--> Finished dependency resolution
+Dependencies resolved.
+================================================================================
+ Package        Architecture Version                         Repository    Size
+================================================================================
+Installing:
+ rpm            armv7hl      4.14.2.1-5.fc30                 updates      478 k
+ iputils        armv7hl      20180629-4.fc30                 fedora       122 k
+ ncurses        armv7hl      6.1-10.20180923.fc30            fedora       353 k
+ net-tools      armv7hl      2.0-0.54.20160912git.fc30       fedora       262 k
+
+Transaction Summary
+================================================================================
+Install  4 Packages
+
+Total download size: 1.2 M
+Installed size: 4.7 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/4): rpm-4.14.2.1-  0% [                    ] ---  B/s |   0  B     --:-- ETA(1-3/4): rpm-4.14.2.  0% [                    ] ---  B/s |   0  B     --:-- ETA(1/4): iputils-20180629-4.fc30.armv7hl.rpm      201 kB/s | 122 kB     00:00    
+(2-3/4): ncurses-6.1 16% [===                 ] 747 kB/s | 201 kB     00:01 ETA(2-4/4): ncurses-6.1 53% [==========-         ] 790 kB/s | 647 kB     00:00 ETA(2/4): ncurses-6.1-10.20180923.fc30.armv7hl.rpm 363 kB/s | 353 kB     00:00    
+(3-4/4): rpm-4.14.2. 63% [============-       ] 807 kB/s | 776 kB     00:00 ETA(3/4): rpm-4.14.2.1-5.fc30.armv7hl.rpm          413 kB/s | 478 kB     00:01    
+(4/4): net-tools-2.0 86% [=================   ] 833 kB/s | 1.0 MB     00:00 ETA(4/4): net-tools-2.0-0.54.20160912git.fc30.armv 332 kB/s | 262 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                           859 kB/s | 1.2 MB     00:01     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+RPMDB altered outside of DNF.
+  Preparing        :  [============                                       ] 1/1  Preparing        :  [=========================                          ] 1/1  Preparing        :  [======================================             ] 1/1  Preparing        :                                                        1/1 
+  Installing       : net-tools-2.0-0.54.201609 [                          ] 1/4  Installing       : net-tools-2.0-0.54.201609 [=                         ] 1/4  Installing       : net-tools-2.0-0.54.201609 [==                        ] 1/4  Installing       : net-tools-2.0-0.54.201609 [===                       ] 1/4  Installing       : net-tools-2.0-0.54.201609 [====                      ] 1/4  Installing       : net-tools-2.0-0.54.201609 [=====                     ] 1/4  Installing       : net-tools-2.0-0.54.201609 [======                    ] 1/4  Installing       : net-tools-2.0-0.54.201609 [=======                   ] 1/4  Installing       : net-tools-2.0-0.54.201609 [========                  ] 1/4  Installing       : net-tools-2.0-0.54.201609 [=========                 ] 1/4  Installing       : net-tools-2.0-0.54.201609 [==========                ] 1/4  Installing       : net-tools-2.0-0.54.201609 [===========               ] 1/4  Installing       : net-tools-2.0-0.54.201609 [============              ] 1/4  Installing       : net-tools-2.0-0.54.201609 [=============             ] 1/4  Installing       : net-tools-2.0-0.54.201609 [==============            ] 1/4  Installing       : net-tools-2.0-0.54.201609 [===============           ] 1/4  Installing       : net-tools-2.0-0.54.201609 [================          ] 1/4  Installing       : net-tools-2.0-0.54.201609 [=================         ] 1/4  Installing       : net-tools-2.0-0.54.201609 [==================        ] 1/4  Installing       : net-tools-2.0-0.54.201609 [===================       ] 1/4  Installing       : net-tools-2.0-0.54.201609 [====================      ] 1/4  Installing       : net-tools-2.0-0.54.201609 [=====================     ] 1/4  Installing       : net-tools-2.0-0.54.201609 [======================    ] 1/4  Installing       : net-tools-2.0-0.54.201609 [=======================   ] 1/4  Installing       : net-tools-2.0-0.54.201609 [========================  ] 1/4  Installing       : net-tools-2.0-0.54.201609 [========================= ] 1/4  Installing       : net-tools-2.0-0.54.20160912git.fc30.armv7hl            1/4 
+  Running scriptlet: net-tools-2.0-0.54.20160912git.fc30.armv7hl            1/4 
+  Installing       : ncurses-6.1-10.20180923.f [                          ] 2/4  Installing       : ncurses-6.1-10.20180923.f [==                        ] 2/4  Installing       : ncurses-6.1-10.20180923.f [===                       ] 2/4  Installing       : ncurses-6.1-10.20180923.f [=====                     ] 2/4  Installing       : ncurses-6.1-10.20180923.f [======                    ] 2/4  Installing       : ncurses-6.1-10.20180923.f [=======                   ] 2/4  Installing       : ncurses-6.1-10.20180923.f [========                  ] 2/4  Installing       : ncurses-6.1-10.20180923.f [=========                 ] 2/4  Installing       : ncurses-6.1-10.20180923.f [==========                ] 2/4  Installing       : ncurses-6.1-10.20180923.f [============              ] 2/4  Installing       : ncurses-6.1-10.20180923.f [=============             ] 2/4  Installing       : ncurses-6.1-10.20180923.f [==============            ] 2/4  Installing       : ncurses-6.1-10.20180923.f [===============           ] 2/4  Installing       : ncurses-6.1-10.20180923.f [================          ] 2/4  Installing       : ncurses-6.1-10.20180923.f [==================        ] 2/4  Installing       : ncurses-6.1-10.20180923.f [===================       ] 2/4  Installing       : ncurses-6.1-10.20180923.f [====================      ] 2/4  Installing       : ncurses-6.1-10.20180923.f [=====================     ] 2/4  Installing       : ncurses-6.1-10.20180923.f [======================    ] 2/4  Installing       : ncurses-6.1-10.20180923.f [=======================   ] 2/4  Installing       : ncurses-6.1-10.20180923.f [========================= ] 2/4  Installing       : ncurses-6.1-10.20180923.fc30.armv7hl                   2/4 
+  Installing       : iputils-20180629-4.fc30.a [                          ] 3/4  Installing       : iputils-20180629-4.fc30.a [==                        ] 3/4  Installing       : iputils-20180629-4.fc30.a [=====                     ] 3/4  Installing       : iputils-20180629-4.fc30.a [======                    ] 3/4  Installing       : iputils-20180629-4.fc30.a [========                  ] 3/4  Installing       : iputils-20180629-4.fc30.a [==========                ] 3/4  Installing       : iputils-20180629-4.fc30.a [============              ] 3/4  Installing       : iputils-20180629-4.fc30.a [==============            ] 3/4  Installing       : iputils-20180629-4.fc30.a [=================         ] 3/4  Installing       : iputils-20180629-4.fc30.a [===================       ] 3/4  Installing       : iputils-20180629-4.fc30.a [======================    ] 3/4  Installing       : iputils-20180629-4.fc30.a [=======================   ] 3/4  Installing       : iputils-20180629-4.fc30.a [========================  ] 3/4  Installing       : iputils-20180629-4.fc30.a [========================= ] 3/4  Installing       : iputils-20180629-4.fc30.armv7hl                        3/4 
+  Running scriptlet: iputils-20180629-4.fc30.armv7hl                        3/4 
+  Installing       : rpm-4.14.2.1-5.fc30.armv7 [                          ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [=                         ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [==                        ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [===                       ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [====                      ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [=====                     ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [======                    ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [=======                   ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [========                  ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [=========                 ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [==========                ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [===========               ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [============              ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [=============             ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [==============            ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [===============           ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [================          ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [=================         ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [==================        ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [===================       ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [====================      ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [=====================     ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [======================    ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [=======================   ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [========================  ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7 [========================= ] 4/4  Installing       : rpm-4.14.2.1-5.fc30.armv7hl                            4/4 
+  Running scriptlet: rpm-4.14.2.1-5.fc30.armv7hl                            4/4 
+  Verifying        : rpm-4.14.2.1-5.fc30.armv7hl                            1/4 
+  Verifying        : iputils-20180629-4.fc30.armv7hl                        2/4 
+  Verifying        : ncurses-6.1-10.20180923.fc30.armv7hl                   3/4 
+  Verifying        : net-tools-2.0-0.54.20160912git.fc30.armv7hl            4/4 
+
+Installed:
+  rpm-4.14.2.1-5.fc30.armv7hl                                                   
+  iputils-20180629-4.fc30.armv7hl                                               
+  ncurses-6.1-10.20180923.fc30.armv7hl                                          
+  net-tools-2.0-0.54.20160912git.fc30.armv7hl                                   
+
+Complete!
+bash-5.0# ip link show
+bash: ip: command not found
+bash-5.0# n 
+bash-5.0# dnf install which
+Last metadata expiration check: 0:56:27 ago on Sun Jan 26 23:15:31 2020.
+Dependencies resolved.
+================================================================================
+ Package        Architecture     Version                  Repository       Size
+================================================================================
+Installing:
+ which          armv7hl          2.21-14.fc30             fedora           39 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 39 k
+Installed size: 83 k
+Is this ok [y/N]: y
+Downloading Packages:
+which-2.21-14.fc30.a  0% [                    ] ---  B/s |   0  B     --:-- ETAwhich-2.21-14.fc30.a  0% [                    ] ---  B/s |   0  B     --:-- ETAwhich-2.21-14.fc30.a  0% [                    ] ---  B/s |   0  B     --:-- ETAwhich-2.21-14.fc30.armv7hl.rpm                   51 kB/s |  39 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                            50 kB/s |  39 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : which-2.21-14.fc30.armv7h [                          ] 1/1  Installing       : which-2.21-14.fc30.armv7h [=========                 ] 1/1  Installing       : which-2.21-14.fc30.armv7h [===========               ] 1/1  Installing       : which-2.21-14.fc30.armv7h [============              ] 1/1  Installing       : which-2.21-14.fc30.armv7h [==============            ] 1/1  Installing       : which-2.21-14.fc30.armv7h [========================  ] 1/1  Installing       : which-2.21-14.fc30.armv7h [========================= ] 1/1  Installing       : which-2.21-14.fc30.armv7hl                             1/1 
+  Running scriptlet: which-2.21-14.fc30.armv7hl                             1/1 
+  Verifying        : which-2.21-14.fc30.armv7hl                             1/1 
+
+Installed:
+  which-2.21-14.fc30.armv7hl                                                    
+
+Complete!
+bash-5.0# 
+bash-5.0# dnf -v install ip
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:57:46 ago on Sun Jan 26 23:15:31 2020.
+No match for argument: ip
+Error: Unable to find a match: ip
+bash-5.0# 
+bash-5.0# dnf -v install iproute
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:58:28 ago on Sun Jan 26 23:15:31 2020.
+--> Starting dependency resolution
+---> Package iproute.armv7hl 5.2.0-1.fc30 will be installed
+---> Package iproute-tc.armv7hl 5.2.0-1.fc30 will be installed
+---> Package linux-atm-libs.armv7hl 2.5.1-25.fc30 will be installed
+---> Package libmnl.armv7hl 1.0.4-9.fc30 will be installed
+--> Finished dependency resolution
+Dependencies resolved.
+================================================================================
+ Package               Architecture   Version              Repository      Size
+================================================================================
+Installing:
+ iproute               armv7hl        5.2.0-1.fc30         updates        533 k
+Installing dependencies:
+ linux-atm-libs        armv7hl        2.5.1-25.fc30        updates         33 k
+ libmnl                armv7hl        1.0.4-9.fc30         fedora          25 k
+Installing weak dependencies:
+ iproute-tc            armv7hl        5.2.0-1.fc30         updates        376 k
+
+Transaction Summary
+================================================================================
+Install  4 Packages
+
+Total download size: 966 k
+Installed size: 3.0 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/4): iproute-5.2.0  0% [                    ] ---  B/s |   0  B     --:-- ETA(1-3/4): iproute-5.2  0% [                    ] ---  B/s |   0  B     --:-- ETA(1/4): linux-atm-libs-2.5.1-25.fc30.armv7hl.rpm  71 kB/s |  33 kB     00:00    
+(2-3/4): iproute-5.2  6% [=                   ] 360 kB/s |  60 kB     00:02 ETA(2-4/4): iproute-tc- 44% [========-           ] 412 kB/s | 427 kB     00:01 ETA(2/4): iproute-5.2.0-1.fc30.armv7hl.rpm         576 kB/s | 533 kB     00:00    
+(3-4/4): libmnl-1.0. 84% [================-   ] 476 kB/s | 813 kB     00:00 ETA(3/4): iproute-tc-5.2.0-1.fc30.armv7hl.rpm      358 kB/s | 376 kB     00:01    
+(4/4): libmnl-1.0.4- 97% [=================== ] 489 kB/s | 941 kB     00:00 ETA(4/4): libmnl-1.0.4- 99% [===================-] 460 kB/s | 957 kB     00:00 ETA(4/4): libmnl-1.0.4-9.fc30.armv7hl.rpm           27 kB/s |  25 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                           683 kB/s | 966 kB     00:01     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :  [============                                       ] 1/1  Preparing        :  [=========================                          ] 1/1  Preparing        :  [======================================             ] 1/1  Preparing        :                                                        1/1 
+  Installing       : libmnl-1.0.4-9.fc30.armv7 [                          ] 1/4  Installing       : libmnl-1.0.4-9.fc30.armv7 [===========               ] 1/4  Installing       : libmnl-1.0.4-9.fc30.armv7 [============              ] 1/4  Installing       : libmnl-1.0.4-9.fc30.armv7 [========================= ] 1/4  Installing       : libmnl-1.0.4-9.fc30.armv7hl                            1/4 
+  Installing       : linux-atm-libs-2.5.1-25.f [                          ] 2/4  Installing       : linux-atm-libs-2.5.1-25.f [=========                 ] 2/4  Installing       : linux-atm-libs-2.5.1-25.f [==================        ] 2/4  Installing       : linux-atm-libs-2.5.1-25.f [========================= ] 2/4  Installing       : linux-atm-libs-2.5.1-25.fc30.armv7hl                   2/4 
+  Installing       : iproute-tc-5.2.0-1.fc30.a [                          ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [=                         ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [==                        ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [===                       ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [====                      ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [=====                     ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [======                    ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [=======                   ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [========                  ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [=========                 ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [==========                ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [===========               ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [============              ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [=============             ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [==============            ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [===============           ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [================          ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [=================         ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [==================        ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [===================       ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [====================      ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [=====================     ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [======================    ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [=======================   ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [========================  ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.a [========================= ] 3/4  Installing       : iproute-tc-5.2.0-1.fc30.armv7hl                        3/4 
+  Installing       : iproute-5.2.0-1.fc30.armv [                          ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [=                         ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [==                        ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [===                       ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [====                      ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [=====                     ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [======                    ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [=======                   ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [========                  ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [=========                 ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [==========                ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [===========               ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [============              ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [=============             ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [==============            ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [===============           ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [================          ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [=================         ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [==================        ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [===================       ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [====================      ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [=====================     ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [======================    ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [=======================   ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [========================  ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv [========================= ] 4/4  Installing       : iproute-5.2.0-1.fc30.armv7hl                           4/4 
+  Running scriptlet: iproute-5.2.0-1.fc30.armv7hl                           4/4 
+  Verifying        : iproute-5.2.0-1.fc30.armv7hl                           1/4 
+  Verifying        : iproute-tc-5.2.0-1.fc30.armv7hl                        2/4 
+  Verifying        : linux-atm-libs-2.5.1-25.fc30.armv7hl                   3/4 
+  Verifying        : libmnl-1.0.4-9.fc30.armv7hl                            4/4 
+
+Installed:
+  iproute-5.2.0-1.fc30.armv7hl              iproute-tc-5.2.0-1.fc30.armv7hl     
+  linux-atm-libs-2.5.1-25.fc30.armv7hl      libmnl-1.0.4-9.fc30.armv7hl         
+
+Complete!
+bash-5.0# dnf -v install bind-utils
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:59:44 ago on Sun Jan 26 23:15:31 2020.
+--> Starting dependency resolution
+---> Package bind-libs.armv7hl 32:9.11.14-2.fc30 will be installed
+---> Package bind-libs-lite.armv7hl 32:9.11.14-2.fc30 will be installed
+---> Package bind-license.noarch 32:9.11.14-2.fc30 will be installed
+---> Package bind-utils.armv7hl 32:9.11.14-2.fc30 will be installed
+---> Package fstrm.armv7hl 0.5.0-1.fc30 will be installed
+---> Package GeoIP.armv7hl 1.6.12-5.fc30 will be installed
+---> Package GeoIP-GeoLite-data.noarch 2018.06-3.fc30 will be installed
+---> Package lmdb-libs.armv7hl 0.9.23-2.fc30 will be installed
+---> Package protobuf-c.armv7hl 1.3.1-2.fc30 will be installed
+--> Finished dependency resolution
+Dependencies resolved.
+================================================================================
+ Package                 Architecture Version                Repository    Size
+================================================================================
+Installing:
+ bind-utils              armv7hl      32:9.11.14-2.fc30      updates      221 k
+Installing dependencies:
+ bind-libs               armv7hl      32:9.11.14-2.fc30      updates       82 k
+ bind-libs-lite          armv7hl      32:9.11.14-2.fc30      updates      990 k
+ bind-license            noarch       32:9.11.14-2.fc30      updates       19 k
+ fstrm                   armv7hl      0.5.0-1.fc30           updates       23 k
+ GeoIP                   armv7hl      1.6.12-5.fc30          fedora       106 k
+ GeoIP-GeoLite-data      noarch       2018.06-3.fc30         fedora       549 k
+ lmdb-libs               armv7hl      0.9.23-2.fc30          fedora        50 k
+ protobuf-c              armv7hl      1.3.1-2.fc30           fedora        31 k
+
+Transaction Summary
+================================================================================
+Install  9 Packages
+
+Total download size: 2.0 M
+Installed size: 5.6 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/9): bind-libs-9.1  0% [                    ] ---  B/s |   0  B     --:-- ETA(1-3/9): bind-libs-9  0% [                    ] ---  B/s |   0  B     --:-- ETA(1/9): bind-license-9.11.14-2.fc30.noarch.rpm    45 kB/s |  19 kB     00:00    
+(2-3/9): bind-libs-9  3% [-                   ] 767 kB/s |  74 kB     00:02 ETA(2/9): bind-libs-9.11.14-2.fc30.armv7hl.rpm     155 kB/s |  82 kB     00:00    
+(3-4/9): bind-libs-l  9% [=-                  ] 775 kB/s | 190 kB     00:02 ETA(3-5/9): bind-utils- 16% [===                 ] 760 kB/s | 350 kB     00:02 ETA(3-5/9): bind-utils- 26% [=====               ] 753 kB/s | 550 kB     00:02 ETA(3/9): fstrm-0.5.0-1.fc30.armv7hl.rpm            30 kB/s |  23 kB     00:00    
+(4-5/9): bind-libs-l 31% [======              ] 752 kB/s | 660 kB     00:01 ETA(4-6/9): GeoIP-1.6.1 52% [==========          ] 792 kB/s | 1.1 MB     00:01 ETA(4/9): bind-utils-9.11.14-2.fc30.armv7hl.rpm    173 kB/s | 221 kB     00:01    
+(5-6/9): GeoIP-1.6.1 60% [============        ] 807 kB/s | 1.2 MB     00:01 ETA(5/9): GeoIP-1.6.12-5.fc30.armv7hl.rpm          189 kB/s | 106 kB     00:00    
+(6-7/9): GeoIP-GeoLi 66% [=============       ] 810 kB/s | 1.4 MB     00:00 ETA(6/9): bind-libs-lite-9.11.14-2.fc30.armv7hl.rp 494 kB/s | 990 kB     00:02    
+(7-8/9): lmdb-libs-0 69% [=============-      ] 797 kB/s | 1.4 MB     00:00 ETA(7-9/9): protobuf-c- 76% [===============     ] 777 kB/s | 1.6 MB     00:00 ETA(7/9): lmdb-libs-0.9.23-2.fc30.armv7hl.rpm       70 kB/s |  50 kB     00:00    
+(8-9/9): GeoIP-GeoLi 84% [================-   ] 768 kB/s | 1.7 MB     00:00 ETA(8-9/9): GeoIP-GeoLi 91% [==================  ] 750 kB/s | 1.8 MB     00:00 ETA(8/9): GeoIP-GeoLite-data-2018.06-3.fc30.noarch 373 kB/s | 549 kB     00:01    
+(9/9): protobuf-c-1. 98% [===================-] 734 kB/s | 2.0 MB     00:00 ETA(9/9): protobuf-c-1. 98% [===================-] 734 kB/s | 2.0 MB     00:00 ETA(9/9): protobuf-c-1. 98% [===================-] 734 kB/s | 2.0 MB     00:00 ETA(9/9): protobuf-c-1. 98% [===================-] 639 kB/s | 2.0 MB     00:00 ETA(9/9): protobuf-c-1.3.1-2.fc30.armv7hl.rpm      7.5 kB/s |  31 kB     00:04    
+--------------------------------------------------------------------------------
+Total                                           336 kB/s | 2.0 MB     00:06     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :  [=====                                              ] 1/1  Preparing        :  [===========                                        ] 1/1  Preparing        :  [================                                   ] 1/1  Preparing        :  [======================                             ] 1/1  Preparing        :  [============================                       ] 1/1  Preparing        :  [=================================                  ] 1/1  Preparing        :  [=======================================            ] 1/1  Preparing        :  [============================================       ] 1/1  Preparing        :                                                        1/1 
+  Installing       : bind-license-32:9.11.14-2 [                          ] 1/9  Installing       : bind-license-32:9.11.14-2 [========================= ] 1/9  Installing       : bind-license-32:9.11.14-2.fc30.noarch                  1/9 
+  Installing       : protobuf-c-1.3.1-2.fc30.a [                          ] 2/9  Installing       : protobuf-c-1.3.1-2.fc30.a [===============           ] 2/9  Installing       : protobuf-c-1.3.1-2.fc30.a [=======================   ] 2/9  Installing       : protobuf-c-1.3.1-2.fc30.a [========================  ] 2/9  Installing       : protobuf-c-1.3.1-2.fc30.a [========================= ] 2/9  Installing       : protobuf-c-1.3.1-2.fc30.armv7hl                        2/9 
+  Installing       : lmdb-libs-0.9.23-2.fc30.a [                          ] 3/9  Installing       : lmdb-libs-0.9.23-2.fc30.a [========                  ] 3/9  Installing       : lmdb-libs-0.9.23-2.fc30.a [================          ] 3/9  Installing       : lmdb-libs-0.9.23-2.fc30.a [======================    ] 3/9  Installing       : lmdb-libs-0.9.23-2.fc30.a [========================  ] 3/9  Installing       : lmdb-libs-0.9.23-2.fc30.a [========================= ] 3/9  Installing       : lmdb-libs-0.9.23-2.fc30.armv7hl                        3/9 
+  Installing       : fstrm-0.5.0-1.fc30.armv7h [                          ] 4/9  Installing       : fstrm-0.5.0-1.fc30.armv7h [===============           ] 4/9  Installing       : fstrm-0.5.0-1.fc30.armv7h [========================  ] 4/9  Installing       : fstrm-0.5.0-1.fc30.armv7h [========================= ] 4/9  Installing       : fstrm-0.5.0-1.fc30.armv7hl                             4/9 
+  Installing       : GeoIP-GeoLite-data-2018.0 [                          ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [=                         ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [==                        ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [===                       ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [====                      ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [=====                     ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [======                    ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [=======                   ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [========                  ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [=========                 ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [==========                ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [===========               ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [============              ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [=============             ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [==============            ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [===============           ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [================          ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [=================         ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [==================        ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [===================       ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [====================      ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [=====================     ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [======================    ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [=======================   ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [========================  ] 5/9  Installing       : GeoIP-GeoLite-data-2018.0 [========================= ] 5/9  Installing       : GeoIP-GeoLite-data-2018.06-3.fc30.noarch               5/9 
+  Installing       : GeoIP-1.6.12-5.fc30.armv7 [                          ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [=                         ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [====                      ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [======                    ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [========                  ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [===========               ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [=============             ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [===============           ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [==================        ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [====================      ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [======================    ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [=======================   ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7 [========================= ] 6/9  Installing       : GeoIP-1.6.12-5.fc30.armv7hl                            6/9 
+  Installing       : bind-libs-lite-32:9.11.14 [                          ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [=                         ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [==                        ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [===                       ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [====                      ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [=====                     ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [======                    ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [=======                   ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [========                  ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [=========                 ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [==========                ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [===========               ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [============              ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [=============             ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [==============            ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [===============           ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [================          ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [=================         ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [==================        ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [===================       ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [====================      ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [=====================     ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [======================    ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [=======================   ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [========================  ] 7/9  Installing       : bind-libs-lite-32:9.11.14 [========================= ] 7/9  Installing       : bind-libs-lite-32:9.11.14-2.fc30.armv7hl               7/9 
+  Installing       : bind-libs-32:9.11.14-2.fc [                          ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc [===                       ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc [=======                   ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc [========                  ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc [===========               ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc [=============             ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc [=================         ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc [=====================     ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc [========================= ] 8/9  Installing       : bind-libs-32:9.11.14-2.fc30.armv7hl                    8/9 
+  Installing       : bind-utils-32:9.11.14-2.f [                          ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [=                         ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [==                        ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [====                      ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [=====                     ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [======                    ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [=======                   ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [========                  ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [=========                 ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [==========                ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [===========               ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [============              ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [==============            ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [===============           ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [================          ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [=================         ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [==================        ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [====================      ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [=====================     ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [======================    ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [=======================   ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [========================  ] 9/9  Installing       : bind-utils-32:9.11.14-2.f [========================= ] 9/9  Installing       : bind-utils-32:9.11.14-2.fc30.armv7hl                   9/9 
+  Running scriptlet: GeoIP-GeoLite-data-2018.06-3.fc30.noarch               9/9 
+  Running scriptlet: bind-utils-32:9.11.14-2.fc30.armv7hl                   9/9 
+  Verifying        : bind-libs-32:9.11.14-2.fc30.armv7hl                    1/9 
+  Verifying        : bind-libs-lite-32:9.11.14-2.fc30.armv7hl               2/9 
+  Verifying        : bind-license-32:9.11.14-2.fc30.noarch                  3/9 
+  Verifying        : bind-utils-32:9.11.14-2.fc30.armv7hl                   4/9 
+  Verifying        : fstrm-0.5.0-1.fc30.armv7hl                             5/9 
+  Verifying        : GeoIP-1.6.12-5.fc30.armv7hl                            6/9 
+  Verifying        : GeoIP-GeoLite-data-2018.06-3.fc30.noarch               7/9 
+  Verifying        : lmdb-libs-0.9.23-2.fc30.armv7hl                        8/9 
+  Verifying        : protobuf-c-1.3.1-2.fc30.armv7hl                        9/9 
+
+Installed:
+  bind-utils-32:9.11.14-2.fc30.armv7hl                                          
+  bind-libs-32:9.11.14-2.fc30.armv7hl                                           
+  bind-libs-lite-32:9.11.14-2.fc30.armv7hl                                      
+  bind-license-32:9.11.14-2.fc30.noarch                                         
+  fstrm-0.5.0-1.fc30.armv7hl                                                    
+  GeoIP-1.6.12-5.fc30.armv7hl                                                   
+  GeoIP-GeoLite-data-2018.06-3.fc30.noarch                                      
+  lmdb-libs-0.9.23-2.fc30.armv7hl                                               
+  protobuf-c-1.3.1-2.fc30.armv7hl                                               
+
+Complete!
+bash-5.0# 
+bash-5.0# 
+bash-5.0# stty col        1111111111111111111111111111111111111111111111111111111111111111111111 11111111111111111111^C
+bash-5.0# stty cols=136
+stty: invalid argument 'cols=136'
+Try 'stty --help' for more information.
+bash-5.0# stty cols 136
+bash-5.0# 1111111111111111111111111111111111111111111111111111111111111111111111 1111111111111111111111                      bash-5.0# 1111111111111111111111111111111111111111111111111111111111111111111111 bash-5.0# 111111111111111111111111111111111111111111111111111111111111111111111
+bash-5.0# 111111111111111111111111111111111111111111111111111111111111111111111                                                                     
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -l
+total 8468
+-rw------- 1 root root 7512288 Jan  5  1970 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+-rw------- 1 root root 1151960 Jan 26 22:57 shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -l
+total 8468
+-rw------- 1 root root 7512288 Jan  5  1970 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+-rw------- 1 root root 1151960 Jan 26 22:57 shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# pwd
+/root
+bash-5.0# cd ..
+bash-5.0# ls -l
+total 56
+lrwxrwxrwx  1 root root    7 Jan  5  1970 bin -> usr/bin
+dr-xr-xr-x  2 root root 4096 Feb 11  2019 boot
+-rw-------  1 root root    0 Jan  5  1970 current-root-n2
+drwxr-xr-x  8 root root 3000 Jan  5  1970 dev
+drwxr-xr-x 48 root root 4096 Jan 27 00:15 etc
+drwxr-xr-x  2 root root 4096 Feb 11  2019 home
+lrwxrwxrwx  1 root root    7 Jan  5  1970 lib -> usr/lib
+drwxr-xr-x  2 root root 4096 Feb 11  2019 media
+drwxr-xr-x  2 root root 4096 Feb 11  2019 mnt
+drwxr-xr-x  6 root root 4096 Jan  5  1970 opt
+dr-xr-xr-x 85 root root    0 Jan  1  1970 proc
+dr-xr-x---  2 root root 4096 Jan 26 22:57 root
+drwxr-xr-x 22 root root 4096 Jan  2  1970 root-old-n2
+drwxr-xr-x 13 root root 4096 Jan 26 22:55 run
+lrwxrwxrwx  1 root root    8 Jan  5  1970 sbin -> usr/sbin
+drwxr-xr-x  2 root root 4096 Feb 11  2019 srv
+dr-xr-xr-x  2 root root 4096 Feb 11  2019 sys
+drwxrwxrwt  3 root root 4096 Jan 27 00:15 tmp
+drwxr-xr-x 11 root root 4096 Jan  5  1970 usr
+drwxr-xr-x 18 root root 4096 Jan  5  1970 var
+bash-5.0# cd /
+bash-5.0# ls -l
+total 56
+lrwxrwxrwx  1 root root    7 Jan  5  1970 bin -> usr/bin
+dr-xr-xr-x  2 root root 4096 Feb 11  2019 boot
+-rw-------  1 root root    0 Jan  5  1970 current-root-n2
+drwxr-xr-x  8 root root 3000 Jan  5  1970 dev
+drwxr-xr-x 48 root root 4096 Jan 27 00:15 etc
+drwxr-xr-x  2 root root 4096 Feb 11  2019 home
+lrwxrwxrwx  1 root root    7 Jan  5  1970 lib -> usr/lib
+drwxr-xr-x  2 root root 4096 Feb 11  2019 media
+drwxr-xr-x  2 root root 4096 Feb 11  2019 mnt
+drwxr-xr-x  6 root root 4096 Jan  5  1970 opt
+dr-xr-xr-x 85 root root    0 Jan  1  1970 proc
+dr-xr-x---  2 root root 4096 Jan 26 22:57 root
+drwxr-xr-x 22 root root 4096 Jan  2  1970 root-old-n2
+drwxr-xr-x 13 root root 4096 Jan 26 22:55 run
+lrwxrwxrwx  1 root root    8 Jan  5  1970 sbin -> usr/sbin
+drwxr-xr-x  2 root root 4096 Feb 11  2019 srv
+dr-xr-xr-x  2 root root 4096 Feb 11  2019 sys
+drwxrwxrwt  3 root root 4096 Jan 27 00:15 tmp
+drwxr-xr-x 11 root root 4096 Jan  5  1970 usr
+drwxr-xr-x 18 root root 4096 Jan  5  1970 var
+bash-5.0# ls opt/
+bin  lib  sbin	usr
+bash-5.0# tree    ps
+bash: ps: command not found
+bash-5.0# ps -a
+bash: ps: command not found
+bash-5.0# pwd
+/
+bash-5.0# d ls -l
+total 56
+lrwxrwxrwx  1 root root    7 Jan  5  1970 bin -> usr/bin
+dr-xr-xr-x  2 root root 4096 Feb 11  2019 boot
+-rw-------  1 root root    0 Jan  5  1970 current-root-n2
+drwxr-xr-x  8 root root 3000 Jan  5  1970 dev
+drwxr-xr-x 48 root root 4096 Jan 27 00:15 etc
+drwxr-xr-x  2 root root 4096 Feb 11  2019 home
+lrwxrwxrwx  1 root root    7 Jan  5  1970 lib -> usr/lib
+drwxr-xr-x  2 root root 4096 Feb 11  2019 media
+drwxr-xr-x  2 root root 4096 Feb 11  2019 mnt
+drwxr-xr-x  6 root root 4096 Jan  5  1970 opt
+dr-xr-xr-x 85 root root    0 Jan  1  1970 proc
+dr-xr-x---  2 root root 4096 Jan 26 22:57 root
+drwxr-xr-x 22 root root 4096 Jan  2  1970 root-old-n2
+drwxr-xr-x 13 root root 4096 Jan 26 22:55 run
+lrwxrwxrwx  1 root root    8 Jan  5  1970 sbin -> usr/sbin
+drwxr-xr-x  2 root root 4096 Feb 11  2019 srv
+dr-xr-xr-x  2 root root 4096 Feb 11  2019 sys
+drwxrwxrwt  3 root root 4096 Jan 27 00:15 tmp
+drwxr-xr-x 11 root root 4096 Jan  5  1970 usr
+drwxr-xr-x 18 root root 4096 Jan  5  1970 var
+bash-5.0# cd
+bash-5.0# ls -l
+total 8468
+-rw------- 1 root root 7512288 Jan  5  1970 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+-rw------- 1 root root 1151960 Jan 26 22:57 shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# ls /home
+bash-5.0# ls /
+bin  boot  current-root-n2  dev  etc  home  lib  media	mnt  opt  proc	root  root-old-n2  run	sbin  srv  sys	tmp  usr  var
+bash-5.0# ls /home/
+bash-5.0# 
+bash-5.0# dnf -v install procps-ng
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 1:03:25 ago on Sun Jan 26 23:15:31 2020.
+--> Starting dependency resolution
+---> Package procps-ng.armv7hl 3.3.15-5.fc30 will be installed
+--> Finished dependency resolution
+Dependencies resolved.
+========================================================================================================================================
+ Package                         Architecture                  Version                               Repository                    Size
+========================================================================================================================================
+Installing:
+ procps-ng                       armv7hl                       3.3.15-5.fc30                         fedora                       289 k
+
+Transaction Summary
+========================================================================================================================================
+Install  1 Package
+
+Total download size: 289 k
+Installed size: 883 k
+Is this ok [y/N]: y
+Downloading Packages:
+procps-ng-3.3.15-5.fc30.armv7hl.rpm               0% [                                                ] ---  B/s |   0  B     --:-- ETAprocps-ng-3.3.15-5.fc30.armv7hl.rpm               0% [                                                ] ---  B/s |   0  B     --:-- ETAprocps-ng-3.3.15-5.fc30.armv7hl.rpm               0% [                                                ] ---  B/s |   0  B     --:-- ETAprocps-ng-3.3.15-5.fc30.armv7hl.rpm              33% [===============-                                ] 300 kB/s |  96 kB     00:00 ETAprocps-ng-3.3.15-5.fc30.armv7hl.rpm                                                                     195 kB/s | 289 kB     00:01    
+----------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                   192 kB/s | 289 kB     00:01     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                1/1 
+  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [                                                                            ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=                                                                           ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [===                                                                         ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=====                                                                       ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [========                                                                    ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [==========                                                                  ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=============                                                               ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [===============                                                             ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [===================                                                         ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [====================                                                        ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [======================                                                      ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [========================                                                    ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [==========================                                                  ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [============================                                                ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [==============================                                              ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=================================                                           ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [====================================                                        ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [======================================                                      ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=========================================                                   ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [==========================================                                  ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [============================================                                ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=============================================                               ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [===============================================                             ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [==================================================                          ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=====================================================                       ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=======================================================                     ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=========================================================                   ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [============================================================                ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [===============================================================             ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [================================================================            ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=================================================================           ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [==================================================================          ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=====================================================================       ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [======================================================================      ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=======================================================================     ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [========================================================================    ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [==========================================================================  ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl [=========================================================================== ] 1/1  Installing       : procps-ng-3.3.15-5.fc30.armv7hl                                                                                1/1 
+  Running scriptlet: procps-ng-3.3.15-5.fc30.armv7hl                                                                                1/1 
+  Verifying        : procps-ng-3.3.15-5.fc30.armv7hl                                                                                1/1 
+
+Installed:
+  procps-ng-3.3.15-5.fc30.armv7hl                                                                                                       
+
+Complete!
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf clean all
+30 files removed
+bash-5.0# exit
+exit
+/ # exit
+~/root-n2 # ls -l
+total 56
+lrwxrwxrwx    1 root     root             7 Jan  5  1970 bin -> usr/bin
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 boot
+-rw-------    1 root     root             0 Jan  5  1970 current-root-n2
+drwxr-xr-x    8 root     root          3000 Jan  5  1970 dev
+drwxr-xr-x   48 root     root          4096 Jan 27 00:19 etc
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 home
+lrwxrwxrwx    1 root     root             7 Jan  5  1970 lib -> usr/lib
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 media
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 mnt
+drwxr-xr-x    6 root     root          4096 Jan  5  1970 opt
+dr-xr-xr-x   83 root     root             0 Jan  1  1970 proc
+dr-xr-x---    2 root     root          4096 Jan 26 22:57 root
+drwx------    2 root     root          4096 Jan  5  1970 root-old-n2
+drwxr-xr-x   13 root     root          4096 Jan 26 22:55 run
+lrwxrwxrwx    1 root     root             8 Jan  5  1970 sbin -> usr/sbin
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 srv
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 sys
+drwxrwxrwt    3 root     root          4096 Jan 27 00:19 tmp
+drwxr-xr-x   11 root     root          4096 Jan  5  1970 usr
+drwxr-xr-x   18 root     root          4096 Jan  5  1970 var
+~/root-n2 # umuont proc
+-sh: umuont: not found
+~/root-n2 # umount dev
+~/root-n2 # umount proc
+~/root-n2 # 
+~/root-n2 # du -sh .
+326.8M	.
+~/root-n2 # du -sh media rm -r opt/*
+~/root-n2 # 
+~/root-n2 # du -sh opt
+4.0K	opt
+~/root-n2 # du -sh boot ettc dev home media mopt proc root root-old-n2 run srv sys tmp usr var
+4.0K	boot
+2.7M	etc
+4.0K	dev
+4.0K	home
+4.0K	media
+4.0K	opt
+4.0K	proc
+8.3M	root
+4.0K	root-old-n2
+76.0K	run
+4.0K	srv
+4.0K	sys
+8.0K	tmp
+276.0M	usr
+11.0M	var
+~/root-n2 # ls -l var~/root-n2 # ls -l var/ls lib
+~/root-n2 # 
+~/root-n2 # ls -l
+total 64
+lrwxrwxrwx    1 root     root             7 Jan  5  1970 bin -> usr/bin
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 boot
+-rw-------    1 root     root             0 Jan  5  1970 current-root-n2
+drwxr-xr-x    2 root     root          4096 Jan  5  1970 dev
+drwxr-xr-x   48 root     root          4096 Jan 27 00:19 etc
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 home
+lrwxrwxrwx    1 root     root             7 Jan  5  1970 lib -> usr/lib
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 media
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 mnt
+drwxr-xr-x    2 root     root          4096 Jan 27 00:21 opt
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 proc
+dr-xr-x---    2 root     root          4096 Jan 26 22:57 root
+drwx------    2 root     root          4096 Jan  5  1970 root-old-n2
+drwxr-xr-x   13 root     root          4096 Jan 26 22:55 run
+lrwxrwxrwx    1 root     root             8 Jan  5  1970 sbin -> usr/sbin
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 srv
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 sys
+drwxrwxrwt    3 root     root          4096 Jan 27 00:19 tmp
+drwxr-xr-x   11 root     root          4096 Jan  5  1970 usr
+drwxr-xr-x   18 root     root          4096 Jan  5  1970 var
+~/root-n2 # ls devdu -sh .
+298.0M	.
+~/root-n2 # cd ..
+~ # 
+~ # ls root-n2* -d
+root-n2                root-n2-snapshot1      root-n2-snapshot1.tgz
+~ # 
+~ # 
+~ # cp -a root-n2 root-n2-snapshot2.
+~ # 
+~ # 
+~ # ls -l
+total 897468
+dr-xr-xr-x   17 root     root          4096 Jan  4  1970 altroot-1
+-rw-------    1 root     root      51932797 Jan  5  1970 altroot-1.tgz
+dr-xr-xr-x   17 root     root          4096 Jan  5  1970 altroot-2
+-rw-------    1 root     root      56665412 Jan  5  1970 altroot-2.tgz
+-rw-------    1 root     root           318 Jan  5  1970 altroot-sha256-sums
+-rw-------    1 root     root       1048576 Jan  1  1970 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1  1970 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4  1970 i1.bash
+-rwx------    1 root     root            68 Jan  4  1970 i2.bash
+-rwx------    1 root     root           109 Jan  4  1970 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5  1970 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3  1970 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3  1970 repof302.tgz
+drwx------    2 root     root          4096 Jan  5  1970 repof303
+-rw-------    1 root     root       3586843 Jan  4  1970 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4  1970 root
+drwx------    2 root     root          4096 Jan  4  1970 root-n1
+-rw-------    1 root     root     209831700 Jan  5  1970 root-n1.tgz
+drwx------   18 root     root          4096 Jan  5  1970 root-n2
+drwx------   18 root     root          4096 Jan  5  1970 root-n2-snapshot1
+-rw-------    1 root     root     120505276 Jan  5  1970 root-n2-snapshot1.tgz
+drwx------   18 root     root          4096 Jan  5  1970 root-n2-snapshot2
+drwx------    2 root     root          4096 Jan  2  1970 root-new
+-rw-------    1 root     root     149044167 Jan  5  1970 root-new.tgz
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1  1970 stream_chn0.h265
+-rw-------    1 root     root       3484952 Jan 26 23:53 uImage
+-rw-------    1 root     root       3485400 Jan  1  1970 uImage-jan22
+~ # du -sh root-n2-snapshot21~ # du -sh root-n2-snapshot1
+root-n2-snapshot1.tgz  root-n2-snapshot1/
+~ # du -sh root-n2-snapshot1
+298.3M	root-n2-snapshot1
+~ # du -sh root-n2-snapshot2~ # du -sh root-n2-snapshot2/
+298.1M	root-n2-snapshot2/
+~ # 
+~ # 
+~ # tar zcf root-n2-snapshot2~ # tar zcf root-n2-snapshot2/.tgz root-n2-snapshot2~ # tar zcf root-n2-snapshot2.tgz root-n2-snapshot2/
+~ # ls -l root-n2-snapshot2.tgz
+-rw-------    1 root     root      98640371 Jan 27 00:29 root-n2-snapshot2.tgz
+~ # 
+~ # 
+~ # 
+~ # 
+~ # cd root-n2
+~/root-n2 # ls
+bin              dev              lib              opt              root-old-n2      srv              usr
+boot             etc              media            proc             run              sys              var
+current-root-n2  home             mnt              root             sbin             tmp
+~/root-n2 # mount -o bind /proc proc
+~/root-n2 # mount -o bind /dev dev
+~/root-n2 # unshare -m --propagation slave
+Welcome to Linux.
+None of nfsroot found in cmdline.
+~/root-n2 # pivot_root . root-old-n2
+/ # bash
+bash-5.0# cd
+bash-5.0# ls -l
+total 8468
+-rw------- 1 root root 7512288 Jan  5  1970 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+-rw------- 1 root root 1151960 Jan 26 22:57 shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rm python3-libs-3.7.6-1.fc30.armv7hl.rpm 
+bash-5.0# rm shadow-utils-4.6-8.fc30.armv7hl.rpm 
+bash-5.0# ls -l
+total 0
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -la
+total 16
+dr-xr-x---  2 root root 4096 Jan 27 00:33 .
+drwx------ 18 root root 4096 Jan  5  1970 ..
+-rw-------  1 root root   96 Jan 27 00:32 .ash_history
+-rw-------  1 root root 1970 Jan 27 00:20 .bash_history
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls
+bash-5.0# pwd
+/root
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 

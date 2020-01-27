@@ -1,0 +1,1909 @@
+ls -l
+total 894060
+dr-xr-xr-x   17 root     root          4096 Jan  4 17:59 altroot-1
+-rw-------    1 root     root      51932797 Jan  5 19:17 altroot-1.tgz
+dr-xr-xr-x   17 root     root          4096 Jan  5 19:02 altroot-2
+-rw-------    1 root     root      56665412 Jan  5 19:22 altroot-2.tgz
+-rw-------    1 root     root           318 Jan  5 20:21 altroot-sha256-sums
+-rw-------    1 root     root       1048576 Jan  1 00:01 bin-dump-p1
+-rw-------    1 root     root       4194304 Jan  1 00:02 bin-dump-p2
+-rwx------    1 root     root           155 Jan  4 17:46 i1.bash
+-rwx------    1 root     root            68 Jan  4 17:52 i2.bash
+-rwx------    1 root     root           109 Jan  4 17:55 i3.bash
+drwxr-xr-x    3 197609   197121        4096 Jan 29  1977 ko
+-rw-------    1 root     root       2245203 Jan 29  1977 ko.tgz
+-rw-------    1 root     root     250419972 Jan  5 18:28 repodest-f30bash.tgz
+-rw-------    1 root     root       5798897 Jan  3 22:20 repof30.tgz
+-rw-------    1 root     root      52095149 Jan  3 23:45 repof302.tgz
+drwx------    2 root     root          4096 Jan  5 18:23 repof303
+-rw-------    1 root     root       3586843 Jan  4 03:36 repof304.tgz
+-rw-------    1 root     root       1117156 Jan  4 00:21 root
+drwx------    2 root     root          4096 Jan  4 17:25 root-n1
+-rw-------    1 root     root     209831700 Jan  5 19:37 root-n1.tgz
+drwx------   18 root     root          4096 Jan  5 20:29 root-n2
+drwx------   18 root     root          4096 Jan  5 20:29 root-n2-snapshot1
+-rw-------    1 root     root     120505276 Jan  5 22:10 root-n2-snapshot1.tgz
+drwx------    2 root     root          4096 Jan  2 18:46 root-new
+-rw-------    1 root     root     149044167 Jan  5 19:28 root-new.tgz
+-rwx------    1 root     root       3457780 Jan 29  1977 sample_vio
+-rw-------    1 root     root             0 Jan  1 19:37 stream_chn0.h265
+-rw-------    1 root     root       3485400 Jan  1 00:04 uImage
+~ # 
+~ # 
+~ # mount -a
+~ # mount 
+/dev/root on / type ext4 (rw,relatime,data=ordered)
+devtmpfs on /dev type devtmpfs (rw,relatime,size=507160k,nr_inodes=126790,mode=755)
+proc on /proc type proc (rw,nosuid,nodev,relatime)
+sysfs on /sys type sysfs (rw,nosuid,nodev,relatime)
+devpts on /dev/pts type devpts (rw,relatime,mode=600,ptmxmode=000)
+/dev/root on /root/root-n2 type ext4 (rw,relatime,data=ordered)
+~ # 
+~ # cd root-n2~ # cd root-n2
+root-n2-snapshot1/  root-n2/
+~ # cd root-n2
+~/root-n2 # ls -l
+total 64
+lrwxrwxrwx    1 root     root             7 Jan  5 20:26 bin -> usr/bin
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 boot
+-rw-------    1 root     root             0 Jan  5 20:29 current-root-n2
+drwxr-xr-x    2 root     root          4096 Jan  5 19:02 dev
+drwxr-xr-x   47 root     root          4096 Jan  5 20:46 etc
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 home
+lrwxrwxrwx    1 root     root             7 Jan  5 20:26 lib -> usr/lib
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 media
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 mnt
+drwxr-xr-x    6 root     root          4096 Jan  5 20:27 opt
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 proc
+dr-xr-x---    2 root     root          4096 Jan 26  2020 root
+drwx------    2 root     root          4096 Jan  5 20:29 root-old-n2
+drwxr-xr-x    5 root     root          4096 Jan  5 19:02 run
+lrwxrwxrwx    1 root     root             8 Jan  5 20:26 sbin -> usr/sbin
+drwxr-xr-x    2 root     root          4096 Feb 11  2019 srv
+dr-xr-xr-x    2 root     root          4096 Feb 11  2019 sys
+drwxrwxrwt    2 root     root          4096 Jan 26  2020 tmp
+drwxr-xr-x   11 root     root          4096 Jan  5 19:02 usr
+drwxr-xr-x   18 root     root          4096 Jan  5 19:02 var
+~/root-n2 # 
+~/root-n2 # muonount
+~/root-n2 # 
+~/root-n2 # mount -o bind /proc proc
+~/root-n2 # mount -o bind /dev dev
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # unshare 0--m --propagation slave
+Welcome to Linux.
+None of nfsroot found in cmdline.
+~/root-n2 # pivot_root . root-old-n2
+/ # cdpwd
+/root/root-n2
+/ # bash
+bash-5.0# 
+bash-5.0# 
+bash-5.0# pwd
+/
+bash-5.0# 
+bash-5.0# cd
+bash-5.0# ls -l
+total 7340
+-rw------- 1 root root 7512288 Jan  5 20:43 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+bash-5.0# dnf -v update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+
+
+^C
+
+
+^C^C
+
+KeyboardInterrupt: Terminated.
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf update
+Fedora 30 - armhfp       [===                 ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp       [===                 ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp       [   ===              ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp    0% [                    ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp    0% [                    ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp    0% [                    ] 3.7 kB/s | 1.2 kB     06:16 ETAFedora 30 - armhfp   24% [====-               ]  72 kB/s | 342 kB     00:14 ETAFedora 30 - armhfp   65% [=============       ]  87 kB/s | 913 kB     00:05 ETAFedora 30 - armhfp    4% [-                   ] 166 kB/s | 1.3 MB     02:48 ETAFedora 30 - armhfp    4% [-                   ]  12 kB/s | 1.4 MB     38:41 ETAFedora 30 - armhfp    2% [                    ]  73 kB/s | 1.7 MB     15:48 ETAFedora 30 - armhfp    2% [-                   ] 127 kB/s | 2.0 MB     09:04 ETAFedora 30 - armhfp    3% [-                   ] 210 kB/s | 2.4 MB     05:28 ETAFedora 30 - armhfp    4% [-                   ] 286 kB/s | 2.9 MB     03:59 ETAFedora 30 - armhfp    4% [-                   ] 370 kB/s | 3.4 MB     03:03 ETAFedora 30 - armhfp    5% [=                   ] 447 kB/s | 3.9 MB     02:30 ETAFedora 30 - armhfp    6% [=                   ] 518 kB/s | 4.3 MB     02:08 ETAFedora 30 - armhfp    6% [=                   ] 583 kB/s | 4.8 MB     01:53 ETAFedora 30 - armhfp    7% [=                   ] 620 kB/s | 5.2 MB     01:46 ETAFedora 30 - armhfp    7% [=-                  ] 660 kB/s | 5.6 MB     01:39 ETAFedora 30 - armhfp    8% [=-                  ] 681 kB/s | 5.9 MB     01:35 ETAFedora 30 - armhfp    8% [=-                  ] 702 kB/s | 6.2 MB     01:32 ETAFedora 30 - armhfp    9% [=-                  ] 710 kB/s | 6.4 MB     01:31 ETAFedora 30 - armhfp    9% [=-                  ] 732 kB/s | 6.7 MB     01:27 ETAFedora 30 - armhfp   10% [==                  ] 750 kB/s | 7.0 MB     01:25 ETAFedora 30 - armhfp   10% [==                  ] 774 kB/s | 7.4 MB     01:22 ETAFedora 30 - armhfp   11% [==                  ] 793 kB/s | 7.7 MB     01:19 ETAFedora 30 - armhfp   11% [==                  ] 814 kB/s | 8.0 MB     01:17 ETAFedora 30 - armhfp   12% [==                  ] 843 kB/s | 8.4 MB     01:14 ETAFedora 30 - armhfp   12% [==-                 ] 874 kB/s | 8.8 MB     01:11 ETAFedora 30 - armhfp   13% [==-                 ] 907 kB/s | 9.2 MB     01:08 ETAFedora 30 - armhfp   13% [==-                 ] 942 kB/s | 9.7 MB     01:05 ETAFedora 30 - armhfp   14% [==-                 ] 981 kB/s |  10 MB     01:02 ETAFedora 30 - armhfp   15% [===                 ] 1.0 MB/s |  11 MB     00:59 ETAFedora 30 - armhfp   15% [===                 ] 1.0 MB/s |  11 MB     00:57 ETAFedora 30 - armhfp   16% [===                 ] 1.0 MB/s |  11 MB     00:56 ETAFedora 30 - armhfp   16% [===                 ] 1.0 MB/s |  12 MB     00:55 ETAFedora 30 - armhfp   17% [===                 ] 1.1 MB/s |  12 MB     00:54 ETAFedora 30 - armhfp   18% [===-                ] 1.1 MB/s |  13 MB     00:52 ETAFedora 30 - armhfp   18% [===-                ] 1.1 MB/s |  13 MB     00:51 ETAFedora 30 - armhfp   19% [===-                ] 1.1 MB/s |  14 MB     00:49 ETAFedora 30 - armhfp   20% [====                ] 1.2 MB/s |  14 MB     00:47 ETAFedora 30 - armhfp   20% [====                ] 1.2 MB/s |  15 MB     00:46 ETAFedora 30 - armhfp   21% [====                ] 1.2 MB/s |  15 MB     00:44 ETAFedora 30 - armhfp   22% [====                ] 1.3 MB/s |  16 MB     00:42 ETAFedora 30 - armhfp   23% [====-               ] 1.3 MB/s |  16 MB     00:41 ETAFedora 30 - armhfp   24% [====-               ] 1.3 MB/s |  17 MB     00:39 ETAFedora 30 - armhfp   24% [====-               ] 1.4 MB/s |  17 MB     00:37 ETAFedora 30 - armhfp   25% [=====               ] 1.4 MB/s |  18 MB     00:35 ETAFedora 30 - armhfp   26% [=====               ] 1.5 MB/s |  19 MB     00:34 ETAFedora 30 - armhfp   27% [=====-              ] 1.5 MB/s |  19 MB     00:32 ETAFedora 30 - armhfp   29% [=====-              ] 1.6 MB/s |  20 MB     00:30 ETAFedora 30 - armhfp   30% [======              ] 1.7 MB/s |  21 MB     00:28 ETAFedora 30 - armhfp   31% [======              ] 1.8 MB/s |  22 MB     00:26 ETAFedora 30 - armhfp   33% [======-             ] 1.9 MB/s |  23 MB     00:24 ETAFedora 30 - armhfp   34% [======-             ] 2.0 MB/s |  24 MB     00:22 ETAFedora 30 - armhfp   36% [=======             ] 2.1 MB/s |  25 MB     00:20 ETAFedora 30 - armhfp   38% [=======-            ] 2.2 MB/s |  27 MB     00:19 ETAFedora 30 - armhfp   40% [========            ] 2.4 MB/s |  28 MB     00:17 ETAFedora 30 - armhfp   42% [========-           ] 2.6 MB/s |  30 MB     00:15 ETAFedora 30 - armhfp   45% [=========           ] 2.8 MB/s |  32 MB     00:13 ETAFedora 30 - armhfp   47% [=========           ] 2.8 MB/s |  33 MB     00:12 ETAFedora 30 - armhfp   48% [=========-          ] 2.9 MB/s |  34 MB     00:12 ETAFedora 30 - armhfp   50% [==========          ] 2.9 MB/s |  35 MB     00:11 ETAFedora 30 - armhfp   51% [==========          ] 2.9 MB/s |  36 MB     00:11 ETAFedora 30 - armhfp   52% [==========          ] 2.9 MB/s |  36 MB     00:11 ETAFedora 30 - armhfp   53% [==========-         ] 2.9 MB/s |  37 MB     00:11 ETAFedora 30 - armhfp   54% [==========-         ] 2.9 MB/s |  38 MB     00:10 ETAFedora 30 - armhfp   56% [===========         ] 2.9 MB/s |  39 MB     00:10 ETAFedora 30 - armhfp   57% [===========         ] 2.9 MB/s |  40 MB     00:10 ETAFedora 30 - armhfp   58% [===========-        ] 2.9 MB/s |  41 MB     00:09 ETAFedora 30 - armhfp   60% [============        ] 2.9 MB/s |  42 MB     00:09 ETAFedora 30 - armhfp   61% [============        ] 2.9 MB/s |  43 MB     00:09 ETAFedora 30 - armhfp   62% [============-       ] 2.9 MB/s |  44 MB     00:08 ETAFedora 30 - armhfp   64% [============-       ] 3.0 MB/s |  45 MB     00:08 ETAFedora 30 - armhfp   65% [=============       ] 3.0 MB/s |  46 MB     00:07 ETAFedora 30 - armhfp   67% [=============       ] 3.0 MB/s |  47 MB     00:07 ETAFedora 30 - armhfp   68% [=============-      ] 3.1 MB/s |  48 MB     00:07 ETAFedora 30 - armhfp   70% [==============      ] 3.1 MB/s |  49 MB     00:06 ETAFedora 30 - armhfp   71% [==============      ] 3.1 MB/s |  50 MB     00:06 ETAFedora 30 - armhfp   73% [==============-     ] 3.2 MB/s |  51 MB     00:05 ETAFedora 30 - armhfp   75% [===============     ] 3.2 MB/s |  52 MB     00:05 ETAFedora 30 - armhfp   76% [===============     ] 3.2 MB/s |  53 MB     00:05 ETAFedora 30 - armhfp   78% [===============-    ] 3.2 MB/s |  54 MB     00:04 ETAFedora 30 - armhfp   79% [===============-    ] 3.3 MB/s |  55 MB     00:04 ETAFedora 30 - armhfp   81% [================    ] 3.3 MB/s |  57 MB     00:04 ETAFedora 30 - armhfp   82% [================-   ] 3.3 MB/s |  58 MB     00:03 ETAFedora 30 - armhfp   84% [================-   ] 3.3 MB/s |  59 MB     00:03 ETAFedora 30 - armhfp   86% [=================   ] 3.4 MB/s |  60 MB     00:02 ETAFedora 30 - armhfp   87% [=================-  ] 3.4 MB/s |  61 MB     00:02 ETAFedora 30 - armhfp   89% [=================-  ] 610 kB/s |  62 MB     00:12 ETAFedora 30 - armhfp   91% [==================  ] 824 kB/s |  64 MB     00:07 ETAFedora 30 - armhfp   91% [==================  ] 817 kB/s |  64 MB     00:07 ETAFedora 30 - armhfp   91% [==================  ] 813 kB/s |  64 MB     00:07 ETAFedora 30 - armhfp   92% [==================  ] 809 kB/s |  64 MB     00:06 ETAFedora 30 - armhfp   92% [==================- ] 807 kB/s |  64 MB     00:06 ETAFedora 30 - armhfp   92% [==================- ] 807 kB/s |  65 MB     00:06 ETAFedora 30 - armhfp   93% [==================- ] 809 kB/s |  65 MB     00:05 ETAFedora 30 - armhfp   93% [==================- ] 814 kB/s |  65 MB     00:05 ETAFedora 30 - armhfp                              1.3 MB/s |  65 MB     00:51    
+Last metadata expiration check: -18284 days, 23:49:53 ago on Sun Jan 26 22:27:43 2020.
+Dependencies resolved.
+================================================================================
+ Package                      Arch     Version                   Repo      Size
+================================================================================
+Upgrading:
+ elfutils-default-yama-scope  noarch   0.178-7.fc30              updates   17 k
+ elfutils-libelf              armv7hl  0.178-7.fc30              updates  180 k
+Installing dependencies:
+ elfutils-libs                armv7hl  0.178-7.fc30              updates  245 k
+ util-linux                   armv7hl  2.33.2-2.fc30             updates  2.3 M
+ xkeyboard-config             noarch   2.26-2.fc30               updates  837 k
+ pam                          armv7hl  1.3.1-17.fc30             fedora   600 k
+ shadow-utils                 armv7hl  2:4.6-8.fc30              fedora   1.1 M
+Installing weak dependencies:
+ elfutils-debuginfod-client   armv7hl  0.178-7.fc30              updates   29 k
+ systemd                      armv7hl  241-12.git323cdf4.fc30    updates  3.5 M
+ cracklib-dicts               armv7hl  2.9.6-19.fc30             fedora   3.9 M
+ libxkbcommon                 armv7hl  0.8.3-1.fc30              fedora    98 k
+
+Transaction Summary
+================================================================================
+Install  9 Packages
+Upgrade  2 Packages
+
+Total download size: 13 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/11): elfutils-deb  0% [                    ] ---  B/s |   0  B     --:-- ETA(1-3/11): systemd-24  0% [                    ] ---  B/s |   0  B     --:-- ETA[MIRROR] systemd-241-12.git323cdf4.fc30.armv7hl.rpm: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirror.csclub.uwaterloo.ca/fedora/linux/updates/30/Everything/armhfp/Packages/s/systemd-241-12.git323cdf4.fc30.armv7hl.rpm [SSL certificate problem: certificate is not yet valid]
+(1-3/11): systemd-24  0% [                    ] ---  B/s |   0  B     --:-- ETA(1/11): elfutils-debuginfod-client-0.178-7.fc30  63 kB/s |  29 kB     00:00    
+(2-3/11): elfutils-l  0% [                    ] 450 kB/s |  43 kB     00:29 ETA[MIRROR] systemd-241-12.git323cdf4.fc30.armv7hl.rpm: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirror.csclub.uwaterloo.ca/fedora/linux/updates/30/Everything/armhfp/Packages/s/systemd-241-12.git323cdf4.fc30.armv7hl.rpm [SSL certificate problem: certificate is not yet valid]
+(2-4/11): elfutils-l  0% [                    ] 448 kB/s | 118 kB     00:28 ETA[MIRROR] util-linux-2.33.2-2.fc30.armv7hl.rpm: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirror.dst.ca/fedora/updates/30/Everything/armhfp/Packages/u/util-linux-2.33.2-2.fc30.armv7hl.rpm [SSL certificate problem: certificate is not yet valid]
+(2-4/11): elfutils-l  1% [                    ] 447 kB/s | 237 kB     00:28 ETA(2/11): elfutils-libs-0.178-7.fc30.armv7hl.rpm  258 kB/s | 245 kB     00:00    
+(3-4/11): systemd-24  2% [                    ] 453 kB/s | 274 kB     00:28 ETA(3-5/11): systemd-24  2% [                    ] 435 kB/s | 324 kB     00:29 ETA(3-5/11): util-linux  4% [-                   ] 466 kB/s | 607 kB     00:26 ETA(3/11): xkeyboard-config-2.26-2.fc30.noarch.rpm 987 kB/s | 837 kB     00:00    
+(4-5/11): util-linux 11% [==                  ] 625 kB/s | 1.5 MB     00:18 ETA(4-6/11): util-linux 13% [==-                 ] 648 kB/s | 1.8 MB     00:17 ETA(4-6/11): util-linux 14% [==-                 ] 635 kB/s | 1.9 MB     00:17 ETA[MIRROR] systemd-241-12.git323cdf4.fc30.armv7hl.rpm: Curl error (60): SSL peer certificate or SSH remote key was not OK for https://mirror.csclub.uwaterloo.ca/fedora/linux/updates/30/Everything/armhfp/Packages/s/systemd-241-12.git323cdf4.fc30.armv7hl.rpm [SSL certificate problem: certificate is not yet valid]
+(4-6/11): cracklib-d 15% [===                 ] 633 kB/s | 2.0 MB     00:17 ETA[FAILED] systemd-241-12.git323cdf4.fc30.armv7hl.rpm: No more mirrors to try - All mirrors were already tried without success
+(5-6/11): util-linux 42% [========-           ] 1.3 MB/s | 5.5 MB     00:05 ETA
+The downloaded packages were saved in cache until the next successful transaction.
+You can remove cached packages by executing 'dnf clean packages'.
+Error: Error downloading packages:
+  Cannot download Packages/s/systemd-241-12.git323cdf4.fc30.armv7hl.rpm: All mirrors were tried
+bash-5.0# 
+bash-5.0# date 
+Mon Jan  5 22:25:02 UTC 1970
+bash-5.0# date -s 2020-1-26
+Sun Jan 26 00:00:00 UTC 2020
+bash-5.0# date -s 22:53
+Sun Jan 26 22:53:00 UTC 2020
+bash-5.0# 
+bash-5.0# date
+Sun Jan 26 22:53:04 UTC 2020
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf -v update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+Fedora 30 - armhfp -     [===                 ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp -     [===                 ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp -     [   ===              ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp - Updates                     10 kB/s | 8.1 kB     00:00    
+reviving: 'updates' can be revived - repomd matches.
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+Fedora 30 - armhfp       [      ===           ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp                               22 kB/s | 6.3 kB     00:00    
+reviving: 'fedora' can be revived - repomd matches.
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:00:03 ago on Sun Jan 26 22:27:24 2020.
+--> Starting dependency resolution
+---> Package elfutils-debuginfod-client.armv7hl 0.178-7.fc30 will be installed
+---> Package elfutils-libs.armv7hl 0.178-7.fc30 will be installed
+---> Package systemd.armv7hl 241-12.git323cdf4.fc30 will be installed
+---> Package util-linux.armv7hl 2.33.2-2.fc30 will be installed
+---> Package xkeyboard-config.noarch 2.26-2.fc30 will be installed
+---> Package cracklib-dicts.armv7hl 2.9.6-19.fc30 will be installed
+---> Package libxkbcommon.armv7hl 0.8.3-1.fc30 will be installed
+---> Package pam.armv7hl 1.3.1-17.fc30 will be installed
+---> Package shadow-utils.armv7hl 2:4.6-8.fc30 will be installed
+---> Package elfutils-default-yama-scope.noarch 0.177-1.fc30 will be upgraded
+---> Package elfutils-default-yama-scope.noarch 0.178-7.fc30 will be an upgrade
+---> Package elfutils-libelf.armv7hl 0.177-1.fc30 will be upgraded
+---> Package elfutils-libelf.armv7hl 0.178-7.fc30 will be an upgrade
+--> Finished dependency resolution
+Dependencies resolved.
+================================================================================
+ Package                      Arch     Version                   Repo      Size
+================================================================================
+Upgrading:
+ elfutils-default-yama-scope  noarch   0.178-7.fc30              updates   17 k
+ elfutils-libelf              armv7hl  0.178-7.fc30              updates  180 k
+Installing dependencies:
+ elfutils-libs                armv7hl  0.178-7.fc30              updates  245 k
+ util-linux                   armv7hl  2.33.2-2.fc30             updates  2.3 M
+ xkeyboard-config             noarch   2.26-2.fc30               updates  837 k
+ pam                          armv7hl  1.3.1-17.fc30             fedora   600 k
+ shadow-utils                 armv7hl  2:4.6-8.fc30              fedora   1.1 M
+Installing weak dependencies:
+ elfutils-debuginfod-client   armv7hl  0.178-7.fc30              updates   29 k
+ systemd                      armv7hl  241-12.git323cdf4.fc30    updates  3.5 M
+ cracklib-dicts               armv7hl  2.9.6-19.fc30             fedora   3.9 M
+ libxkbcommon                 armv7hl  0.8.3-1.fc30              fedora    98 k
+
+Transaction Summary
+================================================================================
+Install  9 Packages
+Upgrade  2 Packages
+
+Total size: 13 M
+Total download size: 12 M
+Is this ok [y/N]: y
+Downloading Packages:
+[SKIPPED] elfutils-debuginfod-client-0.178-7.fc30.armv7hl.rpm: Already downloaded
+[SKIPPED] elfutils-libs-0.178-7.fc30.armv7hl.rpm: Already downloaded           
+[SKIPPED] xkeyboard-config-2.26-2.fc30.noarch.rpm: Already downloaded          
+(4/11): systemd-241-  8% [=-                  ] ---  B/s | 1.1 MB     --:-- ETA(4-6/11): util-linux  8% [=-                  ] ---  B/s | 1.1 MB     --:-- ETA(4-6/11): cracklib-d  9% [=-                  ] 357 kB/s | 1.2 MB     00:33 ETA(4-6/11): cracklib-d 11% [==                  ] 382 kB/s | 1.4 MB     00:30 ETA(4-6/11): cracklib-d 13% [==-                 ] 423 kB/s | 1.8 MB     00:26 ETA(4-6/11): cracklib-d 19% [===-                ] 539 kB/s | 2.4 MB     00:19 ETA(4-6/11): systemd-24 26% [=====               ] 706 kB/s | 3.4 MB     00:13 ETA(4-6/11): systemd-24 32% [======              ] 803 kB/s | 4.1 MB     00:11 ETA(4-6/11): systemd-24 35% [=======             ] 847 kB/s | 4.6 MB     00:09 ETA(4-6/11): util-linux 41% [========            ] 943 kB/s | 5.3 MB     00:08 ETA(4-6/11): util-linux 45% [=========           ] 1.0 MB/s | 5.9 MB     00:07 ETA(4-6/11): util-linux 49% [=========-          ] 1.0 MB/s | 6.3 MB     00:06 ETA(4-6/11): cracklib-d 54% [==========-         ] 1.1 MB/s | 6.9 MB     00:05 ETA(4/11): util-linux-2.33.2-2.fc30.armv7hl.rpm    600 kB/s | 2.3 MB     00:03    
+(5-6/11): systemd-24 55% [===========         ] 1.1 MB/s | 7.1 MB     00:05 ETA(5-7/11): libxkbcomm 58% [===========-        ] 1.1 MB/s | 7.5 MB     00:04 ETA(5/11): libxkbcommon-0.8.3-1.fc30.armv7hl.rpm   170 kB/s |  98 kB     00:00    
+(6-7/11): systemd-24 62% [============        ] 1.1 MB/s | 7.9 MB     00:04 ETA(6-8/11): systemd-24 63% [============-       ] 1.1 MB/s | 8.1 MB     00:04 ETA(6-8/11): systemd-24 67% [=============-      ] 1.1 MB/s | 8.7 MB     00:03 ETA(6-8/11): systemd-24 73% [==============-     ] 1.2 MB/s | 9.3 MB     00:02 ETA(6/11): pam-1.3.1-17.fc30.armv7hl.rpm           545 kB/s | 600 kB     00:01    
+(7-8/11): cracklib-d 75% [===============     ] 1.2 MB/s | 9.7 MB     00:02 ETA(7-9/11): cracklib-d 78% [===============-    ] 1.2 MB/s |  10 MB     00:02 ETA(7-9/11): cracklib-d 83% [================-   ] 1.3 MB/s |  11 MB     00:01 ETA(7-9/11): cracklib-d 88% [=================-  ] 1.3 MB/s |  11 MB     00:01 ETA(7/11): systemd-241-12.git323cdf4.fc30.armv7hl. 535 kB/s | 3.5 MB     00:06    
+(8-9/11): cracklib-d 88% [=================-  ] 1.3 MB/s |  11 MB     00:01 ETA(8-10/11): elfutils- 92% [==================  ] 1.3 MB/s |  12 MB     00:00 ETA(8/11): elfutils-default-yama-scope-0.178-7.fc3  57 kB/s |  17 kB     00:00    
+(9-10/11): shadow-ut 92% [==================- ] 1.3 MB/s |  12 MB     00:00 ETA(9-11/11): elfutils- 95% [=================== ] 1.3 MB/s |  12 MB     00:00 ETA(9/11): shadow-utils-4.6-8.fc30.armv7hl.rpm     577 kB/s | 1.1 MB     00:01    
+(10-11/11): elfutils 97% [===================-] 1.3 MB/s |  12 MB     00:00 ETA(10/11): cracklib-dicts-2.9.6-19.fc30.armv7hl.r 505 kB/s | 3.9 MB     00:07    
+(11/11): elfutils-li 99% [===================-] 1.2 MB/s |  13 MB     00:00 ETA(11/11): elfutils-libelf-0.178-7.fc30.armv7hl.r 179 kB/s | 180 kB     00:01    
+--------------------------------------------------------------------------------
+Total                                           1.5 MB/s |  12 MB     00:08     
+warning: /var/cache/dnf/updates-1b3760c818a8f449/packages/elfutils-debuginfod-client-0.178-7.fc30.armv7hl.rpm: Header V3 RSA/SHA256 Signature, key ID cfc659b9: NOKEY
+Fedora 30 - armhfp -     [         ===        ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp - Updates                    223 kB/s | 1.6 kB     00:00    
+Importing GPG key 0xCFC659B9:
+ Userid     : "Fedora (30) <fedora-30-primary@fedoraproject.org>"
+ Fingerprint: F1D8 EC98 F241 AAF2 0DF6 9420 EF3C 111F CFC6 59B9
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-30-armhfp
+Is this ok [y/N]: y
+Key imported successfully
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+RPMDB altered outside of DNF.
+  Preparing        :  [===                                                ] 1/1  Preparing        :  [=======                                            ] 1/1  Preparing        :  [===========                                        ] 1/1  Preparing        :  [===============                                    ] 1/1  Preparing        :  [===================                                ] 1/1  Preparing        :  [=======================                            ] 1/1  Preparing        :  [===========================                        ] 1/1  Preparing        :  [===============================                    ] 1/1  Preparing        :  [===================================                ] 1/1  Preparing        :  [======================================             ] 1/1  Preparing        :  [==========================================         ] 1/1  Preparing        :  [==============================================     ] 1/1  Preparing        :                                                        1/1 
+  Installing       : cracklib-dicts-2.9.6-19. [                         ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [=                        ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [==                       ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [===                      ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [====                     ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [=====                    ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [======                   ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [=======                  ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [========                 ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [=========                ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [==========               ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [===========              ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [============             ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [=============            ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [==============           ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [===============          ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [================         ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [=================        ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [==================       ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [===================      ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [====================     ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [=====================    ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [======================   ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [=======================  ]  1/13  Installing       : cracklib-dicts-2.9.6-19. [======================== ]  1/13  Installing       : cracklib-dicts-2.9.6-19.fc30.armv7hl                  1/13 
+  Installing       : xkeyboard-config-2.26-2. [                         ]  2/13  Installing       : xkeyboard-config-2.26-2. [=                        ]  2/13  Installing       : xkeyboard-config-2.26-2. [==                       ]  2/13  Installing       : xkeyboard-config-2.26-2. [===                      ]  2/13  Installing       : xkeyboard-config-2.26-2. [====                     ]  2/13  Installing       : xkeyboard-config-2.26-2. [=====                    ]  2/13  Installing       : xkeyboard-config-2.26-2. [======                   ]  2/13  Installing       : xkeyboard-config-2.26-2. [=======                  ]  2/13  Installing       : xkeyboard-config-2.26-2. [========                 ]  2/13  Installing       : xkeyboard-config-2.26-2. [=========                ]  2/13  Installing       : xkeyboard-config-2.26-2. [==========               ]  2/13  Installing       : xkeyboard-config-2.26-2. [===========              ]  2/13  Installing       : xkeyboard-config-2.26-2. [============             ]  2/13  Installing       : xkeyboard-config-2.26-2. [=============            ]  2/13  Installing       : xkeyboard-config-2.26-2. [==============           ]  2/13  Installing       : xkeyboard-config-2.26-2. [===============          ]  2/13  Installing       : xkeyboard-config-2.26-2. [================         ]  2/13  Installing       : xkeyboard-config-2.26-2. [=================        ]  2/13  Installing       : xkeyboard-config-2.26-2. [==================       ]  2/13  Installing       : xkeyboard-config-2.26-2. [===================      ]  2/13  Installing       : xkeyboard-config-2.26-2. [====================     ]  2/13  Installing       : xkeyboard-config-2.26-2. [=====================    ]  2/13  Installing       : xkeyboard-config-2.26-2. [======================   ]  2/13  Installing       : xkeyboard-config-2.26-2. [=======================  ]  2/13  Installing       : xkeyboard-config-2.26-2. [======================== ]  2/13  Installing       : xkeyboard-config-2.26-2.fc30.noarch                   2/13 
+  Installing       : pam-1.3.1-17.fc30.armv7h [                         ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [=                        ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [==                       ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [===                      ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [====                     ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [=====                    ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [======                   ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [=======                  ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [========                 ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [=========                ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [==========               ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [===========              ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [============             ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [=============            ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [==============           ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [===============          ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [================         ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [=================        ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [==================       ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [===================      ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [====================     ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [=====================    ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [======================   ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [=======================  ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7h [======================== ]  3/13  Installing       : pam-1.3.1-17.fc30.armv7hl                             3/13 
+  Upgrading        : elfutils-libelf-0.178-7. [                         ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [=                        ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [==                       ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [===                      ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [====                     ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [=====                    ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [======                   ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [=======                  ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [========                 ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [=========                ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [==========               ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [===========              ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [============             ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [=============            ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [==============           ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [===============          ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [================         ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [=================        ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [==================       ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [===================      ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [====================     ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [=====================    ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [======================   ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [=======================  ]  4/13  Upgrading        : elfutils-libelf-0.178-7. [======================== ]  4/13  Upgrading        : elfutils-libelf-0.178-7.fc30.armv7hl                  4/13 
+  Installing       : util-linux-2.33.2-2.fc30 [                         ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [=                        ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [==                       ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [===                      ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [====                     ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [=====                    ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [======                   ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [=======                  ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [========                 ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [=========                ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [==========               ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [===========              ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [============             ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [=============            ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [==============           ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [===============          ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [================         ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [=================        ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [==================       ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [===================      ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [====================     ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [=====================    ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [======================   ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [=======================  ]  5/13  Installing       : util-linux-2.33.2-2.fc30 [======================== ]  5/13  Installing       : util-linux-2.33.2-2.fc30.armv7hl                      5/13 
+  Running scriptlet: util-linux-2.33.2-2.fc30.armv7hl                      5/13 
+  Installing       : libxkbcommon-0.8.3-1.fc3 [                         ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [==                       ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [=====                    ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [========                 ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [===========              ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [=============            ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [================         ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [===================      ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [======================   ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc3 [======================== ]  6/13  Installing       : libxkbcommon-0.8.3-1.fc30.armv7hl                     6/13 
+  Installing       : shadow-utils-2:4.6-8.fc3 [                         ]  7/13  Installing       : shadow-utils-2:4.6-8.fc3 [=                        ]  7/13  Installing       : shadow-utils-2:4.6-8.fc30.armv7hl                     7/13 
+Error unpacking rpm package shadow-utils-2:4.6-8.fc30.armv7hl
+  Installing       : elfutils-debuginfod-clie [                         ]  8/13  Installing       : elfutils-debuginfod-clie [==========               ]  8/13  Installing       : elfutils-debuginfod-clie [===========              ]  8/13  Installing       : elfutils-debuginfod-clie [=======================  ]  8/13  Installing       : elfutils-debuginfod-clie [======================== ]  8/13  Installing       : elfutils-debuginfod-client-0.178-7.fc30.armv7hl       8/13 
+error: unpacking of archive failed on file /usr/bin/newgidmap;5e2e18d6: cpio: cap_set_file
+error: shadow-utils-2:4.6-8.fc30.armv7hl: install failed
+
+  Upgrading        : elfutils-default-yama-sc [                         ]  9/13  Upgrading        : elfutils-default-yama-sc [=======================  ]  9/13  Upgrading        : elfutils-default-yama-scope-0.178-7.fc30.noarch       9/13 
+  Running scriptlet: elfutils-default-yama-scope-0.178-7.fc30.noarch       9/13 
+  Installing       : elfutils-libs-0.178-7.fc [                         ] 10/13  Installing       : elfutils-libs-0.178-7.fc [=                        ] 10/13  Installing       : elfutils-libs-0.178-7.fc [==                       ] 10/13  Installing       : elfutils-libs-0.178-7.fc [===                      ] 10/13  Installing       : elfutils-libs-0.178-7.fc [====                     ] 10/13  Installing       : elfutils-libs-0.178-7.fc [=====                    ] 10/13  Installing       : elfutils-libs-0.178-7.fc [======                   ] 10/13  Installing       : elfutils-libs-0.178-7.fc [=======                  ] 10/13  Installing       : elfutils-libs-0.178-7.fc [========                 ] 10/13  Installing       : elfutils-libs-0.178-7.fc [=========                ] 10/13  Installing       : elfutils-libs-0.178-7.fc [==========               ] 10/13  Installing       : elfutils-libs-0.178-7.fc [===========              ] 10/13  Installing       : elfutils-libs-0.178-7.fc [============             ] 10/13  Installing       : elfutils-libs-0.178-7.fc [=============            ] 10/13  Installing       : elfutils-libs-0.178-7.fc [==============           ] 10/13  Installing       : elfutils-libs-0.178-7.fc [===============          ] 10/13  Installing       : elfutils-libs-0.178-7.fc [================         ] 10/13  Installing       : elfutils-libs-0.178-7.fc [=================        ] 10/13  Installing       : elfutils-libs-0.178-7.fc [==================       ] 10/13  Installing       : elfutils-libs-0.178-7.fc [===================      ] 10/13  Installing       : elfutils-libs-0.178-7.fc [====================     ] 10/13  Installing       : elfutils-libs-0.178-7.fc [=====================    ] 10/13  Installing       : elfutils-libs-0.178-7.fc [======================   ] 10/13  Installing       : elfutils-libs-0.178-7.fc [=======================  ] 10/13  Installing       : elfutils-libs-0.178-7.fc [======================== ] 10/13  Installing       : elfutils-libs-0.178-7.fc30.armv7hl                   10/13 
+  Running scriptlet: systemd-241-12.git323cdf4.fc30.armv7hl               11/13 
+/var/tmp/rpm-tmp.mOkgM7: line 8: groupadd: command not found
+/var/tmp/rpm-tmp.mOkgM7: line 10: groupadd: command not found
+/var/tmp/rpm-tmp.mOkgM7: line 13: groupadd: command not found
+/var/tmp/rpm-tmp.mOkgM7: line 16: groupadd: command not found
+
+  Installing       : systemd-241-12.git323cdf [                         ] 11/13  Installing       : systemd-241-12.git323cdf [=                        ] 11/13  Installing       : systemd-241-12.git323cdf [==                       ] 11/13  Installing       : systemd-241-12.git323cdf [===                      ] 11/13  Installing       : systemd-241-12.git323cdf [====                     ] 11/13  Installing       : systemd-241-12.git323cdf [=====                    ] 11/13  Installing       : systemd-241-12.git323cdf [======                   ] 11/13  Installing       : systemd-241-12.git323cdf [=======                  ] 11/13  Installing       : systemd-241-12.git323cdf [========                 ] 11/13  Installing       : systemd-241-12.git323cdf [=========                ] 11/13  Installing       : systemd-241-12.git323cdf [==========               ] 11/13  Installing       : systemd-241-12.git323cdf [===========              ] 11/13  Installing       : systemd-241-12.git323cdf [============             ] 11/13  Installing       : systemd-241-12.git323cdf [=============            ] 11/13  Installing       : systemd-241-12.git323cdf [==============           ] 11/13  Installing       : systemd-241-12.git323cdf [===============          ] 11/13  Installing       : systemd-241-12.git323cdf [================         ] 11/13  Installing       : systemd-241-12.git323cdf [=================        ] 11/13  Installing       : systemd-241-12.git323cdf [==================       ] 11/13  Installing       : systemd-241-12.git323cdf [===================      ] 11/13  Installing       : systemd-241-12.git323cdf [====================     ] 11/13  Installing       : systemd-241-12.git323cdf [=====================    ] 11/13  Installing       : systemd-241-12.git323cdf [======================   ] 11/13  Installing       : systemd-241-12.git323cdf [=======================  ] 11/13  Installing       : systemd-241-12.git323cdf [======================== ] 11/13  Installing       : systemd-241-12.git323cdf4.fc30.armv7hl               11/13 
+  Running scriptlet: systemd-241-12.git323cdf4.fc30.armv7hl               11/13 
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/systemd.conf:19] Unknown user 'systemd-network'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/systemd.conf:20] Unknown user 'systemd-network'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/systemd.conf:21] Unknown user 'systemd-network'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/systemd.conf:25] Unknown group 'systemd-journal'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/systemd.conf:26] Unknown group 'systemd-journal'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/systemd.conf:32] Unknown group 'systemd-journal'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/systemd.conf:33] Unknown group 'systemd-journal'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/systemd.conf:34] Unknown group 'systemd-journal'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/var.conf:15] Unknown group 'utmp'.
+systemd-tmpfiles[271]: [/usr/lib/tmpfiles.d/var.conf:16] Unknown group 'utmp'.
+systemd-tmpfile: 1 output lines suppressed due to ratelimiting
+  Cleanup          : elfutils-libelf-0.177-1. [                         ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [=                        ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [===                      ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [=====                    ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [=======                  ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [========                 ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [==========               ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [============             ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [==============           ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [================         ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [=================        ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [===================      ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [=====================    ] 12/13  Cleanup          : elfutils-libelf-0.177-1. [=======================  ] 12/13  Cleanup          : elfutils-libelf-0.177-1.fc30.armv7hl                 12/13 
+  Cleanup          : elfutils-default-yama-sc [                         ] 13/13  Cleanup          : elfutils-default-yama-scope-0.177-1.fc30.noarch      13/13 
+  Running scriptlet: elfutils-default-yama-scope-0.177-1.fc30.noarch      13/13 
+  Running scriptlet: systemd-241-12.git323cdf4.fc30.armv7hl               13/13 
+Errors occurred during transaction.
+  Verifying        : elfutils-debuginfod-client-0.178-7.fc30.armv7hl       1/13 
+  Verifying        : elfutils-libs-0.178-7.fc30.armv7hl                    2/13 
+  Verifying        : systemd-241-12.git323cdf4.fc30.armv7hl                3/13 
+  Verifying        : util-linux-2.33.2-2.fc30.armv7hl                      4/13 
+  Verifying        : xkeyboard-config-2.26-2.fc30.noarch                   5/13 
+  Verifying        : cracklib-dicts-2.9.6-19.fc30.armv7hl                  6/13 
+  Verifying        : libxkbcommon-0.8.3-1.fc30.armv7hl                     7/13 
+  Verifying        : pam-1.3.1-17.fc30.armv7hl                             8/13 
+  Verifying        : shadow-utils-2:4.6-8.fc30.armv7hl                     9/13 
+  Verifying        : elfutils-default-yama-scope-0.178-7.fc30.noarch      10/13 
+  Verifying        : elfutils-default-yama-scope-0.177-1.fc30.noarch      11/13 
+  Verifying        : elfutils-libelf-0.178-7.fc30.armv7hl                 12/13 
+  Verifying        : elfutils-libelf-0.177-1.fc30.armv7hl                 13/13 
+
+Upgraded:
+  elfutils-default-yama-scope-0.178-7.fc30.noarch                               
+  elfutils-libelf-0.178-7.fc30.armv7hl                                          
+
+Installed:
+  elfutils-debuginfod-client-0.178-7.fc30.armv7hl                               
+  systemd-241-12.git323cdf4.fc30.armv7hl                                        
+  cracklib-dicts-2.9.6-19.fc30.armv7hl                                          
+  libxkbcommon-0.8.3-1.fc30.armv7hl                                             
+  elfutils-libs-0.178-7.fc30.armv7hl                                            
+  util-linux-2.33.2-2.fc30.armv7hl                                              
+  xkeyboard-config-2.26-2.fc30.noarch                                           
+  pam-1.3.1-17.fc30.armv7hl                                                     
+
+Failed:
+  shadow-utils-2:4.6-8.fc30.armv7hl                                             
+
+Error: Transaction failed
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls
+python3-libs-3.7.6-1.fc30.armv7hl.rpm  shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# echo /mnt # cp root-n1/root/repodest-f30bash/shadow-utils-4.6-8.fc30.arrmv7hl.rpm root-n2/root
+/mnt
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm -iv shadow-utils-4.6-8.fc30.armv7hl.rpm 
+Verifying packages...
+Preparing packages...
+shadow-utils-2:4.6-8.fc30.armv7hl
+error: unpacking of archive failed on file /usr/bin/newgidmap;5e2e1964: cpio: cap_set_file failed - No such file or directory
+error: shadow-utils-2:4.6-8.fc30.armv7hl: install failed
+
+
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dh nf -v cpio: cap_set_file failed                         --setopt=tsflags=nodocs update
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:10:31 ago on Sun Jan 26 22:54:21 2020.
+--> Starting dependency resolution
+--> Finished dependency resolution
+Dependencies resolved.
+Nothing to do.
+Complete!
+bash-5.0# 
+bash-5.0# dnf -v --setopt=tsflags=nodocs update      install shadow-utils
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: using cache for: fedora-modular
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: using cache for: updates-modular
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: using cache for: updates
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: using cache for: fedora
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:12:18 ago on Sun Jan 26 22:54:21 2020.
+--> Starting dependency resolution
+---> Package shadow-utils.armv7hl 2:4.6-8.fc30 will be installed
+--> Finished dependency resolution
+Dependencies resolved.
+================================================================================
+ Package              Architecture    Version              Repository      Size
+================================================================================
+Installing:
+ shadow-utils         armv7hl         2:4.6-8.fc30         fedora         1.1 M
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 1.1 M
+Installed size: 4.4 M
+Is this ok [y/N]: y
+Downloading Packages:
+shadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f 19% [===-                ] 745 kB/s | 224 kB     00:01 ETAshadow-utils-4.6-8.f 48% [=========-          ] 764 kB/s | 544 kB     00:00 ETAshadow-utils-4.6-8.f 83% [================-   ] 796 kB/s | 944 kB     00:00 ETAshadow-utils-4.6-8.fc30.armv7hl.rpm              53 kB/s | 1.1 MB     00:21    
+--------------------------------------------------------------------------------
+Total                                            53 kB/s | 1.1 MB     00:21     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : shadow-utils-2:4.6-8.fc30 [                          ] 1/1  Installing       : shadow-utils-2:4.6-8.fc30 [=                         ] 1/1  Installing       : shadow-utils-2:4.6-8.fc30.armv7hl                      1/1 
+Error unpacking rpm package shadow-utils-2:4.6-8.fc30.armv7hl
+Errors occurred during transaction.
+  Verifying        : shadow-utils-2:4.6-8.fc30.armv7hl                      1/1 
+
+Failed:
+  shadow-utils-2:4.6-8.fc30.armv7hl                                             
+
+Error: Transaction failed
+bash-5.0# 
+bash-5.0# 
+bash-5.0# ls -l
+total 8468
+-rw------- 1 root root 7512288 Jan  5  1970 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+-rw------- 1 root root 1151960 Jan 26 22:57 shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# 
+bash-5.0# 
+bash-5.0# rpm -iv shadow-utils-4.6-8.fc30.armv7hl.rpm 
+Verifying packages...
+Preparing packages...
+shadow-utils-2:4.6-8.fc30.armv7hl
+error: unpacking of archive failed on file /usr/bin/newgidmap;5e2e1beb: cpio: cap_set_file failed - No such file or directory
+error: shadow-utils-2:4.6-8.fc30.armv7hl: install failed
+bash-5.0# 
+bash-5.0# rpm -iv shadow-utils-4.6-8.fc30.armv7hl.rpm 
+Verifying packages...
+Preparing packages...
+shadow-utils-2:4.6-8.fc30.armv7hl
+error: unpacking of archive failed on file /usr/bin/newgidmap;5e2e1c05: cpio: cap_set_file failed - No such file or directory
+error: shadow-utils-2:4.6-8.fc30.armv7hl: install failed
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf clean all
+30 files removed
+bash-5.0# 
+bash-5.0# 
+bash-5.0# dnf clean allbash-5.0# rpm -iv shadow-utils-4.6-8.fc30.armv7hl.rpm bash-5.0# ls -ldnf -v --setopt=tsflags=nodocs install shadow-utils
+DNF version: 4.2.17
+cachedir: /var/cache/dnf
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+Unknown configuration value: failovermethod=priority in /etc/yum.repos.d/fedora-updates-modular.repo; Configuration: OptionBinding with id "failovermethod" does not exist
+repo: downloading from remote: fedora-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -  95% [=================== ]  47 kB/s |  15 kB     00:00 ETAFedora Modular 30 -   0% [                    ]  47 kB/s |   0  B     00:00 ETAFedora Modular 30 -  36% [=======             ]  50 kB/s |  27 kB     00:00 ETAFedora Modular 30 -  38% [=======-            ]  46 kB/s |  28 kB     00:00 ETAFedora Modular 30 -  76% [===============     ]  45 kB/s |  55 kB     00:00 ETAFedora Modular 30 -   3% [-                   ]  47 kB/s |  89 kB     00:58 ETAFedora Modular 30 -   4% [-                   ]  52 kB/s | 130 kB     00:51 ETAFedora Modular 30 -   7% [=                   ]  64 kB/s | 204 kB     00:41 ETAFedora Modular 30 -  10% [==                  ]  78 kB/s | 294 kB     00:32 ETAFedora Modular 30 -  13% [==-                 ]  89 kB/s | 376 kB     00:27 ETAFedora Modular 30 -  14% [==-                 ]  93 kB/s | 419 kB     00:26 ETAFedora Modular 30 -  17% [===                 ] 100 kB/s | 484 kB     00:23 ETAFedora Modular 30 -  19% [===-                ] 108 kB/s | 553 kB     00:21 ETAFedora Modular 30 -  22% [====-               ] 119 kB/s | 643 kB     00:18 ETAFedora Modular 30 -  26% [=====               ] 133 kB/s | 747 kB     00:15 ETAFedora Modular 30 -  30% [======              ] 148 kB/s | 865 kB     00:13 ETAFedora Modular 30 -  34% [======-             ] 164 kB/s | 988 kB     00:11 ETAFedora Modular 30 -  39% [=======-            ] 181 kB/s | 1.1 MB     00:09 ETAFedora Modular 30 -  45% [=========           ] 204 kB/s | 1.3 MB     00:07 ETAFedora Modular 30 -  52% [==========          ] 230 kB/s | 1.5 MB     00:05 ETAFedora Modular 30 -  56% [===========         ] 235 kB/s | 1.6 MB     00:05 ETAFedora Modular 30 -  58% [===========-        ] 233 kB/s | 1.6 MB     00:05 ETAFedora Modular 30 -  60% [============        ] 232 kB/s | 1.7 MB     00:04 ETAFedora Modular 30 -  63% [============-       ] 232 kB/s | 1.7 MB     00:04 ETAFedora Modular 30 -  65% [=============       ] 216 kB/s | 1.8 MB     00:04 ETAFedora Modular 30 -  65% [=============       ] 205 kB/s | 1.8 MB     00:04 ETAFedora Modular 30 -  67% [=============       ] 202 kB/s | 1.9 MB     00:04 ETAFedora Modular 30 -  69% [=============-      ] 201 kB/s | 1.9 MB     00:04 ETAFedora Modular 30 -  71% [==============      ] 202 kB/s | 2.0 MB     00:03 ETAFedora Modular 30 -  74% [==============-     ] 204 kB/s | 2.1 MB     00:03 ETAFedora Modular 30 -  77% [===============     ] 208 kB/s | 2.1 MB     00:03 ETAFedora Modular 30 -  80% [================    ] 215 kB/s | 2.2 MB     00:02 ETAFedora Modular 30 -  82% [================-   ] 215 kB/s | 2.3 MB     00:02 ETAFedora Modular 30 -  86% [=================   ] 220 kB/s | 2.4 MB     00:01 ETAFedora Modular 30 -  89% [=================-  ] 215 kB/s | 2.5 MB     00:01 ETAFedora Modular 30 -  90% [==================  ] 204 kB/s | 2.5 MB     00:01 ETAFedora Modular 30 -  92% [==================  ] 201 kB/s | 2.5 MB     00:01 ETAFedora Modular 30 - armhfp                      192 kB/s | 2.6 MB     00:13    
+fedora-modular: using metadata from Thu Apr 25 23:44:37 2019.
+repo: downloading from remote: updates-modular
+Fedora Modular 30 -      [===                 ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -      [   ===              ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -      [      ===           ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -   0% [                    ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -   0% [                    ] ---  B/s |   0  B     --:-- ETAFedora Modular 30 -  69% [=============-      ]  83 kB/s |  57 kB     00:00 ETAFedora Modular 30 -   4% [-                   ]  95 kB/s | 146 kB     00:31 ETAFedora Modular 30 -   7% [=-                  ] 125 kB/s | 323 kB     00:30 ETAFedora Modular 30 -  12% [==                  ] 152 kB/s | 499 kB     00:23 ETAFedora Modular 30 -  18% [===-                ] 193 kB/s | 748 kB     00:17 ETAFedora Modular 30 -  25% [=====               ] 242 kB/s | 1.0 MB     00:12 ETAFedora Modular 30 -  27% [=====-              ] 242 kB/s | 1.1 MB     00:12 ETAFedora Modular 30 -  29% [=====-              ] 219 kB/s | 1.2 MB     00:13 ETAFedora Modular 30 -  35% [=======             ] 252 kB/s | 1.4 MB     00:10 ETAFedora Modular 30 -  43% [========-           ] 300 kB/s | 1.7 MB     00:07 ETAFedora Modular 30 -  53% [==========-         ] 368 kB/s | 2.2 MB     00:05 ETAFedora Modular 30 -  66% [=============       ] 452 kB/s | 2.7 MB     00:03 ETAFedora Modular 30 -  83% [================-   ] 565 kB/s | 3.4 MB     00:01 ETAFedora Modular 30 - armhfp - Updates            555 kB/s | 3.7 MB     00:06    
+updates-modular: using metadata from Sun Jan 26 02:05:58 2020.
+repo: downloading from remote: updates
+Fedora 30 - armhfp -     [         ===        ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp - 64% [============-       ]  16 kB/s | 5.2 kB     00:00 ETAFedora 30 - armhfp -  6% [=                   ]  17 kB/s |  13 kB     00:11 ETAFedora 30 - armhfp - 39% [=======-            ]  58 kB/s | 241 kB     00:06 ETAFedora 30 - armhfp -  5% [=                   ]  31 kB/s | 273 kB     02:18 ETAFedora 30 - armhfp -  2% [-                   ]  80 kB/s | 524 kB     04:09 ETAFedora 30 - armhfp -  2% [-                   ]  90 kB/s | 602 kB     03:41 ETAFedora 30 - armhfp -  4% [-                   ] 133 kB/s | 848 kB     02:27 ETAFedora 30 - armhfp -  7% [=                   ] 246 kB/s | 1.4 MB     01:17 ETAFedora 30 - armhfp - 12% [==                  ] 446 kB/s | 2.5 MB     00:40 ETAFedora 30 - armhfp - 17% [===-                ] 631 kB/s | 3.5 MB     00:26 ETAFedora 30 - armhfp - 22% [====-               ] 816 kB/s | 4.6 MB     00:19 ETAFedora 30 - armhfp - 27% [=====-              ] 973 kB/s | 5.6 MB     00:15 ETAFedora 30 - armhfp - 31% [======              ] 1.0 MB/s | 6.4 MB     00:13 ETAFedora 30 - armhfp - 33% [======-             ] 1.1 MB/s | 7.5 MB     00:12 ETAFedora 30 - armhfp - 38% [=======-            ] 1.3 MB/s | 8.5 MB     00:10 ETAFedora 30 - armhfp - 43% [========-           ] 1.4 MB/s | 9.6 MB     00:08 ETAFedora 30 - armhfp - 48% [=========-          ] 1.6 MB/s |  11 MB     00:07 ETAFedora 30 - armhfp - 53% [==========-         ] 1.7 MB/s |  12 MB     00:06 ETAFedora 30 - armhfp - 59% [===========-        ] 1.8 MB/s |  13 MB     00:04 ETAFedora 30 - armhfp - 65% [=============       ] 2.0 MB/s |  15 MB     00:03 ETAFedora 30 - armhfp - 67% [=============-      ] 2.0 MB/s |  15 MB     00:03 ETAFedora 30 - armhfp - 69% [=============-      ] 1.8 MB/s |  15 MB     00:03 ETAFedora 30 - armhfp - 74% [==============-     ] 1.9 MB/s |  17 MB     00:02 ETAFedora 30 - armhfp - 79% [===============-    ] 2.0 MB/s |  18 MB     00:02 ETAFedora 30 - armhfp - 83% [================-   ] 2.1 MB/s |  19 MB     00:01 ETAFedora 30 - armhfp - 87% [=================-  ] 2.2 MB/s |  20 MB     00:01 ETAFedora 30 - armhfp - 93% [==================- ] 2.3 MB/s |  21 MB     00:00 ETAFedora 30 - armhfp - Updates                    1.5 MB/s |  21 MB     00:14    
+updates: using metadata from Sun Jan 26 00:47:27 2020.
+repo: downloading from remote: fedora
+Fedora 30 - armhfp       [            ===     ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp       [               ===  ] ---  B/s |   0  B     --:-- ETAFedora 30 - armhfp  100% [====================] 9.4 kB/s | 6.3 kB     00:00 ETAFedora 30 - armhfp    0% [                    ] 9.4 kB/s |   0  B     01:42 ETAFedora 30 - armhfp   12% [==-                 ]  45 kB/s | 179 kB     00:27 ETAFedora 30 - armhfp   38% [=======-            ]  42 kB/s | 534 kB     00:20 ETAFedora 30 - armhfp    2% [                    ]  72 kB/s | 1.0 MB     09:47 ETAFedora 30 - armhfp    1% [                    ] 143 kB/s | 1.4 MB     08:08 ETAFedora 30 - armhfp    2% [                    ] 182 kB/s | 1.6 MB     06:21 ETAFedora 30 - armhfp    3% [-                   ] 276 kB/s | 2.1 MB     04:10 ETAFedora 30 - armhfp    3% [-                   ] 375 kB/s | 2.7 MB     03:02 ETAFedora 30 - armhfp    4% [-                   ] 462 kB/s | 3.2 MB     02:27 ETAFedora 30 - armhfp    5% [=                   ] 552 kB/s | 3.8 MB     02:02 ETAFedora 30 - armhfp    6% [=                   ] 647 kB/s | 4.4 MB     01:43 ETAFedora 30 - armhfp    7% [=                   ] 710 kB/s | 4.9 MB     01:33 ETAFedora 30 - armhfp    7% [=-                  ] 764 kB/s | 5.4 MB     01:26 ETAFedora 30 - armhfp    8% [=-                  ] 851 kB/s | 6.1 MB     01:16 ETAFedora 30 - armhfp    9% [=-                  ] 941 kB/s | 6.7 MB     01:08 ETAFedora 30 - armhfp   10% [==                  ] 1.0 MB/s | 7.3 MB     01:03 ETAFedora 30 - armhfp   11% [==                  ] 1.0 MB/s | 7.8 MB     01:00 ETAFedora 30 - armhfp   12% [==                  ] 1.1 MB/s | 8.5 MB     00:56 ETAFedora 30 - armhfp   13% [==-                 ] 1.2 MB/s | 9.1 MB     00:52 ETAFedora 30 - armhfp   14% [==-                 ] 1.2 MB/s | 9.8 MB     00:48 ETAFedora 30 - armhfp   15% [===                 ] 1.3 MB/s |  11 MB     00:45 ETAFedora 30 - armhfp   15% [===                 ] 1.3 MB/s |  11 MB     00:44 ETAFedora 30 - armhfp   16% [===                 ] 1.4 MB/s |  12 MB     00:42 ETAFedora 30 - armhfp   17% [===-                ] 1.4 MB/s |  12 MB     00:41 ETAFedora 30 - armhfp   18% [===-                ] 1.4 MB/s |  13 MB     00:40 ETAFedora 30 - armhfp   18% [===-                ] 1.4 MB/s |  13 MB     00:39 ETAFedora 30 - armhfp   19% [===-                ] 1.4 MB/s |  14 MB     00:38 ETAFedora 30 - armhfp   20% [====                ] 1.5 MB/s |  14 MB     00:37 ETAFedora 30 - armhfp   21% [====                ] 1.5 MB/s |  15 MB     00:36 ETAFedora 30 - armhfp   22% [====                ] 1.5 MB/s |  15 MB     00:36 ETAFedora 30 - armhfp   22% [====-               ] 1.5 MB/s |  16 MB     00:34 ETAFedora 30 - armhfp   23% [====-               ] 1.6 MB/s |  17 MB     00:34 ETAFedora 30 - armhfp   24% [====-               ] 1.6 MB/s |  17 MB     00:33 ETAFedora 30 - armhfp   25% [=====               ] 1.6 MB/s |  18 MB     00:32 ETAFedora 30 - armhfp   26% [=====               ] 1.6 MB/s |  18 MB     00:31 ETAFedora 30 - armhfp   27% [=====               ] 1.7 MB/s |  19 MB     00:30 ETAFedora 30 - armhfp   28% [=====-              ] 1.7 MB/s |  20 MB     00:28 ETAFedora 30 - armhfp   29% [=====-              ] 1.8 MB/s |  21 MB     00:27 ETAFedora 30 - armhfp   30% [======              ] 1.8 MB/s |  21 MB     00:26 ETAFedora 30 - armhfp   31% [======              ] 1.9 MB/s |  22 MB     00:25 ETAFedora 30 - armhfp   32% [======-             ] 1.9 MB/s |  23 MB     00:24 ETAFedora 30 - armhfp   34% [======-             ] 2.0 MB/s |  24 MB     00:23 ETAFedora 30 - armhfp   35% [=======             ] 2.0 MB/s |  25 MB     00:22 ETAFedora 30 - armhfp   36% [=======             ] 2.1 MB/s |  26 MB     00:21 ETAFedora 30 - armhfp   38% [=======-            ] 2.1 MB/s |  26 MB     00:20 ETAFedora 30 - armhfp   39% [=======-            ] 2.2 MB/s |  27 MB     00:19 ETAFedora 30 - armhfp   40% [========            ] 2.3 MB/s |  28 MB     00:18 ETAFedora 30 - armhfp   41% [========            ] 2.3 MB/s |  29 MB     00:17 ETAFedora 30 - armhfp   42% [========-           ] 2.3 MB/s |  30 MB     00:17 ETAFedora 30 - armhfp   44% [========-           ] 2.3 MB/s |  31 MB     00:16 ETAFedora 30 - armhfp   45% [=========           ] 2.3 MB/s |  32 MB     00:16 ETAFedora 30 - armhfp   46% [=========           ] 2.4 MB/s |  32 MB     00:15 ETAFedora 30 - armhfp   47% [=========-          ] 2.4 MB/s |  33 MB     00:14 ETAFedora 30 - armhfp   49% [=========-          ] 2.5 MB/s |  34 MB     00:14 ETAFedora 30 - armhfp   50% [==========          ] 2.5 MB/s |  35 MB     00:13 ETAFedora 30 - armhfp   51% [==========          ] 2.5 MB/s |  36 MB     00:13 ETAFedora 30 - armhfp   52% [==========-         ] 2.5 MB/s |  37 MB     00:13 ETAFedora 30 - armhfp   53% [==========-         ] 2.5 MB/s |  37 MB     00:13 ETAFedora 30 - armhfp   54% [==========-         ] 2.5 MB/s |  38 MB     00:12 ETAFedora 30 - armhfp   55% [===========         ] 2.5 MB/s |  39 MB     00:12 ETAFedora 30 - armhfp   56% [===========         ] 2.5 MB/s |  40 MB     00:12 ETAFedora 30 - armhfp   57% [===========-        ] 2.5 MB/s |  40 MB     00:11 ETAFedora 30 - armhfp   58% [===========-        ] 2.5 MB/s |  41 MB     00:11 ETAFedora 30 - armhfp   59% [===========-        ] 2.4 MB/s |  42 MB     00:11 ETAFedora 30 - armhfp   60% [============        ] 2.4 MB/s |  42 MB     00:11 ETAFedora 30 - armhfp   61% [============        ] 2.4 MB/s |  43 MB     00:11 ETAFedora 30 - armhfp   62% [============        ] 906 kB/s |  43 MB     00:29 ETAFedora 30 - armhfp   63% [============-       ] 1.0 MB/s |  44 MB     00:25 ETAFedora 30 - armhfp   63% [============-       ] 1.0 MB/s |  44 MB     00:25 ETAFedora 30 - armhfp   64% [============-       ] 1.0 MB/s |  45 MB     00:24 ETAFedora 30 - armhfp   64% [============-       ] 1.0 MB/s |  45 MB     00:24 ETAFedora 30 - armhfp   65% [=============       ] 1.0 MB/s |  46 MB     00:23 ETAFedora 30 - armhfp   66% [=============       ] 1.1 MB/s |  46 MB     00:22 ETAFedora 30 - armhfp   66% [=============       ] 1.1 MB/s |  46 MB     00:21 ETAFedora 30 - armhfp   67% [=============       ] 1.1 MB/s |  47 MB     00:20 ETAFedora 30 - armhfp   67% [=============-      ] 1.0 MB/s |  47 MB     00:22 ETAFedora 30 - armhfp   68% [=============-      ] 1.0 MB/s |  47 MB     00:22 ETAFedora 30 - armhfp   68% [=============-      ] 1.0 MB/s |  48 MB     00:22 ETAFedora 30 - armhfp   69% [=============-      ] 1.0 MB/s |  48 MB     00:21 ETAFedora 30 - armhfp   69% [=============-      ] 1.0 MB/s |  48 MB     00:21 ETAFedora 30 - armhfp   69% [=============-      ] 1.0 MB/s |  49 MB     00:21 ETAFedora 30 - armhfp   70% [==============      ] 975 kB/s |  49 MB     00:21 ETAFedora 30 - armhfp   70% [==============      ] 968 kB/s |  49 MB     00:21 ETAFedora 30 - armhfp   71% [==============      ] 961 kB/s |  49 MB     00:21 ETAFedora 30 - armhfp   71% [==============      ] 949 kB/s |  50 MB     00:21 ETAFedora 30 - armhfp   71% [==============      ] 945 kB/s |  50 MB     00:21 ETAFedora 30 - armhfp   72% [==============      ] 951 kB/s |  50 MB     00:20 ETAFedora 30 - armhfp   72% [==============-     ] 953 kB/s |  51 MB     00:20 ETAFedora 30 - armhfp   73% [==============-     ] 962 kB/s |  51 MB     00:19 ETAFedora 30 - armhfp   73% [==============-     ] 978 kB/s |  51 MB     00:19 ETAFedora 30 - armhfp   74% [==============-     ] 988 kB/s |  52 MB     00:18 ETAFedora 30 - armhfp   74% [==============-     ] 1.0 MB/s |  52 MB     00:17 ETAFedora 30 - armhfp   75% [===============     ] 900 kB/s |  52 MB     00:19 ETAFedora 30 - armhfp   75% [===============     ] 910 kB/s |  53 MB     00:19 ETAFedora 30 - armhfp   76% [===============     ] 947 kB/s |  53 MB     00:17 ETAFedora 30 - armhfp   76% [===============     ] 974 kB/s |  54 MB     00:16 ETAFedora 30 - armhfp   77% [===============-    ] 1.0 MB/s |  54 MB     00:15 ETAFedora 30 - armhfp   78% [===============-    ] 1.0 MB/s |  55 MB     00:14 ETAFedora 30 - armhfp   79% [===============-    ] 1.1 MB/s |  55 MB     00:13 ETAFedora 30 - armhfp   79% [===============-    ] 1.1 MB/s |  55 MB     00:13 ETAFedora 30 - armhfp   79% [===============-    ] 937 kB/s |  55 MB     00:15 ETAFedora 30 - armhfp   79% [===============-    ] 934 kB/s |  56 MB     00:15 ETAFedora 30 - armhfp   80% [================    ] 932 kB/s |  56 MB     00:15 ETAFedora 30 - armhfp   80% [================    ] 937 kB/s |  56 MB     00:14 ETAFedora 30 - armhfp   81% [================    ] 948 kB/s |  57 MB     00:14 ETAFedora 30 - armhfp   81% [================    ] 954 kB/s |  57 MB     00:13 ETAFedora 30 - armhfp   82% [================    ] 971 kB/s |  57 MB     00:13 ETAFedora 30 - armhfp   82% [================-   ] 989 kB/s |  58 MB     00:12 ETAFedora 30 - armhfp   83% [================-   ] 987 kB/s |  58 MB     00:12 ETAFedora 30 - armhfp   83% [================-   ] 946 kB/s |  58 MB     00:12 ETAFedora 30 - armhfp   83% [================-   ] 950 kB/s |  58 MB     00:12 ETAFedora 30 - armhfp   84% [================-   ] 935 kB/s |  59 MB     00:11 ETAFedora 30 - armhfp   84% [================-   ] 855 kB/s |  59 MB     00:12 ETAFedora 30 - armhfp   84% [================-   ] 858 kB/s |  59 MB     00:12 ETAFedora 30 - armhfp   85% [=================   ] 857 kB/s |  59 MB     00:12 ETAFedora 30 - armhfp   85% [=================   ] 838 kB/s |  60 MB     00:12 ETAFedora 30 - armhfp   86% [=================   ] 849 kB/s |  60 MB     00:11 ETAFedora 30 - armhfp   86% [=================   ] 847 kB/s |  60 MB     00:11 ETAFedora 30 - armhfp   86% [=================   ] 846 kB/s |  60 MB     00:11 ETAFedora 30 - armhfp   87% [=================   ] 859 kB/s |  61 MB     00:10 ETAFedora 30 - armhfp   87% [=================-  ] 864 kB/s |  61 MB     00:10 ETAFedora 30 - armhfp   88% [=================-  ] 871 kB/s |  61 MB     00:09 ETAFedora 30 - armhfp   88% [=================-  ] 892 kB/s |  62 MB     00:09 ETAFedora 30 - armhfp   89% [=================-  ] 907 kB/s |  62 MB     00:08 ETAFedora 30 - armhfp   89% [=================-  ] 925 kB/s |  62 MB     00:07 ETAFedora 30 - armhfp   90% [==================  ] 952 kB/s |  63 MB     00:07 ETAFedora 30 - armhfp   90% [==================  ] 927 kB/s |  63 MB     00:07 ETAFedora 30 - armhfp   91% [==================  ] 935 kB/s |  63 MB     00:06 ETAFedora 30 - armhfp   91% [==================  ] 941 kB/s |  64 MB     00:06 ETAFedora 30 - armhfp   92% [==================  ] 959 kB/s |  64 MB     00:05 ETAFedora 30 - armhfp   92% [==================- ] 981 kB/s |  65 MB     00:05 ETAFedora 30 - armhfp   93% [==================- ] 993 kB/s |  65 MB     00:04 ETAFedora 30 - armhfp                              1.0 MB/s |  65 MB     01:06    
+fedora: using metadata from Thu Apr 25 23:49:00 2019.
+Last metadata expiration check: 0:00:11 ago on Sun Jan 26 23:15:31 2020.
+--> Starting dependency resolution
+---> Package shadow-utils.armv7hl 2:4.6-8.fc30 will be installed
+--> Finished dependency resolution
+Dependencies resolved.
+================================================================================
+ Package              Architecture    Version              Repository      Size
+================================================================================
+Installing:
+ shadow-utils         armv7hl         2:4.6-8.fc30         fedora         1.1 M
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 1.1 M
+Installed size: 4.4 M
+Is this ok [y/N]: y
+Downloading Packages:
+shadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] ---  B/s |   0  B     --:-- ETAshadow-utils-4.6-8.f  0% [                    ] 7.2 kB/s | 5.2 kB     02:34 ETAshadow-utils-4.6-8.f  4% [-                   ]  14 kB/s |  47 kB     01:17 ETAshadow-utils-4.6-8.f 14% [==-                 ]  34 kB/s | 165 kB     00:27 ETAshadow-utils-4.6-8.f 14% [==-                 ]  34 kB/s | 165 kB     00:27 ETAshadow-utils-4.6-8.f 15% [===                 ]  31 kB/s | 171 kB     00:31 ETAshadow-utils-4.6-8.f 32% [======              ]  68 kB/s | 364 kB     00:11 ETAshadow-utils-4.6-8.f 33% [======-             ]  56 kB/s | 372 kB     00:13 ETAshadow-utils-4.6-8.f 53% [==========-         ]  98 kB/s | 599 kB     00:05 ETAshadow-utils-4.6-8.f 73% [==============-     ] 129 kB/s | 827 kB     00:02 ETAshadow-utils-4.6-8.f 76% [===============     ] 127 kB/s | 855 kB     00:02 ETAshadow-utils-4.6-8.f 96% [=================== ] 161 kB/s | 1.1 MB     00:00 ETAshadow-utils-4.6-8.fc30.armv7hl.rpm             120 kB/s | 1.1 MB     00:09    
+--------------------------------------------------------------------------------
+Total                                           120 kB/s | 1.1 MB     00:09     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : shadow-utils-2:4.6-8.fc30 [                          ] 1/1  Installing       : shadow-utils-2:4.6-8.fc30 [=                         ] 1/1  Installing       : shadow-utils-2:4.6-8.fc30.armv7hl                      1/1 
+Error unpacking rpm package shadow-utils-2:4.6-8.fc30.armv7hl
+Errors occurred during transaction.
+  Verifying        : shadow-utils-2:4.6-8.fc30.armv7hl                      1/1 
+
+
+Failed:
+  shadow-utils-2:4.6-8.fc30.armv7hl                                             
+
+Error: Transaction failed
+bash-5.0# 
+bash-5.0# 
+bash-5.0# 
+bash-5.0# exit
+exit
+/ # exit
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # ls /
+bin                komod              nfsroot            sys
+boot               lib                opt                tmp
+current-root-root  linuxrc            proc               usr
+dev                lost+found         root               var
+etc                mkimg.rootfs       sbin
+home               mknod_console      share
+init               mnt                sharefs
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # unshare -m --progpagation slave --setgroups allow
+unshare: can't open '/proc/self/setgroups': No such file or directory
+~/root-n2 # ls proc
+1             26            55            consoles      meminfo
+10            27            56            cpu           misc
+11            28            59            cpuinfo       modules
+12            29            6             crypto        mounts
+120           3             61            device-tree   net
+121           30            62            devices       pagetypeinfo
+126           31            63            diskstats     partitions
+128           32            64            driver        sched_debug
+13            33            65            execdomains   scsi
+14            346           66            fb            self
+149           41            67            filesystems   slabinfo
+15            42            68            fs            softirqs
+150           43            69            interrupts    stat
+16            44            7             iomem         sys
+17            45            70            ioports       sysvipc
+171           46            71            irq           thread-self
+18            47            72            kallsyms      timer_list
+19            48            73            key-users     tty
+2             49            8             keys          uptime
+20            5             87            kmsg          version
+21            50            9             kpagecount    vmallocinfo
+22            51            buddyinfo     kpageflags    vmstat
+23            52            bus           loadavg       zoneinfo
+24            53            cgroups       locks
+25            54            cmdline       mci
+~/root-n2 # 
+~/root-n2 # 
+~/root-n2 # ~/root-n2 # ls proc~/root-n2 # unshare -m --propagation slave --setgroups allow
+Welcome to Linux.
+None of nfsroot found in cmdline.
+~/root-n2 # pivot_root . root~/root-n2 # pivot_root . root
+root-old-n2/  root/
+~/root-n2 # pivot_root . root-old-n2
+/ # bash
+bash-5.0# cd
+bash-5.0# 
+bash-5.0# ls -l
+total 8468
+-rw------- 1 root root 7512288 Jan  5  1970 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+-rw------- 1 root root 1151960 Jan 26 22:57 shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# strace      dnf install strace
+Last metadata expiration check: 0:13:23 ago on Sun Jan 26 23:15:31 2020.
+Dependencies resolved.
+================================================================================
+ Package         Architecture     Version                Repository        Size
+================================================================================
+Installing:
+ strace          armv7hl          5.3-1.fc30             updates          962 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 962 k
+Installed size: 2.0 M
+Is this ok [y/N]: y
+Downloading Packages:
+strace-5.3-1.fc30.ar  0% [                    ] ---  B/s |   0  B     --:-- ETAstrace-5.3-1.fc30.ar  0% [                    ]  12 kB/s | 3.7 kB     01:20 ETAstrace-5.3-1.fc30.ar  9% [=-                  ]  30 kB/s |  96 kB     00:29 ETAstrace-5.3-1.fc30.ar 23% [====-               ]  54 kB/s | 225 kB     00:13 ETAstrace-5.3-1.fc30.ar 37% [=======             ]  77 kB/s | 360 kB     00:07 ETAstrace-5.3-1.fc30.ar 54% [==========-         ] 105 kB/s | 520 kB     00:04 ETAstrace-5.3-1.fc30.ar 72% [==============      ] 134 kB/s | 696 kB     00:01 ETAstrace-5.3-1.fc30.ar 88% [=================-  ] 156 kB/s | 848 kB     00:00 ETAstrace-5.3-1.fc30.armv7hl.rpm                   404 kB/s | 962 kB     00:02    
+--------------------------------------------------------------------------------
+Total                                           402 kB/s | 962 kB     00:02     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : strace-5.3-1.fc30.armv7hl [                          ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [=                         ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [==                        ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [===                       ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [====                      ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [=====                     ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [======                    ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [=======                   ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [========                  ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [=========                 ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [==========                ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [===========               ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [============              ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [=============             ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [==============            ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [===============           ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [================          ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [=================         ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [==================        ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [===================       ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [====================      ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [=====================     ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [======================    ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [=======================   ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [========================  ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl [========================= ] 1/1  Installing       : strace-5.3-1.fc30.armv7hl                              1/1 
+  Running scriptlet: strace-5.3-1.fc30.armv7hl                              1/1 
+  Verifying        : strace-5.3-1.fc30.armv7hl                              1/1 
+
+Installed:
+  strace-5.3-1.fc30.armv7hl                                                     
+
+Complete!
+bash-5.0# 
+
+
+bash-5.0# 
+bash-5.0# ls -l
+total 8468
+-rw------- 1 root root 7512288 Jan  5  1970 python3-libs-3.7.6-1.fc30.armv7hl.rpm
+-rw------- 1 root root 1151960 Jan 26 22:57 shadow-utils-4.6-8.fc30.armv7hl.rpm
+bash-5.0# strace rpm -iv shadow-utils-4.6-8.fc30.armv7hl.rpm 
+execve("/usr/bin/rpm", ["rpm", "-iv", "shadow-utils-4.6-8.fc30.armv7hl."...], 0xbec60df8 /* 11 vars */) = 0
+brk(NULL)                               = 0x7f737000
+uname({sysname="Linux", nodename="(none)", ...}) = 0
+mmap2(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb6f63000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/lib/tls/v7l/neon/vfp/librpm.so.8", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/v7l/neon/vfp", 0xbeec5218) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/local/lib/tls/v7l/neon/librpm.so.8", O_RDONLY|O_LARGEFILE|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/v7l/neon", 0xbeec5218) = -1 ENOENT (No such file or directory)
+
+~~~~
+
+write(30, "gcc 9.0.1 20190129\0\0\n\0\0\0\0\0\0\0\0\1\0\0"..., 32768) = 32768
+gettimeofday({tv_sec=1580081433, tv_usec=127357}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=127489}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=128671}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=128805}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=129428}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=129557}, NULL) = 0
+write(30, "1 20190129\0\0\n\0\0\0\0\0\0\0\0\1\0\0GA*GOW\0*"..., 4680) = 4680
+gettimeofday({tv_sec=1580081433, tv_usec=129904}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=130022}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=130294}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=130413}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=130552}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=130674}, NULL) = 0
+close(30)                               = 0
+gettimeofday({tv_sec=1580081433, tv_usec=130891}, NULL) = 0
+getuid32()                              = 0
+chown32("/usr/bin/chage;5e2e20fe", 0, 0) = 0
+chmod("/usr/bin/chage;5e2e20fe", 04755) = 0
+getuid32()                              = 0
+utimensat(AT_FDCWD, "/usr/bin/chage;5e2e20fe", [{tv_sec=1549170202, tv_nsec=0} /* 2019-02-03T05:03:22+0000 */, {tv_sec=1549170202, tv_nsec=0} /* 2019-02-03T05:03:22+0000 */], AT_SYMLINK_NOFOLLOW) = 0
+lstat64("/usr/bin/chage", {st_mode=S_IFREG|S_ISUID|0755, st_size=102984, ...}) = 0
+chmod("/usr/bin/chage", 0755)           = 0
+lstat64("/usr/bin/chage", {st_mode=S_IFREG|0755, st_size=102984, ...}) = 0
+removexattr("/usr/bin/chage", "security.capability") = -1 EOPNOTSUPP (Operation not supported)
+rename("/usr/bin/chage;5e2e20fe", "/usr/bin/chage") = 0
+gettimeofday({tv_sec=1580081433, tv_usec=133786}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=133971}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=134105}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=134270}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=134402}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=134531}, NULL) = 0
+umask(0577)                             = 022
+openat(AT_FDCWD, "/usr/bin/gpasswd;5e2e20fe", O_WRONLY|O_CREAT|O_EXCL|O_TRUNC|O_LARGEFILE, 0666) = 30
+fcntl64(30, F_SETFD, FD_CLOEXEC)        = 0
+umask(022)                              = 0577
+gettimeofday({tv_sec=1580081433, tv_usec=470790}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=470949}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=471073}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=476540}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=476703}, NULL) = 0
+write(30, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0h7\0\0004\0\0\0"..., 32768) = 32768
+gettimeofday({tv_sec=1580081433, tv_usec=477292}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=477424}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=478618}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=478754}, NULL) = 0
+read(29, "\205\10\26ES\24\202\251)\273\315D\16\206\202h\322\34\312\306w\370\6\346h\2,x$\376\21\274"..., 32768) = 32768
+gettimeofday({tv_sec=1580081433, tv_usec=483141}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=483305}, NULL) = 0
+write(30, "\f\320M\342\0000\223\345\0040\215\345\0000\240\343\0@\240\341\1`\240\341\311\347\377\353\0p\240\343"..., 32768) = 32768
+gettimeofday({tv_sec=1580081433, tv_usec=483883}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=484019}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=485210}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=485348}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=487148}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=487291}, NULL) = 0
+write(30, "GA$\5gcc 9.0.1 20190129\0\0\n\0\0\0\0\0\0\0"..., 32768) = 32768
+gettimeofday({tv_sec=1580081433, tv_usec=487831}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=487966}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=489158}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=489292}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=490591}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=490738}, NULL) = 0
+write(30, "\27\0\0\0\0\0\0\0\0\1\0\0GA$\5gcc 9.0.1 201901"..., 21272) = 21272
+gettimeofday({tv_sec=1580081433, tv_usec=491206}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=491390}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=492217}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=492349}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=492493}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=492618}, NULL) = 0
+close(30)                               = 0
+gettimeofday({tv_sec=1580081433, tv_usec=492837}, NULL) = 0
+getuid32()                              = 0
+chown32("/usr/bin/gpasswd;5e2e20fe", 0, 0) = 0
+chmod("/usr/bin/gpasswd;5e2e20fe", 04755) = 0
+getuid32()                              = 0
+utimensat(AT_FDCWD, "/usr/bin/gpasswd;5e2e20fe", [{tv_sec=1549170202, tv_nsec=0} /* 2019-02-03T05:03:22+0000 */, {tv_sec=1549170202, tv_nsec=0} /* 2019-02-03T05:03:22+0000 */], AT_SYMLINK_NOFOLLOW) = 0
+lstat64("/usr/bin/gpasswd", {st_mode=S_IFREG|S_ISUID|0755, st_size=119576, ...}) = 0
+chmod("/usr/bin/gpasswd", 0755)         = 0
+lstat64("/usr/bin/gpasswd", {st_mode=S_IFREG|0755, st_size=119576, ...}) = 0
+removexattr("/usr/bin/gpasswd", "security.capability") = -1 EOPNOTSUPP (Operation not supported)
+rename("/usr/bin/gpasswd;5e2e20fe", "/usr/bin/gpasswd") = 0
+gettimeofday({tv_sec=1580081433, tv_usec=495663}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=495839}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=495971}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=496170}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=496307}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=496447}, NULL) = 0
+umask(0577)                             = 022
+openat(AT_FDCWD, "/usr/bin/lastlog;5e2e20fe", O_WRONLY|O_CREAT|O_EXCL|O_TRUNC|O_LARGEFILE, 0666) = 30
+fcntl64(30, F_SETFD, FD_CLOEXEC)        = 0
+umask(022)                              = 0577
+gettimeofday({tv_sec=1580081433, tv_usec=497326}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=497474}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=497597}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=500997}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=501166}, NULL) = 0
+write(30, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0 \27\0\0004\0\0\0"..., 29348) = 29348
+gettimeofday({tv_sec=1580081433, tv_usec=837143}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=837289}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=838377}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=838517}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=838666}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=838788}, NULL) = 0
+close(30)                               = 0
+gettimeofday({tv_sec=1580081433, tv_usec=839008}, NULL) = 0
+getuid32()                              = 0
+chown32("/usr/bin/lastlog;5e2e20fe", 0, 0) = 0
+chmod("/usr/bin/lastlog;5e2e20fe", 0755) = 0
+getuid32()                              = 0
+utimensat(AT_FDCWD, "/usr/bin/lastlog;5e2e20fe", [{tv_sec=1549170202, tv_nsec=0} /* 2019-02-03T05:03:22+0000 */, {tv_sec=1549170202, tv_nsec=0} /* 2019-02-03T05:03:22+0000 */], AT_SYMLINK_NOFOLLOW) = 0
+lstat64("/usr/bin/lastlog", {st_mode=S_IFREG|0755, st_size=29348, ...}) = 0
+lstat64("/usr/bin/lastlog", {st_mode=S_IFREG|0755, st_size=29348, ...}) = 0
+removexattr("/usr/bin/lastlog", "security.capability") = -1 EOPNOTSUPP (Operation not supported)
+rename("/usr/bin/lastlog;5e2e20fe", "/usr/bin/lastlog") = 0
+gettimeofday({tv_sec=1580081433, tv_usec=841467}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=841646}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=841779}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=842117}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=842263}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=842414}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=842529}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=842649}, NULL) = 0
+umask(0577)                             = 022
+openat(AT_FDCWD, "/usr/bin/newgidmap;5e2e20fe", O_WRONLY|O_CREAT|O_EXCL|O_TRUNC|O_LARGEFILE, 0666) = 30
+fcntl64(30, F_SETFD, FD_CLOEXEC)        = 0
+umask(022)                              = 0577
+gettimeofday({tv_sec=1580081433, tv_usec=843526}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=843682}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=843799}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=847840}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=848008}, NULL) = 0
+write(30, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\270\30\0\0004\0\0\0"..., 32768) = 32768
+gettimeofday({tv_sec=1580081433, tv_usec=848599}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=848734}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=849925}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=850063}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=851680}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=851831}, NULL) = 0
+write(30, "\26\0\0\0\0\0\0\0\0\1\0\0GA+GLIBCXX_ASSERTION"..., 26632) = 26632
+gettimeofday({tv_sec=1580081433, tv_usec=852359}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=852488}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=853472}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=853604}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=853746}, NULL) = 0
+gettimeofday({tv_sec=1580081433, tv_usec=853869}, NULL) = 0
+close(30)                               = 0
+gettimeofday({tv_sec=1580081433, tv_usec=854086}, NULL) = 0
+getuid32()                              = 0
+chown32("/usr/bin/newgidmap;5e2e20fe", 0, 0) = 0
+chmod("/usr/bin/newgidmap;5e2e20fe", 0755) = 0
+getuid32()                              = 0
+capget({version=_LINUX_CAPABILITY_VERSION_3, pid=0}, NULL) = 0
+lstat64("/usr/bin/newgidmap;5e2e20fe", {st_mode=S_IFREG|0755, st_size=59400, ...}) = 0
+setxattr("/usr/bin/newgidmap;5e2e20fe", "security.capability", "\1\0\0\2@\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 20, 0) = -1 EOPNOTSUPP (Operation not supported)
+lstat64("/usr/bin/newgidmap;5e2e20fe", {st_mode=S_IFREG|0755, st_size=59400, ...}) = 0
+lstat64("/usr/bin/newgidmap;5e2e20fe", {st_mode=S_IFREG|0755, st_size=59400, ...}) = 0
+removexattr("/usr/bin/newgidmap;5e2e20fe", "security.capability") = -1 EOPNOTSUPP (Operation not supported)
+unlink("/usr/bin/newgidmap;5e2e20fe")   = 0
+gettimeofday({tv_sec=1580081434, tv_usec=191505}, NULL) = 0
+munmap(0xb6124000, 2101248)             = 0
+close(29)                               = 0
+gettimeofday({tv_sec=1580081434, tv_usec=192058}, NULL) = 0
+write(2, "error: ", 7error: )                  = 7
+write(2, "unpacking of archive failed on f"..., 119unpacking of archive failed on file /usr/bin/newgidmap;5e2e20fe: cpio: cap_set_file failed - No such file or directory
+) = 119
+gettimeofday({tv_sec=1580081434, tv_usec=192623}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=192757}, NULL) = 0
+close(28)                               = 0
+gettimeofday({tv_sec=1580081434, tv_usec=192975}, NULL) = 0
+write(2, "error: ", 7error: )                  = 7
+write(2, "shadow-utils-2:4.6-8.fc30.armv7h"..., 50shadow-utils-2:4.6-8.fc30.armv7hl: install failed
+) = 50
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=193798}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=194021}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=194476}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=194671}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=194797}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=194955}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=195394}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=195553}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=195974}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=196156}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=196281}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=196433}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=196863}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=197018}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=197440}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=197609}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=197750}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=197902}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=198312}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=198510}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=198651}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=198823}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=198968}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=199125}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=199255}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=199402}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=199524}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=199666}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=199787}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=535235}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=535389}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=535552}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=535681}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=535831}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=535957}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=536104}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=536223}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=536368}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=536487}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=536628}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=536749}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=536889}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=537010}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=537150}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=537267}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=537408}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=537527}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=537663}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=537783}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=537923}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=538042}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=538180}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=538296}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=538433}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=538554}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=538690}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=538806}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=538942}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=539060}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=539196}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=539312}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=539449}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=539568}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=539705}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=539818}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=539958}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=540072}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=540209}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=540325}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=540459}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=540576}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=540713}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=540831}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=540965}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=541083}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=541221}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=541377}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=541526}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=541647}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=541793}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=541912}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=542051}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=542170}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=542309}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=542426}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=542562}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=542680}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=542818}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=542935}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=543072}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=543186}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=543323}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=543440}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=543575}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=878961}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=879123}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=879244}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=879381}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=879499}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=879641}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=879758}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=879892}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880004}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880137}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880250}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880384}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880496}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880626}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880736}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880867}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=880977}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=881106}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=881215}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=881380}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=881497}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=881637}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=881752}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=881883}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=881997}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=882130}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=882240}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=882373}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=882484}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=882615}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=882725}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=882859}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=882967}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=883099}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=883210}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=883339}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=883449}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=883583}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=883694}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=883825}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=883932}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=884061}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=884171}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=884302}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=884412}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=884544}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=884652}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=884782}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=884891}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885022}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885130}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885261}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885371}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885504}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885613}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885743}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885854}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=885986}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=886098}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=886230}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=886340}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=886471}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=886584}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=886713}, NULL) = 0
+gettimeofday({tv_sec=1580081434, tv_usec=886820}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=222252}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=222376}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=222523}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=222639}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=222776}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=222891}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=223026}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=223135}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=223267}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=223377}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=223510}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=223623}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=223763}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=223874}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224005}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224119}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224249}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224358}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224487}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224598}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224728}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224838}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=224967}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=225078}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=225208}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=225318}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=225447}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=225557}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=225687}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=225797}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=225925}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=226034}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=226163}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=226273}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=226402}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=226540}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=226684}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=226798}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=226935}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=227045}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=227178}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=227288}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=227418}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=227528}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=227656}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=227766}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=227900}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228007}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228136}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228246}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228376}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228485}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228613}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228725}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228853}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=228964}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=229095}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=229205}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=229334}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=229442}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=229572}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=229682}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=229811}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=229921}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=230055}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=565483}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=565645}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=565767}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=565907}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=566023}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=566159}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=566271}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=566402}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=566515}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=566650}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=566762}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=566894}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567005}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567136}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567244}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567374}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567483}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567614}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567724}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567859}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=567969}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=568102}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=568211}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=568345}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=568455}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=568587}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=568698}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=568828}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=568936}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=569065}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=569175}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=569308}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=569419}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=569548}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=569659}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=569790}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=569899}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570030}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570139}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570271}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570383}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570513}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570622}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570751}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570863}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=570994}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=571104}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=571234}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=571375}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=571514}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=571627}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=571763}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=571875}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572010}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572122}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572252}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572360}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572490}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572599}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572729}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572840}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=572974}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=573085}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=573211}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=573319}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=908779}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=908910}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=909056}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=909175}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=909311}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=909425}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=909562}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=909675}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=909809}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=909919}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=910050}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=910162}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=910293}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=910405}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=910536}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=910646}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=910780}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=910889}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=911020}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=911130}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=911260}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=911404}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=911544}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=911658}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=911789}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=911901}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912031}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912142}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912273}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912383}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912514}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912622}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912753}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912863}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=912993}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=913106}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=913237}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=913347}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=913477}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=913587}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=913716}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=913827}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=913959}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=914069}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=914200}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=914310}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=914440}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=914552}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=914681}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=914789}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=914918}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915029}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915158}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915267}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915396}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915507}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915643}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915753}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915884}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=915993}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=916125}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=916235}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=916365}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=916474}, NULL) = 0
+gettimeofday({tv_sec=1580081435, tv_usec=916607}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=252015}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=252167}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=252286}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=252421}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=252535}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=252673}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=252789}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=252921}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=253031}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=253165}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=253277}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=253408}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=253518}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=253649}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=253761}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=253889}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254000}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254129}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254238}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254368}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254477}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254603}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254714}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254844}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=254953}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=255083}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=255192}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=255324}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=255433}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=255562}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=255672}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=255801}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=255913}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256042}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256152}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256281}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256389}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256517}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256626}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256754}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256863}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=256992}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=257100}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=257229}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=257339}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=257469}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=257580}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=257709}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=257818}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=257947}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=258057}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=258187}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=258294}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=258424}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=258531}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=258660}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=258770}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=258899}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=259006}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=259138}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=259248}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=259378}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=259487}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=259615}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=595048}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=595212}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=595336}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=595478}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=595594}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=595730}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=595842}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=595976}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=596085}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=596217}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=596330}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=596461}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=596573}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=596705}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=596817}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=596952}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=597063}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=597194}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=597303}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=597433}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=597543}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=597673}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=597782}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=597914}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598026}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598157}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598267}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598398}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598508}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598639}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598749}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598879}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=598990}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=599122}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=599233}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=599365}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=599476}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=599608}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=599717}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=599846}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=599957}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=600086}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=600194}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=600324}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=600435}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=600566}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=600673}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=600804}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=600912}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=601045}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=601155}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=601285}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=601430}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=601569}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=601682}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=601817}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=601928}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=602065}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=602174}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=602308}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=602417}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=602549}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=602662}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=602793}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=602906}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=938317}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=938444}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=938589}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=938704}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=938844}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=938956}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=939089}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=939203}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=939337}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=939449}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=939580}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=939693}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=939827}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=939937}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=940068}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=940178}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=940311}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=940423}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=940554}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=940666}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=940797}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=940909}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=941037}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=941149}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=941277}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=941420}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=941562}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=941677}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=941812}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=941923}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=942059}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=942170}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=942303}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=942413}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=942544}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=942653}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=942785}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=942895}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943028}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943141}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943270}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943378}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943509}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943618}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943752}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943862}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=943992}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=944104}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=944233}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=944345}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=944476}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=944585}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=944717}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=944829}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=944960}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=945070}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=945201}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=945312}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=945442}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=945553}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=945686}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=945796}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=945926}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=946035}, NULL) = 0
+gettimeofday({tv_sec=1580081436, tv_usec=946165}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=281548}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=281700}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=281819}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=281958}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=282072}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=282205}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=282317}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=282448}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=282556}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=282688}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=282797}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=282932}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=283042}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=283172}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=283282}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=283409}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=283520}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=283656}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=283767}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=283898}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284007}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284135}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284246}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284378}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284491}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284618}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284727}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284857}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=284970}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=285100}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=285209}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=285339}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=285450}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=285586}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=285696}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=285829}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=285942}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=286074}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=286184}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=286322}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=286434}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=286566}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=286676}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=286809}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=286919}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=287050}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=287160}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=287293}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=287403}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=287532}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=287667}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=287816}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=287935}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=288078}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=288194}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=288337}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=288449}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=288584}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=288698}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=288831}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=288941}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=289069}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=289180}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=289314}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=289424}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=624855}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=624984}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=625130}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=625252}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=625387}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=625500}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=625631}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=625742}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=625877}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=625987}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=626118}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=626228}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=626359}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=626470}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=626601}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=626711}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=626842}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=626953}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=627084}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=627192}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=627323}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=627433}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=627564}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=627677}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=627806}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=627915}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=628045}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=628156}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=628286}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=628395}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=628524}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=628636}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=628766}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=628875}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629005}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629116}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629247}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629354}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629486}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629597}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629726}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629833}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=629963}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=630074}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=630207}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=630317}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=630449}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=630559}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=630688}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=630799}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=630925}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=631036}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=631165}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=631276}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=631446}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=631565}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=631702}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=631813}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=631945}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=632053}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=632186}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=632299}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=632431}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=632541}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=632672}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=968077}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=968230}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=968353}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=968492}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=968606}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=968740}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=968854}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=968989}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=969101}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=969233}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=969345}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=969477}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=969586}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=969714}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=969822}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=969950}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=970060}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=970191}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=970303}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=970434}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=970544}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=970673}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=970781}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=970908}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=971016}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=971150}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=971261}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=971429}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=971544}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=971680}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=971793}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=971924}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=972033}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=972167}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=972279}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=972409}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=972518}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=972651}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=972763}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=972898}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973009}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973140}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973252}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973384}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973494}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973626}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973735}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973866}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=973976}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=974106}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=974217}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=974351}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=974460}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=974589}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=974699}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=974828}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=974936}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=975067}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=975177}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=975309}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=975419}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=975551}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=975662}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=975795}, NULL) = 0
+gettimeofday({tv_sec=1580081437, tv_usec=975904}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=311695}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=311881}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=312066}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=312194}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=312347}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=312466}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=312606}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=312720}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=312858}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=312974}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=313113}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=313231}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=313364}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=313478}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=313611}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=313721}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=313854}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=313965}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=314100}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=314212}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=314345}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=314459}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=314593}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=314703}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=314835}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=314945}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=315076}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=315188}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=315323}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=315435}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=315568}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=315678}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=315859}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=315976}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=316115}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=316228}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=316364}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=316476}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=316609}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=316722}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=316851}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=316960}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=317091}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=317203}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=317335}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=317446}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=317577}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=317689}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=317822}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=317932}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=318061}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=318170}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=318300}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=318413}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=318545}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=318654}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=318788}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=318900}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=319030}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=319144}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=319273}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=319385}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=319517}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=319629}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=319759}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=655190}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=655423}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=655566}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=655731}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=655856}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=656007}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=656126}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=656264}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=656379}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=656514}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=656625}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=656759}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=656872}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657005}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657113}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657245}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657356}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657488}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657598}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657728}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657837}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=657967}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=658080}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=658211}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=658322}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=658452}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=658564}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=658696}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=658806}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=658935}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=659046}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=659176}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=659287}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=659416}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=659527}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=659660}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=659769}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=659898}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660008}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660138}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660249}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660381}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660490}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660623}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660733}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660867}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=660975}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=661105}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=661215}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=661386}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=661503}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=661642}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=661757}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=661891}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=661999}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=662131}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=662243}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=662373}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=662484}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=662614}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=662723}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=662853}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=662963}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=663094}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=998512}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=998691}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=998815}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=998958}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=999076}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=999214}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=999324}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=999461}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=999572}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=999705}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=999817}, NULL) = 0
+gettimeofday({tv_sec=1580081438, tv_usec=999951}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=65}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=200}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=312}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=445}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=559}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=691}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=803}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=934}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=1045}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=1177}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=1291}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=1520}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=1637}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=1776}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=1889}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=2128}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=2251}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=2404}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=2519}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=2658}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=2772}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=2906}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3016}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3145}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3258}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3392}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3502}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3634}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3743}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3875}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=3985}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=4116}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=4224}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=4356}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=4470}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=4600}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=4710}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=4840}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=4949}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=5081}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=5191}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=5320}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=5429}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=5560}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=5668}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=5800}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=5910}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=6041}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=6149}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=6282}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=6391}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=6524}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=6637}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=6769}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=6880}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=342303}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=342440}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=342593}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=342712}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=342851}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=342963}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=343098}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=343214}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=343348}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=344343}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=344598}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=345040}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=345282}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=345432}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=345598}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=346006}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=346174}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=346291}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=346438}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=346841}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=346988}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=347380}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=347539}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=347660}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=347802}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=348200}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=348350}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=348742}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=348904}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=349022}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=349159}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=349553}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=349700}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=350093}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=350253}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=350368}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=685828}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=685989}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=686158}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=686284}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=686432}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=686554}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=686693}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=686808}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=686943}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=687057}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=687192}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=687306}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=687440}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=687550}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=687682}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=687795}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=687925}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=688036}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=688168}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=688279}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=688411}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=688532}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=688667}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=689076}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=689227}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=689626}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=689793}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=689912}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=690053}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=690452}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=690600}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=690983}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=691138}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=691254}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=691439}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=691858}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=692003}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=692398}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=692561}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=692691}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=692838}, NULL) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], 8) = 0
+rt_sigprocmask(SIG_SETMASK, ~[ILL ABRT BUS FPE KILL SEGV STOP TSTP RTMIN RT_1], NULL, 8) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=693228}, NULL) = 0
+gettimeofday({tv_sec=1580081439, tv_usec=693455}, NULL) = 0
+gettimeofday({tv_sec=1580081440, tv_usec=28921}, NULL) = 0
+gettimeofday({tv_sec=1580081440, tv_usec=29092}, NULL) = 0
+umask(077)                              = 022
+close(8)                                = 0
+fcntl64(13, F_SETLK64, {l_type=F_UNLCK, l_whence=SEEK_SET, l_start=0, l_len=0}) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], [], 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+fdatasync(3)                            = 0
+munmap(0xb6325000, 1126400)             = 0
+close(3)                                = 0
+close(27)                               = 0
+close(26)                               = 0
+close(25)                               = 0
+close(24)                               = 0
+close(23)                               = 0
+close(22)                               = 0
+close(21)                               = 0
+close(20)                               = 0
+close(19)                               = 0
+close(18)                               = 0
+close(17)                               = 0
+close(16)                               = 0
+close(15)                               = 0
+close(14)                               = 0
+close(12)                               = 0
+close(11)                               = 0
+close(10)                               = 0
+close(9)                                = 0
+umask(022)                              = 077
+openat(AT_FDCWD, "/var/lib/rpm/.dbenv.lock", O_RDWR|O_CREAT|O_LARGEFILE, 0644) = 3
+umask(077)                              = 022
+fcntl64(3, F_SETLKW64, {l_type=F_WRLCK, l_whence=SEEK_SET, l_start=0, l_len=0}) = 0
+close(7)                                = 0
+munmap(0xb6473000, 1318912)             = 0
+close(6)                                = 0
+munmap(0xb65b5000, 212992)              = 0
+close(4)                                = 0
+close(5)                                = 0
+munmap(0xb65e9000, 827392)              = 0
+close(3)                                = 0
+rt_sigprocmask(SIG_BLOCK, ~[RTMIN RT_1], [], 8) = 0
+rt_sigaction(SIGINT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6cfb5d0}, NULL, 8) = 0
+rt_sigaction(SIGQUIT, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6cfb5d0}, NULL, 8) = 0
+rt_sigaction(SIGHUP, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6cfb5d0}, NULL, 8) = 0
+rt_sigaction(SIGTERM, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6cfb5d0}, NULL, 8) = 0
+rt_sigaction(SIGPIPE, {sa_handler=SIG_DFL, sa_mask=[], sa_flags=SA_RESTORER, sa_restorer=0xb6cfb5d0}, NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+close(13)                               = 0
+exit_group(1)                           = ?
++++ exited with 1 +++
+bash-5.0# 

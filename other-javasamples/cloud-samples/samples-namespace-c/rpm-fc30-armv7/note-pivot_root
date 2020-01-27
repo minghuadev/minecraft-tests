@@ -1,0 +1,93 @@
+
+# mkfs.ext4 /dev/mmcblk0p4
+
+# mkdir root-new
+# mount -t ext4 /dev/mmcblk0p4  root-new
+# cd root-new
+
+# cp -a /bin /lib /sbin /usr .
+# mkdir proc sys dev tmp var
+# mkdir root-old root
+
+# mount -o bind /proc $(pwd)/proc
+# mount -o bind /dev  $(pwd)/dev
+
+# unshare -m --propagation slave 
+# pivot_root . root-old
+
+# sh
+
+/* if copied all directories into /opt */
+
+# LD_LIBRARY_PATH=/opt/lib:/opt/usr/lib PATH=/opt/bin:/opt/sbin:/opt/usr/bin:/opt/usr/sbin \
+  /opt/lib/ld-2.24.so /opt/bin/sh
+
+# /opt/lib/ld-2.24.so /opt/bin/ls
+
+ # /opt/lib/ld-2.24.so /opt/bin/rpm -i bash-4.3.43-4.fc25.armv7hl.rpm
+ # /opt/lib/ld-2.24.so /opt/bin/rpm -i file-5.28-4.fc25.armv7hl.rpm
+ # /opt/lib/ld-2.24.so /opt/bin/rpm -i file-libs-5.28-4.fc25.armv7hl.rpm
+ # /opt/lib/ld-2.24.so /opt/bin/rpm -i glibc-2.24-10.fc25.armv7hl.rpm
+ # /opt/lib/ld-2.24.so /opt/bin/rpm -i glibc-common-2.24-10.fc25.armv7hl.rpm
+ # /opt/lib/ld-2.24.so /opt/bin/rpm -i ncurses-base-6.0-6.20160709.fc25.noarch.rpm
+ # /opt/lib/ld-2.24.so /opt/bin/rpm -i ncurses-libs-6.0-6.20160709.fc25.armv7hl.rpm
+ # /opt/lib/ld-2.24.so /opt/bin/rpm -i libgcc-6.4.1-1.fc25.armv7hl.rpm
+
+#  LD_LIBRARY_PATH=/lib:/usr/lib PATH=/bin:/sbin:/usr/bin:/usr/sbin /usr/bin/bash
+
+/* install the following manually using the above sh or ls commands on old lib: */
+ coreutils-*  /* 3x: -, -common, -single, --note: do not use the full version as it conflict with the minimal version */
+
+ libse*  /* 4x */
+ libattr, libacl, libcap, libcap-ng, pcre2, 
+
+ /* now bash can do ls. continue to install everything in repo302 directory.
+  * repo302 contains additional packages downloaded after inital bash.
+  * repo302 needs to remove curl, coreutils due to conflict with their -minimal or -single version.
+  */
+
+ ...
+
+/* install from inside bash: */
+/* install from inside bash: it looks the filesystem needs to be installed first
+ *                           because it creates /lib->/usr/lib and /bin->/usr/bin
+ */
+
+ ls -l *.rpm :  /* these files are manually added one by one and move to repof303/ */
+-rw------- 1 0 0  106660 Jan  4 00:35 fedora-gpg-keys-30-2.noarch.rpm
+-rw------- 1 0 0   11152 Jan  4 00:30 fedora-release-30-6.noarch.rpm
+-rw------- 1 0 0   19468 Jan  4 00:31 fedora-release-common-30-6.noarch.rpm
+-rw------- 1 0 0    9688 Jan  4 00:34 fedora-repos-30-2.noarch.rpm
+-rw------- 1 0 0 1117156 Jan  4 00:22 filesystem-3.10-1.fc30.armv7hl.rpm
+-rw------- 1 0 0   58164 Jan  3 23:57 libseccomp-2.4.2-2.fc30.armv7hl.rpm
+-rw------- 1 0 0   72024 Jan  3 23:57 libselinux-2.9-3.1.fc30.armv7hl.rpm
+-rw------- 1 0 0  102728 Jan  3 23:57 libsemanage-2.9-1.fc30.armv7hl.rpm
+-rw------- 1 0 0  253620 Jan  3 23:57 libsepol-2.9-1.fc30.armv7hl.rpm
+-rw------- 1 0 0  226328 Jan  4 00:07 pcre2-10.33-16.fc30.armv7hl.rpm
+-rw------- 1 0 0  152372 Jan  4 00:24 setup-2.13.6-1.fc30.noarch.rpm
+
+/* install rpm-* packages, then ... */
+
+ rpm --initdb
+ rpm -i filesystem-3.10-1.fc30.armv7hl.rpm setup-2.13.6-1.fc30.noarch.rpm \
+        fedora-release-30-6.noarch.rpm fedora-release-common-30-6.noarch.rpm \
+        fedora-repos-30-2.noarch.rpm fedora-gpg-keys-30-2.noarch.rpm \
+        repof30/* repof302/* ./*.rpm
+
+    error: 
+        basesystem is needed by glibc-2.29-27.fc30.armv7hl
+        glibc-langpack = 2.29-27.fc30 is needed by glibc-2.29-27.fc30.armv7hl
+        tzdata >= 2003a is needed by glibc-common-2.29-27.fc30.armv7hl
+        coreutils-single conflicts with coreutils-8.31-6.fc30.armv7hl
+        curl conflicts with curl-minimal-7.65.3-4.fc30.armv7hl
+        libcurl conflicts with libcurl-minimal-7.65.3-4.fc30.armv7hl
+
+  bash-5.0# cd repof302/
+  bash-5.0# rm curl-7.65.3-4.fc30.armv7hl.rpm
+  bash-5.0# rm libcurl-7.65.3-4.fc30.armv7hl.rpm
+  bash-5.0# rm coreutils-8.31-6.fc30.armv7hl.rpm
+
+  /* add: */ glibc-minimal-langpack tzdata-2019c-1 basesystem
+  /* run rpm -i *.rpm repof30/* repof302/* */
+
+

@@ -1,0 +1,221 @@
+
+inside the f30 namespace:
+
+ mkdir altcontainer
+ rpm --root $(pwd)/altcontainer --initdb
+ dnf -v install --releasever=31 --installroot=$(pwd)/altcontainer fedora-release-container fedora-gpg-keys filesystem setup glibc-minimal-langpack
+ rpm --root $(pwd)/altcontainer -q -a
+
+bash-5.0# rpm --root $(pwd)/altcontainer -q -a
+tzdata-2019c-1.fc31.noarch
+fedora-gpg-keys-31-1.noarch
+fedora-repos-31-1.noarch
+fedora-release-common-31-2.noarch
+filesystem-3.12-2.fc31.armv7hl
+pcre2-10.34-4.fc31.armv7hl
+ncurses-libs-6.1-12.20190803.fc31.armv7hl
+glibc-common-2.30-10.fc31.armv7hl
+bash-5.0.11-1.fc31.armv7hl
+gpg-pubkey-3c3359c4-5c6ae44d
+ncurses-base-6.1-12.20190803.fc31.noarch
+libgcc-9.2.1-1.fc31.armv7hl
+fedora-release-container-31-2.noarch
+setup-2.13.6-1.fc31.noarch
+basesystem-11-8.fc31.noarch
+libselinux-2.9-5.fc31.armv7hl
+glibc-minimal-langpack-2.30-10.fc31.armv7hl
+glibc-2.30-10.fc31.armv7hl
+libsepol-2.9-2.fc31.armv7hl
+
+
+ dnf -v --installroot=$(pwd)/altcontainer --releasever=31 install dnf coreutils-single curl-minimal
+
+
+
+or install the minimal namespace root
+
+ dnf -v --releasever=31 --installroot=$(pwd)/altcontainer --setopt=install_weak_deps=False --best install \
+        fedora-release-container fedora-gpg-keys filesystem setup glibc-minimal-langpack
+
+========================================================================================================================================
+ Package                                  Architecture            Version                                 Repository               Size
+========================================================================================================================================
+Installing:
+ fedora-release-container                 noarch                  31-2                                    updates                  12 k
+ glibc-minimal-langpack                   armv7hl                 2.30-10.fc31                            updates                  51 k
+ setup                                    noarch                  2.13.6-1.fc31                           updates                 142 k
+ fedora-gpg-keys                          noarch                  31-1                                    fedora                  100 k
+ filesystem                               armv7hl                 3.12-2.fc31                             fedora                  1.1 M
+Installing dependencies:
+ bash                                     armv7hl                 5.0.11-1.fc31                           updates                 1.6 M
+ fedora-release-common                    noarch                  31-2                                    updates                  20 k
+ glibc                                    armv7hl                 2.30-10.fc31                            updates                 3.0 M
+ glibc-common                             armv7hl                 2.30-10.fc31                            updates                 636 k
+ pcre2                                    armv7hl                 10.34-4.fc31                            updates                 240 k
+ basesystem                               noarch                  11-8.fc31                               fedora                  6.9 k
+ fedora-repos                             noarch                  31-1                                    fedora                  9.6 k
+ libgcc                                   armv7hl                 9.2.1-1.fc31                            fedora                  101 k
+ libselinux                               armv7hl                 2.9-5.fc31                              fedora                   81 k
+ libsepol                                 armv7hl                 2.9-2.fc31                              fedora                  282 k
+ ncurses-base                             noarch                  6.1-12.20190803.fc31                    fedora                   60 k
+ ncurses-libs                             armv7hl                 6.1-12.20190803.fc31                    fedora                  284 k
+ tzdata                                   noarch                  2019c-1.fc31                            fedora                  429 k
+
+Transaction Summary
+========================================================================================================================================
+Install  18 Packages
+
+Total download size: 8.1 M
+Installed size: 27 M
+
+ dnf -v --releasever=31 --installroot=$(pwd)/altcontainer --setopt=install_weak_deps=False --best install \
+        dnf coreutils-single curl-minimal  iputils wget which bind-utils traceroute vim
+
+========================================================================================================================================
+ Package                                  Architecture         Version                                       Repository            Size
+========================================================================================================================================
+Installing:
+ bind-utils                               armv7hl              32:9.11.14-2.fc31                             updates              234 k
+ coreutils-single                         armv7hl              8.31-6.fc31                                   updates              636 k
+ dnf                                      noarch               4.2.18-1.fc31                                 updates              405 k
+ vim-enhanced                             armv7hl              2:8.2.109-1.fc31                              updates              1.3 M
+ curl-minimal                             armv7hl              7.66.0-1.fc31                                 fedora               123 k
+ iputils                                  armv7hl              20190515-3.fc31                               fedora               140 k
+ traceroute                               armv7hl              3:2.1.0-9.fc31                                fedora                56 k
+ wget                                     armv7hl              1.20.3-2.fc31                                 fedora               793 k
+ which                                    armv7hl              2.21-15.fc31                                  fedora                41 k
+Installing dependencies:
+ audit-libs                               armv7hl              3.0-0.15.20191104git1c2f876.fc31              updates              108 k
+ bind-libs                                armv7hl              32:9.11.14-2.fc31                             updates               87 k
+ bind-libs-lite                           armv7hl              32:9.11.14-2.fc31                             updates              1.0 M
+ bind-license                             noarch               32:9.11.14-2.fc31                             updates               20 k
+ crypto-policies                          noarch               20191128-2.gitcd267a5.fc31                    updates               97 k
+ dnf-data                                 noarch               4.2.18-1.fc31                                 updates               48 k
+ elfutils-default-yama-scope              noarch               0.178-7.fc31                                  updates               17 k
+ elfutils-libelf                          armv7hl              0.178-7.fc31                                  updates              189 k
+ elfutils-libs                            armv7hl              0.178-7.fc31                                  updates              263 k
+ file-libs                                armv7hl              5.37-8.fc31                                   updates              537 k
+ fstrm                                    armv7hl              0.5.0-1.fc31                                  updates               24 k
+ glib2                                    armv7hl              2.62.4-1.fc31                                 updates              2.5 M
+ gnupg2                                   armv7hl              2.2.18-2.fc31                                 updates              2.2 M
+ gnutls                                   armv7hl              3.6.11-1.fc31                                 updates              908 k
+ json-c                                   armv7hl              0.13.1-8.fc31                                 updates               36 k
+ libblkid                                 armv7hl              2.34-4.fc31                                   updates              151 k
+ libcap-ng                                armv7hl              0.7.10-1.fc31                                 updates               27 k
+ libcom_err                               armv7hl              1.45.5-1.fc31                                 updates               27 k
+ libcomps                                 armv7hl              0.1.14-1.fc31                                 updates               68 k
+ libdnf                                   armv7hl              0.43.1-1.fc31                                 updates              550 k
+ libidn2                                  armv7hl              2.3.0-1.fc31                                  updates              102 k
+ libmodulemd1                             armv7hl              1.8.16-1.fc31                                 updates              164 k
+ libmount                                 armv7hl              2.34-4.fc31                                   updates              174 k
+ libnghttp2                               armv7hl              1.39.2-2.fc31                                 updates               73 k
+ librepo                                  armv7hl              1.11.1-1.fc31                                 updates               89 k
+ libreport-filesystem                     noarch               2.11.3-1.fc31                                 updates               14 k
+ libsmartcols                             armv7hl              2.34-4.fc31                                   updates              119 k
+ libsolv                                  armv7hl              0.7.10-1.fc31                                 updates              346 k
+ libssh                                   armv7hl              0.9.3-1.fc31                                  updates              192 k
+ libssh-config                            noarch               0.9.3-1.fc31                                  updates               11 k
+ libtirpc                                 armv7hl              1.2.5-0.fc31                                  updates               89 k
+ libuuid                                  armv7hl              2.34-4.fc31                                   updates               27 k
+ libxcrypt                                armv7hl              4.4.10-2.fc31                                 updates              145 k
+ libxml2                                  armv7hl              2.9.10-2.fc31                                 updates              625 k
+ libzstd                                  armv7hl              1.4.4-1.fc31                                  updates              245 k
+ python-pip-wheel                         noarch               19.1.1-7.fc31                                 updates              1.2 M
+ python3                                  armv7hl              3.7.6-1.fc31                                  updates               31 k
+ python3-dnf                              noarch               4.2.18-1.fc31                                 updates              403 k
+ python3-hawkey                           armv7hl              0.43.1-1.fc31                                 updates               84 k
+ python3-libcomps                         armv7hl              0.1.14-1.fc31                                 updates               46 k
+ python3-libdnf                           armv7hl              0.43.1-1.fc31                                 updates              611 k
+ python3-libs                             armv7hl              3.7.6-1.fc31                                  updates              6.6 M
+ python3-rpm                              armv7hl              4.15.1-1.fc31                                 updates               86 k
+ rpm                                      armv7hl              4.15.1-1.fc31                                 updates              497 k
+ rpm-build-libs                           armv7hl              4.15.1-1.fc31                                 updates               90 k
+ rpm-libs                                 armv7hl              4.15.1-1.fc31                                 updates              264 k
+ rpm-sign-libs                            armv7hl              4.15.1-1.fc31                                 updates               25 k
+ sqlite-libs                              armv7hl              3.30.0-1.fc31                                 updates              529 k
+ systemd-libs                             armv7hl              243.5-1.fc31                                  updates              499 k
+ vim-common                               armv7hl              2:8.2.109-1.fc31                              updates              6.5 M
+ vim-filesystem                           noarch               2:8.2.109-1.fc31                              updates               24 k
+ zchunk-libs                              armv7hl              1.1.5-1.fc31                                  updates               47 k
+ zlib                                     armv7hl              1.2.11-20.fc31                                updates               90 k
+ alternatives                             armv7hl              1.11-5.fc31                                   fedora                34 k
+ brotli                                   armv7hl              1.0.7-6.fc31                                  fedora               334 k
+ bzip2-libs                               armv7hl              1.0.8-1.fc31                                  fedora                39 k
+ ca-certificates                          noarch               2019.2.32-3.fc31                              fedora               367 k
+ cyrus-sasl-lib                           armv7hl              2.1.27-2.fc31                                 fedora                96 k
+ expat                                    armv7hl              2.2.8-1.fc31                                  fedora                89 k
+ gawk                                     armv7hl              5.0.1-5.fc31                                  fedora               1.2 M
+ gdbm-libs                                armv7hl              1:1.18.1-1.fc31                               fedora                51 k
+ gmp                                      armv7hl              1:6.1.2-10.fc31                               fedora               217 k
+ gpgme                                    armv7hl              1.13.1-3.fc31                                 fedora               184 k
+ gpm-libs                                 armv7hl              1.20.7-19.fc31                                fedora                20 k
+ grep                                     armv7hl              3.3-3.fc31                                    fedora               244 k
+ ima-evm-utils                            armv7hl              1.2.1-2.fc31                                  fedora                55 k
+ keyutils-libs                            armv7hl              1.6-3.fc31                                    fedora                30 k
+ krb5-libs                                armv7hl              1.17-45.fc31                                  fedora               711 k
+ libacl                                   armv7hl              2.2.53-4.fc31                                 fedora                23 k
+ libarchive                               armv7hl              3.4.0-1.fc31                                  fedora               362 k
+ libassuan                                armv7hl              2.5.3-2.fc31                                  fedora                64 k
+ libattr                                  armv7hl              2.4.48-7.fc31                                 fedora                17 k
+ libcap                                   armv7hl              2.26-6.fc31                                   fedora                51 k
+ libcurl                                  armv7hl              7.66.0-1.fc31                                 fedora               250 k
+ libdb                                    armv7hl              5.3.28-38.fc31                                fedora               698 k
+ libdb-utils                              armv7hl              5.3.28-38.fc31                                fedora               140 k
+ libffi                                   armv7hl              3.1-23.fc31                                   fedora                32 k
+ libgcrypt                                armv7hl              1.8.5-1.fc31                                  fedora               424 k
+ libgomp                                  armv7hl              9.2.1-1.fc31                                  fedora               220 k
+ libgpg-error                             armv7hl              1.36-2.fc31                                   fedora               191 k
+ libksba                                  armv7hl              1.3.5-10.fc31                                 fedora               121 k
+ libmaxminddb                             armv7hl              1.2.0-8.fc31                                  fedora                22 k
+ libmetalink                              armv7hl              0.1.3-9.fc31                                  fedora                26 k
+ libnsl2                                  armv7hl              1.2.0-5.20180605git4a062cf.fc31               fedora                54 k
+ libpsl                                   armv7hl              0.21.0-2.fc31                                 fedora                60 k
+ libsigsegv                               armv7hl              2.11-8.fc31                                   fedora                26 k
+ libstdc++                                armv7hl              9.2.1-1.fc31                                  fedora               554 k
+ libtasn1                                 armv7hl              4.14-2.fc31                                   fedora                69 k
+ libunistring                             armv7hl              0.9.10-6.fc31                                 fedora               498 k
+ libusbx                                  armv7hl              1.0.22-4.fc31                                 fedora                66 k
+ libverto                                 armv7hl              0.3.0-8.fc31                                  fedora                21 k
+ libyaml                                  armv7hl              0.2.2-2.fc31                                  fedora                54 k
+ lmdb-libs                                armv7hl              0.9.23-3.fc31                                 fedora                56 k
+ lua-libs                                 armv7hl              5.3.5-6.fc31                                  fedora               102 k
+ lz4-libs                                 armv7hl              1.9.1-1.fc31                                  fedora                63 k
+ mpfr                                     armv7hl              3.1.6-5.fc31                                  fedora               210 k
+ nettle                                   armv7hl              3.5.1-3.fc31                                  fedora               412 k
+ npth                                     armv7hl              1.6-3.fc31                                    fedora                24 k
+ openldap                                 armv7hl              2.4.47-3.fc31                                 fedora               277 k
+ openssl                                  armv7hl              1:1.1.1d-2.fc31                               fedora               628 k
+ openssl-libs                             armv7hl              1:1.1.1d-2.fc31                               fedora               1.2 M
+ p11-kit                                  armv7hl              0.23.16.1-2.fc31                              fedora               288 k
+ p11-kit-trust                            armv7hl              0.23.16.1-2.fc31                              fedora               130 k
+ pcre                                     armv7hl              8.43-2.fc31.1                                 fedora               174 k
+ popt                                     armv7hl              1.16-18.fc31                                  fedora                57 k
+ protobuf-c                               armv7hl              1.3.1-3.fc31                                  fedora                33 k
+ publicsuffix-list-dafsa                  noarch               20190417-2.fc31                               fedora                56 k
+ python-setuptools-wheel                  noarch               41.2.0-1.fc31                                 fedora               275 k
+ python3-gpg                              armv7hl              1.13.1-3.fc31                                 fedora               229 k
+ readline                                 armv7hl              8.0-3.fc31                                    fedora               190 k
+ sed                                      armv7hl              4.5-4.fc31                                    fedora               287 k
+ tss2                                     armv7hl              1331-2.fc31                                   fedora               546 k
+ xz-libs                                  armv7hl              5.2.4-6.fc31                                  fedora                85 k
+
+Transaction Summary
+========================================================================================================================================
+Install  122 Packages
+
+Total download size: 45 M
+Installed size: 158 M
+
+
+previous experiment history to get more packages
+
+    5  dnf install iputils
+    6  dnf install wget
+    8  dnf install which
+   12  dnf install bind-utils
+   16  dnf install traceroute
+   22  dnf uninstall gtk3
+   24  dnf --setopt=install_weak_deps=False --best install openssh
+   25  dnf --setopt=install_weak_deps=False --best install openssh-clients
+
+

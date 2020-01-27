@@ -1,0 +1,29 @@
+
+
+init rpm with: 
+rpm --root $(pwd)/altroot --initdb
+
+then run i1.bash to create directories, i2.bash to get bash up, i3 to install everything. 
+
+
+
+/mnt/root-n1/root # cat i1.bash
+#!/bin/bash
+
+rpm --root $(pwd)/altroot -i --nodeps repof303/filesystem-3* repof303/setup-2* repof303/fedora-release-common*  repof303/fedora-release-30*
+
+
+/mnt/root-n1/root # cat i2.bash
+#!/bin/bash
+
+rpm --root $(pwd)/altroot -i --nodeps repof30/*.rpm
+
+
+
+/mnt/root-n1/root # cat i3.bash
+#!/bin/bash
+
+rpm --root $(pwd)/altroot --reinstall -v repof30/*.rpm repof303/*.rpm repof302/*.rpm repof302/xtra/*.rpm
+
+
+

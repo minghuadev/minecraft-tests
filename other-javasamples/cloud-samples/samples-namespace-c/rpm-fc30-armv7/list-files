@@ -1,0 +1,26 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-r--r--    5214 Jan 24 16:05 note-rpm-pkgs-302
+-rwxr-xr-x     479 Jan 24 17:31 note-f30-download-bash.bash
+-rw-r--r--     689 Jan 24 17:36 note-rpm-pkgs-304
+-rw-r--r--     223 Jan 24 17:37 note-rpm-pkgs-30-manual
+-rw-r--r--     478 Jan 24 17:38 note-rpm-pkgs-303-manual
+-rw-r--r--    3826 Jan 24 22:23 note-pivot_root
+-rw-rw-r--     588 Jan 25 10:38 notes-4-rpm-alternative-root
+-rw-rw-r--    2055 Jan 26 13:48 note-pivot_root-pkg-1
+-rwx------  154746 Jan 26 16:35 notes-screen-log-2-dnf-ok
+-rw-rw-r--    1021 Jan 26 20:45 note-pivot_root-pkg-2-dnf-installroot
+-rw-r--r--  451897 Jan 26 20:46 notes-screen-log-1-trials
+-rwx------   72707 Jan 26 20:48 notes-screen-log-4-dnf-updated
+-rwx------  166778 Jan 26 20:53 notes-screen-log-3-dnf-install-fail-straced
+-rw-rw-r--       0 Jan 26 20:56 list-files
+
+-rw-rw-r--     829 Jan 26 20:56 list-files
+-rw-rw-r--   10563 Jan 26 23:03 note-rpm-pkgs-305-manual-no-x
+-rw-rw-r--   22205 Jan 27 00:07 note-pivot_root-pkg-2-dnf-installroot
+
+

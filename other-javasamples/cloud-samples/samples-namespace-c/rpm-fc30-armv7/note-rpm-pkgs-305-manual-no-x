@@ -1,0 +1,98 @@
+
+
+when installing dnf by installroot x packages are brought in. 
+try to remove them below. it shows packages relying on gtk3. 
+
+reiew the non-x packages in the list: openssh and openssh-client
+then install them back using   dnf --setopt=install_weak_deps=False --best install
+
+or use this to check who needs gtk3   dnf repoquery --alldeps --whatrequires <package>
+or the reverse                        dnf repoquery --requires --resolve     <package>
+
+
+bash-5.0# dnf remove gtk3
+Dependencies resolved.
+========================================================================================================================================
+ Package                                    Architecture           Version                                Repository               Size
+========================================================================================================================================
+Removing:
+ gtk3                                       armv7hl                3.24.13-1.fc31                         @updates                 19 M
+Removing dependent packages:
+ gnome-keyring                              armv7hl                3.34.0-1.fc31                          @fedora                 3.8 M
+Removing unused dependencies:
+ abattis-cantarell-fonts                    noarch                 0.111-3.fc31                           @fedora                 718 k
+ adobe-source-code-pro-fonts                noarch                 2.030.1.050-7.fc31                     @fedora                 1.8 M
+ adwaita-cursor-theme                       noarch                 3.34.3-1.fc31                          @updates                 11 M
+ adwaita-icon-theme                         noarch                 3.34.3-1.fc31                          @updates                 11 M
+ at-spi2-atk                                armv7hl                2.34.1-1.fc31                          @fedora                 218 k
+ at-spi2-core                               armv7hl                2.34.0-1.fc31                          @fedora                 438 k
+ atk                                        armv7hl                2.34.1-1.fc31                          @fedora                 1.2 M
+ avahi-libs                                 armv7hl                0.7-20.fc31                            @fedora                 130 k
+ cairo                                      armv7hl                1.16.0-6.fc31                          @fedora                 1.5 M
+ cairo-gobject                              armv7hl                1.16.0-6.fc31                          @fedora                  27 k
+ colord-libs                                armv7hl                1.4.4-2.fc31                           @fedora                 685 k
+ cups-libs                                  armv7hl                1:2.2.12-3.fc31                        @updates                608 k
+ dconf                                      armv7hl                0.34.0-1.fc31                          @fedora                 256 k
+ fipscheck                                  armv7hl                1.5.0-7.fc31                           @fedora                  35 k
+ fipscheck-lib                              armv7hl                1.5.0-7.fc31                           @fedora                  11 k
+ fontconfig                                 armv7hl                2.13.92-3.fc31                         @fedora                 675 k
+ fontpackages-filesystem                    noarch                 1.44-25.fc31                           @fedora                   0
+ freetype                                   armv7hl                2.10.0-3.fc31                          @fedora                 651 k
+ fribidi                                    armv7hl                1.0.5-5.fc31                           @updates                303 k
+ gcr                                        armv7hl                3.34.0-1.fc31                          @updates                1.6 M
+ gcr-base                                   armv7hl                3.34.0-1.fc31                          @updates                723 k
+ gdk-pixbuf2                                armv7hl                2.40.0-1.fc31                          @fedora                 2.5 M
+ gdk-pixbuf2-modules                        armv7hl                2.40.0-1.fc31                          @fedora                 219 k
+ glib-networking                            armv7hl                2.62.3-1.fc31                          @updates                481 k
+ graphite2                                  armv7hl                1.3.13-1.fc31                          @fedora                 179 k
+ gsettings-desktop-schemas                  armv7hl                3.34.0-1.fc31                          @fedora                 4.1 M
+ gtk-update-icon-cache                      armv7hl                3.24.13-1.fc31                         @updates                 57 k
+ harfbuzz                                   armv7hl                2.6.1-2.fc31                           @fedora                 1.7 M
+ hicolor-icon-theme                         noarch                 0.17-7.fc31                            @fedora                  72 k
+ jasper-libs                                armv7hl                2.0.14-9.fc31                          @fedora                 309 k
+ jbigkit-libs                               armv7hl                2.1-17.fc31                            @fedora                 100 k
+ json-glib                                  armv7hl                1.4.4-3.fc31                           @fedora                 488 k
+ lcms2                                      armv7hl                2.9-6.fc31                             @fedora                 303 k
+ libX11                                     armv7hl                1.6.9-2.fc31                           @updates                1.1 M
+ libX11-common                              noarch                 1.6.9-2.fc31                           @updates                1.3 M
+ libXau                                     armv7hl                1.0.9-2.fc31                           @fedora                  55 k
+ libXcomposite                              armv7hl                0.4.4-17.fc31                          @fedora                  34 k
+ libXcursor                                 armv7hl                1.1.15-6.fc31                          @fedora                  37 k
+ libXdamage                                 armv7hl                1.1.4-17.fc31                          @fedora                  29 k
+ libXext                                    armv7hl                1.3.4-2.fc31                           @fedora                  77 k
+ libXfixes                                  armv7hl                5.0.3-10.fc31                          @fedora                  22 k
+ libXft                                     armv7hl                2.3.3-2.fc31                           @fedora                 113 k
+ libXi                                      armv7hl                1.7.10-2.fc31                          @fedora                  64 k
+ libXinerama                                armv7hl                1.1.4-4.fc31                           @fedora                  14 k
+ libXrandr                                  armv7hl                1.5.2-2.fc31                           @fedora                  40 k
+ libXrender                                 armv7hl                0.9.10-10.fc31                         @fedora                  38 k
+ libXtst                                    armv7hl                1.2.3-10.fc31                          @fedora                  25 k
+ libdatrie                                  armv7hl                0.2.9-10.fc31                          @fedora                  50 k
+ libedit                                    armv7hl                3.1-30.20191211cvs.fc31                @updates                186 k
+ libepoxy                                   armv7hl                1.5.3-4.fc31                           @fedora                 962 k
+ libgusb                                    armv7hl                0.3.2-1.fc31                           @updates                 97 k
+ libjpeg-turbo                              armv7hl                2.0.2-5.fc31                           @updates                330 k
+ libmodman                                  armv7hl                2.0.1-20.fc31                          @fedora                  58 k
+ libpng                                     armv7hl                2:1.6.37-2.fc31                        @fedora                 186 k
+ libproxy                                   armv7hl                0.4.15-14.fc31                         @fedora                 157 k
+ libsoup                                    armv7hl                2.68.3-1.fc31                          @updates                1.3 M
+ libthai                                    armv7hl                0.1.28-3.fc31                          @fedora                 754 k
+ libtiff                                    armv7hl                4.0.10-7.fc31                          @updates                552 k
+ libwayland-client                          armv7hl                1.17.0-2.fc31                          @fedora                  46 k
+ libwayland-cursor                          armv7hl                1.17.0-2.fc31                          @fedora                  29 k
+ libwayland-egl                             armv7hl                1.17.0-2.fc31                          @fedora                 7.7 k
+ libxcb                                     armv7hl                1.13.1-3.fc31                          @fedora                 801 k
+ openssh                                    armv7hl                8.1p1-1.fc31                           @updates                1.8 M
+ openssh-clients                            armv7hl                8.1p1-1.fc31                           @updates                2.3 M
+ pango                                      armv7hl                1.44.7-1.fc31                          @updates                694 k
+ pixman                                     armv7hl                0.38.4-1.fc31                          @fedora                 601 k
+ rest                                       armv7hl                0.8.1-6.fc31                           @fedora                 154 k
+
+Transaction Summary
+========================================================================================================================================
+Remove  69 Packages
+
+Freed space: 81 M
+
+
+

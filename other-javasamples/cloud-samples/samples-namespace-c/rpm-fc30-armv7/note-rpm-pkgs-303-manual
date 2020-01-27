@@ -1,0 +1,14 @@
+basesystem-11-7.fc30.noarch.rpm
+fedora-gpg-keys-30-2.noarch.rpm
+fedora-release-30-6.noarch.rpm
+fedora-release-common-30-6.noarch.rpm
+fedora-repos-30-2.noarch.rpm
+filesystem-3.10-1.fc30.armv7hl.rpm
+glibc-minimal-langpack-2.29-27.fc30.armv7hl.rpm
+libseccomp-2.4.2-2.fc30.armv7hl.rpm
+libselinux-2.9-3.1.fc30.armv7hl.rpm
+libsemanage-2.9-1.fc30.armv7hl.rpm
+libsepol-2.9-1.fc30.armv7hl.rpm
+pcre2-10.33-16.fc30.armv7hl.rpm
+setup-2.13.6-1.fc30.noarch.rpm
+tzdata-2019c-1.fc30.noarch.rpm
