@@ -1,0 +1,64 @@
+#!/bin/sh
+
+olddir=$(pwd)
+
+while true; do # scope 
+ if [ -z "$1" ]; then break; fi
+ cmd=$1
+ if [ "$cmd" == "sh_bash" ]; then
+    
+    echo Running pivot ...
+    pivot_root . root-old-contained
+
+    echo Running bash ...
+    #bash -c "echo; echo abcde; echo pwd; pwd; echo"
+    #bash --login
+    bash
+
+    echo Running exit ...
+    exit 0
+ elif [ "$cmd" == "sh_sysd" ]; then
+
+    echo Running pivot ...
+    pivot_root . root-old-contained
+    #/lib/ld-2.30.so /usr/lib/systemd/systemd --system --unit=basic.target
+    /lib/ld-2.30.so /usr/lib/systemd/systemd --help
+
+    echo Running exit ...
+    exit 0
+ fi
+ break # 
+
+done # while true scope 
+
+
+cd /root/altcontained
+
+#mount -o bind /proc proc
+mount -o bind /dev dev
+mount -o bind /dev/pts dev/pts
+mount -o bind /sys sys
+mount -t cgroup cgroup sys/fs/cgroup
+mount -t tmpfs tmpfs run
+
+echo Running unshare ...
+if [ ! -z "$1" -a "$1" == "bash" ]; then 
+    unshare -p -m --propagation slave  sh -c "/root/altstart.sh sh_bash"
+else
+    #unshare -p -m --propagation slave  sh -c "/root/altstart.sh sh_sysd"
+    #unshare -p -m --propagation slave  root/rootinit
+    unshare  -m --propagation slave  root/rootinit
+fi
+
+echo Running umount ...
+umount run
+umount sys/fs/cgroup
+umount sys
+umount dev/pts
+umount dev
+#umount proc
+
+echo Running cd ...
+cd $olddir
+
+

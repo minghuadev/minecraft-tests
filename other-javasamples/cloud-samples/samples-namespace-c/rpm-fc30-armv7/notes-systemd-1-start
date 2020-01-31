@@ -1,0 +1,207 @@
+
+toc
+    systemd link
+    issues
+    script 1
+    script 2
+    script 3
+
+
+================
+systemd link
+
+https://developers.redhat.com/blog/2016/09/13/running-systemd-in-a-non-privileged-container/
+
+https://superuser.com/questions/688733/start-a-systemd-service-inside-chroot
+
+https://github.com/systemd/systemd/issues/6477
+
+================
+issues
+
+allocate pty: mmount -t devpts devpts dev/pts
+cgroup: mount /sys/fs/cgroup ro and /sys/fs/cgroup/systemd rw
+module autofs4 : insert the module
+systemd cannot be run in a chroot() environment: not to mount proc before 
+failed to allocate manager object
+
+
+================
+script 1
+
+~ # cat altstart.sh
+#!/bin/sh
+
+olddir=$(pwd)
+
+if [ ! -z "$1" ]; then
+ cmd=$1
+ if [ "$cmd" == "sh" ]; then
+
+    echo Running pivot ...
+    pivot_root . root-old-contained
+
+    echo Running bash ...
+    #bash -c "echo; echo abcde; echo pwd; pwd; echo"
+    #bash --login
+    #bash
+    /lib/ld-2.30.so /usr/lib/systemd/systemd --help
+
+ fi
+
+ echo Running exit ...
+ exit 0
+fi
+
+
+cd /root/altcontained
+
+mount -o bind /proc proc
+mount -o bind /dev dev
+mount -o bind /dev/pts dev/pts
+mount -o bind /sys sys
+
+
+echo Running unshare ...
+unshare -p -m --propagation slave sh -c "/root/altstart.sh sh"
+
+ #export LD_LIBRARY_PATH=usr/lib:usr/lib/systemd:$LD_LIBRARY_PATH
+ #export LD_DEBUG=libs
+ #export LD_DEBUG=all
+#unshare -p -m --propagation slave  lib/ld-2.30.so usr/lib/systemd/systemd --system --unit=basic.target
+#unshare -p -m --propagation slave  lib/ld-2.30.so usr/lib/systemd/systemd --help
+# --system --unit=basic.target
+
+#unshare -p -m --propagation slave  sh -c 'echo LD_LIBRARY_PATH $LD_LIBRARY_PATH'
+
+
+echo Running umount ...
+umount sys
+umount dev/pts
+umount dev
+umount proc
+
+echo Running cd ...
+cd $olddir
+
+
+================
+script 2
+
+~ # cat altstart.sh
+#!/bin/sh
+
+olddir=$(pwd)
+
+if [ ! -z "$1" ]; then
+ cmd=$1
+ if [ "$cmd" == "sh_bash" ]; then
+
+    echo Running pivot ...
+    pivot_root . root-old-contained
+
+    echo Running bash ...
+    #bash -c "echo; echo abcde; echo pwd; pwd; echo"
+    #bash --login
+    bash
+ elif [ "$cmd" == "sh_sysd" ]; then
+
+    echo Running pivot ...
+    pivot_root . root-old-contained
+    #/lib/ld-2.30.so /usr/lib/systemd/systemd --system --unit=basic.target
+    /lib/ld-2.30.so /usr/lib/systemd/systemd --help
+
+ fi
+
+ echo Running exit ...
+ exit 0
+fi
+
+
+cd /root/altcontained
+
+mount -o bind /proc proc
+mount -o bind /dev dev
+mount -o bind /dev/pts dev/pts
+mount -o bind /sys sys
+
+echo Running unshare ...
+#unshare -p -m --propagation slave sh -c "/root/altstart.sh sh_bash"
+unshare -p -m --propagation slave sh -c "/root/altstart.sh sh_sysd"
+
+echo Running umount ...
+umount sys
+umount dev/pts
+umount dev
+umount proc
+
+echo Running cd ...
+cd $olddir
+
+
+================
+script 3
+
+~ # cat altstart.sh
+#!/bin/sh
+
+olddir=$(pwd)
+
+while true; do # scope
+ if [ -z "$1" ]; then break; fi
+ cmd=$1
+ if [ "$cmd" == "sh_bash" ]; then
+
+    echo Running pivot ...
+    pivot_root . root-old-contained
+
+    echo Running bash ...
+    #bash -c "echo; echo abcde; echo pwd; pwd; echo"
+    #bash --login
+    bash
+
+    echo Running exit ...
+    exit 0
+ elif [ "$cmd" == "sh_sysd" ]; then
+
+    echo Running pivot ...
+    pivot_root . root-old-contained
+    #/lib/ld-2.30.so /usr/lib/systemd/systemd --system --unit=basic.target
+    /lib/ld-2.30.so /usr/lib/systemd/systemd --help
+
+    echo Running exit ...
+    exit 0
+ fi
+ break #
+
+done # while true scope
+
+
+cd /root/altcontained
+
+mount -o bind /proc proc
+mount -o bind /dev dev
+mount -o bind /dev/pts dev/pts
+mount -o bind /sys sys
+
+echo Running unshare ...
+if [ ! -z "$1" -a "$1" == "bash" ]; then
+    unshare -p -m --propagation slave  sh -c "/root/altstart.sh sh_bash"
+else
+    #unshare -p -m --propagation slave  sh -c "/root/altstart.sh sh_sysd"
+    unshare  -m --propagation slave  root/rootinit
+fi
+
+echo Running umount ...
+umount sys
+umount dev/pts
+umount dev
+umount proc
+
+echo Running cd ...
+cd $olddir
+
+
+================
+
+

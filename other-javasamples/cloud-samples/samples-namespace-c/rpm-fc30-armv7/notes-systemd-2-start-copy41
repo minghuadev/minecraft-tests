@@ -1,0 +1,82 @@
+
+run bash as process 1 then exec /usr/lib/systemd/systemd
+
+
+[1] previous issue
+[1.1] 
+https://developers.redhat.com/blog/2016/09/13/running-systemd-in-a-non-privileged-container/
+
+/run mounted to a tmpfs
+cgroup mounted ro and cgroup/systemd rw
+SIGRTMIN+3 to stop. on armv7hl SIGRTMIN is 32
+
+[1.2]
+Couldn't find an alternative telinit implementation to spawn
+
+https://stackoverflow.com/questions/36545105/docker-couldnt-find-an-alternative-telinit-implementation-to-spawn
+solution: run /usr/lib/systemd/systemd instead of /usr/sbin/systemd
+
+[1.3]
+Failed to lookup module alias autofs4
+
+[1.4] 
+cgroup: cgroup2: unknown option nsdelegate
+
+
+[2] issue
+
+bash-5.0# exec /usr/lib/systemd/systemd
+cgroup: cgroup2: unknown option "nsdelegate"
+systemd[1]: systemd v243.5-1.fc31 running in system mode. (+PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN2 -IDN +PCRE2 default-hierarchy=unified)
+systemd[1]: Detected architecture arm.
+systemd[1]: Failed to create symlink /sys/fs/cgroup/cpuacct: Operation not permitted
+
+Welcome to Fedora 31 (Container Image)!
+
+systemd[1]: Cannot determine cgroup we are running in: No medium found
+systemd[1]: Failed to allocate manager object: No medium found
+[!!!!!!] Failed to allocate manager object.
+
+[2.1] search
+https://github.com/systemd/systemd/issues/6477
+
+bash-4.3# /usr/lib/systemd/systemd --version
+systemd 234
++PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD -IDN2 +IDN default-hierarchy=hybrid
+bash-4.3# mount -t sysfs sysfs /sys
+bash-4.3# mount -t proc proc /proc/
+bash-4.3# mount -t tmpfs tmpfs /sys/fs/cgroup/
+bash-4.3# mkdir /sys/fs/cgroup/systemd
+bash-4.3# mount -t tmpfs tmpfs /sys/fs/cgroup/systemd
+bash-4.3# mkdir /sys/fs/cgroup/systemd/lxc
+bash-4.3# mount -o remount,rw /
+bash-4.3# mkdir /SUB
+bash-4.3# mount -t cgroup cgroup -o none,name=systemd /SUB
+bash-4.3# mkdir /SUB/lxc
+bash-4.3# echo 1 >/SUB/lxc/cgroup.procs
+bash-4.3# mount --bind /SUB/lxc /sys/fs/cgroup/systemd/lxc
+bash-4.3# cat /proc/self/cgroup
+1:name=systemd:/lxc
+bash-4.3# exec /usr/lib/systemd/systemd
+
+
+[3] sshd for debugging
+add this target to basic.target too
+
+bash-5.0# cat basic-sshd.service
+#  SPDX-License-Identifier: LGPL-2.1+
+
+[Unit]
+Description=Basic SSHD Service
+DefaultDependencies=no
+After=basic.target
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/sshd -D -p 2222
+Restart=always
+RestartSec=2
+StandardOutput=/dev/ttyS000
+WatchdogSec=3min
+
+

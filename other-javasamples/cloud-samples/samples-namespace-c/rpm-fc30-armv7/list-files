@@ -24,3 +24,23 @@ ls -lrt
 -rw-rw-r--   22205 Jan 27 00:07 note-pivot_root-pkg-2-dnf-installroot
 
 
+-rw-r--r--     559 Jan 27 16:49 notes-pivot-start-1
+-rw-r--r--   12890 Jan 28 18:06 rootinit.c-copy1
+-rw-r--r--   13187 Jan 28 20:44 rootinit.c-copy2
+-rw-r--r--   13331 Jan 28 20:50 rootinit.c-copy3
+-rw-r--r--    3493 Jan 28 22:57 notes-systemd-1-start
+-rw-rw-r--       0 Jan 28 23:02 list-files
+
+-rw-rw-r--    1123 Jan 28 23:03 list-files
+-rw-r--r--    3922 Jan 29 00:36 notes-systemd-1-start
+-rwx------    1301 Jan 29 10:29 rootinit-altstart.sh-copy3
+-rw-r--r--   13583 Jan 29 22:04 rootinit.c-copy41
+-rwx------    1301 Jan 29 22:46 rootinit-altstart.sh-copy41
+-rw-r--r--    2193 Jan 29 23:21 notes-systemd-2-start-copy41
+
+
+-rw-rw-r--    1452 Jan 29 22:45 list-files
+-rw-r--r--    2539 Jan 29 23:41 notes-systemd-2-start-copy41
+-rw-rw-r--     819 Jan 29 23:43 notes-systemd-2-running
+
+

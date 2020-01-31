@@ -1,0 +1,41 @@
+
+~ # cat altstart.sh
+#!/bin/sh
+
+olddir=$(pwd)
+
+if [ ! -z "$1" ]; then
+ cmd=$1
+ if [ "$cmd" == "sh" ]; then
+
+    echo Running pivot ...
+    pivot_root . root-old-contained
+
+    echo Running bash ...
+    #bash -c "echo; echo abcde; echo pwd; pwd; echo"
+    #bash --login
+    bash
+
+ fi
+
+ echo Running exit ...
+ exit 0
+fi
+
+
+cd /root/altcontained
+
+mount -o bind /proc proc
+mount -o bind /dev dev
+
+echo Running unshare ...
+unshare -m --propagation slave sh -c "/root/altstart.sh sh"
+
+echo Running umount ...
+umount proc
+umount dev
+
+echo Running cd ...
+cd $olddir
+
+

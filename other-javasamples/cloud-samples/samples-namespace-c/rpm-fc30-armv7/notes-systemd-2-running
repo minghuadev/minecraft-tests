@@ -1,0 +1,36 @@
+
+
+systemctl status
+
+
+CGroup: /lxc
+         |
+         |-user.slice
+         |  ...
+         |-init.scope
+         |  ...
+         |
+         +-system.slice
+            |
+            |-dbus-broker.service
+            |  ...
+            |-sshd.service
+            |  ...
+            |-basic-sshd.service
+            |  ...
+            |-system-getty.slice
+            |  \
+            |   --getty@tty1.service
+            |      \
+            |       -- 47 /sbin/agetty -o -p -- \u --noclear tty1 linux
+            |-systemd-logind.service
+            |  ...
+            |-console-getty.service
+            |  \
+            |   -- 46 /sbin/agetty -o -p -- \u --noclear --keep-baud console 115200,38400,9600 vt100
+            |
+
+
+edit console-getty.service and getty@.service to disable the service by a false condition
+
+
