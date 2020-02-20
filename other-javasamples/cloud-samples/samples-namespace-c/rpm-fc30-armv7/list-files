@@ -48,3 +48,17 @@ ls -lrt
 -rw-r--r--    5549 Jan 31 20:01 rootinit_mount_ns.c-copy51
 
 
+-rw-r--r--    5549 Jan 31 20:01 rootinit_mount_ns.c-copy51
+-rw-r--r--    1897 Feb  3 09:15 list-files
+-rw-r--r--    2109 Feb  7 15:13 notes-systemd-3-debian9-scripts
+-rw-r--r--    3233 Feb  7 18:01 notes-systemd-3-debian9
+drwxr-xr-x       0 Feb 12 14:06 docker-centos7
+
+docker-centos7/ : 
+-rw-r--r--      84 Feb 12 11:41 sh-run-registry.bash
+-rw-r--r--     230 Feb 12 13:19 entrypoint.bash
+-rw-r--r--     994 Feb 12 13:38 bb.dockerfile
+-rw-r--r--     265 Feb 12 14:03 sh-run-ui.bash
+drwxr-xr-x       0 Feb 12 15:32 docker_mount
+
+

@@ -1,0 +1,68 @@
+Loaded plugins: fastestmirror, ovl
+Transaction ID : 3
+Begin time     : Wed Feb 12 20:44:19 2020
+Begin rpmdb    : 147:f5168802bd9b73a5c8796e9f9d468666cd0de310
+End time       :            20:44:59 2020 (40 seconds)
+End rpmdb      : 147:0c6067d32399d7dabf64fb99e6097172132b6ab0
+User           : System <unset>
+Return-Code    : Success
+Command Line   : update -y
+Transaction performed with:
+    Installed     rpm-4.11.3-40.el7.x86_64                      @CentOS
+    Installed     yum-3.4.3-163.el7.centos.noarch               @CentOS
+    Installed     yum-plugin-fastestmirror-1.1.31-52.el7.noarch @CentOS
+Packages Altered:
+    Updated binutils-2.27-41.base.el7.x86_64               @CentOS
+    Update           2.27-41.base.el7_7.2.x86_64           @updates
+    Updated ca-certificates-2018.2.22-70.0.el7_5.noarch    @CentOS
+    Update                  2019.2.32-76.el7_7.noarch      @updates
+    Updated curl-7.29.0-54.el7.x86_64                      @CentOS
+    Update       7.29.0-54.el7_7.2.x86_64                  @updates
+    Updated device-mapper-7:1.02.158-2.el7.x86_64          @CentOS
+    Update                7:1.02.158-2.el7_7.2.x86_64      @updates
+    Updated device-mapper-libs-7:1.02.158-2.el7.x86_64     @CentOS
+    Update                     7:1.02.158-2.el7_7.2.x86_64 @updates
+    Updated hostname-3.13-3.el7.x86_64                     @CentOS
+    Update           3.13-3.el7_7.1.x86_64                 @updates
+    Updated libblkid-2.23.2-61.el7.x86_64                  @CentOS
+    Update           2.23.2-61.el7_7.1.x86_64              @updates
+    Updated libcurl-7.29.0-54.el7.x86_64                   @CentOS
+    Update          7.29.0-54.el7_7.2.x86_64               @updates
+    Updated libmount-2.23.2-61.el7.x86_64                  @CentOS
+    Update           2.23.2-61.el7_7.1.x86_64              @updates
+    Updated libsmartcols-2.23.2-61.el7.x86_64              @CentOS
+    Update               2.23.2-61.el7_7.1.x86_64          @updates
+    Updated libuuid-2.23.2-61.el7.x86_64                   @CentOS
+    Update          2.23.2-61.el7_7.1.x86_64               @updates
+    Updated nss-3.44.0-4.el7.x86_64                        @CentOS
+    Update      3.44.0-7.el7_7.x86_64                      @updates
+    Updated nss-softokn-3.44.0-5.el7.x86_64                @CentOS
+    Update              3.44.0-8.el7_7.x86_64              @updates
+    Updated nss-softokn-freebl-3.44.0-5.el7.x86_64         @CentOS
+    Update                     3.44.0-8.el7_7.x86_64       @updates
+    Updated nss-sysinit-3.44.0-4.el7.x86_64                @CentOS
+    Update              3.44.0-7.el7_7.x86_64              @updates
+    Updated nss-tools-3.44.0-4.el7.x86_64                  @CentOS
+    Update            3.44.0-7.el7_7.x86_64                @updates
+    Updated nss-util-3.44.0-3.el7.x86_64                   @CentOS
+    Update           3.44.0-4.el7_7.x86_64                 @updates
+    Updated procps-ng-3.3.10-26.el7.x86_64                 @CentOS
+    Update            3.3.10-26.el7_7.1.x86_64             @updates
+    Updated sqlite-3.7.17-8.el7.x86_64                     @CentOS
+    Update         3.7.17-8.el7_7.1.x86_64                 @updates
+    Updated systemd-219-67.el7_7.1.x86_64                  @Updates
+    Update          219-67.el7_7.3.x86_64                  @updates
+    Updated systemd-libs-219-67.el7_7.1.x86_64             @Updates
+    Update               219-67.el7_7.3.x86_64             @updates
+    Updated tzdata-2019b-1.el7.noarch                      @CentOS
+    Update         2019c-1.el7.noarch                      @updates
+    Updated util-linux-2.23.2-61.el7.x86_64                @CentOS
+    Update             2.23.2-61.el7_7.1.x86_64            @updates
+Scriptlet output:
+   1 Failed to get D-Bus connection: Operation not permitted
+   2 install-info: No such file or directory for /usr/share/info/as.info.gz
+   3 install-info: No such file or directory for /usr/share/info/binutils.info.gz
+   4 install-info: No such file or directory for /usr/share/info/gprof.info.gz
+   5 install-info: No such file or directory for /usr/share/info/ld.info.gz
+   6 install-info: No such file or directory for /usr/share/info/standards.info.gz
+history info
