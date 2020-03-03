@@ -1,0 +1,36 @@
+
+test6_kinesalite-pkg-note.txt
+
+
+ubuntu 18.04 lts
+install nodejs
+install npm
+
+
+git clone zeit/pkg
+cd pkg
+git checkout 4.4.3
+npm install -g pkg
+
+
+clone mhart/kinesalite
+cd kinesalite
+git checkout 3.3.0
+
+modify to include specific js files for pkg
+
+    --- a/package.json
+    +++ b/package.json
+    @@ -7,6 +7,9 @@
+       "scripts": {
+         "test": "mocha --require should --reporter spec -t $([ $REMOTE ] && echo 30s || echo 4s)"
+       },
+    +  "pkg": {
+    +    "scripts": [ "actions/*.js", "validations/*.js" ]
+    +  },
+       "repository": "mhart/kinesalite",
+
+run to build kinesalite binary
+
+    pkg -t node8-linux -c package.json cli.js
+

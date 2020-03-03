@@ -17,3 +17,7 @@ list-content
 [13] aws kinesis video producer python exception    (test1_4_2)
 [14] aws kinesis video producer python ok           (test1_4_5)
 
+[15] aws kinesis get put    (test4_)
+     aws stream list create (test5_)
+     kinesalite list create get put  (test6_)
+

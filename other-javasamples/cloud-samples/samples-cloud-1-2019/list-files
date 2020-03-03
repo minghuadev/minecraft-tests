@@ -56,3 +56,17 @@ ls -lrt
 
 -rwxrwxr-x     2411 Jan  1 10:51 list-files
 
+-rwxr-xr-x   1856 Dec 23 11:10 test4_kinesis_data_get.py
+-rwxr-xr-x   1001 Dec 23 11:20 test4_kinesis_data_put.py
+-rwxr-xr-x   2022 Feb 29 12:18 test5_kinesis_data_create.py
+-rwxr-xr-x   2452 Feb 29 13:04 test6_kinesalite_data_create.py
+-rwxr-xr-x   2853 Feb 29 13:10 test5_kinesis_data_list.py
+-rwxr-xr-x   1224 Feb 29 13:22 test6_kinesalite_data_put.py
+-rw-r--r--    684 Feb 29 18:50 test6_kinesalite-pkg-note.txt
+-rwxr-xr-x   3327 Feb 29 18:55 test6_kinesalite_data_list.py
+
+
+-rw-r--r--   1072 Mar  2 09:32 list-content
+-rw-r--r--   2944 Mar  2 09:33 list-files
+
+
