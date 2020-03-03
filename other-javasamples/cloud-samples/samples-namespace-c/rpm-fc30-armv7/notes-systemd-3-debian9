@@ -1,0 +1,88 @@
+
+
+toc
+    [1] os version
+    [2] disabled systemd units
+    [3] mounts
+    [4] mask
+    [5] rebuild from docker layer file
+
+
+[1] 
+    # cat /usr/lib/os-release
+    PRETTY_NAME="Debian GNU/Linux 9 (stretch)"
+    NAME="Debian GNU/Linux"
+    VERSION_ID="9"
+    VERSION="9 (stretch)"
+    VERSION_CODENAME=stretch
+    ID=debian
+    HOME_URL="https://www.debian.org/"
+    SUPPORT_URL="https://www.debian.org/support"
+    BUG_REPORT_URL="https://bugs.debian.org/"
+
+    # history | grep install
+        8  apt-get install openssh-server
+       16  apt-get install sudo
+       18  apt-get install gnupg2
+           apt-get install vim-tiny
+       20  apt-get install systemd
+       55  apt-get install nslookup   --no effect
+       78  apt-get install iputils-ping
+       96  apt-get install network-manager
+    # dpkg -l | wc
+        229    2179   27806
+
+
+[2] 
+    ~/debian_layer/etc/systemd # for x in `find . -type l` ; do echo; echo $x; readlink $x; done | grep -B1 null
+    ./system/serial-getty@ttyAMA0.service
+    /dev/null
+    --
+    ./system/cgmanager.service
+    /dev/null
+
+    ~/debian_layer/etc/systemd # find . -name *removed
+    ./system/multi-user.target.wants/remote-fs.target.removed
+    ./system/multi-user.target.wants/ModemManager.service.removed
+    ./system/multi-user.target.wants/pppd-dns.service.removed
+
+
+[3] 
+    # systemctl list-units | grep mount
+    ● -.mount                                    error  active mounted   Root Mount
+      container\x2dcgroup.mount                  loaded active mounted   /container-cgroup
+      root\x2ddebian\x2dparent-dev-pts.mount     loaded active mounted   /root-debian-parent/dev/pts
+      root\x2ddebian\x2dparent-dev.mount         loaded active mounted   /root-debian-parent/dev
+      root\x2ddebian\x2dparent-proc.mount        loaded active mounted   /root-debian-parent/proc
+      root\x2ddebian\x2dparent-sys.mount         loaded active mounted   /root-debian-parent/sys
+      root\x2ddebian\x2dparent.mount             loaded active mounted   /root-debian-parent
+      run-user-1000.mount                        loaded active mounted   /run/user/1000
+      sys-fs-fuse-connections.mount              loaded active mounted   FUSE Control File System
+      sys-kernel-config.mount                    loaded active mounted   Configuration File System
+      sys-kernel-debug.mount                     loaded active mounted   Debug File System
+      systemd-remount-fs.service                 loaded active exited    Remount Root and Kernel File Systems
+
+
+[4] mask: 
+      sys-kernel-config.mount  sys-kernel-debug.mount  systemd-remount-fs.service  sys-fs-fuse-connections.mount
+
+
+[5] rebuild from the docker layer file
+
+  after the first bash,  chmod -R root:root *  ,  chmod 755 /  
+
+[5.1] intial packages 
+    # dpkg -l | wc
+         81     705    8091
+
+[5.2] installing
+    # apt-get -o APT::Sandbox::User=root update
+    # apt-get                            --no-install-recommends install openssh-server
+                                             ... sudo gnupg2 vim-tiny
+                                             ... systemd
+                                             ... iputils-ping
+                                             ... network-manager
+    # dpkg -l | wc
+        169    1608   19057
+
+
