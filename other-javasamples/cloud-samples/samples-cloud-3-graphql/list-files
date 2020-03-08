@@ -1,0 +1,14 @@
+
+list-files
+
+
+ls -lrt
+
+-rw-r--r--  100186 Mar  7 13:51 test1client-query5-output
+-rwxr-xr-x    1535 Mar  7 15:14 test1.py*
+-rw-r--r--     654 Mar  7 18:56 test1client-requirements
+-rwxr-xr-x    9366 Mar  7 21:03 test1client.py*
+-rwxr-xr-x    1234 Mar  7 23:53 test1intros.py*
+-rw-r--r--       0 Mar  8 16:26 list-files
+
+
