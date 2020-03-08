@@ -1,0 +1,21 @@
+#
+# dockerfile
+
+From ubuntu:bionic
+
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get --no-install-recommends install -y python3.7 python3.7-dev
+RUN apt-get --no-install-recommends install -y iproute2 iputils-ping dnsutils vim-tiny less
+RUN apt-get --no-install-recommends install -y python3 python3-venv python3.7-venv
+RUN apt-get --no-install-recommends install -y gcc
+RUN apt-get --no-install-recommends install -y net-tools
+RUN apt-get --no-install-recommends install -y ppp patch
+RUN apt-get --no-install-recommends install -y coreutils
+RUN cd /bin && rm sh && ln -s bash sh
+
+ENTRYPOINT ["/bin/bash"]
+
+#  docker build -f dockerfile -t bionicbase .
+#  docker run -td --name bionic -v $(pwd)/docker_mount:/root/docker_mount -v $(pwd)/penv37:/root/penv37 --device=/dev/ttyUSB1 --device=/dev/ppp bionicbase
+

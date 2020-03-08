@@ -1,0 +1,17 @@
+
+list-files
+
+
+ls -lrt
+
+-rwxr-xr-x   1267 Jan 30 22:54 debstart.sh*
+-rw-r--r--   9784 Jan 30 23:00 debian_init.c
+-rwxr-xr-x    574 Jan 30 23:11 debprep.sh*
+-rwxr-xr-x    202 Jan 30 23:13 debinnersource.sh*
+-rw-r--r--    813 Feb 17 07:23 dockerfile-bionic
+-rw-r--r--    707 Feb 27 19:21 dockerfile-bionic-2020
+-rw-r--r--    300 Feb 27 19:40 docker-shell
+-rw-r--r--    270 Mar  8 15:55 deb-run-readme
+-rw-r--r--      0 Mar  8 15:28 list-files
+
+

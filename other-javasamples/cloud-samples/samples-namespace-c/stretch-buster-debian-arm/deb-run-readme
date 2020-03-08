@@ -1,0 +1,16 @@
+
+how to run: 
+
+let's say the ns root is bind-mounted to /root/debian-layer
+
+
+cd /root/debian-layer
+./debstart.sh
+./debprep.sh
+source debinnersource.sh
+
+
+the debian_init.c is assumped to have been compiled and placed inplace 
+the scripts will be able to find and run. 
+
+
