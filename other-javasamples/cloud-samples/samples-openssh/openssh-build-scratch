@@ -1,0 +1,84 @@
+
+
+build openssh from source:
+
+    apt install build-essential zlib1g-dev libssl-dev
+    mkdir /var/lib/sshd
+    chmod -R 700 /var/lib/sshd/
+    chown -R root:sys /var/lib/sshd/
+    useradd -r -U -d /var/lib/sshd/ -c "sshd privsep" -s /bin/false sshd
+    wget -c https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-8.0p1.tar.gz
+    tar -xzf openssh-8.0p1.tar.gz
+    cd openssh-8.0p1/
+    ./configure --with-md5-passwords --with-privsep-path=/var/lib/sshd/ --sysconfdir=/etc/ssh
+    make
+    make install
+
+
+openssh install:
+
+    root@(none):~/openssh-8.0p1# make install
+    (cd openbsd-compat && make)
+    make[1]: Entering directory '/root/openssh-8.0p1/openbsd-compat'
+    make[1]: Nothing to be done for 'all'.
+    make[1]: Leaving directory '/root/openssh-8.0p1/openbsd-compat'
+    /bin/mkdir -p /usr/local/bin
+    /bin/mkdir -p /usr/local/sbin
+    /bin/mkdir -p /usr/local/share/man/cat1
+    /bin/mkdir -p /usr/local/share/man/cat5
+    /bin/mkdir -p /usr/local/share/man/cat8
+    /bin/mkdir -p /usr/local/libexec
+    /bin/mkdir -p -m 0755 /var/lib/sshd/
+    /usr/bin/install -c -m 0755 -s ssh /usr/local/bin/ssh
+    /usr/bin/install -c -m 0755 -s scp /usr/local/bin/scp
+    /usr/bin/install -c -m 0755 -s ssh-add /usr/local/bin/ssh-add
+    /usr/bin/install -c -m 0755 -s ssh-agent /usr/local/bin/ssh-agent
+    /usr/bin/install -c -m 0755 -s ssh-keygen /usr/local/bin/ssh-keygen
+    /usr/bin/install -c -m 0755 -s ssh-keyscan /usr/local/bin/ssh-keyscan
+    /usr/bin/install -c -m 0755 -s sshd /usr/local/sbin/sshd
+    /usr/bin/install -c -m 4711 -s ssh-keysign /usr/local/libexec/ssh-keysign
+    /usr/bin/install -c -m 0755 -s ssh-pkcs11-helper /usr/local/libexec/ssh-pkcs11-helper
+    /usr/bin/install -c -m 0755 -s sftp /usr/local/bin/sftp
+    /usr/bin/install -c -m 0755 -s sftp-server /usr/local/libexec/sftp-server
+    /usr/bin/install -c -m 644 ssh.1.out /usr/local/share/man/cat1/ssh.1
+    /usr/bin/install -c -m 644 scp.1.out /usr/local/share/man/cat1/scp.1
+    /usr/bin/install -c -m 644 ssh-add.1.out /usr/local/share/man/cat1/ssh-add.1
+    /usr/bin/install -c -m 644 ssh-agent.1.out /usr/local/share/man/cat1/ssh-agent.1
+    /usr/bin/install -c -m 644 ssh-keygen.1.out /usr/local/share/man/cat1/ssh-keygen.1
+    /usr/bin/install -c -m 644 ssh-keyscan.1.out /usr/local/share/man/cat1/ssh-keyscan.1
+    /usr/bin/install -c -m 644 moduli.5.out /usr/local/share/man/cat5/moduli.5
+    /usr/bin/install -c -m 644 sshd_config.5.out /usr/local/share/man/cat5/sshd_config.5
+    /usr/bin/install -c -m 644 ssh_config.5.out /usr/local/share/man/cat5/ssh_config.5
+    /usr/bin/install -c -m 644 sshd.8.out /usr/local/share/man/cat8/sshd.8
+    /usr/bin/install -c -m 644 sftp.1.out /usr/local/share/man/cat1/sftp.1
+    /usr/bin/install -c -m 644 sftp-server.8.out /usr/local/share/man/cat8/sftp-server.8
+    /usr/bin/install -c -m 644 ssh-keysign.8.out /usr/local/share/man/cat8/ssh-keysign.8
+    /usr/bin/install -c -m 644 ssh-pkcs11-helper.8.out /usr/local/share/man/cat8/ssh-pkcs11-helper.8
+    /bin/mkdir -p /etc/ssh
+    /etc/ssh/ssh_config already exists, install will not overwrite
+    ssh-keygen: generating new host keys: RSA DSA ECDSA ED25519
+    /usr/local/sbin/sshd -t -f /etc/ssh/sshd_config
+
+    root@(none):~/openssh-8.0p1# /usr/local/sbin/sshd --help
+    unknown option -- -
+    OpenSSH_8.0p1, OpenSSL 1.1.1d  10 Sep 2019
+    usage: sshd [-46DdeiqTt] [-C connection_spec] [-c host_cert_file]
+                [-E log_file] [-f config_file] [-g login_grace_time]
+                [-h host_key_file] [-o option] [-p port] [-u len]
+
+
+system changes to make chroot sshd working with py charm remote
+
+  before chroot:
+    mount -o bind /dev/pts dev/pts
+    chmod a+rwx dev/tty
+    chmod a+rw dev/null
+    chmod a+rw dev/zero
+
+  in chroot:
+    chmod a+rx /usr/local/libexec
+
+  enable TcpForward in /etc/ssh/sshd_config
+  bring up lo
+
+
