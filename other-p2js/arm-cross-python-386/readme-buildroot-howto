@@ -1,0 +1,121 @@
+
+
+download buildroot-2020.08.2.tar.gz and extract it. the version contains python 3.8.6. 
+install host packages listed in the buildroot user manual.
+
+
+gather information from the target: cpu a53, kernel 4.6, gcc 6.3, aarch64 little endian
+
+
+configure buildroot for a base build:
+
+  run 
+    make menuconfig
+
+  select in menuconfig
+    target options
+        aarch64 little endian
+        cortex-a53
+    toolchain
+        external toolchain
+        custom toolchain
+        pre-installed toolchain
+        /opt/hm-linux/x86-arm/aarch64-hm-linux toolchain path
+        $(ARCH)-hm-linux toolchain prefix
+        gcc version 6.x
+        kernel header series 4.6.x
+        C library glibc/eglibc
+        toolchain has C++ support
+
+  run 
+    make
+
+
+configure buildroot to include python3 and build:
+
+  run make menuconfig to select 
+    target package
+        interpreted language
+            python3
+
+  make a time stamp in file system
+    touch stamp1
+
+  run
+    make V=1 > log-build-screen 2>&1 
+
+  inspect the log file and dl directory, new packages are downloaded and built
+    $ find dl -newer stamp1
+    dl/expat/expat-2.2.9.tar.xz
+    dl/python3/Python-3.8.6.tar.xz
+    dl/pkgconf/pkgconf-1.6.1.tar.xz
+    dl/libffi/libffi-3.3.tar.gz
+    dl/libzlib/zlib-1.2.11.tar.xz
+
+  get a list of new files in target directory
+    $ (cd output/target && find ./ -newer ../../stamp1)
+
+  edit the list to exclude files that should not be copied.
+  exclude the usr/lib/python3.8/ directory from the list. 
+  exclude files existing on the target. 
+  verify new files in /lib/ are on target under /lib64/ and of the same version each.
+  the final list is: 
+    Link: ./usr/lib/libffi.so
+    File: ./usr/lib/libpython3.so
+    File: ./usr/lib/libpython3.8.so.1.0
+    File: ./usr/lib/libffi.so.7.1.0
+    Link: ./usr/lib/libffi.so.7
+    Link: ./usr/lib/libpython3.8.so
+    Link: ./usr/bin/python3
+    File: ./usr/bin/python3.8
+    Link: ./usr/bin/python
+
+  copy these files and links to the target. copy usr/lib/python3.8/ to the target. 
+
+
+configure to include python-pip package
+  stamp and build
+  inspect downloaded packages
+    $ find dl -newer stamp2
+    dl/libopenssl/openssl-1.1.1g.tar.gz
+    dl/python-setuptools/setuptools-44.0.0.zip
+    dl/python-pip/pip-20.0.2.tar.gz
+
+  find new files under output/target and copy these files: 
+    ./usr/lib/libz.so.1.2.11
+    ./usr/lib/libssl.so
+    ./usr/lib/libssl.so.1.1
+    ./usr/lib/libcrypto.so.1.1
+    ./usr/lib/libz.so.1
+    ./usr/lib/libz.so
+    ./usr/lib/libexpat.so.1
+    ./usr/lib/libcrypto.so
+    ./usr/lib/libpython3.so
+    ./usr/lib/libpython3.8.so.1.0
+    ./usr/lib/libffi.so.7.1.0
+    ./usr/lib/libexpat.so
+    ./usr/lib/libexpat.so.1.6.11
+    ./usr/bin/easy_install-3.8
+    ./usr/bin/xmlwf
+    ./usr/bin/pip3.8
+    ./usr/bin/python3.8
+    ./usr/bin/pip
+    ./usr/bin/pip3
+    ./usr/bin/easy_install
+
+
+configure to include zlib support in legacy packages
+  it looks no artifacts difference. so take it out. 
+
+
+need to rebuild host-python3 packages too to get the zlib and xml compiled. 
+  zlib and xml are enabled by pip. but the frozenimportlib is built by host-python.
+  find all the *python* packages under output/build/ and do a -dirclean on them:
+
+    make host-python3-dirclean
+    make python3-dirclean
+
+  rebuild:
+    make
+
+

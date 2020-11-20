@@ -1,0 +1,72 @@
+#!/bin/bash
+
+#comments info:
+##  double hash: dir
+### triple hash: exist on target. everything under /lib exist on target /lib64
+
+elements=`cat << EOF1 | grep -v '^#'
+##./etc
+#./etc/issue
+##./etc/network
+##./etc/network/if-pre-up.d
+##./etc/init.d
+#./etc/inittab
+#./etc/os-release
+#./etc/hosts
+#./etc/shadow
+#./etc/hostname
+
+##./usr
+##./usr/lib
+./usr/lib/libffi.so
+
+./usr/lib/libpython3.so
+#./usr/lib/os-release
+./usr/lib/libpython3.8.so.1.0
+./usr/lib/libffi.so.7.1.0
+./usr/lib/libffi.so.7
+./usr/lib/libpython3.8.so
+#./usr/share
+#./usr/share/udhcpc
+#./usr/bin
+./usr/bin/python3
+#./usr/bin/smtpd.py.8
+./usr/bin/python3.8
+./usr/bin/python
+#./log-build-new-target
+
+##./lib
+###./lib/libanl-2.24.so
+###./lib/libnss_files-2.24.so
+###./lib/libatomic.so.1.2.0
+###./lib/libresolv-2.24.so
+###./lib/libdl-2.24.so
+###./lib/libgcc_s.so.1
+###./lib/libpthread-2.24.so
+###./lib/librt-2.24.so
+###./lib/libstdc++.so.6.0.22
+###./lib/libnsl-2.24.so
+###./lib/libutil-2.24.so
+###./lib/libcrypt-2.24.so
+###./lib/libc-2.24.so
+###./lib/libm-2.24.so
+#./lib/ld-2.24.so
+###./lib/libnss_dns-2.24.so
+
+##./bin
+#./bin/busybox
+EOF1
+`
+for x in ${elements}; do
+    if [ -L ${x} ]; then
+        echo Link: ${x}
+    elif [ -L ${x} -o -f ${x} ]; then
+        echo File: ${x}
+    elif [ -d ${x} ]; then
+        echo Dir : ${x}
+    else
+        echo Unknown: ${x}
+    fi
+done
+
+

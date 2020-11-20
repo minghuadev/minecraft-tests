@@ -1,0 +1,33 @@
+#!/bin/bash
+# run under output/target/ to collect python3 files
+
+
+elements1=`cat << EOF1 | sed -e 's/.* //'
+Link: ./usr/lib/libffi.so
+File: ./usr/lib/libpython3.so
+File: ./usr/lib/libpython3.8.so.1.0
+File: ./usr/lib/libffi.so.7.1.0
+Link: ./usr/lib/libffi.so.7
+Link: ./usr/lib/libpython3.8.so
+EOF1
+`
+
+mkdir -p shipping/usr-lib
+cp -av ${elements1} shipping/usr-lib/
+
+
+elements2=`cat << EOF2 | sed -e 's/.* //'
+Link: ./usr/bin/python3
+File: ./usr/bin/python3.8
+Link: ./usr/bin/python
+EOF2
+`
+
+mkdir -p shipping/usr-bin
+cp -av ${elements2} shipping/usr-bin/
+
+
+mkdir -p shipping/usr-lib-python3.8
+cp -av usr/lib/python3.8 shipping/usr-lib-python3.8/
+
+

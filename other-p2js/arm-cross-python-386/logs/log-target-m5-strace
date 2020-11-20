@@ -1,0 +1,56 @@
+#!/bin/bash
+
+
+elements1=`cat << EOF1 | sed -e 's/.* //'
+Link: ./usr/lib/libffi.so
+File: ./usr/lib/libpython3.so
+File: ./usr/lib/libpython3.8.so.1.0
+File: ./usr/lib/libffi.so.7.1.0
+Link: ./usr/lib/libffi.so.7
+Link: ./usr/lib/libpython3.8.so
+./usr/lib/libz.so.1.2.11
+./usr/lib/libssl.so
+./usr/lib/libssl.so.1.1
+./usr/lib/libcrypto.so.1.1
+./usr/lib/libz.so.1
+./usr/lib/libz.so
+./usr/lib/libexpat.so.1
+./usr/lib/libcrypto.so
+./usr/lib/libpython3.so
+./usr/lib/libpython3.8.so.1.0
+./usr/lib/libffi.so.7.1.0
+./usr/lib/libexpat.so
+./usr/lib/libexpat.so.1.6.11
+
+EOF1
+`
+
+mkdir -p shipping/usr-lib
+cp -av ${elements1} shipping/usr-lib/
+
+
+elements2=`cat << EOF2 | sed -e 's/.* //'
+Link: ./usr/bin/python3
+File: ./usr/bin/python3.8
+Link: ./usr/bin/python
+./usr/bin/easy_install-3.8
+./usr/bin/xmlwf
+./usr/bin/pip3.8
+./usr/bin/python3.8
+./usr/bin/pip
+./usr/bin/pip3
+./usr/bin/easy_install
+
+./usr/bin/strace-log-merge
+./usr/bin/strace
+EOF2
+`
+
+mkdir -p shipping/usr-bin
+cp -av ${elements2} shipping/usr-bin/
+
+
+mkdir -p shipping/usr-lib-python3.8
+cp -av usr/lib/python3.8 shipping/usr-lib-python3.8/
+
+
