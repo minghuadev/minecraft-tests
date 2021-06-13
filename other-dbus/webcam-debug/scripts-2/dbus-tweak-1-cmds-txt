@@ -1,0 +1,61 @@
+
+
+# cat t.sh
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+    string:"{ \"table\": \"image_adjustment\", \"key\": {}, \"data\":  \"*\", \"cmd\": \"Select\" }"
+
+
+# ./t.sh
+method return time=1501865610.193967 sender=:1.3 -> destination=:1.52 serial=162 reply_serial=2
+   string "{ "iReturn": 0, "sErrMsg": "", "jData": [ { "id": 0, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 30, "iHue": 50 }, { "id": 1, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 30, "iHue": 50 }, { "id": 2, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 30, "iHue": 50 }, { "id": 3, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 30, "iHue": 50 }, { "id": 4, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 30, "iHue": 50 }, { "id": 5, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 30, "iHue": 50 } ] }"
+
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+    string:"{ \"table\": \"image_adjustment\", \"key\": {}, \"data\": { "id": 1, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 15, "iHue": 50 }, \"cmd\": \"Update\" }"
+
+
+
+
+# ls -l t*.sh
+-rwxr-xr-x 1 root root 199 Aug  5 01:08 t.sh
+-rwxr-xr-x 1 root root 192 Aug  5 00:58 t1-show.sh
+-rwxr-xr-x 1 root root 199 Aug  5 01:09 t2-delete.sh
+-rw-r--r-- 1 root root 307 Aug  5 01:17 t3-insert.sh
+-rw-r--r-- 1 root root 307 Aug  5 01:26 t4-update.sh
+-rw-r--r-- 1 root root 209 Aug  5 02:20 t5-update.sh
+
+
+##command t1- and t5- are verified to work properly
+
+
+[root@webcam:~]# cat t1-show.sh
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.media.Cmd \
+    string:"{ \"table\": \"image_adjustment\", \"key\": {}, \"data\":  \"*\", \"cmd\": \"Select\" }"
+
+
+[root@webcam:~]# cat t2-delete.sh
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.media.Cmd \
+    string:"{ \"table\": \"image_adjustment\", \"key\": {}, \"data\":  {\"id\": 5 }, \"cmd\": \"Delete\" }"
+
+
+[root@webcam:~]# cat t3-insert.sh
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.media.Cmd \
+    string:"{ \"table\": \"image_adjustment\", \"key\": {}, \"data\": { \"id\": 1, \"iBrightness\": 50, \"iContrast\": 50, \"iSaturation\": 50, \"iSharpness\": 50, \"iFPS\": 15, \"iHue\": 50 }, \"cmd\": \"Insert\" }"
+
+
+[root@webcam:~]# cat t4-update.sh
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.media.Cmd \
+    string:"{ \"table\": \"image_adjustment\", \"key\": {}, \"data\": { \"id\": 2, \"iBrightness\": 50, \"iContrast\": 50, \"iSaturation\": 50, \"iSharpness\": 50, \"iFPS\": 16, \"iHue\": 50 }, \"cmd\": \"Update\" }"
+
+
+[root@webcam:~]# cat t5-update.sh
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.media.Cmd \
+    string:"{ \"table\": \"image_adjustment\", \"key\": {\"id\":0}, \"data\": { \"iFPS\": 17 }, \"cmd\": \"Update\" }"
+
+

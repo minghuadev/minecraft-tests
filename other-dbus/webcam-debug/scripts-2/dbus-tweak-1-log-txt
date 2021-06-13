@@ -1,0 +1,30 @@
+
+method call time=1501870328.438610 sender=:1.127 -> destination=webcam.dbserver serial=2 path=/; interface=webcam.dbserver.media; member=Cmd
+   string "{ "table": "image_scenario", "key": { }, "data": "*", "cmd": "Select" }"
+
+method return time=1501870328.439476 sender=:1.61 -> destination=:1.127 serial=115 reply_serial=2
+   string "{ "iReturn": 0, "sErrMsg": "", "jData": [ { "id": 0, "sScenario": "normal" } ] }"
+
+
+method call time=1501870328.440810 sender=:1.127 -> destination=webcam.dbserver serial=3 path=/; interface=webcam.dbserver.media; member=Cmd
+   string "{ "table": "image_adjustment", "key": { }, "data": "*", "cmd": "Select" }"
+
+method return time=1501870328.441778 sender=:1.61 -> destination=:1.127 serial=116 reply_serial=3
+   string "{ "iReturn": 0, "sErrMsg": "", "jData": [ { "id": 0, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 30, "iHue": 47 }, { "id": 1, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 15, "iHue": 50 } ] }"
+
+
+method call time=1501870328.442897 sender=:1.127 -> destination=webcam.dbserver serial=4 path=/; interface=webcam.dbserver.media; member=Cmd
+   string "{ "table": "image_adjustment", "key": { "id": 0 }, "data": { "iHue": 45 }, "cmd": "Update" }"
+
+signal time=1501870328.462842 sender=:1.61 -> destination=(null destination) serial=117 path=/; interface=webcam.dbserver.media; member=DataChanged
+   string "{ "table": "image_adjustment", "key": { "id": 0 }, "data": { "iHue": 45 }, "cmd": "Update" }"
+
+method return time=1501870328.463002 sender=:1.61 -> destination=:1.127 serial=118 reply_serial=4
+   string "{ "iReturn": 0, "sErrMsg": "", "jData": [ ] }"
+
+method call time=1501870328.465084 sender=:1.127 -> destination=webcam.dbserver serial=5 path=/; interface=rockchip.dbserver.media; member=Cmd
+   string "{ "table": "image_adjustment", "key": { }, "data": "*", "cmd": "Select" }"
+
+method return time=1501870328.466173 sender=:1.61 -> destination=:1.127 serial=119 reply_serial=5
+   string "{ "iReturn": 0, "sErrMsg": "", "jData": [ { "id": 0, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 30, "iHue": 45 }, { "id": 1, "iBrightness": 50, "iContrast": 50, "iSaturation": 50, "iSharpness": 50, "iFPS": 15, "iHue": 50 } ] }"
+

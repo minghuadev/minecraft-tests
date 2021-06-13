@@ -1,0 +1,35 @@
+
+# dbus-monitor --system "type=signal,sender=webcam.dbserver"
+signal time=1501841567.024686 sender=org.freedesktop.DBus -> destination=:1.56 serial=2 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameAcquired
+   string ":1.56"
+signal time=1501841567.024928 sender=org.freedesktop.DBus -> destination=:1.56 serial=4 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameLost
+   string ":1.56"
+
+
+signal time=1501841591.104588 sender=:1.3 -> destination=(null destination) serial=167 path=/; interface=webcam.dbserver.media; member=DataChanged
+   string "{ "table": "image_exposure", "key": { "id": 0 }, "data": { "sExposureTime": "1\/12" }, "cmd": "Update" }"
+signal time=1501841634.985229 sender=:1.3 -> destination=(null destination) serial=172 path=/; interface=webcam.dbserver.media; member=DataChanged
+   string "{ "table": "image_exposure", "key": { "id": 0 }, "data": { "sExposureMode": "auto" }, "cmd": "Update" }"
+signal time=1501841648.332568 sender=:1.3 -> destination=(null destination) serial=177 path=/; interface=webcam.dbserver.media; member=DataChanged
+   string "{ "table": "image_exposure", "key": { "id": 0 }, "data": { "sExposureMode": "manual" }, "cmd": "Update" }"
+signal time=1501841738.101567 sender=:1.3 -> destination=(null destination) serial=182 path=/; interface=webcam.dbserver.media; member=DataChanged
+   string "{ "table": "image_video_adjustment", "key": { "id": 0 }, "data": { "sPowerLineFrequencyMode": "NTSC(60HZ)" }, "cmd": "Update" }"
+signal time=1501841754.299529 sender=:1.3 -> destination=(null destination) serial=187 path=/; interface=webcam.dbserver.media; member=DataChanged
+   string "{ "table": "image_video_adjustment", "key": { "id": 0 }, "data": { "sPowerLineFrequencyMode": "PAL(50HZ)" }, "cmd": "Update" }"
+
+
+
+examples:
+search dbus monitor capture all messages
+https://wiki.ubuntu.com/DebuggingDBus
+
+    dbus-monitor "type=signal,sender='org.gnome.TypingMonitor',interface='org.gnome.TypingMonitor'"
+
+  Multiple rules can be specified. If a message matches any of the rules, the message will be printed. Like so:
+
+    dbus-monitor "type=error" "sender=org.freedesktop.SystemToolsBackends"
+
+    dbus-monitor "type=method_call" "type=method_return" "type=error"
+
+
+
