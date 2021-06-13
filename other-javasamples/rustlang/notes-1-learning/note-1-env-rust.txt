@@ -1,0 +1,38 @@
+
+
+scripts:
+    $ cat envsetup.bat
+    set CARGO_HOME=homecargo
+    set RUSTUP_HOME=homeup
+
+    $ cat envrun.bat
+    set CARGO_HOME=D:\rust\homecargo
+    set RUSTUP_HOME=D:\rust\homeup
+
+
+to install
+    D:\rust>envsetup.bat
+    D:\rust>download\rustup-init.exe
+
+to uninstall
+    D:\rust>envsetup.bat
+    D:\rust>rustup self uninstall
+
+to run
+    D:\rust>envrun.bat
+    D:\rust>rustup --version
+
+
+pycharm startup script
+
+    $ cat pycrun.bat
+    set CARGO_HOME=D:\rust\homecargo
+    set RUSTUP_HOME=D:\rust\homeup
+
+    cd "C:\Program Files\JetBrains\PyCharm Community Edition 2020.2.2\"
+    "C:\Program Files\JetBrains\PyCharm Community Edition 2020.2.2\bin\pycharm64.exe"
+    cd D:\rust
+
+  after running the first project, the standard library setup is:
+    D:\rust\homeup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\src\rust
+
