@@ -1,0 +1,38 @@
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"id\": 1, \"sService\": \"wifi_123_managed_psk\",\"iFavorite\": 1,\"sPassword\":\"qt88\",\"iAutoconnect\": 1}, \"cmd\": \"Insert\" }"
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\":  \"*\", \"cmd\": \"Select\" }"
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"id\": 1, \"sService\": \"wifi_123_managed_psk\",\"iFavorite\": 1,\"sPassword\":\"mypasswordqt99\",\"iAutoconnect\": 1}, \"cmd\": \"Update\" }"
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"sService\": 1}, \"cmd\": \"Delete\" }"
+
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"id\": 2, \"sService\": \"wifi_123_managed_psk\",\"iFavorite\": 1,\"sPassword\":\"your-password\",\"iAutoconnect\": 1}, \"cmd\": \"Insert\" }"
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"id\": 2, \"sService\": \"wifi_123_managed_psk\",\"iFavorite\": 1,\"sPassword\":\"your-password\",\"iAutoconnect\": 1}, \"cmd\": \"Update\" }"
+
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"id\": 1, \"sService\": \"wifi_123_managed_psk\",\"iFavorite\": 2,\"sPassword\":\"your-password\",\"iAutoconnect\": 1}, \"cmd\": \"Insert\" }"
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"id\": 1, \"sService\": \"wifi_123_managed_psk\",\"iFavorite\": 2,\"sPassword\":\"your-password\",\"iAutoconnect\": 1}, \"cmd\": \"Update\" }"
+
+
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+    string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\":  \"*\", \"cmd\": \"Select\" }"
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+    string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"sService\": 1}, \"cmd\": \"Delete\" }"
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+    string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"sService\": 1}, \"cmd\": \"Update\" }"
+
+
+dbus-send --system --print-reply --dest=webcam.dbserver / webcam.dbserver.net.Cmd \
+string:"{ \"table\": \"NetworkService\", \"key\": {}, \"data\": {\"id\": 1, \"sService\": \"wifi_123_managed_psk\",\"iFavorite\": 2,\"sPassword\":\"your-password\",\"iAutoconnect\": 1}, \"cmd\": \"Update\" }"
+
