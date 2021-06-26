@@ -1,0 +1,89 @@
+
+2021-6-26
+
+
+search bitcoin mining open source software explained
+https://bitcoin.stackexchange.com/questions/1/what-open-source-miner-applications-are-there
+  https://github.com/jgarzik/pyminer
+  https://en.bitcoin.it/wiki/Software#Mining_apps
+    https://en.bitcoin.it/wiki/CGMiner
+    https://github.com/ckolivas/cgminer
+      search ModMiner FPGAs
+        https://en.bitcoin.it/wiki/FPGA
+            http://en.qi-hardware.com/wiki/Icarus
+                miner.py
+        https://github.com/luke-jr/bfgminer
+
+search miner.py
+https://pypi.org/project/secret-miner/
+  https://github.com/kedpter/secret_miner
+    https://github.com/ethereum-mining/ethminer
+        geth, the go program made for ethereum by ethereum.
+          search on github for geth
+            https://github.com/ethereum/go-ethereum
+https://www.analyticsvidhya.com/blog/2021/05/how-to-mine-bitcoin-using-python-part-i/
+https://bitcoin.stackexchange.com/questions/1255/how-to-code-the-simplest-bitcoin-cpu-miner
+  https://github.com/philipperemy/my-first-bitcoin-miner
+
+search bitcoin source code walkthrough
+http://drnealaggarwal.info/bitcoin-source-code-walkthrough/
+    https://github.com/bitcoinbook/bitcoinbook/
+    SentDex https://www.youtube.com/playlist?list=PLQVvvaa0QuDcq2QME4pfeh0cE71mkb_qz
+    https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/
+
+search bitcoin mining pool client python
+https://leftasexercise.com/2018/06/18/mining-bitcoins-in-python/
+https://pythonrepo.com/repo/geohot-simplepool
+    https://cheapeth.org/
+
+search bitcoin mining for beginners
+https://www.masterdc.com/blog/how-to-mine-bitcoin-beginners-guide-to-mining/
+
+https://coinguides.org/xmrig-beginners-guide/
+    **1**
+
+search asic miner protocol
+http://www.righto.com/2014/02/bitcoin-mining-hard-way-algorithms.html
+    miner.py and stratum.py
+    **2**
+
+search xmrig connect to nicehash
+https://www.reddit.com/r/NiceHash/comments/7ckjws/xmrig_config_for_cpu_mining_to_nicehash/
+    stratum+tcp://cryptonight.usa.nicehash.com:3355 or for SSL connection: 
+    stratum+ssl://cryptonight.usa.nicehash.com:33355 username: YourBitcoinAddress password: x
+
+    (Read/Use: https://www.nicehash.com/cpu-gpu-mining)
+    Then read the XMRIG docs at https://github.com/xmrig/xmrig :
+        https://github.com/xmrig/xmrig/blob/master/README.md AND
+        https://github.com/xmrig/xmrig/blob/master/src/config.json
+
+https://www.nicehash.com/stratum-generator
+    sha256 us-west: stratum+tcp://sha256.usa-west.nicehash.com:3334
+                    username: Your BTC Mining Address
+                    password: x
+
+search nicehash test server
+https://www.nicehash.com/support/mining-help/mining-advanced-topics/which-stratum-servers-are-available
+https://www.nicehash.com/docs/
+    https://github.com/nicehash/rest-clients-demo
+
+https://xmrig.com/docs/algorithms
+https://www.nicehash.com/algorithm
+https://www.nicehash.com/support/mining-help/mining-advanced-topics/which-stratum-servers-are-available
+https://xmrig.com/wizard
+
+search miner in rust lang
+https://www.reddit.com/r/rust/comments/9qgry9/announcing_powhasher_monero_miner_in_pure_rust/
+    https://github.com/kazcw/powhasher
+
+    Monero has tweaked their algorithm enough to break all my opcode-level optimizations, 
+    I'd open-source the project. I wrote a core for the new algo in Rust based on stdsimd intrinsics 
+    (and found a rustc bug in the process https://github.com/rust-lang/rust/issues/55249), and 
+    now it's pure Rust except for deep dependencies like libc and some ancillary hashing functions 
+    (which I rewrote the buffer munging for in Rust, but used the C/ASM simd code from their 
+    reference implementations). The miner itself is quite simple, and just hooks together 
+    two constituent libraries with some efficient synchronization:
+
+    the simd pipelined-hasher implementation: yellowsun https://github.com/kazcw/yellowsun
+    the stratum protocol client: cn-stratum https://github.com/kazcw/cn-stratum
+
