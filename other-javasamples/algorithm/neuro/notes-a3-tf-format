@@ -1,0 +1,15 @@
+
+search tensorflow export model common format
+
+
+https://www.tensorflow.org/hub/exporting_hub_format
+  https://www.tensorflow.org/hub/model_formats
+      preferred format: SavedModel format
+        https://www.tensorflow.org/guide/saved_model
+
+
+https://towardsdatascience.com/guide-to-file-formats-for-machine-learning-columnar-training-inferencing-and-the-feature-store-2e0c3d18d4f9
+
+
+
+
