@@ -1,0 +1,28 @@
+
+
+search tensorflow tutorial
+
+https://www.tensorflow.org/tutorials
+
+  https://www.tensorflow.org/tutorials/quickstart/beginner
+
+
+
+
+search mobilenet v1
+
+https://paperswithcode.com/paper/mobilenets-efficient-convolutional-neural
+  https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md
+    http://download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224.tgz
+
+https://medium.datadriveninvestor.com/review-on-mobilenet-v1-abec7888f438
+
+
+
+
+search mobilenet v1 face detection
+
+https://github.com/yeephycho/tensorflow-face-detection
+  https://github.com/yeephycho/widerface-to-tfrecord
+
+
