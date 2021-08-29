@@ -1,0 +1,87 @@
+
+
+reference: https://www.funtoo.org/Steam/LXD
+
+
+user $ xhost +local:
+
+
+root # lxd init                                         ---run once
+root # lxc launch images:ubuntu/groovy steam-ubuntu     ---not this
+root # lxc launch images:ubuntu/focal steam-ubuntu      ---run this
+
+root # lxc config device add steam-ubuntu mygpu gpu
+
+root # lxc config device add steam-ubuntu X0 proxy bind=container connect=unix:/tmp/.X11-unix/X0 listen=unix:/tmp/.X11-unix/X0 uid=1000 gid=1000 mode=0777 security.uid=1001 security.gid=1001
+ ---note: the security.- refers to the host, and uid gid refer to the container
+ ---ref: https://blog.simos.info/running-x11-software-in-lxd-containers/
+
+root # lxc config set steam-ubuntu environment.DISPLAY :0
+root # lxc config set steam-ubuntu environment.PROTON_NO_ESYNC 1
+
+
+root # lxc exec steam-ubuntu -- bash
+ ---note: xterm works here. but if restart the container, it won't.
+
+steam-ubuntu # dpkg --add-architecture i386
+steam-ubuntu # apt update && apt upgrade
+steam-ubuntu # apt install wget software-properties-common pciutils
+
+steam-ubuntu # add-apt-repository ppa:kisak/kisak-mesa
+steam-ubuntu # apt update && apt upgrade
+steam-ubuntu # apt install libgl1-mesa-dri:i386 mesa-vulkan-drivers mesa-vulkan-drivers:i386
+
+ --- skip nvidia driver...
+
+steam-ubuntu # wget -O ~/steam.deb http://media.steampowered.com/client/installer/steam.deb && apt install ~/steam.deb && rm ~/steam.deb
+steam-ubuntu # exit
+
+
+root # lxc restart steam-ubuntu                                 ---run once
+root # lxc exec steam-ubuntu -- bash -c "su ubuntu -c steam"
+
+
+ ---ref: https://discuss.linuxcontainers.org/t/gui-apps-in-lxd-container/4612
+ ---note: add yourself to the lxd group
+ ---note: lxc list
+          lxc profile list
+          lxc profile show <profile>
+          lxc profile edit <profile>
+
+
+steam-ubuntu # apt install libgl1:i386
+steam-ubuntu # apt install xdg-desktop-portal
+steam-ubuntu # apt install xdg-desktop-portal-gtk
+
+
+
+Package libgl1:i386 needs to be installed
+Package xdg-desktop-portal needs to be installed
+Package xdg-desktop-portal-gtk needs to be installed
+xterm: Xt error: Can't open display: :0
+Running Steam on ubuntu 20.04 64-bit
+STEAM_RUNTIME is enabled automatically
+Pins potentially out-of-date, rebuilding...
+Unable to init server: Could not connect: Connection refused
+
+(zenity:337): Gtk-WARNING **: 18:57:48.473: cannot open display: :0
+Can't find 'steam-runtime-check-requirements', continuing anyway
+WARNING: Using default/fallback debugger launch
+/home/ubuntu/.local/share/Steam/ubuntu12_32/steam
+[2021-08-21 18:57:48] Startup - updater built Mar 23 2021 20:11:00
+ILocalize::AddFile() failed to load file "public/steambootstrapper_english.txt".
+Installing breakpad exception handler for appid(steam)/version(0)
+src/steamexe/updateui_xwin.cpp (337) : Assertion Failed: Could not open connection to X
+src/steamexe/updateui_xwin.cpp (337) : Assertion Failed: Could not open connection to X
+Installing breakpad exception handler for appid(steam)/version(1.0)
+Unable to init server: Could not connect: Connection refused
+
+(zenity:385): Gtk-WARNING **: 18:57:48.671: cannot open display: :0
+src/steamexe/main.cpp (815) : Assertion Failed: failed to initialize update status ui, or create initial window
+src/steamexe/main.cpp (815) : Assertion Failed: failed to initialize update status ui, or create initial window
+crash_20210821185748_3.dmp[388]: Uploading dump (out-of-process)
+/tmp/dumps/crash_20210821185748_3.dmp
+crash_20210821185748_3.dmp[388]: Finished uploading minidump (out-of-process): success = no
+crash_20210821185748_3.dmp[388]: error: libcurl.so: cannot open shared object file: No such file or direct
+
+

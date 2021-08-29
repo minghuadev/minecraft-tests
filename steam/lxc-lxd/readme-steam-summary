@@ -1,0 +1,12 @@
+
+[1] follow -2- to create the gui lxd container.
+    but use the -lxdp2 pofile to map directory.
+
+[2] follow -1- or -3- to install steam. 
+
+
+to run steam in container:
+
+  lxc exec steam-ubuntu -- bash -c "su ubuntu -c steam"
+
+

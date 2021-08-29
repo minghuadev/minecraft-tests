@@ -1,0 +1,69 @@
+
+reassign profile:
+
+https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/
+
+$ lxc profile assign oldcontainer default,gui
+$ lxc restart oldcontainer
+
+
+init preseed:
+
+https://discuss.linuxcontainers.org/t/how-to-get-the-full-configuration-to-use-it-with-lxd-init-preseed/3333/2
+
+How to get the full configuration to use it with lxd init –preseed
+
+lxc config show
+lxc cluster show mycluster
+lxc network show lxdbr0
+lxc storage show default
+lxc profile show default
+
+
+init reset:
+
+https://discuss.linuxcontainers.org/t/lxd-4-1-reset-lxd-init/8210
+reset lxd init
+
+  lxd init is only a convenient way to do a bunch of commands at once: 
+
+    lxc config set
+    lxc network create
+    lxc storage create
+    lxc profile device add
+
+https://blog.simos.info/how-to-initialize-lxd-again/
+
+    lxc image list
+    lxc stop <container>
+    lxc delete <container>
+    lxc image delete <fingerprint>
+
+
+search lxc container mount host directory
+
+https://askubuntu.com/questions/610513/how-do-i-share-a-directory-between-an-lxc-container-and-the-host
+
+  add to the lxdp2.txt: 
+  under devices:
+    devices:
+      projects:
+        path: /home/ubuntu/vshare
+        source: /home/steamy/vshare
+        type: disk
+  and rename tne profile from gui to guishare:
+    name: guishare
+
+  run:
+    $ lxc profile create guishare
+    $ cat lxdp2.txt | lxc profile edit guishare
+    $ lxc profile assign oldcontainer default,guishare
+    $ lxc restart oldcontainer
+
+  or run:
+  ref: https://www.cyberciti.biz/faq/how-to-add-or-mount-directory-in-lxd-linux-container/
+
+    $ lxc config device add <oldcontainer> shareddir disk source=/home/steamy/vshare path=/home/ubuntu/vshare
+    $ lxc config device remove <oldcontainer> shareddir
+
+

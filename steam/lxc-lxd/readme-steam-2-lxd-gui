@@ -1,0 +1,30 @@
+
+reference: https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/
+
+  do once: edit both /etc/subuid and /etc/subgid to add this line, 
+  where 1001 is the host uid and gid: 
+    root:1001:1
+
+  download this profile, and put it into a gui profile:
+  https://blog.simos.info/wp-content/uploads/2018/06/lxdguiprofile.txt
+
+  change `both 1000 1000` to `both 1001 1000`, and source socket `.../1000/...` to `.../1001/...`, 
+  and save to lxdp1.txt
+  run
+
+    $ lxc profile create gui
+    $ cat lxdp1.txt | lxc profile edit gui
+
+  run to launch container:
+
+    $ lxc launch --profile default --profile gui ubuntu:focal steam-ubuntu
+
+  exam:
+
+    $ lxc exec steam-ubuntu -- sudo --user ubuntu --login
+
+    ubuntu@steam-ubuntu:~$ tail -6 /var/log/cloud-init.log
+    ubuntu@steam-ubuntu:~$ glxgears
+    ubuntu@steam-ubuntu:~$ pactl info
+
+
