@@ -1,0 +1,20 @@
+
+readme-steam-links
+
+
+https://www.funtoo.org/Steam/LXD
+
+   the right commands to install steam from .dep package file.
+
+
+
+search steam lxd cannot open display :0
+
+  https://discuss.linuxcontainers.org/t/gui-apps-in-lxd-container/4612
+      the debug process and findings
+
+
+  https://blog.simos.info/how-to-easily-run-graphics-accelerated-gui-apps-in-lxd-containers-on-your-ubuntu-desktop/
+      the original blog that brought to the above debug process
+
+

@@ -1,0 +1,38 @@
+
+reference:  readme-steam-1-lxd
+
+
+user:
+    $ xhost +local:
+
+
+container: 
+
+    root@steam-ubuntu:/home/ubuntu# cat install-pkgs 
+    #!/bin/bash
+    
+    set -ex
+    
+    dpkg --add-architecture i386
+    apt update && apt upgrade -y
+    apt install -y wget software-properties-common pciutils
+    
+    add-apt-repository -y ppa:kisak/kisak-mesa
+    apt update && apt upgrade -y
+    apt install -y libgl1-mesa-dri:i386 mesa-vulkan-drivers mesa-vulkan-drivers:i386
+    
+
+    root@steam-ubuntu:/home/ubuntu# bash install-pkgs 
+
+
+     --- skip nvidia driver...
+
+    steam-ubuntu # wget -O ~/steam.deb http://media.steampowered.com/client/installer/steam.deb && apt install ~/steam.deb && rm ~/steam.deb
+    steam-ubuntu # exit
+
+
+host:
+    $ lxc restart steam-ubuntu                                 ---run once
+    $ lxc exec steam-ubuntu -- bash -c "su ubuntu -c steam"
+
+
