@@ -1,0 +1,28 @@
+
+[6] Test AppSync Queries
+
+
+[6.1] on AppSync console, select Queries under the dojoapi, 
+      in explorer pane, select drop-down Mutation, plus sign + , 
+      it will show the "addTask" mutation method. 
+      select "addTask", 
+      type some text in the "description", type the "id" to be "1" .
+      the query code looks like
+
+mutation MyMutation {
+  addTask(description: "my first task", id: "1")
+}
+
+      click the Run button, 
+      response shows in the log pane. 
+
+      look at the table the data item has been added. 
+
+[6.2] 
+      test the query by using "id" "1"
+
+[6.3] if both tests works well, 
+      select Settings of the dojoapi API, 
+      copy "API URL", and "API KEY"
+
+

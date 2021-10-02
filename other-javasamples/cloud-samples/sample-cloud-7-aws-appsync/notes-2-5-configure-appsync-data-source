@@ -1,0 +1,42 @@
+
+[5] Configure AppSync Data Source
+
+
+[5.1] AppSync console, open dojoapi details, 
+      select Data Source, 
+      Create data source, 
+      give it a data source name:        dojodatasource
+      choose Data source type:           AWS Lambda function
+      select existing lambda function:   dojoworklambda
+      create a New role
+      Create
+
+      later edit to find the new role created for this.
+
+[5.2] select Schema, 
+      select Attach next to "addTask(...): String" under Resolvers, 
+      select or type in a data source name:        dojodatasource
+ 
+[5.2.1]
+      enable request mapping template and enter the following
+
+{
+  "version" : "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+        "method": "addTask",
+        "arguments":  $utils.toJson($context.arguments)
+    }
+}
+
+
+[5.2.2]
+      enable response mapping template and enter the following
+
+$util.toJson($context.result)
+
+
+[5.2.3]
+      do the same for "getTask(...)"
+
+

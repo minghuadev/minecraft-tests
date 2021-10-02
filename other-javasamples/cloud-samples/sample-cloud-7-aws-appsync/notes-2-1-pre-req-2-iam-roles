@@ -1,0 +1,19 @@
+
+
+[1] pre-requisites:
+
+[1.1] an aws account. 
+
+
+
+[2] Create IAM Roles
+
+[2.1] on IAM console, choose Access management, Roles, Create role, 
+      select type of trusted entnty: AWS service 
+      choose use case: Lambda, Next Permissions, 
+      search for "PowerUserAccess" and select it as the policy, Next Tags, 
+      tags: project = linkstream , phase = dojo ,
+      give the role a name:       dojolambdarole
+      Create role
+
+
