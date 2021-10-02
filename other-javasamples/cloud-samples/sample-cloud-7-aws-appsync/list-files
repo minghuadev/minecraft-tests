@@ -1,0 +1,15 @@
+
+ls -l
+
+-rw-rw-r--+       0 Oct  2 07:43 list-files
+-rw-rw-r--+     304 Sep 25 15:28 notes-1-links
+-rwx------+   29762 Sep 25 15:28 notes-2-0-arch.png
+-rw-rw-r--+     435 Sep 25 17:54 notes-2-1-1-pre-req-2-iam-roles
+-rw-rw-r--+     457 Sep 25 18:06 notes-2-3-3-config-appsync-api
+-rw-rw-r--+    1207 Sep 25 18:16 notes-2-4-4-create-db-lambda
+-rw-rw-r--+     951 Sep 25 18:51 notes-2-5-5-configure-appsync-data-source
+-rw-rw-r--+     693 Sep 25 18:41 notes-2-6-6-test
+-rw-rw-r--+     654 Sep 25 19:20 notes-2-7-7-dev-env
+-rw-rw-r--+     754 Sep 25 19:15 notes-2-8-8-build-client
+-rw-rw-r--+     303 Sep 25 19:22 notes-2-9-resources
+
