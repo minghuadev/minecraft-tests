@@ -1,0 +1,30 @@
+
+
+[3] configure appsync api
+
+[3.1] on AWS AppSync console, select Create API, 
+      select Build from scratch, Start, 
+      give it an api nane: dojoapi
+
+[3.2] select Edit Schema, 
+      enter the following, Save Schema, 
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    addTask(id: String!, description: String!): String
+}
+
+type Query {
+    getTask(id: String!): String
+}
+
+type Task {
+    id: String!
+    description: String!
+}
+
+

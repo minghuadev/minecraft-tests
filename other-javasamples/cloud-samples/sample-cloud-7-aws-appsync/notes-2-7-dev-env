@@ -1,0 +1,29 @@
+
+
+[7] Setup Development Environment
+
+    configure AWS Cloud9 environment with AWS SDK for Python Boto3
+
+
+[7.1] on Cloud9 console, click Create environment, 
+      give it a name:    dojoenvironment
+      Next step
+      Configure settings
+
+            Create a new EC2 instance for environment (direct access)
+            t2.micro (1GiB RAM + 1 vCPU)
+            Ubuntu Server 18.04 LTS
+            IAM role service-linked generated : AWSServiceRoleForAWSCloud9
+
+      Next step
+      Create environment
+
+
+[7.2] setup 
+
+      sudo apt-get update
+      python3 --version
+      sudo apt-get install python-boto3
+      sudo pip install requests_aws4auth
+
+

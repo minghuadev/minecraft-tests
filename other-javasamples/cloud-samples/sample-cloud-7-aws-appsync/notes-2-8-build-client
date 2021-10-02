@@ -1,0 +1,28 @@
+
+[8] Create Client
+
+[8.1] create a new file
+
+      paste the code below. 
+
+import requests
+from requests_aws4auth import AWS4Auth
+
+session = requests.Session()
+
+APPSYNC_API_ENDPOINT_URL = "{API-URL}"
+API_KEY = "{API-KEY}"
+
+query = "mutation MyMutation { addTask(id: \"2\", description: \"my task\")}"
+response = session.request( url=APPSYNC_API_ENDPOINT_URL, method='POST', headers={'x-api-key': API_KEY}  ,json={'query': query})
+print(response.json()['data'])
+
+query = "query MyQuery { getTask(id: \"2\")}"
+response = session.request( url=APPSYNC_API_ENDPOINT_URL, method='POST', headers={'x-api-key': API_KEY}  ,json={'query': query})
+print(response.json()['data'])
+
+      replace {API-KEY} and {API-URL} with the url and key from the appsync api. 
+      the requests_aws4auth is not necessary for this sample.
+
+
+

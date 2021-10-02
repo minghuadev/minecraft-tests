@@ -1,0 +1,43 @@
+
+[4] Create Lambda Function
+
+    create a Lambda function to provide implementation of the "getTask" and "addTask" methods. 
+
+
+[4.1] DynamoDB console click Create table, 
+      give it a table name:                dojowork
+      use a primary key in type string:    id
+      use default settings. 
+
+[4.2] Lambda console click Create function, 
+      select Author from scratch, 
+      give it a name :                     dojoworklambda
+      user runtime :                       python 3.8
+      Use an existing role :               dojolambdarole
+      Create function
+
+[4.3] put in the following code
+
+import json
+import boto3
+
+def lambda_handler(event, context):
+       
+    response = "The method not defined"
+    client = boto3.resource('dynamodb')
+    table = client.Table("dojowork")
+       
+    if (event["method"] == "getTask"):
+           
+        response = table.get_item(Key={'id': event["arguments"]["id"]})
+        return response
+           
+    elif (event["method"] == "addTask"):
+           
+        response = table.put_item(Item={'id': event["arguments"]["id"], 'description': event["arguments"]["description"]})
+        return response
+           
+    else:
+        return response
+
+
