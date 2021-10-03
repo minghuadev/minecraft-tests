@@ -2,13 +2,26 @@
 iam role:       dojolambdarole
 appsync api:    dojoapi
 dynamodb table: dojowork
-data source:    dojodatasource
 lambda:         dojoworklambda
+data source:    dojodatasource
 
 data source new role: 
     arn:aws:iam::<user-id>:role/service-role/appsync-ds-lam-<abc123>-dojoworklambda
 
-cloud9 new role: 
+data source new policy:
+    appsync-ds-lam-<abc123>-dojoworklambda
+
+appsync new policy and new role on data source:
+    appsync-ds-ddb...dojo...
+    appsync-ds-ddb...dojo...
+
+dynamodb encryption key:
+    ...
+
+cloud9 new role:
     AWSServiceRoleForAWSCloud9
+
+cloud9 encryption key:
+    ...
 
 
