@@ -13,3 +13,12 @@ ls -l
 -rw-rw-r--+     754 Sep 25 19:15 notes-2-8-8-build-client
 -rw-rw-r--+     303 Sep 25 19:22 notes-2-9-resources
 
+
+ls -lrt
+
+-rw-rw-r--+     633 Oct  2 07:44 list-files
+-rw-rw-r--+     816 Oct  2 08:09 notes-2-8-build-client
+-rw-rw-r--+    3351 Oct  3 08:51 notes-3-1-atomic-inc
+-rw-rw-r--+    1067 Oct  3 09:25 notes-1-links
+-rw-rw-r--+     545 Oct  3 10:10 notes-2-9-resources
+
