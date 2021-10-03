@@ -4,14 +4,33 @@ notes-1-links
 
 search aws appsync python tutorial
 
-
 https://www.youtube.com/watch?v=nSKnqHu08YM
 AWS Tutorials - Build AWS AppSync API and API Client using Python
   by AWS Tutorials, sept 27, 2020
 
-
 https://aws-dojo.com/workshoplists/workshoplist20/
 Build AWS AppSync API and API Client using Python
 
+
+search appsync sdk python
+
+https://aws.amazon.com/blogs/mobile/appsync-websockets-python/
+Createing a Python WebSocket client for AWS AppSync real-time subscriptions
+
+https://stackoverflow.com/questions/60293311/how-to-send-a-graphql-query-to-appsync-from-python
+Many solutions ...
+
+
+search aws dynamodb atomic increment
+  see  notes-3-1-atomic-inc
+
+https://acloudguru.com/blog/engineering/dynamodb-atomic-counters
+
+https://gist.github.com/pictolearn/3a13312e7525cc766be42fb43d3d9a94
+Increment_an_automic_counter.py
+
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Python.03.html
+Amazon DynamoDB Developer guide, Getting Started with AWS SDKs, Python and DynamoDB
+Step 3: Crud Operations, Step 3.4: Increment an Atomic Counter
 
 
