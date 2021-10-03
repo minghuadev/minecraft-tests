@@ -1,0 +1,108 @@
+
+notes-3-1-atomic-inc
+
+
+search aws dynamodb atomic increnent
+
+
+https://acloudguru.com/blog/engineering/dynamodb-atomic-counters
+
+    {    "siteUrl": "https://www.linuxacademy.com/",    "visits": "0"}
+
+    import boto3
+    dynamodb = boto3.client('dynamodb')
+    response = dynamodb.update_item(    TableName='siteVisits',     
+                                        Key={
+                                            'siteUrl':{'S': "https://www.linuxacademy.com/"}
+                                        },
+                                        UpdateExpression='SET visits = visits + :inc',
+                                        ExpressionAttributeValues={
+                                            ':inc': {'N': '1'}
+                                        },
+                                        ReturnValues="UPDATED_NEW")
+    print("UPDATING ITEM")
+    print(response)
+
+
+https://gist.github.com/pictolearn/3a13312e7525cc766be42fb43d3d9a94
+Increment_an_automic_counter.py
+    
+                                                          # increment of an atomic counter
+
+# boto3, an AWS SDK package
+# JSON, a text format package that is language independent
+# decimal, a precision Handling package
+import boto3                                   
+import json                                   
+import decimal  
+
+
+# Helper class to convert a DynamoDB item to JSON.
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, decimal.Decimal):
+            if o % 1 > 0:
+                return float(o)
+            else:
+                return int(o)
+        return super(DecimalEncoder, self).default(o)
+      
+# resource request service and region are set
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')                         
+table = dynamodb.Table('<table name>')
+
+title = "The Big New Movie"
+year = 2015
+
+# updation of items into the table
+response = table.update_item(                                                             
+    Key={
+        'year': year,
+        'title': title
+    },
+    UpdateExpression="set info.rating = info.rating + :val",
+    ExpressionAttributeValues={
+        ':val': decimal.Decimal(1)
+    },
+    ReturnValues="UPDATED_NEW"
+)
+
+print("UpdateItem succeeded:")
+print(json.dumps(response, indent=4, cls=DecimalEncoder))
+
+
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStarted.Python.03.html
+Amazon DynamoDB Developer guide, Getting Started with AWS SDKs, Python and DynamoDB
+  Step 3: Crud Operations, Step 3.4: Increment an Atomic Counter
+
+from decimal import Decimal
+from pprint import pprint
+import boto3
+
+
+def increase_rating(title, year, rating_increase, dynamodb=None):
+    if not dynamodb:
+        dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")
+
+    table = dynamodb.Table('Movies')
+
+    response = table.update_item(
+        Key={
+            'year': year,
+            'title': title
+        },
+        UpdateExpression="set info.rating = info.rating + :val",
+        ExpressionAttributeValues={
+            ':val': Decimal(rating_increase)
+        },
+        ReturnValues="UPDATED_NEW"
+    )
+    return response
+
+
+if __name__ == '__main__':
+    update_response = increase_rating("The Big New Movie", 2015, 1)
+    print("Update movie succeeded:")
+    pprint(update_response, sort_dicts=False)
+
+
