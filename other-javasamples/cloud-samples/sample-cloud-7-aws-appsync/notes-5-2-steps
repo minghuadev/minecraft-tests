@@ -1,0 +1,32 @@
+
+
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started-hello-world.html
+
+
+Prerequisites
+
+ [1] Creating an AWS account.
+ [2] Configuring AWS Identity and Access Management (IAM) permissions.
+ [3] Installing Docker. Note: Docker is a prerequisite only for testing your application locally.
+ [4] Installing Homebrew. Note: Homebrew is a prerequisite only for Linux and macOS. ( not really needed? )
+ [5] Installing the AWS SAM command line interface (CLI). Note: Make sure that you have version 1.13.0 or later.
+         Check the version by running the sam --version command.
+
+
+#Step 1 - Download a sample application
+sam init
+
+#Step 2 - Build your application
+cd sam-app
+sam build
+
+#Step 3 - Deploy your application
+sam deploy --guided
+
+#Step 4: (Optional) Test your application locally
+sam local start-api
+
+
+
+
+

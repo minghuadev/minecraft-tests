@@ -14,11 +14,28 @@ ls -l
 -rw-rw-r--+     303 Sep 25 19:22 notes-2-9-resources
 
 
-ls -lrt
+ls -lrt 
 
 -rw-rw-r--+     633 Oct  2 07:44 list-files
 -rw-rw-r--+     816 Oct  2 08:09 notes-2-8-build-client
 -rw-rw-r--+    3351 Oct  3 08:51 notes-3-1-atomic-inc
 -rw-rw-r--+    1067 Oct  3 09:25 notes-1-links
 -rw-rw-r--+     545 Oct  3 10:10 notes-2-9-resources
+
+
+ls -lrt
+-rw-rw-r--+     899 Oct  3 10:43 list-files
+-rw-rw-r--+    1087 Oct 11 06:36 notes-4-1-links-dynamodb
+-rw-rw-r--+    2274 Oct  9 21:05 notes-4-2-tut1-db.py
+-rw-rw-r--+    2134 Oct  9 20:45 notes-4-2-tut1-create.py
+-rw-rw-r--+     771 Oct  9 20:51 notes-4-2-tut2-new.py
+-rw-rw-r--+     726 Oct  9 20:53 notes-4-2-tut2-new2.py
+-rw-rw-r--+    1001 Oct  9 20:59 notes-4-2-tut3-update.py
+-rw-rw-r--+     912 Oct  9 21:01 notes-4-2-tut3-update2.py
+-rw-rw-r--+     870 Oct  9 21:03 notes-4-2-tut4-inc.py
+-rw-rw-r--+     871 Oct  9 21:03 notes-4-2-tut4-dec.py
+-rw-rw-r--+     879 Oct 10 08:04 notes-5-1-links-saml
+-rw-rw-r--+     896 Oct 10 19:58 notes-5-2-steps
+-rw-rw-r--+    2432 Oct 11 06:40 notes-5-9-resources
+
 

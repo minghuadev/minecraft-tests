@@ -1,0 +1,25 @@
+
+
+search aws run lambda on your own pc
+
+
+https://aws.amazon.com/about-aws/whats-new/2017/08/introducing-aws-sam-local-a-cli-tool-to-test-aws-lambda-functions-locally/
+Introducing AWS SAM Local, a CLI Tool to Test AWS Labmda Functions Locally
+
+
+https://github.com/aws/aws-sam-cli
+
+
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started-set-up-credentials.html
+
+
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-permissions.html
+permissions for the helloworld example: 
+    Option 2: attach aws-managed policies, 
+                        AWSCloudFormationFullAccess, IAMFullAccess, AWSLambda_FullAccess, 
+                        AmazonAPIGatewayAdministrator, AmazonS3FullAccess, 
+                        AmazonEC2ContainerRegistryFullAccess, 
+                        ...dynamodb-full-access
+
+
+
