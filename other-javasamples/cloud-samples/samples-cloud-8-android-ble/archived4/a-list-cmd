@@ -1,0 +1,4 @@
+
+$ find app/src/ -newer archived4/a-stamp-1 -name '*.xml'
+$ find app/src/ -newer archived4/a-stamp-1 -name '*.kt'
+
