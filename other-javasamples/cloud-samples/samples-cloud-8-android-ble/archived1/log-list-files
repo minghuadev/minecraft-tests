@@ -1,0 +1,16 @@
+
+log-list-files
+
+
+ls -lrt
+
+-rwx------+    1533 Oct 31 09:21 activity_main.xml
+-rwx------+     178 Oct 31 09:45 strings.xml
+-rwx------+     776 Oct 31 09:45 MainActivity.kt
+-rwx------+     884 Oct 31 09:53 activity_display_message.xml
+-rwx------+    1204 Nov  6 19:42 DisplayMessageActivity.kt
+-rw-r--r--+     536 Nov  7 07:42 log-sdk-version
+-rw-r--r--+     270 Nov  7 07:54 log-cp-files
+-rw-r--r--+       0 Nov 10 09:20 log-list-files
+
+

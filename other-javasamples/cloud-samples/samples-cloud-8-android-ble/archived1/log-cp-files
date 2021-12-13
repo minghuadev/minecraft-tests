@@ -1,0 +1,10 @@
+
+
+./app/src/main/java/com/example/myfirstapp/DisplayMessageActivity.kt
+./app/src/main/java/com/example/myfirstapp/MainActivity.kt
+
+./app/src/main/res/layout/activity_display_message.xml
+./app/src/main/res/layout/activity_main.xml
+
+./app/src/main/res/values/strings.xml
+

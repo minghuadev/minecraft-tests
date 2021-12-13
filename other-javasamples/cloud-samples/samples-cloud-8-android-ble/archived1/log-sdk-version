@@ -1,0 +1,21 @@
+
+
+android studio 2020.3.1 patch 3
+
+
+source origin:
+    https://developer.android.com/training/basics/firstapp
+    navigation: Docs tab, Guides sub tab, then Build your first app in the left pane
+
+
+five folders to exclude from realtime scanning:
+https://developer.android.com/studio/intro/studio-config
+
+    the projects,
+    the studio installation,
+    the sdk            ~/AppData/Local/Android/Sdk/ ,
+    the studio system  ~/AppData/Local/Google/AndroidStudio<version>/ ,
+    the gradle cache   ~/.gradle/ ,
+
+  and the ~/.android/
+

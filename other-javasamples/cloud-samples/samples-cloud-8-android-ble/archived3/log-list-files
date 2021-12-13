@@ -1,0 +1,24 @@
+
+ls -l
+
+-rwx------+     9943 Nov 10 07:47 BleUtilOp.kt-3-1-scan-ok
+-rwx------+    12316 Nov 10 09:02 BleUtilOp.kt-3-2-connect-ok
+
+
+ls -lrt
+
+-rw----r--+      132 Nov 10 09:30 log-list-files
+-rwx------+    12320 Nov 10 09:33 BleUtilOp.kt-3-2-connect-ok
+-rwx------+     9947 Nov 10 09:35 BleUtilOp.kt-3-1-scan-ok
+-rwx------+    12349 Nov 10 10:41 BleUtilOp.kt-3-3-data-out
+-rwx------+    13069 Nov 10 11:01 BleUtilOp.kt-3-4-state-full
+-rwx------+    16650 Nov 10 11:52 BleUtilOp.kt-3-5-mtu-ok
+-rwx------+    23138 Nov 10 12:36 BleUtilOp.kt-3-6-write-ok
+-rwx------+    27565 Nov 10 15:11 BleUtilOp.kt-3-7-subscription-ok
+-rwx------+    29145 Nov 10 19:16 BleUtilOp.kt-3-8-comments
+-rwx------+     2072 Nov 10 20:42 activity_display_message.xml-3-9-bound
+-rwx------+    31710 Nov 10 20:45 BleUtilOp.kt-3-9-bound
+-rwx------+     6644 Nov 10 20:55 DisplayMessageActivity.kt-3-9-bound
+-rwx------+    35424 Nov 11 09:36 BleUtilOp.kt-3-a-state-machine
+
+

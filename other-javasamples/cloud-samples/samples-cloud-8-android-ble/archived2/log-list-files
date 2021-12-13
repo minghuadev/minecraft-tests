@@ -1,0 +1,18 @@
+
+log-list-files
+
+ls -lrt
+
+-rwx------+    1533 Oct 31 09:21 activity_main.xml
+-rwx------+     178 Oct 31 09:45 strings.xml
+-rwx------+     776 Oct 31 09:45 MainActivity.kt
+-rwx------+     884 Oct 31 09:53 activity_display_message.xml
+-rwx------+    3206 Nov  9 13:02 DisplayMessageActivity.kt-2-1-post-handler
+-rwx------+    3629 Nov  9 17:36 DisplayMessageActivity.kt
+-rwx------+    1837 Nov  9 18:09 AndroidManifest.xml
+-rwx------+    7603 Nov  9 20:46 BleUtilOp.kt
+-rw----r--+     361 Nov 10 06:58 log-cp-files
+-rw----r--+       0 Nov 10 09:18 log-list-files
+
+
+
