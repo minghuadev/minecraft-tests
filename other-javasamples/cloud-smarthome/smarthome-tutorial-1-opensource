@@ -1,1 +1,71 @@
 
+
+search: open source smart home
+
+
+https://opensource.com/article/20/11/home-assistant
+why I used home assistant for open source home automation
+by Steve Ovens, 11 Nov 2020
+
+    Plex - streaming movies:      https://www.plex.tv/
+    Kodi - iso content manager:   https://opensource.com/article/19/1/manage-your-media-kodi
+    Nextcloud - self-hosted productivity:   https://nextcloud.com/
+    Self-hosted - podcast:        https://selfhosted.show/
+
+    Tasmota - ESP firmware:   https://tasmota.github.io/docs/
+    ESPHome - ESP firmware:   https://esphome.io/
+
+    CloudFree - Tasmota gadgets:    https://cloudfree.shop/
+    Shelly - cloud modules:         https://cloudfree.shop/
+
+user articies: https://opensource.com/user_articles/155706/155706
+               authored content by steve ovens
+
+series articles: 
+  cloud control vs local control: what to choose for your home automation
+  how to choose a wireless protocol for home automation
+  set up home assistant to manage your open source smart home
+  integrate devices and add-ons into your home automation setup
+  how to set up custom sensors in home assistant
+  protect your home assistant with these backups
+
+
+https://opensource.com/article/20/6/mycroft-voice-assistant-skill
+how to prepare to write your first mycroft AI skill using python
+by Steve Ovens, 19 Jun 2020
+
+  part 1
+  https://opensource.com/article/20/6/open-source-voice-assistant
+  a secure ald private open source alternative to alexa
+  08 Jun 2020
+
+  part 2
+  https://opensource.com/article/20/6/mycroft
+  get started with open source voice assistant software
+  09 Jun 2020
+
+  part 3
+  this one
+
+  part 4
+  https://opensource.com/article/20/6/mycroft-intent-parsers
+  use intent parsers for your open source home automation project
+  29 Jun 2020
+
+  part 5
+  https://opensource.com/article/20/7/mycroft-voice-skill
+  bring your mycroft AI voice assistant skill to life with python
+  31 Jul 2020
+
+
+how to automate your system adminstration tasks with ansible
+how to use ansible to set up a git server over ssh
+how to use ansible to set up system monitoring with prometheus
+
+
+bash tips for everyday at the command line
+
+
+the evolution of package managers
+
+
