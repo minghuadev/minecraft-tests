@@ -1,0 +1,88 @@
+
+from stopit import SignalTimeout as Timeout
+
+                in_pipe = None
+                with Timeout(3.0) as timeout_ctx:
+                    tmp_in_pipe = open(rx_pipe_path, "rb")
+                    in_pipe = tmp_in_pipe
+
+                if in_pipe is not None:
+                        self._pipe_state = "ok"
+                        self._pipe_open_count += 1
+                        print("in_pipe open: ok")
+                        os.set_blocking(in_pipe.fileno(), False)
+                        print("in_pipe set non-blocking: ok")
+
+                        last_active_time = time.time()
+                        first_fr_cnt, first_pktsz = 0, 0
+                        while True:
+                            def chk_timeout(tm_now, last_active_time):
+                                if tm_now - last_active_time > 10:
+                                    return True
+                                if self._stop_requested:
+                                    return True
+                                return False
+
+                            in_data = in_pipe.read(16)
+                            tnow = time.time()
+                            if in_data is None or len(in_data) <= 0:
+                                if chk_timeout(tnow, last_active_time):
+                                    print("in_packet timeout: header")
+                                    break # fail
+                                time.sleep(0.01)
+                                continue
+                            last_active_time = tnow
+
+                            # header received
+                            dlen = len(in_data)
+                            if dlen < 16:
+                                print("in_pipe error header: len too small ", dlen)
+                                break # fail
+                            def dec_data4( data4 ):
+                                ##print("  data ", data4[0], data4[1], data4[2], data4[3])
+                                if len(data4) >= 4:
+                                    return ((data4[3] * 256 + data4[2]) * 256 + data4[1]) * 256 + data4[0]
+                                else: # 3-byte
+                                    return (data4[2] * 256 + data4[1]) * 256 + data4[0]
+                            # call dec_data4() to decode header. 
+
+                            seg_data, seg_left = b'', h3_segsz
+                            while seg_left > 0:
+                                in_data = in_pipe.read(h3_segsz)
+                                tnow = time.time()
+                                if in_data is None or len(in_data) <= 0:
+                                    if chk_timeout(tnow, last_active_time):
+                                        print("in_packet timeout: data")
+                                        break  # fail
+                                    time.sleep(0.003)
+                                    continue
+                                last_active_time = tnow
+
+                                dlen = len(in_data)
+                                if dlen > seg_left:
+                                    print("in_pipe error data: len too big ", dlen, " seg_left ", seg_left)
+                                seg_left -= dlen
+                                seg_data += in_data
+                                if seg_left <= 0:
+                                    dlen = len(seg_data)
+                                    if self._data_receive_done != True:
+                                        self._data_received_len += dlen
+                                        self._data_received_bytes += seg_data
+                                    else:
+                                        print("in_pipe drop data: len ", dlen)
+                                    break
+
+                            if self._data_receive_done != True:
+                                if self._data_received_len >= first_pktsz:
+                                    if is_i_frame:
+                                        self._data_is_i_frame = True
+                                    self._data_receive_done = True
+                                    print("in_pipe pkt ok: received full-length pkt. frame ",
+                                          first_fr_cnt, first_pktsz)
+                                    # reset for next packet
+                                    first_fr_cnt, first_pktsz = 0, 0
+
+                            time.sleep(0.001)
+                        in_pipe.close()
+                        print("in_pipe close: closed")
+
