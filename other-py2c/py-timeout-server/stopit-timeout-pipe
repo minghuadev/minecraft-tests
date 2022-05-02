@@ -86,3 +86,17 @@ from stopit import SignalTimeout as Timeout
                         in_pipe.close()
                         print("in_pipe close: closed")
 
+##
+# if on some platform the open(rx_pipe_path, "rb") fails or blocks till the other end opens, 
+# change as the following: 
+#
+# -    in_pipe = os.open(rx_pipe_path, "rb")
+# +    in_pipe = os.open(rx_pipe_path, os.O_RDONLY | os.O_NONBLOCK)
+# 
+# -    os.set_blocking(in_pipe.fileno(), False)
+# +    os.set_blocking(in_pipe, False)
+#
+# -    in_data = in_pipe.read(1024)
+# +    in_data = os.read(in_pipe, 1024)
+#
+
