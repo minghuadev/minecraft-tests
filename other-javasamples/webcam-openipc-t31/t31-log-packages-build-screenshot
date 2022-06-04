@@ -1,0 +1,468 @@
+
+oipcu7@3fc0ac2b47b4:~/buildfiles/openipc-firmware$ grep '7m>>>' t31-log-build-1 | sed 's/.\[27m.*$//' | sed 's/^.*\[7m>>>//'
+
+ host-skeleton  Extracting
+ host-skeleton  Patching
+ host-skeleton  Configuring
+ host-skeleton  Building
+ host-skeleton  Installing to host directory
+ host-attr 2.4.48 Extracting
+ host-attr 2.4.48 Patching
+ host-attr 2.4.48 Updating config.sub and config.guess
+ host-attr 2.4.48 Patching libtool
+ host-attr 2.4.48 Configuring
+ host-attr 2.4.48 Building
+ host-attr 2.4.48 Installing to host directory
+ host-acl 2.2.53 Extracting
+ host-acl 2.2.53 Patching
+ host-acl 2.2.53 Updating config.sub and config.guess
+ host-acl 2.2.53 Patching libtool
+ host-acl 2.2.53 Configuring
+ host-acl 2.2.53 Building
+ host-acl 2.2.53 Installing to host directory
+ host-m4 1.4.18 Extracting
+ host-m4 1.4.18 Patching
+ host-m4 1.4.18 Updating config.sub and config.guess
+ host-m4 1.4.18 Patching libtool
+ host-m4 1.4.18 Configuring
+ host-m4 1.4.18 Building
+ host-m4 1.4.18 Installing to host directory
+ host-libtool 2.4.6 Extracting
+ host-libtool 2.4.6 Patching
+ host-libtool 2.4.6 Updating config.sub and config.guess
+ host-libtool 2.4.6 Configuring
+ host-libtool 2.4.6 Building
+ host-libtool 2.4.6 Installing to host directory
+ host-autoconf 2.69 Extracting
+ host-autoconf 2.69 Patching
+ host-autoconf 2.69 Updating config.sub and config.guess
+ host-autoconf 2.69 Patching libtool
+ host-autoconf 2.69 Configuring
+ host-autoconf 2.69 Building
+ host-autoconf 2.69 Installing to host directory
+ host-automake 1.15.1 Extracting
+ host-automake 1.15.1 Patching
+ host-automake 1.15.1 Updating config.sub and config.guess
+ host-automake 1.15.1 Patching libtool
+ host-automake 1.15.1 Configuring
+ host-automake 1.15.1 Building
+ host-automake 1.15.1 Installing to host directory
+ host-fakeroot 1.20.2 Extracting
+ host-fakeroot 1.20.2 Patching
+ host-fakeroot 1.20.2 Updating config.sub and config.guess
+ host-fakeroot 1.20.2 Configuring
+ host-fakeroot 1.20.2 Autoreconfiguring
+ host-fakeroot 1.20.2 Patching libtool
+ host-fakeroot 1.20.2 Building
+ host-fakeroot 1.20.2 Installing to host directory
+ host-makedevs  Extracting
+ host-makedevs  Patching
+ host-makedevs  Configuring
+ host-makedevs  Building
+ host-makedevs  Installing to host directory
+ host-binutils 2.32 Extracting
+ host-binutils 2.32 Patching
+ host-binutils 2.32 Updating config.sub and config.guess
+ host-binutils 2.32 Patching libtool
+ host-binutils 2.32 Configuring
+ host-binutils 2.32 Building
+ host-binutils 2.32 Installing to host directory
+ host-gmp 6.1.2 Extracting
+ host-gmp 6.1.2 Patching
+ host-gmp 6.1.2 Updating config.sub and config.guess
+ host-gmp 6.1.2 Patching libtool
+ host-gmp 6.1.2 Configuring
+ host-gmp 6.1.2 Building
+ host-gmp 6.1.2 Installing to host directory
+ host-mpfr 4.0.2 Extracting
+ host-mpfr 4.0.2 Patching
+ host-mpfr 4.0.2 Updating config.sub and config.guess
+ host-mpfr 4.0.2 Patching libtool
+ host-mpfr 4.0.2 Configuring
+ host-mpfr 4.0.2 Building
+ host-mpfr 4.0.2 Installing to host directory
+ host-mpc 1.1.0 Extracting
+ host-mpc 1.1.0 Patching
+ host-mpc 1.1.0 Updating config.sub and config.guess
+ host-mpc 1.1.0 Patching libtool
+ host-mpc 1.1.0 Configuring
+ host-mpc 1.1.0 Building
+ host-mpc 1.1.0 Installing to host directory
+ host-gcc-initial 7.5.0 Extracting
+ host-gcc-initial 7.5.0 Patching
+ host-gcc-initial 7.5.0 Updating config.sub and config.guess
+ host-gcc-initial 7.5.0 Patching libtool
+ host-gcc-initial 7.5.0 Configuring
+ host-gcc-initial 7.5.0 Building
+ host-gcc-initial 7.5.0 Installing to host directory
+ skeleton-init-common  Extracting
+ skeleton-init-common  Patching
+ skeleton-init-common  Configuring
+ skeleton-init-common  Building
+ skeleton-init-common  Installing to staging directory
+ skeleton-init-common  Fixing libtool files
+ skeleton-init-common  Installing to target
+ skeleton-init-sysv  Extracting
+ skeleton-init-sysv  Patching
+ skeleton-init-sysv  Configuring
+ skeleton-init-sysv  Building
+ skeleton-init-sysv  Installing to target
+ skeleton  Extracting
+ skeleton  Patching
+ skeleton  Configuring
+ skeleton  Building
+ skeleton  Installing to target
+ linux-headers 3.10.14 Extracting
+ linux-headers 3.10.14 Patching
+ linux-headers 3.10.14 Configuring
+ linux-headers 3.10.14 Building
+ linux-headers 3.10.14 Installing to staging directory
+ linux-headers 3.10.14 Fixing libtool files
+ linux-headers 3.10.14 Installing to target
+ musl-compat-headers  Extracting
+ musl-compat-headers  Patching
+ musl-compat-headers  Configuring
+ musl-compat-headers  Building
+ musl-compat-headers  Installing to staging directory
+ musl-compat-headers  Fixing libtool files
+ musl 1.1.24 Extracting
+ musl 1.1.24 Patching
+ musl 1.1.24 Configuring
+ musl 1.1.24 Building
+ musl 1.1.24 Installing to staging directory
+ musl 1.1.24 Fixing libtool files
+ musl 1.1.24 Installing to target
+ host-gcc-final 7.5.0 Extracting
+ host-gcc-final 7.5.0 Patching
+ host-gcc-final 7.5.0 Updating config.sub and config.guess
+ host-gcc-final 7.5.0 Patching libtool
+ host-gcc-final 7.5.0 Configuring
+ host-gcc-final 7.5.0 Building
+ host-gcc-final 7.5.0 Installing to host directory
+ toolchain-buildroot  Extracting
+ toolchain-buildroot  Patching
+ toolchain-buildroot  Configuring
+ toolchain-buildroot  Building
+ toolchain-buildroot  Installing to target
+ toolchain  Extracting
+ toolchain  Patching
+ toolchain  Configuring
+ toolchain  Building
+ toolchain  Installing to staging directory
+ toolchain  Fixing libtool files
+ toolchain  Installing to target
+ busybox 1.31.1 Extracting
+ busybox 1.31.1 Patching
+ busybox 1.31.1 Configuring
+ busybox 1.31.1 Building
+ busybox 1.31.1 Installing to target
+ host-pkgconf 1.6.1 Extracting
+ host-pkgconf 1.6.1 Patching
+ host-pkgconf 1.6.1 Updating config.sub and config.guess
+ host-pkgconf 1.6.1 Patching libtool
+ host-pkgconf 1.6.1 Configuring
+ host-pkgconf 1.6.1 Building
+ host-pkgconf 1.6.1 Installing to host directory
+ haserl 0.9.36 Extracting
+ haserl 0.9.36 Patching
+ haserl 0.9.36 Updating config.sub and config.guess
+ haserl 0.9.36 Patching libtool
+ haserl 0.9.36 Configuring
+ haserl 0.9.36 Building
+ haserl 0.9.36 Installing to target
+ ifupdown-scripts  Extracting
+ ifupdown-scripts  Patching
+ ifupdown-scripts  Configuring
+ ifupdown-scripts  Building
+ ifupdown-scripts  Installing to target
+ initscripts  Extracting
+ initscripts  Patching
+ initscripts  Configuring
+ initscripts  Building
+ initscripts  Installing to target
+ json-c 0.15 Extracting
+ json-c 0.15 Patching
+ json-c 0.15 Configuring
+ json-c 0.15 Building
+ json-c 0.15 Installing to staging directory
+ json-c 0.15 Fixing libtool files
+ json-c 0.15 Installing to target
+ host-bison 3.4.2 Extracting
+ host-bison 3.4.2 Patching
+ host-bison 3.4.2 Updating config.sub and config.guess
+ host-bison 3.4.2 Patching libtool
+ host-bison 3.4.2 Configuring
+ host-bison 3.4.2 Building
+ host-bison 3.4.2 Installing to host directory
+ host-gettext-tiny adaa9c64921e80f2b8dd3610ffb508618b9204f3 Extracting
+ host-gettext-tiny adaa9c64921e80f2b8dd3610ffb508618b9204f3 Patching
+ host-gettext-tiny adaa9c64921e80f2b8dd3610ffb508618b9204f3 Configuring
+ host-gettext-tiny adaa9c64921e80f2b8dd3610ffb508618b9204f3 Building
+ host-gettext-tiny adaa9c64921e80f2b8dd3610ffb508618b9204f3 Installing to host directory
+ host-gettext  Extracting
+ host-gettext  Patching
+ host-gettext  Configuring
+ host-gettext  Building
+ host-gettext  Installing to host directory
+ host-flex 2.6.4 Extracting
+ host-flex 2.6.4 Patching
+ host-flex 2.6.4 Updating config.sub and config.guess
+ host-flex 2.6.4 Configuring
+ host-flex 2.6.4 Gettextizing
+ host-flex 2.6.4 Autoreconfiguring
+ host-flex 2.6.4 Patching libtool
+ host-flex 2.6.4 Building
+ host-flex 2.6.4 Installing to host directory
+ libnl 3.5.0 Extracting
+ libnl 3.5.0 Patching
+ libnl 3.5.0 Updating config.sub and config.guess
+ libnl 3.5.0 Patching libtool
+ libnl 3.5.0 Configuring
+ libnl 3.5.0 Building
+ libnl 3.5.0 Installing to staging directory
+ libnl 3.5.0 Fixing libtool files
+ libnl 3.5.0 Installing to target
+ libyaml 0.2.2 Extracting
+ libyaml 0.2.2 Patching
+ libyaml 0.2.2 Updating config.sub and config.guess
+ libyaml 0.2.2 Patching libtool
+ libyaml 0.2.2 Configuring
+ libyaml 0.2.2 Building
+ libyaml 0.2.2 Installing to staging directory
+ libyaml 0.2.2 Fixing libtool files
+ libyaml 0.2.2 Installing to target
+ libzlib 1.2.11 Extracting
+ libzlib 1.2.11 Patching
+ libzlib 1.2.11 Configuring
+ libzlib 1.2.11 Building
+ libzlib 1.2.11 Installing to staging directory
+ libzlib 1.2.11 Fixing libtool files
+ libzlib 1.2.11 Installing to target
+ host-patchelf 0.9 Extracting
+ host-patchelf 0.9 Patching
+ host-patchelf 0.9 Updating config.sub and config.guess
+ host-patchelf 0.9 Patching libtool
+ host-patchelf 0.9 Configuring
+ host-patchelf 0.9 Building
+ host-patchelf 0.9 Installing to host directory
+ host-uboot-tools 2020.01 Extracting
+ host-uboot-tools 2020.01 Patching
+ host-uboot-tools 2020.01 Configuring
+ host-uboot-tools 2020.01 Building
+ host-uboot-tools 2020.01 Installing to host directory
+ wireless_tools 30.pre9 Extracting
+ wireless_tools 30.pre9 Patching
+ wireless_tools 30.pre9 Configuring
+ wireless_tools 30.pre9 Building
+ wireless_tools 30.pre9 Installing to staging directory
+ wireless_tools 30.pre9 Fixing libtool files
+ wireless_tools 30.pre9 Installing to target
+ wpa_supplicant 2.9 Extracting
+ wpa_supplicant 2.9 Patching
+ wpa_supplicant 2.9 Configuring
+ wpa_supplicant 2.9 Building
+ wpa_supplicant 2.9 Installing to staging directory
+ wpa_supplicant 2.9 Fixing libtool files
+ wpa_supplicant 2.9 Installing to target
+ zlib  Extracting
+ zlib  Patching
+ zlib  Configuring
+ zlib  Building
+ zlib  Installing to target
+ host-kmod 26 Extracting
+ host-kmod 26 Patching
+ host-kmod 26 Updating config.sub and config.guess
+ host-kmod 26 Configuring
+ host-kmod 26 Autoreconfiguring
+ host-kmod 26 Patching libtool
+ host-kmod 26 Building
+ host-kmod 26 Installing to host directory
+ host-lzma 4.32.7 Extracting
+ host-lzma 4.32.7 Patching
+ host-lzma 4.32.7 Updating config.sub and config.guess
+ host-lzma 4.32.7 Patching libtool
+ host-lzma 4.32.7 Configuring
+ host-lzma 4.32.7 Building
+ host-lzma 4.32.7 Installing to host directory
+ linux 3.10.14 Extracting
+ ingenic_patcher 0.1 Extracting
+ ingenic_patcher 0.1 Patching
+ linux 3.10.14 Patching
+ linux 3.10.14 Configuring
+ linux 3.10.14 Building
+ linux 3.10.14 Installing to target
+ linux 3.10.14 Installing to images directory
+ host-libzlib 1.2.11 Extracting
+ host-libzlib 1.2.11 Patching
+ host-libzlib 1.2.11 Configuring
+ host-libzlib 1.2.11 Building
+ host-libzlib 1.2.11 Installing to host directory
+ host-lz4 1.9.2 Extracting
+ host-lz4 1.9.2 Patching
+ host-lz4 1.9.2 Configuring
+ host-lz4 1.9.2 Building
+ host-lz4 1.9.2 Installing to host directory
+ host-lzo 2.10 Extracting
+ host-lzo 2.10 Patching
+ host-lzo 2.10 Configuring
+ host-lzo 2.10 Building
+ host-lzo 2.10 Installing to host directory
+ host-xz 5.2.4 Extracting
+ host-xz 5.2.4 Patching
+ host-xz 5.2.4 Updating config.sub and config.guess
+ host-xz 5.2.4 Patching libtool
+ host-xz 5.2.4 Configuring
+ host-xz 5.2.4 Building
+ host-xz 5.2.4 Installing to host directory
+ host-zlib  Extracting
+ host-zlib  Patching
+ host-zlib  Configuring
+ host-zlib  Building
+ host-zlib  Installing to host directory
+ host-zstd 1.4.9 Extracting
+ host-zstd 1.4.9 Patching
+ host-zstd 1.4.9 Configuring
+ host-zstd 1.4.9 Building
+ host-zstd 1.4.9 Installing to host directory
+ host-squashfs 4.4 Extracting
+ host-squashfs 4.4 Patching
+ host-squashfs 4.4 Configuring
+ host-squashfs 4.4 Building
+ host-squashfs 4.4 Installing to host directory
+ ingenic-osdrv-t31  Extracting
+ ingenic-osdrv-t31  Patching
+ ingenic-osdrv-t31  Configuring
+ ingenic-osdrv-t31  Building
+ ingenic-osdrv-t31  Installing to target
+ dropbear-openipc 2020.81 Extracting
+ dropbear-openipc 2020.81 Patching
+ dropbear-openipc 2020.81 Updating config.sub and config.guess
+ dropbear-openipc 2020.81 Patching libtool
+ dropbear-openipc 2020.81 Configuring
+ dropbear-openipc 2020.81 Building
+ dropbear-openipc 2020.81 Installing to target
+ fwprintenv-openipc 2020.04 Extracting
+ fwprintenv-openipc 2020.04 Patching
+ fwprintenv-openipc 2020.04 Configuring
+ fwprintenv-openipc 2020.04 Building
+ fwprintenv-openipc 2020.04 Installing to staging directory
+ fwprintenv-openipc 2020.04 Fixing libtool files
+ fwprintenv-openipc 2020.04 Installing to target
+ ipctool HEAD Extracting
+ ipctool HEAD Patching
+ ipctool HEAD Configuring
+ ipctool HEAD Building
+ ipctool HEAD Installing to target
+ lame-openipc 3.100 Extracting
+ lame-openipc 3.100 Patching
+ lame-openipc 3.100 Updating config.sub and config.guess
+ lame-openipc 3.100 Patching libtool
+ lame-openipc 3.100 Configuring
+ lame-openipc 3.100 Building
+ lame-openipc 3.100 Installing to staging directory
+ lame-openipc 3.100 Fixing libtool files
+ lame-openipc 3.100 Installing to target
+ mbedtls-openipc 2.25.0 Extracting
+ mbedtls-openipc 2.25.0 Patching
+ mbedtls-openipc 2.25.0 Configuring
+ mbedtls-openipc 2.25.0 Building
+ mbedtls-openipc 2.25.0 Installing to staging directory
+ mbedtls-openipc 2.25.0 Fixing libtool files
+ mbedtls-openipc 2.25.0 Installing to target
+ libcurl-openipc 7.76.0 Extracting
+ libcurl-openipc 7.76.0 Patching
+ libcurl-openipc 7.76.0 Updating config.sub and config.guess
+ libcurl-openipc 7.76.0 Patching libtool
+ libcurl-openipc 7.76.0 Configuring
+ libcurl-openipc 7.76.0 Building
+ libcurl-openipc 7.76.0 Installing to staging directory
+ libcurl-openipc 7.76.0 Fixing package configuration files
+ libcurl-openipc 7.76.0 Fixing libtool files
+ libcurl-openipc 7.76.0 Installing to target
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Extracting
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Patching
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Updating config.sub and config.guess
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Patching libtool
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Configuring
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Building
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Installing to staging directory
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Fixing libtool files
+ libevent-openipc 2db55e43cffd2fb6a34b5c997f2b8d043ca0ece5 Installing to target
+ libogg-openipc 1.3.5 Extracting
+ libogg-openipc 1.3.5 Patching
+ libogg-openipc 1.3.5 Updating config.sub and config.guess
+ libogg-openipc 1.3.5 Patching libtool
+ libogg-openipc 1.3.5 Configuring
+ libogg-openipc 1.3.5 Building
+ libogg-openipc 1.3.5 Installing to staging directory
+ libogg-openipc 1.3.5 Fixing libtool files
+ libogg-openipc 1.3.5 Installing to target
+ libwebsockets-openipc 4.2.2 Extracting
+ libwebsockets-openipc 4.2.2 Patching
+ libwebsockets-openipc 4.2.2 Configuring
+ libwebsockets-openipc 4.2.2 Building
+ libwebsockets-openipc 4.2.2 Installing to staging directory
+ libwebsockets-openipc 4.2.2 Fixing libtool files
+ libwebsockets-openipc 4.2.2 Installing to target
+ linux-firmware-openipc 20190717 Extracting
+ linux-firmware-openipc 20190717 Patching
+ linux-firmware-openipc 20190717 Configuring
+ linux-firmware-openipc 20190717 Building
+ linux-firmware-openipc 20190717 Installing to target
+ majestic-t31 current Extracting
+ majestic-t31 current Patching
+ majestic-t31 current Configuring
+ majestic-t31 current Building
+ majestic-t31 current Installing to target
+ majestic-fonts  Extracting
+ majestic-fonts  Patching
+ majestic-fonts  Configuring
+ majestic-fonts  Building
+ majestic-fonts  Installing to target
+ microbe-web HEAD Extracting
+ microbe-web HEAD Patching
+ microbe-web HEAD Configuring
+ microbe-web HEAD Building
+ microbe-web HEAD Installing to target
+ motors 32ba1309e739c068a89132aaebcde69b71fdaf4a Extracting
+ motors 32ba1309e739c068a89132aaebcde69b71fdaf4a Patching
+ motors 32ba1309e739c068a89132aaebcde69b71fdaf4a Configuring
+ motors 32ba1309e739c068a89132aaebcde69b71fdaf4a Building
+ motors 32ba1309e739c068a89132aaebcde69b71fdaf4a Installing to target
+ opus-openipc 1.3.1 Extracting
+ opus-openipc 1.3.1 Patching
+ opus-openipc 1.3.1 Updating config.sub and config.guess
+ opus-openipc 1.3.1 Patching libtool
+ opus-openipc 1.3.1 Configuring
+ opus-openipc 1.3.1 Building
+ opus-openipc 1.3.1 Installing to staging directory
+ opus-openipc 1.3.1 Fixing libtool files
+ opus-openipc 1.3.1 Installing to target
+ uacme-openipc 1.2.4 Extracting
+ uacme-openipc 1.2.4 Patching
+ uacme-openipc 1.2.4 Updating config.sub and config.guess
+ uacme-openipc 1.2.4 Patching libtool
+ uacme-openipc 1.2.4 Configuring
+ uacme-openipc 1.2.4 Building
+ uacme-openipc 1.2.4 Installing to target
+ vtund-openipc 3.0.2 Extracting
+ vtund-openipc 3.0.2 Patching
+ vtund-openipc 3.0.2 Updating config.sub and config.guess
+ vtund-openipc 3.0.2 Patching libtool
+ vtund-openipc 3.0.2 Configuring
+ vtund-openipc 3.0.2 Building
+ vtund-openipc 3.0.2 Installing to target
+ yaml-cli HEAD Extracting
+ yaml-cli HEAD Patching
+ yaml-cli HEAD Configuring
+ yaml-cli HEAD Building
+ yaml-cli HEAD Installing to target
+   Finalizing host directory
+   Finalizing target directory
+   Sanitizing RPATH in target tree
+   Copying overlay /home/oipcu7/buildfiles/openipc-firmware/buildroot-2020.02.12/../general/overlay
+   Executing post-build script /home/oipcu7/buildfiles/openipc-firmware/buildroot-2020.02.12/../scripts/executing_commands_for_musl.sh
+   Generating root filesystems common tables
+   Generating filesystem image rootfs.cpio
+   Generating filesystem image rootfs.squashfs
+   Generating filesystem image rootfs.tar

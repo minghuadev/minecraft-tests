@@ -1,0 +1,60 @@
+
+
+oipcu7@3fc0ac2b47b4:~/buildfiles/openipc-firmware$ ls -l buildroot-2020.02.12/dl/
+total 212
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:02 acl
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:02 attr
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:03 autoconf
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:03 automake
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:03 binutils
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:25 bison
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:24 busybox
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:33 dropbear-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:03 fakeroot
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:26 flex
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:33 fwprintenv-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:06 gcc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:26 gettext-tiny
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:05 gmp
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:25 haserl
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:34 ipctool
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:25 json-c
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:27 kmod
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:34 lame-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:34 libcurl-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:35 libevent-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:26 libnl
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:35 libogg-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:03 libtool
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:35 libwebsockets-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:26 libyaml
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:26 libzlib
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:13 linux
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:36 linux-firmware-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:31 lz4
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:27 lzma
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:31 lzo
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:02 m4
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:36 majestic-t31
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:34 mbedtls-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:36 microbe-web
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:36 motors
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:06 mpc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:06 mpfr
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:14 musl
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:14 musl-compat-headers
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:36 opus-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:27 patchelf
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:25 pkgconf
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:33 squashfs
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:36 uacme-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:27 uboot-tools
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:36 vtund-openipc
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:27 wireless_tools
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:27 wpa_supplicant
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:32 xz
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:37 yaml-cli
+drwxr-xr-x 2 oipcu7 oipcu7 4096 Jun  2 22:32 zstd
+
+
+

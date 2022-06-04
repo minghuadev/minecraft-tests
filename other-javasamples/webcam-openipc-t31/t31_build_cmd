@@ -1,0 +1,33 @@
+#!/bin/bash
+# build commands derived from .github/workflow/t31_... file, of github.com/openipc/firmeare
+
+
+# set VERBOSE for buildroot to print full build commands:
+export VERBOSE=1
+
+
+tm1s=$(date +%s)
+tm1d=$(date)
+
+(echo && echo -n Starting '... ' && echo ${tm1d} ) >> t31-log-build
+
+mkdir -vp tmp
+
+(echo && echo "make prepare" && echo ) >> t31-log-build
+make prepare  >> t31-log-build 2>&1
+
+(echo && echo "make PLATFORM=ingenic BOARD=unknown_unknown_t31_openipc all" && echo ) >> t31-log-build
+make PLATFORM=ingenic BOARD=unknown_unknown_t31_openipc all >> t31-log-build 2>&1
+
+tm2s=$(date +%s)
+tm2d=$(date)
+
+(echo && echo -n Finishing '...  ' && echo ${tm2d} ) >> t31-log-build
+(        echo -n Started at '... ' && echo ${tm1d} ) >> t31-log-build
+(        echo 'Consumed time ... ' $(( $tm2s - $tm1s )) seconds. ) >> t31-log-build
+
+echo && echo -n Finishing '...  ' && echo ${tm2d}
+        echo -n Started at '... ' && echo ${tm1d}
+	echo 'Consumed time ... ' $(( $tm2s - $tm1s )) seconds.
+
+
