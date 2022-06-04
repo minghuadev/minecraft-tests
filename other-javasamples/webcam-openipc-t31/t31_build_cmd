@@ -1,5 +1,6 @@
 #!/bin/bash
-# build commands derived from .github/workflow/t31_... file, of github.com/openipc/firmeare
+# t31_build_cmd
+# build commands derived from .github/workflow/t31_images.yml file, of github.com/openipc/firmeare
 
 
 # set VERBOSE for buildroot to print full build commands:
@@ -13,8 +14,16 @@ tm1d=$(date)
 
 mkdir -vp tmp
 
+if [ -f copy-buildroot-2020.02.12.tar.gz -a ! -f buildroot-2020.02.12.tar.gz ]; then
+	cp -av copy-buildroot-2020.02.12.tar.gz buildroot-2020.02.12.tar.gz >> t31-log-build
+fi
+
 (echo && echo "make prepare" && echo ) >> t31-log-build
 make prepare  >> t31-log-build 2>&1
+
+if [ -d copy-dl -a ! -d buildroot-2020.02.12/dl ]; then
+	cp -av copy-dl buildroot-2020.02.12/dl  >> t31-log-build
+fi
 
 (echo && echo "make PLATFORM=ingenic BOARD=unknown_unknown_t31_openipc all" && echo ) >> t31-log-build
 make PLATFORM=ingenic BOARD=unknown_unknown_t31_openipc all >> t31-log-build 2>&1

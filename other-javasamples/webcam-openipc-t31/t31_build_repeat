@@ -1,0 +1,25 @@
+#!/bin/bash
+# t31_build_repeat
+
+cnt_tmp=`cat log-cnt|sed 's/cnt //'|xargs`
+cnt=0; 
+if [ ! -z "$cnt_tmp" ]; then
+	echo cnt_tmp $cnt_tmp
+	if [ "$cnt_tmp" -ge 0 -a "$cnt_tmp" -lt 10000 ]; then
+		cnt=$cnt_tmp
+		echo cnt_tmp $cnt_tmp used to recover cnt $cnt
+	else
+		echo cnt_tmp $cnt_tmp discarded. use cnt $cnt
+	fi
+fi
+
+while true; do 
+	cnt=$(( $cnt + 1 )); 
+	echo cnt $cnt; 
+	(echo cnt $cnt > log-cnt); 
+	make distclean; 
+	sh t31_build_cmd; 
+	sleep 1;
+done
+
+
