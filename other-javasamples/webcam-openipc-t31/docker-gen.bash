@@ -15,7 +15,8 @@ echo Creating bb.dockerfile ...
 cat << EOF1 > bb.dockerfile
 
  #FROM ubuntu:focal-20210921 # focal fails aws_sdk build.
- FROM ubuntu:bionic-20210930
+ #FROM ubuntu:bionic-20210930
+ FROM ubuntu:bionic-20220415
 
  RUN apt-get update
  RUN apt-get install -y git tree openssh-client make
