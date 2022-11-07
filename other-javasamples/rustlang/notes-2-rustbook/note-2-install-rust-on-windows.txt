@@ -1,0 +1,89 @@
+
+
+contents
+    vc_redist.x64 .exe
+    rust-1.64.0-x86_64-gnu .exe
+    rust-1.64.0-x86_64-msvc .msi
+    windows rust development vscode
+    portable git .exe
+
+
+install vc_redist.x64.exe
+  maybe due to not able to run the rust-gnu installer or something.
+  --not necessary after moving to the rust msvc version?
+
+
+rust-1.64.0-x86_64-pc-windows-gnu.exe:
+  install to:
+  C:\Users\SurfaceView\AppData\Local\Programs\Rust-stable-GNU-1.64\
+  --not used. moving to the rust msvc version?
+
+
+x86_64-pc-windows-msvc:
+  rust-1.64.0-x86_64-pc-windows-msvc.msi
+  install to:
+  C:\Users\SurfaceView\AppData\Local\Programs\Rust stable MSVC 1.64\
+    not select the rust language server?? later vscode needs it??
+
+
+windows rust development
+  search windows rust development
+  https://learn.microsoft.com/en-us/windows/dev-environment/rust/
+
+   https://learn.microsoft.com/en-us/windows/dev-environment/rust/setup
+    [1] microsoft c++ build tools 
+        https://visualstudio.microsoft.com/visual-cpp-build-tools/
+            download https://aka.ms/vs/17/release/vs_BuildTools.exe
+            run it.
+            select workloads: recommend you select—
+                              .NET desktop development, 
+                              Desktop development with C++, 
+                              and Universal Windows Platform development
+                actually select desktop devel w c++, included: 
+                            c++ build tools core features
+                            c++ 2022 redistributable update
+                            c++ core desktop features
+                            optional: msvc v143 - vs 2022 c++ build tool
+                                      windows 10 sdk (10.0.19041.0)
+                                      c++ cmake tools for windows
+                                      testing tools core features - build tools
+                                      c++ addressSanitizer
+                installing ... visual studio build tools 2022 1.75GB, packages 320.
+        or microsoft visual studio
+    [2] visual studio code
+    [2.1] download and install https://code.visualstudio.com/ 
+          VSCodeUserSetup-x64-1.72.2.exe
+          install to C:\Users\SurfaceView\AppData\Local\Programs\Microsoft VS Code
+    [2.2] install rust-analyzer extension in vscode.
+    [2.3] install CodeLLDB extension in vscode.
+
+    [3] rust with vscode tutorial
+          create a cargo project.
+          cd into the directory, and launch vscode by "code ." command.
+          open the source code, set a breakpoint, and run debugger. 
+          the first time you should get an error for no launch configuration, 
+          clock ok, then you get a prompt to generate a launch configuration. 
+          after generating the launch configuration, it is good to debug.
+
+    [4] after the installation process, recent installed apps in windows start menu:
+          rust 1.64 (msvc 64-bit) shell
+          visual studio installer
+          developer command prompt for vs 2022
+          developer powershell for vs 2022
+          x86 native tools command prompt for vs 2022
+          x86_64 cross tools command prompt for vs 2022
+          x64_x86 cross tools command prompt for vs 2022
+          x64 native tools command prompt for vs 2022
+          application verifier (x64)
+          application verifier (wow)
+          windows app cert kit
+          windows software development kit
+          debuggable package manager
+          visual studio code  ---this is at the top of the recent list.
+
+
+portable git
+  download PortableGit-2.28.0-64-bit.7z.exe
+  run to extract it, and use as a bash shell.
+
+
