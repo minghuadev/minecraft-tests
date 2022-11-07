@@ -1,0 +1,84 @@
+
+
+https://www.reddit.com/r/rust/comments/htcizm/tutorials_or_documentation_for_home_automation_in/
+tutorials or documentation for home automation (in rust)?
+
+
+cfsamson  2 yr. ago  edited 2 yr. ago
+
+I actually started a similar project this summer. As others have suggested 
+I'd start with the book first and implement the side procject as you go. 
+If you have a lot of low level experience using the Pi alredy it could 
+probably work as a side project. I would not start learning Rust by doing 
+my first home automation project on the Pi unless frustration-management 
+is your second hobby...
+
+Now depending on the PI you're using you can possibly install Rust and 
+compile directly on the Pi, but the better way (in my eyes) is to cross 
+compile. You can follow [this tutorial](
+https://chacin.dev/blog/cross-compiling-rust-for-the-raspberry-pi/). 
+I set up a workflow using [cargo-make](https://github.com/sagiegurari/cargo-make).
+
+Just to give a few starters. My `.cargo/config` looks like this (note that 
+this is not the same as i`Cargo.toml`).
+
+    build]
+    target = "armv7-unknown-linux-gnueabihf"
+    
+    [target.armv7-unknown-linux-gnueabihf]
+    linker = "Users/myname/dev/linux/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-gcc"
+
+linker is an absolute path to the ARM linker you downloaded and unpacked 
+from [here](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-a/downloads)
+
+And my `Makefile.toml` looks like this:
+
+    env_scripts = [
+    '''
+    #!@duckscript
+    
+    if eq ${PROFILE} "dev"
+        set_env PROFILE "debug"
+    elseif eq ${PROFILE} "production"
+        set_env PROFILE "release"
+    else
+        trigger_error "Development or production profile must be set."
+    end
+    '''
+    ]
+    
+    [env]
+    TARGET= "armv7-unknown-linux-gnueabihf"
+    PROFILE = "${CARGO_MAKE_CARGO_PROFILE}"
+    PWD = "somepassword"
+    
+    [tasks.run_multisensor]
+    script_runner = "@shell"
+    script = [
+        '''
+        sshpass -p "${PWD}" scp -r ./target/${TARGET}/${PROFILE}/multi_sensor pi@raspberrypi:~/dev/pi
+        '''
+    ]
+    dependencies = ["build"]
+
+Now I placed the binary in `~/dev/pi` (folder I have already crated on the PI) 
+and I can SSH into that folder and run the executables.
+
+When you get "hello world" working on the PI you can start using [rppal](
+https://crates.io/crates/rppal) and check if there are any crates that already 
+supports the sensor you're using. I'm using the Bosch BME680 sensor, and there 
+is a [crate](https://crates.io/crates/bme680) for driving that one, but I'm not 
+that lucky with the other sensors I'm using.
+
+You can also take a look at client/server libraries in Rust and try them out. 
+I haven't tried this myself (yet) so I don't know if there are any rough edges 
+but if you run on raspbian they should work without major issues.
+
+I'll have to say though, that you can probably read off the sensor in less than 
+an hour using Python since there is most likely both existing libraries, 
+a tutorial with detailed steps and example code to do just that. Using Rust 
+you'll need to be prepared to set up communication using I2C/SPI, possibly link 
+to a C library from the vendor using FFI to drive the sensor and so on.
+
+
+

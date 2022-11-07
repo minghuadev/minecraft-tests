@@ -1,0 +1,60 @@
+
+
+search opensource rust smart home project
+
+
+data representation: 
+
+    haystack library in rust by j2nn.com
+    https://www.j2inn.com/blog/a-new-open-source-library-for-project-haystack-rust
+    https://github.com/j2inn/libhaystack
+    https://crates.io/crates/libhaystack
+
+
+home automation
+
+    https://github.com/FruitieX/homectl
+
+    https://github.com/cedricgrothues/home-automation
+        based on jake wright's home-automation project and his youtube series
+        https://github.com/jakewright/home-automation
+
+        client written in dart using flutter
+        core and moduels in go.
+        tools/hub in rust.
+
+
+24 projects
+
+  https://serokell.io/blog/open-source-rust
+  open-source rust: 24 awesome fraomeworks, projects, and libraries
+
+    web: rocket, actix web, yew, warp
+
+        https://github.com/seanmonstar/warp server framework
+        https://github.com/yewstack/yew     wasm
+
+    os: redox, theseus
+
+    other: 
+        servo: web engine prototype from mozilla. 
+                 https://github.com/servo/servo
+
+        lunatic: using wasm as actors to structure execution. 
+                 https://github.com/lunatic-solutions/lunatic
+
+
+tutorial on home automation
+
+  https://www.reddit.com/r/rust/comments/htcizm/tutorials_or_documentation_for_home_automation_in/
+
+
+os:
+
+  https://www.zdnet.com/article/google-shows-off-kataos-a-secure-operating-system-written-in-rust/
+  google shows off KataOS, a secure operating system written in rust
+
+    sel4, sel4-sys, sysroot
+
+
+
