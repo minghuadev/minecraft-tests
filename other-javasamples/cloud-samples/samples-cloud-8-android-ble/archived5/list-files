@@ -1,0 +1,9 @@
+
+ls -lrt
+
+-rw----r--   1269 Dec 12 12:10 notes-1-diff-data-file
+-rwx------   1052 Dec 12 13:42 notes-2-copy-files.txt
+-rw----r--   2044 Dec 12 15:21 notes-0-recreate-project
+-rw----r--    218 Dec 12 15:22 list-files
+
+

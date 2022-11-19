@@ -1,0 +1,19 @@
+
+
+
+$ diff ../archived2/activity_main.xml   ../app/src/main/res/layout/activity_main.xml
+$ diff ../archived2/MainActivity.kt     ../app/src/main/java/com/example/myfirstapp/MainActivity.kt
+$ diff ../archived2/strings.xml         ../app/src/main/res/values/strings.xml
+$ diff ../archived2/AndroidManifest.xml ../app/src/main/AndroidManifest.xml
+
+$ diff ../archived4/activity_display_message.xml-b ../app/src/main/res/layout/activity_display_message.xml
+$ diff ../archived4/DisplayMessageActivity.kt-b    ../app/src/main/java/com/example/myfirstapp/DisplayMessageActivity.kt
+$ diff ../archived4/BleUtilOp.kt-b         ../app/src/main/java/com/example/myfirstapp/BleUtilOp.kt
+$ diff ../archived4/BleResultData.kt-a     ../app/src/main/java/com/example/myfirstapp/BleResultData.kt
+$ diff ../archived4/BleResultDataWork.kt-b ../app/src/main/java/com/example/myfirstapp/BleResultDataWork.kt
+
+$ diff ../archived4/BleUtilData.kt-b ../app/src/main/java/com/example/myfirstapp/BleUtilData.kt
+4c4
+....<<same as in notes-1-diff-data-file>>....
+
+

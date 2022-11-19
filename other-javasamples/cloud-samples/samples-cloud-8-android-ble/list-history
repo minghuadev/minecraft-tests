@@ -1,0 +1,71 @@
+
+list-history
+2022-11-19
+
+
+$ ls -lrt archived1 >> list-history
+-rwx------+   1533 Oct 31  2021 activity_main.xml
+-rwx------+    178 Oct 31  2021 strings.xml
+-rwx------+    776 Oct 31  2021 MainActivity.kt
+-rwx------+    884 Oct 31  2021 activity_display_message.xml
+-rwx------+   1204 Nov  6  2021 DisplayMessageActivity.kt
+-rw-r--r--+    536 Nov  7  2021 log-sdk-version
+-rw-r--r--+    270 Nov  7  2021 log-cp-files
+-rw-r--r--+    438 Nov 10  2021 log-list-files
+
+
+$ ls -lrt archived2 >> list-history
+-rwx------+   1533 Oct 31  2021 activity_main.xml
+-rwx------+    178 Oct 31  2021 strings.xml
+-rwx------+    776 Oct 31  2021 MainActivity.kt
+-rwx------+    884 Oct 31  2021 activity_display_message.xml
+-rwx------+   3206 Nov  9  2021 DisplayMessageActivity.kt-2-1-post-handler
+-rwx------+   3629 Nov  9  2021 DisplayMessageActivity.kt
+-rwx------+   1837 Nov  9  2021 AndroidManifest.xml
+-rw----r--+    361 Nov 10  2021 log-cp-files
+-rw----r--+    564 Nov 10  2021 log-list-files
+-rwx------+   7605 Nov 10  2021 BleUtilOp.kt
+
+
+$ ls -lrt archived3 >> list-history
+-rwx------+   12320 Nov 10  2021 BleUtilOp.kt-3-2-connect-ok
+-rwx------+    9947 Nov 10  2021 BleUtilOp.kt-3-1-scan-ok
+-rwx------+   12349 Nov 10  2021 BleUtilOp.kt-3-3-data-out
+-rwx------+   13069 Nov 10  2021 BleUtilOp.kt-3-4-state-full
+-rwx------+   16650 Nov 10  2021 BleUtilOp.kt-3-5-mtu-ok
+-rwx------+   23138 Nov 10  2021 BleUtilOp.kt-3-6-write-ok
+-rwx------+   27565 Nov 10  2021 BleUtilOp.kt-3-7-subscription-ok
+-rwx------+   29145 Nov 10  2021 BleUtilOp.kt-3-8-comments
+-rwx------+    2072 Nov 10  2021 activity_display_message.xml-3-9-bound
+-rwx------+   31710 Nov 10  2021 BleUtilOp.kt-3-9-bound
+-rwx------+    6644 Nov 10  2021 DisplayMessageActivity.kt-3-9-bound
+-rwx------+   35424 Nov 11  2021 BleUtilOp.kt-3-a-state-machine
+-rw----r--+     944 Nov 28  2021 log-list-files
+
+
+$ ls -lrt archived4 >> list-history
+-rw----r--+       0 Nov 28  2021 a-stamp-1
+-rwx------+    1029 Nov 28  2021 BleResultData.kt-a
+-rwx------+    3894 Nov 28  2021 BleResultDataWork.kt-a
+-rwx------+   35185 Nov 28  2021 BleUtilOp.kt-a
+-rwx------+    7288 Nov 28  2021 DisplayMessageActivity.kt-a
+-rw----r--+     244 Nov 28  2021 a-list-copy
+-rw----r--+     115 Nov 28  2021 a-list-cmd
+-rw----r--+       0 Nov 28  2021 b-stamp-2
+-rwx------+    3238 Nov 28  2021 activity_display_message.xml-b
+-rwx------+    8116 Nov 28  2021 DisplayMessageActivity.kt-b
+-rwx------+    4259 Nov 28  2021 BleResultDataWork.kt-b
+-rwx------+   35670 Nov 28  2021 BleUtilOp.kt-b
+-rw----r--+     296 Nov 28  2021 b-list-copy
+-rw----r--+     116 Nov 28  2021 b-list-cmd
+-rw----r--+     835 Nov 28  2021 list-files
+-rwx------+    1424 Nov 29  2021 BleUtilData.kt-b
+
+
+$ ls -lrt archived5 >> list-history
+-rw----r--+   1269 Dec 12  2021 notes-1-diff-data-file
+-rwx------+   1052 Dec 12  2021 notes-2-copy-files.txt
+-rw----r--+   2044 Dec 12  2021 notes-0-recreate-project
+-rw----r--+    218 Dec 12  2021 list-files
+
+

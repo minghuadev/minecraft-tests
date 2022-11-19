@@ -1,0 +1,60 @@
+
+[1] diff data file to make sure the difference and prepare to copy in the actual data file later.
+    save to notes-1-diff-data-file
+
+[2] create a project: 
+        Location: MyNo3App
+        Type: empty activity
+        Configurations: 
+                Name:          My No3 App
+                Package name:  com.example.myno3app
+                Save location: ..../MyNo3App
+                Language:      Kotlin
+                Minimum SDK:   API 23: Android 6.0 (Marshmallow)
+
+[3] create a new activity: 
+    app >> New >> Activity >> Empty Activity
+        Configurations:
+                Activity Name:     DisplayMessageActivity
+                Generate a Layout File: <check>
+                Layout Name:       activity_display_message
+                Package name:      com.example.myno3app
+                Source Language:   Kotlin
+                Target Source Set: main    ---or release or debug
+
+[4] copy content from 5 files, and more files: 
+        activity_main.xml                  ---this
+        MainActivity.kt                    ---this 
+        activity_display_message.xml
+        DisplayMessageActivity.kt
+        strings.xml                        ---this
+
+[4.1] from archived2
+
+[4.2] from archived2, add files: 
+        AndroidManifest.xml                ---this
+        BleUtilOp.kt
+
+[4.3] from archived3, update three files: 
+        activity_display_message.xml
+        DisplayMessageActivity.kt
+        BleUtilOp.kt
+
+[4.4] from archived4, update files:
+        activity_display_message.xml       ---this
+        DisplayMessageActivity.kt          ---this
+        BleUtilOp.kt                       ---this
+
+[4.5] from archived4, add files: 
+        BleResultData.kt                   ---this
+        BleResultDataWork.kt               ---this
+
+[4.6] from the original directory, copy this file: 
+        BleUtilData.kt                     ---this
+
+    detailed list of files see notes-2-copy-files.txt
+
+[5] edit the source of MainActivity
+    change EXTRA_MESSAGE to use the new package name for the message. 
+
+

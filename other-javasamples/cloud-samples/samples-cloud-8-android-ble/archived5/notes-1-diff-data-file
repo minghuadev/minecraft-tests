@@ -1,0 +1,45 @@
+
+
+diff only data files are different:
+note the ....n are edited substitutes to original data
+
+
+
+$ diff archived4/BleUtilData.kt-b app/src/main/java/com/example/myfirstapp/BleUtilData.kt
+4c4
+<     private val ble_uuid = "[00000001-0002-0003-0004-1234567890ab]"
+---
+>     private val ble_uuid = "[00000001-....1
+19c19
+<     Service 00000001-0002-0003-0004-1234567890ab
+---
+>     Service 00000001-....1
+21,22c21,22
+<     |--00000002-0002-0003-0004-1234567890ab
+<     |--00000003-0002-0003-0004-1234567890ab
+---
+>     |--....2
+>     |--....3
+24,26c24,26
+<     private val svc_user = "00000001-0002-0003-0004-1234567890ab"
+<     private val char_wr = "00000002-0002-0003-0004-1234567890ab" /* incoming into the peripheral */
+<     private val char_rd = "00000003-0002-0003-0004-1234567890ab"
+---
+>     private val svc_user = "00000001-....1
+>     private val char_wr = "....2
+>     private val char_rd = "....3
+42c42,46
+<         return byteArrayOf(0x21, 0x22, 0x23, 0x41, 0x42, 0x43)
+---
+>         //byteArrayOf(0x21, 0x22, 0x23, 0x41, 0x42, 0x43)
+>         return byteArrayOf(
+>                 0x20, 0x2f, 0x...., 
+>                 ...., 0x20, 0x...., 0x20, 0x0a, 0x20)
+>                 /* ./....4..../command one.... */
+44c48
+< }
+---
+> }
+\ No newline at end of file
+
+
