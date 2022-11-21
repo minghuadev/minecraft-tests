@@ -1,0 +1,34 @@
+
+
+https://developer.android.com/training/basics/firstapp
+2022-11-20
+
+  tabs: it is under docs/guides tabs and titled "Build your first app" in the left-menu
+
+  ignore "Create a Hello World app".
+  ignore "Start the Android Basics course". 
+
+  choose "Browse learning resources", https://developer.android.com/courses
+    ignore "New! Android Basics with Compose"
+    other interesting courses: "pathway Modern Android app architecture", 
+                               "pathway Kotlin coroutines", 
+                               "pathway Kotlin for Java developers"
+
+    choose "Android Basics in Kotlin", 
+      https://developer.android.com/courses/android-basics-kotlin/course
+
+      6 units: "Unit 1: Kotlin basics", "Unit 2: Layouts", "3 Navigation", 
+                 "4 Connect to the internet", "5 Data persistence", "6 WorkManager"
+
+      Unit 2: "pathway 1 get user input in an app part 1", "pathway 2 ... part 2", 
+                "3 display a scrollable list"
+                all dated September 2020.
+        https://developer.android.com/courses/android-basics-kotlin/unit-2
+
+      Unit 3: 4 pathways dated December 2020, and one May 2020.
+        https://developer.android.com/courses/android-basics-kotlin/unit-3
+
+        Concepts: intent, extra, activity lifecycle, fragment, architecture
+
+
+

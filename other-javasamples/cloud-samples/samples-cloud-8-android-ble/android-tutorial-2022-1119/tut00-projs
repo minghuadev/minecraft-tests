@@ -1,0 +1,70 @@
+
+
+tut00-projs
+
+
+android studio: 
+
+    android-studio-2020.3.1.25-windows.zip
+    AndroidStudioPortable/android-studio-2020.3.1.25-windows/
+
+    Android Studio Arctic Fox | 2020.3.1 Patch 3
+    Build #AI-203.7717.56.2031.7784292, built on September 30, 2021
+    Runtime version: 11.0.10+0-b96-7249189 amd64
+    VM: OpenJDK 64-Bit Server VM by Orcale Corporation
+
+
+previous android studio projects
+
+  relative to ~/.../AndroidStudioProjects/
+
+    MyNo3App/
+    MyFirstNo02App/
+    Android-BLE-Library/
+    Andriod-Scanner-Compat-Library/
+    Android-BLE-Library/examples/ble-gatt-client/
+    ble-gatt-client/
+    MyNo2App/
+    MyFirstApp/
+
+
+tut1-first-app:
+
+    tut1-first-app/Greeting1App/
+
+
+refactor change package name and directory name for the package
+
+  refactor: 
+    change package from greeting1app to greeting2app, 
+    change app name from "Greeting 1 App" to "Greeting 2 App", 
+    change them name from Greeting1App to Greeting2App.
+
+  clone and find leaked strings: 
+
+    $ grep -r -i greeting1app *
+    app/build.gradle:        applicationId "com.example.greeting1app"
+    app/src/androidTest/java/com/example/greeting2app/ExampleInstrumentedTest.kt:        assertEquals("com.example.greeting1app", appContext.packageName)
+
+    $ grep -r -i 'greeting 1 app' *
+    settings.gradle:rootProject.name = "Greeting 1 App"
+
+  finding the strings in the original cloned project directory: 
+
+    $ grep -r -i 'greeting 1 app' *
+    app/src/main/res/values/strings.xml:    <string name="app_name">Greeting 1 App</string>
+    settings.gradle:rootProject.name = "Greeting 1 App"
+
+    $ grep -r -i 'greeting1app' *
+    app/build.gradle:        applicationId "com.example.greeting1app"
+    app/src/androidTest/java/com/example/greeting1app/ExampleInstrumentedTest.kt:package com.example.greeting1app
+    app/src/androidTest/java/com/example/greeting1app/ExampleInstrumentedTest.kt:        assertEquals("com.example.greeting1app", appContext.packageName)
+    app/src/main/AndroidManifest.xml:    package="com.example.greeting1app">
+    app/src/main/AndroidManifest.xml:        android:theme="@style/Theme.Greeting1App">
+    app/src/main/java/com/example/greeting1app/MainActivity.kt:package com.example.greeting1app
+    app/src/main/res/values/themes.xml:    <style name="Theme.Greeting1App" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    app/src/main/res/values-night/themes.xml:    <style name="Theme.Greeting1App" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    app/src/test/java/com/example/greeting1app/ExampleUnitTest.kt:package com.example.greeting1app
+
+
+

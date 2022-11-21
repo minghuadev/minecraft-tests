@@ -1,0 +1,73 @@
+
+
+https://developer.android.com/training/basics/firstapp
+2022-11-19
+
+  tabs: it is under docs/guides tabs and titled "Build your first app" in the left-menu
+
+  ignore "Create a Hello World app".
+  choose "Start the Android Basics course". 
+    Unit 1: Your first android app
+        ignore "pathway 1 introduction to kotlin"
+
+        choose "pathway 2 set up android seudio"
+            3 create yoru first android app
+                use a "Phone and Tablet"/"Empty Compose Activity" template.
+                create the project. build to see design preview. 
+                use "Android" or "Project Source Files" in project pane drop-down menu.
+                ....abandon this path
+
+        choose "pathway 3 build a basic layout"
+                ....abandon this path
+
+  choose "Browse learning resources", https://developer.android.com/courses
+    ignore "New! Android Basics with Compose"
+    other interesting courses: "pathway Modern Android app architecture", 
+                               "pathway Kotlin coroutines", 
+                               "pathway Kotlin for Java developers"
+
+    choose "Android Basics in Kotlin", 
+      https://developer.android.com/courses/android-basics-kotlin/course
+
+      6 units: "Unit 1: Kotlin basics", "Unit 2: Layouts", "3 Navigation", 
+                 "4 Connect to the internet", "5 Data persistence", "6 WorkManager"
+
+      Unit 1: "pathway 1 introduction to kotlin", "pathway 2 create your first app", 
+                "3 build a basic layout", "4 add a button to an app", 
+                all dated May 2020.
+
+      choose "pathway 3 Build a basic layout". 
+        https://developer.android.com/courses/pathways/android-basics-kotlin-three
+
+          Use: "Empty Activity" template.
+          Use: name "Greeting 1 App", package "com.example.greeting1app", location "Greeting1App", 
+               lang "Kotlin", min sdk "API 23: Android 6.0 (Marshmallow)".
+               uncheck "Use legacy android support libraries". 
+
+          Tips: set adb path when it cannot detect the adb path
+                 "Extended controls (...) > Settings > General tab > 'Use detected ADB location'"
+          Concepts: view, viewGroup, textView, ConstraintLayout
+
+          Work through the part with a TextView and its layout. 
+          Skip the part for an ImageView.
+
+      choose "pathway 4 Add a button to an app". 
+
+          Tips: auto import or alt-enter
+          Concepts: class and object in kotlin
+                    string resource in string.xml
+                    activities
+                    button
+                    toast: 
+                        val rollButton: Button = findViewById(R.id.button)
+                        rollButton.setOnClickListener {
+                            val toast = Toast.makeText(this, "Dice Rolled!", Toast.LENGTH_SHORT)
+                            toast.show()
+                        }
+                    if else when Boolean
+                    image
+                    unit test
+                    debugging with log
+
+
+
