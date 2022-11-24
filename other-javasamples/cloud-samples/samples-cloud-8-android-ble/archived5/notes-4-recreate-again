@@ -1,0 +1,59 @@
+
+
+recreate a project: 
+
+    name: No4 BLE
+    package: com.example.no4ble
+    location: No4BLE
+    lang: kotlin
+    min api: API 23: Android 6.0 (Marshmallow)
+    un-check: Use legacy android.support libraries
+
+
+add an activity:
+
+    see notes-0-recreate-project 
+    git init and check-in files.
+
+
+copy files:
+
+    see notes-0-recreate-project and notes-2-copy-files.txt
+    actual commands:
+        $ cp archived2/activity_main.xml app/src/main/res/layout/activity_main.xml
+        $ cp archived2/MainActivity.kt app/src/main/java/com/example/no4ble/MainActivity.kt
+        $ cp archived2/strings.xml app/src/main/res/values/strings.xml
+        $ cp archived4/activity_display_message.xml-b app/src/main/res/layout/activity_display_message.xml
+        $ cp archived4/DisplayMessageActivity.kt-b app/src/main/java/com/example/no4ble/DisplayMessageActivity.kt
+        $ cp archived4/BleUtilOp.kt-b app/src/main/java/com/example/no4ble/BleUtilOp.kt
+        $ cp archived4/BleResultData.kt-a app/src/main/java/com/example/no4ble/BleResultData.kt
+        $ cp archived4/BleResultDataWork.kt-b app/src/main/java/com/example/no4ble/BleResultDataWork.kt
+        $ cp archived4/BleUtilData.kt-b app/src/main/java/com/example/no4ble/BleUtilData.kt
+        $ cp archived2/AndroidManifest.xml app/src/main/AndroidManifest.xml
+
+    inspect changed files and new files:
+
+        $ git status
+        Changes not staged for commit:
+                modified:   app/src/main/AndroidManifest.xml
+                modified:   app/src/main/java/com/example/no4ble/DisplayMessageActivity.kt
+                modified:   app/src/main/java/com/example/no4ble/MainActivity.kt
+                modified:   app/src/main/res/layout/activity_display_message.xml
+                modified:   app/src/main/res/layout/activity_main.xml
+                modified:   app/src/main/res/values/strings.xml
+        Untracked files:
+                app/src/main/java/com/example/no4ble/BleResultData.kt
+                app/src/main/java/com/example/no4ble/BleResultDataWork.kt
+                app/src/main/java/com/example/no4ble/BleUtilData.kt
+                app/src/main/java/com/example/no4ble/BleUtilOp.kt
+
+    edit res/values/strings.xml, change the app_name "My First App" back to the new name.
+    files in res/layut/ are ok.
+    edit java/.../no4ble/*.kt, change package name myfirstapp to the new name.
+    edit AndroidManifest.xml, change package name myfirstapp to the new name,
+                              change theme MyFirstApp back to No4BLE.
+    edit DisplayMessageActivity.kt, change "My_First_App.app" into "No4_BLE.app"
+
+
+adapt to nordic nus characters
+
