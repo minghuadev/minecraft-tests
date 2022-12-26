@@ -1,0 +1,50 @@
+
+2022-12-25
+
+
+connection kit
+    [1] from aws iot console home page, the "getting started with aws iot"/"Connect device" button 
+    [2] the aws iot console, then "connect", then "connect one device"
+  both are the same to a 5-step wizard/tutorial.
+
+
+certificate: MyIotThing2.cert.pem
+script: start.ps1
+private key:  MyIotThing2.private.key
+policy:       MyIotThing2-Policy
+sdk:          python
+
+
+download connection kit zip. extract and look inside the directory.
+
+
+how to run in the wizard of above [1] or [2]: 
+
+  step 1: Add execution permissions using command
+          Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+
+  step 2: .\start.ps1
+
+
+inspect start.ps1, and manually download packages and install
+
+  download source zip: https://github.com/aws/aws-iot-device-sdk-python-v2
+  extract and name it: ./aws-iot-device-sdk-python-v2
+
+  pip install -v .\aws-iot-device-sdk-python-v2\
+  it installs awscrt 0.16.0 too.
+
+  download ca file: https://www.amazontrust.com/repository/AmazonRootCA1.pem
+  rename it to: root-CA.crt
+
+
+run python command line
+
+  python3 aws-iot-device-sdk-python-v2\samples\pubsub.py \
+        --endpoint a312345678abc4-ats.iot.us-east-2.amazonaws.com \
+        --ca_file root-CA.crt \
+        --cert MyIotThing2.cert.pem --key MyIotThing2.private.key \
+        --client_id basicPubSub --topic sdk/test/python --count 0
+
+
+
