@@ -1,0 +1,71 @@
+
+previously created:
+
+  Nexus 4 API 23 armeabi-v7a
+  Android 6.0 | arm
+  size on disk in device manager: 628 MB
+
+  Nexus 5 API 23 - armeabi-v7a google-api
+  Android 6.0 Google APIs | arm
+  size on disk in device manager: 3.6GB
+
+  Pixel_3a_API_33_x86_64
+  Android Tiramisu Google APIs | x86_64
+  size on disk in device manager: 801MB initial, used 10GB
+
+ new
+  tablet Nexus 7 (2012) API 29 Q
+  Android 10.0 | x86
+  size initial 513MB, used ...
+
+
+
+search android studio install intel HAXM
+
+    open sdk manager. click sdk tools tab. select "intel x86 emulator accelerator (haxm installer) 7.6.5".
+    click apply. 
+
+SDK Path: C:\Users\jack\AppData\Local\Android\Sdk
+
+Packages to install: - Intel x86 Emulator Accelerator (HAXM installer) (extras;intel;Hardware_Accelerated_Execution_Manager)
+
+Preparing "Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)".
+Downloading https://dl.google.com/android/repository/extras/intel/haxm-windows_v7_6_5.zip
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" ready.
+Installing Intel x86 Emulator Accelerator (HAXM installer) in C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" complete.
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" finished.
+
+Preparing "Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)".
+Warning: Package "com.android.repository.impl.generated.v2.RemotePackage@44b0bc2c" (extras;intel;Hardware_Accelerated_Execution_Manager) should be installed in 
+"C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager" but 
+it already exists.
+Installing in "C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager-2" instead.
+Downloading https://dl.google.com/android/repository/extras/intel/haxm-windows_v7_6_5.zip
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" ready.
+Installing Intel x86 Emulator Accelerator (HAXM installer) in C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager-2
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" complete.
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" finished.
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\build-tools\30.0.3\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\build-tools\33.0.1\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\emulator\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\extras\google\auto\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager-2\package.xml
+Warning: Observed package id 'extras;intel;Hardware_Accelerated_Execution_Manager' in inconsistent location 'C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager-2' (Expected 'C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager')
+Warning: Already observed package id 'extras;intel;Hardware_Accelerated_Execution_Manager' in 'C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager'. Skipping duplicate at 'C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager-2'
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\patcher\v4\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\platform-tools\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\platforms\android-32\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\platforms\android-33\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\sources\android-33\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-23\default\armeabi-v7a\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-23\google_apis\armeabi-v7a\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-33\google_apis\arm64-v8a\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-33\google_apis\x86_64\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\tools\package.xml
+Android SDK is up to date.
+Running Intel® HAXM installer
+Intel HAXM installed successfully!
+Done
+

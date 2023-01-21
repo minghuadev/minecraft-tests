@@ -1,0 +1,77 @@
+
+
+new project downloads: 
+
+Packages to install: - Android SDK Platform 32 (platforms;android-32)
+
+Preparing "Install Android SDK Platform 32 (revision: 1)".
+Downloading https://dl.google.com/android/repository/platform-32_r01.zip
+"Install Android SDK Platform 32 (revision: 1)" ready.
+Installing Android SDK Platform 32 in C:\Users\jack\AppData\Local\Android\Sdk\platforms\android-32
+"Install Android SDK Platform 32 (revision: 1)" complete.
+"Install Android SDK Platform 32 (revision: 1)" finished.
+
+
+firewall access request: 
+C:\users\jack\appdata\local\android\sdk\platform-tools\adb.exe
+
+
+gradle downloads: downloaded a lot in the sync left-tab not visible.
+Download https://services.gradle.org/distributions/gradle-7.4-bin.zip finished, took 20 s 586 ms (115.85 MB)
+(115.85 MB)
+Starting Gradle Daemon...
+Gradle Daemon started in 3 s 681 ms
+> Task :prepareKotlinBuildScriptModel UP-TO-DATE
+Checking the license for package Android SDK Tools in C:\Users\jack\AppData\Local\Android\Sdk\licenses
+License for package Android SDK Tools accepted.
+Preparing "Install Android SDK Tools (revision: 26.1.1)".
+"Install Android SDK Tools (revision: 26.1.1)" ready.
+Installing Android SDK Tools in C:\Users\jack\AppData\Local\Android\Sdk\tools
+"Install Android SDK Tools (revision: 26.1.1)" complete.
+"Install Android SDK Tools (revision: 26.1.1)" finished.
+Checking the license for package Android SDK Build-Tools 30.0.3 in C:\Users\jack\AppData\Local\Android\Sdk\licenses
+License for package Android SDK Build-Tools 30.0.3 accepted.
+Preparing "Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)".
+"Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" ready.
+Installing Android SDK Build-Tools 30.0.3 in C:\Users\jack\AppData\Local\Android\Sdk\build-tools\30.0.3
+"Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" complete.
+"Install Android SDK Build-Tools 30.0.3 (revision: 30.0.3)" finished.
+
+BUILD SUCCESSFUL in 5m 21s
+
+
+install arm image in sdk platform:
+Packages to install: - Google APIs ARM 64 v8a System Image (system-images;android-33;google_apis;arm64-v8a)
+
+Preparing "Install Google APIs ARM 64 v8a System Image (revision: 6)".
+Downloading https://dl.google.com/android/repository/sys-img/google_apis/arm64-v8a-33_r06.zip
+"Install Google APIs ARM 64 v8a System Image (revision: 6)" ready.
+Installing Google APIs ARM 64 v8a System Image in C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-33\google_apis\arm64-v8a
+"Install Google APIs ARM 64 v8a System Image (revision: 6)" complete.
+"Install Google APIs ARM 64 v8a System Image (revision: 6)" finished.
+
+
+create nexus4 armeabiv7 api23 avd:
+Packages to install: - ARM EABI v7a System Image (system-images;android-23;default;armeabi-v7a)
+
+Preparing "Install ARM EABI v7a System Image (revision: 6)".
+Downloading https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-23_r06.zip
+"Install ARM EABI v7a System Image (revision: 6)" ready.
+Installing ARM EABI v7a System Image in C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-23\default\armeabi-v7a
+"Install ARM EABI v7a System Image (revision: 6)" complete.
+"Install ARM EABI v7a System Image (revision: 6)" finished.
+
+
+create nexus5 armeabiv7 api23 google api avd: cold boot
+Packages to install: - Google APIs ARM EABI v7a System Image (system-images;android-23;google_apis;armeabi-v7a)
+
+Preparing "Install Google APIs ARM EABI v7a System Image (revision: 33)".
+Downloading https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-23_r33.zip
+Downloading https://dl.google.com/android/repository/sys-img/google_apis/armeabi-v7a-23_r33.zip
+"Install Google APIs ARM EABI v7a System Image (revision: 33)" ready.
+Installing Google APIs ARM EABI v7a System Image in C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-23\google_apis\armeabi-v7a
+"Install Google APIs ARM EABI v7a System Image (revision: 33)" complete.
+"Install Google APIs ARM EABI v7a System Image (revision: 33)" finished.
+
+
+

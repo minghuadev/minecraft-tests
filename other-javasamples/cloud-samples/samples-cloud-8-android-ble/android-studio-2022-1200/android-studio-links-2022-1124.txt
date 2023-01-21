@@ -1,0 +1,89 @@
+
+
+sha256sum:
+8235ab7aa34117c7a6c27bf30cea2f2a4043fabacd03b8b988bb689d41e09200 android-studio-2021.3.1.16-windows.zip
+# built/released sept 15 2022 from https://developer.android.com/studio/archive
+# downloaded 11/24/2022
+
+
+install sdk to c:\users\jack\appdata\local\android\sdk\
+
+
+licenses: android-sdk-license: download 
+                 sdk patch applier v4, android emulator, google apis intel x86 atom_64 system image
+                 sources for android 33, android sdk platform 33, android sdk build-tools 33.0.1
+                 android sdk platform-tools
+          intel-android-extra-license
+                 intel x86 emulator accelerator (haxm installer)
+
+downloading components:
+
+Preparing "Install SDK Patch Applier v4 (revision: 1)".
+Downloading https://dl.google.com/android/repository/3534162-studio.sdk-patcher.zip
+"Install SDK Patch Applier v4 (revision: 1)" ready.
+Installing SDK Patch Applier v4 in C:\Users\jack\AppData\Local\Android\Sdk\patcher\v4
+"Install SDK Patch Applier v4 (revision: 1)" complete.
+"Install SDK Patch Applier v4 (revision: 1)" finished.
+Preparing "Install Android Emulator (revision: 31.3.13)".
+Downloading https://dl.google.com/android/repository/emulator-windows_x64-9189900.zip
+"Install Android Emulator (revision: 31.3.13)" ready.
+Installing Android Emulator in C:\Users\jack\AppData\Local\Android\Sdk\emulator
+"Install Android Emulator (revision: 31.3.13)" complete.
+"Install Android Emulator (revision: 31.3.13)" finished.
+Preparing "Install Google APIs Intel x86 Atom_64 System Image (revision: 7)".
+Downloading https://dl.google.com/android/repository/sys-img/google_apis/x86_64-33_r07.zip
+
+Downloading https://dl.google.com/android/repository/sys-img/google_apis/x86_64-33_r07.zip
+"Install Google APIs Intel x86 Atom_64 System Image (revision: 7)" ready.
+Installing Google APIs Intel x86 Atom_64 System Image in C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-33\google_apis\x86_64
+"Install Google APIs Intel x86 Atom_64 System Image (revision: 7)" complete.
+"Install Google APIs Intel x86 Atom_64 System Image (revision: 7)" finished.
+Preparing "Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)".
+Downloading https://dl.google.com/android/repository/extras/intel/haxm-windows_v7_6_5.zip
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" ready.
+Installing Intel x86 Emulator Accelerator (HAXM installer) in C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" complete.
+"Install Intel x86 Emulator Accelerator (HAXM installer) (revision: 7.6.5)" finished.
+Preparing "Install Sources for Android 33 (revision: 1)".
+Downloading https://dl.google.com/android/repository/sources-33_r01.zip
+
+Downloading https://dl.google.com/android/repository/sources-33_r01.zip
+"Install Sources for Android 33 (revision: 1)" ready.
+Installing Sources for Android 33 in C:\Users\jack\AppData\Local\Android\Sdk\sources\android-33
+"Install Sources for Android 33 (revision: 1)" complete.
+"Install Sources for Android 33 (revision: 1)" finished.
+Preparing "Install Android SDK Platform 33 (revision: 2)".
+Downloading https://dl.google.com/android/repository/platform-33_r02.zip
+
+Downloading https://dl.google.com/android/repository/platform-33_r02.zip
+"Install Android SDK Platform 33 (revision: 2)" ready.
+Installing Android SDK Platform 33 in C:\Users\jack\AppData\Local\Android\Sdk\platforms\android-33
+"Install Android SDK Platform 33 (revision: 2)" complete.
+"Install Android SDK Platform 33 (revision: 2)" finished.
+Preparing "Install Android SDK Build-Tools 33.0.1 (revision: 33.0.1)".
+Downloading https://dl.google.com/android/repository/build-tools_r33.0.1-windows.zip
+"Install Android SDK Build-Tools 33.0.1 (revision: 33.0.1)" ready.
+Installing Android SDK Build-Tools 33.0.1 in C:\Users\jack\AppData\Local\Android\Sdk\build-tools\33.0.1
+"Install Android SDK Build-Tools 33.0.1 (revision: 33.0.1)" complete.
+"Install Android SDK Build-Tools 33.0.1 (revision: 33.0.1)" finished.
+Preparing "Install Android SDK Platform-Tools (revision: 33.0.3)".
+Downloading https://dl.google.com/android/repository/platform-tools_r33.0.3-windows.zip
+"Install Android SDK Platform-Tools (revision: 33.0.3)" ready.
+Installing Android SDK Platform-Tools in C:\Users\jack\AppData\Local\Android\Sdk\platform-tools
+"Install Android SDK Platform-Tools (revision: 33.0.3)" complete.
+"Install Android SDK Platform-Tools (revision: 33.0.3)" finished.
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\build-tools\33.0.1\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\emulator\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\extras\intel\Hardware_Accelerated_Execution_Manager\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\patcher\v4\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\platform-tools\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\platforms\android-33\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\sources\android-33\package.xml
+Parsing C:\Users\jack\AppData\Local\Android\Sdk\system-images\android-33\google_apis\x86_64\package.xml
+Android SDK is up to date.
+Running Intel® HAXM installer
+Intel® HAXM installation failed. To install Intel® HAXM follow the instructions found at: https://github.com/intel/haxm/wiki/Installation-Instructions-on-Windows
+Creating Android virtual device
+Android virtual device Pixel_3a_API_33_x86_64 was successfully created
+
+
