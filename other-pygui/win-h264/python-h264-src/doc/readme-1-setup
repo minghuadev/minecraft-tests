@@ -1,0 +1,52 @@
+
+
+python 3.8.10 on windows server 2022
+
+
+initial venv: 
+
+(penv38a1) C:\user\penv38a1>pip list
+Package    Version
+---------- -------
+pip        21.1.1
+setuptools 56.0.0
+
+(penv38a1) C:\user\penv38a1>pip install ffmpeg-python
+Collecting ffmpeg-python
+  Downloading ffmpeg_python-0.2.0-py3-none-any.whl (25 kB)
+Collecting future
+  Downloading future-0.18.3.tar.gz (840 kB)
+     |................................| 840 kB 6.4 MB/s
+Using legacy 'setup.py install' for future, since package 'wheel' is not installed.
+Installing collected packages: future, ffmpeg-python
+    Running setup.py install for future ... done
+
+(penv38a1) C:\user\penv38a1>pip install numpy
+Collecting numpy
+  Downloading numpy-1.24.1-cp38-cp38-win_amd64.whl (14.9 MB)
+     |................................| 14.9 MB ...
+Installing collected packages: numpy
+Successfully installed numpy-1.24.1
+
+(penv38a1) C:\user\penv38a1>pip install opencv-python
+Collecting opencv-python
+  Downloading opencv_python-4.7.0.68-cp37-abi3-win_amd64.whl (38.2 MB)
+     |................................| 38.2 MB 6.4 MB/s
+Requirement already satisfied: numpy>=1.17.0 in c:\user\penv38a1\lib\site-packages (from opencv-python) (1.24.1)
+Installing collected packages: opencv-python
+Successfully installed opencv-python-4.7.0.68
+
+
+ffmpeg:
+
+ref: https://phoenixnap.com/kb/ffmpeg-windows
+download full_build.7z and extract
+from gyan.dev or BtbN
+
+from gyan.dev: https://www.gyan.dev/ffmpeg/builds/
+latest git master branch build
+version: 2023-01-18-git-ba36e6ed52
+
+or BtbN: https://github.com/BtbN/FFmpeg-Builds/releases
+
+

@@ -1,0 +1,10 @@
+
+ls -l
+
+-rwxr-xr-x   129847808 Jan 19 10:56 ffmpeg.exe
+-rwxr-xr-x   129699328 Jan 19 10:56 ffplay.exe
+-rwxr-xr-x   129736192 Jan 19 10:56 ffprobe.exe
+-rw-rw-r--           0 Jan 21 15:19 list-files
+
+
+

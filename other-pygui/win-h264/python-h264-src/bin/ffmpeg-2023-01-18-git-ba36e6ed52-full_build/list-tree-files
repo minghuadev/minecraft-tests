@@ -1,0 +1,55 @@
+
+tree --charset=ascii -sF 
+
+.
+|-- [      35147]  LICENSE*
+|-- [      39728]  README.txt*
+|-- [          0]  bin/
+|   |-- [  129847808]  ffmpeg.exe*
+|   |-- [  129699328]  ffplay.exe*
+|   `-- [  129736192]  ffprobe.exe*
+|-- [          0]  doc/
+|   |-- [     109519]  bootstrap.min.css*
+|   |-- [       2494]  default.css*
+|   |-- [      46500]  developer.html*
+|   |-- [      60158]  faq.html*
+|   |-- [      15007]  fate.html*
+|   |-- [    2542968]  ffmpeg-all.html*
+|   |-- [      49350]  ffmpeg-bitstream-filters.html*
+|   |-- [     291010]  ffmpeg-codecs.html*
+|   |-- [     112633]  ffmpeg-devices.html*
+|   |-- [    1432073]  ffmpeg-filters.html*
+|   |-- [     230561]  ffmpeg-formats.html*
+|   |-- [     103372]  ffmpeg-protocols.html*
+|   |-- [      13734]  ffmpeg-resampler.html*
+|   |-- [       8296]  ffmpeg-scaler.html*
+|   |-- [      52021]  ffmpeg-utils.html*
+|   |-- [     154514]  ffmpeg.html*
+|   |-- [    2019873]  ffplay-all.html*
+|   |-- [      37645]  ffplay.html*
+|   |-- [    2035074]  ffprobe-all.html*
+|   |-- [      52821]  ffprobe.html*
+|   |-- [     115464]  general.html*
+|   |-- [      25349]  git-howto.html*
+|   |-- [       2666]  libavcodec.html*
+|   |-- [       2546]  libavdevice.html*
+|   |-- [       2612]  libavfilter.html*
+|   |-- [       2642]  libavformat.html*
+|   |-- [       3139]  libavutil.html*
+|   |-- [       3566]  libswresample.html*
+|   |-- [       3179]  libswscale.html*
+|   |-- [      28311]  mailing-list-faq.html*
+|   |-- [      10166]  nut.html*
+|   |-- [      19964]  platform.html*
+|   `-- [       6288]  style.min.css*
+|-- [          0]  list-tree-files
+`-- [          0]  presets/
+    |-- [        227]  libvpx-1080p.ffpreset*
+    |-- [        227]  libvpx-1080p50_60.ffpreset*
+    |-- [        219]  libvpx-360p.ffpreset*
+    |-- [        227]  libvpx-720p.ffpreset*
+    `-- [        227]  libvpx-720p50_60.ffpreset*
+
+3 directories, 44 files
+
+
