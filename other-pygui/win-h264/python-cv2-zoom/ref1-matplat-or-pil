@@ -1,0 +1,31 @@
+
+
+search cv2 imshow zoom
+2023-1-21
+
+
+
+https://stackoverflow.com/questions/50533775/zooming-functionality-in-opencv-imshow-in-windows
+
+
+[1] use matplot or cv2 in ref2
+
+import cv2
+import matplotlib.pyplot as plt
+
+image = cv2.imread("~\\imagedir\\image.jpg")
+plt_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+imgplot = plt.imshow(plt_image)
+
+
+[2] use PIL
+
+import cv2
+from PIL import Image
+
+img = cv2.imread('lena.jpg')
+img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+im_pil = Image.fromarray(img2)
+im_pil.show()
+
+
