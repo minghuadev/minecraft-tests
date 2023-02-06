@@ -1,0 +1,284 @@
+Microsoft Windows [Version 10.0.19045.2486]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\jack>cd \
+
+C:\>dir
+ Volume in drive C has no label.
+
+ Directory of C:\
+
+10/03/2021  12:27 AM    <DIR>          PerfLogs
+01/19/2023  06:56 PM    <DIR>          Program Files
+11/10/2022  06:53 PM    <DIR>          Program Files (x86)
+11/24/2022  06:55 PM    <DIR>          Users
+01/26/2023  07:46 PM    <DIR>          Windows
+11/24/2022  07:52 PM    <DIR>          works
+               0 File(s)              0 bytes
+               6 Dir(s)  161,858,785,280 bytes free
+
+C:\>cd works
+
+C:\works>dir
+ Volume in drive C has no label.
+
+ Directory of C:\works
+
+11/24/2022  07:52 PM    <DIR>          .
+11/24/2022  07:52 PM    <DIR>          ..
+01/20/2023  10:19 AM    <DIR>          AndroidProjs
+11/24/2022  07:07 PM    <DIR>          downloads
+11/10/2022  08:13 PM    <DIR>          idea-prjs
+11/17/2022  06:55 PM    <DIR>          penv3a81
+11/17/2022  06:53 PM    <DIR>          Python31008
+               0 File(s)              0 bytes
+               7 Dir(s)  161,858,711,552 bytes free
+
+C:\works>mkdir penv3a82jupyter
+
+C:\works>cd penv3a82jupyter
+
+C:\works\penv3a82jupyter>..\python31008\python.exe -m venv .
+
+C:\works\penv3a82jupyter>dir
+ Volume in drive C has no label.
+
+ Directory of C:\works\penv3a82jupyter
+
+01/26/2023  08:23 PM    <DIR>          .
+01/26/2023  08:23 PM    <DIR>          ..
+01/26/2023  08:23 PM    <DIR>          Include
+01/26/2023  08:23 PM    <DIR>          Lib
+01/26/2023  08:23 PM                85 pyvenv.cfg
+01/26/2023  08:24 PM    <DIR>          Scripts
+               1 File(s)             85 bytes
+               5 Dir(s)  161,835,393,024 bytes free
+
+C:\works\penv3a82jupyter>Scripts\activate.bat
+
+(penv3a82jupyter) C:\works\penv3a82jupyter>pip list
+Package    Version
+---------- -------
+pip        22.2.2
+setuptools 63.2.0
+
+[notice] A new release of pip available: 22.2.2 -> 22.3.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+
+(penv3a82jupyter) C:\works\penv3a82jupyter>pip install jupyter
+Collecting jupyter
+  Downloading jupyter-1.0.0-py2.py3-none-any.whl (2.7 kB)
+Collecting ipywidgets
+  Downloading ipywidgets-8.0.4-py3-none-any.whl (137 kB)
+     ---------------------------------------- 137.8/137.8 kB 4.1 MB/s eta 0:00:00
+Collecting qtconsole
+  Downloading qtconsole-5.4.0-py3-none-any.whl (121 kB)
+     ---------------------------------------- 121.0/121.0 kB 3.6 MB/s eta 0:00:00
+Collecting jupyter-console
+  Downloading jupyter_console-6.4.4-py3-none-any.whl (22 kB)
+Collecting nbconvert
+  Downloading nbconvert-7.2.9-py3-none-any.whl (274 kB)
+     ---------------------------------------- 274.9/274.9 kB 8.5 MB/s eta 0:00:00
+Collecting ipykernel
+  Downloading ipykernel-6.20.2-py3-none-any.whl (149 kB)
+     ---------------------------------------- 149.2/149.2 kB 4.5 MB/s eta 0:00:00
+Collecting notebook
+  Downloading notebook-6.5.2-py3-none-any.whl (439 kB)
+     ---------------------------------------- 439.1/439.1 kB 9.1 MB/s eta 0:00:00
+Collecting packaging
+  Downloading packaging-23.0-py3-none-any.whl (42 kB)
+     ---------------------------------------- 42.7/42.7 kB ? eta 0:00:00
+Collecting nest-asyncio
+  Downloading nest_asyncio-1.5.6-py3-none-any.whl (5.2 kB)
+Collecting ipython>=7.23.1
+  Downloading ipython-8.8.0-py3-none-any.whl (775 kB)
+     ---------------------------------------- 775.8/775.8 kB 6.1 MB/s eta 0:00:00
+Collecting pyzmq>=17
+  Downloading pyzmq-25.0.0-cp310-cp310-win_amd64.whl (969 kB)
+     ---------------------------------------- 969.4/969.4 kB 6.8 MB/s eta 0:00:00
+Collecting traitlets>=5.4.0
+  Downloading traitlets-5.8.1-py3-none-any.whl (116 kB)
+     ---------------------------------------- 116.8/116.8 kB 6.7 MB/s eta 0:00:00
+Collecting debugpy>=1.0
+  Downloading debugpy-1.6.6-cp310-cp310-win_amd64.whl (4.8 MB)
+     ---------------------------------------- 4.8/4.8 MB 7.3 MB/s eta 0:00:00
+Collecting comm>=0.1.1
+  Downloading comm-0.1.2-py3-none-any.whl (6.5 kB)
+Collecting jupyter-client>=6.1.12
+  Downloading jupyter_client-8.0.1-py3-none-any.whl (103 kB)
+     ---------------------------------------- 103.2/103.2 kB 5.8 MB/s eta 0:00:00
+Collecting matplotlib-inline>=0.1
+  Downloading matplotlib_inline-0.1.6-py3-none-any.whl (9.4 kB)
+Collecting psutil
+  Downloading psutil-5.9.4-cp36-abi3-win_amd64.whl (252 kB)
+     ---------------------------------------- 252.5/252.5 kB 16.1 MB/s eta 0:00:00
+Collecting tornado>=6.1
+  Downloading tornado-6.2-cp37-abi3-win_amd64.whl (425 kB)
+     ---------------------------------------- 425.3/425.3 kB 5.3 MB/s eta 0:00:00
+Collecting widgetsnbextension~=4.0
+  Downloading widgetsnbextension-4.0.5-py3-none-any.whl (2.0 MB)
+     ---------------------------------------- 2.0/2.0 MB 7.2 MB/s eta 0:00:00
+Collecting jupyterlab-widgets~=3.0
+  Downloading jupyterlab_widgets-3.0.5-py3-none-any.whl (384 kB)
+     ---------------------------------------- 384.3/384.3 kB 8.0 MB/s eta 0:00:00
+Collecting pygments
+  Downloading Pygments-2.14.0-py3-none-any.whl (1.1 MB)
+     ---------------------------------------- 1.1/1.1 MB 8.9 MB/s eta 0:00:00
+Collecting prompt-toolkit!=3.0.0,!=3.0.1,<3.1.0,>=2.0.0
+  Downloading prompt_toolkit-3.0.36-py3-none-any.whl (386 kB)
+     ---------------------------------------- 386.4/386.4 kB 8.0 MB/s eta 0:00:00
+Collecting jupyterlab-pygments
+  Downloading jupyterlab_pygments-0.2.2-py2.py3-none-any.whl (21 kB)
+Collecting jinja2>=3.0
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ---------------------------------------- 133.1/133.1 kB 4.0 MB/s eta 0:00:00
+Collecting nbformat>=5.1
+  Downloading nbformat-5.7.3-py3-none-any.whl (78 kB)
+     ---------------------------------------- 78.1/78.1 kB ? eta 0:00:00
+Collecting markupsafe>=2.0
+  Downloading MarkupSafe-2.1.2-cp310-cp310-win_amd64.whl (16 kB)
+Collecting mistune<3,>=2.0.3
+  Downloading mistune-2.0.4-py2.py3-none-any.whl (24 kB)
+Collecting bleach
+  Downloading bleach-6.0.0-py3-none-any.whl (162 kB)
+     ---------------------------------------- 162.5/162.5 kB 9.5 MB/s eta 0:00:00
+Collecting pandocfilters>=1.4.1
+  Downloading pandocfilters-1.5.0-py2.py3-none-any.whl (8.7 kB)
+Collecting tinycss2
+  Downloading tinycss2-1.2.1-py3-none-any.whl (21 kB)
+Collecting beautifulsoup4
+  Downloading beautifulsoup4-4.11.1-py3-none-any.whl (128 kB)
+     ---------------------------------------- 128.2/128.2 kB 7.4 MB/s eta 0:00:00
+Collecting jupyter-core>=4.7
+  Downloading jupyter_core-5.1.5-py3-none-any.whl (93 kB)
+     ---------------------------------------- 93.5/93.5 kB 5.6 MB/s eta 0:00:00
+Collecting nbclient>=0.5.0
+  Downloading nbclient-0.7.2-py3-none-any.whl (71 kB)
+     ---------------------------------------- 72.0/72.0 kB 3.9 MB/s eta 0:00:00
+Collecting defusedxml
+  Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+Collecting argon2-cffi
+  Downloading argon2_cffi-21.3.0-py3-none-any.whl (14 kB)
+Collecting nbclassic>=0.4.7
+  Downloading nbclassic-0.5.1-py3-none-any.whl (10.0 MB)
+     ---------------------------------------- 10.0/10.0 MB 8.2 MB/s eta 0:00:00
+Collecting prometheus-client
+  Downloading prometheus_client-0.16.0-py3-none-any.whl (122 kB)
+     ---------------------------------------- 122.5/122.5 kB 3.6 MB/s eta 0:00:00
+Collecting Send2Trash>=1.8.0
+  Downloading Send2Trash-1.8.0-py3-none-any.whl (18 kB)
+Collecting ipython-genutils
+  Downloading ipython_genutils-0.2.0-py2.py3-none-any.whl (26 kB)
+Collecting terminado>=0.8.3
+  Downloading terminado-0.17.1-py3-none-any.whl (17 kB)
+Collecting qtpy>=2.0.1
+  Downloading QtPy-2.3.0-py3-none-any.whl (83 kB)
+     ---------------------------------------- 83.6/83.6 kB 4.6 MB/s eta 0:00:00
+Collecting jedi>=0.16
+  Downloading jedi-0.18.2-py2.py3-none-any.whl (1.6 MB)
+     ---------------------------------------- 1.6/1.6 MB 7.7 MB/s eta 0:00:00
+Collecting stack-data
+  Downloading stack_data-0.6.2-py3-none-any.whl (24 kB)
+Collecting decorator
+  Downloading decorator-5.1.1-py3-none-any.whl (9.1 kB)
+Collecting colorama
+  Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Collecting pickleshare
+  Downloading pickleshare-0.7.5-py2.py3-none-any.whl (6.9 kB)
+Collecting backcall
+  Downloading backcall-0.2.0-py2.py3-none-any.whl (11 kB)
+Collecting python-dateutil>=2.8.2
+  Downloading python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+     ---------------------------------------- 247.7/247.7 kB 7.7 MB/s eta 0:00:00
+Collecting pywin32>=1.0
+  Downloading pywin32-305-cp310-cp310-win_amd64.whl (12.1 MB)
+     ---------------------------------------- 12.1/12.1 MB 8.1 MB/s eta 0:00:00
+Collecting platformdirs>=2.5
+  Downloading platformdirs-2.6.2-py3-none-any.whl (14 kB)
+Collecting notebook-shim>=0.1.0
+  Downloading notebook_shim-0.2.2-py3-none-any.whl (13 kB)
+Collecting jupyter-server>=1.17.0
+  Downloading jupyter_server-2.1.0-py3-none-any.whl (365 kB)
+     ---------------------------------------- 365.2/365.2 kB 11.1 MB/s eta 0:00:00
+Collecting jsonschema>=2.6
+  Downloading jsonschema-4.17.3-py3-none-any.whl (90 kB)
+     ---------------------------------------- 90.4/90.4 kB 5.0 MB/s eta 0:00:00
+Collecting fastjsonschema
+  Downloading fastjsonschema-2.16.2-py3-none-any.whl (22 kB)
+Collecting wcwidth
+  Downloading wcwidth-0.2.6-py2.py3-none-any.whl (29 kB)
+Collecting pywinpty>=1.1.0
+  Downloading pywinpty-2.0.10-cp310-none-win_amd64.whl (1.4 MB)
+     ---------------------------------------- 1.4/1.4 MB 8.1 MB/s eta 0:00:00
+Collecting argon2-cffi-bindings
+  Downloading argon2_cffi_bindings-21.2.0-cp36-abi3-win_amd64.whl (30 kB)
+Collecting soupsieve>1.2
+  Downloading soupsieve-2.3.2.post1-py3-none-any.whl (37 kB)
+Collecting webencodings
+  Downloading webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+Collecting six>=1.9.0
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting parso<0.9.0,>=0.8.0
+  Downloading parso-0.8.3-py2.py3-none-any.whl (100 kB)
+     ---------------------------------------- 100.8/100.8 kB ? eta 0:00:00
+Collecting pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0
+  Downloading pyrsistent-0.19.3-cp310-cp310-win_amd64.whl (62 kB)
+     ---------------------------------------- 62.7/62.7 kB ? eta 0:00:00
+Collecting attrs>=17.4.0
+  Downloading attrs-22.2.0-py3-none-any.whl (60 kB)
+     ---------------------------------------- 60.0/60.0 kB 3.1 MB/s eta 0:00:00
+Collecting jupyter-server-terminals
+  Downloading jupyter_server_terminals-0.4.4-py3-none-any.whl (13 kB)
+Collecting anyio<4,>=3.1.0
+  Downloading anyio-3.6.2-py3-none-any.whl (80 kB)
+     ---------------------------------------- 80.6/80.6 kB 4.4 MB/s eta 0:00:00
+Collecting jupyter-events>=0.4.0
+  Downloading jupyter_events-0.6.3-py3-none-any.whl (18 kB)
+Collecting websocket-client
+  Downloading websocket_client-1.5.0-py3-none-any.whl (55 kB)
+     ---------------------------------------- 55.9/55.9 kB 1.5 MB/s eta 0:00:00
+Collecting cffi>=1.0.1
+  Downloading cffi-1.15.1-cp310-cp310-win_amd64.whl (179 kB)
+     ---------------------------------------- 179.1/179.1 kB 5.4 MB/s eta 0:00:00
+Collecting pure-eval
+  Downloading pure_eval-0.2.2-py3-none-any.whl (11 kB)
+Collecting asttokens>=2.1.0
+  Downloading asttokens-2.2.1-py2.py3-none-any.whl (26 kB)
+Collecting executing>=1.2.0
+  Downloading executing-1.2.0-py2.py3-none-any.whl (24 kB)
+Collecting idna>=2.8
+  Downloading idna-3.4-py3-none-any.whl (61 kB)
+     ---------------------------------------- 61.5/61.5 kB 3.4 MB/s eta 0:00:00
+Collecting sniffio>=1.1
+  Downloading sniffio-1.3.0-py3-none-any.whl (10 kB)
+Collecting pycparser
+  Downloading pycparser-2.21-py2.py3-none-any.whl (118 kB)
+     ---------------------------------------- 118.7/118.7 kB 6.8 MB/s eta 0:00:00
+Collecting rfc3339-validator
+  Downloading rfc3339_validator-0.1.4-py2.py3-none-any.whl (3.5 kB)
+Collecting pyyaml>=5.3
+  Downloading PyYAML-6.0-cp310-cp310-win_amd64.whl (151 kB)
+     ---------------------------------------- 151.7/151.7 kB 9.4 MB/s eta 0:00:00
+Collecting python-json-logger>=2.0.4
+  Downloading python_json_logger-2.0.4-py3-none-any.whl (7.8 kB)
+Collecting rfc3986-validator>=0.1.1
+  Downloading rfc3986_validator-0.1.1-py2.py3-none-any.whl (4.2 kB)
+Collecting webcolors>=1.11
+  Downloading webcolors-1.12-py3-none-any.whl (9.9 kB)
+Collecting fqdn
+  Downloading fqdn-1.5.1-py3-none-any.whl (9.1 kB)
+Collecting isoduration
+  Downloading isoduration-20.11.0-py3-none-any.whl (11 kB)
+Collecting uri-template
+  Downloading uri_template-1.2.0-py3-none-any.whl (10 kB)
+Collecting jsonpointer>1.13
+  Downloading jsonpointer-2.3-py2.py3-none-any.whl (7.8 kB)
+Collecting arrow>=0.15.0
+  Downloading arrow-1.2.3-py3-none-any.whl (66 kB)
+     ---------------------------------------- 66.4/66.4 kB ? eta 0:00:00
+Installing collected packages: webencodings, wcwidth, Send2Trash, pywin32, pure-eval, pickleshare, mistune, ipython-genutils, fastjsonschema, executing, backcall, widgetsnbextension, websocket-client, webcolors, uri-template, traitlets, tornado, tinycss2, soupsieve, sniffio, six, rfc3986-validator, pyzmq, pyyaml, pywinpty, python-json-logger, pyrsistent, pygments, pycparser, psutil, prompt-toolkit, prometheus-client, platformdirs, parso, pandocfilters, packaging, nest-asyncio, markupsafe, jupyterlab-widgets, jupyterlab-pygments, jsonpointer, idna, fqdn, defusedxml, decorator, debugpy, colorama, attrs, terminado, rfc3339-validator, qtpy, python-dateutil, matplotlib-inline, jupyter-core, jsonschema, jinja2, jedi, comm, cffi, bleach, beautifulsoup4, asttokens, anyio, stack-data, nbformat, jupyter-server-terminals, jupyter-client, arrow, argon2-cffi-bindings, nbclient, isoduration, ipython, argon2-cffi, nbconvert, ipykernel, qtconsole, jupyter-events, jupyter-console, ipywidgets, jupyter-server, notebook-shim, nbclassic, notebook, jupyter
+Successfully installed Send2Trash-1.8.0 anyio-3.6.2 argon2-cffi-21.3.0 argon2-cffi-bindings-21.2.0 arrow-1.2.3 asttokens-2.2.1 attrs-22.2.0 backcall-0.2.0 beautifulsoup4-4.11.1 bleach-6.0.0 cffi-1.15.1 colorama-0.4.6 comm-0.1.2 debugpy-1.6.6 decorator-5.1.1 defusedxml-0.7.1 executing-1.2.0 fastjsonschema-2.16.2 fqdn-1.5.1 idna-3.4 ipykernel-6.20.2 ipython-8.8.0 ipython-genutils-0.2.0 ipywidgets-8.0.4 isoduration-20.11.0 jedi-0.18.2 jinja2-3.1.2 jsonpointer-2.3 jsonschema-4.17.3 jupyter-1.0.0 jupyter-client-8.0.1 jupyter-console-6.4.4 jupyter-core-5.1.5 jupyter-events-0.6.3 jupyter-server-2.1.0 jupyter-server-terminals-0.4.4 jupyterlab-pygments-0.2.2 jupyterlab-widgets-3.0.5 markupsafe-2.1.2 matplotlib-inline-0.1.6 mistune-2.0.4 nbclassic-0.5.1 nbclient-0.7.2 nbconvert-7.2.9 nbformat-5.7.3 nest-asyncio-1.5.6 notebook-6.5.2 notebook-shim-0.2.2 packaging-23.0 pandocfilters-1.5.0 parso-0.8.3 pickleshare-0.7.5 platformdirs-2.6.2 prometheus-client-0.16.0 prompt-toolkit-3.0.36 psutil-5.9.4 pure-eval-0.2.2 pycparser-2.21 pygments-2.14.0 pyrsistent-0.19.3 python-dateutil-2.8.2 python-json-logger-2.0.4 pywin32-305 pywinpty-2.0.10 pyyaml-6.0 pyzmq-25.0.0 qtconsole-5.4.0 qtpy-2.3.0 rfc3339-validator-0.1.4 rfc3986-validator-0.1.1 six-1.16.0 sniffio-1.3.0 soupsieve-2.3.2.post1 stack-data-0.6.2 terminado-0.17.1 tinycss2-1.2.1 tornado-6.2 traitlets-5.8.1 uri-template-1.2.0 wcwidth-0.2.6 webcolors-1.12 webencodings-0.5.1 websocket-client-1.5.0 widgetsnbextension-4.0.5
+
+[notice] A new release of pip available: 22.2.2 -> 22.3.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+
