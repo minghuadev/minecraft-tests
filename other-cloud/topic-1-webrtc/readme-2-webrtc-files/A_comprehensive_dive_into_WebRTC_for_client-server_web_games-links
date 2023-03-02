@@ -52,7 +52,6 @@ $ cat .gitmodules
 
 $ ls depot_tools/
 $ git submodule update
-$ git submodule update
 Cloning into '~/webrtc--libwebrtc/depot_tools'...
 Submodule path 'depot_tools': checked out '33e88a4e19aa1eb306fe66431e8b0621773eb66c'
 
