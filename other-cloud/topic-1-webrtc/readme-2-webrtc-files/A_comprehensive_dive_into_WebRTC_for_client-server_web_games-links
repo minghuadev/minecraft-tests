@@ -1,0 +1,59 @@
+
+2023-3-2:
+
+https://blog.brkho.com/2017/03/15/dive-into-client-server-web-games-webrtc/
+
+
+
+commands to checkout the build scripts repo and set it up to the hash that the blog suggests:
+
+$ git clone https://github.com/awsproj23/webrtc--libwebrtc
+$ cd webrtc--libwebrtc
+$ git checkout 83814ef6f3
+$ git log -1
+commit 83814ef6f3e317cb816476ed081fe4f984a92d25 (HEAD)
+Author: Axel Isouard <axel@isouard.fr>
+Date:   Tue Feb 21 19:51:03 2017 +0100
+    Rename DEPOTTOOLS_GCLIENT_EXECUTABLE to GCLIENT_EXECUTABLE
+
+$ vi CMakeModules/Version.cmake
+$ git checkout -b develop-minghuadev
+
+$ git log -1 -p
+commit 363cda17d8e46e9b70eb0b6760b2eacd5f1005b6 (HEAD -> develop-minghuadev)
+Author: minghuadev <minghuadev@users.noreply.github.com>
+Date:   Thu Mar 2 17:25:34 2023 +0000
+
+    adapt for A_comprehensive_dive_into_WebRTC_for_client-server_web_games-beep_boop
+
+diff --git a/CMakeModules/Version.cmake b/CMakeModules/Version.cmake
+index 562689a..6142c42 100644
+--- a/CMakeModules/Version.cmake
++++ b/CMakeModules/Version.cmake
+@@ -5,9 +5,9 @@ set(LIBWEBRTC_MAJOR_VERSION 0)
+ set(LIBWEBRTC_MINOR_VERSION 0)
+ set(LIBWEBRTC_PATCH_VERSION 1)
+ set(LIBWEBRTC_BUILD_VERSION -rc.4)
+-set(LIBWEBRTC_WEBRTC_REVISION ae2551232b5249e38298a50f2d9a64d3c862db00)
++set(LIBWEBRTC_WEBRTC_REVISION 3dda246b69df7ff489660e0aee0378210104240b)
+
+ set(LIBWEBRTC_API_VERSION
+     "${LIBWEBRTC_MAJOR_VERSION}.${LIBWEBRTC_MINOR_VERSION}.${LIBWEBRTC_PATCH_VERSION}")
+ set(LIBWEBRTC_VERSION
+-    ${LIBWEBRTC_API_VERSION}${LIBWEBRTC_BUILD_VERSION})
+\ No newline at end of file
++    ${LIBWEBRTC_API_VERSION}${LIBWEBRTC_BUILD_VERSION})
+
+$ git submodule init
+$ cat .gitmodules
+[submodule "depot_tools"]
+        path = depot_tools
+        url = https://chromium.googlesource.com/chromium/tools/depot_tools.git
+
+$ ls depot_tools/
+$ git submodule update
+$ git submodule update
+Cloning into '~/webrtc--libwebrtc/depot_tools'...
+Submodule path 'depot_tools': checked out '33e88a4e19aa1eb306fe66431e8b0621773eb66c'
+
+
