@@ -1,0 +1,23 @@
+
+
+2023-3-4
+
+
+search digikey: uvc camera
+
+  DfRobot lattePanda 5MP SEN0286: 
+      UVC
+      ubuntu guide: https://help.ubuntu.com/community/UVC
+                    add to /etc/modprobe.d/uvcvideo.conf: 
+                          options uvcvideo nodrop=1
+
+  DfRobot vga FIT0701: 
+      not UVC
+
+  SparkFun DEV-18440 ARDUCAM 5MP PLUS OV5642 MINI CAM:
+      i2c for configuration
+      spi for command and data
+      qsxvga 2560x2048 7.5fps jpeg
+      vga preview 15fps
+
+
