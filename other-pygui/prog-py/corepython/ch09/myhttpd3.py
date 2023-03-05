@@ -18,6 +18,7 @@ class MyHandler(BaseHTTPRequestHandler):
 
 def main():
     try:
+        # the instance of MyHandler will keep the server in its self.server
         server = HTTPServer(('', 80), MyHandler)
         print('Welcome to the machine...')
 	print('Press ^C once or twice to quit')
@@ -25,6 +26,9 @@ def main():
     except KeyboardInterrupt:
         print('^C received, shutting down server')
         server.socket.close()
+        # same as: server.server_close(). will trigger an exception in server.
 
 if __name__ == '__main__':
     main()
+
+
