@@ -22,8 +22,10 @@ Send a POST request::
     curl -d "foo=bar&bin=baz" http://localhost
 
 """
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-import SocketServer
+
+
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
 
 class S(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -33,7 +35,7 @@ class S(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self._set_headers()
-        self.wfile.write("<html><body><h1>hi!</h1></body></html>")
+        self.wfile.write(b"<html><body><h1>hi!</h1></body></html>")
 
     def do_HEAD(self):
         self._set_headers()
@@ -42,15 +44,17 @@ class S(BaseHTTPRequestHandler):
         # Doesn't do anything with posted data
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         post_data = self.rfile.read(content_length) # <--- Gets the data itself
-        print post_data # <-- Print post data
-        self.wfile.write("<html><body><h1>POST!</h1><pre>" + post_data + "</pre></body></html>")
+        print(post_data) # <-- Print post data
+        self.wfile.write(b"<html><body><h1>POST!</h1><pre>" + post_data + b"</pre></body></html>")
         self._set_headers()
+
 
 def run(server_class=HTTPServer, handler_class=S, port=80):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print 'Starting httpd...'
+    print('Starting httpd... on port ', port)
     httpd.serve_forever()
+
 
 if __name__ == "__main__":
     from sys import argv
@@ -59,6 +63,7 @@ if __name__ == "__main__":
         run(port=int(argv[1]))
     else:
         run()
+
 
 
 
