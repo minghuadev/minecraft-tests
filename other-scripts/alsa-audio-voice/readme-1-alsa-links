@@ -1,0 +1,17 @@
+
+search alsa add a filter
+  https://unix.stackexchange.com/questions/326940/how-do-i-send-my-audio-output-through-a-high-pass-filter-in-alsa
+  https://stackoverflow.com/questions/7002423/how-to-mix-multiple-pcm-streams-using-alsa/40823928#40823928
+  https://alsa.opensrc.org/MultipleCards
+  https://www.volkerschatz.com/noise/alsa.html
+
+
+search opensource echo cancelation
+  https://github.com/voice-engine/ec
+
+
+search speexdsp arm cross build
+  https://stackoverflow.com/questions/54581564/compiling-speex-and-speexdsp-for-android-64bit-architectures-results-in-error
+
+
+
