@@ -31,3 +31,12 @@ pkgv="1.6.9"
 find_dep(pkgn, pkgv)
 
 
+# result: 
+# package:  rpyc 4.1.5
+# resp:  <Response [200]>
+# deps:  ['plumbum']
+# package:  plumbum 1.6.9
+# resp:  <Response [200]>
+# deps:  None
+
+
