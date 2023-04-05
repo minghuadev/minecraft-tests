@@ -1,0 +1,44 @@
+
+pixel 6a initial apps
+  apr 5 2023
+    build number SD2A.220123.051.A3, android 12
+    see all 33 apps, actually it is 34 apps: 
+        Android Auto  --disable d01
+        Android System WebView  --ok-on 01
+        Calculator  --ok-on 02
+        Calendar  --ok-on 03
+        Camera  --ok-on 04
+        Chrome  --ok-on 05
+        Clock  --ok-on 06
+        Contacts  --ok-on 07
+        Digital Wellbeing  --ok-on 08
+        Drive  --disable d02
+
+        Files  --ok-on 09
+        Files by Google  --ok-on 10
+        Gboard  --ok-on 11
+        Gmail  --disable d03
+        Google  --disable d04
+        Google Play services  --ok-on 12
+        Google Play Store  --ok-on 13
+        Google TV  --disable d05
+        Live Transcribe & Sound Notification  --disable d06
+        Maps  --disable d07
+
+        Messages  --ok-on 14
+        Personal Safety  --disable d08
+        Phone  --ok-on 15
+        Photos  --ok-on 16
+        Pixel Launcher  --ok-on 17
+        Pixel Tips  --ok-on 18
+        Recorder  --disable d09
+        Settings  --ok-on 19
+        SIM Toolkit  --ok-on 20
+        Sound Amplifier  --disable d10
+        Voice Access  --disable d11
+
+        Wireless emergency alerts  --ok-on 21
+        YouTube  --disable  d12
+        Youtube Music  --disable d13
+
+
