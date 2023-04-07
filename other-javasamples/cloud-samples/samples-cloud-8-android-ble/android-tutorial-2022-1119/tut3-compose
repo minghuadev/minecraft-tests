@@ -1,0 +1,25 @@
+
+https://developer.android.com/courses/android-basics-compose/course
+2023-4-7
+
+  tabs: docs/guides, left-menu: app-basics/build-your-first-app, 
+        main pane: title: build your first Android app
+                   link: https://developer.android.com/training/basics/firstapp
+
+                   the first codelab: create a hello world app
+                                      note: about compose annotation and preview
+                   the 2nd codelab: start the android basics course
+                                    here...
+
+  title: Android Basics with Compose
+  units:  1-your first android app, 2-building app ui, 
+          3-display lists and use material design, 
+          4-navigation and app architecture, 
+          5-connect to the internet, 6-data persistence, 
+          7-work manager, 8-compose with views
+
+unit 1 pathway 1: introduction to kotlin
+unit 1 pathway 2: set up android studio
+uint 1 pathway 3: build a basic layout
+
+
