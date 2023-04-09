@@ -1,0 +1,305 @@
+
+
+
+~/Android-Scanner-Compat-Library
+$ git log -1 --stat
+commit 9e4094195ae2ea44617eca851ad208dda8143ec6 (HEAD -> master, origin/master, origin/HEAD)
+Author: Aleksander Nowakowski <aleksander.nowakowski@nordicsemi.no>
+Date:   Wed Dec 15 15:22:17 2021 +0100
+
+    Dependencies updated
+
+ build.gradle         | 2 +-
+ scanner/build.gradle | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+~/Android-Scanner-Compat-Library
+$ git diff
+diff --git a/scanner/src/main/java/no/nordicsemi/android/support/v18/scanner/BluetoothLeScannerImplOreo.java b/scanner/src/main/java/no/nordicsemi/android/support/v18/scanner/BluetoothLeScannerImplOreo.java
+index 8c9dd7f..994b3f3 100644
+--- a/scanner/src/main/java/no/nordicsemi/android/support/v18/scanner/BluetoothLeScannerImplOreo.java
++++ b/scanner/src/main/java/no/nordicsemi/android/support/v18/scanner/BluetoothLeScannerImplOreo.java
+@@ -33,6 +33,7 @@ import android.os.Handler;
+
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
++import android.util.Log;
+
+ import java.util.ArrayList;
+ import java.util.Collections;
+@@ -275,11 +276,31 @@ import java.util.List;
+                // Get data as bytes
+                final byte[] data = result.getScanRecord() != null ? result.getScanRecord().getBytes() : null;
+                // And return the v18.ScanResult
+-               return new ScanResult(result.getDevice(), eventType, result.getPrimaryPhy(),
++               ScanRecord rcd = ScanRecord.parseFromBytes(data);
++               int dlen = data.length;
++               String lgc = "";
++               if ( ! result.isLegacy() ) lgc += " isLegacy=" + (result.isLegacy() ? "yes,":"no, ");
++               if (dlen >= 6 && data[0] == 2 && data[1] == 1 && data[2] == 30 && data[3] == 17 && data[4] == 7 && data[5] == 65 ) {
++                       Log.w("MARKER____ ScanResult",
++                                       lgc + " datalen=" + String.valueOf(dlen) + " " + rcd.toString() );
++               } else {
++                       String data_header = " : ";
++                       if ( dlen > 0 ) data_header += Integer.toHexString(data[0]);
++                       if ( dlen > 1 ) data_header += ", " + Integer.toHexString(data[1]);
++                       if ( dlen > 2 ) data_header += ", " + Integer.toHexString(data[2]);
++                       if ( dlen > 3 ) data_header += ", " + Integer.toHexString(data[3]);
++                       if ( dlen > 4 ) data_header += ", " + Integer.toHexString(data[4]);
++                       if ( dlen > 5 ) data_header += ", " + Integer.toHexString(data[5]);
++                       if ( dlen > 6 ) data_header += ", " + Integer.toHexString(data[6]);
++                       Log.w("MARKER____ ScanResult",
++                                       lgc + " datalen=" + String.valueOf(dlen) + data_header + " " + rcd.toString() );
++               }
++               ScanResult rst = new ScanResult(result.getDevice(), eventType, result.getPrimaryPhy(),
+                                result.getSecondaryPhy(), result.getAdvertisingSid(),
+                                result.getTxPower(), result.getRssi(),
+                                result.getPeriodicAdvertisingInterval(),
+-                               ScanRecord.parseFromBytes(data), result.getTimestampNanos());
++                               rcd, result.getTimestampNanos());
++               return rst;
+        }
+
+        /* package */ static class PendingIntentExecutorWrapper extends ScanCallbackWrapper {
+diff --git a/scanner/src/main/java/no/nordicsemi/android/support/v18/scanner/ScanRecord.java b/scanner/src/main/java/no/nordicsemi/android/support/v18/scanner/ScanRecord.java
+index 3818756..b5fea89 100644
+--- a/scanner/src/main/java/no/nordicsemi/android/support/v18/scanner/ScanRecord.java
++++ b/scanner/src/main/java/no/nordicsemi/android/support/v18/scanner/ScanRecord.java
+@@ -79,6 +79,9 @@ public final class ScanRecord {
+        // Raw bytes of scan record.
+        private final byte[] bytes;
+
++       // parsed bytes
++       private final int parsedSize;
++
+        /**
+         * Returns the advertising flags indicating the discoverable mode and capability of the device.
+         * Returns -1 if the flag field is not set.
+@@ -169,7 +172,7 @@ public final class ScanRecord {
+                                           @Nullable final SparseArray<byte[]> manufacturerData,
+                                           @Nullable final Map<ParcelUuid, byte[]> serviceData,
+                                           final int advertiseFlags, final int txPowerLevel,
+-                                          final String localName, final byte[] bytes) {
++                                          final String localName, final byte[] bytes, final int parsed_size) {
+                this.serviceUuids = serviceUuids;
+                this.manufacturerSpecificData = manufacturerData;
+                this.serviceData = serviceData;
+@@ -177,6 +180,7 @@ public final class ScanRecord {
+                this.advertiseFlags = advertiseFlags;
+                this.txPowerLevel = txPowerLevel;
+                this.bytes = bytes;
++               this.parsedSize = parsed_size;
+        }
+
+        /**
+@@ -286,13 +290,13 @@ public final class ScanRecord {
+                        }
+
+                        return new ScanRecord(serviceUuids, manufacturerData, serviceData,
+-                                       advertiseFlag, txPowerLevel, localName, scanRecord);
++                                       advertiseFlag, txPowerLevel, localName, scanRecord, currentPos);
+                } catch (final Exception e) {
+                        Log.e(TAG, "unable to parse scan record: " + Arrays.toString(scanRecord));
+                        // As the record is invalid, ignore all the parsed results for this packet
+                        // and return an empty record with raw scanRecord bytes in results
+                        return new ScanRecord(null, null, null,
+-                                       -1, Integer.MIN_VALUE, null, scanRecord);
++                                       -1, Integer.MIN_VALUE, null, scanRecord, 0);
+                }
+        }
+
+@@ -313,7 +317,9 @@ public final class ScanRecord {
+                return "ScanRecord [advertiseFlags=" + advertiseFlags + ", serviceUuids=" + serviceUuids
+                                + ", manufacturerSpecificData=" + BluetoothLeUtils.toString(manufacturerSpecificData)
+                                + ", serviceData=" + BluetoothLeUtils.toString(serviceData)
+-                               + ", txPowerLevel=" + txPowerLevel + ", deviceName=" + deviceName + "]";
++                               + ", txPowerLevel=" + txPowerLevel + ", deviceName=" + deviceName
++                               + ", parsedSize=" + parsedSize
++                               + "]";
+        }
+
+        // Parse service UUIDs.
+
+
+
+~/Android-BLE-Library
+$ git log -1 --stat
+commit 122319c029746f86e210874da642d5477b003817 (HEAD -> master, origin/master, origin/HEAD)
+Author: Sylwester Zieliński <sylwester.zielinski@nordicsemi.no>
+Date:   Tue Oct 26 10:14:53 2021 +0200
+
+    Add record to .gitignore
+
+ .gitignore | 149 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 145 insertions(+), 4 deletions(-)
+
+~/Android-BLE-Library
+$ git diff
+diff --git a/ble/src/main/java/no/nordicsemi/android/ble/BleManager.java b/ble/src/main/java/no/nordicsemi/android/ble/BleManager.java
+index c907c59..0f031b2 100644
+--- a/ble/src/main/java/no/nordicsemi/android/ble/BleManager.java
++++ b/ble/src/main/java/no/nordicsemi/android/ble/BleManager.java
+@@ -547,8 +547,9 @@ public abstract class BleManager implements ILogger {
+                if (device == null) {
+                        throw new NullPointerException("Bluetooth device not specified");
+                }
++               log(Log.WARN, "MARKER____ BleManager::connect()");
+                return Request.connect(device)
+-                               .usePreferredPhy(phy)
++                               .usePreferredPhy(phy) /* marker */
+                                .useAutoConnect(shouldAutoConnect())
+                                .setRequestHandler(requestHandler);
+        }
+diff --git a/ble/src/main/java/no/nordicsemi/android/ble/BleManagerHandler.java b/ble/src/main/java/no/nordicsemi/android/ble/BleManagerHandler.java
+index 4e5c5d5..d617704 100644
+--- a/ble/src/main/java/no/nordicsemi/android/ble/BleManagerHandler.java
++++ b/ble/src/main/java/no/nordicsemi/android/ble/BleManagerHandler.java
+@@ -577,6 +577,8 @@ abstract class BleManagerHandler extends RequestHandler {
+                        final int preferredPhy = connectRequest.getPreferredPhy();
+                        log(Log.DEBUG, "gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, "
+                                        + ParserUtils.phyMaskToString(preferredPhy) + ")");
++                       log(Log.WARN, "MARKER____ BleManagerHandler::internalConnect() gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, "
++                                       + ParserUtils.phyMaskToString(preferredPhy) + ", handle = ...)");
+
+                        bluetoothGatt = device.connectGatt(context, false, gattCallback,
+                                        BluetoothDevice.TRANSPORT_LE, preferredPhy, handler);
+@@ -585,6 +587,8 @@ abstract class BleManagerHandler extends RequestHandler {
+                        final int preferredPhy = connectRequest.getPreferredPhy();
+                        log(Log.DEBUG, "gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, "
+                                        + ParserUtils.phyMaskToString(preferredPhy) + ")");
++                       log(Log.WARN, "MARKER____ BleManagerHandler::internalConnect() gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, "
++                                       + ParserUtils.phyMaskToString(preferredPhy) + ")");
+                        // A variant of connectGatt with Handled can't be used here.
+                        // Check https://github.com/NordicSemiconductor/Android-BLE-Library/issues/54
+                        // This bug specifically occurs in SDK 26 and is fixed in SDK 27
+@@ -592,10 +596,12 @@ abstract class BleManagerHandler extends RequestHandler {
+                                        BluetoothDevice.TRANSPORT_LE, preferredPhy/*, handler*/);
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        log(Log.DEBUG, "gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)");
++                       log(Log.WARN, "MARKER____ BleManagerHandler::internalConnect() gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)");
+                        bluetoothGatt = device.connectGatt(context, false, gattCallback,
+                                        BluetoothDevice.TRANSPORT_LE);
+                } else {
+                        log(Log.DEBUG, "gatt = device.connectGatt(autoConnect = false)");
++                       log(Log.WARN, "MARKER____ BleManagerHandler::internalConnect() gatt = device.connectGatt(autoConnect = false)");
+                        bluetoothGatt = device.connectGatt(context, false, gattCallback);
+                }
+                return true;
+@@ -1103,6 +1109,9 @@ abstract class BleManagerHandler extends RequestHandler {
+                log(Log.DEBUG, "gatt.setPreferredPhy(" + ParserUtils.phyMaskToString(txPhy) + ", "
+                                + ParserUtils.phyMaskToString(rxPhy) + ", coding option = "
+                                + ParserUtils.phyCodedOptionToString(phyOptions) + ")");
++               log(Log.WARN, "MARKER____ BleManagerHandler::inernalSetPreferredPhy gatt.setPreferredPhy(" + ParserUtils.phyMaskToString(txPhy) + ", "
++                               + ParserUtils.phyMaskToString(rxPhy) + ", coding option = "
++                               + ParserUtils.phyCodedOptionToString(phyOptions) + ")");
+                gatt.setPreferredPhy(txPhy, rxPhy, phyOptions);
+                return true;
+        }
+diff --git a/ble/src/main/java/no/nordicsemi/android/ble/ConnectRequest.java b/ble/src/main/java/no/nordicsemi/android/ble/ConnectRequest.java
+index c758f73..0048fd1 100644
+--- a/ble/src/main/java/no/nordicsemi/android/ble/ConnectRequest.java
++++ b/ble/src/main/java/no/nordicsemi/android/ble/ConnectRequest.java
+@@ -226,6 +226,7 @@ public class ConnectRequest extends TimeoutableRequest {
+         */
+        public ConnectRequest usePreferredPhy(@PhyMask final int phy) {
+                this.preferredPhy = phy;
++               this.preferredPhy = PhyRequest.PHY_LE_1M_MASK; /* marker */
+                return this;
+        }
+
+diff --git a/ble/src/main/java/no/nordicsemi/android/ble/PhyRequest.java b/ble/src/main/java/no/nordicsemi/android/ble/PhyRequest.java
+index c955ec4..07b110c 100644
+--- a/ble/src/main/java/no/nordicsemi/android/ble/PhyRequest.java
++++ b/ble/src/main/java/no/nordicsemi/android/ble/PhyRequest.java
+@@ -92,6 +92,11 @@ public final class PhyRequest extends SimpleValueRequest<PhyCallback> implements
+                        rxPhy = PHY_LE_1M_MASK;
+                if (phyOptions < PHY_OPTION_NO_PREFERRED || phyOptions > PHY_OPTION_S8)
+                        phyOptions = PHY_OPTION_NO_PREFERRED;
++
++               txPhy = PhyRequest.PHY_LE_1M_MASK;
++               rxPhy = PhyRequest.PHY_LE_1M_MASK;
++               phyOptions = PHY_OPTION_NO_PREFERRED; /* marker */
++
+                this.txPhy = txPhy;
+                this.rxPhy = rxPhy;
+                this.phyOptions = phyOptions;
+diff --git a/ble/src/main/java/no/nordicsemi/android/ble/annotation/PhyMask.java b/ble/src/main/java/no/nordicsemi/android/ble/annotation/PhyMask.java
+index cd7efd7..b42870d 100644
+--- a/ble/src/main/java/no/nordicsemi/android/ble/annotation/PhyMask.java
++++ b/ble/src/main/java/no/nordicsemi/android/ble/annotation/PhyMask.java
+@@ -32,6 +32,6 @@ import no.nordicsemi.android.ble.PhyRequest;
+ @IntDef(flag = true, value = {
+                PhyRequest.PHY_LE_1M_MASK,
+                PhyRequest.PHY_LE_2M_MASK,
+-               PhyRequest.PHY_LE_CODED_MASK
++               PhyRequest.PHY_LE_CODED_MASK /* marker */
+ })
+ public @interface PhyMask {}
+diff --git a/ble/src/main/java/no/nordicsemi/android/ble/utils/ParserUtils.java b/ble/src/main/java/no/nordicsemi/android/ble/utils/ParserUtils.java
+index d73254d..1f1c348 100644
+--- a/ble/src/main/java/no/nordicsemi/android/ble/utils/ParserUtils.java
++++ b/ble/src/main/java/no/nordicsemi/android/ble/utils/ParserUtils.java
+@@ -179,7 +179,7 @@ public class ParserUtils {
+        }
+
+        @NonNull
+-       public static String phyMaskToString(@PhyMask final int mask) {
++       public static String phyMaskToString(@PhyMask final int mask) { /* marker */
+                switch (mask) {
+                        case PhyRequest.PHY_LE_1M_MASK:
+                                return "LE 1M";
+
+
+
+~/Android-nRF-Blinky
+$ git log -1 --stat
+commit 279dd796a84e17b66212d3ca0e5828da713a5169 (HEAD -> main, origin/main, origin/HEAD)
+Merge: 10fb109 e0e5994
+Author: Aleksander Nowakowski <aleksander.nowakowski@nordicsemi.no>
+Date:   Wed Mar 30 15:31:57 2022 +0200
+
+    Merge pull request #68 from NordicSemiconductor/feature/monochrome-icon
+
+    Monochrome icons for Android 13
+
+~/Android-nRF-Blinky
+$ git diff
+diff --git a/app/src/main/java/no/nordicsemi/android/blinky/profile/BlinkyManager.java b/app/src/main/java/no/nordicsemi/android/blinky/profile/BlinkyManager.java
+index cd07b6f..5e7dfbc 100644
+--- a/app/src/main/java/no/nordicsemi/android/blinky/profile/BlinkyManager.java
++++ b/app/src/main/java/no/nordicsemi/android/blinky/profile/BlinkyManager.java
+@@ -49,11 +49,18 @@ import no.nordicsemi.android.log.Logger;
+
+ public class BlinkyManager extends ObservableBleManager {
+        /** Nordic Blinky Service UUID. */
+-       public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001523-1212-efde-1523-785feabcd123");
++       //public final static UUID LBS_UUID_SERVICE = UUID.fromString("00001523-1212-efde-1523-785feabcd123");
++       public final static UUID LBS_UUID_SERVICE = UUID.fromString("6e400001-b5a3-f393-e0a9-e50e24dcca9e"); /* nordic nus */
+        /** BUTTON characteristic UUID. */
+-       private final static UUID LBS_UUID_BUTTON_CHAR = UUID.fromString("00001524-1212-efde-1523-785feabcd123");
++       //private final static UUID LBS_UUID_BUTTON_CHAR = UUID.fromString("00001524-1212-efde-1523-785feabcd123");
++       private final static UUID LBS_UUID_BUTTON_CHAR = UUID.fromString("6e400003-b5a3-f393-e0a9-e50e24dcca9e"); /* rd nus from peripheral */
+        /** LED characteristic UUID. */
+-       private final static UUID LBS_UUID_LED_CHAR = UUID.fromString("00001525-1212-efde-1523-785feabcd123");
++       //private final static UUID LBS_UUID_LED_CHAR = UUID.fromString("00001525-1212-efde-1523-785feabcd123");
++       private final static UUID LBS_UUID_LED_CHAR = UUID.fromString("6e400002-b5a3-f393-e0a9-e50e24dcca9e"); /* wr nus into peripheral */
+
+        private final MutableLiveData<Boolean> ledState = new MutableLiveData<>();
+        private final MutableLiveData<Boolean> buttonState = new MutableLiveData<>();
+@@ -179,12 +186,14 @@ public class BlinkyManager extends ObservableBleManager {
+                public boolean isRequiredServiceSupported(@NonNull final BluetoothGatt gatt) {
+                        final BluetoothGattService service = gatt.getService(LBS_UUID_SERVICE);
+                        if (service != null) {
++                               /* marker */
+                                buttonCharacteristic = service.getCharacteristic(LBS_UUID_BUTTON_CHAR);
+                                ledCharacteristic = service.getCharacteristic(LBS_UUID_LED_CHAR);
+                        }
+
+                        boolean writeRequest = false;
+                        if (ledCharacteristic != null) {
++                               /* marker */
+                                final int ledProperties = ledCharacteristic.getProperties();
+                                writeRequest = (ledProperties & BluetoothGattCharacteristic.PROPERTY_WRITE) > 0;
+                        }
+
+
