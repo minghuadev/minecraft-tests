@@ -47,3 +47,31 @@ update: automatic update
     build number SD2A.220601.003.B1, android 12
 
 
+update: update to android 13
+  apr 8 2023
+    build number TQ1A.221205.011, android 13
+
+   adb reboot bootloader
+    bootloader version bluejay-1.2-9152140
+   fastboot getvar all: 
+    slot-fastboot-ok:a:yes
+    slot-fastboot-ok:b:no
+
+   mounts
+    /dev/block/sda8 on /metadata
+    /dev/block/sda1 on /mnt/vendor/persist
+    /dev/block/sda5 on /mnt/vendor/efs
+    /dev/block/sda6 on /mnt/vendor/efs_backup
+    /dev/block/sda7 on /mnt/vendor/modem_userdata
+    /dev/block/sda12 on /mnt/vendor/modem_img
+    
+
+update: manually system update, size 275MB
+  apr 9 2023
+    build number TQ2A.230305.008.F1, android 13
+   reboot bootloader
+    bootloader version bluejay-1.2-9465320
+    current slot b
+    /dev/block/sda12 on /mnt/vendor/modem_img
+
+
