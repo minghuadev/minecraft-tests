@@ -11,6 +11,7 @@ pixel 6a initial apps
         Chrome  --ok-on 05
         Clock  --ok-on 06
         Contacts  --ok-on 07
+                android 13: Data Restore Tool  --disable
         Digital Wellbeing  --ok-on 08
         Drive  --disable d02
 
@@ -73,5 +74,7 @@ update: manually system update, size 275MB
     bootloader version bluejay-1.2-9465320
     current slot b
     /dev/block/sda12 on /mnt/vendor/modem_img
+
+  apps: totally 38 apps. 
 
 
