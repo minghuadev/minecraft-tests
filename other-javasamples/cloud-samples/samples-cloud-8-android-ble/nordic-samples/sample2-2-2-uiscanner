@@ -1,0 +1,96 @@
+
+  copy uiscanner version 1.3.8 into the blinky source directory and make the build.
+
+$ diff -ur ../Android-Common-Libraries/uiscanner/ ./uiscanner/ > log-diff-2-2-uiscanner
+
+diff -ur ../Android-Common-Libraries/uiscanner/build.gradle.kts ./uiscanner/build.gradle.kts
+--- ../Android-Common-Libraries/uiscanner/build.gradle.kts	2023-05-05 07:07:02.373167900 -0700
++++ ./uiscanner/build.gradle.kts	2023-05-05 07:19:02.230869600 -0700
+@@ -31,14 +31,15 @@
+ 
+ plugins {
+     /*alias(libs.plugins.nordic.feature)*/
+-    alias(libs.plugins.nordic.library.compose) apply true
++    //alias(libs.plugins.nordic.library.compose) apply true
+     alias(libs.plugins.nordic.feature)
+-    alias(libs.plugins.nordic.nexus)
++    //alias(libs.plugins.nordic.nexus)
+     id("kotlin-parcelize")
+ }
+ 
+-group = "no.nordicsemi.android.common"
++//group = "no.nordicsemi.android.common"
+ 
++/*
+ nordicNexusPublishing {
+     POM_ARTIFACT_ID = "uiscanner"
+     POM_NAME = "Nordic library for Android with UI screens utilizing uiscanner library."
+@@ -50,6 +51,7 @@
+     POM_SCM_CONNECTION = "scm:git@github.com:NordicPlayground/Android-Common-Libraries.git"
+     POM_SCM_DEV_CONNECTION = "scm:git@github.com:NordicPlayground/Android-Common-Libraries.git"
+ }
++ */
+ 
+ android {
+     namespace = "no.nordicsemi.android.common.ui.scanner"
+@@ -62,9 +64,12 @@
+ }
+ 
+ dependencies {
+-    implementation(project(":core"))
+-    implementation(project(":theme"))
+-    implementation(project(":permission"))
++    //implementation(project(":core"))
++    //implementation(project(":theme"))
++    //implementation(project(":permission"))
++    implementation(libs.nordic.core)
++    implementation(libs.nordic.theme)
++    implementation(libs.nordic.permission)
+ 
+     implementation(libs.accompanist.flowlayout)
+ 
+diff -ur ../Android-Common-Libraries/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt ./uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt
+--- ../Android-Common-Libraries/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt	2023-05-04 15:46:48.995206500 -0700
++++ ./uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt	2023-05-05 07:34:02.720020000 -0700
+@@ -48,9 +48,9 @@
+     uuid: ParcelUuid?,
+     cancellable: Boolean = true,
+     onResult: (ScannerScreenResult) -> Unit,
+-    deviceItem: @Composable (DiscoveredBluetoothDevice) -> Unit = {
+-        DeviceListItem(it.displayName, it.address)
+-    }
++    //deviceItem: @Composable (DiscoveredBluetoothDevice) -> Unit = {
++    //    DeviceListItem(it.displayName, it.address)
++    //}
+ ) {
+     var isScanning by rememberSaveable { mutableStateOf(false) }
+ 
+@@ -64,7 +64,7 @@
+             uuid = uuid,
+             onScanningStateChanged = { isScanning = it },
+             onResult = { onResult(DeviceSelected(it)) },
+-            deviceItem = deviceItem,
++            //deviceItem = deviceItem,
+         )
+     }
+ }
+diff -ur ../Android-Common-Libraries/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerView.kt ./uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerView.kt
+--- ../Android-Common-Libraries/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerView.kt	2023-05-04 22:43:16.158395400 -0700
++++ ./uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerView.kt	2023-05-05 07:27:16.858995800 -0700
+@@ -52,6 +52,7 @@
+ import no.nordicsemi.android.common.permission.RequireBluetooth
+ import no.nordicsemi.android.common.permission.RequireLocation
+ import no.nordicsemi.android.common.theme.R
++import no.nordicsemi.android.common.theme.view.RssiIcon
+ import no.nordicsemi.android.common.ui.scanner.main.DeviceListItem
+ import no.nordicsemi.android.common.ui.scanner.main.DevicesListView
+ import no.nordicsemi.android.common.ui.scanner.main.viewmodel.ScannerViewModel
+@@ -66,7 +67,7 @@
+     onScanningStateChanged: (Boolean) -> Unit = {},
+     onResult: (DiscoveredBluetoothDevice) -> Unit,
+     deviceItem: @Composable (DiscoveredBluetoothDevice) -> Unit = {
+-        DeviceListItem(it.displayName, it.address)
++        DeviceListItem(it.displayName, it.address, extras = { RssiIcon(it.rssi) })
+     }
+ ) {
+     RequireBluetooth(

@@ -1,0 +1,47 @@
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+index 21c24cc..c1864d7 100644
+--- a/app/build.gradle.kts
++++ b/app/build.gradle.kts
+@@ -38,6 +38,9 @@ group = "no.nordicsemi.android.common"
+ 
+ android {
+     namespace = "no.nordicsemi.android.common.test"
++    defaultConfig {
++        versionCode = 1
++    }
+ }
+ 
+ dependencies {
+diff --git a/uiscanner/build.gradle.kts b/uiscanner/build.gradle.kts
+index b10c468..21144b6 100644
+--- a/uiscanner/build.gradle.kts
++++ b/uiscanner/build.gradle.kts
+@@ -30,6 +30,7 @@
+  */
+ 
+ plugins {
++    alias(libs.plugins.nordic.library.compose)
+     alias(libs.plugins.nordic.feature)
+     alias(libs.plugins.nordic.nexus)
+     id("kotlin-parcelize")
+diff --git a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerView.kt b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerView.kt
+index 8153415..7172412 100644
+--- a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerView.kt
++++ b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerView.kt
+@@ -52,6 +52,7 @@ import kotlinx.coroutines.launch
+ import no.nordicsemi.android.common.permission.RequireBluetooth
+ import no.nordicsemi.android.common.permission.RequireLocation
+ import no.nordicsemi.android.common.theme.R
++import no.nordicsemi.android.common.theme.view.RssiIcon
+ import no.nordicsemi.android.common.ui.scanner.main.DeviceListItem
+ import no.nordicsemi.android.common.ui.scanner.main.DevicesListView
+ import no.nordicsemi.android.common.ui.scanner.main.viewmodel.ScannerViewModel
+@@ -66,7 +67,7 @@ fun ScannerView(
+     onScanningStateChanged: (Boolean) -> Unit = {},
+     onResult: (DiscoveredBluetoothDevice) -> Unit,
+     deviceItem: @Composable (DiscoveredBluetoothDevice) -> Unit = {
+-        DeviceListItem(it.displayName, it.address)
++        DeviceListItem(it.displayName, it.address, extras = { RssiIcon(it.rssi) })
+     }
+ ) {
+     RequireBluetooth(

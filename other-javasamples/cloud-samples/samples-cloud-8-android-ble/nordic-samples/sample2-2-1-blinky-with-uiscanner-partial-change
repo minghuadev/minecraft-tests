@@ -1,0 +1,132 @@
+
+  attempt to add a new data into the model. not build?
+
+diff --git a/app/src/main/java/no/nordicsemi/android/blinky/di/BlinkyModule.kt b/app/src/main/java/no/nordicsemi/android/blinky/di/BlinkyModule.kt
+index 217b4c9..e1f6456 100644
+--- a/app/src/main/java/no/nordicsemi/android/blinky/di/BlinkyModule.kt
++++ b/app/src/main/java/no/nordicsemi/android/blinky/di/BlinkyModule.kt
+@@ -40,6 +40,16 @@ abstract class BlinkyModule {
+             return handle.get(Blinky).name ?: context.getString(R.string.unnamed_device)
+         }
+ 
++        @Provides
++        @ViewModelScoped
++        @Named("rssiName")
++        fun provideRssiName(
++            @ApplicationContext context: Context,
++            handle: SavedStateHandle,
++        ): String {
++            return handle.get(Blinky).rssiName ?: context.getString(R.string.unnamed_device)
++        }
++
+         @Provides
+         @ViewModelScoped
+         @Named("deviceId")
+diff --git a/blinky/ui/src/main/java/no/nordicsemi/android/blinky/control/BlinkyDestination.kt b/blinky/ui/src/main/java/no/nordicsemi/android/blinky/control/BlinkyDestination.kt
+index b1b9427..81fb408 100644
+--- a/blinky/ui/src/main/java/no/nordicsemi/android/blinky/control/BlinkyDestination.kt
++++ b/blinky/ui/src/main/java/no/nordicsemi/android/blinky/control/BlinkyDestination.kt
+@@ -15,6 +15,8 @@ val Blinky = createDestination<BlinkyDevice, Unit>("blinky")
+ data class BlinkyDevice(
+     val device: BluetoothDevice,
+     val name: String?,
++    val rssiName: String,
++    val rssiValue: Int
+ ): Parcelable
+ 
+ val BlinkyDestination = defineDestination(Blinky) {
+diff --git a/scanner/build.gradle.kts b/scanner/build.gradle.kts
+index 718848e..91a74ac 100644
+--- a/scanner/build.gradle.kts
++++ b/scanner/build.gradle.kts
+@@ -11,6 +11,7 @@ dependencies {
+     implementation(project(":blinky:spec"))
+     implementation(project(":blinky:ui"))
+ 
+-    implementation(libs.nordic.uiscanner)
++    //implementation(libs.nordic.uiscanner)
++    implementation(project(":uiscanner"))
+     implementation(libs.nordic.navigation)
+ }
+\ No newline at end of file
+diff --git a/scanner/src/main/java/no/nordicsemi/android/blinky/scanner/ScannerDestination.kt b/scanner/src/main/java/no/nordicsemi/android/blinky/scanner/ScannerDestination.kt
+index 61d845e..41f7408 100644
+--- a/scanner/src/main/java/no/nordicsemi/android/blinky/scanner/ScannerDestination.kt
++++ b/scanner/src/main/java/no/nordicsemi/android/blinky/scanner/ScannerDestination.kt
+@@ -1,5 +1,9 @@
+ package no.nordicsemi.android.blinky.scanner
+ 
++import androidx.compose.runtime.getValue
++import androidx.compose.runtime.mutableStateOf
++import androidx.compose.runtime.remember
++import androidx.compose.runtime.setValue
+ import androidx.hilt.navigation.compose.hiltViewModel
+ import no.nordicsemi.android.blinky.control.Blinky
+ import no.nordicsemi.android.blinky.control.BlinkyDevice
+@@ -12,10 +16,17 @@ val Scanner = createSimpleDestination("scanner")
+ 
+ val ScannerDestination = defineDestination(Scanner) {
+     val viewModel: SimpleNavigationViewModel = hiltViewModel()
++    var viewRssiValue by remember { mutableStateOf(0) }
++    var viewRssiName by remember { mutableStateOf("") }
+ 
+     BlinkyScanner(
+         onDeviceSelected = { device, name ->
+-            viewModel.navigateTo(Blinky, BlinkyDevice(device, name))
+-        }
++            viewModel.navigateTo(Blinky, BlinkyDevice(device, name, viewRssiName, viewRssiValue))
++        },
++        onRssiChanged = { rssi, name ->
++            viewRssiValue = rssi
++            viewRssiName = name?:""
++                        },
++        viewRssiValue = viewRssiValue,
+     )
+ }
+\ No newline at end of file
+diff --git a/scanner/src/main/java/no/nordicsemi/android/blinky/scanner/view/ScannerScreen.kt b/scanner/src/main/java/no/nordicsemi/android/blinky/scanner/view/ScannerScreen.kt
+index 317b484..11b2458 100644
+--- a/scanner/src/main/java/no/nordicsemi/android/blinky/scanner/view/ScannerScreen.kt
++++ b/scanner/src/main/java/no/nordicsemi/android/blinky/scanner/view/ScannerScreen.kt
+@@ -8,10 +8,13 @@ import no.nordicsemi.android.blinky.scanner.R
+ import no.nordicsemi.android.blinky.spec.BlinkySpec
+ import no.nordicsemi.android.common.ui.scanner.DeviceSelected
+ import no.nordicsemi.android.common.ui.scanner.ScannerScreen
++import no.nordicsemi.android.common.ui.scanner.main.DeviceListItem
+ 
+ @Composable
+ fun BlinkyScanner(
+     onDeviceSelected: (BluetoothDevice, String?) -> Unit,
++    onRssiChanged: (Int, String?) -> Unit,
++    viewRssiValue: Int
+ ) {
+     ScannerScreen(
+         title = stringResource(id = R.string.scanner_title),
+@@ -20,10 +23,14 @@ fun BlinkyScanner(
+         onResult = { result ->
+             when (result) {
+                 is DeviceSelected -> with(result.device) {
++                    onRssiChanged(rssi, name)
+                     onDeviceSelected(device, name)
+                 }
+                 else -> {}
+             }
+-        }
++        },
++        //deviceItem = {
++        //    DeviceListItem(it.displayName, it.address)
++        //}
+     )
+ }
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+index 91ba44c..f1e84c6 100644
+--- a/settings.gradle.kts
++++ b/settings.gradle.kts
+@@ -27,6 +27,7 @@ include(":scanner")
+ include(":blinky:spec")
+ include(":blinky:ui")
+ include(":blinky:ble")
++include(":uiscanner")
+ 
+ //if (file("../Android-Common-Libraries").exists()) {
+ //    includeBuild("../Android-Common-Libraries")

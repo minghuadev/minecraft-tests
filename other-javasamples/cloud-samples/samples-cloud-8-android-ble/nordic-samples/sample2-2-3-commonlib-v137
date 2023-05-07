@@ -1,0 +1,39 @@
+
+  attempt to build commonlib version 1.3.7 into its own library aar files
+
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+index 29c21cc..c1862d7 100644
+--- a/app/build.gradle.kts
++++ b/app/build.gradle.kts
+@@ -38,6 +38,9 @@ group = "no.nordicsemi.android.common"
+ 
+ android {
+     namespace = "no.nordicsemi.android.common.test"
++    defaultConfig {
++        versionCode = 1
++    }
+ }
+ 
+ dependencies {
+diff --git a/uiscanner/build.gradle.kts b/uiscanner/build.gradle.kts
+index e094097..998bef9 100644
+--- a/uiscanner/build.gradle.kts
++++ b/uiscanner/build.gradle.kts
+@@ -30,6 +30,8 @@
+  */
+ 
+ plugins {
++    /*alias(libs.plugins.nordic.feature)*/
++    alias(libs.plugins.nordic.library.compose) apply true
+     alias(libs.plugins.nordic.feature)
+     alias(libs.plugins.nordic.nexus)
+     id("kotlin-parcelize")
+@@ -70,4 +72,8 @@ dependencies {
+     implementation(libs.androidx.compose.material.iconsExtended)
+ 
+     implementation(libs.nordic.scanner)
++    /*
++    implementation(libs.nordic.navigation)
++    implementation(libs.androidx.activity.compose)
++     */
+ }

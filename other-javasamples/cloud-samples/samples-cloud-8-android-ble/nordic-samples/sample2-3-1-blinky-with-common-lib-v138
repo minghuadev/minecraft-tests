@@ -1,0 +1,109 @@
+
+  copy commonlib version 1.3.8 uiscanner into blinky source directory and build.
+
+diff --git a/blinky/ui/build.gradle.kts b/blinky/ui/build.gradle.kts
+index b11a457..011243a 100644
+--- a/blinky/ui/build.gradle.kts
++++ b/blinky/ui/build.gradle.kts
+@@ -11,10 +11,11 @@ android {
+ 
+ dependencies {
+     implementation(project(":blinky:spec"))
++    implementation(project(":uiscanner"))
+ 
+     implementation(libs.nordic.theme)
+     implementation(libs.nordic.uilogger)
+-    implementation(libs.nordic.uiscanner)
++    //implementation(libs.nordic.uiscanner)
+     implementation(libs.nordic.navigation)
+     implementation(libs.nordic.permission)
+     implementation(libs.nordic.log.timber)
+diff --git a/scanner/build.gradle.kts b/scanner/build.gradle.kts
+index 718848e..f173450 100644
+--- a/scanner/build.gradle.kts
++++ b/scanner/build.gradle.kts
+@@ -10,7 +10,8 @@ android {
+ dependencies {
+     implementation(project(":blinky:spec"))
+     implementation(project(":blinky:ui"))
++    implementation(project(":uiscanner"))
+ 
+-    implementation(libs.nordic.uiscanner)
++    //implementation(libs.nordic.uiscanner)
+     implementation(libs.nordic.navigation)
+ }
+\ No newline at end of file
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+index 91ba44c..f1e84c6 100644
+--- a/settings.gradle.kts
++++ b/settings.gradle.kts
+@@ -27,6 +27,7 @@ include(":scanner")
+ include(":blinky:spec")
+ include(":blinky:ui")
+ include(":blinky:ble")
++include(":uiscanner")
+ 
+ //if (file("../Android-Common-Libraries").exists()) {
+ //    includeBuild("../Android-Common-Libraries")
+diff --git a/uiscanner/build.gradle.kts b/uiscanner/build.gradle.kts
+index 012c442..11e7436 100644
+--- a/uiscanner/build.gradle.kts
++++ b/uiscanner/build.gradle.kts
+@@ -31,10 +31,11 @@
+ 
+ plugins {
+     alias(libs.plugins.nordic.feature)
+-    alias(libs.plugins.nordic.nexus)
++    //alias(libs.plugins.nordic.nexus)
+     id("kotlin-parcelize")
+ }
+ 
++/*
+ group = "no.nordicsemi.android.common"
+ 
+ nordicNexusPublishing {
+@@ -51,15 +52,21 @@ nordicNexusPublishing {
+     POM_DEVELOPER_NAME = "Sylwester Zieliński"
+     POM_DEVELOPER_EMAIL = "sylwester.zielinski@nordicsemi.no"
+ }
++ */
+ 
+ android {
+     namespace = "no.nordicsemi.android.common.ui.scanner"
+ }
+ 
+ dependencies {
++    /*
+     implementation(project(":core"))
+     implementation(project(":theme"))
+     implementation(project(":permission"))
++     */
++    implementation(libs.nordic.core)
++    implementation(libs.nordic.theme)
++    implementation(libs.nordic.permission)
+ 
+     implementation(libs.accompanist.flowlayout)
+ 
+diff --git a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt
+index 1197414..01f34ca 100644
+--- a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt
++++ b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt
+@@ -38,6 +38,7 @@ import androidx.compose.runtime.mutableStateOf
+ import androidx.compose.runtime.saveable.rememberSaveable
+ import androidx.compose.runtime.setValue
+ import androidx.compose.ui.res.stringResource
++import no.nordicsemi.android.common.theme.view.RssiIcon
+ import no.nordicsemi.android.common.ui.scanner.main.DeviceListItem
+ import no.nordicsemi.android.common.ui.scanner.model.DiscoveredBluetoothDevice
+ import no.nordicsemi.android.common.ui.scanner.view.ScannerAppBar
+@@ -49,7 +50,9 @@ fun ScannerScreen(
+     cancellable: Boolean = true,
+     onResult: (ScannerScreenResult) -> Unit,
+     deviceItem: @Composable (DiscoveredBluetoothDevice) -> Unit = {
+-        DeviceListItem(it.displayName, it.address)
++        DeviceListItem(it.displayName, it.address,
++            extras = { RssiIcon(it.rssi) }
++        )
+     }
+ ) {
+     var isScanning by rememberSaveable { mutableStateOf(false) }

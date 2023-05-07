@@ -1,0 +1,201 @@
+
+  updating live age
+
+diff --git a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt
+index f14f450..616446a 100644
+--- a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt
++++ b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/ScannerScreen.kt
+@@ -41,6 +41,7 @@ import kotlinx.coroutines.delay
+ import no.nordicsemi.android.common.theme.view.RssiIcon
+ import no.nordicsemi.android.common.ui.scanner.main.DeviceListItem
+ import no.nordicsemi.android.common.ui.scanner.model.DiscoveredBluetoothDevice
++import no.nordicsemi.android.common.ui.scanner.model.UserScannerData
+ import no.nordicsemi.android.common.ui.scanner.view.ScannerAppBar
+ 
+ @Composable
+@@ -54,6 +55,8 @@ fun ScannerScreen(
+             extras = {
+                 Row() {
+                     val stInstance by remember { mutableStateOf( it ) }
++                    val userData by remember { mutableStateOf( UserScannerData() ) }
++
+                     fun calculateAge(updateTime: Long): String {
+                         var displayAge: String = when {
+                             updateTime == 0L -> "61+m"
+@@ -77,9 +80,22 @@ fun ScannerScreen(
+                         return displayAge
+                     }
+ 
++                    fun set_user_data_if_new() {
++                        val userdataIdx = userData.find_user_data_index(it.address)
++                        if ( userdataIdx < 0 ) {
++                            userData.set_user_data(
++                                it.address,
++                                it.displayName ?: "<set-no-name>", it.rssi
++                            )
++                        }
++                    }
++                    set_user_data_if_new()
++
+                     var timeout_init: Long = 150 // seconds
+                     var timeout by remember { mutableStateOf(timeout_init)}
+-                    var stDisplayAge by remember { mutableStateOf("unknown")}
++                    var stDisplayInitAge by remember { mutableStateOf("unknown")}
++                    var stDisplayLiveAge by remember { mutableStateOf("unknown")}
++                    var stDisplayRssi by remember { mutableStateOf(it.rssi) }
+ 
+                     LaunchedEffect(timeout) {
+                         val step_delay: Long = 3 // seconds
+@@ -90,12 +106,28 @@ fun ScannerScreen(
+                             timeout = timeout_init
+                         }
+                         val age = calculateAge(stInstance.updateTime)
+-                        stDisplayAge = age
++                        stDisplayInitAge = age
++
++                        val userdataIdx = userData.find_user_data_index(stInstance.address)
++                        if ( userdataIdx >= 0 ) {
++                            val userdata = userData.get_user_data(userdataIdx)
++                            if ( userdata != null ) {
++                                val user_update_time = userdata.updateTime
++                                val user_age = calculateAge(user_update_time)
++                                stDisplayLiveAge = user_age
++                                stDisplayRssi = userdata.rssi
++                            } else {
++                                stDisplayLiveAge = "61+m"
++                            }
++                        } else {
++                            stDisplayLiveAge = "62+m"
++                        }
+                     }
+ 
+                     Text(text = timeout.toString() + " ")
+-                    Text(text = stDisplayAge + " ")
+-                    RssiIcon(stInstance.rssi)
++                    Text(text = stDisplayLiveAge + " ")
++                    Text(text = stDisplayInitAge + " ")
++                    RssiIcon(stDisplayRssi)
+                 }
+             }
+         )
+diff --git a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/model/UserScannerData.kt b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/model/UserScannerData.kt
+index e19d429..71af428 100644
+--- a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/model/UserScannerData.kt
++++ b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/model/UserScannerData.kt
+@@ -0,0 +1,90 @@
++package no.nordicsemi.android.common.ui.scanner.model
++
++
++class UserScannerDataItem(
++    var name: String = "<init-name>",
++    var address: String = "<init-address>",
++    var rssi: Int = 0,
++    var initTime: Long = 0, // millis
++    var updateTime: Long = 0, // millis
++) { }
++
++class UserScannerData(
++    var updateCount: Long = 0,
++    var logicError: Boolean = false,
++
++    var line0_st:String = "",
++    var user_lines:ArrayList<UserScannerDataItem> = ArrayList<UserScannerDataItem>(),
++    var user_last_set_millis: Long = 0,
++) {
++    companion object {
++        var the_instance: UserScannerData? = null
++        var the_instance_count: Int = 0
++    }
++
++    init{
++        the_instance = this
++        the_instance_count ++
++        clear_user_data()
++    }
++    private fun clear_user_data(): Unit {
++        line0_st = ""
++        user_lines = ArrayList<UserScannerDataItem>()
++        user_lines.add( UserScannerDataItem(name="poll-id") )
++    }
++
++    fun report_logic_error(): Unit {
++        logicError = true
++    }
++
++    fun clear_all_data(): Unit {
++        updateCount = 0
++        logicError = false
++        clear_user_data()
++    }
++
++    fun find_user_data_index(addr:String): Int {
++        val dsz = user_lines.size
++        for (i in 0..dsz-1) {
++            if ( user_lines.get(i).address == addr) {
++                return i
++            }
++        }
++        return -1
++    }
++    fun set_user_data(addr:String, name:String, rssi:Int): Unit {
++        val uidx = find_user_data_index(addr)
++        val nowTm = System.currentTimeMillis()
++        if ( uidx >= 0 ) {
++            val prevInit = user_lines.get(uidx).initTime
++            user_lines.set(uidx,
++                UserScannerDataItem(address = addr, name = name,
++                    rssi = rssi, initTime = prevInit, updateTime = nowTm))
++        } else {
++            user_lines.add( UserScannerDataItem(address = addr, name = name,
++                rssi = rssi, initTime = nowTm, updateTime = nowTm) )
++        }
++        user_last_set_millis = nowTm
++    }
++    fun get_user_data(idx:Int): UserScannerDataItem? {
++        val dsz = user_lines.size
++        if ( idx >= 0 && idx < dsz ) {
++            return user_lines.get(idx)
++        }
++        return null
++    }
++    fun get_user_last_set_millis(): Long {
++        return user_last_set_millis
++    }
++}
++
++fun dispatchUserScannerData(addr:String, name:String, rssi:Int): Unit {
++    val userData = UserScannerData.the_instance
++    if ( userData != null ) {
++        val idx = userData.find_user_data_index(addr)
++        if ( idx >= 0 ) {
++            userData.set_user_data(addr, name, rssi)
++        }
++    }
++}
++
+diff --git a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/repository/DevicesDataStore.kt b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/repository/DevicesDataStore.kt
+index 91e1430..31914b9 100644
+--- a/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/repository/DevicesDataStore.kt
++++ b/uiscanner/src/main/java/no/nordicsemi/android/common/ui/scanner/repository/DevicesDataStore.kt
+@@ -34,6 +34,7 @@ package no.nordicsemi.android.common.ui.scanner.repository
+ import kotlinx.coroutines.flow.MutableStateFlow
+ import no.nordicsemi.android.support.v18.scanner.ScanResult
+ import no.nordicsemi.android.common.ui.scanner.model.DiscoveredBluetoothDevice
++import no.nordicsemi.android.common.ui.scanner.model.dispatchUserScannerData
+ import no.nordicsemi.android.common.ui.scanner.model.toDiscoveredBluetoothDevice
+ import javax.inject.Inject
+ import javax.inject.Singleton
+@@ -46,7 +47,12 @@ internal class DevicesDataStore @Inject constructor() {
+     fun addNewDevice(scanResult: ScanResult) {
+         devices.firstOrNull { it.device == scanResult.device }?.let { device ->
+             val i = devices.indexOf(device)
+-            devices.set(i, device.update(scanResult))
++            //devices.set(i, device.update(scanResult))
++            val updatedDevice = device.update(scanResult)
++            devices.set(i, updatedDevice)
++            dispatchUserScannerData(scanResult.device.address,
++                scanResult.scanRecord?.deviceName?:"<dispatch-no-name>",
++                scanResult.rssi)
+         } ?: scanResult.toDiscoveredBluetoothDevice().also { devices.add(it) }
+ 
+         data.value = devices.toList()
