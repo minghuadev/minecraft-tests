@@ -1,0 +1,243 @@
+
+
+search android save data to file
+
+example:
+--- a/app/src/main/java/no/nordicsemi/android/blinky/MainActivity.kt
++++ b/app/src/main/java/no/nordicsemi/android/blinky/MainActivity.kt
+@@ -8,6 +8,7 @@ import no.nordicsemi.android.blinky.scanner.ScannerDestination
++import java.io.*
+
+ @AndroidEntryPoint
+ class MainActivity: NordicActivity() {
+@@ -20,5 +21,26 @@ class MainActivity: NordicActivity() {
+                 NavigationView(ScannerDestination + BlinkyDestination)
+             }
+         }
++
++        /* https://www.topcoder.com/thrive/articles/save-data-using-file-in-android
++           loadData()
++           https://stackoverflow.com/questions/41000584/best-way-to-use-bufferedreader-in-kotlin
++         */
++        val file: File = applicationContext
++            .getFileStreamPath("Data.txt")
++        var result: String = ""
++        if (file.exists()) {
++            val reader = BufferedReader(InputStreamReader(applicationContext.openFileInput("Data.txt")))
++            var line: String? = ""
++            while (line != null) {
++                line = reader.readLine()
++                result += line
++            }
++            reader.close()
++        }
++        result += "\nmore\n"
++        val writer = BufferedWriter(OutputStreamWriter(openFileOutput("Data.txt", MODE_PRIVATE)))
++        writer.write(result)
++        writer.close()
+     }
+ }
+
+
+
+search android save file to download folder
+
+https://stackoverflow.com/questions/28183893/how-to-store-files-generated-from-app-in-downloads-folder-of-android
+
+    use this to get the directory: 
+    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+    like: File dir = Environment.get...
+
+    add this permission to manifest.xml:
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    or use download manager ...
+
+    deprecated in api 29.
+
+
+
+search android convert a File to its path
+
+https://mkyong.com/java/java-convert-file-to-path/
+
+    .toPath()
+
+
+
+search getFileStreamPath file contains a separator
+
+https://stackoverflow.com/questions/11467359/file-contains-a-path-separator
+
+    create a file=File(path) and check file.exists() 
+
+
+
+search OutputStreamWriter from file path
+
+https://www.tabnine.com/code/java/methods/java.io.OutputStreamWriter/write
+
+    OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file))
+
+
+
+example helper class:
+
+  class MainFileIoUtil(val mainAppContext: HiltApplication) : FileIoInterface {
+    override fun readData(): ArrayList<String>? {
+        var result: ArrayList<String> = ArrayList<String>()
+        //val reader = BufferedReader(InputStreamReader(mainAppContext.openFileInput("Data.txt")))
+        var file_dir_raw: String? = null
+        var file_name_raw = "BlinkyData.txt"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            file_dir_raw =
+                mainAppContext.getExternalFilesDir(
+                    Environment.DIRECTORY_DOWNLOADS
+                )?.toPath().toString()
+            val fdir = file_dir_raw
+            if (fdir != null) {
+                file_name_raw = fdir + "/" + file_name_raw
+            }
+        }
+        val file_name = file_name_raw
+        val file_dir = file_dir_raw
+        if (file_dir == null) {
+            val file: File = mainAppContext
+                .getFileStreamPath(file_name)
+            if (!file.exists()) {
+                return null
+            }
+        } else {
+            val file: File = File(file_name)
+            if (!file.exists()) {
+                return null
+            }
+        }
+        val reader = if (file_dir == null) {
+            BufferedReader(
+                InputStreamReader(mainAppContext.openFileInput(file_name))
+            )
+        } else {
+            BufferedReader(
+                InputStreamReader(
+                    FileInputStream(File(file_name))
+                )
+            )
+        }
+        var line: String? = null
+        do {
+            line = reader.readLine()
+            if (line != null) {
+                result.add(line)
+            }
+        } while (line != null)
+        reader.close()
+        return result
+    }
+
+    override fun writeData(data: String) {
+        var file_dir_raw: String? = null
+        var file_name_raw = "BlinkyData.txt"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            file_dir_raw =
+                mainAppContext.getExternalFilesDir(
+                    Environment.DIRECTORY_DOWNLOADS
+                )?.toPath().toString()
+            val fdir = file_dir_raw
+            if (fdir != null) {
+                file_name_raw = fdir + "/" + file_name_raw
+            }
+        }
+        val file_name = file_name_raw
+        val file_dir = file_dir_raw
+        if (file_dir == null) {
+            val writer = BufferedWriter(
+                OutputStreamWriter(
+                    mainAppContext.openFileOutput(
+                        file_name,
+                        ComponentActivity.MODE_PRIVATE
+                    )
+                )
+            )
+            writer.write(data)
+            writer.close()
+        } else {
+            val file: File = File(file_name)
+            val writer = BufferedWriter(
+                OutputStreamWriter(
+                    FileOutputStream(file)
+                )
+            )
+            writer.write(data)
+            writer.close()
+        }
+    }
+  }
+
+  instantiate the helper object in main activity:
+
+    FileIoUtil.getInstance(MainFileIoUtil(applicationContext as HiltApplication))
+
+
+example helper class simplified:
+
+  class MainFileIoUtil(val mainAppContext: HiltApplication) : FileIoInterface {
+
+    private fun convert_filename_to_reader(filename: String): BufferedReader? {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val file_dir =
+                mainAppContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toPath()
+                    .toString()
+            val file_path = file_dir + "/" + filename
+            val file = File(file_path)
+            if (!file.exists()) {
+                return null
+            }
+            return BufferedReader(InputStreamReader(FileInputStream(file)))
+        }
+        val file = mainAppContext.getFileStreamPath(filename)
+        if (!file.exists()) {
+            return null
+        }
+        return BufferedReader(InputStreamReader(mainAppContext.openFileInput(filename)))
+    }
+
+    override fun readData(): ArrayList<String>? {
+        val reader = convert_filename_to_reader("BlinkyData.txt")
+        if (reader == null) return null
+        var result: ArrayList<String> = ArrayList<String>()
+        var line: String? = null
+        do {
+            line = reader.readLine()
+            if (line != null) {
+                result.add(line)
+            }
+        } while (line != null)
+        reader.close()
+        return result
+    }
+
+    private fun convert_filename_to_writer(filename: String): BufferedWriter {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val file_dir =
+                mainAppContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+                    ?.toPath().toString()
+            val file_path = file_dir + "/" + filename
+            return BufferedWriter(OutputStreamWriter(FileOutputStream(File(file_path))))
+        }
+        return BufferedWriter(
+            OutputStreamWriter(
+                mainAppContext.openFileOutput(filename, ComponentActivity.MODE_PRIVATE)
+            )
+        )
+    }
+
+    override fun writeData(data: String) {
+        val writer = convert_filename_to_writer("BlinkyData.txt")
+        writer.write(data)
+        writer.close()
+    }
+  }
+
+
+

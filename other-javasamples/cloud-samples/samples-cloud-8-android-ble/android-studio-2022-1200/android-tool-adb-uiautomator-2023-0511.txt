@@ -1,0 +1,38 @@
+
+
+search adb command to click on button
+
+https://stackoverflow.com/questions/18924968/using-adb-to-access-a-particular-ui-control-on-the-screen
+
+
+search android uiautomator
+
+https://developer.android.com/training/testing/other-components/ui-automator
+
+
+search android app run shell command
+
+https://stackoverflow.com/questions/6613889/how-to-start-an-android-application-from-the-command-line
+    adb shell am start -n com.package.name/com.package.name.ActivityName
+    am start -a com.example.ACTION_NAME -n com.package.name/com.package.name.ActivityName
+
+https://stackoverflow.com/questions/12698814/get-launchable-activity-name-of-package-from-adb
+  to find the main activity: 
+    adb shell pm list packages -f
+    adb pull <apk path from previous command>
+    aapt dump badging <pulledfile.apk>
+
+
+search android shell stop app
+
+https://stackoverflow.com/questions/3117095/stopping-an-android-app-from-console
+    adb shell am force-stop com.my.app.id
+  or also delete its data: 
+    adb shell am pm clear com.my.app.id
+
+
+search android shell put app to background
+  send a home key event
+    adb shell input keyevent 3
+
+
