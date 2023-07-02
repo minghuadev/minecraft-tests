@@ -1,0 +1,40 @@
+#
+# install4-and-src
+
+
+mkdir and-src
+cd and-src
+mkdir .repo
+cd .repo
+ln -s ../../git-repo repo
+
+cd ..
+
+# start with disk available space 322G
+# git-repo on branch main at c657844
+
+.repo/repo/repo init -u https://github.com/khadas/android_manifest.git -b khadas-vim3-p-64bit
+.repo/repo/repo sync -j1 -n
+
+# total 706 projects. took 204m.
+# after repo sync -n available space becomes 139G
+# du -sh shows 183G under the working directory.
+
+# cp -a into a new ssd drive, took 24m.
+# ssd disk used 184G available 686G.
+
+.repo/repo/repo sync -l
+
+# it took 4m.
+# after repo sync -l ssd available space becomes 648G. used 38G.
+# du -sh shows 221G. used 38G.
+
+
+# on aws ec2 c4.8xlarge 96vcpu 60G-RAM 500G-SSD:
+# repo sync -j1 -n took 149m.
+# du -sh shows same 184G.
+# cp -a into a directory on same ssd took 22m.
+# cp -a into a directory on another ssd took 12m41.
+# repo sync -l took 3m28s.
+
+

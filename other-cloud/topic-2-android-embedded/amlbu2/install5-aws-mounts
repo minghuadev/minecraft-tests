@@ -1,0 +1,19 @@
+
+first ec2 instance: c4.8xlarge 32vcpu 60G ubuntu22 kernel 5.19
+second ec2: ubuntu20 kernel 5.15.0-1036-aws
+third ec2: m6a.4xlarge 16vcpu 64G
+
+
+~$ cat /etc/fstab
+LABEL=cloudimg-rootfs   /        ext4   discard,errors=remount-ro       0 1
+LABEL=UEFI      /boot/efi       vfat    umask=0077      0 1
+
+# /dev/xvdf1: 500GB
+UUID=6f7eaf92-4517-4f44-941f-1b62691049d2 /mnt/xdisk2 ext4 defaults 0 0
+/mnt/xdisk2/home-developer1 /home/developer1 none bind,defaults,user=developer1 0 0
+
+# /dev/xvdg1: 250GB
+UUID=f52ad020-1daa-4dbf-b799-bf6c9732d23e /mnt/xdisk3 ext4 defaults 0 0
+/mnt/xdisk3/home-developer1-archive /home/developer1/archive none bind,defaults,user=developer1 0 0
+
+

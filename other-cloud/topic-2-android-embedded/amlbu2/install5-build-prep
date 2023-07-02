@@ -1,0 +1,133 @@
+#
+# install5-build-prep
+
+
+# https://docs.khadas.com/products/sbc/vim3/development/android/build-android
+# VIM3/3L Build Android
+
+
+# Preparations: 
+
+# Establishing a Build Environment
+# https://source.android.com/docs/setup/start/initializing
+# ubuntu 18.04 or higher: 
+#     apt-get install git-core gnupg flex bison build-essential zip curl zlib1g-dev libc6-dev-i386 libncurses5 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig
+
+# downloading android source.
+
+# Install Toolchains for the Amlogic Platform
+
+
+# build u-boot
+$ cd PATH_YOUR_PROJECT
+$ cd bootloader/uboot
+$ ./mk kvim3
+
+# instead, need PATH: 
+PATH=$PATH:/opt/toolchains/gcc-arm-none-eabi-6-2017-q2-update/bin && ./mk kvim3
+
+# in this step, generated images are: 
+#   build/u-boot.bin: for onboard EMMC storage booting.
+#   build/u-boot.bin.sd.bin: for external TF card booting.
+
+# failed to find arm-none-eabi-cpp
+# https://forum.khadas.com/t/khadas-vim3-source-code-building-issue/11885/2
+# install extra toolchain: no need, use the PATH=$PATH:/opt/toolchains/...
+#     apt-get install gcc-arm-none-eabi
+#
+# later if it failed uImage
+#     apt-get install u-boot-tools
+#
+# https://forum.khadas.com/t/compiling-android-uboot-vim3/4886/3
+# makefile expects toochains at a specific location: 
+#     CROSS_COMPILE ?= /opt/toolchains/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux/bin/aarch64-none-...
+#     CROSS_COMPILE_T32 ?= /opt/toolchains/gcc-arm-none-eabi-6-2017-q2-update/bin/arm-none-
+# or using a docker container
+#
+
+# build Android
+
+$ cd PATH_YOUR_PROJECT
+$ source build/envsetup.sh
+$ lunch kvim3-userdebug
+$ make -j1 otapackage
+
+# generated image will be: out/target/product/kvim3-userdebug/update.img
+
+# rebuild from repo sync -l, 
+#     before start df -h shows available 648G, du -sh shows 221G.
+
+# on aws c4.8xlarge ubuntu 22 use -j30
+#
+# failed to find aarch64-linux-gnu-gcc
+# at 59% in 29m.
+# run again with: 
+PATH=$PATH:/opt/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin && make -j30 otapackage
+
+# in 9m, failed 
+# FAILED: out/target/product/kvim3/obj/APPS/Chrome_intermediates/package.apk
+# https://forum.khadas.com/t/vim3-android-pie-build-failures/7611
+#     This is a problem of either the old or the incorrect .apk. You must either delete it 
+#     along the path device / khadas / kvim3 / preinstall and disable it in the .mk files 
+#     in the same directory. 
+#
+#     ~/buildfiles/and-src/device/khadas/kvim3/preinstall$ rm Chrome.apk
+#     ~/buildfiles/and-src/device/khadas/kvim3/preinstall$ grep Chrome *.mk
+#     Android.mk:LOCAL_MODULE := Chrome
+#     preinstall.mk:PRODUCT_PACKAGES += Chrome
+#     ~/buildfiles/and-src/device/khadas/kvim3/preinstall$ vi Android.mk
+#     ~/buildfiles/and-src/device/khadas/kvim3/preinstall$ vi preinstall.mk
+#
+# could also have a memory usage issue: 
+# https://forum.khadas.com/t/build-android-failed/646/18
+#     to solve: limit jack compiler memory use, or increase swap file size.
+#
+# run again using -j1. kernel rebuilding took about 2m. then it continues. 
+#   total 35120 to go.
+
+# in 12m, finished ffmpeg.
+# rerun using -j30:
+#   total 32717 to go.
+#
+# in 7m, ran out of disk space.
+
+# rebuild from scratch without gcc-arm-none-eabi in container.
+#   total 102954 to go.
+#
+# in 34m14s failed Chrome, at 65% 67894/102954. fix and restart.
+# restart, total 35124 to go.
+#
+# in 24m46s failed.
+# rerun using -j1, total 1312 to go.
+# in 5m59s failed. 
+#     FAILED: out/target/product/kvim3/dex_bootjars/system/framework/arm64/boot.art
+#     patchoatd E 07-01 08:49:53 614862 614862 image_space.cc:1761] \
+#     Could not create image space with image file \
+#     'out/target/product/kvim3/dex_bootjars/system/framework/boot.art'. \
+#     Attempting to fall back to imageless running. Error was: \
+#     Failed to mmap at expected address      , mapped at 0x7fa853a00000 instead of 0x705fa000
+# https://forum.khadas.com/t/vim3-build-android-android-9-0-64-bit-failed/19285/15
+#     it suggests: [1] use kernel 5.17 instead of 5.19. [2] use ubuntu 18.04 instead of 22.
+#                  [3] modify art/runtime/mem_map.cc.
+
+# on aws c4.8xlarge ubuntu 20 use -j30
+# continue from ubuntu 22: 
+#   total 1312 to go.
+# done in 18m50s.
+
+# du -sh shows size 346G. 
+# make clean.
+# du -sh shows size 226G.
+
+# run with -j36 to build android again.
+# it took 55m56s to finish ok.
+# du -sh shows size 346G. 
+
+# on aws m6a.4xlarge ubuntu20 16vcpu 64g
+# make clean
+# du -sh shows size 226G.
+# run with -j16 to build android again. total 102952 to go.
+# it took 1h18m55s to finish ok.
+# du -sh shows size 346G. 
+
+
