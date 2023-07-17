@@ -1,0 +1,8 @@
+
+
+search adafruit circuitpython input from serial console
+https://stackoverflow.com/questions/48922189/receive-data-from-host-computer-using-circuit-python-on-circuit-playground-expre
+  use `supervisor.runtime.serial_bytes_available` from https://learn.adafruit.com/AT-Hand-Raiser/circuitpython-code
+
+
+
