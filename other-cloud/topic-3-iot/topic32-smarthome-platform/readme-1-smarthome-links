@@ -1,0 +1,32 @@
+
+open source systems
+
+
+
+search best smart home open source system
+
+https://geekflare.com/open-source-home-automation-tools/
+  [1] home assistant
+  [2] frigate
+        camera, python, opencv/tensorflow, homeassistant integration, custom model, 
+        mqtt, rtsp re-streaming, webrtc, 
+        886 forks  github/blakeblackshear/frigate
+  [3] openhab
+  [4] calaos
+        c/c++/lua, server/web/mobile/os/plc/sensor, api http-json websocket,
+        33 repos 38 forks
+  [5] domoticz
+        c/c++, , ...
+        11 repos 1.1k forks
+  [6] jeedom  php
+  [7] iobroker  js
+  [8] smarthomatic
+        device/controller/boards
+  [9] node-red
+  [10] homegenie  cs/js/python/fluent-api
+  [11] homebridge  homekit
+  [12] freedomotic  java
+
+
+
+
