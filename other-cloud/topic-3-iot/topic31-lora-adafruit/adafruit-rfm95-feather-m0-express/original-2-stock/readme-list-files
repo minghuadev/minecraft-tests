@@ -1,0 +1,50 @@
+
+$ tree -sF --charset=ascii ./
+./
+|-- [         88]  boot_out.txt
+|-- [       3734]  code.py
+|-- [      78444]  laugh.wav
+|-- [          0]  lib/
+|   |-- [          0]  adafruit_hid/
+|   |   |-- [        441]  __init__.mpy
+|   |   |-- [       1041]  consumer_control.mpy
+|   |   |-- [        482]  consumer_control_code.mpy
+|   |   |-- [       2561]  gamepad.mpy
+|   |   |-- [       1957]  keyboard.mpy
+|   |   |-- [       1305]  keyboard_layout_us.mpy
+|   |   |-- [       2176]  keycode.mpy
+|   |   `-- [       1605]  mouse.mpy
+|   |-- [          0]  adafruit_motor/
+|   |   |-- [          0]  __init__.py
+|   |   |-- [       1277]  motor.mpy
+|   |   |-- [       2797]  servo.mpy
+|   |   `-- [       2129]  stepper.mpy
+|   `-- [       1891]  neopixel.mpy
+|-- [       2798]  README.txt
+|-- [      96620]  rimshot.wav
+`-- [          0]  System Volume Information/
+    |-- [         76]  IndexerVolumeGuid
+    `-- [         12]  WPSettings.dat
+
+4 directories, 20 files
+
+
+
+$ ls -l
+-rw-r--r--       88 Dec 31  1999  boot_out.txt
+-rw-r--r--     3734 Jul 20  2020  code.py
+-rw-r--r--    78444 Oct 24  2017  laugh.wav
+drwxr-xr-x        0 Dec 31  1999  lib
+-rw-r--r--     2798 Apr 25  2018  README.txt
+-rw-rw-r--+     970 Jul 14 10:51  readme-list-files
+-rw-r--r--    96620 Oct 24  2017  rimshot.wav
+drwxr-xr-x        0 Jul 31  2020 'System Volume Information'
+
+
+$ ls -l lib/
+drwxr-xr-x      0 Jul 20  2020 adafruit_hid
+drwxr-xr-x      0 Jul 20  2020 adafruit_motor
+-rw-r--r--   1891 Jul 18  2020 neopixel.mpy
+
+
+

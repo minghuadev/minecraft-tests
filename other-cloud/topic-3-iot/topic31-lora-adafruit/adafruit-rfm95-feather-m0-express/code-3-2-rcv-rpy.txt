@@ -1,0 +1,80 @@
+import board
+import digitalio
+import time
+
+led = digitalio.DigitalInOut(board.LED)
+led.direction = digitalio.Direction.OUTPUT
+
+print("OK blinking LED for 5 seconds ...")
+tm0=time.monotonic()
+while True:
+    led.value = True
+    time.sleep(0.2)
+    led.value = False
+    time.sleep(0.75)
+    tm1 = time.monotonic()
+    if tm1-tm0 >= 4.9:
+        break
+
+# keep led on
+led.value = True
+time.sleep(0.2)
+
+
+print("OK loading SPI ...")
+
+import busio
+spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
+
+cs = digitalio.DigitalInOut(board.D5)
+reset = digitalio.DigitalInOut(board.D6)
+
+
+print("OK loading RFM9x ...")
+
+import adafruit_rfm9x
+rfm9x = adafruit_rfm9x.RFM9x(spi, cs, reset, 915.0)
+
+print("    rfm9x node %s %s" % ( str(type(rfm9x.node)), str(rfm9x.node)))
+print("    rfm9x dest %s %s" % ( str(type(rfm9x.destination)), str(rfm9x.destination)))
+print("    rfm9x txpw %s %s" % ( str(type(rfm9x.tx_power)), str(rfm9x.tx_power)))
+
+
+print("OK RFM9x sending ...")
+rfm9x.send('Hello world!')
+
+print("OK RFM9x sent .")
+
+print("OK RFM9x receiving ...")
+while True:
+    packet = rfm9x.receive(timeout=6.0)
+    if packet is not None:
+        packet_text = "<unknown>"
+        decode_ok = False
+        try:
+            packet_text = str(packet, 'ascii')
+            decode_ok = True
+        except:
+            packet_text = "<exception-decoding-ascii>"
+        print('Received: {0}'.format(packet_text), 
+                "  at rssi %d snr %s" % (rfm9x.last_rssi, str(rfm9x.last_snr)))
+        if decode_ok:
+            reply_msg = 'Received: {0}'.format(packet_text) + \
+                "  at rssi %d snr %s" % (rfm9x.last_rssi, str(rfm9x.last_snr))
+            time.sleep(0.1)
+            rfm9x.send(reply_msg)
+
+            led.value = False
+            time.sleep(0.2)
+            led.value = True
+            time.sleep(0.2)
+            led.value = False
+            led.value = True
+            time.sleep(0.2)
+            led.value = False
+            time.sleep(0.2)
+            led.value = True
+    else:
+        print("Received nothing.")
+
+
