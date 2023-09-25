@@ -5,6 +5,12 @@ initial
   created to continue cloud related stuffs.
   previous locations: 
         other-javasamples/cloud/
+                        mqtt-aws-iot
+                              ---setup and run python samples
+                        iot-framework
+                              ---survey of frameworks and platforms
+                              ---iot alternatives
+                                 2017, 2022, 2023 as late as 9/24/2023
         other-javasamples/cloud-hashpower/ 
         other-javasamples/cloud-samples/
                                     samples-cloud-1-2019

@@ -1,0 +1,36 @@
+
+2023-9-24
+
+
+search aws iot core alternatives 
+
+https://www.g2.com/products/aws-iot/competitors/alternatives
+Top 10 Alternatives to AWS IoT Recently Reviewed By G2 Community
+
+   particle
+   blynk iot platform
+
+
+
+search blynk iot alternative
+
+https://alternativeto.net/software/blynk-iot/
+Blynk IoT Alternatives
+    mainly IoT Platforms, but also Home Automation Tools or Log Management Tools
+
+
+
+search your iot solution using eclipse iot
+
+https://link.springer.com/book/10.1007/978-1-4842-8882-5
+Building Enterprise IoT Solutions with Eclipse IoT Technologies
+  An Open Source Approach to Edge Computing
+  Springer link
+
+https://www.youtube.com/watch?v=4puftTW6KlI
+Building an IoT product from scratch using Eclipse IoT Technologies
+
+https://www.youtube.com/watch?v=7lUJMLI9Lxg
+A flexible and scalable industrial IoT platform using Eclipse IoT projects
+
+
