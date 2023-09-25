@@ -1,0 +1,25 @@
+
+reference: lxc-lxd/readme-steam-2-gui
+
+  do once: edit both /etc/subuid and /etc/subgid to add this line,
+  where 1001 is the host uid and gid:
+    root:1001:1
+
+  copy lxdp2.txt to lxdp3.txt and change the name, share directory.
+  change `both 1000 1000` to `both 1001 1000`, and source socket `.../1000/...` to `.../1001/...`,
+  create the host shared directory. 
+
+  launch: 
+
+    $ lxc profile create gui2
+    $ cat lxdp3.txt | lxc profile edit gui2
+    $ lxc launch --profile default --profile gui2 ubuntu:focal gui2-ubuntu
+
+  exam: 
+    $ lxc exec gui2-ubuntu -- sudo --user ubuntu --login
+
+    ubuntu@gui2-ubuntu:~$ tail -6 /var/log/cloud-init.log
+    ubuntu@gui2-ubuntu:~$ glxgears
+    ubuntu@gui2-ubuntu:~$ pactl info
+
+

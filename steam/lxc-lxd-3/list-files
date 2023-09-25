@@ -1,0 +1,16 @@
+
+
+ls -l
+-rw-rw-r--    707 Aug 21  2021 lxdp2.txt
+-rw-rw-r--    710 Jan 30  2022 readme-general-1-lxd-gui-profile-lxdp3.txt
+-rw-rw-r--    710 Jan 30  2022 lxdp3.txt
+-rw-rw-r--    728 Jan 30  2022 readme-general-1-lxd-gui-profile
+-rw-rw-r--     54 Jan 30  2022 cmd-login
+-rw-rw-r--    710 Aug 19 08:49 lxdp4.txt
+-rw-rw-r--   1935 Aug 19 11:02 lxdp4-readme-install-steam.txt
+-rw-rw-r--    718 Aug 19 12:03 lxdp5.txt
+-rw-rw-r--   2257 Aug 26 07:34 lxdp5-readme-create.txt
+-rw-rw-r--   4498 Aug 26 15:30 lxdp5-readme-install-steam-ubunt.txt
+-rw-rw-r--      0 Sep 24 15:53 list-files
+
+
