@@ -1,0 +1,102 @@
+
+
+2023-9-25
+updates: 
+
+  python tested is 3.7.7 on windows 10.
+
+  the aws-iot-device-sdk-python-v2 when installed is called awsiotsdk.
+  the current awsiotsdk git tag is v1.19.0 plus one commit on the main branch, 
+  its installed version shows as 1.0.0.dev0 .
+
+  the installed version of awscrt is 0.19.1 . its source should be at: 
+  https://github.com/awslabs/aws-crt-python
+
+  to run the sdk pubsub sample, the samples/utils/ needs to be in python path.
+
+  put the following to a bat file to run two messages:
+
+   python pubsub.py ^
+    --endpoint a312345678abc4-ats.iot.us-east-2.amazonaws.com ^
+    --ca_file connect_device_package-wn3\root-CA.crt ^
+    --cert connect_device_package-wn3\MyIotThing2.cert.pem ^
+    --key connect_device_package-wn3\MyIotThing2.private.key ^
+    --client_id basicPubSub --topic sdk/test/python --count 2
+
+  in the end the tutorial suggests to explore: registry, shadow, rule.
+
+
+on embedded arm device with debian buster:
+
+  list of pip packages before installation in a venv: 
+
+    pip           18.1
+    pkg-resources 0.0.0
+    setuptools    40.8.0
+
+  commands to install
+
+    apt-get install cmake           ---installed cmake-3.13.4-1 and more
+    apt-get install g++             ---installed g++ armhf 8.3.0
+    pip install wheel               ---installed wheel-0.41.2
+    pip install awscrt==0.19.1      ---built whl file and installed ok
+
+
+on embedded arm device without debian:
+
+  list of pip packages before installation in a venv:
+
+    pip         19.0.3
+    setuptools  40.8.0
+
+  command to install: 
+
+    pip install <the-wheel-file-built-above>
+    pip install awsiotsdk==1.19.0
+
+  list of pip installed packages:
+
+    awscrt      0.19.1
+    awsiotsdk   1.19.0
+
+
+tips: multiple certificates
+
+  each time on aws iot console connecting a single device to an existing thing, 
+  it creates a new certificate to use. 
+
+tips: multiple devices to the same thing
+
+  search aws iot can you connect multiple devices to the same thing
+
+  stackoverflow 37576646/how-to-connect-multiple-devices-to-same-thing-in-aws-iot
+  connecting multiple devices to same thing: 
+    [1] use a different client id. same client id keeps only one connection.
+    [2] embed the device identification in topic or payload. 
+    [3] only one shadow, multiple devices cannot use shadow.
+
+  https://aws.amazon.com/iot-core/faqs/
+  how many devices can be connected to aws iot core
+    billions of devices and trillions of messages
+
+  https://docs.aws.amazon.com/iot/latest/developerguide/audit-chk-device-cert-shared.html
+  Device certificate shared
+    audit check will find certificates used by multiple device ids.
+
+  https://repost.aws/questions/QUWCca1AflSKK9P6CGQPf2JA/multiple-iot-devices-to-multiple-things
+  https://repost.aws/questions/QUH_PM8snPR7exXOo5UJ578w/does-aws-iot-allow-a-certificate-for-multiple-devices
+    While AWS IoT does support a single certificate/key used across multiple 
+    connections (things), it's an anti-pattern.
+
+  https://www.linkedin.com/pulse/parallel-mqtt-sessions-between-device-aws-iot-core-lukasz-malinowski
+  Parallel MQTT sessions between Device and AWS IoT Core
+    need to edit the policy to allow client id wildcard.
+
+  stackoverflow 59836449/how-to-connect-multiple-real-devices-to-a-single-shadow-in-aws-iot
+  multiple devices to the same shadow
+    https://www.youtube.com/watch?v=yPGPH8vMpSw
+    mimic mqtt simulator: aws test for multiple devices to same shadow
+
+    https://mqttlab.iotsim.io/aws/
+
+
