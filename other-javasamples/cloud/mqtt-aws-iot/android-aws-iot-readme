@@ -1,0 +1,41 @@
+
+
+2023-10-1
+
+
+
+search aws iot android client
+
+
+https://repost.aws/questions/QUtOYDbZWESRyCK1Y1xmuW4A/aws-iot-core-for-android-devices
+
+    it's more common for mobile apps to use Cognito identities than X.509 certificates. 
+    and to use mobile sdk or amplify to publish and subscripbe to aws iot core.
+
+    links: 
+      cognito identities 
+      https://docs.aws.amazon.com/iot/latest/developerguide/cognito-identities.html
+
+      mobile sdk
+      https://docs.amplify.aws/sdk/pubsub/getting-started/q/platform/android/
+
+      amplify
+      https://docs.amplify.aws/lib/pubsub/getting-started/q/platform/js/
+
+
+
+aws iot console start package: 
+
+  connect one device from aws console, and choose linux, java. 
+  the start.sh contains: 
+
+    package: aws-iot-device-sdk-java-v2
+    include: software.amazon.awssdk.crt*
+
+    command line: 
+        mvn exec:java -pl samples/BasicPubSub \
+                -Dexec.mainClass=pubsub.PubSub \
+                -Dexec.args='--endpoint abcd1234-ats.iot.us-east-2.amazonaws.com --client_id sdk-java --topic sdk/test/java --ca_file ../root-CA.crt --cert ../MyIotThing.cert.pem --key ../MyIotThing.private.key'
+
+
+
