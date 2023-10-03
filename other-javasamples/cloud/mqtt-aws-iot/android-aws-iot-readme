@@ -24,7 +24,7 @@ https://repost.aws/questions/QUtOYDbZWESRyCK1Y1xmuW4A/aws-iot-core-for-android-d
 
 
 
-aws iot console start package: 
+aws iot service console start package: 
 
   connect one device from aws console, and choose linux, java. 
   the start.sh contains: 
@@ -37,5 +37,37 @@ aws iot console start package:
                 -Dexec.mainClass=pubsub.PubSub \
                 -Dexec.args='--endpoint abcd1234-ats.iot.us-east-2.amazonaws.com --client_id sdk-java --topic sdk/test/java --ca_file ../root-CA.crt --cert ../MyIotThing.cert.pem --key ../MyIotThing.private.key'
 
+
+
+github aws/aws-iot-device-sdk-java-v2
+
+  search issues: android studio
+    issue 87: how to build crt
+      build for "Failed to resolve: software.amazon.awssdk.crtandroid:0.6.5"
+
+        git clone git@github.com/awslabs/aws-crt-java
+        cd aws-crt-java
+        git checkout v0.6.5
+        cd android
+        ./gradlew build
+        ./gradlew publishToMavenLocal
+
+        ls -R .m2/repository/software/amazon/awssdk/crt
+
+  build and publish the sdk to maven local. modify its gradle.build to work-around some bugs.
+  build the sample app, it builds ok.
+
+    if we don't build and publish sdk to maven local, the sample won't build. 
+    though we can find the sdk here: 
+        https://central.sonatype.com/artifact/software.amazon.awssdk.iotdevicesdk/aws-iot-device-sdk?smo=true
+        https://repo1.maven.org/maven2/software/amazon/awssdk/iotdevicesdk/aws-iot-device-sdk/1.17.0/
+
+  removed the project directory, and re-did it again. the sample app builds without building sdk first.
+
+    speculation: previously attempted to build the sdk first, and it failed. the failure might have 
+                 left some damaged/temporary files in the ide. that might have caused the sample app
+                 build to fail.
+
+  the android sample app has a bug in its build.gradle in sample paths, missing a slash in all samples.
 
 
