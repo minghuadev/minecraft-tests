@@ -67,7 +67,22 @@ github aws/aws-iot-device-sdk-java-v2
     speculation: previously attempted to build the sdk first, and it failed. the failure might have 
                  left some damaged/temporary files in the ide. that might have caused the sample app
                  build to fail.
+                 another possibility could be that the local build has left the library installed 
+                 at ~/.m2/... location.
 
   the android sample app has a bug in its build.gradle in sample paths, missing a slash in all samples.
+
+  from issue 346
+
+    https://mvnrepository.com/artifact/software.amazon.awssdk.crt/aws-crt-android
+    https://docs.gradle.org/current/userguide/dependency_downgrade_and_exclude.html#sec:excluding-transitive-deps
+
+  used aws libraries: from the android studio it can be seen 
+        gradle: software.amazon.awssdk.crt:aws-crt-android:0.27.3@aar
+        gradle: software.amazon.awssdk.iotdevicesdk:aws-iot-device-sdk-android:1.17.0@aar
+
+  search online for where the android studio keeps dependencies, two locations:
+        one that the ~/.gradle/caches/modules-2/file2-2.1/, where we can find the aws-crt-android-0.27.3.aar .
+        another at ~/.m2/repository/... where we can find the aws-iot-device-sdk-android-1.17.0.aar .
 
 
