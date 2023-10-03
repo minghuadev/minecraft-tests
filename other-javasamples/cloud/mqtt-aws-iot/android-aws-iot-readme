@@ -86,3 +86,14 @@ github aws/aws-iot-device-sdk-java-v2
         another at ~/.m2/repository/... where we can find the aws-iot-device-sdk-android-1.17.0.aar .
 
 
+
+to use these libraires in nordic blinky: may need to pull the version catalog local
+
+  https://devzone.nordicsemi.com/f/nordic-q-a/96818/gradle-build-failed-android-nrf-blinky
+  https://github.com/NordicSemiconductor/Android-Gradle-Plugins
+
+  because the type of nrf-blinky versionCatalogs.create() is a VersionCatalogBuilder, 
+  searching for "kotlin VersionCatalogBuilder", turns up this issue: 
+    https://github.com/gradle/gradle/issues/20383 
+
+
