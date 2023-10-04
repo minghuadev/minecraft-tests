@@ -85,15 +85,34 @@ github aws/aws-iot-device-sdk-java-v2
         one that the ~/.gradle/caches/modules-2/file2-2.1/, where we can find the aws-crt-android-0.27.3.aar .
         another at ~/.m2/repository/... where we can find the aws-iot-device-sdk-android-1.17.0.aar .
 
+  verify:  under samples/Android/app run  ./gradlew.bat :dependencies  to see dep graph and configuration
 
 
-to use these libraires in nordic blinky: may need to pull the version catalog local
+
+use these libraires in nordic blinky:
 
   https://devzone.nordicsemi.com/f/nordic-q-a/96818/gradle-build-failed-android-nrf-blinky
   https://github.com/NordicSemiconductor/Android-Gradle-Plugins
 
   because the type of nrf-blinky versionCatalogs.create() is a VersionCatalogBuilder, 
-  searching for "kotlin VersionCatalogBuilder", turns up this issue: 
+  searching for "kotlin VersionCatalogBuilder", turns up this issue: for multiple files
     https://github.com/gradle/gradle/issues/20383 
+
+  look at the  settings.gradle.kts
+  search android studio version catalog dependencyResolutionManagement
+  https://engineering.teknasyon.com/a-simple-guide-to-version-catalog-implementation-in-android-17d0ff3fd1f
+    a simple guide to version catalog implementation in android using toml format
+
+    https://docs.gradle.org/current/userguide/platforms.html
+    the official gradle doc
+
+  result summary: 
+        the nordic blinky uses gradle 7.4, that has version catalog stable.
+        adding to the  settings.gradle.kts  below the  from("no.nordic...:1.1.3")  line: 
+                library("<alias>", "<group>", <artifacts>).version("1.17.0")
+        adding to the  app/build.gradle.kts :  replace "-" with "." in alias
+                api(libs.<alias>)
+        after gradle sync, verify the external library versions of crt and iot-device-sdk.
+
 
 
