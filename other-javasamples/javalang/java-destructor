@@ -1,0 +1,14 @@
+
+2023-10-14
+
+
+search java destructor
+
+
+https://stackoverflow.com/questions/171952/is-there-a-destructor-for-java
+
+  [1] use finalize for a sanity check, use a custom close() to clean up.
+  [2] try-with-resource.
+
+
+
