@@ -64,11 +64,13 @@ github aws/aws-iot-device-sdk-java-v2
 
   removed the project directory, and re-did it again. the sample app builds without building sdk first.
 
-    speculation: previously attempted to build the sdk first, and it failed. the failure might have 
+    speculation: 
+            [1] previously attempted to build the sdk first, and it failed. the failure might have 
                  left some damaged/temporary files in the ide. that might have caused the sample app
                  build to fail.
-                 another possibility could be that the local build has left the library installed 
+            [2] another possibility could be that the local build has left the library installed 
                  at ~/.m2/... location.
+                 more likely it is [2] not [1].
 
   the android sample app has a bug in its build.gradle in sample paths, missing a slash in all samples.
 
@@ -84,6 +86,9 @@ github aws/aws-iot-device-sdk-java-v2
   search online for where the android studio keeps dependencies, two locations:
         one that the ~/.gradle/caches/modules-2/file2-2.1/, where we can find the aws-crt-android-0.27.3.aar .
         another at ~/.m2/repository/... where we can find the aws-iot-device-sdk-android-1.17.0.aar .
+
+    search for files named "aws*" and with "crt" or "iot", under ~/.gradle/caches and ~/.m2/ ,
+    found the "-android-" files. guess those were from previous maven local install
 
   verify:  under samples/Android/app run  ./gradlew.bat :dependencies  to see dep graph and configuration
 
@@ -110,9 +115,54 @@ use these libraires in nordic blinky:
         the nordic blinky uses gradle 7.4, that has version catalog stable.
         adding to the  settings.gradle.kts  below the  from("no.nordic...:1.1.3")  line: 
                 library("<alias>", "<group>", <artifacts>).version("1.17.0")
+            e.g.: 
+            settings.gradle.kts
+                dependencyResolutionManagement {
+                    ...
+                    versionCatalogs { // MutableVersionCatalogContainer
+                        create("libs") { // VersionCatalogBuilder
+                            from("no.nodic...-catalog:1.1.3" /* dependencyNotation */ )
+              +             library("aws-iot-device-sdi" /* alias */,
+              +                  "software.amazon.awssdk.iotdevicesdk" /* group */, 
+              +                  "aws-iot-device-sdk-android" /* artifact */).version("1.17.0")
+
         adding to the  app/build.gradle.kts :  replace "-" with "." in alias
                 api(libs.<alias>)
+            e.g.: 
+            build.gradle.kts multiple files in different component directories
+                dependencies {
+                    ...
+                    implementation(project(":awsiotsamples" /* path */)
+              +     //api('software.amazon.awssdk.iotdevicesdk:aws-iot-device-sdk-android:1.17.0')
+              +     api(libs.aws.iot.device.sdk)
+                    implementation(libs.nordic.theme)
+
         after gradle sync, verify the external library versions of crt and iot-device-sdk.
+
+
+
+upgrade android studio: 
+
+  2023-11-16
+  previously used android studio version 2021.3.1 built on aug 31 2022, from .16-windows.zip file.
+  upgrade to android studio version 2022.3.1 pathc 4 built on nov 13 2023, from .22 zip file.
+
+  fix: 
+    it failed to find dependency
+        fix by: 
+              -                  "aws-iot-device-sdk-android" /* artifact */).version("1.17.0")
+              +                  "aws-iot-device-sdk"         /* artifact */).version("1.17.5")
+
+        so the maven central version does not have "-android" in its name.
+        previous builds could have been ok if using the non-"android" names, without maven local. 
+
+        it also updates the aws-crt to 0.28.5
+
+  search maven aws-crt-android, it turns out the central holds two crt names: 
+        https://mvnrepository.com/artifact/software.amazon.awssdk.crt
+          one named aws-crt, another aws-crt-android
+
+  search maven aws-iot-device-sdk, it turns out no -android version.
 
 
 
