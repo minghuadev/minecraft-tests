@@ -1,0 +1,35 @@
+
+
+search python encryption
+
+https://www.geeksforgeeks.org/how-to-encrypt-and-decrypt-strings-in-python/
+
+  use cryptography.fernet for aes
+
+
+
+search python ecdh
+
+https://cryptobook.nakov.com/asymmetric-key-ciphers/ecdh-key-exchange-examples
+
+  ecdh exchange: use tinyec
+
+https://cryptobook.nakov.com/asymmetric-key-ciphers/ecc-encryption-decryption
+
+  encryption: use tinyec and pycryptodome
+
+https://github.com/alexmgr/tinyec
+
+
+
+search python cryptography vs pycryptodome
+
+https://www.reddit.com/r/Python/comments/5gn3q8/what_crypto_library_should_one_use_in_python/?rdt=61571
+
+  criptography and pynacl
+  libnacl
+  pyaes rsa
+  passlib
+
+
+
