@@ -1,0 +1,18 @@
+
+
+search linux encryption library builtin
+
+
+
+https://blog.cloudflare.com/the-linux-crypto-api-for-user-applications
+
+  /proc/crypto list kernel crypto modules and drivers
+
+
+  compile and run the sample: 
+
+    $ gcc -o openssl openssl-crypto-sample.c -lcrypto
+    $ ./openssl
+    OpenSSL: 3758.60 Mb/s
+
+
