@@ -1,0 +1,95 @@
+#!/bin/bash
+# docker-gen.bash
+
+# special suffix for user name and directories
+#   e.g. "u7" will create:
+#          rk1808u7    --docker guest user name
+#          rkimgu7     --docker image name
+#          rkbu7       --docker container name
+ux="uu6sqlite3"
+
+
+echo Creating bb.dockerfile ...
+
+# create bb.dockerfile:
+cat << EOF1 > bb.dockerfile
+
+ # debian buster 10.13 at hub.docker.com/_/debian
+ #FROM debian:10.13-slim
+ FROM debian:buster-20231218-slim
+
+ RUN apt-get update
+ RUN apt-get install -y git tree openssh-client
+ RUN apt-get install -y file vim procps bzip2
+ RUN apt-get install -y lsb-release
+
+ # tzdata
+   # preseed tzdata, update package index, upgrade packages and install needed software
+   RUN truncate -s0 /tmp/preseed.cfg && \
+       (echo "tzdata tzdata/Areas select America" >> /tmp/preseed.cfg) && \
+       (echo "tzdata tzdata/Zones/America select Los_Angeles" >> /tmp/preseed.cfg) && \
+       debconf-set-selections /tmp/preseed.cfg && \
+       rm -f /etc/timezone /etc/localtime && \
+       apt-get update && \
+       DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
+       apt-get install -y tzdata
+   # cleanup of files from setup
+   RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ # time needed for the rk1808 recovery build.sh script:
+ RUN apt-get update
+ RUN apt-get install -y time
+
+ # for example.js:
+ RUN apt-get install -y wget
+ #RUN apt-get install -y nodejs npm
+
+ # for python3 sqlite3:
+ RUN (echo; echo Installing python3 ... ; echo)
+ RUN apt-get install -y python3
+ RUN apt-get install -y python3-venv
+
+ ARG UNAME=rk1808${ux}
+
+ ARG UID=9999
+ ARG GID=9999
+
+ RUN groupadd -g \$GID \$UNAME
+ RUN useradd -m -u \$UID -g \$GID -s /bin/bash \$UNAME
+
+ RUN rm /bin/sh && ln -s bash /bin/sh
+ RUN cp -a /etc /etc-original && chmod a+rw /etc
+
+ USER \$UNAME
+
+ CMD /bin/bash
+EOF1
+
+set -ex
+
+echo Docker build off bb.dockerfile ...
+docker build --build-arg UID=$(id -u) --build-arg GID=$(id -g) \
+     -f bb.dockerfile  -t rkimg${ux} .
+
+echo Docker build finished ...
+
+
+echo
+echo Creating sh-create.bash file ...
+
+cat << EOF2 > sh-create.bash
+#!/bin/bash
+
+if [ ! -d sharedfiles ]; then mkdir sharedfiles; fi
+if [ ! -d buildfiles ]; then mkdir buildfiles; fi
+
+    docker run -td \
+         -v $(pwd)/sharedfiles:/home/rk1808${ux}/sharedfiles \\
+         -v $(pwd)/buildfiles:/home/rk1808${ux}/buildfiles   \\
+         --name rkb${ux}  rkimg${ux}
+
+EOF2
+
+echo Created sh-create.bash file ...
+
+
