@@ -1,0 +1,68 @@
+
+search roll your own home automation
+2023-12-31
+
+
+https://www.safewise.com/blog/home-automation-guide-for-beginners/
+diy home automation guide for beginners
+  by john carlson may 4 2023
+
+
+https://arstechnica.com/civis/threads/diy-off-grid-home-automation.1495271/
+diy or off-grid home automation
+  discussions, aug 18 2023
+
+
+https://www.reddit.com/r/selfhosted/comments/d6xo4v/rollyourown_home_security_is_this_a_thing/?rdt=37332
+roll-your-own home security: is this a thing
+  4 years ago
+
+https://www.reddit.com/r/homeautomation/comments/f17q0h/starting_from_scratch/
+starting from scratch
+  4 years ago
+
+  one says: use homeassistant or hubitat
+  https://community.hubitat.com/t/will-hubitat-continue-to-be-a-friend-of-developers/60892
+
+https://www.reddit.com/r/smarthome/comments/sg2h7j/build_a_webapp_for_my_home_automation_system/
+build a webapp for my home automation system
+  2 years ago
+
+https://www.reddit.com/r/homeautomation/comments/122j4bk/just_starting_out_with_home_automation_have_made/
+just starting out with home automation, have made some mistakes
+  9 mo ago
+
+  calex bulb using beken chip since 2020: flash bekeopenbeken/libretuya via ota
+  wiki: https://www.reddit.com/r/homeautomation/wiki/index/
+ **
+
+
+https://reolink.com/blog/diy-smart-home-automation-system/
+diy smart home automation system: the 2024 ultimate guide
+
+
+https://forum.allaboutcircuits.com/threads/any-better-home-automation-system-recommend.190713/
+any better home automation system recommended
+  dec 3 2022
+
+  ya'akov dec 4: 
+    the most versatile is a roll-your-own system based on node-red with or without home assistant.
+    this is also the most work.
+
+    Cheap and cheerful is Sonoff. Flexible but plug-and-play is Smarthings.
+ **
+    Well made and somewhat universal is Shelly.
+    Plug-and-play but not particularly end-hacker friendly is Amazon Alexa.
+    Apple user focused and nicely done is HomeKit (also the most expensive in the end).
+
+ search sonoff protocol
+    https://sonoff.tech/diy-developer/
+
+
+https://makezine.com/article/home/connected-home/set-up-your-own-private-smart-home/
+set up your own private smart home
+
+  mozilla webthings
+ **
+
+
