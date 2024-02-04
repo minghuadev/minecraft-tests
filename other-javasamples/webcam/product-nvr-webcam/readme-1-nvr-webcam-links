@@ -1,0 +1,67 @@
+
+2024-2-3
+
+
+
+search open source ip camera chip set
+
+
+https://news.ycombinator.com/item?id=30545652
+Hacker News
+Ask HN: Self-hosted open source IP security cameras? 
+
+    larsla on March 3, 2022
+    I use Frigate (https://frigate.video/) on a rPI for recording and doing person detection for 3 Reolink cameras. 
+    Connecting that to HomeAssistant for dashboard and notifications. 
+    And here is the video that introduced me to Frigate: 
+
+        https://www.youtube.com/watch?v=pqDCEZSVeRk
+        EVEN MORE Free Local Object Detection with Home Assistant - Frigate Install
+        by Evenything Smart Home
+
+     	
+    lormayna on March 3, 2022
+    Use motion https://motion-project.github.io/
+
+    eternityforest on March 4, 2022
+    I tried pretty much all of them, now I'm working on my own NVR 
+    (https://eternityforest.com/doku/doku.php?id=tech:nvr).
+    For the cameras themselves, Amcrest is good enough for me, but the PineCube looks like it has potential. 
+
+ 	
+    zikduruqe on March 4, 2022
+    I am running Wyze v2 cameras with RTSP firmware on them, using Homebrige and Scrypted. 
+    People are also liking camera.ui too.
+
+        Homebridge - https://github.com/homebridge/homebridge
+        scrypted - https://github.com/koush/scrypted/wiki/Installation:-Docker-...
+        camera.ui - https://github.com/SeydX/camera.ui 
+
+
+https://www.microseven.com/product/4MP-5MP-Open-Source-Remote-Managed-M7B5MP-SWSAA.html
+Microseven Professional Open Source 5MP Ultra HD WiFi or Wired 
+
+
+
+search open source ip camera hardware
+
+
+https://www.instructables.com/DIY-Professional-Open-Source-Night-Vision-Security/
+DIY Professional Open Source Night Vision Security Camera
+by Blackir
+
+    Raspberry Pi 3B + 
+    Cooling kit with thermal paste
+    POE injector 12/24/48V DC power source
+    DC/DC converter LM2596HVS high voltage which is able to support up to 57V input.
+        the card is equipped with a potentiometer to precisely adjust the output voltage.
+    Waterproof PG13 cable glande
+    Anti-humidity bags
+    MotionEyeOS
+    ELP 5mp 2592x1944 IR Camera plug with automatic IR CUT Night Vision
+
+    AndrewA167: 
+    I've built a MotionEyeOS camera using parts off Amazon - a CanaKit Pi Zero W and a SainSmart camera module 
+    - for about $40. 
+
+
