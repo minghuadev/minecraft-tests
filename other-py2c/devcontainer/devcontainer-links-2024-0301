@@ -1,0 +1,97 @@
+
+
+reading frigate/.devcontainer/devcontainer.json
+search ghcr.io devcontainer
+https://medium.com/cwan-engineering/reproducible-local-development-with-dev-containers-0ed5fa850b36
+  Reproducible Local Development with Dev Containers
+   by Clearwater Analytics Engineering oct 19 2023
+
+search docker devcontainer command line
+https://github.com/devcontainers/cli
+
+search devcontainer cli in python
+https://xebia.com/blog/how-to-create-a-devcontainer-for-your-python-project/
+  How to create a Devcontainer for your Python project
+   by Jeroen Overschie nov 21 2022
+   **good starting point**
+    code:
+        https://github.com/godatadriven/python-devcontainer-template
+    server: 
+        the devcontainer launches a vscode server when launched by vscode: 
+        https://code.visualstudio.com/docs/remote/vscode-server
+    features:
+    prebuild:
+https://www.youtube.com/watch?v=Fc6TAahZ1Pk
+  Different Ways to Run Dev Containers: VS Code vs CLI
+    cli:
+        npm install -g @devcontainers/cli
+        devcontainer --help
+        git clone https://github.com/microsoft/vscode-remote-try-rust
+        devcontainer up --wokrspace-folder ./vscode-remote-try-rust/
+        devcontainer exec --workspace-folder ./vscode-remote-try-rust/ cargo run
+https://github.com/devcontainers/cli
+    ref https://github.com/microsoft/vscode/wiki/How-to-Contribute
+        need node >=18.15.x and <19
+        **use latest 18.19.1**
+    
+experiment cli: 
+    ubuntu 20.04, free avail 524M, space avail 12G
+        note: no need for the host nodejs and npm. can use nvm directly.
+    
+    $ sudo apt install nodejs
+    $ node --version
+    v10.19.0
+    $ sudo apt install npm
+    $ npm --version
+    6.14.4
+
+    ubuntu, mem 496M, disk 12G
+    
+    $ wget https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh
+    $ bash install.sh
+    
+    exit and get back into the terminal, refer to github.com/devcontainers/cli, 
+    $ nvm ls-remote
+    $ nvm install 18.19.1
+    $ node --version
+    v18.19.1
+    $ npm --version
+    10.2.4
+
+    $ npm install @devcontainers/cli
+
+experiment image history:
+
+    $ docker pull python:3.10
+    3.10: Pulling from library/python
+    Digest: sha256:b54e76c629a98430ac9c92e4f6bddeb672396a895b44a85022d12ee2f7239144
+    Status: Downloaded newer image for python:3.10
+    docker.io/library/python:3.10
+
+  check the image hash on hub.docker.com to find the exact image: 
+    image digest: 0833eb3c is shown on the web for linux/arm64/v8 python:3.10
+    os/arch=linux/arm64/v8 digest 0833eb3c is also shown for 3.10.13-bookworm
+    their layers on the web also matche
+
+  the "devcontainer up" for python above shows the exact sha256 hash. thus it must be the same.
+
+
+search linux docker tcp api
+https://serverfault.com/questions/843296/how-do-i-expose-the-docker-api-over-tcp
+
+    solution 1: 
+        on a Ubuntu 16.04.2, edit /lib/systemd/system/docker.service into this line: 
+            ExecStart=/usr/bin/docker daemon -H fd:// -H tcp://0.0.0.0:
+        then
+            systemctl daemon-reload
+            systemctl restart docker.service
+        on ubuntu 18.04: 
+            ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:4243
+        or run "systemctl edit docker.service" to modify it. see: 
+          https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units#editing-unit-files
+        on ubuntu 20.04 the original line is: 
+          ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+    solution 2: configure systemd to override the unit with tls
+
+

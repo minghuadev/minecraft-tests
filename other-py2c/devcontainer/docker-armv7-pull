@@ -1,0 +1,12 @@
+
+aws t4g is an aarch64
+it can run armv7hf docker containers.
+
+
+to pull an arm32/v7 debian buster image: 
+
+
+docker pull --platform linux/arm/v7 debian:buster-20240211-slim
+
+
+
