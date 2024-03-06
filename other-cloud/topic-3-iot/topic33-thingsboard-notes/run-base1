@@ -1,0 +1,32 @@
+#!/bin/bash
+
+
+loopcnt=0
+while true; do
+
+	loopcnt=$(( $loopcnt + 1 ))
+	m=`date +%M`
+	n=$(( ($m % 10) + 1 ))
+	if [ $n -lt 30 ]; then
+		t=$(( 30 - $n ))
+		echo t is 30 minus n
+	else
+		t=$n
+		echo t is n
+	fi
+	u=`date +%s`
+
+ echo; echo -n loopcnt $loopcnt '  ' ; echo -n `date|xargs` '  ' ; echo data $t
+ curl -v -X POST http://localhost:8080/api/v1/g10aKMMqAku8O3aEU5fH/telemetry \
+	 --header Content-Type:application/json --data \
+	 "{temperature:${t},unixtime:${u},loopcnt:${loopcnt}}"
+
+ if [ $loopcnt -le 10 ]; then
+	 sleep 60
+ else
+	 break
+ fi
+done
+
+
+

@@ -1,0 +1,21 @@
+
+~/penvtb$ source bin/activate
+
+
+(penvtb) 
+~/penvtb$ pip list
+Package       Version
+------------- -------
+paho-mqtt     1.6.1
+pip           20.0.2
+pkg-resources 0.0.0
+setuptools    44.0.0
+wheel         0.42.0
+
+
+(penvtb) 
+~/penvtb$ python --version
+Python 3.8.10
+
+
+

@@ -1,0 +1,22 @@
+
+
+2024-3-4
+
+
+ls -lrt
+
+-rw-r--r--  1         354 Jan 23 10:24 tb-setup.sh
+-rw-r--r--  1         304 Jan 23 11:08 tb-demo-device
+-rwxr-xr-x  1         552 Jan 24 11:56 run-base1*
+-rwxr-xr-x  1         410 Jan 24 12:30 run-base1-low*
+-rwxr-xr-x  1         410 Jan 24 12:31 run-base1-hi*
+-rwxr-xr-x  1        1154 Jan 26 11:12 run-base1-past10*
+-rw-r--r--  1        1894 Feb  1 20:13 tb-demo-account-txt
+-rwxr-xr-x  1        5352 Feb  6 09:51 run-base2-paho-0.py*
+-rwxr-xr-x  1        5863 Feb  6 10:55 run-base2-paho.py*
+-rw-r--r--  1         265 Mar  1 20:15 penv-log
+-rw-r--r--  1  197121 746 Mar  4 16:43 tb-images
+-rw-r--r--  1           0 Mar  4 16:25 list-files
+
+
+

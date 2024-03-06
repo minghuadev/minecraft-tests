@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+loopcnt=0
+while true; do
+
+	loopcnt=$(( $loopcnt + 1 ))
+	m=`date +%M`
+	n=$(( ($m % 10) + 1 ))
+	u=`date +%s`
+	t=10
+
+ echo; echo -n loopcnt $loopcnt '  ' ; echo -n `date|xargs` '  ' ; echo data $t
+ curl -v -X POST http://localhost:8080/api/v1/g10aKMMqAku8O3aEU5fH/telemetry \
+	 --header Content-Type:application/json --data \
+	 "{temperature:${t},unixtime:${u},loopcnt:${loopcnt}}"
+
+	 break
+done
+
+
+

@@ -1,0 +1,68 @@
+#!/bin/bash
+
+
+u0=`date +%s`
+
+s0=`date +%S`
+while true; do
+	s1=`date +%S`
+	if [ $s1 -le 30 ]; then
+		echo now second $s1 , wait ...
+		sleep 1
+	else
+		break
+	fi
+done
+while true; do
+	s1=`date +%S`
+	if [ $s1 -ge 30 ]; then
+		echo now second $s1 , wait ...
+		sleep 1
+	else
+		break
+	fi
+done
+
+m0=`date +%M`
+echo m0 $m0
+if [ $m0 -lt 10 ]; then
+	if [ "x$m0" == "x08" ]; then
+		m0=8
+		echo m0 $m0 modified
+	elif [ "x$m0" == "x09" ]; then
+		m0=9
+		echo m0 $m0 modified
+	fi
+fi
+m1=m0
+
+loopcnt=0
+while true; do
+	loopcnt=$(( $loopcnt + 1 ))
+	m1=$(( $m1 + 1 ))
+	n=$(( ($m1 % 10) + 1 ))
+	if [ $n -lt 30 ]; then
+		t=$(( 30 - $n ))
+		echo t is 30 minus n $n
+	else
+		t=$n
+		echo t is n $n
+	fi
+	u=$(( $u0 - (10 - $loopcnt) * 60 ))
+	s=$(( $u * 1000 ))
+	 echo "{ts:$s,values:{temperature:${t},unixtime:${u},loopcnt:${loopcnt}}}"
+
+ echo; echo -n loopcnt $loopcnt '  ' ; echo -n `date|xargs` '  ' ; echo data $t
+ curl -v -X POST http://localhost:8080/api/v1/g10aKMMqAku8O3aEU5fH/telemetry \
+	 --header Content-Type:application/json --data \
+	 "{ts:$s,values:{temperature:${t},unixtime:${u},loopcnt:${loopcnt}}}"
+
+ if [ $loopcnt -le 10 ]; then
+	 sleep 1
+ else
+	 break
+ fi
+done
+
+
+

@@ -1,0 +1,27 @@
+
+2024-3-4
+
+
+docker images: 
+
+    REPOSITORY                   TAG       IMAGE ID       CREATED         SIZE
+    thingsboard/tb-postgres      latest    fccc535c4705   2 months ago    1.16GB
+
+
+docker image inspect: 
+
+    $ docker image inspect fccc535c4705
+    [
+        {
+            "Id": "sha256:fccc535c47058cb5713f3cd1658c9a2db32d3dd62c28946664955d29e6ea6668",
+            "RepoTags": [
+                "thingsboard/tb-postgres:latest"
+            ],
+            "RepoDigests": [
+                "thingsboard/tb-postgres@sha256:edbf6e988274d7100f8f48ffe01abad4c0118f72c8f5804ebb9be1bd3add25e1"
+            ],
+            "Parent": "",
+            "Comment": "buildkit.dockerfile.v0",
+            "Created": "2023-12-28T09:25:57.368277758Z",
+
+

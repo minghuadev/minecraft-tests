@@ -1,0 +1,60 @@
+
+
+These commands install ThingsBoard and load demo data and accounts.
+
+ThingsBoard UI will be available using the URL: http://localhost:8080. 
+You may use username tenant@thingsboard.org and password tenant. 
+More info about demo accounts is available here.
+
+
+Default system administrator account:
+
+    login - sysadmin@thingsboard.org.
+    password - sysadmin.
+
+Default tenant administrator account:
+
+    login - tenant@thingsboard.org.
+    password - tenant.
+
+Demo tenant customers:
+
+    Customer A users - customer@thingsboard.org or customerA@thingsboard.org.
+    Customer B users - customerB@thingsboard.org.
+    Customer C users - customerC@thingsboard.org.
+    all users have “customer” password.
+
+
+Tenant devices
+
+    Test Device A1, A2, A3 - belong to Customer A. Access tokens: A1_TEST_TOKEN, 
+        A2_TEST_TOKEN and A3_TEST_TOKEN.
+    Test Device B1 - belong to Customer B. Access token: B1_TEST_TOKEN.
+
+    Test Device C1 - belong to Customer C. Access token: C1_TEST_TOKEN.
+    DHT11 Demo Device - created for temperature and humidity upload sample applications. 
+        Access token: DHT11_DEMO_TOKEN
+    Raspberry Pi Demo Device - created for GPIO control sample application. 
+        Access token: RASPBERRY_PI_DEMO_TOKEN
+
+
+Dashboards
+
+    Temperature & Humidity Demo Dashboard - created for temperature and humidity
+        upload sample applications 
+        [ https://thingsboard.io/docs/samples/nodemcu/temperature/ ].
+
+    Raspberry PI GPIO Demo Dashboard - created for Raspberry Pi GPIO control 
+        sample application [ https://thingsboard.io/docs/samples/raspberry/gpio/ ].
+
+
+Rule Chains
+
+    There is predefined Rule Chain for storing all incoming telemetry and attribute
+        updates. 
+    All other incoming requests just logged. 
+    Refer to other documentations: Rule Engine Getting Started, Rule Engine Overview, 
+        Rule Engine Tutorials.
+
+
+
