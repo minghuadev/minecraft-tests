@@ -1,0 +1,31 @@
+
+2024-3-4
+
+
+ls -l
+
+-rwxr-xr-x  1  186 Mar  1 19:46 bb-cmd*
+-rw-r--r--  1  741 Mar  2 07:58 build-log-part2
+-rw-r--r--  1  908 Mar  1 19:17 env-list-versions-logged
+-rw-r--r--  1  845 Mar  2 08:07 failure-1-compose-file
+-rw-r--r--  1 2513 Mar  1 20:03 failure-2-start-interval
+-rw-r--r--  1 2236 Mar  1 20:04 failure-3-base_host
+-rw-r--r--  1 2087 Mar  1 20:04 failure-4-build-nginx
+-rw-r--r--  1 2106 Mar  1 20:05 failure-5-build-nginx
+-rw-r--r--  1 1990 Mar  1 20:06 failure-6-go2rtc
+-rw-r--r--  1 2195 Mar  1 20:13 failure-7-nproc
+-rw-r--r--  1 4002 Mar  1 20:08 failure-8-install_26_overlay
+-rw-r--r--  1 2198 Mar  1 20:08 failure-9-install_deps
+-rw-r--r--  1 3785 Mar  1 20:09 failure-a-wheels
+-rw-r--r--  1 2433 Mar  1 20:09 failure-b-requirements-dev
+-rw-r--r--  1 2752 Mar  1 20:10 failure-c-dev-bus-usb
+-rw-r--r--  1 2708 Mar  1 20:11 failure-d-known_hosts
+-rw-r--r--  1 2662 Mar  1 20:12 failure-e-known_hosts
+-rw-r--r--  1 2716 Mar  1 20:12 failure-f-make
+-rw-r--r--  1  456 Mar  2 07:59 failure-g-non-entry
+-rw-r--r--  1 2206 Mar  4 19:49 frigate-1-devcontainer.txt
+-rw-r--r--  1 9587 Mar  1 19:54 xdiff-part2
+-rw-r--r--  1    0 Mar  4 19:52 list-files
+
+
+

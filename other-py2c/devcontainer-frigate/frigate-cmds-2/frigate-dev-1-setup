@@ -1,0 +1,33 @@
+
+2024-3-4
+frigate-dev-1-setup
+
+
+pre-setup spaces in /home/devuser
+
+    df -h .      used 136G   avail 87G
+    free                     avail 14,514,876
+    du -sh .     15M    .cache 14M  .config 140K  .gnupg 16K  .local 548K  .ssh 4K
+    du -sh /var/lib/docker   40G
+
+install docker-compose docker-buildx
+
+    df -h .      used 137G   avail 86G
+
+after started devcontainer in vscode
+
+    df -h .      used 150G   avail 73G
+    free                     avail 13,138,924
+    du -sh .     2.0G
+    du -sh /var/lib/docker   55G
+
+versions: 
+
+    ubuntu 20.04.6, kernel 5.4.0-97
+    docker 24.0.5, docker-compose 1.25.0, docker-buildx 0.11.2
+
+    vscode 1.87.0 commit 019f4d14 date 2024-02-27 electron 27.3.2 node.js 18.17.1
+        in downloaded file code-stable-x64-1709077346.tar.gz
+    devcontainers extension v0.348.0
+
+

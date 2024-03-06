@@ -1,0 +1,28 @@
+
+
+After this operation, 1630 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bullseye/main amd64 make amd64 4.3-4.1 [396 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 396 kB in 0s (5244 kB/s)
+Selecting previously unselected package make.
+(Reading database ... 18926 files and directories currently installed.)
+Preparing to unpack .../make_4.3-4.1_amd64.deb ...
+Unpacking make (4.3-4.1) ...
+Setting up make (4.3-4.1) ...
+Removing intermediate container 58677956d69f
+ ---> 6f16da398625
+Step 100/130 : RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspace/frigate/requirements-dev.txt     pip3 install -r requirements-dev.txt
+ERROR: Service 'devcontainer' failed to build: the --mount option requires BuildKit. Refer to https://docs.docker.com/go/buildkit/ to learn how to build images with BuildKit enabled
+Error: Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709338776958.yml build
+    at G0 (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:525)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async itA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:2497)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3170)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+    at async erA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11010)
+{"outcome":"error","message":"Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709338776958.yml build","description":"An error occurred building the Docker Compose images."}
+
+
+

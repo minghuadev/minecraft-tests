@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# uncomment this to remove previous container: 
+#EXT_ARG="--remove-existing-container"
+
+export DOCKER_BUILDKIT=1
+devcontainer up --workspace-folder ./frigate/  ${EXT_ARG}
+
+

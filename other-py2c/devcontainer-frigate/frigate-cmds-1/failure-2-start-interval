@@ -1,0 +1,38 @@
+
+$ devcontainer up --workspace-folder ./frigate/
+[6 ms] @devcontainers/cli 0.56.2. Node.js v18.19.1. linux 5.15.0-1055-aws x64.
+Running the initializeCommand from devcontainer.json...
+
+[89 ms] Start: Run: /bin/sh -c .devcontainer/initialize.sh
+config/config.yml already exists, skipping initialization
+
+.....
+
+[1709 ms] Start: Run: docker inspect --type image debian:11-slim
+[1834 ms] Start: Run: docker-credential-secret get
+[2153 ms] Resolving Feature dependencies for 'ghcr.io/devcontainers/features/common-utils:1'...
+[2153 ms] * Processing feature: ghcr.io/devcontainers/features/common-utils:1
+[2206 ms] Start: Run: docker-credential-secret get
+[2566 ms] * Fetching feature: common-utils_0_oci
+[2725 ms] * Fetched feature: common-utils_0_oci version 1.2.0
+
+Step 1/2 : FROM scratch
+Step 2/2 : COPY . /tmp/build-features/
+Successfully tagged dev_container_feature_content_temp:latest
+
+....
+
+Building devcontainer
+ERROR: dockerfile parse error on line 206: unknown flag: start-interval
+Error: Command failed: docker-compose --project-name frigate -f //frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709323416132.yml build
+    at G0 (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:525)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async itA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:2497)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3170)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+    at async erA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11010)
+{"outcome":"error","message":"Command failed: docker-compose --project-name frigate -f /home/frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709323416132.yml build","description":"An error occurred building the Docker Compose images."}
+
+

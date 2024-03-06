@@ -1,0 +1,29 @@
+
+
+pre-build:
+
+    $ df -h .
+    Filesystem      Size  Used Avail Use% Mounted on
+    /dev/root        29G   12G   18G  41% /
+
+    $ free
+                  total        used        free      shared  buff/cache   available
+    Mem:        3944484      524584     1987244        5024     1432656     3110628
+
+post-build: 
+
+    $ df -h .
+    Filesystem      Size  Used Avail Use% Mounted on
+    /dev/root        29G   23G  6.8G  77% /
+
+    $ free
+                  total        used        free      shared  buff/cache   available
+    Mem:        3944484      590464     2167552        8360     1186468     3041512
+
+
+total build time:  20m53s
+compose time:      19.75m or 1185s
+post create:       43.63s
+machine: aws ec2 t3-medium 2vcpu 4Gmem
+
+

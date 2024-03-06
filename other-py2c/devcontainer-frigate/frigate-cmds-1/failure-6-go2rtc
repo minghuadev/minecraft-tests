@@ -1,0 +1,19 @@
+
+Step 21/122 : WORKDIR /rootfs/usr/local/go2rtc/bin
+ ---> Running in fa337bc35391
+Removing intermediate container fa337bc35391
+ ---> c6e8f0d24ebf
+Step 22/122 : ADD --link --chmod=755 "https://github.com/AlexxIT/go2rtc/releases/download/v1.8.5/go2rtc_linux_${TARGETARCH}" go2rtc
+ERROR: Service 'devcontainer' failed to build: the --chmod option requires BuildKit. Refer to https://docs.docker.com/go/buildkit/ to learn how to build images with BuildKit enabled
+Error: Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709333277306.yml build
+    at G0 (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:525)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async itA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:2497)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3170)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+    at async erA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11010)
+{"outcome":"error","message":"Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709333277306.yml build","description":"An error occurred building the Docker Compose images."}
+
+

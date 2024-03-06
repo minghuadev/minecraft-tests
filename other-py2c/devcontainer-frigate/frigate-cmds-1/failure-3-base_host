@@ -1,0 +1,27 @@
+
+Building devcontainer
+Step 1/120 : ARG _DEV_CONTAINERS_BASE_IMAGE=placeholder
+Step 2/120 : ARG DEBIAN_FRONTEND=noninteractive
+Step 3/120 : ARG BASE_IMAGE=debian:11
+Step 4/120 : ARG SLIM_BASE=debian:11-slim
+Step 5/120 : FROM ${BASE_IMAGE} AS base
+11: Pulling from library/debian
+09e2bc8a597c: Pull complete
+Digest: sha256:171478fbe347a3cfe45058dae333b6ed848fd8ce89f3104c89fa94c245086db1
+Status: Downloaded newer image for debian:11
+ ---> 52d6bfa40b9a
+Step 6/120 : FROM --platform=${BUILDPLATFORM} debian:11 AS base_host
+ERROR: Service 'devcontainer' failed to build: failed to parse platform : "" is an invalid component of "": platform specifier component must match "^[A-Za-z0-9_-]+$": invalid argument
+Error: Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709324689037.yml build
+    at G0 (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:525)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async itA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:2497)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3170)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+    at async erA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11010)
+{"outcome":"error","message":"Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709324689037.yml build","description":"An error occurred building the Docker Compose images."}
+
+
+

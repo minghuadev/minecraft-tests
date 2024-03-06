@@ -1,0 +1,26 @@
+
+Processing triggers for libc-bin (2.36-9+deb12u4) ...
+(Reading database ... 13126 files and directories currently installed.)
+Purging configuration files for gpg-agent (2.2.27-2+deb11u2) ...
+Purging configuration files for dirmngr (2.2.27-2+deb11u2) ...
++ rm -rf /var/lib/apt/lists/auxfiles /var/lib/apt/lists/deb.debian.org_debian-security_dists_bullseye-security_InRelease /var/lib/apt/lists/deb.debian.org_debian-security_dists_bullseye-security_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian-security_dists_bullseye-security_non-free_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_InRelease /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_contrib_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_non-free_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bullseye-updates_InRelease /var/lib/apt/lists/deb.debian.org_debian_dists_bullseye-updates_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bullseye_InRelease /var/lib/apt/lists/deb.debian.org_debian_dists_bullseye_contrib_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bullseye_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/deb.debian.org_debian_dists_bullseye_non-free_binary-amd64_Packages.lz4 /var/lib/apt/lists/lock /var/lib/apt/lists/packages.cloud.google.com_apt_dists_coral-edgetpu-stable_InRelease /var/lib/apt/lists/packages.cloud.google.com_apt_dists_coral-edgetpu-stable_main_binary-amd64_Packages.lz4 /var/lib/apt/lists/partial
+++ dpkg --print-architecture
++ curl -fsSL https://github.com/mikefarah/yq/releases/download/v4.33.3/yq_linux_amd64 --output /usr/local/bin/yq
++ chmod +x /usr/local/bin/yq
+Removing intermediate container 61d86c5a013a
+ ---> 4f034d2c5ab9
+Step 82/129 : RUN --mount=type=bind,from=wheels,source=/wheels,target=/deps/wheels     python3 -m pip install --upgrade pip &&     pip3 install -U /deps/wheels/*.whl
+ERROR: Service 'devcontainer' failed to build: the --mount option requires BuildKit. Refer to https://docs.docker.com/go/buildkit/ to learn how to build images with BuildKit enabled
+Error: Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709338352914.yml build
+    at G0 (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:525)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async itA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:2497)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3170)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+    at async erA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11010)
+{"outcome":"error","message":"Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709338352914.yml build","description":"An error occurred building the Docker Compose images."}
+
+
+

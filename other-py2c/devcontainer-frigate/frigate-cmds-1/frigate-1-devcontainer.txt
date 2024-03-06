@@ -1,0 +1,57 @@
+
+2024-3-4
+frigate-1-devcontainer.txt
+toc:
+    latest fix to enable running on dev branch
+    working hash on the dev branch before applying the diff xdiff-part2
+    current master branch
+
+
+latest fix to enable running on dev branch
+
+    --- a/docker-compose.yml
+    +++ b/docker-compose.yml
+    @@ -25,6 +25,7 @@ services:
+         #                     capabilities: [gpu]
+         environment:
+           YOLO_MODELS: yolov7-320
+    +      I_PROMISE_I_WONT_MAKE_AN_ISSUE_ON_GITHUB: "true"
+         ##devices:
+           ##- /dev/bus/usb:/dev/bus/usb
+           # - /dev/dri:/dev/dri # for intel hwaccel, needs to be updated for your hardware
+
+
+working hash on the dev branch before applying the diff xdiff-part2
+
+    commit ebf34ce378a5f66d73a1a58317b08110ccec1e31
+    Author: Nicolas Mowen <nickmowen213@gmail.com>
+    Date:   Fri Mar 1 10:56:45 2024 -0700
+        Revamp multiselect (#10172)
+        * Just use multiselect for mobile
+        * Update revamped design and add export to values
+        * Get actions looking good on mobile and desktop
+     web/src/components/filter/ReviewActionGroup.tsx      |  83 ++++++++++++++++++++++++-------------------
+     web/src/components/player/PreviewThumbnailPlayer.tsx | 224 ++++++++++++++++++++++++++++++++++++-------------------------------------------------------------------------------
+     web/src/views/events/EventView.tsx                   |  41 ++++++++++-----------
+     3 files changed, 133 insertions(+), 215 deletions(-)
+
+
+current master branch
+ a few doc changes on tag v0.13.2
+
+    commit 8034613bebce0752b706eeac6a09f3780cc54a3e (origin/master, master)
+    Author: Sjoerd Oostdijck <sjoerd@t-l.org>
+    Date:   Wed Feb 28 04:41:56 2024 +0100
+        Update cameras.md add tapo C225 camera (#10101)
+     docs/docs/configuration/cameras.md | 5 +++--
+     1 file changed, 3 insertions(+), 2 deletions(-)
+
+    ....
+
+    commit 6476f8ade78a337be2244ead486d68e6d6365807 (tag: v0.13.2)
+    Author: Nicolas Mowen <nickmowen213@gmail.com>
+    Date:   Fri Feb 16 08:35:21 2024 -0700
+        Format (#9889)
+     frigate/output.py | 5 +----
+     1 file changed, 1 insertion(+), 4 deletions(-)
+

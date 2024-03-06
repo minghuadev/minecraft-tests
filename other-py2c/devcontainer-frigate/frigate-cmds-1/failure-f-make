@@ -1,0 +1,43 @@
+
+Creating frigate-devcontainer ... done
+Running the postCreateCommand from devcontainer.json...
+
++ '[' -f /home/vscode/.ssh/known_hosts ']'
++ '[' '!' -d /home/vscode/.ssh ']'
++ mkdir /home/vscode/.ssh
++ chmod 0700 /home/vscode/.ssh
++ echo 'ls -ld ~/.ssh'
+ls -ld ~/.ssh
++ ls -ld /home/vscode/.ssh
+drwx------ 2 vscode vscode 4096 Mar  2 01:48 /home/vscode/.ssh
++ jq -r '.ssh_keys | .[]'
++ sed -e 's/^/github.com /'
++ curl -L https://api.github.com/meta
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 85105  100 85105    0     0   966k      0 --:--:-- --:--:-- --:--:--  966k
++ sudo mkdir -p /media/frigate
+++ id -u
+++ id -g
++ sudo chown -R 1001:1001 /media/frigate
++ echo 'export LIBAVFORMAT_VERSION_MAJOR=$(ffmpeg -version | grep -Po "libavformat\W+\K\d+")'
++ make version
+.devcontainer/post_create.sh: line 30: make: command not found
+[6467 ms] postCreateCommand failed with exit code 127. Skipping any further user-provided commands.
+Error: Command failed: /bin/sh -c .devcontainer/post_create.sh
+    at uP (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:235:130)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async rh (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:4393)
+    at async eh (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:3738)
+    at async ih (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:2942)
+    at async Ag (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:2386)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3334)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+{"outcome":"error","message":"Command failed: /bin/sh -c .devcontainer/post_create.sh","description":"The postCreateCommand in the devcontainer.json failed.","containerId":"4962b7ab995c182192701d8070b6ae24a4416a20c24d6286c45c9db19bce5911"}
+
+
+fix: add apt-get install in post_create script
+
+

@@ -1,0 +1,260 @@
+
+git log -1:
+
+commit ebf34ce378a5f66d73a1a58317b08110ccec1e31
+Author: Nicolas Mowen <nickmowen213@gmail.com>
+Date:   Fri Mar 1 10:56:45 2024 -0700
+
+    Revamp multiselect (#10172)
+    
+    * Just use multiselect for mobile
+    
+    * Update revamped design and add export to values
+    
+    * Get actions looking good on mobile and desktop
+
+
+
+git status:
+
+On branch dev
+Your branch is up to date with 'origin/dev'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .devcontainer/post_create.sh
+	modified:   docker-compose.yml
+	modified:   docker/main/Dockerfile
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+
+git diff: 
+
+diff --git a/.devcontainer/post_create.sh b/.devcontainer/post_create.sh
+index 1a1832f3..5d9da978 100755
+--- a/.devcontainer/post_create.sh
++++ b/.devcontainer/post_create.sh
+@@ -3,11 +3,25 @@
+ set -euxo pipefail
+ 
+ # Cleanup the old github host key
++##new: check only if the file exists
++if [ -f ~/.ssh/known_hosts ]; then
+ sed -i -e '/AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31\/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi\/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==/d' ~/.ssh/known_hosts
++fi
+ # Add new github host key
++##new: create .ssh if it does not exist
++if [ ! -d ~/.ssh ]; then
++	mkdir ~/.ssh
++	chmod 0700 ~/.ssh
++	echo 'ls -ld ~/.ssh'
++	ls -ld ~/.ssh
++fi
+ curl -L https://api.github.com/meta | jq -r '.ssh_keys | .[]' | \
+   sed -e 's/^/github.com /' >> ~/.ssh/known_hosts
+ 
++##new:
++echo -n pwd : ' ' ; pwd
++echo -n who : ' ' ; who
++
+ # Frigate normal container runs as root, so it have permission to create
+ # the folders. But the devcontainer runs as the host user, so we need to
+ # create the folders and give the host user permission to write to them.
+diff --git a/docker-compose.yml b/docker-compose.yml
+index a4d34919..d2073408 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -1,13 +1,14 @@
+-version: "3"
++version: "3.7"
++##version: "3"
+ services:
+   devcontainer:
+     container_name: frigate-devcontainer
+     # add groups from host for render, plugdev, video
+-    group_add:
+-      - "109" # render
+-      - "110" # render
+-      - "44"  # video
+-      - "46"  # plugdev
++    ##group_add:
++    ##  - "109" # render
++    ##  - "110" # render
++    ##  - "44"  # video
++    ##  - "46"  # plugdev
+     shm_size: "256mb"
+     build:
+       context: .
+@@ -24,8 +25,8 @@ services:
+     #                     capabilities: [gpu]
+     environment:
+       YOLO_MODELS: yolov7-320
+-    devices:
+-      - /dev/bus/usb:/dev/bus/usb
++    ##devices:
++      ##- /dev/bus/usb:/dev/bus/usb
+       # - /dev/dri:/dev/dri # for intel hwaccel, needs to be updated for your hardware
+     volumes:
+       - .:/workspace/frigate:cached
+@@ -33,7 +34,7 @@ services:
+       - /etc/localtime:/etc/localtime:ro
+       - ./config:/config
+       - ./debug:/media/frigate
+-      - /dev/bus/usb:/dev/bus/usb
++      ##- /dev/bus/usb:/dev/bus/usb
+   mqtt:
+     container_name: mqtt
+     image: eclipse-mosquitto:1.6
+diff --git a/docker/main/Dockerfile b/docker/main/Dockerfile
+index 3354a21c..665b30fa 100644
+--- a/docker/main/Dockerfile
++++ b/docker/main/Dockerfile
+@@ -8,7 +8,8 @@ ARG SLIM_BASE=debian:11-slim
+ 
+ FROM ${BASE_IMAGE} AS base
+ 
+-FROM --platform=${BUILDPLATFORM} debian:11 AS base_host
++##FROM --platform=${BUILDPLATFORM} debian:11 AS base_host
++FROM  debian:11 AS base_host
+ 
+ FROM ${SLIM_BASE} AS slim-base
+ 
+@@ -25,15 +26,25 @@ ENV CCACHE_DIR /root/.ccache
+ ENV CCACHE_MAXSIZE 2G
+ 
+ # bind /var/cache/apt to tmpfs to speed up nginx build
+-RUN --mount=type=tmpfs,target=/tmp --mount=type=tmpfs,target=/var/cache/apt \
+-    --mount=type=bind,source=docker/main/build_nginx.sh,target=/deps/build_nginx.sh \
+-    --mount=type=cache,target=/root/.ccache \
+-    /deps/build_nginx.sh
+-
+-FROM scratch AS go2rtc
+-ARG TARGETARCH
++##RUN --mount=type=tmpfs,target=/tmp --mount=type=tmpfs,target=/var/cache/apt \
++##    --mount=type=bind,source=docker/main/build_nginx.sh,target=/deps/build_nginx.sh \
++##    --mount=type=cache,target=/root/.ccache \
++##    /deps/build_nginx.sh
++RUN mkdir /deps
++COPY docker/main/build_nginx.sh /deps/build_nginx.sh
++RUN /deps/build_nginx.sh
++
++##FROM scratch AS go2rtc
++##ARG TARGETARCH
+ WORKDIR /rootfs/usr/local/go2rtc/bin
+-ADD --link --chmod=755 "https://github.com/AlexxIT/go2rtc/releases/download/v1.8.5/go2rtc_linux_${TARGETARCH}" go2rtc
++##ADD --link --chmod=755 "https://github.com/AlexxIT/go2rtc/releases/download/v1.8.5/go2rtc_linux_${TARGETARCH}" go2rtc
++RUN apt-get update \
++    && apt-get install -y wget \
++    && rm -rf /var/lib/apt/lists/*
++ARG TARGETARCH="amd64"
++RUN wget "https://github.com/AlexxIT/go2rtc/releases/download/v1.8.5/go2rtc_linux_${TARGETARCH}"
++RUN chmod 0755 go2rtc_linux_${TARGETARCH}
++RUN ln -s go2rtc_linux_${TARGETARCH} go2rtc
+ 
+ 
+ ####
+@@ -72,7 +83,12 @@ ENV CCACHE_MAXSIZE 2G
+ # Build libUSB without udev.  Needed for Openvino NCS2 support
+ WORKDIR /opt
+ RUN apt-get update && apt-get install -y unzip build-essential automake libtool ccache pkg-config
+-RUN --mount=type=cache,target=/root/.ccache wget -q https://github.com/libusb/libusb/archive/v1.0.26.zip -O v1.0.26.zip && \
++##RUN --mount=type=cache,target=/root/.ccache wget -q https://github.com/libusb/libusb/archive/v1.0.26.zip -O v1.0.26.zip && \
++##    unzip v1.0.26.zip && cd libusb-1.0.26 && \
++##    ./bootstrap.sh && \
++##    ./configure CC='ccache gcc' CCX='ccache g++' --disable-udev --enable-shared && \
++##    make -j $(nproc --all)
++RUN  wget -q https://github.com/libusb/libusb/archive/v1.0.26.zip -O v1.0.26.zip && \
+     unzip v1.0.26.zip && cd libusb-1.0.26 && \
+     ./bootstrap.sh && \
+     ./configure CC='ccache gcc' CCX='ccache g++' --disable-udev --enable-shared && \
+@@ -106,9 +122,13 @@ COPY audio-labelmap.txt .
+ 
+ 
+ FROM wget AS s6-overlay
+-ARG TARGETARCH
+-RUN --mount=type=bind,source=docker/main/install_s6_overlay.sh,target=/deps/install_s6_overlay.sh \
+-    /deps/install_s6_overlay.sh
++##ARG TARGETARCH
++##RUN --mount=type=bind,source=docker/main/install_s6_overlay.sh,target=/deps/install_s6_overlay.sh \
++##    /deps/install_s6_overlay.sh
++ARG TARGETARCH="amd64"
++RUN   mkdir /deps
++COPY  docker/main/install_s6_overlay.sh /deps/install_s6_overlay.sh
++RUN   /deps/install_s6_overlay.sh
+ 
+ 
+ FROM base AS wheels
+@@ -157,7 +177,8 @@ RUN pip3 wheel --wheel-dir=/wheels -r /requirements-wheels.txt
+ # Collect deps in a single layer
+ FROM scratch AS deps-rootfs
+ COPY --from=nginx /usr/local/nginx/ /usr/local/nginx/
+-COPY --from=go2rtc /rootfs/ /
++##COPY --from=go2rtc /rootfs/ /
++COPY --from=nginx /rootfs/ /rootfs/ /
+ COPY --from=libusb-build /usr/local/lib /usr/local/lib
+ COPY --from=s6-overlay /rootfs/ /
+ COPY --from=models /rootfs/ /
+@@ -179,11 +200,18 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
+ ENV PATH="/usr/lib/btbn-ffmpeg/bin:/usr/local/go2rtc/bin:/usr/local/nginx/sbin:${PATH}"
+ 
+ # Install dependencies
+-RUN --mount=type=bind,source=docker/main/install_deps.sh,target=/deps/install_deps.sh \
+-    /deps/install_deps.sh
+-
+-RUN --mount=type=bind,from=wheels,source=/wheels,target=/deps/wheels \
+-    python3 -m pip install --upgrade pip && \
++##RUN --mount=type=bind,source=docker/main/install_deps.sh,target=/deps/install_deps.sh \
++##    /deps/install_deps.sh
++ARG TARGETARCH="amd64"
++RUN  mkdir /deps
++COPY docker/main/install_deps.sh /deps/install_deps.sh
++RUN  /deps/install_deps.sh
++
++##RUN --mount=type=bind,from=wheels,source=/wheels,target=/deps/wheels \
++##    python3 -m pip install --upgrade pip && \
++##    pip3 install -U /deps/wheels/*.whl
++COPY --from=wheels /wheels /deps/wheels
++RUN python3 -m pip install --upgrade pip && \
+     pip3 install -U /deps/wheels/*.whl
+ 
+ COPY --from=deps-rootfs / /
+@@ -202,7 +230,9 @@ ENV S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0
+ ENTRYPOINT ["/init"]
+ CMD []
+ 
+-HEALTHCHECK --start-period=120s --start-interval=5s --interval=15s --timeout=5s --retries=3 \
++##HEALTHCHECK --start-period=120s --start-interval=5s --interval=15s --timeout=5s --retries=3 \
++##    CMD curl --fail --silent --show-error http://127.0.0.1:5000/api/version || exit 1
++HEALTHCHECK --start-period=120s  --interval=15s --timeout=5s --retries=3 \
+     CMD curl --fail --silent --show-error http://127.0.0.1:5000/api/version || exit 1
+ 
+ # Frigate deps with Node.js and NPM for devcontainer
+@@ -230,15 +260,22 @@ RUN apt-get update \
+     && apt-get install make -y \
+     && rm -rf /var/lib/apt/lists/*
+ 
+-RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspace/frigate/requirements-dev.txt \
+-    pip3 install -r requirements-dev.txt
++##RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspace/frigate/requirements-dev.txt \
++##    pip3 install -r requirements-dev.txt
++COPY ./docker/main/requirements-dev.txt /workspace/frigate/requirements-dev.txt
++RUN  pip3 install -r requirements-dev.txt
++
++##new: 
++RUN groupadd -g 109 render
++RUN groupadd -g 110 syslog
+ 
+ CMD ["sleep", "infinity"]
+ 
+ 
+ # Frigate web build
+ # This should be architecture agnostic, so speed up the build on multiarch by not using QEMU.
+-FROM --platform=$BUILDPLATFORM node:20 AS web-build
++##FROM --platform=$BUILDPLATFORM node:20 AS web-build
++FROM  node:20 AS web-build
+ 
+ WORKDIR /work
+ COPY web/package.json web/package-lock.json ./

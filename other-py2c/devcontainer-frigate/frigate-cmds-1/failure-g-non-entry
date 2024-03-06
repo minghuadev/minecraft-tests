@@ -1,0 +1,19 @@
+
+the container built by disabling the target in compose file is not 
+running the entry command. 
+
+search docker compose 1.25 target 
+found out that need to put 3.7 in version instead of 3: 
+
+https://github.com/docker/compose/issues/5714
+ Build target doesn't work in compose 1.19 #5714 
+
+
+$ docker-compose version
+docker-compose version 1.25.0, build unknown
+docker-py version: 4.1.0
+CPython version: 3.8.10
+OpenSSL version: OpenSSL 1.1.1f  31 Mar 2020
+
+
+

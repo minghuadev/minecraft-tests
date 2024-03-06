@@ -1,0 +1,27 @@
+
+[4309 ms] Start: Run: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709342994604.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.containerFeatures-1709342996332.yml up -d
+mqtt is up-to-date
+Creating frigate-devcontainer ... done
+Running the postCreateCommand from devcontainer.json...
+
++ sed -i -e '/AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31\/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi\/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==/d' /home/vscode/.ssh/known_hosts
+sed: can't read /home/vscode/.ssh/known_hosts: No such file or directory
+[6362 ms] postCreateCommand failed with exit code 2. Skipping any further user-provided commands.
+Error: Command failed: /bin/sh -c .devcontainer/post_create.sh
+    at uP (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:235:130)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async rh (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:4393)
+    at async eh (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:3738)
+    at async ih (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:2942)
+    at async Ag (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:2386)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3334)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+{"outcome":"error","message":"Command failed: /bin/sh -c .devcontainer/post_create.sh","description":"The postCreateCommand in the devcontainer.json failed.","containerId":"8a7ad591c338e2505d696c907f4617299805b4c93f7faa21e86753faf80d2c9e"}
+
+
+fix: in post_create script check whether the file exist first before editing it
+
+
+

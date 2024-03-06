@@ -1,0 +1,31 @@
+
+
+$ docker --version
+Docker version 24.0.5, build 24.0.5-0ubuntu1~20.04.1
+
+
+$ docker-compose version
+docker-compose version 1.25.0, build unknown
+docker-py version: 4.1.0
+CPython version: 3.8.10
+OpenSSL version: OpenSSL 1.1.1f  31 Mar 2020
+
+
+$ dpkg -l docker-buildx
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+||/ Name           Version                 Architecture Description
++++-==============-=======================-============-===============================================================
+ii  docker-buildx  0.11.2-0ubuntu1~20.04.2 amd64        Docker CLI plugin for extended build capabilities with BuildKit
+
+
+$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04.6 LTS
+Release:        20.04
+Codename:       focal
+
+
+

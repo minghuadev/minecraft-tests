@@ -1,0 +1,33 @@
+
+
+[5333 ms] Start: Run: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709343302922.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.containerFeatures-1709343304722.yml up -d
+mqtt is up-to-date
+Creating frigate-devcontainer ... done
+Running the postCreateCommand from devcontainer.json...
+
++ '[' -f /home/vscode/.ssh/known_hosts ']'
++ sed -e 's/^/github.com /'
+.devcontainer/post_create.sh: line 11: /home/vscode/.ssh/known_hosts: No such file or directory
++ curl -L https://api.github.com/meta
++ jq -r '.ssh_keys | .[]'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  105k    0  105k    0     0   937k      0 --:--:-- --:--:-- --:--:--  937k
+[8057 ms] postCreateCommand failed with exit code 1. Skipping any further user-provided commands.
+Error: Command failed: /bin/sh -c .devcontainer/post_create.sh
+    at uP (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:235:130)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async rh (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:4393)
+    at async eh (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:3738)
+    at async ih (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:2942)
+    at async Ag (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:227:2386)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3334)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+{"outcome":"error","message":"Command failed: /bin/sh -c .devcontainer/post_create.sh","description":"The postCreateCommand in the devcontainer.json failed.","containerId":"87976940c292164fd127f69f1ddf3fd2d5c836ba411d7e2000f862ed510080d4"}
+
+
+fix: in post_create script, create .ssh if it does not exist
+
+

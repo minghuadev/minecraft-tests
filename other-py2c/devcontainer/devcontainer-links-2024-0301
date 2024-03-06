@@ -20,6 +20,7 @@ https://xebia.com/blog/how-to-create-a-devcontainer-for-your-python-project/
         the devcontainer launches a vscode server when launched by vscode: 
         https://code.visualstudio.com/docs/remote/vscode-server
     features:
+    non-root:
     prebuild:
 https://www.youtube.com/watch?v=Fc6TAahZ1Pk
   Different Ways to Run Dev Containers: VS Code vs CLI

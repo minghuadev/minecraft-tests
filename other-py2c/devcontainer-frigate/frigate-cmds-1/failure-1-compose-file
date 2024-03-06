@@ -1,0 +1,38 @@
+
+
+The Compose file '/  /frigate/docker-compose.yml' is invalid because:
+Unsupported config option for services.devcontainer: 'group_add'
+services.devcontainer.build contains unsupported option: 'target'
+
+
+fix: 
+  apt-get install docker-compose
+
+  group_add: 
+  target:        fixed by changing version to 3.7 from 3
+
+
+search docker compose 1.25 group_add
+https://github.com/docker/compose/issues/4700
+ 
+RUN groupadd -g <uid> web
+RUN useradd -u <uid> -g <gid> web
+
+
+host: 
+    $ grep 109 /etc/group
+    render:x:109:
+
+    $ grep 110 /etc/group
+    syslog:x:110:
+
+compose file: 
+
+    # add groups from host for render, plugdev, video
+    ##group_add:
+    ##  - "109" # render
+    ##  - "110" # render   --syslog on the host 
+    ##  - "44"  # video    --already exist on the container
+    ##  - "46"  # plugdev  --already exist on the container
+
+

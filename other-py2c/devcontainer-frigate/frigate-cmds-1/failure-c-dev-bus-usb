@@ -1,0 +1,29 @@
+
+[123215 ms] Start: Run: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709341716183.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.containerFeatures-1709341835760.yml up -d
+Creating network "frigate_default" with the default driver
+Pulling mqtt (eclipse-mosquitto:1.6)...
+1.6: Pulling from library/eclipse-mosquitto
+f7dab3ab2d6e: Pull complete
+fded66e82efd: Pull complete
+0ab4c5a382ed: Pull complete
+Digest: sha256:c9007ecf0e35a14035ef2ad8209aa589bfbd2c67d77b94daf97e98fd2e5ec571
+Status: Downloaded newer image for eclipse-mosquitto:1.6
+Creating mqtt ...
+Creating frigate-devcontainer ... error
+Creating mqtt                 ... done
+ERROR: for frigate-devcontainer  Cannot start service devcontainer: error gathering device information while adding custom device "/dev/bus/usb": no such file or directory
+
+ERROR: for devcontainer  Cannot start service devcontainer: error gathering device information while adding custom device "/dev/bus/usb": no such file or directory
+ERROR: Encountered errors while bringing up the project.
+Error: Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709341716183.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.containerFeatures-1709341835760.yml up -d
+    at itA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:429:3379)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ttA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:409:3170)
+    at async StA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:3833)
+    at async ZC (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:481:4775)
+    at async trA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11269)
+    at async erA (/home//.nvm/versions/node/v18.19.1/lib/node_modules/@devcontainers/cli/dist/spec-node/devContainersSpecCLI.js:614:11010)
+{"outcome":"error","message":"Command failed: docker-compose --project-name frigate -f /home//frigate/docker-compose.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.build-1709341716183.yml -f /tmp/devcontainercli-/docker-compose/docker-compose.devcontainer.containerFeatures-1709341835760.yml up -d","description":"An error occurred starting Docker Compose up."}
+
+
+
