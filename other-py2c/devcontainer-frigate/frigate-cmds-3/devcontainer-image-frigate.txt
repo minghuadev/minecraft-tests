@@ -1,0 +1,67 @@
+
+
+the frigate container image is named "frigate_devcontainer", 
+where the "frigate" is the workspace-folder name, 
+and the "devcontainer" is the service name in both 
+docker-compose.yml and .devcontainer/devcontainer.json
+
+e.g. the following diff will suffix a "r" to the image name.
+
+diff --git a/.devcontainer/devcontainer.json b/.devcontainer/devcontainer.json
+index d0c1f2c9..b51db5ab 100644
+--- a/.devcontainer/devcontainer.json
++++ b/.devcontainer/devcontainer.json
+@@ -1,7 +1,7 @@
+ {
+   "name": "Frigate Devcontainer",
+   "dockerComposeFile": "../docker-compose.yml",
+-  "service": "devcontainer",
++  "service": "devcontainerr",
+   "workspaceFolder": "/workspace/frigate",
+   "initializeCommand": ".devcontainer/initialize.sh",
+   "postCreateCommand": ".devcontainer/post_create.sh",
+diff --git a/docker-compose.yml b/docker-compose.yml
+index d2073408..9e12eab5 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -1,7 +1,7 @@
+ version: "3.7"
+ ##version: "3"
+ services:
+-  devcontainer:
++  devcontainerr:
+     container_name: frigate-devcontainer
+     # add groups from host for render, plugdev, video
+     ##group_add:
+
+
+
+the diff below can be used to make use of the above named image:
+
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 9e12eab5..3a51adb9 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -10,11 +10,12 @@ services:
+     ##  - "44"  # video
+     ##  - "46"  # plugdev
+     shm_size: "256mb"
+-    build:
+-      context: .
+-      dockerfile: docker/main/Dockerfile
++    #build:
++    #  context: .
++    #  dockerfile: docker/main/Dockerfile
+       # Use target devcontainer-trt for TensorRT dev
+-      target: devcontainer
++    #  target: devcontainer
++    image: frigate_devcontainerr
+     ## Uncomment this block for nvidia gpu support
+     # deploy:
+     #       resources:
+
+
+https://github.com/blakeblackshear/frigate/issues/4957
+  the dev doc
+
+

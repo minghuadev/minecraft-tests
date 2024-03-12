@@ -1,0 +1,22 @@
+
+
+search aws lambda flask
+
+
+https://medium.com/@apcelent/deploying-flask-on-aws-lambda-6fcd02baace2
+Deploying Flask on AWS Lambda  by Apcelent  on Mar 8 2018
+   flask, zappa.  using the aws iam access tokens, simple steps
+
+
+https://dev.to/raphael_jambalos/more-than-hello-world-in-lambda-build-and-deploy-flask-apis-in-aws-lambda-via-cdk-1m04
+More than 'Hello World in Lambda': Build and Deploy Python Flask APIs in AWS Lambda via CDK
+ by Raphael Jambalos on Mar 22 2020
+   flask, zappa packages it into a zip, deploy the zip via CDK
+
+
+https://www.cloudtechsimplified.com/run-python-flask-in-aws-lambda/
+How to run Python Flask application in AWS Lambda
+ by Mugilan Ragupathi  on Jun 5 2023
+   aws-wsgi, CDK.
+
+
