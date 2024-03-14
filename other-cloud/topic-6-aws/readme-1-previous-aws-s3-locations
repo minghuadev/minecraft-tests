@@ -1,0 +1,14 @@
+
+
+~/minecraft-tests/other-javasamples
+$ grep -r s3 * | egrep '(aws|amazon)' | cat -n
+     1  cloud/iot-framework/note-links:http://ai2-s2-pdfs.s3.amazonaws.com/b532/02604041849cbf87f62ea8138099bd0b4056.pdf
+     2  cloud-samples/samples-cloud-1-2019/go_example_s3.go:    "github.com/aws/aws-sdk-go/service/s3"
+     3  Binary file xaas/webpage-TheCloudLandscape-JohanDenHaan_files/cloud_platform_aws.png matches
+     4  xaas/webpage-TheCloudLandscape-JohanDenHaan.html: 
+            Examples of object storage are
+            <a  href="http://aws.amazon.com/s3/" >Amazon S3</a>,
+            <a  href="https://wiki.openstack.org/wiki/Swift" >OpenStack Swift</a>, and
+            <a  href="http://ceph.com/ceph-storage/object-storage/" >Ceph Storage</a>.
+
+
