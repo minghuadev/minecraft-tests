@@ -1,0 +1,18 @@
+
+2024-4-28
+
+
+ls -l
+
+-rw-r--r--    1139 Mar 13 13:23 boto_t01_s3hello.py
+-rw-r--r--    1752 Apr 27 21:40 boto_t02_s3bucket_exist.py
+-rw-r--r--    2636 Apr 27 22:09 boto_t03_s3list.py
+-rw-r--r--    2990 Apr 28 08:35 boto_t03_s3rename.py
+-rw-r--r--    3740 Apr 27 21:40 boto_t03_s3updownload.py
+-rw-r--r--    3097 Mar 18 22:02 boto_t04_kms01_list.py
+-rw-r--r--    4621 Mar 18 22:05 boto_t05_kms02_encrypt.py
+-rw-r--r--    9915 Apr 27 21:39 boto_t06_ecc_sign.py
+-rw-rw-r--+      0 Apr 28 09:07 list-files
+
+
+
