@@ -1,0 +1,66 @@
+
+
+aws lambda python 3.11 runtime ec2 layer creation: 
+
+
+ec2 created using amazon linux 2 ami
+
+
+search amazon linux 2 install python 3.11
+https://tecadmin.net/how-to-install-python-3-11-on-amazon-linux-2/
+    build python from source
+    runs ok except that it's missing ssl in python
+
+
+search python build with ssl module on amazon linux 2
+https://stackoverflow.com/questions/75611127/ssl-module-is-not-available-in-python-3-10-even-though-openssl-v1-1-1-was-instal
+    build openssl from source and python from source
+https://github.com/pyenv/pyenv/issues/2210
+    swap openssl-devl for openssl11-devel
+    builds and runs ok, with openssl in python: 'OpenSSL 1.1.1g FIPS  21 Apr 2020'
+
+
+commands to build python 3.11: 
+
+    sudo yum install gcc openssl-devel bzip2-devel libffi-devel zlib-devel -y
+    sudo yum swap openssl-devel openssl11-devel
+    wget https://www.python.org/ftp/python/3.11.8/Python-3.11.8.tgz
+    tar xzf Python-3.11.8.tgz
+    cd Python-3.11.8
+    sudo ./configure --enable-optimizations
+    sudo make altinstall
+
+  then use venv to run.
+
+
+
+ssl certificate in python
+search python ssl add certificate
+
+https://stackoverflow.com/questions/39356413/how-to-add-a-custom-ca-root-certificate-to-the-ca-store-used-by-pip-in-windows
+  many comments
+  one of: 
+    import ssl
+    print(ssl.get_default_verify_paths())
+
+    DefaultVerifyPaths(
+        cafile='/etc/pki/tls/cert.pem', 
+        capath='/etc/pki/tls/certs', 
+        openssl_cafile_env='SSL_CERT_FILE', 
+        openssl_cafile='/etc/pki/tls/cert.pem', 
+        openssl_capath_env='SSL_CERT_DIR', 
+        openssl_capath='/etc/pki/tls/certs')
+
+    create the SSL_CERT_DIR and place your cert there
+
+  one other about pip: 
+    create your self-signed cert
+    download a full bundle
+    add your cert to the file in the bundle
+    point to the bundle: 
+        pip config set global.cert %USERPROFILE%\certs\ca-bundle.crt
+        pip config set global.cert $HOME/certs/ca-bundle.crt
+    see:
+        pip config list
+        pip config list -v
+
