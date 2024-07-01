@@ -1,0 +1,45 @@
+
+2024-3-20: 
+
+search open source authenticator app for windows
+
+
+https://github.com/2fast-team/2fast
+
+  rfc 6238 totp
+  the github release needs administrator to install
+  it has initial android preview
+
+
+https://www.ghacks.net/2019/09/12/winotp-authenticator-open-source-alternative-for-winauth/
+ by Ashwin on sep 12 2019
+
+microsoft app https://apps.microsoft.com/detail/9nf2rgqkx1mv
+
+    WinOTP Authenticator
+    by Vladimir Akopyan
+        this app installs from ms store.
+
+https://github.com/innomediahho/WinOTP
+    mirrored from other source
+
+https://github.com/VladimirAkopyan/Authenticator
+
+https://github.com/winauth/winauth
+    rfc 6238
+
+
+https://alternativeto.net/software/google-authenticator/?license=opensource
+
+    Aegis Authenticator, open source, android
+    KeePass, open source, https://keepass.info/, mono
+    KeePass2Android, open source, android, 
+
+
+
+search keepass on github
+
+keepassx keepassxc keepassdx keepass2android
+
+
+
