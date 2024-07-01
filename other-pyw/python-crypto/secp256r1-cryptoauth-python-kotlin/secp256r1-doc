@@ -1,0 +1,134 @@
+
+
+search android sdk ecp256
+
+https://stackoverflow.com/questions/58535529/secnamedcurves-getbynamesecp256r1-showing-nosuchmethod-exception-in-android
+
+
+
+search android bouncycastle
+
+https://stackoverflow.com/questions/2584401/how-to-add-bouncy-castle-algorithm-to-android
+  SunEC already supports many curves
+
+https://www.baeldung.com/java-bouncy-castle
+
+
+
+search android secp256r1
+
+https://www.danielhugenroth.com/posts/2021_07_ec_curves_on_android/
+  ** by default it uses boringSSL since api 23 and 28: 
+    val keyPair = KeyPairGenerator.getInstance("EC", provider).apply {
+        initialize(ECGenParameterSpec(curveName))
+        genKeyPair()
+    }
+https://stackoverflow.com/questions/40115286/generating-valid-ecdsa-secp256r1-prime256v1-key-pair-on-android-using-spongy-ca
+  ** generate the key and write hex to stream
+https://stackoverflow.com/questions/57087599/how-to-encrypt-and-decrypt-data-in-android-using-the-elliptic-curve-key-pair-of
+  ** android 12 ecdh ecdsa
+  https://gist.github.com/zcdziura/7652286
+    ** ecdh
+
+search java security key pair
+https://stackoverflow.com/questions/5127379/how-to-generate-a-rsa-keypair-with-a-privatekey-encrypted-with-password
+
+search java ecp key extract point
+https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/security/interfaces/ECPublicKey.html
+  ** ECPublicKey.getW():ECPoint, ECPoint.getAffineX():BigInteger, .getAffineY()
+
+search java biginteger to hex
+https://stackoverflow.com/questions/14048476/biginteger-to-hex-decimal-octal-binary-strings
+  ** BigInteger.toString(16) // hexadecimal
+https://www.baeldung.com/java-byte-arrays-hex-strings
+  ** encode hex string, decode hex string, etc
+
+search java biginteger to byte array
+https://stackoverflow.com/questions/4407779/biginteger-to-byte
+  ** if first byte is 0, remove it.
+
+search convert byte array to biginteger java
+https://stackoverflow.com/questions/48372017/convert-byte-array-to-biginteger
+  encusre first byte is 0-to-127
+
+search java ecp key from point
+https://stackoverflow.com/questions/48832170/generate-ec-public-key-from-byte-array-private-key-in-native-java-7
+  ** from encoded private bytes
+
+search generate ec public key byte array
+https://stackoverflow.com/questions/25443756/generating-ecpublickey-from-byte-array
+  hex string public key bytes to the public key 
+
+search kotlin hex string to byte array
+https://stackoverflow.com/questions/66613717/kotlin-convert-hex-string-to-bytearray
+
+search kotlin ecdsa
+https://developer.android.com/privacy-and-security/cryptography
+  ** ecdsa sign, and verify
+  ** encrypt decrypt: AES/CBC/PKCS5PADDING
+
+search javax crypto cipher transformation
+search cipher_transformation 
+https://stackoverflow.com/questions/9333504/how-can-i-list-the-available-cipher-algorithms
+  code to list all available providers and algorithm parameters
+
+search kotlin ecdsa signature read elements
+https://stackoverflow.com/questions/78523400/how-to-sign-a-data-using-ecdsa-private-key-with-the-p-256-secp256k1-curve-in-a
+  P-256 aka secp256r1 aka prime256v1
+  ** asn.1 decoder
+
+search javax ecdh shared key size
+https://stackoverflow.com/questions/66060346/trying-to-create-a-ecdh-keypair-in-java
+  Java SunEC
+
+search aes cbc vs gcm
+https://security.stackexchange.com/questions/184305/why-would-i-ever-use-aes-256-cbc-if-aes-256-gcm-is-more-secure
+  use cbc + hmac
+  https://crypto.stackexchange.com/questions/202/should-we-mac-then-encrypt-or-encrypt-then-mac
+
+search java SecretKey get bytes
+https://stackoverflow.com/questions/5364338/converted-secretkey-into-bytes-how-to-convert-it-back-to-a-secretkey
+  ** use getEncoded() to get bytes, and SecretKeySpec() to create a new key from bytes
+
+search java create ECParameterSpec
+https://stackoverflow.com/questions/60197887/constructing-ec-public-key-from-ec-point-and-ecparameterspec-gives-invalid-x-val
+  ** use 
+      final String curveName = "prime256v1";
+      AlgorithmParameters params = AlgorithmParameters.getInstance("EC", "BC");
+      params.init(new ECGenParameterSpec(curveName));
+      ECParameterSpec ecParameterSpec = params.getParameterSpec(ECParameterSpec.class);
+
+search pass java class to kotlin function
+https://www.baeldung.com/kotlin/class-function-parameter
+  ** use TheClass::class.java
+
+search kotlin hmac example
+https://stackoverflow.com/questions/63484772/hmac-signature-in-kotlin
+  ** base64 decoder, hmac sign, string builder
+
+
+
+search fernet encryption
+https://www.comparitech.com/blog/information-security/what-is-fernet/
+  detailed explanation
+https://stackoverflow.com/questions/36117046/is-the-fernet-cryptography-module-safe-and-can-i-do-aes-encryption-with-that-mo
+  aes gcm mode
+
+search fernet kotlin
+https://stackoverflow.com/questions/76198997/python-and-kotlin-deriving-different-keys-from-same-password-in-fernet
+  a user bug and its fix
+https://stackoverflow.com/questions/64645256/fernet-encryption-decryption-with-python-and-kotlin/64646839?noredirect=1
+  the working fernet code
+https://github.com/l0s/fernet-java8
+  the fernet library
+
+
+
+search secp256r1 c++ library
+
+https://stackoverflow.com/questions/71946144/compute-shared-secret-for-ecdsaecp-sha256-keys-with-crypto
+  https://www.cryptopp.com/wiki/Elliptic_Curve_Diffie-Hellman#Key_Agreement
+
+https://github.com/NeoResearch/libcrypton
+
+

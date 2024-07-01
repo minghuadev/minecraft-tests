@@ -1,0 +1,103 @@
+
+service_common_ecdh.py: 
+
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import ec, utils
+from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
+from cryptography.utils import int_from_bytes, int_to_bytes
+
+def host_ecdh_create_key():
+    # Create a host private key
+    host_key = ec.generate_private_key(ec.SECP256R1(), default_backend())
+
+    # Convert host's public key into ATECCx08 format
+    host_pub = host_key.public_key().public_bytes(encoding=Encoding.X962,
+                                                  format=PublicFormat.UncompressedPoint)[1:]
+    return host_key, host_pub
+
+def host_ecdh_create_shared(host_key, device_pub):
+    # Convert device public key to a cryptography public key object
+    device_pub = ec.EllipticCurvePublicNumbers(
+        curve=ec.SECP256R1(),
+        x=int_from_bytes(device_pub[0:32], byteorder='big'),
+        y=int_from_bytes(device_pub[32:64], byteorder='big'),
+    ).public_key(default_backend())
+
+    # Perform the host side ECDH computation
+    host_shared = host_key.exchange(ec.ECDH(), device_pub)
+    return host_shared
+
+
+private key binary size: 246 bytes in pem encoding.
+
+
+common_encryptions.py: 
+
+import base64
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.fernet import Fernet
+
+from cryptography.hazmat.primitives.serialization import load_pem_private_key
+
+def host_encryptions_genkey_kdf(shared_secret):
+    # derived from host_ecdh_kdf_encrypt()
+    password_provided = "password"  # This is input in the form of a string
+    password = password_provided.encode()  # Convert to type bytes
+    salt = b'salt_'  # CHANGE THIS - recommend using a key from os.urandom(16), must be of type bytes
+    salt += shared_secret  # the ecdh shared secret key
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+        backend=default_backend()
+    )
+    derived_key_raw = kdf.derive(password) # Can only use kdf once
+    derivedkey = base64.urlsafe_b64encode(derived_key_raw)
+    return derivedkey
+
+
+commom_crypto_utils.py
+
+def host_sign_digest(digest, key): # digest: bytes of 32
+    signature = key.sign(digest, ec.ECDSA(utils.Prehashed(hashes.SHA256()))) # bytes of 71
+    (r,s) = utils.decode_dss_signature(signature)
+    signature = int_to_bytes(r, 32) + int_to_bytes(s, 32)
+    return signature
+
+def host_verify_digest(digest, signature, public_key_data):
+    """
+    Verify a signature using the host software
+    """
+    try:
+        r = int_from_bytes(signature[0:32], byteorder='big', signed=False)
+        s = int_from_bytes(signature[32:64], byteorder='big', signed=False)
+        sig = utils.encode_dss_signature(r, s)
+
+        public_key = ec.EllipticCurvePublicNumbers(
+            curve=ec.SECP256R1(),
+            x=int_from_bytes(public_key_data[0:32], byteorder='big'),
+            y=int_from_bytes(public_key_data[32:64], byteorder='big'),
+        ).public_key(default_backend())
+        public_key.verify(sig, digest, ec.ECDSA(utils.Prehashed(hashes.SHA256())))
+        return True
+    except InvalidSignature:
+        return False
+
+hazmat utils.py
+
+def decode_dss_signature(signature):
+    with DERReader(signature).read_single_element(SEQUENCE) as seq:
+        r = seq.read_element(INTEGER).as_integer()
+        s = seq.read_element(INTEGER).as_integer()
+        return r, s
+
+def encode_dss_signature(r, s):
+    return encode_der(
+        SEQUENCE,
+        encode_der(INTEGER, encode_der_integer(r)),
+        encode_der(INTEGER, encode_der_integer(s)),
+    )
+
+

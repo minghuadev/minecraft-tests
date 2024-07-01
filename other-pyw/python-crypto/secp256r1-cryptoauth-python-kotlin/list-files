@@ -1,0 +1,42 @@
+
+2024-7-1
+
+
+ls -l 
+
+-rw-r--r--      0 Jul  1 09:58 list-files
+-rw-r--r--   5260 Jun 23 11:26 secp256r1-doc
+drwxr-xr-x      0 Jul  1 09:51 secp256r1-examples-1/
+drwxr-xr-x      0 Jul  1 09:55 secp256r1-examples-2/
+drwxr-xr-x      0 Jul  1 09:56 secp256r1-examples-3/
+
+
+ls -l secp256r1-examples-1/
+
+-rw-r--r--   15184 Jun 23 06:25 secp256r1-kotlin-MainActivity-1.kt
+-rw-r--r--    3676 Jul  1 09:50 secp256r1-python-code
+-rw-r--r--    4974 Jul  1 09:51 secp256r1-python-example-dump-1.py
+
+
+ls -l secp256r1-examples-2/
+
+-rwxr-xr-x    2786 Jun 22 20:26 common_crypto_utils.py*
+-rw-r--r--    6000 Jul  1 09:53 example-dump.py
+-rw-r--r--    1071 Jun 22 20:26 example_utils.py
+-rw-r--r--   18781 Jun 23 08:18 secp256r1-kotlin-MainActivity-2.kt
+-rwxr-xr-x    6028 Jul  1 09:53 service_common_ecdh.py*
+-rw-r--r--     138 Jun 22 20:31 tmp_k_prv.private
+-rw-r--r--     276 Jun 22 20:31 tmp_k_prv.private.hex
+-rw-r--r--      64 Jun 22 20:31 tmp_k_pub.pub
+-rw-r--r--     128 Jun 22 20:31 tmp_k_pub.pub.hex
+-rw-r--r--      64 Jun 22 20:31 tmp_out_shared_key_hex
+-rw-r--r--     144 Jun 22 20:31 tmp_out_sig_hex
+
+
+ls -l secp256r1-examples-2/
+
+-rw-r--r--   6992 Jul  1 09:56 example-dump.py
+-rw-r--r--     96 Jun 23 08:35 tmp_out_cipher_txt
+
+
+
