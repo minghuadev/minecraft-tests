@@ -1,0 +1,18 @@
+
+
+jdk: save to ~/.jdks/openjdk-22 oracle openjdk 22.0.1
+
+  the first time opened the idea to run the learning ide tutorial it asked for 
+  downloading a sdk, and prompted many options. the openjdk 22 is the latest. 
+  thus selected it.
+
+  after running some examples to build, it turned out the bundled jdk version 
+  is an amazon corretto 21. jdk 22 won't work. not sure it won't work with 
+  the gradle sync only or the build as well.
+
+  when building the nrf blinky example it automatically switched to corretto 17 
+  and downloaded it. 
+
+  from the above it can be seen as a mistake to download jdk 22.
+
+

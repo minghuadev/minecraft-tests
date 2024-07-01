@@ -1,0 +1,738 @@
+
+
+open project created by compose-multi-platform web widzard: 
+
+
+Starting Gradle Daemon...
+Gradle Daemon started in 1 s 783 ms
+Type-safe project accessors is an incubating feature.
+Download https://dl.google.com/dl/android/maven2/com/android/application/com.android.application.gradle.plugin/8.2.0/com.android.application.gradle.plugin-8.2.0.pom, took 832 ms
+Download https://dl.google.com/dl/android/maven2/com/android/library/com.android.library.gradle.plugin/8.2.0/com.android.library.gradle.plugin-8.2.0.pom, took 58 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/org.jetbrains.compose.gradle.plugin/1.6.10/org.jetbrains.compose.gradle.plugin-1.6.10.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/plugin/compose/org.jetbrains.kotlin.plugin.compose.gradle.plugin/2.0.0/org.jetbrains.kotlin.plugin.compose.gradle.plugin-2.0.0.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/multiplatform/org.jetbrains.kotlin.multiplatform.gradle.plugin/2.0.0/org.jetbrains.kotlin.multiplatform.gradle.plugin-2.0.0.pom, took 57 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.2.0/gradle-8.2.0.pom, took 63 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.2.0/gradle-8.2.0.module, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/compose-gradle-plugin/1.6.10/compose-gradle-plugin-1.6.10.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/ddms/ddmlib/31.2.0/ddmlib-31.2.0.pom, took 55 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/crash/31.2.0/crash-31.2.0.pom, took 76 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-settings-api/8.2.0/gradle-settings-api-8.2.0.pom, took 89 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/sdklib/31.2.0/sdklib-31.2.0.pom, took 89 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/repository/31.2.0/repository-31.2.0.pom, took 93 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.2.0-10154469/aapt2-proto-8.2.0-10154469.pom, took 95 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/aaptcompiler/8.2.0/aaptcompiler-8.2.0.pom, took 108 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/sdk-common/31.2.0/sdk-common-31.2.0.pom, took 124 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-settings-api/8.2.0/gradle-settings-api-8.2.0.module, took 23 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/shared/31.2.0/shared-31.2.0.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-model/31.2.0/lint-model-31.2.0.pom, took 27 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.2.0-10154469/aapt2-proto-8.2.0-10154469.module, took 33 ms
+Download https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-compiler-common/8.2.0/databinding-compiler-common-8.2.0.pom, took 31 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/aaptcompiler/8.2.0/aaptcompiler-8.2.0.module, took 52 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-typedef-remover/31.2.0/lint-typedef-remover-31.2.0.pom, took 58 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-test-api/8.2.0/builder-test-api-8.2.0.pom, took 34 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/layoutlib/layoutlib-api/31.2.0/layoutlib-api-31.2.0.pom, took 36 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-additional-test-output-proto/31.2.0/android-test-plugin-host-additional-test-output-proto-31.2.0.pom, took 34 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-ddmlib-proto/31.2.0/android-device-provider-ddmlib-proto-31.2.0.pom, took 35 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-gradle-proto/31.2.0/android-device-provider-gradle-proto-31.2.0.pom, took 36 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-emulator-control-proto/31.2.0/android-test-plugin-host-emulator-control-proto-31.2.0.pom, took 38 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-coverage-proto/31.2.0/android-test-plugin-host-coverage-proto-31.2.0.pom, took 39 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-test-api/8.2.0/builder-test-api-8.2.0.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-result-listener-gradle-proto/31.2.0/android-test-plugin-result-listener-gradle-proto-31.2.0.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/bundletool/1.15.2/bundletool-1.15.2.pom, took 25 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-apk-installer-proto/31.2.0/android-test-plugin-host-apk-installer-proto-31.2.0.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-core/1.0.0-beta10/jetifier-core-1.0.0-beta10.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/transform-api/2.0.0-deprecated-use-gradle-api/transform-api-2.0.0-deprecated-use-gradle-api.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-retention-proto/31.2.0/android-test-plugin-host-retention-proto-31.2.0.pom, took 37 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-logcat-proto/31.2.0/android-test-plugin-host-logcat-proto-31.2.0.pom, took 55 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-processor/1.0.0-beta10/jetifier-processor-1.0.0-beta10.pom, took 43 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-core/1.0.0-beta10/jetifier-core-1.0.0-beta10.module, took 23 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-processor/1.0.0-beta10/jetifier-processor-1.0.0-beta10.module, took 23 ms
+Download https://dl.google.com/dl/android/maven2/com/google/testing/platform/core-proto/0.0.8-alpha08/core-proto-0.0.8-alpha08.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.19.3/protobuf-java-3.19.3.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-api/8.2.0/gradle-api-8.2.0.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-model/8.2.0/builder-model-8.2.0.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/com/google/flatbuffers/flatbuffers-java/1.12.0/flatbuffers-java-1.12.0.pom, took 68 ms
+Download https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.7.0/tink-1.7.0.pom, took 69 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.8.6/gson-2.8.6.pom, took 75 ms
+Download https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java-util/3.19.3/protobuf-java-util-3.19.3.pom, took 71 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder/8.2.0/builder-8.2.0.pom, took 71 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-api/8.2.0/gradle-api-8.2.0.module, took 45 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-model/8.2.0/builder-model-8.2.0.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder/8.2.0/builder-8.2.0.module, took 21 ms
+Download https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-parent/3.19.3/protobuf-parent-3.19.3.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/gson/gson-parent/2.8.6/gson-parent-2.8.6.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-bom/3.19.3/protobuf-bom-3.19.3.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.9.0/kotlin-stdlib-jdk8-1.9.0.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.5.6/httpmime-4.5.6.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.5.6/httpcomponents-client-4.5.6.pom, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-parent/10/httpcomponents-parent-10.pom, took 32 ms
+Download https://repo.maven.apache.org/maven2/org/apache/apache/18/apache-18.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/25/commons-parent-25.pom, took 32 ms
+Download https://repo.maven.apache.org/maven2/org/apache/apache/9/apache-9.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.2/asm-9.2.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/ow2/1.5/ow2-1.5.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/9.2/asm-analysis-9.2.pom, took 29 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.2/asm-commons-9.2.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-util/9.2/asm-util-9.2.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.67/bcpkix-jdk15on-1.67.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2.pom, took 26 ms
+Download https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-runtime-parent/2.3.2/jaxb-runtime-parent-2.3.2.pom, took 27 ms
+Download https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-parent/2.3.2/jaxb-parent-2.3.2.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-bom-ext/2.3.2/jaxb-bom-ext-2.3.2.pom, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/2.3.2/jaxb-bom-2.3.2.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.5/project-1.0.5.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/net/sf/jopt-simple/jopt-simple/4.9/jopt-simple-4.9.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/com/squareup/javapoet/1.10.0/javapoet-1.10.0.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-core/1.45.1/grpc-core-1.45.1.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-netty/1.45.1/grpc-netty-1.45.1.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf/1.45.1/grpc-protobuf-1.45.1.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-stub/1.45.1/grpc-stub-1.45.1.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/tensorflow/tensorflow-lite-metadata/0.1.0-rc2/tensorflow-lite-metadata-0.1.0-rc2.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.10/gson-2.10.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/gson/gson-parent/2.10/gson-parent-2.10.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/common/31.2.0/common-31.2.0.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/guava/31.1-jre/guava-31.1-jre.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/31.1-jre/guava-parent-31.1-jre.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk15on/1.67/bcprov-jdk15on-1.67.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.12.0/xercesImpl-2.12.0.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/dvlib/31.2.0/dvlib-31.2.0.pom, took 40 ms
+Download https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/52/commons-parent-52.pom, took 40 ms
+Download https://repo.maven.apache.org/maven2/org/apache/apache/23/apache-23.pom, took 35 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.4.16/httpcomponents-core-4.4.16.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-parent/11/httpcomponents-parent-11.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/apache/apache/21/apache-21.pom, took 27 ms
+Download https://repo.maven.apache.org/maven2/com/google/jimfs/jimfs/1.1/jimfs-1.1.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/google/jimfs/jimfs-parent/1.1/jimfs-parent-1.1.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/com/sun/activation/all/1.2.0/all-1.2.0.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/net/java/jvnet-parent/1/jvnet-parent-1.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.5.14/httpcomponents-client-4.5.14.pom, took 26 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/protos/31.2.0/protos-31.2.0.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.pom, took 39 ms
+Download https://repo.maven.apache.org/maven2/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/net/java/jvnet-parent/3/jvnet-parent-3.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.9.0/kotlin-stdlib-jdk7-1.9.0.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.2/asm-tree-9.2.pom, took 33 ms
+Download https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.pom, took 27 ms
+Download https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api-parent/2.3.2/jakarta.xml.bind-api-parent-2.3.2.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/glassfish/jaxb/txw2/2.3.2/txw2-2.3.2.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-txw-parent/2.3.2/jaxb-txw-parent-2.3.2.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/com/sun/istack/istack-commons-runtime/3.0.8/istack-commons-runtime-3.0.8.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/com/sun/istack/istack-commons/3.0.8/istack-commons-3.0.8.pom, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jvnet/staxex/stax-ex/1.8.1/stax-ex-1.8.1.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/com/sun/xml/fastinfoset/FastInfoset/1.2.16/FastInfoset-1.2.16.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/com/sun/xml/fastinfoset/fastinfoset-project/1.2.16/fastinfoset-project-1.2.16.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/sun/activation/all/1.2.1/all-1.2.1.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.2/project-1.0.2.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.3.1/error_prone_annotations-2.3.1.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/google/dagger/dagger/2.28.3/dagger-2.28.3.pom, took 34 ms
+Download https://repo.maven.apache.org/maven2/com/google/auto/value/auto-value-annotations/1.6.2/auto-value-annotations-1.6.2.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/com/google/auto/value/auto-value-parent/1.6.2/auto-value-parent-1.6.2.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.3.1/error_prone_parent-2.3.1.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/com/google/auto/auto-parent/6/auto-parent-6.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.7.0/jose4j-0.7.0.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.30/slf4j-parent-1.7.30.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6/jdom2-2.0.6.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.5.1/error_prone_annotations-2.5.1.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.5.1/error_prone_parent-2.5.1.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.10.0/error_prone_annotations-2.10.0.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.10.0/error_prone_parent-2.10.0.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-api/1.45.1/grpc-api-1.45.1.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.19/animal-sniffer-annotations-1.19.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-parent/1.19/animal-sniffer-parent-1.19.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/50/mojo-parent-50.pom, took 29 ms
+Download https://repo.maven.apache.org/maven2/io/perfmark/perfmark-api/0.23.0/perfmark-api-0.23.0.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/io/perfmark/perfmark-api/0.23.0/perfmark-api-0.23.0.module, took 19 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.72.Final/netty-codec-http2-4.1.72.Final.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.1.72.Final/netty-parent-4.1.72.Final.pom, took 39 ms
+Download https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.72.Final/netty-handler-proxy-4.1.72.Final.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/com/google/api/grpc/proto-google-common-protos/2.0.1/proto-google-common-protos-2.0.1.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf-lite/1.45.1/grpc-protobuf-lite-1.45.1.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/2.5.8/checker-qual-2.5.8.pom, took 26 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/apkzlib/8.2.0/apkzlib-8.2.0.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/com/android/signflinger/8.2.0/signflinger-8.2.0.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/com/android/zipflinger/8.2.0/zipflinger-8.2.0.pom, took 37 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/manifest-merger/31.2.0/manifest-merger-31.2.0.pom, took 41 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/tracker/31.2.0/tracker-31.2.0.pom, took 131 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/manifest-merger/31.2.0/manifest-merger-31.2.0.module, took 34 ms
+Download https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/35/commons-parent-35.pom, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/apache/apache/15/apache-15.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/com/squareup/javawriter/2.5.0/javawriter-2.5.0.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.12.0/checker-qual-3.12.0.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.12.0/checker-qual-3.12.0.module, took 19 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.11.0/error_prone_annotations-2.11.0.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.11.0/error_prone_parent-2.11.0.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.11/commons-codec-1.11.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/42/commons-parent-42.pom, took 45 ms
+Download https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/34/commons-parent-34.pom, took 27 ms
+Download https://repo.maven.apache.org/maven2/org/apache/apache/13/apache-13.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.6.0/jna-5.6.0.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.45.1/grpc-context-1.45.1.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.72.Final/netty-common-4.1.72.Final.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.72.Final/netty-buffer-4.1.72.Final.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.72.Final/netty-transport-4.1.72.Final.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.72.Final/netty-codec-4.1.72.Final.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.72.Final/netty-handler-4.1.72.Final.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.72.Final/netty-codec-http-4.1.72.Final.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.72.Final/netty-codec-socks-4.1.72.Final.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.72.Final/netty-resolver-4.1.72.Final.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-tcnative-classes/2.0.46.Final/netty-tcnative-classes-2.0.46.Final.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-tcnative-parent/2.0.46.Final/netty-tcnative-parent-2.0.46.Final.pom, took 27 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-settings-api/8.2.0/gradle-settings-api-8.2.0.jar, took 24 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-model/31.2.0/lint-model-31.2.0.jar, took 258 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/repository/31.2.0/repository-31.2.0.jar, took 315 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/manifest-merger/31.2.0/manifest-merger-31.2.0.jar, took 358 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/tracker/31.2.0/tracker-31.2.0.jar, took 89 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/shared/31.2.0/shared-31.2.0.jar, took 181 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/aaptcompiler/8.2.0/aaptcompiler-8.2.0.jar, took 544 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-retention-proto/31.2.0/android-test-plugin-host-retention-proto-31.2.0.jar, took 108 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-emulator-control-proto/31.2.0/android-test-plugin-host-emulator-control-proto-31.2.0.jar, took 106 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/sdklib/31.2.0/sdklib-31.2.0.jar, took 1 s 623 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-model/8.2.0/builder-model-8.2.0.jar, took 189 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/sdk-common/31.2.0/sdk-common-31.2.0.jar, took 1 s 694 ms
+Download https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-compiler-common/8.2.0/databinding-compiler-common-8.2.0.jar, took 876 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-test-api/8.2.0/builder-test-api-8.2.0.jar, took 80 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/dvlib/31.2.0/dvlib-31.2.0.jar, took 114 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/layoutlib/layoutlib-api/31.2.0/layoutlib-api-31.2.0.jar, took 281 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-api/8.2.0/gradle-api-8.2.0.jar, took 460 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-core/1.0.0-beta10/jetifier-core-1.0.0-beta10.jar, took 235 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-processor/1.0.0-beta10/jetifier-processor-1.0.0-beta10.jar, took 240 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/common/31.2.0/common-31.2.0.jar, took 770 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/ddms/ddmlib/31.2.0/ddmlib-31.2.0.jar, took 1 s 381 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/crash/31.2.0/crash-31.2.0.jar, took 123 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-typedef-remover/31.2.0/lint-typedef-remover-31.2.0.jar, took 125 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.22/kotlin-stdlib-1.9.22.jar, took 1 s 50 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-ddmlib-proto/31.2.0/android-device-provider-ddmlib-proto-31.2.0.jar, took 85 ms
+Download https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-common/8.2.0/databinding-common-8.2.0.jar, took 91 ms
+Download https://dl.google.com/dl/android/maven2/com/android/databinding/baseLibrary/8.2.0/baseLibrary-8.2.0.jar, took 96 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.2.0-10154469/aapt2-proto-8.2.0-10154469.jar, took 1 s 23 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-coverage-proto/31.2.0/android-test-plugin-host-coverage-proto-31.2.0.jar, took 71 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-logcat-proto/31.2.0/android-test-plugin-host-logcat-proto-31.2.0.jar, took 71 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-gradle-proto/31.2.0/android-device-provider-gradle-proto-31.2.0.jar, took 79 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-additional-test-output-proto/31.2.0/android-test-plugin-host-additional-test-output-proto-31.2.0.jar, took 79 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.9.22/kotlin-reflect-1.9.22.jar, took 2 s 118 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.5.6/httpmime-4.5.6.jar, took 66 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-apk-installer-proto/31.2.0/android-test-plugin-host-apk-installer-proto-31.2.0.jar, took 87 ms
+Download https://repo.maven.apache.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.jar, took 125 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-result-listener-gradle-proto/31.2.0/android-test-plugin-result-listener-gradle-proto-31.2.0.jar, took 192 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/9.2/asm-analysis-9.2.jar, took 71 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.2/asm-commons-9.2.jar, took 72 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-util/9.2/asm-util-9.2.jar, took 102 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.2/asm-tree-9.2.jar, took 121 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.2/asm-9.2.jar, took 182 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder/8.2.0/builder-8.2.0.jar, took 6 s 182 ms
+Download https://repo.maven.apache.org/maven2/net/sf/jopt-simple/jopt-simple/4.9/jopt-simple-4.9.jar, took 115 ms
+Download https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java-util/3.19.3/protobuf-java-util-3.19.3.jar, took 181 ms
+Download https://repo.maven.apache.org/maven2/com/squareup/javapoet/1.10.0/javapoet-1.10.0.jar, took 224 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf/1.45.1/grpc-protobuf-1.45.1.jar, took 125 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/apkzlib/8.2.0/apkzlib-8.2.0.jar, took 354 ms
+Download https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.67/bcpkix-jdk15on-1.67.jar, took 468 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-netty/1.45.1/grpc-netty-1.45.1.jar, took 177 ms
+Download https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2.jar, took 948 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-core/1.45.1/grpc-core-1.45.1.jar, took 427 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-stub/1.45.1/grpc-stub-1.45.1.jar, took 110 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.10/gson-2.10.jar, took 219 ms
+Download https://repo.maven.apache.org/maven2/org/tensorflow/tensorflow-lite-metadata/0.1.0-rc2/tensorflow-lite-metadata-0.1.0-rc2.jar, took 287 ms
+Download https://repo.maven.apache.org/maven2/com/google/flatbuffers/flatbuffers-java/1.12.0/flatbuffers-java-1.12.0.jar, took 120 ms
+Download https://repo.maven.apache.org/maven2/com/google/api/grpc/proto-google-common-protos/2.0.1/proto-google-common-protos-2.0.1.jar, took 1 s 711 ms
+Download https://dl.google.com/dl/android/maven2/com/google/testing/platform/core-proto/0.0.8-alpha08/core-proto-0.0.8-alpha08.jar, took 1 s 24 ms
+Download https://repo.maven.apache.org/maven2/com/google/jimfs/jimfs/1.1/jimfs-1.1.jar, took 151 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf-lite/1.45.1/grpc-protobuf-lite-1.45.1.jar, took 93 ms
+Download https://repo.maven.apache.org/maven2/com/google/dagger/dagger/2.28.3/dagger-2.28.3.jar, took 130 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-api/1.45.1/grpc-api-1.45.1.jar, took 269 ms
+Download https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.7.0/tink-1.7.0.jar, took 2 s 402 ms
+Download https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.19.3/protobuf-java-3.19.3.jar, took 2 s 248 ms
+Download https://repo.maven.apache.org/maven2/javax/inject/javax.inject/1/javax.inject-1.jar, took 75 ms
+Download https://repo.maven.apache.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0.jar, took 106 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/guava/31.1-jre/guava-31.1-jre.jar, took 1 s 99 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar, took 222 ms
+Download https://repo.maven.apache.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.jar, took 123 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar, took 709 ms
+Download https://dl.google.com/dl/android/maven2/com/android/signflinger/8.2.0/signflinger-8.2.0.jar, took 85 ms
+Download https://dl.google.com/dl/android/maven2/com/android/zipflinger/8.2.0/zipflinger-8.2.0.jar, took 172 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/annotations/31.2.0/annotations-31.2.0.jar, took 120 ms
+Download https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.jar, took 1 s 154 ms
+Download https://repo.maven.apache.org/maven2/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.jar, took 187 ms
+Download https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar, took 118 ms
+Download https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.12.0/xercesImpl-2.12.0.jar, took 1 s 578 ms
+Download https://repo.maven.apache.org/maven2/org/glassfish/jaxb/txw2/2.3.2/txw2-2.3.2.jar, took 103 ms
+Download https://repo.maven.apache.org/maven2/org/jvnet/staxex/stax-ex/1.8.1/stax-ex-1.8.1.jar, took 115 ms
+Download https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar, took 202 ms
+Download https://repo.maven.apache.org/maven2/com/sun/istack/istack-commons-runtime/3.0.8/istack-commons-runtime-3.0.8.jar, took 86 ms
+Download https://repo.maven.apache.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar, took 134 ms
+Download https://repo.maven.apache.org/maven2/com/sun/xml/fastinfoset/FastInfoset/1.2.16/FastInfoset-1.2.16.jar, took 212 ms
+Download https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.jar, took 1 s 485 ms
+Download https://repo.maven.apache.org/maven2/com/google/auto/value/auto-value-annotations/1.6.2/auto-value-annotations-1.6.2.jar, took 44 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.11.0/error_prone_annotations-2.11.0.jar, took 52 ms
+Download https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar, took 87 ms
+Download https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.7.0/jose4j-0.7.0.jar, took 217 ms
+Download https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk15on/1.67/bcprov-jdk15on-1.67.jar, took 3 s 505 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar, took 41 ms
+Download https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar, took 63 ms
+Download https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6/jdom2-2.0.6.jar, took 199 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.2.0/gradle-8.2.0.jar, took 13 s 628 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/protos/31.2.0/protos-31.2.0.jar, took 7 s 75 ms
+Download https://repo.maven.apache.org/maven2/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4.jar, took 36 ms
+Download https://repo.maven.apache.org/maven2/io/perfmark/perfmark-api/0.23.0/perfmark-api-0.23.0.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.72.Final/netty-handler-proxy-4.1.72.Final.jar, took 53 ms
+Download https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.11/commons-codec-1.11.jar, took 169 ms
+Download https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.12.0/checker-qual-3.12.0.jar, took 174 ms
+Download https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.19/animal-sniffer-annotations-1.19.jar, took 215 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/apksig/8.2.0/apksig-8.2.0.jar, took 283 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.72.Final/netty-codec-http2-4.1.72.Final.jar, took 376 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar, took 39 ms
+Download https://repo.maven.apache.org/maven2/com/squareup/javawriter/2.5.0/javawriter-2.5.0.jar, took 44 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar, took 41 ms
+Download https://repo.maven.apache.org/maven2/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar, took 143 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.45.1/grpc-context-1.45.1.jar, took 78 ms
+Download https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar, took 98 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.72.Final/netty-codec-socks-4.1.72.Final.jar, took 110 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.72.Final/netty-codec-4.1.72.Final.jar, took 419 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.72.Final/netty-resolver-4.1.72.Final.jar, took 97 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/bundletool/1.15.2/bundletool-1.15.2.jar, took 11 s 910 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.72.Final/netty-buffer-4.1.72.Final.jar, took 222 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.72.Final/netty-codec-http-4.1.72.Final.jar, took 637 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.72.Final/netty-handler-4.1.72.Final.jar, took 639 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.72.Final/netty-transport-4.1.72.Final.jar, took 368 ms
+Download https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.6.0/jna-5.6.0.jar, took 994 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-tcnative-classes/2.0.46.Final/netty-tcnative-classes-2.0.46.Final.jar, took 48 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.72.Final/netty-common-4.1.72.Final.jar, took 254 ms
+> Task :composeApp:convertXmlValueResourcesForAndroidDebug NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForAndroidInstrumentedTest NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForAndroidInstrumentedTestDebug NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForAndroidRelease NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForAndroidUnitTest NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForAndroidUnitTestDebug NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForAndroidUnitTestRelease NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :composeApp:convertXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidDebug NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidInstrumentedTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidInstrumentedTestDebug NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidRelease NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidUnitTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidUnitTestDebug NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForAndroidUnitTestRelease NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForCommonMain
+> Task :composeApp:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForDesktopMain NO-SOURCE
+> Task :composeApp:copyNonXmlValueResourcesForDesktopTest NO-SOURCE
+> Task :composeApp:generateComposeResClass
+> Task :composeApp:prepareComposeResourcesTaskForAndroidDebug NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidDebug NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidInstrumentedTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidInstrumentedTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidInstrumentedTestDebug NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidInstrumentedTestDebug NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidRelease NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidRelease NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidUnitTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidUnitTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidUnitTestDebug NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidUnitTestDebug NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForAndroidUnitTestRelease NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForAndroidUnitTestRelease NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForCommonMain
+> Task :composeApp:generateResourceAccessorsForCommonMain
+> Task :composeApp:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForCommonTest NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForDesktopMain NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForDesktopMain NO-SOURCE
+> Task :composeApp:prepareComposeResourcesTaskForDesktopTest NO-SOURCE
+> Task :composeApp:generateResourceAccessorsForDesktopTest NO-SOURCE
+> Task :composeApp:prepareKotlinIdeaImport
+> Task :prepareKotlinBuildScriptModel UP-TO-DATE
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources/1.6.10/components-resources-1.6.10.pom, took 123 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources/1.6.10/components-resources-1.6.10.module, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview/1.6.10/components-ui-tooling-preview-1.6.10.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview/1.6.10/components-ui-tooling-preview-1.6.10.module, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources-desktop/1.6.10/components-resources-desktop-1.6.10.pom, took 105 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources-desktop/1.6.10/components-resources-desktop-1.6.10.module, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview-desktop/1.6.10/components-ui-tooling-preview-desktop-1.6.10.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview-desktop/1.6.10/components-ui-tooling-preview-desktop-1.6.10.module, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview-desktop/1.6.10/components-ui-tooling-preview-desktop-1.6.10.jar, took 65 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources-desktop/1.6.10/components-resources-desktop-1.6.10.jar, took 159 ms
+Download https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/1.9.0/activity-compose-1.9.0.pom, took 60 ms
+Download https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/1.9.0/activity-compose-1.9.0.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/activity/activity-ktx/1.9.0/activity-ktx-1.9.0.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.6.1/lifecycle-viewmodel-2.6.1.pom, took 65 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/1.0.1/ui-1.0.1.pom, took 69 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.0.1/runtime-saveable-1.0.1.pom, took 74 ms
+Download https://dl.google.com/dl/android/maven2/androidx/activity/activity-ktx/1.9.0/activity-ktx-1.9.0.module, took 26 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime/1.0.1/runtime-1.0.1.pom, took 84 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.6.1/lifecycle-viewmodel-2.6.1.module, took 25 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime/1.0.1/runtime-1.0.1.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.0.1/runtime-saveable-1.0.1.module, took 37 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/1.0.1/ui-1.0.1.module, took 27 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-uikit/1.6.10/ui-uikit-1.6.10.pom, took 59 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-uikit/1.6.10/ui-uikit-1.6.10.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/activity/activity/1.9.0/activity-1.9.0.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx/2.6.1/lifecycle-runtime-ktx-2.6.1.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-ktx/2.6.1/lifecycle-viewmodel-ktx-2.6.1.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.2.1/savedstate-ktx-1.2.1.pom, took 24 ms
+Download https://dl.google.com/dl/android/maven2/androidx/core/core-ktx/1.13.0/core-ktx-1.13.0.pom, took 39 ms
+Download https://dl.google.com/dl/android/maven2/androidx/activity/activity/1.9.0/activity-1.9.0.module, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate-ktx/1.2.1/savedstate-ktx-1.2.1.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx/2.6.1/lifecycle-runtime-ktx-2.6.1.module, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/core/core-ktx/1.13.0/core-ktx-1.13.0.module, took 27 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-ktx/2.6.1/lifecycle-viewmodel-ktx-2.6.1.module, took 30 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.5.0/kotlinx-coroutines-android-1.5.0.pom, took 27 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.5.0/kotlinx-coroutines-android-1.5.0.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.1.0/annotation-1.1.0.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit/1.0.1/ui-unit-1.0.1.pom, took 26 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics/1.0.1/ui-graphics-1.0.1.pom, took 30 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text/1.0.1/ui-text-1.0.1.pom, took 33 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry/1.0.1/ui-geometry-1.0.1.pom, took 33 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit/1.0.1/ui-unit-1.0.1.module, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics/1.0.1/ui-graphics-1.0.1.module, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text/1.0.1/ui-text-1.0.1.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry/1.0.1/ui-geometry-1.0.1.module, took 50 ms
+Download https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.2.1/savedstate-1.2.1.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/core/core/1.13.0/core-1.13.0.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/savedstate/savedstate/1.2.1/savedstate-1.2.1.module, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/core/core/1.13.0/core-1.13.0.module, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-savedstate/2.6.1/lifecycle-viewmodel-savedstate-2.6.1.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.6.1/lifecycle-runtime-2.6.1.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-savedstate/2.6.1/lifecycle-viewmodel-savedstate-2.6.1.module, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.6.1/lifecycle-runtime-2.6.1.module, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.6.4/kotlinx-coroutines-android-1.6.4.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.6.4/kotlinx-coroutines-bom-1.6.4.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.6.4/kotlinx-coroutines-android-1.6.4.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.2.0/annotation-1.2.0.pom, took 16 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.2.0/annotation-1.2.0.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.6.0/annotation-1.6.0.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.6.0/annotation-1.6.0.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.6.2/lifecycle-runtime-2.6.2.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.6.2/lifecycle-runtime-2.6.2.module, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/versionedparcelable/versionedparcelable/1.1.1/versionedparcelable-1.1.1.pom, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.4.0/annotation-experimental-1.4.0.pom, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-experimental/1.4.0/annotation-experimental-1.4.0.module, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core/2.6.1/lifecycle-livedata-core-2.6.1.pom, took 24 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core/2.6.1/lifecycle-livedata-core-2.6.1.module, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.6.21/kotlin-stdlib-jdk8-1.6.21.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core/2.6.2/lifecycle-livedata-core-2.6.2.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-livedata-core/2.6.2/lifecycle-livedata-core-2.6.2.module, took 24 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx/2.6.2/lifecycle-runtime-ktx-2.6.2.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-ktx/2.6.2/lifecycle-runtime-ktx-2.6.2.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.6.2/lifecycle-viewmodel-2.6.2.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.6.2/lifecycle-viewmodel-2.6.2.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-ktx/2.6.2/lifecycle-viewmodel-ktx-2.6.2.pom, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-ktx/2.6.2/lifecycle-viewmodel-ktx-2.6.2.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-savedstate/2.6.2/lifecycle-viewmodel-savedstate-2.6.2.pom, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-savedstate/2.6.2/lifecycle-viewmodel-savedstate-2.6.2.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.6.2/lifecycle-common-2.6.2.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.6.2/lifecycle-common-2.6.2.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/collection/collection/1.0.0/collection-1.0.0.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.6.21/kotlin-stdlib-jdk7-1.6.21.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview/1.6.10/components-ui-tooling-preview-1.6.10.jar, took 58 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material/1.6.10/material-1.6.10.jar, took 79 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation/1.6.10/foundation-1.6.10.jar, took 115 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-core/1.6.10/animation-core-1.6.10.jar, took 134 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-ripple/1.6.10/material-ripple-1.6.10.jar, took 140 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation/1.6.10/animation-1.6.10.jar, took 148 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-layout/1.6.10/foundation-layout-1.6.10.jar, took 158 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources/1.6.10/components-resources-1.6.10.jar, took 167 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-saveable/1.6.10/runtime-saveable-1.6.10.jar, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime-compose/2.8.0/lifecycle-runtime-compose-2.8.0.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-unit/1.6.10/ui-unit-1.6.10.jar, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-geometry/1.6.10/ui-geometry-1.6.10.jar, took 97 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-icons-core/1.6.10/material-icons-core-1.6.10.jar, took 102 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-text/1.6.10/ui-text-1.6.10.jar, took 141 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-graphics/1.6.10/ui-graphics-1.6.10.jar, took 148 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui/1.6.10/ui-1.6.10.jar, took 185 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-common/2.8.0/lifecycle-common-2.8.0.jar, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-util/1.6.10/ui-util-1.6.10.jar, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime/2.8.0/lifecycle-runtime-2.8.0.jar, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/collection-internal/collection/1.6.10/collection-1.6.10.jar, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-viewmodel/2.8.0/lifecycle-viewmodel-2.8.0.jar, took 101 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.8.0/kotlinx-coroutines-core-1.8.0.jar, took 132 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime/1.6.10/runtime-1.6.10.jar, took 144 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko/0.8.4/skiko-0.8.4.jar, took 152 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/annotation-internal/annotation/1.6.10/annotation-1.6.10.jar, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/atomicfu/0.23.2/atomicfu-0.23.2.jar, took 106 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.0/kotlin-stdlib-2.0.0-all.jar, took 52 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview/1.6.7/ui-tooling-preview-1.6.7.pom, took 66 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview/1.6.7/ui-tooling-preview-1.6.7.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime/1.6.7/runtime-1.6.7.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime/1.6.7/runtime-1.6.7.module, took 42 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.6.7/foundation-1.6.7.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation/1.6.7/foundation-1.6.7.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material/1.6.7/material-1.6.7.pom, took 46 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material/1.6.7/material-1.6.7.module, took 40 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/1.6.7/ui-1.6.7.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui/1.6.7/ui-1.6.7.module, took 104 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources-android/1.6.10/components-resources-android-1.6.10.pom, took 65 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources-android/1.6.10/components-resources-android-1.6.10.module, took 95 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview-android/1.6.10/components-ui-tooling-preview-android-1.6.10.pom, took 104 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview-android/1.6.10/components-ui-tooling-preview-android-1.6.10.module, took 96 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview-android/1.6.7/ui-tooling-preview-android-1.6.7.pom, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-tooling-preview-android/1.6.7/ui-tooling-preview-android-1.6.7.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-android/1.6.7/runtime-android-1.6.7.pom, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-android/1.6.7/runtime-android-1.6.7.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.6.7/foundation-android-1.6.7.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.6.7/foundation-android-1.6.7.module, took 46 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-android/1.6.7/material-android-1.6.7.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-android/1.6.7/material-android-1.6.7.module, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.6.7/ui-android-1.6.7.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.6.7/ui-android-1.6.7.module, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.7.1/kotlinx-coroutines-android-1.7.1.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.7.1/kotlinx-coroutines-bom-1.7.1.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.7.1/kotlinx-coroutines-android-1.7.1.module, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.6.7/runtime-saveable-1.6.7.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable/1.6.7/runtime-saveable-1.6.7.module, took 18 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.7.1/kotlinx-coroutines-core-1.7.1.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.7.1/kotlinx-coroutines-core-1.7.1.module, took 39 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation/1.6.7/animation-1.6.7.pom, took 36 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation/1.6.7/animation-1.6.7.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-icons-core/1.6.7/material-icons-core-1.6.7.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-icons-core/1.6.7/material-icons-core-1.6.7.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core/1.6.7/animation-core-1.6.7.pom, took 62 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-ripple/1.6.7/material-ripple-1.6.7.pom, took 81 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core/1.6.7/animation-core-1.6.7.module, took 16 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-ripple/1.6.7/material-ripple-1.6.7.module, took 34 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text/1.6.7/ui-text-1.6.7.pom, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text/1.6.7/ui-text-1.6.7.module, took 24 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit/1.6.7/ui-unit-1.6.7.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics/1.6.7/ui-graphics-1.6.7.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry/1.6.7/ui-geometry-1.6.7.pom, took 66 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util/1.6.7/ui-util-1.6.7.pom, took 71 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit/1.6.7/ui-unit-1.6.7.module, took 25 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics/1.6.7/ui-graphics-1.6.7.module, took 44 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util/1.6.7/ui-util-1.6.7.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry/1.6.7/ui-geometry-1.6.7.module, took 52 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable-android/1.6.7/runtime-saveable-android-1.6.7.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/runtime/runtime-saveable-android/1.6.7/runtime-saveable-android-1.6.7.module, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.1/kotlinx-coroutines-core-jvm-1.7.1.pom, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.7.1/kotlinx-coroutines-core-jvm-1.7.1.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-android/1.6.7/animation-android-1.6.7.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-android/1.6.7/animation-android-1.6.7.module, took 17 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core-android/1.6.7/animation-core-android-1.6.7.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/animation/animation-core-android/1.6.7/animation-core-android-1.6.7.module, took 45 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-icons-core-android/1.6.7/material-icons-core-android-1.6.7.pom, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-icons-core-android/1.6.7/material-icons-core-android-1.6.7.module, took 18 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-ripple-android/1.6.7/material-ripple-android-1.6.7.pom, took 25 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/material/material-ripple-android/1.6.7/material-ripple-android-1.6.7.module, took 57 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-android/1.6.7/ui-text-android-1.6.7.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-text-android/1.6.7/ui-text-android-1.6.7.module, took 26 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.6.0/annotation-jvm-1.6.0.pom, took 17 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.6.0/annotation-jvm-1.6.0.module, took 35 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry-android/1.6.7/ui-geometry-android-1.6.7.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-geometry-android/1.6.7/ui-geometry-android-1.6.7.module, took 38 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics-android/1.6.7/ui-graphics-android-1.6.7.pom, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-graphics-android/1.6.7/ui-graphics-android-1.6.7.module, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit-android/1.6.7/ui-unit-android-1.6.7.pom, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-unit-android/1.6.7/ui-unit-android-1.6.7.module, took 21 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util-android/1.6.7/ui-util-android-1.6.7.pom, took 47 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-util-android/1.6.7/ui-util-android-1.6.7.module, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.20/kotlin-stdlib-jdk8-1.8.20.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.7.0/annotation-1.7.0.pom, took 19 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.7.0/annotation-1.7.0.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout/1.6.7/foundation-layout-1.6.7.pom, took 47 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout/1.6.7/foundation-layout-1.6.7.module, took 20 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.7.0/annotation-jvm-1.7.0.pom, took 27 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.7.0/annotation-jvm-1.7.0.module, took 18 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.20/kotlin-stdlib-jdk7-1.8.20.pom, took 22 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout-android/1.6.7/foundation-layout-android-1.6.7.pom, took 17 ms
+Download https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-layout-android/1.6.7/foundation-layout-android-1.6.7.module, took 106 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview/1.6.10/components-ui-tooling-preview-1.6.10-sources.jar, took 76 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.0/kotlin-stdlib-2.0.0-common-sources.jar, took 273 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime/1.6.10/runtime-1.6.10-sources.jar, took 363 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources/1.6.10/components-resources-1.6.10-sources.jar, took 371 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material/1.6.10/material-1.6.10-sources.jar, took 411 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui/1.6.10/ui-1.6.10-sources.jar, took 462 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation/1.6.10/foundation-1.6.10-sources.jar, took 525 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-common/2.0.0/kotlin-stdlib-common-2.0.0-sources.jar, took 108 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/collection-internal/collection/1.6.10/collection-1.6.10-sources.jar, took 54 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/annotation-internal/annotation/1.6.10/annotation-1.6.10-sources.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/atomicfu/0.23.2/atomicfu-0.23.2-sources.jar, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.8.0/kotlinx-coroutines-core-1.8.0-sources.jar, took 66 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation/1.6.10/animation-1.6.10-sources.jar, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-core/1.6.10/animation-core-1.6.10-sources.jar, took 31 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-common/2.8.0/lifecycle-common-2.8.0-sources.jar, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime/2.8.0/lifecycle-runtime-2.8.0-sources.jar, took 23 ms
+Download https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0-sources.jar, took 36 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.6.0/annotation-1.6.0-sources.jar, took 32 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime-compose/2.8.0/lifecycle-runtime-compose-2.8.0-sources.jar, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-viewmodel/2.8.0/lifecycle-viewmodel-2.8.0-sources.jar, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-saveable/1.6.10/runtime-saveable-1.6.10-sources.jar, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-geometry/1.6.10/ui-geometry-1.6.10-sources.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-util/1.6.10/ui-util-1.6.10-sources.jar, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-uikit/1.6.10/ui-uikit-1.6.10-sources.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-graphics/1.6.10/ui-graphics-1.6.10-sources.jar, took 44 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-unit/1.6.10/ui-unit-1.6.10-sources.jar, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko/0.8.4/skiko-0.8.4-sources.jar, took 59 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-text/1.6.10/ui-text-1.6.10-sources.jar, took 52 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-layout/1.6.10/foundation-layout-1.6.10-sources.jar, took 29 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-icons-core/1.6.10/material-icons-core-1.6.10-sources.jar, took 61 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-ripple/1.6.10/material-ripple-1.6.10-sources.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-resources-desktop/1.6.10/components-resources-desktop-1.6.10-sources.jar, took 70 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/components/components-ui-tooling-preview-desktop/1.6.10/components-ui-tooling-preview-desktop-1.6.10-sources.jar, took 146 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/desktop/desktop-jvm/1.6.10/desktop-jvm-1.6.10-sources.jar, took 164 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-desktop/1.6.10/ui-desktop-1.6.10-sources.jar, took 286 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko-awt/0.8.4/skiko-awt-0.8.4-sources.jar, took 338 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-desktop/1.6.10/material-desktop-1.6.10-sources.jar, took 359 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-desktop/1.6.10/runtime-desktop-1.6.10-sources.jar, took 371 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-desktop/1.6.10/foundation-desktop-1.6.10-sources.jar, took 575 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0-sources.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.8.0/kotlinx-coroutines-core-jvm-1.8.0-sources.jar, took 85 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-desktop/1.6.10/animation-desktop-1.6.10-sources.jar, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-core-desktop/1.6.10/animation-core-desktop-1.6.10-sources.jar, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-layout-desktop/1.6.10/foundation-layout-desktop-1.6.10-sources.jar, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-saveable-desktop/1.6.10/runtime-saveable-desktop-1.6.10-sources.jar, took 17 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-geometry-desktop/1.6.10/ui-geometry-desktop-1.6.10-sources.jar, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-graphics-desktop/1.6.10/ui-graphics-desktop-1.6.10-sources.jar, took 40 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-unit-desktop/1.6.10/ui-unit-desktop-1.6.10-sources.jar, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-text-desktop/1.6.10/ui-text-desktop-1.6.10-sources.jar, took 49 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-util-desktop/1.6.10/ui-util-desktop-1.6.10-sources.jar, took 18 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-icons-core-desktop/1.6.10/material-icons-core-desktop-1.6.10-sources.jar, took 53 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-ripple-desktop/1.6.10/material-ripple-desktop-1.6.10-sources.jar, took 40 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-tooling-preview-desktop/1.6.10/ui-tooling-preview-desktop-1.6.10-sources.jar, took 24 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.2.0/gradle-8.2.0-sources.jar, took 603 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-settings-api/8.2.0/gradle-settings-api-8.2.0-sources.jar, took 50 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-model/31.2.0/lint-model-31.2.0-sources.jar, took 69 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder/8.2.0/builder-8.2.0-sources.jar, took 77 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/manifest-merger/31.2.0/manifest-merger-31.2.0-sources.jar, took 65 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/sdk-common/31.2.0/sdk-common-31.2.0-sources.jar, took 140 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/sdklib/31.2.0/sdklib-31.2.0-sources.jar, took 108 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/repository/31.2.0/repository-31.2.0-sources.jar, took 65 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/aaptcompiler/8.2.0/aaptcompiler-8.2.0-sources.jar, took 77 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/tracker/31.2.0/tracker-31.2.0-sources.jar, took 53 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/shared/31.2.0/shared-31.2.0-sources.jar, took 57 ms
+Download https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-compiler-common/8.2.0/databinding-compiler-common-8.2.0-sources.jar, took 60 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-emulator-control-proto/31.2.0/android-test-plugin-host-emulator-control-proto-31.2.0-sources.jar, took 52 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-retention-proto/31.2.0/android-test-plugin-host-retention-proto-31.2.0-sources.jar, took 45 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-model/8.2.0/builder-model-8.2.0-sources.jar, took 59 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-api/8.2.0/gradle-api-8.2.0-sources.jar, took 58 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-test-api/8.2.0/builder-test-api-8.2.0-sources.jar, took 19 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/ddms/ddmlib/31.2.0/ddmlib-31.2.0-sources.jar, took 97 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/layoutlib/layoutlib-api/31.2.0/layoutlib-api-31.2.0-sources.jar, took 34 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/dvlib/31.2.0/dvlib-31.2.0-sources.jar, took 45 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/common/31.2.0/common-31.2.0-sources.jar, took 70 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-processor/1.0.0-beta10/jetifier-processor-1.0.0-beta10-sources.jar, took 23 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/jetifier/jetifier-core/1.0.0-beta10/jetifier-core-1.0.0-beta10-sources.jar, took 24 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.2.0-10154469/aapt2-proto-8.2.0-10154469-sources.jar, took 101 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/crash/31.2.0/crash-31.2.0-sources.jar, took 47 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-typedef-remover/31.2.0/lint-typedef-remover-31.2.0-sources.jar, took 45 ms
+Download https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-common/8.2.0/databinding-common-8.2.0-sources.jar, took 43 ms
+Download https://dl.google.com/dl/android/maven2/com/android/databinding/baseLibrary/8.2.0/baseLibrary-8.2.0-sources.jar, took 58 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-ddmlib-proto/31.2.0/android-device-provider-ddmlib-proto-31.2.0-sources.jar, took 49 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-gradle-proto/31.2.0/android-device-provider-gradle-proto-31.2.0-sources.jar, took 46 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-additional-test-output-proto/31.2.0/android-test-plugin-host-additional-test-output-proto-31.2.0-sources.jar, took 19 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-coverage-proto/31.2.0/android-test-plugin-host-coverage-proto-31.2.0-sources.jar, took 44 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-logcat-proto/31.2.0/android-test-plugin-host-logcat-proto-31.2.0-sources.jar, took 45 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-apk-installer-proto/31.2.0/android-test-plugin-host-apk-installer-proto-31.2.0-sources.jar, took 46 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-result-listener-gradle-proto/31.2.0/android-test-plugin-result-listener-gradle-proto-31.2.0-sources.jar, took 48 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.5.6/httpmime-4.5.6-sources.jar, took 34 ms
+Download https://repo.maven.apache.org/maven2/commons-io/commons-io/2.4/commons-io-2.4-sources.jar, took 63 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.2/asm-commons-9.2-sources.jar, took 29 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-util/9.2/asm-util-9.2-sources.jar, took 31 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/9.2/asm-analysis-9.2-sources.jar, took 33 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.2/asm-tree-9.2-sources.jar, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.2/asm-9.2-sources.jar, took 43 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/apkzlib/8.2.0/apkzlib-8.2.0-sources.jar, took 58 ms
+Download https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.67/bcpkix-jdk15on-1.67-sources.jar, took 102 ms
+Download https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-runtime/2.3.2/jaxb-runtime-2.3.2-sources.jar, took 125 ms
+Download https://repo.maven.apache.org/maven2/net/sf/jopt-simple/jopt-simple/4.9/jopt-simple-4.9-sources.jar, took 29 ms
+Download https://repo.maven.apache.org/maven2/com/squareup/javapoet/1.10.0/javapoet-1.10.0-sources.jar, took 25 ms
+Download https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java-util/3.19.3/protobuf-java-util-3.19.3-sources.jar, took 24 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf/1.45.1/grpc-protobuf-1.45.1-sources.jar, took 19 ms
+Download https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.7.0/tink-1.7.0-sources.jar, took 612 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/protos/31.2.0/protos-31.2.0-sources.jar, took 473 ms
+Download https://repo.maven.apache.org/maven2/com/google/api/grpc/proto-google-common-protos/2.0.1/proto-google-common-protos-2.0.1-sources.jar, took 125 ms
+Download https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.19.3/protobuf-java-3.19.3-sources.jar, took 124 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-netty/1.45.1/grpc-netty-1.45.1-sources.jar, took 36 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-core/1.45.1/grpc-core-1.45.1-sources.jar, took 58 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.10/gson-2.10-sources.jar, took 42 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-stub/1.45.1/grpc-stub-1.45.1-sources.jar, took 28 ms
+Download https://dl.google.com/dl/android/maven2/com/google/testing/platform/core-proto/0.0.8-alpha08/core-proto-0.0.8-alpha08-sources.jar, took 59 ms
+Download https://repo.maven.apache.org/maven2/com/google/flatbuffers/flatbuffers-java/1.12.0/flatbuffers-java-1.12.0-sources.jar, took 25 ms
+Download https://repo.maven.apache.org/maven2/com/google/jimfs/jimfs/1.1/jimfs-1.1-sources.jar, took 36 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf-lite/1.45.1/grpc-protobuf-lite-1.45.1-sources.jar, took 19 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-api/1.45.1/grpc-api-1.45.1-sources.jar, took 46 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/guava/31.1-jre/guava-31.1-jre-sources.jar, took 335 ms
+Download https://repo.maven.apache.org/maven2/com/google/dagger/dagger/2.28.3/dagger-2.28.3-sources.jar, took 24 ms
+Download https://repo.maven.apache.org/maven2/javax/inject/javax.inject/1/javax.inject-1-sources.jar, took 18 ms
+Download https://repo.maven.apache.org/maven2/net/sf/kxml/kxml2/2.3.0/kxml2-2.3.0-sources.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk15on/1.67/bcprov-jdk15on-1.67-sources.jar, took 623 ms
+Download https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.12.0/xercesImpl-2.12.0-sources.jar, took 324 ms
+Download https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21-sources.jar, took 186 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14-sources.jar, took 154 ms
+Download https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16-sources.jar, took 70 ms
+Download https://repo.maven.apache.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0-sources.jar, took 32 ms
+Download https://dl.google.com/dl/android/maven2/com/android/signflinger/8.2.0/signflinger-8.2.0-sources.jar, took 35 ms
+Download https://dl.google.com/dl/android/maven2/com/android/zipflinger/8.2.0/zipflinger-8.2.0-sources.jar, took 39 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/annotations/31.2.0/annotations-31.2.0-sources.jar, took 17 ms
+Download https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0-sources.jar, took 171 ms
+Download https://repo.maven.apache.org/maven2/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3-sources.jar, took 50 ms
+Download https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2-sources.jar, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jvnet/staxex/stax-ex/1.8.1/stax-ex-1.8.1-sources.jar, took 27 ms
+Download https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2-sources.jar, took 44 ms
+Download https://repo.maven.apache.org/maven2/org/glassfish/jaxb/txw2/2.3.2/txw2-2.3.2-sources.jar, took 30 ms
+Download https://repo.maven.apache.org/maven2/com/sun/istack/istack-commons-runtime/3.0.8/istack-commons-runtime-3.0.8-sources.jar, took 21 ms
+Download https://repo.maven.apache.org/maven2/com/sun/xml/fastinfoset/FastInfoset/1.2.16/FastInfoset-1.2.16-sources.jar, took 59 ms
+Download https://repo.maven.apache.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1-sources.jar, took 26 ms
+Download https://repo.maven.apache.org/maven2/com/google/auto/value/auto-value-annotations/1.6.2/auto-value-annotations-1.6.2-sources.jar, took 33 ms
+Download https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.11.0/error_prone_annotations-2.11.0-sources.jar, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.7.0/jose4j-0.7.0-sources.jar, took 47 ms
+Download https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30-sources.jar, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6/jdom2-2.0.6-sources.jar, took 157 ms
+Download https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3-sources.jar, took 24 ms
+Download https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4-sources.jar, took 27 ms
+Download https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.19/animal-sniffer-annotations-1.19-sources.jar, took 21 ms
+Download https://repo.maven.apache.org/maven2/io/perfmark/perfmark-api/0.23.0/perfmark-api-0.23.0-sources.jar, took 20 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.72.Final/netty-codec-http2-4.1.72.Final-sources.jar, took 62 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.72.Final/netty-handler-proxy-4.1.72.Final-sources.jar, took 20 ms
+Download https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.12.0/checker-qual-3.12.0-sources.jar, took 49 ms
+Download https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.11/commons-codec-1.11-sources.jar, took 61 ms
+Download https://dl.google.com/dl/android/maven2/com/android/tools/build/apksig/8.2.0/apksig-8.2.0-sources.jar, took 60 ms
+Download https://repo.maven.apache.org/maven2/com/squareup/javawriter/2.5.0/javawriter-2.5.0-sources.jar, took 19 ms
+Download https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1-sources.jar, took 18 ms
+Download https://repo.maven.apache.org/maven2/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01-sources.jar, took 119 ms
+Download https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2-sources.jar, took 130 ms
+Download https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.6.0/jna-5.6.0-sources.jar, took 39 ms
+Download https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.45.1/grpc-context-1.45.1-sources.jar, took 21 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.72.Final/netty-codec-http-4.1.72.Final-sources.jar, took 90 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.72.Final/netty-handler-4.1.72.Final-sources.jar, took 64 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.72.Final/netty-codec-socks-4.1.72.Final-sources.jar, took 32 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.72.Final/netty-codec-4.1.72.Final-sources.jar, took 53 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.72.Final/netty-transport-4.1.72.Final-sources.jar, took 61 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.72.Final/netty-buffer-4.1.72.Final-sources.jar, took 46 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.72.Final/netty-resolver-4.1.72.Final-sources.jar, took 23 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.72.Final/netty-common-4.1.72.Final-sources.jar, took 102 ms
+Download https://repo.maven.apache.org/maven2/io/netty/netty-tcnative-classes/2.0.46.Final/netty-tcnative-classes-2.0.46.Final-sources.jar, took 26 ms
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.7/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 2m 6s
+4 actionable tasks: 4 executed
+
+

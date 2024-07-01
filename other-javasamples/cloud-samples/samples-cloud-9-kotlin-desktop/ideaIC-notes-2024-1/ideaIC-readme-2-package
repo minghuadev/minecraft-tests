@@ -1,0 +1,20 @@
+
+
+$ JAVA_HOME=~/.jdks/corretto-21.0.3 ./gradlew package
+Starting a Gradle Daemon, 1 incompatible and 7 stopped Daemons could not be reused, use --status for details
+
+> Task :downloadWix
+Download https://github.com/wixtoolset/wix3/releases/download/wix3112rtm/wix311-binaries.zip
+
+> Task :packageMsi
+The distribution is written to build\compose\binaries\main\msi\compose-desktop-demo-1.0.0.msi
+
+
+
+$ JAVA_HOME=~/.jdks/corretto-21.0.3 ./gradlew createDistributable
+
+> Task :createDistributable
+The distribution is written to build\compose\binaries\main\app
+
+
+

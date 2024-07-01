@@ -1,0 +1,39 @@
+
+
+search kotlin desktop
+
+
+https://medium.com/ekino-france/building-your-first-desktop-application-in-kotlin-with-compose-desktop-ff8a9191ee34
+  building your first desktop application in kotlin with compose
+
+  source repo: 
+    https://github.com/mariebnst/compose-desktop-demo
+
+  native distribution: 
+    https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/Native_distributions_and_local_execution/README.md
+    we can run the createDistributable gradle task to create just the exe in a directory
+
+
+intellij idea 2024-1-4
+  the ide redirects, when creating new desktop examples, to 
+
+  getting started 
+    https://github.com/JetBrains/compose-multiplatform-desktop-template#before-you-start
+    native distribution into build/compose/binaries: ./gradlew package
+
+  template archived
+    https://github.com/JetBrains/compose-multiplatform-template#readme
+
+
+
+search intelij idea kotlin library project
+https://docs.gradle.org/current/samples/sample_building_kotlin_libraries.html
+  building kotlin libraries sample
+
+
+
+search gradle module dependency
+https://docs.gradle.org/current/userguide/declaring_dependencies.html
+  use  implementation(project(":utils"))
+
+

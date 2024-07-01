@@ -1,0 +1,93 @@
+
+
+search kotlin threading
+
+https://medium.com/@kevin_be_gray/make-threaded-http-requests-in-kotlin-d5db6eb16418
+  use ktor
+  the example does not compile/build because it is a JavaFX example.
+
+
+
+gradle sync downloads with ktor example above:
+
+> Task :prepareKotlinBuildScriptModel UP-TO-DATE
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-core/2.3.12/ktor-client-core-2.3.12.pom, took 105 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-cio/2.3.12/ktor-client-cio-2.3.12.pom, took 166 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-core/2.3.12/ktor-client-core-2.3.12.module, took 37 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-cio/2.3.12/ktor-client-cio-2.3.12.module, took 96 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-core-jvm/2.3.12/ktor-client-core-jvm-2.3.12.pom, took 134 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-core-jvm/2.3.12/ktor-client-core-jvm-2.3.12.module, took 42 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-cio-jvm/2.3.12/ktor-client-cio-jvm-2.3.12.pom, took 104 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-cio-jvm/2.3.12/ktor-client-cio-jvm-2.3.12.module, took 139 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websocket-serialization/2.3.12/ktor-websocket-serialization-2.3.12.pom, took 12 ms
+Download https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-jdk8/1.7.1/kotlinx-coroutines-jdk8-1.7.1.pom, took 62 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-slf4j/1.7.1/kotlinx-coroutines-slf4j-1.7.1.pom, took 64 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http/2.3.12/ktor-http-2.3.12.pom, took 68 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-events/2.3.12/ktor-events-2.3.12.pom, took 68 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websocket-serialization/2.3.12/ktor-websocket-serialization-2.3.12.module, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-jdk8/1.7.1/kotlinx-coroutines-jdk8-1.7.1.module, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom, took 61 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-slf4j/1.7.1/kotlinx-coroutines-slf4j-1.7.1.module, took 24 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-events/2.3.12/ktor-events-2.3.12.module, took 62 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http/2.3.12/ktor-http-2.3.12.module, took 83 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.22/kotlin-stdlib-jdk8-1.8.22.pom, took 12 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-common/1.8.22/kotlin-stdlib-common-1.8.22.pom, took 12 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.22/kotlin-stdlib-jdk7-1.8.22.pom, took 13 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websockets/2.3.12/ktor-websockets-2.3.12.pom, took 16 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http-cio/2.3.12/ktor-http-cio-2.3.12.pom, took 84 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network-tls/2.3.12/ktor-network-tls-2.3.12.pom, took 85 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http-cio/2.3.12/ktor-http-cio-2.3.12.module, took 27 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websockets/2.3.12/ktor-websockets-2.3.12.module, took 41 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network-tls/2.3.12/ktor-network-tls-2.3.12.module, took 90 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http-jvm/2.3.12/ktor-http-jvm-2.3.12.pom, took 19 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http-jvm/2.3.12/ktor-http-jvm-2.3.12.module, took 22 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-events-jvm/2.3.12/ktor-events-jvm-2.3.12.pom, took 14 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-events-jvm/2.3.12/ktor-events-jvm-2.3.12.module, took 14 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websocket-serialization-jvm/2.3.12/ktor-websocket-serialization-jvm-2.3.12.pom, took 14 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websocket-serialization-jvm/2.3.12/ktor-websocket-serialization-jvm-2.3.12.module, took 10 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http-cio-jvm/2.3.12/ktor-http-cio-jvm-2.3.12.pom, took 173 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http-cio-jvm/2.3.12/ktor-http-cio-jvm-2.3.12.module, took 173 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websockets-jvm/2.3.12/ktor-websockets-jvm-2.3.12.pom, took 9 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websockets-jvm/2.3.12/ktor-websockets-jvm-2.3.12.module, took 9 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network-tls-jvm/2.3.12/ktor-network-tls-jvm-2.3.12.pom, took 101 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network-tls-jvm/2.3.12/ktor-network-tls-jvm-2.3.12.module, took 86 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-utils/2.3.12/ktor-utils-2.3.12.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-utils/2.3.12/ktor-utils-2.3.12.module, took 168 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-serialization/2.3.12/ktor-serialization-2.3.12.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-serialization/2.3.12/ktor-serialization-2.3.12.module, took 28 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network/2.3.12/ktor-network-2.3.12.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network/2.3.12/ktor-network-2.3.12.module, took 13 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-jdk8/1.8.0/kotlinx-coroutines-jdk8-1.8.0.pom, took 18 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-jdk8/1.8.0/kotlinx-coroutines-jdk8-1.8.0.module, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-slf4j/1.8.0/kotlinx-coroutines-slf4j-1.8.0.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-slf4j/1.8.0/kotlinx-coroutines-slf4j-1.8.0.module, took 164 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-utils-jvm/2.3.12/ktor-utils-jvm-2.3.12.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-utils-jvm/2.3.12/ktor-utils-jvm-2.3.12.module, took 17 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-serialization-jvm/2.3.12/ktor-serialization-jvm-2.3.12.pom, took 10 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-serialization-jvm/2.3.12/ktor-serialization-jvm-2.3.12.module, took 26 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network-jvm/2.3.12/ktor-network-jvm-2.3.12.pom, took 193 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network-jvm/2.3.12/ktor-network-jvm-2.3.12.module, took 142 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-io/2.3.12/ktor-io-2.3.12.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-io/2.3.12/ktor-io-2.3.12.module, took 18 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-io-jvm/2.3.12/ktor-io-jvm-2.3.12.pom, took 17 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-io-jvm/2.3.12/ktor-io-jvm-2.3.12.module, took 24 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websocket-serialization-jvm/2.3.12/ktor-websocket-serialization-jvm-2.3.12.jar, took 34 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-events-jvm/2.3.12/ktor-events-jvm-2.3.12.jar, took 42 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-serialization-jvm/2.3.12/ktor-serialization-jvm-2.3.12.jar, took 53 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-websockets-jvm/2.3.12/ktor-websockets-jvm-2.3.12.jar, took 159 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network-tls-jvm/2.3.12/ktor-network-tls-jvm-2.3.12.jar, took 229 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-cio-jvm/2.3.12/ktor-client-cio-jvm-2.3.12.jar, took 277 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http-cio-jvm/2.3.12/ktor-http-cio-jvm-2.3.12.jar, took 382 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-client-core-jvm/2.3.12/ktor-client-core-jvm-2.3.12.jar, took 648 ms
+Download https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar, took 65 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-slf4j/1.8.0/kotlinx-coroutines-slf4j-1.8.0.jar, took 183 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-network-jvm/2.3.12/ktor-network-jvm-2.3.12.jar, took 418 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-http-jvm/2.3.12/ktor-http-jvm-2.3.12.jar, took 555 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-utils-jvm/2.3.12/ktor-utils-jvm-2.3.12.jar, took 606 ms
+Download https://repo.maven.apache.org/maven2/io/ktor/ktor-io-jvm/2.3.12/ktor-io-jvm-2.3.12.jar, took 756 ms
+
+BUILD SUCCESSFUL in 35s
+
+
+

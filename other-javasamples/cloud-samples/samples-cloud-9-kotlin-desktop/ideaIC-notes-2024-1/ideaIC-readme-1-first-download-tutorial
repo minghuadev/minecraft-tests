@@ -1,0 +1,277 @@
+
+first demo example, 
+full code repo at https://github.com/mariebnst/compose-desktop-demo, 
+ide first downloading: 
+
+
+Download https://services.gradle.org/distributions/gradle-8.7-bin.zip, took 17 s 515 ms
+Starting Gradle Daemon...
+Gradle Daemon started in 3 s 411 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.0.0/kotlin-gradle-plugin-2.0.0.pom, took 852 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugins-bom/2.0.0/kotlin-gradle-plugins-bom-2.0.0.pom, took 488 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugins-bom/2.0.0/kotlin-gradle-plugins-bom-2.0.0.module, took 436 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.0.0/kotlin-gradle-plugin-2.0.0.module, took 647 ms
+Download https://maven.pkg.jetbrains.space/public/p/compose/dev/org/jetbrains/compose/compose-gradle-plugin/1.6.10/compose-gradle-plugin-1.6.10.pom, took 671 ms
+Download https://maven.pkg.jetbrains.space/public/p/compose/dev/org/jetbrains/compose/compose-gradle-plugin/1.6.10/compose-gradle-plugin-1.6.10.module, took 261 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/compose-compiler-gradle-plugin/2.0.0/compose-compiler-gradle-plugin-2.0.0.pom, took 446 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/compose-compiler-gradle-plugin/2.0.0/compose-compiler-gradle-plugin-2.0.0.module, took 363 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-api/2.0.0/kotlin-gradle-plugin-api-2.0.0.pom, took 406 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-klib-commonizer-api/2.0.0/kotlin-klib-commonizer-api-2.0.0.pom, took 627 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-compiler-runner/2.0.0/kotlin-compiler-runner-2.0.0.pom, took 698 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-model/2.0.0/kotlin-gradle-plugin-model-2.0.0.pom, took 703 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea/2.0.0/kotlin-gradle-plugin-idea-2.0.0.pom, took 730 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-build-tools-api/2.0.0/kotlin-build-tools-api-2.0.0.pom, took 715 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea-proto/2.0.0/kotlin-gradle-plugin-idea-proto-2.0.0.pom, took 733 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-build-statistics/2.0.0/kotlin-build-statistics-2.0.0.pom, took 810 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-api/2.0.0/kotlin-gradle-plugin-api-2.0.0.module, took 769 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea/2.0.0/kotlin-gradle-plugin-idea-2.0.0.module, took 332 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-model/2.0.0/kotlin-gradle-plugin-model-2.0.0.module, took 381 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-util-klib/2.0.0/kotlin-util-klib-2.0.0.pom, took 391 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-compiler-embeddable/2.0.0/kotlin-compiler-embeddable-2.0.0.pom, took 385 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-tooling-core/2.0.0/kotlin-tooling-core-2.0.0.pom, took 159 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-annotations/2.0.0/kotlin-gradle-plugin-annotations-2.0.0.pom, took 501 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-native-utils/2.0.0/kotlin-native-utils-2.0.0.pom, took 486 ms
+Download https://plugins.gradle.org/m2/com/google/code/gson/gson/2.8.9/gson-2.8.9.pom, took 81 ms
+Download https://plugins.gradle.org/m2/com/google/code/gson/gson-parent/2.8.9/gson-parent-2.8.9.pom, took 72 ms
+Download https://plugins.gradle.org/m2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom, took 67 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.5.0/kotlinx-coroutines-core-jvm-1.5.0.pom, took 68 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.5.0/kotlinx-coroutines-core-jvm-1.5.0.module, took 75 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-daemon-client/2.0.0/kotlin-daemon-client-2.0.0.pom, took 431 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-util-io/2.0.0/kotlin-util-io-2.0.0.pom, took 403 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330.pom, took 68 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-daemon-embeddable/2.0.0/kotlin-daemon-embeddable-2.0.0.pom, took 404 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-model/2.0.0/kotlin-gradle-plugin-model-2.0.0.jar, took 515 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea/2.0.0/kotlin-gradle-plugin-idea-2.0.0.jar, took 548 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-api/2.0.0/kotlin-gradle-plugin-api-2.0.0.jar, took 718 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-api/2.0.0/kotlin-gradle-plugin-api-2.0.0-gradle85.jar, took 735 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/compose-compiler-gradle-plugin/2.0.0/compose-compiler-gradle-plugin-2.0.0-gradle85.jar, took 890 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea-proto/2.0.0/kotlin-gradle-plugin-idea-proto-2.0.0.jar, took 1 s 456 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-build-statistics/2.0.0/kotlin-build-statistics-2.0.0.jar, took 466 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-klib-commonizer-api/2.0.0/kotlin-klib-commonizer-api-2.0.0.jar, took 582 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-annotations/2.0.0/kotlin-gradle-plugin-annotations-2.0.0.jar, took 145 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-build-tools-api/2.0.0/kotlin-build-tools-api-2.0.0.jar, took 353 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-compiler-runner/2.0.0/kotlin-compiler-runner-2.0.0.jar, took 421 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-util-klib/2.0.0/kotlin-util-klib-2.0.0.jar, took 699 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-native-utils/2.0.0/kotlin-native-utils-2.0.0.jar, took 829 ms
+Download https://plugins.gradle.org/m2/com/google/code/gson/gson/2.8.9/gson-2.8.9.jar, took 230 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-tooling-core/2.0.0/kotlin-tooling-core-2.0.0.jar, took 315 ms
+Download https://maven.pkg.jetbrains.space/public/p/compose/dev/org/jetbrains/compose/compose-gradle-plugin/1.6.10/compose-gradle-plugin-1.6.10.jar, took 3 s 851 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-util-io/2.0.0/kotlin-util-io-2.0.0.jar, took 368 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-daemon-embeddable/2.0.0/kotlin-daemon-embeddable-2.0.0.jar, took 950 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-daemon-client/2.0.0/kotlin-daemon-client-2.0.0.jar, took 1 s 500 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.5.0/kotlinx-coroutines-core-jvm-1.5.0.jar, took 1 s 696 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330.jar, took 1 s 850 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.0.0/kotlin-gradle-plugin-2.0.0-gradle85.jar, took 7 s 470 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-compiler-embeddable/2.0.0/kotlin-compiler-embeddable-2.0.0.jar, took 9 s 657 ms
+> Task :prepareKotlinBuildScriptModel UP-TO-DATE
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/desktop/desktop-jvm-windows-x64/1.6.10/desktop-jvm-windows-x64-1.6.10.pom, took 161 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.0/kotlin-stdlib-2.0.0.pom, took 161 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.0/kotlin-stdlib-2.0.0.module, took 31 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/desktop/desktop/1.6.10/desktop-1.6.10.pom, took 51 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko-awt-runtime-windows-x64/0.8.4/skiko-awt-runtime-windows-x64-0.8.4.pom, took 52 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/desktop/desktop/1.6.10/desktop-1.6.10.module, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/desktop/desktop-jvm/1.6.10/desktop-jvm-1.6.10.pom, took 29 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/desktop/desktop-jvm/1.6.10/desktop-jvm-1.6.10.module, took 32 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko-awt/0.8.4/skiko-awt-0.8.4.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko-awt/0.8.4/skiko-awt-0.8.4.module, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.8.0/kotlinx-coroutines-core-1.8.0.pom, took 38 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui/1.6.10/ui-1.6.10.pom, took 39 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-tooling-preview/1.6.10/ui-tooling-preview-1.6.10.pom, took 124 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-util/1.6.10/ui-util-1.6.10.pom, took 124 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.8.0/kotlinx-coroutines-bom-1.8.0.pom, took 41 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime/1.6.10/runtime-1.6.10.pom, took 139 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material/1.6.10/material-1.6.10.pom, took 147 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation/1.6.10/foundation-1.6.10.pom, took 157 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui/1.6.10/ui-1.6.10.module, took 59 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-tooling-preview/1.6.10/ui-tooling-preview-1.6.10.module, took 27 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation/1.6.10/foundation-1.6.10.module, took 37 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-util/1.6.10/ui-util-1.6.10.module, took 43 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime/1.6.10/runtime-1.6.10.module, took 56 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.8.0/kotlinx-coroutines-core-1.8.0.module, took 49 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material/1.6.10/material-1.6.10.module, took 66 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-common/2.0.0/kotlin-stdlib-common-2.0.0.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.9.23/kotlin-stdlib-jdk8-1.9.23.pom, took 29 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.8.0/kotlinx-coroutines-core-jvm-1.8.0.pom, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.8.0/kotlinx-coroutines-core-jvm-1.8.0.module, took 19 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-desktop/1.6.10/foundation-desktop-1.6.10.pom, took 45 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-desktop/1.6.10/foundation-desktop-1.6.10.module, took 22 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-desktop/1.6.10/material-desktop-1.6.10.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-desktop/1.6.10/material-desktop-1.6.10.module, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-desktop/1.6.10/runtime-desktop-1.6.10.pom, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-desktop/1.6.10/runtime-desktop-1.6.10.module, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-desktop/1.6.10/ui-desktop-1.6.10.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-desktop/1.6.10/ui-desktop-1.6.10.module, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-tooling-preview-desktop/1.6.10/ui-tooling-preview-desktop-1.6.10.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-tooling-preview-desktop/1.6.10/ui-tooling-preview-desktop-1.6.10.module, took 30 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-util-desktop/1.6.10/ui-util-desktop-1.6.10.pom, took 37 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-util-desktop/1.6.10/ui-util-desktop-1.6.10.module, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.9.23/kotlin-stdlib-jdk7-1.9.23.pom, took 18 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation/1.6.10/animation-1.6.10.pom, took 30 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/annotation-internal/annotation/1.6.10/annotation-1.6.10.pom, took 32 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko/0.8.4/skiko-0.8.4.pom, took 45 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-text/1.6.10/ui-text-1.6.10.pom, took 45 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/collection-internal/collection/1.6.10/collection-1.6.10.pom, took 48 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/atomicfu/0.23.2/atomicfu-0.23.2.pom, took 50 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-layout/1.6.10/foundation-layout-1.6.10.pom, took 51 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-layout/1.6.10/foundation-layout-1.6.10.module, took 29 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/annotation-internal/annotation/1.6.10/annotation-1.6.10.module, took 51 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-text/1.6.10/ui-text-1.6.10.module, took 54 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko/0.8.4/skiko-0.8.4.module, took 58 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation/1.6.10/animation-1.6.10.module, took 55 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/atomicfu/0.23.2/atomicfu-0.23.2.module, took 58 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/collection-internal/collection/1.6.10/collection-1.6.10.module, took 58 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-core/1.6.10/animation-core-1.6.10.pom, took 143 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-ripple/1.6.10/material-ripple-1.6.10.pom, took 143 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-icons-core/1.6.10/material-icons-core-1.6.10.pom, took 143 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-core/1.6.10/animation-core-1.6.10.module, took 33 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-ripple/1.6.10/material-ripple-1.6.10.module, took 33 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-icons-core/1.6.10/material-icons-core-1.6.10.module, took 48 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-viewmodel/2.8.0/lifecycle-viewmodel-2.8.0.pom, took 138 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-geometry/1.6.10/ui-geometry-1.6.10.pom, took 136 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-saveable/1.6.10/runtime-saveable-1.6.10.pom, took 139 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime/2.8.0/lifecycle-runtime-2.8.0.pom, took 141 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-graphics/1.6.10/ui-graphics-1.6.10.pom, took 149 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime-compose/2.8.0/lifecycle-runtime-compose-2.8.0.pom, took 149 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-common/2.8.0/lifecycle-common-2.8.0.pom, took 156 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-unit/1.6.10/ui-unit-1.6.10.pom, took 185 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-viewmodel/2.8.0/lifecycle-viewmodel-2.8.0.module, took 55 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime-compose/2.8.0/lifecycle-runtime-compose-2.8.0.module, took 57 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-geometry/1.6.10/ui-geometry-1.6.10.module, took 68 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime/2.8.0/lifecycle-runtime-2.8.0.module, took 66 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-graphics/1.6.10/ui-graphics-1.6.10.module, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-saveable/1.6.10/runtime-saveable-1.6.10.module, took 31 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-common/2.8.0/lifecycle-common-2.8.0.module, took 48 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-unit/1.6.10/ui-unit-1.6.10.module, took 29 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-desktop/1.6.10/animation-desktop-1.6.10.pom, took 86 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-desktop/1.6.10/animation-desktop-1.6.10.module, took 34 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.8.0/annotation-1.8.0.pom, took 108 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation/1.8.0/annotation-1.8.0.module, took 46 ms
+Download https://dl.google.com/dl/android/maven2/androidx/collection/collection/1.4.0/collection-1.4.0.pom, took 35 ms
+Download https://dl.google.com/dl/android/maven2/androidx/collection/collection/1.4.0/collection-1.4.0.module, took 38 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-layout-desktop/1.6.10/foundation-layout-desktop-1.6.10.pom, took 35 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-layout-desktop/1.6.10/foundation-layout-desktop-1.6.10.module, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-text-desktop/1.6.10/ui-text-desktop-1.6.10.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-text-desktop/1.6.10/ui-text-desktop-1.6.10.module, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/atomicfu-jvm/0.23.2/atomicfu-jvm-0.23.2.pom, took 31 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/atomicfu-jvm/0.23.2/atomicfu-jvm-0.23.2.module, took 37 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-core-desktop/1.6.10/animation-core-desktop-1.6.10.pom, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-core-desktop/1.6.10/animation-core-desktop-1.6.10.module, took 53 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-icons-core-desktop/1.6.10/material-icons-core-desktop-1.6.10.pom, took 33 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-icons-core-desktop/1.6.10/material-icons-core-desktop-1.6.10.module, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-ripple-desktop/1.6.10/material-ripple-desktop-1.6.10.pom, took 27 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-ripple-desktop/1.6.10/material-ripple-desktop-1.6.10.module, took 24 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.8.0/lifecycle-common-2.8.0.pom, took 72 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.8.0/lifecycle-common-2.8.0.module, took 41 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.8.0/lifecycle-runtime-2.8.0.pom, took 36 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime/2.8.0/lifecycle-runtime-2.8.0.module, took 165 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime-compose-desktop/2.8.0/lifecycle-runtime-compose-desktop-2.8.0.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime-compose-desktop/2.8.0/lifecycle-runtime-compose-desktop-2.8.0.module, took 25 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.8.0/lifecycle-viewmodel-2.8.0.pom, took 59 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel/2.8.0/lifecycle-viewmodel-2.8.0.module, took 62 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-saveable-desktop/1.6.10/runtime-saveable-desktop-1.6.10.pom, took 25 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-saveable-desktop/1.6.10/runtime-saveable-desktop-1.6.10.module, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-geometry-desktop/1.6.10/ui-geometry-desktop-1.6.10.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-geometry-desktop/1.6.10/ui-geometry-desktop-1.6.10.module, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-graphics-desktop/1.6.10/ui-graphics-desktop-1.6.10.pom, took 28 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-graphics-desktop/1.6.10/ui-graphics-desktop-1.6.10.module, took 35 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-unit-desktop/1.6.10/ui-unit-desktop-1.6.10.pom, took 24 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-unit-desktop/1.6.10/ui-unit-desktop-1.6.10.module, took 46 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.8.0/annotation-jvm-1.8.0.pom, took 32 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.8.0/annotation-jvm-1.8.0.module, took 38 ms
+Download https://dl.google.com/dl/android/maven2/androidx/collection/collection-jvm/1.4.0/collection-jvm-1.4.0.pom, took 30 ms
+Download https://dl.google.com/dl/android/maven2/androidx/collection/collection-jvm/1.4.0/collection-jvm-1.4.0.module, took 35 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common-jvm/2.8.0/lifecycle-common-jvm-2.8.0.pom, took 53 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common-jvm/2.8.0/lifecycle-common-jvm-2.8.0.module, took 64 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-desktop/2.8.0/lifecycle-runtime-desktop-2.8.0.pom, took 57 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-desktop/2.8.0/lifecycle-runtime-desktop-2.8.0.module, took 197 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-desktop/2.8.0/lifecycle-viewmodel-desktop-2.8.0.pom, took 36 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-desktop/2.8.0/lifecycle-viewmodel-desktop-2.8.0.module, took 66 ms
+Download https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0.pom, took 34 ms
+Download https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0.module, took 56 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/desktop/desktop-jvm/1.6.10/desktop-jvm-1.6.10.jar, took 58 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-ripple-desktop/1.6.10/material-ripple-desktop-1.6.10.jar, took 94 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-desktop/1.6.10/animation-desktop-1.6.10.jar, took 967 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-layout-desktop/1.6.10/foundation-layout-desktop-1.6.10.jar, took 1 s 788 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-icons-core-desktop/1.6.10/material-icons-core-desktop-1.6.10.jar, took 1 s 894 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko-awt-runtime-windows-x64/0.8.4/skiko-awt-runtime-windows-x64-0.8.4.jar, took 2 s 179 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/animation/animation-core-desktop/1.6.10/animation-core-desktop-1.6.10.jar, took 2 s 303 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-tooling-preview-desktop/1.6.10/ui-tooling-preview-desktop-1.6.10.jar, took 38 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/androidx/lifecycle/lifecycle-runtime-compose-desktop/2.8.0/lifecycle-runtime-compose-desktop-2.8.0.jar, took 228 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/skiko/skiko-awt/0.8.4/skiko-awt-0.8.4.jar, took 327 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-graphics-desktop/1.6.10/ui-graphics-desktop-1.6.10.jar, took 851 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-geometry-desktop/1.6.10/ui-geometry-desktop-1.6.10.jar, took 48 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-unit-desktop/1.6.10/ui-unit-desktop-1.6.10.jar, took 127 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-saveable-desktop/1.6.10/runtime-saveable-desktop-1.6.10.jar, took 397 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-text-desktop/1.6.10/ui-text-desktop-1.6.10.jar, took 2 s 158 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-util-desktop/1.6.10/ui-util-desktop-1.6.10.jar, took 71 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-desktop/2.8.0/lifecycle-viewmodel-desktop-2.8.0.jar, took 81 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-desktop/2.8.0/lifecycle-runtime-desktop-2.8.0.jar, took 188 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/material/material-desktop/1.6.10/material-desktop-1.6.10.jar, took 3 s 402 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/ui/ui-desktop/1.6.10/ui-desktop-1.6.10.jar, took 3 s 580 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/runtime/runtime-desktop/1.6.10/runtime-desktop-1.6.10.jar, took 826 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/compose/foundation/foundation-desktop/1.6.10/foundation-desktop-1.6.10.jar, took 4 s 483 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/atomicfu-jvm/0.23.2/atomicfu-jvm-0.23.2.jar, took 36 ms
+Download https://dl.google.com/dl/android/maven2/androidx/arch/core/core-common/2.2.0/core-common-2.2.0.jar, took 62 ms
+Download https://dl.google.com/dl/android/maven2/androidx/annotation/annotation-jvm/1.8.0/annotation-jvm-1.8.0.jar, took 244 ms
+Download https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common-jvm/2.8.0/lifecycle-common-jvm-2.8.0.jar, took 297 ms
+Download https://dl.google.com/dl/android/maven2/androidx/collection/collection-jvm/1.4.0/collection-jvm-1.4.0.jar, took 303 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.8.0/kotlinx-coroutines-core-jvm-1.8.0.jar, took 713 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.0/kotlin-stdlib-2.0.0.jar, took 764 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.jar, took 26 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-compose-compiler-plugin-embeddable/2.0.0/kotlin-compose-compiler-plugin-embeddable-2.0.0.pom, took 77 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-embeddable/2.0.0/kotlin-scripting-compiler-embeddable-2.0.0.pom, took 77 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-impl-embeddable/2.0.0/kotlin-scripting-compiler-impl-embeddable-2.0.0.pom, took 52 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-common/2.0.0/kotlin-scripting-common-2.0.0.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-jvm/2.0.0/kotlin-scripting-jvm-2.0.0.pom, took 23 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-script-runtime/2.0.0/kotlin-script-runtime-2.0.0.pom, took 20 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-common/2.0.0/kotlin-scripting-common-2.0.0.jar, took 95 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-script-runtime/2.0.0/kotlin-script-runtime-2.0.0.jar, took 122 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-jvm/2.0.0/kotlin-scripting-jvm-2.0.0.jar, took 168 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-embeddable/2.0.0/kotlin-scripting-compiler-embeddable-2.0.0.jar, took 174 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-impl-embeddable/2.0.0/kotlin-scripting-compiler-impl-embeddable-2.0.0.jar, took 173 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-compose-compiler-plugin-embeddable/2.0.0/kotlin-compose-compiler-plugin-embeddable-2.0.0.jar, took 265 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-embeddable/2.0.0/kotlin-scripting-compiler-embeddable-2.0.0-sources.jar, took 49 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.0/kotlin-stdlib-2.0.0-sources.jar, took 146 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-compiler-impl-embeddable/2.0.0/kotlin-scripting-compiler-impl-embeddable-2.0.0-sources.jar, took 31 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-jvm/2.0.0/kotlin-scripting-jvm-2.0.0-sources.jar, took 48 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-scripting-common/2.0.0/kotlin-scripting-common-2.0.0-sources.jar, took 21 ms
+Download https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-script-runtime/2.0.0/kotlin-script-runtime-2.0.0-sources.jar, took 23 ms
+Download https://services.gradle.org/distributions/gradle-8.7-src.zip, took 7 s 180 ms
+
+a long long wait ...
+
+
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-model/2.0.0/kotlin-gradle-plugin-model-2.0.0-sources.jar, took 126 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-api/2.0.0/kotlin-gradle-plugin-api-2.0.0-sources.jar, took 98 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/compose-compiler-gradle-plugin/2.0.0/compose-compiler-gradle-plugin-2.0.0-sources.jar, took 84 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.0.0/kotlin-gradle-plugin-2.0.0-sources.jar, took 206 ms
+Download https://maven.pkg.jetbrains.space/public/p/compose/dev/org/jetbrains/compose/compose-gradle-plugin/1.6.10/compose-gradle-plugin-1.6.10-sources.jar, took 1 s 286 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea-proto/2.0.0/kotlin-gradle-plugin-idea-proto-2.0.0-sources.jar, took 125 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea/2.0.0/kotlin-gradle-plugin-idea-2.0.0-sources.jar, took 56 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-klib-commonizer-api/2.0.0/kotlin-klib-commonizer-api-2.0.0-sources.jar, took 64 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-build-statistics/2.0.0/kotlin-build-statistics-2.0.0-sources.jar, took 60 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-build-tools-api/2.0.0/kotlin-build-tools-api-2.0.0-sources.jar, took 62 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-compiler-runner/2.0.0/kotlin-compiler-runner-2.0.0-sources.jar, took 108 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-native-utils/2.0.0/kotlin-native-utils-2.0.0-sources.jar, took 81 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-util-klib/2.0.0/kotlin-util-klib-2.0.0-sources.jar, took 64 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-compiler-embeddable/2.0.0/kotlin-compiler-embeddable-2.0.0-sources.jar, took 3 s 553 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-gradle-plugin-annotations/2.0.0/kotlin-gradle-plugin-annotations-2.0.0-sources.jar, took 91 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-tooling-core/2.0.0/kotlin-tooling-core-2.0.0-sources.jar, took 83 ms
+Download https://plugins.gradle.org/m2/com/google/code/gson/gson/2.8.9/gson-2.8.9-sources.jar, took 83 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-daemon-client/2.0.0/kotlin-daemon-client-2.0.0-sources.jar, took 64 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.5.0/kotlinx-coroutines-core-jvm-1.5.0-sources.jar, took 170 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-util-io/2.0.0/kotlin-util-io-2.0.0-sources.jar, took 88 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-daemon-embeddable/2.0.0/kotlin-daemon-embeddable-2.0.0-sources.jar, took 66 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330-sources.jar, took 150 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-stdlib/1.9.22/kotlin-stdlib-1.9.22.pom, took 192 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-stdlib/1.9.22/kotlin-stdlib-1.9.22.module, took 58 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-stdlib/1.9.22/kotlin-stdlib-1.9.22-sources.jar, took 329 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-reflect/1.9.22/kotlin-reflect-1.9.22.pom, took 71 ms
+Download https://plugins.gradle.org/m2/org/jetbrains/kotlin/kotlin-reflect/1.9.22/kotlin-reflect-1.9.22-sources.jar, took 247 ms
+
+BUILD SUCCESSFUL in 13m 41s
+
+
+
+

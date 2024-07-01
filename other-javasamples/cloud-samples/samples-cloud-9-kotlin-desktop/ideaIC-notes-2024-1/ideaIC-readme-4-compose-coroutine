@@ -1,0 +1,14 @@
+
+
+search kotlin coroutine
+
+https://kotlinlang.org/docs/coroutines-basics.html
+
+
+
+search kotlin compose coroutine
+
+https://medium.com/@rchaitanya/using-coroutines-in-compose-in-android-2e757332523d
+  use rememberCoroutineScope() to keep coutine on the screen across multiple recomposings.
+
+
