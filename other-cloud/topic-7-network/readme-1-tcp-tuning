@@ -1,0 +1,116 @@
+
+
+search linux tcp slow start window size
+2024-12-1
+
+
+https://iitggithub.github.io/articles/2018-05-tcp-window-size-tuning-guide-linux.html
+
+TCP Window Size Tuning Guide (Linux)
+
+
+Calculating Bandwidth-Delay Product (BDP)
+
+  e.g. bw 20Mbps, rtt 340ms
+  BDP = bw (bits/sec) * rtt (sec) = 20,000,000 * 0.34 = 6,800,000 bits = 850,000 bytes
+
+Calculate the Optimal TCP Window Size
+
+  take the max unscaled TCP windows size 65535 divided by the Maximum Segment Size 
+  (MSS) which is 1300 in our example.
+  65535 / 1300 = 50.41
+
+  round down to even number. resulting in 50.
+
+  multiply by MSS to find the unscaled window size: 
+  50 * 1300 = 65000 bytes
+
+  scale unscaled window size to meet the BDP: 
+  multiply 65000 by 2 until the window size exceeds the BDP. 
+  we get 1,040,000, over 850,000.
+
+  aligning the window size with system constraints:
+  1,040,000 is not a valid system parameter. divide it by 1024 (to work 
+  in 1k blocks) and round up: 
+  1,040,000 / 1024 = 1016
+
+  final optimal window size: 
+  1016 * 1024 = 1,040,384
+  this will be used as the default window size.
+
+  setting minimum and maximum window sizes: 
+
+   maximum:
+    BDP reference: e.g. BDP suggests 16 MB for a 1Gb/s link, becomes maximum window size.
+
+    Link capacity: [1] use fastest link segment speed. [2] for 1 Gb/s, max 16M is ok. 
+                   [3] for 10 Gb/s link, max 32M or more.
+
+    System memory limitations: ensure not to over system memory limit.
+
+    example: receive window set to 16MB: net.core.rmem_max=16777216
+
+   minimum:
+    typical: for most cases, 4kB
+    adjust for traffic: 
+        low-latency, high-frequency connections (e.g. database or web servers):
+        a lower minimum (4-8 kB) reduces the risk of overwhelming memory resources.
+
+        high-latency or high-bandwidth links (e.g. wan or vpn): 
+        a higher minimum (16-32 kB) can help keep connections performant by reducing 
+        TCP slow start from default (4096) if you set 
+        net.ipv4.tcp_slow_start_after_idle to 0 and disable TCP slow start.
+
+        not to exceed system memory limitations.
+
+    example: minimum 20 kB: net.ipv4.tcp_rmem='20480 1040384 16777216'
+             here 20480 is the minimum because a high-latency, low-throughput 20Mbps link.
+
+Optimized Values:
+
+# Enable automatic scaling of the TCP window size based on network conditions
+sysctl -w net.ipv4.tcp_window_scaling=1
+
+# Disable slow start after idle to maintain full throughput even after periods of inactivity
+sysctl -w net.ipv4.tcp_slow_start_after_idle=0
+
+# Configure the minimum, default, and maximum receive buffer sizes for auto-tuning:
+# - Minimum: 20 KB, to prevent low memory usage from limiting throughput.
+# - Default: ~1 MB, optimized for general use.
+# - Maximum: 16 MB, for high-speed connections like 1 Gb/s or higher.
+sysctl -w net.ipv4.tcp_rmem='20480 1040384 16777216'
+sysctl -w net.ipv4.tcp_wmem='20480 1040384 16777216'
+
+# Set the default receive and send buffer sizes for connections where window scaling is disabled
+sysctl -w net.core.rmem_default=1040384
+sysctl -w net.core.wmem_default=1040384
+
+# Set the maximum allowed receive and send buffer sizes per socket
+# Useful when window scaling is disabled and for large connections
+sysctl -w net.core.rmem_max=16777216
+sysctl -w net.core.wmem_max=16777216
+
+# Set the maximum optional buffer memory per socket to match maximum window size
+# Helps avoid bottlenecks in buffer-limited situations
+sysctl -w net.core.optmem_max=16777216
+
+# Define the maximum number of packets to queue if the kernel can’t process packets fast enough
+# This value is increased to improve handling of sudden traffic spikes
+sysctl -w net.core.netdev_max_backlog=65536
+
+# Specify the TCP congestion control algorithm; "cubic" is generally preferred for modern networks
+sysctl -w net.ipv4.tcp_congestion_control='cubic'
+
+# Enable RFC1323 TCP timestamps to improve round-trip time calculation accuracy
+sysctl -w net.ipv4.tcp_timestamps=1
+
+# Enable Selective Acknowledgements (SACK) to optimise performance over lossy networks
+sysctl -w net.ipv4.tcp_sack=1
+
+# Apply the updated TCP settings to all new connections
+sysctl -w net.ipv4.route.flush=1
+
+
+
+
+
