@@ -1,0 +1,19 @@
+
+2025-2-5
+links
+
+search openssl secp256r1 examples in c
+
+github.com/h2o/picotls
+    tls using openssl backend
+
+www.herongyang.com/EC-Cryptography/Curve-secp256r1-for-256-Bit-ECC-Keys.html
+    tutorial about the curve and its parameters
+
+asecuritysite.com/openssl/keypair2
+    generating a key pair with openssl
+
+www.codeproject.com/Articles/5388092/Building-Secure-Applications-with-OpenSSL
+    openssl api and examples for ssl
+
+
