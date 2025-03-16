@@ -1,0 +1,20 @@
+
+
+ls -l 
+-rw-r--r--     576 Mar 13 23:03 docker-gen-2-diff
+-rw-r--r--     544 Mar 13 23:44 docker-gen-3-diff
+-rwxr-xr-x    2511 Mar 13 20:45 docker-gen.bash-1*
+-rw-r--r--     504 Mar 14 12:39 readme-1-frigate-versions
+-rw-r--r--    2317 Mar 14 08:24 readme-2-devcontainer-node-versions
+-rw-r--r--     411 Mar 14 08:52 readme-3-host-versions
+-rw-r--r--    1001 Mar 14 11:03 readme-4-build
+-rw-r--r--    1318 Mar 14 10:07 readme-4-build-diffs
+-rw-r--r--   22163 Mar 14 09:54 readme-4-build-errors
+-rw-r--r--    1259 Mar 14 12:37 readme-4-build-images
+-rw-r--r--     625 Mar 16 09:05 readme-5-development-1
+-rw-r--r--    1749 Mar 16 08:53 readme-other-debug-proxy-1
+-rw-r--r--     236 Mar 16 08:52 readme-other-debug-proxy-2
+-rw-r--r--       0 Mar 16 13:05 list-files
+
+
+

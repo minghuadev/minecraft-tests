@@ -1,0 +1,25 @@
+
+
+current head on dev:
+
+    $ git branch -v
+    * dev                    bf311e64 Simplify auth check (#17138)
+      dev-snapshot-2024-0213 63bc1b15 Improve thumbnails and live player (#9828)
+      dev-snapshot-2025-0313 bf311e64 Simplify auth check (#17138)
+
+recent tag: 
+
+    v0.15.0
+    v0.15.0-rc2
+
+node version: 
+
+    check the dockerfile, it uses node 20
+
+
+actual built source 2024-3-14
+
+    $ git branch -v
+    * dev d2368f5c Use a recent time window for areas for autotracking zooming (#17150)
+
+

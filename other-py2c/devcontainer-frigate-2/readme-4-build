@@ -1,0 +1,52 @@
+
+using build script: 
+#!/bin/bash
+
+# uncomment this to remove previous container:
+#EXT_ARG="--remove-existing-container"
+
+export DOCKER_BUILDKIT=1
+devcontainer up --workspace-folder ./frigate/  ${EXT_ARG}
+
+
+failure and fix: 
+
+    it failed usb device and service.
+    change compose file as the diff shows. 
+    remove the two containers.
+    build again. 
+
+
+build time: 
+
+    on ec2 xlarge, 4 vcpu, 16G memory
+    first part took about 10 minutes.
+    second part took about 1 minute.
+
+
+rebuild time:
+
+    rebuild takes about 95 seconds. it uses cached containers.
+
+
+clear up docker cache
+
+    docker system df
+    docker container prune -f
+    docker stop $(docker ps -q)
+    docker container prune
+    docker rm $(docker ps -a -q)
+    docker image prune -f
+    docker image prune -a -f
+    docker volume prune pf
+    docker volume prune -a -f
+    docker buildx prune -f
+    docker system prune -f
+
+rebuild: 
+
+    pre-build df avail: 33G
+    post-build :        20G
+    takes :             11m51s
+
+

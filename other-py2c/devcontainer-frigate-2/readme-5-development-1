@@ -1,0 +1,45 @@
+
+https://docs.frigate.video/development/contributing
+
+
+Core: 
+
+[1] setup
+[2] config
+
+    at config/config.yml
+
+[3] testing mp4 files
+
+    place them in a "debug" folder, as [2] uses.
+
+[4] run frigate from command line in two terminals
+
+    python3 -m frigate
+    cd web; npm install && npm run dev
+
+[5] teardown
+
+    docker-compose down -v
+
+
+Testing: 
+
+
+Web Interface:
+
+[1] setup a frigate instance
+[2] install dependencies
+
+    cd web && npm install
+
+[3] run the development server
+
+    cd web && npm run dev
+
+[3a] run against a remote frigate instance
+
+    replace the "localhost" with the remote IP in "vite.config.ts"
+
+
+

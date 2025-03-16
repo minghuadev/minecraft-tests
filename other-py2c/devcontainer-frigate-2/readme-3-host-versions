@@ -1,0 +1,17 @@
+
+
+ubuntu 20.4
+    previous doc: ../devcontainer-frigate/frigate-cmds-2/frigate-dev-1-setup
+
+    apt-get install docker.io      : installed Docker version 26.1.3, build 26.1.3-0ubuntu1~24.04.1
+    apt-get install docker-compose docker-buildx    : 1.29.2-6ubuntu1, 0.14.1-0ubuntu1~24.04.1
+
+    apt-get install nodejs
+    apt-get install npm
+
+
+in user account
+    install nvm, node, npm
+    install devcontainer
+
+

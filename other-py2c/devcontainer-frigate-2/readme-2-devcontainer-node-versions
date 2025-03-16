@@ -1,0 +1,85 @@
+
+
+[1] nodejs and npm versions required by devcontainer
+
+    previous doc: ../devcontainer/devcontainer-links-2024-0301
+
+    refer to https://github.com/devcontainers/cli, 
+    see the section titled "Build from Sources", the "dev container configuration" link, 
+    at https://github.com/devcontainers/cli/tree/main/.devcontainer page, 
+    in the "Dockerfile", 
+    image from mcr.microsoft.com/devcontainers/typescript-node:1-16-bullseye , 
+    container user name "node",
+
+    search to find the link 
+    https://mcr.microsoft.com/en-us/artifact/mar/devcontainers/typescript-node/about
+
+    pull the image and build a container from it using the -1 scripts, 
+    inside, it is 
+        nodejs --version : v16.20.2
+	npm --version    : 9.8.1
+	python3 --version: 3.9.2
+	debian 11 matching ubuntu 20, 21
+
+    ubuntu 24 matches to debian 13 trixie
+
+    click the all tags link on the microsoft page, 
+    in this all tags page https://mcr.microsoft.com/v2/devcontainers/typescript-node/tags/list, 
+    the latest versions 
+        at line 554 is 1.1.8-20-bookworm
+	at line 573 is 20-bookworm
+
+    change the docker script, and pull and create again, using the -2 scripts.
+    inside, it is
+        debian 12 bookworm
+	nodejs --version : v20.18.1
+	npm --version    : 10.8.2
+	python3 --version : 3.11.2
+
+    change the docker script, to pull ubuntu 24.04. using the -3 scripts.
+    inside, it is
+        ubuntu 24.04 lts noble
+	python3 --version : 3.12.3
+
+
+[2] install nvm, nodejs, npm
+    previous doc: same as [1]
+
+[2.1] host global nodejs and npm
+
+    in the ubuntu 24.04 container, using the root account, 
+        apt install nodejs
+	apt install npm
+
+    installed versions
+        nodejs --version : v18.19.1
+	npm --version    : 9.2.0
+
+[2.2] user nodejs and npm
+
+    check https://github.com/nvm-sh/nvm, latest install script is 
+    https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh
+
+    run wget to download the install.sh script , then 
+
+        bash install.sh
+
+    exit and get back in, run to install nodejs 20: 
+
+        nvm install 20
+
+    check versions: 
+        node --version    : v20.19.0
+	npm --version     : 10.8.2
+
+[3] install devcontainer cli
+    previous doc: same as [1]
+
+    run
+        npm install -g @devcontainers/cli
+
+    version
+        devcontainer --version    : 0.75.0
+
+
+

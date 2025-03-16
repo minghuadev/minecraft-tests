@@ -1,0 +1,50 @@
+
+~/frigate-src/frigate-src$ git diff | cat
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 2d905d38..5043b247 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -3,11 +3,11 @@ services:
+   devcontainer:
+     container_name: frigate-devcontainer
+     # add groups from host for render, plugdev, video
+-    group_add:
+-      - "109" # render
+-      - "110" # render
+-      - "44"  # video
+-      - "46"  # plugdev
++    ##group_add:
++      ##- "109" # render
++      ##- "110" # render
++      ##- "44"  # video
++      ##- "46"  # plugdev
+     shm_size: "256mb"
+     build:
+       context: .
+@@ -24,8 +24,8 @@ services:
+     #                     capabilities: [gpu]
+     environment:
+       YOLO_MODELS: ""
+-    devices:
+-      - /dev/bus/usb:/dev/bus/usb
++    ##devices:
++      ##- /dev/bus/usb:/dev/bus/usb
+       # - /dev/dri:/dev/dri # for intel hwaccel, needs to be updated for your hardware
+     volumes:
+       - .:/workspace/frigate:cached
+@@ -33,9 +33,9 @@ services:
+       - /etc/localtime:/etc/localtime:ro
+       - ./config:/config
+       - ./debug:/media/frigate
+-      - /dev/bus/usb:/dev/bus/usb
++      ##- /dev/bus/usb:/dev/bus/usb
+   mqtt:
+     container_name: mqtt
+     image: eclipse-mosquitto:1.6
+     ports:
+-      - "1883:1883"
+\ No newline at end of file
++      - "1883:1883"
+
+
+

@@ -1,0 +1,15 @@
+
+$ docker ps -a
+CONTAINER ID   IMAGE                      COMMAND                  CREATED       STATUS       PORTS                                       NAMES
+e124847e4a48   vsc-frigate-src-cbf1e5d15ba4dc4f722d594f253704b760f7dc2fc2b566f89d25ad0bd54e2b4c-uid   
+                                          "/bin/sh -c 'echo Co…"   2 hours ago   Up 2 hours   5000/tcp, 8554-8555/tcp, 8555/udp           frigate-devcontainer
+98933864b26f   eclipse-mosquitto:1.6      "/docker-entrypoint.…"   2 hours ago   Up 2 hours   0.0.0.0:1883->1883/tcp, :::1883->1883/tcp   mqtt
+
+$ docker images
+REPOSITORY                                                                             TAG       IMAGE ID       CREATED         SIZE
+vsc-frigate-src-cbf1e5d15ba4dc4f722d594f253704b760f7dc2fc2b566f89d25ad0bd54e2b4c-uid   latest    0bb4f7350268   2 hours ago     3.29GB
+frigate-src_devcontainer                                                               latest    f1c667d6833e   2 hours ago     3.28GB
+dev_container_feature_content_temp                                                     latest    3ec415c7fbe9   2 hours ago     90kB
+eclipse-mosquitto                                                                      1.6       5dade4ce550b   23 months ago   11.6MB
+
+

@@ -1,0 +1,17 @@
+
+
+$ diff -u docker-gen.bash-1 docker-gen.bash
+--- docker-gen.bash-1   2025-03-14 03:45:49.278590835 +0000
++++ docker-gen.bash     2025-03-14 04:09:21.470448891 +0000
+@@ -17,7 +17,8 @@
+  # debian buster 10.13 at hub.docker.com/_/debian
+  #FROM debian:10.13-slim
+  #FROM debian:buster-20231218-slim
+- FROM mcr.microsoft.com/devcontainers/typescript-node:1-16-bullseye
++ #FROM mcr.microsoft.com/devcontainers/typescript-node:1-16-bullseye
++ FROM mcr.microsoft.com/devcontainers/typescript-node:20-bookworm
+
+  RUN apt-get update
+  RUN apt-get install -y git tree openssh-client
+
+
