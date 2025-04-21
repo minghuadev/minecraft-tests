@@ -1,0 +1,73 @@
+
+2024-4-20
+
+
+search homeassistant hosting
+
+community.home-assistant.io/t/would-it-be-possible-to-host-my-home-assistant-on-a-cloud-server/427543
+  2022 by lizsugar Liz
+
+    Using Ethernet over IP tunnel. the EoIP bridge allow for device discovery using layer 2 broadcast.
+
+nextlevel-blog.de/blog/home-assistant/
+  2024 Hosting Home Assistant with Docker Compose: A Step-by-Step Guide
+
+    create a "socker-compose.yaml" file: 
+        services:
+          homeassistant:
+            container_name: homeassistant
+            image: "ghcr.io/home-assistant/home-assistant:stable"
+            volumes:
+              - ./conf:/config
+              - ./templates:/config/custom_templates
+              - /etc/localtime:/etc/localtime:ro
+            restart: unless-stopped
+            healthcheck:
+              test: ["CMD", "curl", "-f", "http://<your-domain>:8123"]
+              interval: 1m
+              timeout: 10s
+              retries: 3
+              start_period: 40s
+            ports:
+              - 8123:8123
+            privileged: true
+
+    run to create directories and start the container:
+        mkdir -p conf templates
+        docker-compose up -d
+
+    further customizations: 
+        SSL Certificates: Integrate Let's Encrypt for SSL certifciates to secure your connection.
+        Add-ons: Explore and install various add-ons for extended functionality.
+        Automations: Create custom automations to enahnce your smart home experience.
+    best practices:
+        backup regularly, use mariaDB for database becasue the default sqlite can be prone to corruptions, 
+        static IP address, limit recorder entities, naming conventions like domain.room_location_number, 
+        use trigger IDs in automations, use VPN SSL 2FA etc for security, plan for intenet and network outages, 
+        segment iot network, regularly validate configuration, use node-red for advanced automation or 
+        AdGuard for network-wide ad blocking
+
+
+search home assistant hosting on aws
+
+community.home-assistant.io/t/home-assistant-in-the-cloud/436220
+  2022  tips
+    with help from like ZeroTier or Wireguard, ZWaveJS and Zigbee2MQTT.
+    on ARM64 debian VM using site2site VPN, no mDNS thus using static IP.
+    ups like amazon.com/gp/product/B01LAEX7J0 MakerFocus Raspberry Pi 4 Battery Pack UPS...
+    vpn: tailscale and zerotier
+    HA is monolithic thus no proper split among UI storage, connectivity integrations.
+  2023 Jul: 
+    debian 12, unsupported network manager and unhealthy issues: 
+        https://www.home-assistant.io/more-info/unsupported/network_manager
+        https://www.home-assistant.io/more-info/unhealthy/privileged
+    HAOS: https://portal.habitats.tech/Home+Assistant+(HA)/3.+HAOS+-+Install+OS
+
+www.home-assistant.io/integrations/aws/
+    accessing aws sqs, sns, lambda
+
+community.home-assistant.io/t/getting-started-by-installing-in-aws/310352
+  aws cost needs to be considered. 
+
+
+
