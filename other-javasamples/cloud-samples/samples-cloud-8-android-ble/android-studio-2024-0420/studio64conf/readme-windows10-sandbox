@@ -1,0 +1,9 @@
+
+start windows sandbox using the configurations inside 
+MySandboxConfigFile.wsb
+
+it shares the shared shared-workspace directory to c:\workspace directory. 
+
+then use the bat script to start android studio to redirect all working directories to be under the shared directory. 
+
+

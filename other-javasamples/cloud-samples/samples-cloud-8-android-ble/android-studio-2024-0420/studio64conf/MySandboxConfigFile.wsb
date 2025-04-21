@@ -1,0 +1,15 @@
+<Configuration>
+
+<MappedFolders>
+  <MappedFolder>
+    <HostFolder>C:\Users\testing\Desktop\win-sandbox\shared-workspace</HostFolder>
+    <SandboxFolder>C:\workspace</SandboxFolder>
+    <ReadOnly>false</ReadOnly>
+  </MappedFolder>
+</MappedFolders>
+
+<MemoryInMB>8192</MemoryInMB>
+
+</Configuration>
+
+
