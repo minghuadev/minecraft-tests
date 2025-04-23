@@ -1,0 +1,38 @@
+
+2025-4-22
+
+
+search python invoke webkit
+
+stackoverflow.com 3949060/python-webkit-gtk-on-windows
+stackoverflow.com 14199727/pywebkitgtk-headless-full-dom-interaction-possible
+  PyQTWebView
+  pywebkitgtk
+
+https://github.com/jmalonzo/pywebkitgtk
+
+
+search python invoke webkit on windows
+
+https://wiki.python.org/moin/PythonWebKit
+
+https://www.gnu.org/software/pythonwebkit/
+
+https://trac.webkit.org/wiki/BuildingOnWindows
+
+
+search pypi webkit
+
+https://pypi.org/project/PyQtWebKit/#history
+  5.15.2 in 2022
+
+https://pypi.org/project/pywebkit/#history
+  0.2.1 in 2021
+  https://github.com/Yaseen549/pywebkit
+
+https://pypi.org/project/pywebview/#history
+  5.4 on Jan 27 2025
+  https://pywebview.flowrl.com/ docs and examples
+
+
+
