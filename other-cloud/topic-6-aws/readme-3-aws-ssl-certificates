@@ -1,0 +1,51 @@
+
+2025-5-17
+
+
+search aws root certificate change
+
+aws.amazon.com/blogs/security/how-to-prepare-for-aws-move-to-its-own-certificate-authority/
+How to Prepare for AWS's Move to Its Own Certificate Authority
+
+  need in the root CA bundle: 
+    Starfield Services Root Certificate Authority – G2
+
+https://www.amazontrust.com/repository/
+
+  we recommend that all five of the roots be included in the trust store. 
+  "Amazon Root CA 1 - 4" represent different key types/algorithms. 
+  "Starfield Services Root Certificate Authority - G2" is an older root that is compatible 
+  with other older trust stores and clients that can not be updated.
+
+
+
+search python use certifi certificates
+
+stackoverflow 42982143/python-requests-how-to-use-system-ca-certificates-debian-ubuntu
+
+  example: 
+    export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
+    >>> import certifi
+    >>> certifi.where()
+   '/etc/ssl/certs/ca-certificates.crt'
+
+appdividend.com/python-certifi/
+
+    SSL_CERT_FILE=...
+    REQUESTS_CA_BUNDLE=...
+
+
+
+search windows 10 certificates store
+
+learn.microsoft.com/en-us/windows-hardware/drivers/install/trusted-root-certification-authorities-certificate-store
+Trusted Root Certification Authorities Certificate Store
+
+    run "mmc"
+    select "File" in menu, "Add/Remove Snap-in", "Certificates", "Add", 
+    in a pop-up, select "Computer account", "Next", "Local computer", "Finish",
+    in the mmc, under certificates, expand "Trusted Root Certification Authorities".
+
+
+

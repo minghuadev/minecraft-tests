@@ -1,0 +1,15 @@
+
+ls -lrt
+
+-rw-rw-r--       753 Mar 14  2024 readme-1-previous-aws-s3-locations
+-rw-r--r--      4506 Mar 20  2024 aws-boto3-s3-bucket-credential-etc
+-rw-rw-r--        56 Mar 20  2024 readme-2-previous-aws-boto3-locations
+drwxrwxr-x      4096 Apr 28  2024 aws-boto3-s3-bucket-examples
+-rwxr-xr-x     21648 May 17  2024 aws-cloudwatch-example.py
+-rw-rw-r--         0 May 17 22:56 list-files
+
+
+-rw-rw-r--       391 May 17 22:56 list-files
+-rw-rw-r--      1488 May 17 23:54 readme-3-aws-ssl-certificates
+
+
