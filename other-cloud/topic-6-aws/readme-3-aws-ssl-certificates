@@ -35,6 +35,8 @@ appdividend.com/python-certifi/
     SSL_CERT_FILE=...
     REQUESTS_CA_BUNDLE=...
 
+  you might need to convert the original .crt file into .pem format and copy it to a local location.
+
 
 
 search windows 10 certificates store
