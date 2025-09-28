@@ -1,0 +1,78 @@
+
+2025-9-27
+
+
+search privacy model
+
+
+[1]
+web: eclipse models for privacy, 2024 to 2025, by Eclipse Foundation
+  https://models4privacy.org/
+
+    survey list of interesting technologies, tools, chips, certifications, etc
+
+
+[2] 
+web: privacy engineering - Privacy Threat Modeling, by KU Leuven Belgium a university
+  https://linddun.org/
+
+
+[3]
+web: google releases valtgemma its first privacy-preserving llm, sep 15 2025, by Ryan Whitwam
+  https://arstechnica.com/ai/2025/09/google-releases-vaultgemma-its-first-privacy-preserving-llm/
+
+    keeps training data private, compute budget vs token budget vs accuracy
+
+
+[4]
+developer doc: Data Model Gallery - Data Cloud - Privacy - Privacy Overview Data Model
+  https://developer.salesforce.com/docs/platform/data-models/guide/privacy-overview.html
+
+    diagram
+
+
+[5]
+web: privacy threat modeling: the basics - threat modeling, 2024, by Narayana pappu of zendata
+  https://www.zendata.dev/post/privacy-threat-modelling-the-basics
+
+    identify sentive data
+    data mapping for context
+    identify privacy threats
+    risk assessment prioritisation
+    strategising and implementing mitigation controls
+    continuous model updates and monitoring
+    usecase: e-commerce
+    best practices
+    regular reviews and updates
+    integration with business
+    collaboration across departments
+    data minisation and privacy by design
+    training and awareness
+    incident response
+
+
+[6]
+web: keeping data private: a new model explained - linear-transformation model, 2025
+  https://scisimple.com/en/articles/2025-04-29-keeping-data-private-a-new-model-explained--ak5e15z
+
+
+[7]
+pdf: ieee digital privacy - introducing ieee digital privacy model
+  https://digitalprivacy.ieee.org/wp-content/uploads/2025/05/intro-ieee-digital-privacy-model.pdf
+
+    expectations by 6 characteristics: 
+        identity, behavior, inference, transation, 
+        confidentiality integrity, access observability
+ 
+
+[8]
+book: guide to data privacy - models, technologies, solutions, 2022, springer, by Vicenc Torra
+    part of series: undergraduate topics in computer science
+
+    models, computational definitions, implementations, 
+    differential privacy, k-anonymity, secure multiparty computation.
+
+    tools from statistical disclosure control, privacy-preserving data mining, 
+    privacy for communications
+
+
