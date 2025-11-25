@@ -1,0 +1,14 @@
+
+2025-10-7
+
+
+ls -l sqlite-* rubyinstaller-*
+
+-rwxr-xr-x    124813384 Oct  7 16:04 rubyinstaller-devkit-2.5.3-1-x64.exe*
+-rwxr-xr-x    142556392 Oct  7 15:23 rubyinstaller-devkit-2.5.9-1-x64.exe*
+-rwxr-xr-x    132420272 Oct  7 16:34 rubyinstaller-devkit-2.7.8-1-x64.exe*
+-rw-r--r--      1344617 Oct  7 01:24 sqlite-dll-win-x64-3500400.zip
+-rw-r--r--      6430656 Oct  7 01:28 sqlite-tools-win-x64-3500400.zip
+
+
+

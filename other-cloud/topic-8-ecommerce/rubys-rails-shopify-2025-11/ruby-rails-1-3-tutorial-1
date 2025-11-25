@@ -1,0 +1,143 @@
+
+2025-10-7
+
+search ruby on rails tutorial
+
+
+
+https://www.tutorialspoint.com/ruby-on-rails/index.htm
+
+[1] home, hello world
+
+    rails new myapp
+    cd myapp
+    rails generate controller index index
+
+      create  app/controllers/index_controller.rb
+       route  get 'index/index'
+      invoke  erb
+      create    app/views/index
+      create    app/views/index/index.html.erb
+      invoke  test_unit
+      create    test/controllers/index_controller_test.rb
+      invoke  helper
+      create    app/helpers/index_helper.rb
+      invoke    test_unit
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/index.coffee
+      invoke    scss
+      create      app/assets/stylesheets/index.scss
+
+    $ find . -newer xstep1
+      ./app/assets/javascripts
+      ./app/assets/javascripts/index.coffee
+      ./app/assets/stylesheets
+      ./app/assets/stylesheets/index.scss
+      ./app/controllers
+      ./app/controllers/index_controller.rb
+      ./app/helpers
+      ./app/helpers/index_helper.rb
+      ./app/views
+      ./app/views/index
+      ./app/views/index/index.html.erb
+      ./config/routes.rb
+      ./test/controllers
+      ./test/controllers/index_controller_test.rb
+
+[2] framework mvc, directory structure
+
+    project design process
+
+[3] rails console
+
+    rails generate model Person name:string age:integer
+      invoke  active_record
+      create    db/migrate/20251009135105_create_people.rb
+      create    app/models/person.rb
+      invoke    test_unit
+      create      test/models/person_test.rb
+      create      test/fixtures/people.yml
+
+    rails db:migrate
+
+    bundle exec rails db:rollback
+    rails destroy model Person
+
+    ---create it again, then
+
+    rails console
+        Rails.version
+
+	Person.column_names
+	Person
+
+	p1=Person.new(name:"Ravi", age:21)
+	p1.save
+
+        Person.create(name:"Raja", age:25)
+
+        Person.all
+
+	p1.name="Ravindra"
+	p1.save
+	p1.update(name="Ravindra")
+
+        Person.where("age > ?", 25)
+
+	p1=Person.create(name="Roger", 20)
+	p1.destroy
+
+  rails cli commands 
+    rails console
+    rails server
+    rails test
+    rails generate
+    rails db:migrate
+    rails db:create
+    rails routes
+    rails dbconsole
+    rails new app_name
+
+  list all records:
+   stackoverflow.com/questions/2098131/
+   rails-how-to-list-database-tables-objects-using-the-rails-console
+    rails console
+        Rails.application.eager_load!
+	ActiveRecord::Base.descendants
+
+[4] database setup
+
+    create for _development, _production, _test
+    edit yaml
+
+[5] examples, active records, (validations, associations, query), migration
+
+    rails new library
+    cd library
+
+    rails generate model Book
+    rails generate model Subject
+
+        --- concepts: database mappings, entities, belongings, 
+        --- concepts: relation one-to-one, one-to-many, many-to-many
+	--- concepts: validations, 
+	--- concepts: queries, 
+
+    rails generate model Book title:string price:float subject:references --force
+    rails generate model Subject name:String --force
+
+    ---edit books.rb to have "belongs_to :subject" and subject.rb "has_many :books"
+
+    rails db:migrate
+    ---fails...
+
+
+
+https://rubyonrails.org/docs/tutorials
+beginner 
+ https://guides.rubyonrails.org/getting_started.html
+  5.2: https://guides.rubyonrails.org/v5.2/getting_started.html
+
+
+

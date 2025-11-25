@@ -1,0 +1,170 @@
+
+2025-10-9
+
+search ruby on rails tutorial
+
+
+
+https://rubyonrails.org/docs/tutorials
+beginner https://guides.rubyonrails.org/getting_started.html
+v5.2: https://guides.rubyonrails.org/v5.2/getting_started.html
+
+    rails new blog
+    cd blog
+    rails server
+
+    rails routes 
+            ---5: service, representation, disk, update_disk, direct_uploads: ggg put post
+
+[4] hello rails
+
+    rails generate controller Welcome index
+    rails routes ---add welcome_index at welcome#index
+
+    -code: add to config/routes.rb: 
+            resources :articles
+
+    rails routes ---add the following routes (44x removing spaces)
+                 articles GET    /articles(.:format)                          articles#index
+                          POST   /articles(.:format)                          articles#create
+              new_article GET    /articles/new(.:format)                      articles#new
+             edit_article GET    /articles/:id/edit(.:format)                 articles#edit
+                  article GET    /articles/:id(.:format)                      articles#show
+                          PATCH  /articles/:id(.:format)                      articles#update
+                          PUT    /articles/:id(.:format)                      articles#update
+                          DELETE /articles/:id(.:format)                      articles#destroy
+
+    -naming: rails inferred the singular form article and makes meaningful use
+
+[5] getting up and running
+[5.1] laying down the groundwork
+
+    rails generate controller Articles
+      create  app/controllers/articles_controller.rb
+      invoke  erb
+      create    app/views/articles
+      invoke  test_unit
+      create    test/controllers/articles_controller_test.rb
+      invoke  helper
+      create    app/helpers/articles_helper.rb
+      invoke    test_unit
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/articles.coffee
+      invoke    scss
+      create      app/assets/stylesheets/articles.scss
+
+    rails routes ---same
+
+    -code: define the `new` in the controller, get a 204 error
+
+    ##rails generate controller Articles new
+    ##rails routes ---add articles_new at articles#new
+
+    ##rails generate controller Articles index new
+    ##rails routes ---add articles_index at articles#index, and <blank> at articles#new
+
+    rails generate controller Articles index new
+        ---this creates controller methods and views, and adds two lines to config/routes.rb: 
+    rails routes ---add articles_index at articles#index, and articles_new at articles#new
+        ---manually remove the two lines from config/routes.rb , the routes change back.
+
+[5.2] the first form
+
+    -code: a form builder by form_with in app/views/articles/new.html.erb
+
+        <%= form_with scope: :article, local: true do |form| %>
+          <p> <%= form.label :title %><br>
+              <%= form.text_field :title %>
+          </p>
+          <p> <%= form.label :text %><br>
+              <%= form.text_area :text %>
+          </p>
+          <p> <%= form.submit %>
+          </p>
+        <% end %>
+
+    -code: use url option to redirect post
+
+        <%= form_with scope: :article, url: articles_path, local: true do |form| %>
+
+    -code: `local: true`  above avoids ajax thus it uses full page redirect.
+
+[5.3] creating articles
+
+    -code: define `create` in controller
+
+        def create
+          render plain: params[:article].inspect
+        end
+
+[5.4] creating the article model
+[5.5] running a migration
+
+    -naming: singular
+
+    rails generate model Article title:string text:text
+    rails db:migrate
+
+[5.6] saving data in controller
+
+    -code: `create` in controller
+
+        def create
+          @article = Article.new(params[:article])
+
+          @article.save
+          redirect_to @article
+        end
+
+    -error: string parameters, need to whitelist in controller
+    -code:
+        @article = Article.new(params.require(:article).permit(:title, :text))
+    -code: refactored
+        ...
+	  @article = Article.new(params[:article])
+	...
+	private
+          def article_params
+            params.require(:article).permit(:title, :text)
+          end
+
+[5.7] showing articles
+
+    -convention: normally follow: index, show, new, edit, create, update, destroy
+    -code: `show` in controller
+        @article = Article.find(params[:id])
+
+    -code: app/views/articles/show.html.erb
+
+        <p> <strong>Title:</strong>
+          <%= @article.title %>
+        </p>
+        <p> <strong>Text:</strong>
+          <%= @article.text %>
+        </p>
+
+[5.8] listing all articles
+
+    -code: `index` in controller
+        @articles = Article.all
+
+    -code: the table body part in view index.html.erb
+          <% @articles.each do |article| %>
+            <tr>
+              <td><%= article.title %></td>
+              <td><%= article.text %></td>
+              <td><%= link_to 'Show', article_path(article) %></td>
+            </tr>
+          <% end %>
+
+[5.9] adding links
+
+    -code: in views/welcome/index.html.erb, articles/index.html.erb, new.html.erb, show.html.erb
+
+        <%= link_to 'My Blog', controller: 'articles' %>
+	<%= link_to 'New article', new_article_path %>
+	<%= link_to 'Back', articles_path %>
+
+
+

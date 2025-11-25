@@ -1,0 +1,268 @@
+
+
+2025-10-6
+
+
+
+search windows install ruby and rails
+
+https://guides.railsgirls.com/install/windows
+https://serverspace.io/support/help/install-ruby-on-rails-windows/
+    for fixing sqlite3 error, not sure needed or not
+
+https://www.geeksforgeeks.org/ruby/how-to-install-ruby-on-rails-on-windows-and-linux/
+https://www.geeksforgeeks.org/sql/introduction-to-sqlite/
+    for [1], [2], [3], [4], [5]
+
+steps: 
+
+[1] install sqlite tool
+     download from https://www.sqlite.org/download.html
+     extract
+     add its directory to PATH
+     run "sqlite3 --version" to verify
+       3.50.4 2025-07-30 19:33:53 4d8adfb30e03f...bf45e20a3 (64-bit)
+
+    install sqlite dll, after [5]
+     same download extract and add its directory to PATH
+
+[2] install ruby
+     download RubyInstallers Ruby+Devkit from https://rubyinstaller.org/downloads/
+     run the installer to install ruby
+     run "ruby --version" to verify
+       ruby 3.4.6 (2025-09-16 revision dbd83256b1) +PRISM [x64-mingw-ucrt]
+
+[3] install rails
+     run "gem install rails"
+
+      ~\ror-works>gem install rails
+      Successfully installed zeitwerk-2.7.3
+      Successfully installed thor-1.4.0
+      Successfully installed rack-3.2.2
+      Successfully installed rackup-2.2.1
+      Successfully installed concurrent-ruby-1.3.5
+      Successfully installed tzinfo-2.0.6
+      Successfully installed i18n-1.14.7
+      Successfully installed connection_pool-2.5.4
+      Successfully installed activesupport-8.0.3
+      Successfully installed useragent-0.16.11
+      Successfully installed nokogiri-1.18.10-x64-mingw-ucrt
+      Successfully installed crass-1.0.6
+      Successfully installed loofah-2.24.1
+      Successfully installed rails-html-sanitizer-1.6.2
+      Successfully installed rails-dom-testing-2.3.0
+      Successfully installed rack-test-2.2.0
+      Successfully installed rack-session-2.1.1
+      Successfully installed erubi-1.13.1
+      Successfully installed builder-3.3.0
+      Successfully installed actionview-8.0.3
+      Successfully installed actionpack-8.0.3
+      Successfully installed railties-8.0.3
+      Successfully installed marcel-1.1.0
+      Successfully installed activemodel-8.0.3
+      Successfully installed activerecord-8.0.3
+      Successfully installed globalid-1.3.0
+      Successfully installed activejob-8.0.3
+      Successfully installed activestorage-8.0.3
+      Successfully installed actiontext-8.0.3
+      Successfully installed mini_mime-1.1.5
+      Successfully installed mail-2.8.1
+      Successfully installed actionmailer-8.0.3
+      Successfully installed actionmailbox-8.0.3
+      Successfully installed websocket-extensions-0.1.5
+      Building native extensions. This could take a while...
+      Successfully installed websocket-driver-0.8.0
+      Building native extensions. This could take a while...
+      Successfully installed nio4r-2.7.4
+      Successfully installed actioncable-8.0.3
+      Successfully installed rails-8.0.3
+      38 gems installed
+
+[4] create project
+
+[4.1]
+     rails new myproject
+
+               run  bundle install --quiet
+      warning: Public keyring not found; have you run 'pacman-key --init'?
+      ....
+
+      To see why this extension failed to compile, please check the mkmf.log which can
+      be found here:
+      C:/Ruby34-x64/lib/ruby/gems/3.4.0/extensions/x64-mingw-ucrt/3.4.0/psych-5.2.6/mkmf.log
+
+      Gem files will remain installed in
+      C:/Ruby34-x64/lib/ruby/gems/3.4.0/gems/psych-5.2.6 for inspection.
+
+      Results logged to
+      C:/Ruby34-x64/lib/ruby/gems/3.4.0/extensions/x64-mingw-ucrt/3.4.0/psych-5.2.6/gem_make.out
+
+     error: missing yaml.h
+
+[4.2]
+    eventually succeeded except the keyring error
+
+     search rails missing yaml.h
+     https://www.reddit.com/r/rails/comments/1h16r3e/upgraded_rails_722_800_problem_with_psych520/
+
+      wget https://github.com/yaml/libyaml/releases/download/0.2.5/yaml-0.2.5.tar.gz
+      tar zxf yaml-0.2.5.tar.gz
+      cd yaml-0.2.5
+      ./configure
+      make
+      make install
+
+    build again
+     cd myproject
+     bundle install --quiet
+    error: missing yaml.h
+
+     $ cd ~/Ruby34-x64
+     $ find . -type f -name ruby.h
+     ./include/ruby-3.4.0/ruby/internal/intern/ruby.h
+     ./include/ruby-3.4.0/ruby/ruby.h
+     ./include/ruby-3.4.0/ruby.h
+
+     $ find . -type f -name yaml.h
+     ./msys64/usr/local/include/yaml.h
+
+     $ cp ./msys64/usr/local/include/yaml.h ./include/ruby-3.4.0/
+
+     $ cd msys64
+     $ ls usr/local/lib/
+     libyaml.a  libyaml.dll.a  libyaml.la  pkgconfig/
+     $ ls usr/local/lib/pkgconfig/
+     yaml-0.1.pc
+
+    build again: 
+    error:
+     current directory:
+     C:/Ruby34-x64/lib/ruby/gems/3.4.0/gems/psych-5.2.6/ext/psych
+     C:/Users/owen/Downloads/Ruby34-x64/bin/ruby.exe extconf.rb
+     checking for pkg-config for yaml-0.1... not found
+     checking for yaml.h... yes
+     checking for yaml_get_version() in -lyaml... no
+     libyaml not found
+     *** extconf.rb failed ***
+
+     ~/Ruby34-x64/msys64/usr/local/lib
+     $ ls -l
+     -rw-r--r--  503278 Oct  7 02:54 libyaml.a
+     -rw-r--r--   40926 Oct  7 02:54 libyaml.dll.a
+     -rw-r--r--     914 Oct  7 02:54 libyaml.la
+     drwxr-xr-x       0 Oct  7 08:17 pkgconfig/
+     $ cd pkgconfig/
+     $ ls -l
+     -rw-r--r--   218 Oct  7 02:54 yaml-0.1.pc
+
+     ~/Ruby34-x64/msys64/usr
+     $ ls lib/pkgconfig/
+     autoopts.pc  libalpm.pc  libmagic.pc  libpkgconf.pc
+
+     $ cp -a local/lib/pkgconfig/yaml-0.1.pc lib/pkgconfig/
+
+    build again, error
+     ~/Ruby34-x64/msys64
+     $ cp -a usr/local/lib/pkgconfig mingw32/lib/
+
+    build again, error, error, error
+     ~/Ruby34-x64/msys64
+     $ cp -a usr/local/lib/lib* mingw32/lib/
+     $ cp -a usr/local/lib/lib* usr/lib/
+
+     ~/Ruby34-x64
+     $ cp -a msys64/usr/local/lib/pkgconfig/yaml-0.1.pc lib/pkgconfig/
+     $ cp -av msys64/usr/local/lib/libyaml.* lib/
+
+    succeeded except the keyring error
+
+[4.3] 
+    error: keyring ...
+
+[5]
+     cd myproject
+     rails server
+    error: Gem Load Error is: cannot load such file -- sqlite3/sqlite3_native
+
+    did the sqlite3 dll in [1], still same error
+
+
+
+search windows ruby gem load error cannot load sqlite3/sqlite3_native
+
+[1]
+stackoverflow.com questions/17643897/
+                cannot-load-such-file-sqlite3-sqlite3-native-loaderror-on-ruby-on-rails
+
+     ~\>gem list sqlite3
+     sqlite3 (2.7.4 x64-mingw-ucrt)
+
+     >gen uninstall sqlite3 --all
+     >gem install sqlite3 --platform=ruby
+     Successfully installed mini_portile2-2.8.9
+     warning: Public keyring not found; have you run 'pacman-key --init'?
+     error: clangarm64: key "5F944B027F7FE2091985AA2EFA11531AA0AA7F57" is unknown
+     error: keyring is not writable
+     error: mingw32: key "5F944B027F7FE2091985AA2EFA11531AA0AA7F57" is unknown
+     error: keyring is not writable
+     error: mingw64: key "5F944B027F7FE2091985AA2EFA11531AA0AA7F57" is unknown
+     error: keyring is not writable
+     error: ucrt64: key "5F944B027F7FE2091985AA2EFA11531AA0AA7F57" is unknown
+     error: keyring is not writable
+     error: clang64: key "5F944B027F7FE2091985AA2EFA11531AA0AA7F57" is unknown
+     error: keyring is not writable
+     error: msys: key "5F944B027F7FE2091985AA2EFA11531AA0AA7F57" is unknown
+     error: keyring is not writable
+     error: database 'clangarm64' is not valid (invalid or corrupted database (PGP signature))
+     error: database 'mingw32' is not valid (invalid or corrupted database (PGP signature))
+     error: database 'mingw64' is not valid (invalid or corrupted database (PGP signature))
+     error: database 'ucrt64' is not valid (invalid or corrupted database (PGP signature))
+     error: database 'clang64' is not valid (invalid or corrupted database (PGP signature))
+     error: database 'msys' is not valid (invalid or corrupted database (PGP signature))
+     pacman failed with the following output:
+     Building native extensions. This could take a while...
+     Successfully installed sqlite3-2.7.4
+     Parsing documentation for mini_portile2-2.8.9
+     Installing ri documentation for mini_portile2-2.8.9
+     Parsing documentation for sqlite3-2.7.4
+     Installing ri documentation for sqlite3-2.7.4
+     Done installing documentation for mini_portile2, sqlite3 after 23 seconds
+     2 gems installed
+
+[2] why as pointed to by one of the stackoverflow answers
+
+  https://namedia.home.blog/2021/03/07/ruby-2-5-1-windows-fix-cannot-load-such-file-sqlite3-sqlite3_native-loaderror/
+
+[3]
+  after [1], still have the sqlite3 error. 
+  search gem sqlite3 platform ruby
+  found: https://github.com/sparklemotion/sqlite3-ruby/blob/main/INSTALLATION.md
+
+  how to: change the Gemfile of generated project, to have 
+                  gem "sqlite3", force_ruby_platform: true
+        e.g.: 
+          [3.1]
+            after creating the project with sqlite3 errors: 
+                >gem list sqlite3
+                sqlite3 (2.7.4 x64-mingw-ucrt)
+          [3.2]
+            modify gemfile, and
+                >cd myproject
+        	>bundle install
+        	>gem list sqlite3
+        	sqlite3 (2.7.4 ruby x64-mingw-ucrt)
+          [3.3] 
+            still have the sqlite3 error when launching rails server
+                >rails server
+
+[4] 
+  search windows Ruby and SQLite3 Version Compatibility
+  https://medium.com/@declancronje/installing-and-troubleshooting-ruby-on-rails-sqlite3-windows-10-fix-87c8886d03b
+
+  will try ruby 2.5.3 with rails 5.2.2
+
+  https://rubyinstaller.org/downloads/archives/
+  https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.5.9-1/rubyinstaller-devkit-2.5.9-1-x64.exe
+
+
+

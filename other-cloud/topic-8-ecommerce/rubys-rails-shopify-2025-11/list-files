@@ -1,0 +1,41 @@
+
+
+
+ls -l
+
+-rw-r--r--          0 Nov  3 07:42 list-files
+-rw-r--r--        180 Oct 16 07:41 ruby-lang-1-1-tutorial
+-rw-r--r--       9540 Oct 15 07:59 ruby-rails-1-1-attempt
+-rw-r--r--        411 Oct 16 07:41 ruby-rails-1-1-downloads
+-rw-r--r--       8101 Oct  7 18:24 ruby-rails-1-2-2dot5-2dot7
+-rw-r--r--        328 Oct 15 09:42 ruby-rails-1-2-versions-dates
+-rw-r--r--       3321 Oct  9 09:15 ruby-rails-1-3-tutorial-1
+-rw-r--r--       5224 Oct 12 11:11 ruby-rails-1-3-tutorial-2
+-rwxr-xr-x  124813384 Oct  7 16:04 rubyinstaller-devkit-2.5.3-1-x64.exe*
+-rwxr-xr-x  142556392 Oct  7 15:23 rubyinstaller-devkit-2.5.9-1-x64.exe*
+-rwxr-xr-x  132420272 Oct  7 16:34 rubyinstaller-devkit-2.7.8-1-x64.exe*
+-rw-r--r--        118 Oct 16 16:46 shopify-developer-1-1-tutorial
+-rw-r--r--    1344617 Oct  7 01:24 sqlite-dll-win-x64-3500400.zip
+-rw-r--r--    6430656 Oct  7 01:28 sqlite-tools-win-x64-3500400.zip
+
+
+
+ls -lrt
+
+-rw-r--r--    1344617 Oct  7 01:24 sqlite-dll-win-x64-3500400.zip
+-rw-r--r--    6430656 Oct  7 01:28 sqlite-tools-win-x64-3500400.zip
+-rwxr-xr-x  142556392 Oct  7 15:23 rubyinstaller-devkit-2.5.9-1-x64.exe*
+-rwxr-xr-x  124813384 Oct  7 16:04 rubyinstaller-devkit-2.5.3-1-x64.exe*
+-rwxr-xr-x  132420272 Oct  7 16:34 rubyinstaller-devkit-2.7.8-1-x64.exe*
+-rw-r--r--       8101 Oct  7 18:24 ruby-rails-1-2-2dot5-2dot7
+-rw-r--r--       3321 Oct  9 09:15 ruby-rails-1-3-tutorial-1
+-rw-r--r--       5224 Oct 12 11:11 ruby-rails-1-3-tutorial-2
+-rw-r--r--       9540 Oct 15 07:59 ruby-rails-1-1-attempt
+-rw-r--r--        328 Oct 15 09:42 ruby-rails-1-2-versions-dates
+-rw-r--r--        411 Oct 16 07:41 ruby-rails-1-1-downloads
+-rw-r--r--        180 Oct 16 07:41 ruby-lang-1-1-tutorial
+-rw-r--r--        118 Oct 16 16:46 shopify-developer-1-1-tutorial
+-rw-r--r--       1086 Nov  3 07:42 list-files
+
+
+

@@ -1,0 +1,276 @@
+
+2025-10-7
+
+
+
+attempt 1, 2.5.9-1
+
+[1] install ruby 2.5.9-1 with devkit
+
+    >ruby --version
+    ruby 2.5.9p229 (2021-04-05 revision 67939) [x64-mingw32]
+
+    >gem list
+    *** LOCAL GEMS ***
+    bigdecimal (default: 1.3.4)
+    cmath (default: 1.0.0)
+    csv (default: 1.0.0)
+    date (default: 1.0.0)
+    dbm (default: 1.0.0)
+    did_you_mean (1.2.0)
+    etc (default: 1.0.0)
+    fcntl (default: 1.0.0)
+    fiddle (default: 1.0.0)
+    fileutils (default: 1.0.2)
+    gdbm (default: 2.0.0)
+    io-console (default: 0.4.6)
+    ipaddr (default: 1.2.0)
+    json (default: 2.1.0)
+    minitest (5.10.3)
+    net-telnet (0.1.1)
+    openssl (default: 2.1.2)
+    power_assert (1.1.1)
+    psych (default: 3.0.2)
+    rake (12.3.3)
+    rdoc (default: 6.0.1.1)
+    scanf (default: 1.0.0)
+    sdbm (default: 1.0.0)
+    stringio (default: 0.0.1)
+    strscan (default: 1.0.0)
+    test-unit (3.2.7)
+    webrick (default: 1.4.2.1)
+    xmlrpc (0.3.0)
+    zlib (default: 1.0.0)
+
+    >gem --version
+    2.7.6
+
+[2] install rails
+
+    >gem install rails
+
+      ---this will cause a few errors due to default versions are too high. fix below.
+
+    >gem install bundler -v 2.3.27
+    >gem install pp -v 0.2.0
+
+      ---this will not work, it attempts pp >=0.6.0, need a lower gem version for 0.2.0.
+
+    >gem install sqlite3 -v 1.4.0 --source "https://rubygems.org/"
+
+
+
+attempt 2.5.3-1
+
+[1] 
+
+    >gem --version
+    2.7.6
+      ---not sure how to downgrade it.
+
+
+
+attempt 2.7.8-1 x64
+
+[1] 
+    >gem --version
+    3.1.6
+
+    >ruby --version
+    ruby 2.7.8p225 (2023-03-30 revision 1f4d455848) [x64-mingw32]
+
+    >gem list
+    benchmark (default: 0.1.0)
+    bigdecimal (default: 2.0.0)
+    bundler (default: 2.1.4)
+    cgi (default: 0.1.0.2)
+    csv (default: 3.1.2)
+    date (default: 3.0.3)
+    dbm (default: 1.1.0)
+    delegate (default: 0.1.0)
+    did_you_mean (default: 1.4.0)
+    etc (default: 1.1.0)
+    fcntl (default: 1.0.0)
+    fiddle (default: 1.0.0)
+    fileutils (default: 1.4.1)
+    forwardable (default: 1.3.1)
+    gdbm (default: 2.1.0)
+    getoptlong (default: 0.1.0)
+    io-console (default: 0.5.6)
+    ipaddr (default: 1.2.2)
+    irb (default: 1.2.6)
+    json (default: 2.3.0)
+    logger (default: 1.4.2)
+    matrix (default: 0.2.0)
+    minitest (5.13.0)
+    mutex_m (default: 0.1.0)
+    net-pop (default: 0.1.0)
+    net-smtp (default: 0.1.0)
+    net-telnet (0.2.0)
+    observer (default: 0.1.0)
+    open3 (default: 0.1.0)
+    openssl (default: 2.1.4)
+    ostruct (default: 0.2.0)
+    power_assert (1.1.7)
+    prime (default: 0.1.1)
+    pstore (default: 0.1.0)
+    psych (default: 3.1.0)
+    racc (default: 1.4.16)
+    rake (13.0.1)
+    rdoc (default: 6.2.1.1)
+    readline (default: 0.0.2)
+    reline (default: 0.1.5)
+    rexml (default: 3.2.3.1)
+    rss (default: 0.2.8)
+    sdbm (default: 1.0.0)
+    singleton (default: 0.1.0)
+    stringio (default: 0.1.0)
+    strscan (default: 1.0.3)
+    test-unit (3.3.4)
+    timeout (default: 0.1.0)
+    tracer (default: 0.1.0)
+    uri (default: 0.10.0.2)
+    webrick (default: 1.6.1)
+    xmlrpc (0.3.0)
+    yaml (default: 0.1.0)
+    zlib (default: 1.1.0)
+
+[2] 
+    >gem install zeitwerk -v 2.6.18
+    >gem install nokogiri -v 1.15.7
+    >gem install securerandom -v 0.3.2    ---this is no need in [3] below
+    >gem install net-imap -v 0.4.22
+
+    >gem install rails -v 6.1.7.10
+      --- rails 8.0.3 needs ruby 3.2.0
+                7.2.2.2 needs 3.1.0
+		6.1.7.10
+
+    for rails 6.1.7.10:     ---this is no issue in [3] below
+        rack's executable "rackup" conflicts with rackup
+        Overwrite the executable? [yN]  y
+        Successfully installed rack-2.2.19
+
+[3] re-install 
+  rails 6.1.7.10 , ruby 2.7.8 , msys 2023-04-01 , gem 3.1.6
+
+    > ... zeitwerk 2.6.18
+    > ... nokogiri 1.15.7
+    > ... net-imap -v 0.4.22
+
+    >gem install rails -v 6.1.7.10
+
+    Successfully installed zeitwerk-2.6.18
+    Successfully installed concurrent-ruby-1.3.5
+    Successfully installed tzinfo-2.0.6
+    Successfully installed i18n-1.14.7
+    Successfully installed activesupport-6.1.7.10
+    Successfully installed mini_portile2-2.8.9
+    Successfully installed nokogiri-1.15.7-x64-mingw32
+    Successfully installed rails-dom-testing-2.3.0
+    Successfully installed crass-1.0.6
+    Successfully installed loofah-2.24.1
+    Successfully installed rails-html-sanitizer-1.6.2
+    Successfully installed erubi-1.13.1
+    Successfully installed builder-3.3.0
+    Successfully installed actionview-6.1.7.10
+    Successfully installed rack-2.2.19
+    Successfully installed rack-test-2.2.0
+    Successfully installed actionpack-6.1.7.10
+    Successfully installed sprockets-4.2.2
+    Successfully installed sprockets-rails-3.5.2
+    Successfully installed method_source-1.1.0
+    Successfully installed thor-1.4.0
+    Successfully installed railties-6.1.7.10
+    Successfully installed mini_mime-1.1.5
+    Successfully installed marcel-1.1.0
+    Successfully installed activemodel-6.1.7.10
+    Successfully installed activerecord-6.1.7.10
+    Successfully installed globalid-1.3.0
+    Successfully installed activejob-6.1.7.10
+    Successfully installed activestorage-6.1.7.10
+    Successfully installed actiontext-6.1.7.10
+    Successfully installed net-protocol-0.2.2
+    Successfully installed net-imap-0.4.22
+    Successfully installed mail-2.8.1
+    Successfully installed actionmailbox-6.1.7.10
+    Successfully installed websocket-extensions-0.1.5
+    Successfully installed base64-0.3.0
+    Building native extensions. This could take a while...
+    Successfully installed websocket-driver-0.8.0
+    Building native extensions. This could take a while...
+    Successfully installed nio4r-2.7.4
+    Successfully installed actioncable-6.1.7.10
+    Successfully installed actionmailer-6.1.7.10
+    Successfully installed rails-6.1.7.10
+
+    >rails --version
+      ---failed logger ...
+
+  remove all installed gems: 
+
+    >gem uninstall -aIx
+
+[4] 
+  install rails 5.2.8.1 the latest 5.x on rubygems.org dated july 12 2022
+
+    > ...
+    gem install nokogiri -v 1.15.7
+    gem install net-imap -v 0.4.22
+
+
+    >gem install rails -v 5.2.8.1
+
+    Successfully installed concurrent-ruby-1.3.5
+    Successfully installed minitest-5.25.5
+    Successfully installed thread_safe-0.3.6
+    Successfully installed tzinfo-1.2.11
+    Successfully installed i18n-1.14.7
+    Successfully installed activesupport-5.2.8.1
+    Successfully installed mini_portile2-2.8.9
+    Successfully installed rails-dom-testing-2.3.0
+    Successfully installed crass-1.0.6
+    Successfully installed loofah-2.24.1
+    Successfully installed rails-html-sanitizer-1.6.2
+    Successfully installed erubi-1.13.1
+    Successfully installed builder-3.3.0
+    Successfully installed actionview-5.2.8.1
+    Successfully installed rack-2.2.19
+    Successfully installed rack-test-2.2.0
+    Successfully installed actionpack-5.2.8.1
+    Successfully installed sprockets-4.2.2
+    Successfully installed sprockets-rails-3.4.2
+    Successfully installed method_source-1.1.0
+    Successfully installed thor-1.4.0
+    Successfully installed rake-13.3.0
+    Successfully installed railties-5.2.8.1
+    Successfully installed marcel-1.0.4
+    Successfully installed arel-9.0.0
+    Successfully installed activemodel-5.2.8.1
+    Successfully installed activerecord-5.2.8.1
+    Successfully installed activestorage-5.2.8.1
+    Successfully installed websocket-extensions-0.1.5
+    Successfully installed base64-0.3.0
+    Building native extensions. This could take a while...
+    Successfully installed websocket-driver-0.8.0
+    Building native extensions. This could take a while...
+    Successfully installed nio4r-2.7.4
+    Successfully installed actioncable-5.2.8.1
+    Successfully installed globalid-1.1.0
+    Successfully installed activejob-5.2.8.1
+    Successfully installed net-protocol-0.2.2
+    Successfully installed net-imap-0.4.22
+    Successfully installed mini_mime-1.1.5
+    Successfully installed mail-2.8.1
+    Successfully installed actionmailer-5.2.8.1
+    Successfully installed rails-5.2.8.1
+
+    >rails --version
+    Rails 5.2.8.1
+
+    >rails new myblogapp
+    >cd myblogapp
+    >rails server
+
+
+
