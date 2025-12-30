@@ -1,0 +1,106 @@
+
+2025-12-9
+
+
+https://shopify.dev/docs/apps/build/build?framework=reactRouter
+
+
+github full project: 
+
+    Shopify/example-app--qr-code--remix/tree/upgrade-to-react-router
+
+github previous template project:
+
+    Shopify/shopify-app-template-react-router
+    the template comes with pre-configured examples of: 
+          app/shopify.server.ts        --- .js
+          app/routes/app._index.tsx    --- .jsx
+          app/routes/webhooks.tsx      --- .jsx
+
+  or see the node_modules/shopify-app-react-router
+
+
+[0] pre-requisite
+
+    $ cd <project-directory>
+    $ npm install qrcode
+    $ npm install @shopify/polaris-icons
+    $ npm install tiny-invariant
+
+
+[1] add the qr code data model to your database
+
+    edit schema
+    $ npm run prisma migrate dev -- --name add-qrcode-table
+    $ npm run prisma studio
+
+
+[2] get qr code and product data
+
+    app/models/QRCode.server.js
+
+    get a single or multiple qr code, using Prisma FindFirst and FindMany.
+    get the qr code image, 
+       takes user to  /qrcode/$id/scan , 
+       uses a function to construct this url and the image.
+    get the destination url between product or cart pages.
+    retrieve additional product and variant data.
+    validate qr code.
+
+
+[3] create a qr code form
+
+  the admin needs to be auth'ed by app/routes/app.jsx
+
+    app/routes/app.qrcodes.$id.jsx
+
+    authenticate the user, and return an admin object
+    return a json response
+    manage the form state
+    add a product selector
+    submit
+    lay out the form
+        [3.1], ...
+
+[3.1] add a product selector
+[3.2] submit
+[3.3] layout the form
+    breadcrumb, title, select the product, destination options, 
+    qr code preview, save bar, crate or update or delete
+
+
+[4] list qr codes
+
+  in the app home
+
+    app/routes/app._index.jsx
+
+    empty state
+    index table
+    index table rows
+    warn of deleted
+    lay out
+
+
+[5] add a public qr code route
+
+    app/routes/qrcodes.$id.jsx
+
+    load the code
+    render the code image
+
+
+[6] redirect the customer to the destination url
+
+    app/routes/qrcode.$id.scan.jsx
+
+    validate
+    increment count
+    redirect
+
+
+[7] preview and test the app
+
+
+
+

@@ -1,0 +1,118 @@
+
+2025-12-18
+
+
+search how do you run a reactjs project
+
+
+https://letsreact.org/how-to-run-react-app
+
+  $ npx create-react-app my-app
+  $ cd my-app
+  $ npm start
+
+
+command log follows, prefixed with '*** " for important lines
+
+$ npx create-react-app my-app
+Need to install the following packages:
+create-react-app@5.1.0
+Ok to proceed? (y) y
+
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async reque
+sts by a key value, which is much more comprehensive and powerful.
+npm warn deprecated fstream-ignore@1.0.5: This package is no longer supported.
+npm warn deprecated uid-number@0.0.6: This package is no longer supported.
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated fstream@1.0.12: This package is no longer supported.
+npm warn deprecated tar@2.2.2: This version of tar is no longer supported, and will not receive security updates. Please upgrade asap.
+*** create-react-app is deprecated.
+
+You can find a list of up-to-date React frameworks on react.dev
+*** For more info see:https://react.dev/link/cra
+
+This error message will only be shown once per install.
+
+*** Creating a new React app in C:\Users\nodeuser\Desktop\node-react-project\my-app.
+
+Installing packages. This might take a couple of minutes.
+*** Installing react, react-dom, and react-scripts with cra-template...
+
+
+added 1303 packages in 2m
+
+266 packages are looking for funding
+  run `npm fund` for details
+
+Initialized a git repository.
+
+Installing template dependencies using npm...
+
+added 17 packages, and changed 1 package in 10s
+
+266 packages are looking for funding
+  run `npm fund` for details
+Removing template package using npm...
+
+
+removed 1 package, and audited 1320 packages in 7s
+
+266 packages are looking for funding
+  run `npm fund` for details
+
+*** 9 vulnerabilities (3 moderate, 6 high)
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+Git commit not created Error: Command failed: git commit -m "Initialize project using Create React App"
+    at genericNodeError (node:internal/errors:984:15)
+    at wrappedFn (node:internal/errors:538:14)
+    at checkExecSyncError (node:child_process:891:11)
+    at execSync (node:child_process:963:15)
+    at tryGitCommit (C:\Users\nodeuser\my-app\node_modules\react-scripts\scripts\init.js:62:5)
+    at module.exports (C:\Users\nodeuser\my-app\node_modules\react-scripts\scripts\init.js:350:25)
+    at [eval]:3:14
+    at runScriptInThisContext (node:internal/vm:209:10)
+    at node:internal/process/execution:118:14
+    at [eval]-wrapper:6:24 {
+  status: 128,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 5952,
+  stdout: null,
+  stderr: null
+}
+Removing .git directory...
+
+Success! Created my-app at C:\Users\nodeuser\my-app
+Inside that directory, you can run several commands:
+
+*** 
+  npm start
+    Starts the development server.
+
+*** 
+  npm run build
+    Bundles the app into static files for production.
+
+*** 
+  npm test
+    Starts the test runner.
+
+*** 
+  npm run eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+
+We suggest that you begin by typing:
+
+*** 
+  cd my-app
+  npm start
+
+Happy hacking!
+
+

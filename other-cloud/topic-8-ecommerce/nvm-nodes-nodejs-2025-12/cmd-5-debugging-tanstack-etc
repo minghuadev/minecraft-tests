@@ -1,0 +1,67 @@
+
+2025-12-15
+
+
+
+$ npm install @tanstack/react-router-devtools
+added 17 packages, and audited 794 packages in 35s
+
+$ ls -lrt  ---show only new items below
+drwxr-xr-x   197121 0 Dec 15 09:01 '@tanstack'/
+drwxr-xr-x   197121 0 Dec 15 09:01  cookie-es/
+drwxr-xr-x   197121 0 Dec 15 09:01  clsx/
+drwxr-xr-x   197121 0 Dec 15 09:01  tiny-warning/
+drwxr-xr-x   197121 0 Dec 15 09:01  use-sync-external-store/
+drwxr-xr-x   197121 0 Dec 15 09:01  seroval-plugins/
+drwxr-xr-x   197121 0 Dec 15 09:01  seroval/
+drwxr-xr-x   197121 0 Dec 15 09:01  goober/
+drwxr-xr-x   197121 0 Dec 15 09:01  solid-js/
+drwxr-xr-x   197121 0 Dec 15 09:01 '@unrs'/
+drwxr-xr-x   197121 0 Dec 15 09:01 '@rollup'/
+drwxr-xr-x   197121 0 Dec 15 09:01 '@parcel'/
+drwxr-xr-x   197121 0 Dec 15 09:01 '@esbuild'/
+drwxr-xr-x   197121 0 Dec 15 09:01 '@napi-rs'/
+drwxr-xr-x   197121 0 Dec 15 09:01 '@emnapi'/
+drwxr-xr-x   197121 0 Dec 15 09:01 '@tybys'/
+
+$ npm uninstall @tanstack/react-router-devtools
+removed 17 packages, and audited 777 packages in 4s
+
+drwxr-xr-x   197121 0 Dec 15 10:21 '@unrs'/
+drwxr-xr-x   197121 0 Dec 15 10:21 '@rollup'/
+drwxr-xr-x   197121 0 Dec 15 10:21 '@parcel'/
+drwxr-xr-x   197121 0 Dec 15 10:21 '@esbuild'/
+drwxr-xr-x   197121 0 Dec 15 10:21 '@emnapi'/
+drwxr-xr-x   197121 0 Dec 15 10:21 '@tybys'/
+drwxr-xr-x   197121 0 Dec 15 10:21 '@tanstack'/
+drwxr-xr-x   197121 0 Dec 15 10:21 '@napi-rs'/
+
+$ rmdir \@emnapi \@tybys \@tanstack \@napi-rs  
+
+
+
+duck ai: 
+    add logging into a shopify react router app
+
+code 1: 
+import { useEffect } from "react";
+//import { useLocation } from 'react-router-dom';  // not working
+
+    //const location = useLocation();  // not working
+    //const location = { pathname: "Index()" };  // ok
+    //const location = this.props.location;  // not working
+    //const location = window.location.pathname; // not working
+    let location = { pathname: "Index()" };  // both server and client sides
+    if ( typeof window !== "undefined" ) {
+        location = { pathname: window.location.pathname };  // client side
+    }
+
+    useEffect(() => {
+        console.log('Navigated to:', location.pathname); // Log the current path
+    }, [location]);
+
+code 2:
+npm install loglevel
+npm install winston
+
+

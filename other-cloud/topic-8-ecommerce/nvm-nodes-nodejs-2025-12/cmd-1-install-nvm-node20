@@ -1,0 +1,75 @@
+
+
+2025-12-7
+
+
+[1] check nvm version
+
+check github.com/nvm-sh/nvm the latest is v0.40.3
+
+
+[2] download nvm install script
+
+$ curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh > install.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 16631  100 16631    0     0   151k      0 --:--:-- --:--:-- --:--:--  153k
+
+
+[3] install nvm
+
+$ bash install.sh
+=> Downloading nvm from git to '/c/Users/nodeuser/.nvm'
+=> Cloning into 'C:/Users/nodeuser/.nvm'...
+remote: Enumerating objects: 384, done.
+remote: Counting objects: 100% (384/384), done.
+remote: Compressing objects: 100% (328/328), done.
+remote: Total 384 (delta 42), reused 181 (delta 28), pack-reused 0 (from 0)
+Receiving objects: 100% (384/384), 392.50 KiB | 1.64 MiB/s, done.
+Resolving deltas: 100% (42/42), done.
+* (HEAD detached at FETCH_HEAD)
+  master
+=> Compressing and cleaning up git repository
+
+=> Profile not found. Tried ~/.bashrc, ~/.bash_profile, ~/.zprofile, ~/.zshrc, and ~/.profile.
+=> Create one of them and run this script again
+   OR
+=> Append the following lines to the correct file yourself:
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+=> Close and reopen your terminal to start using nvm or run the following to use it now:
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+[4] set up nvm env
+
+copy the last two lines into an env-set.bash file
+run once from bash
+    source env-set.bash 
+
+$ nvm --version
+0.40.3
+
+
+[5] install node 20
+
+$ nvm install 20
+Downloading and installing node v20.19.6...
+Downloading https://nodejs.org/dist/v20.19.6/node-v20.19.6-win-x64.zip...
+################################################################################ 100.0%
+Computing checksum with sha256sum
+Checksums matched!
+Now using node v20.19.6 (npm v10.8.2)
+Creating default alias: default -> 20 (-> v20.19.6)
+
+$ node --version
+v20.19.6
+
+$ npm --version
+10.8.2
+
+

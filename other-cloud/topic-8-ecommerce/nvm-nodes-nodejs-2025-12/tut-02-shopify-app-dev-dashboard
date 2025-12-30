@@ -1,0 +1,26 @@
+
+2025-12-14
+
+
+https://shopify.dev/docs/apps/build/dev-dashboard/create-apps-using-dev-dashboard
+
+
+an API-only app can get client-credentials grant
+
+
+https://shopify.dev/docs/apps/build/authentication-authorization/access-tokens/client-credentials-grant
+
+curl -X POST \
+  "https://{shop}.myshopify.com/admin/oauth/access_token" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=client_credentials" \
+  -d "client_id={client_id}" \
+  -d "client_secret={client_secret}"
+
+{
+  "access_token": "f85632530bf277ec9ac6f649fc327f17",
+  "scope": "write_orders,read_customers",
+  "expires_in": 86399
+}
+
+

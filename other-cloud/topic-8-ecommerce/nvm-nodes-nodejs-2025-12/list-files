@@ -1,0 +1,21 @@
+
+list-files
+2025-12-30
+
+
+ls -lrt
+
+-rwxr-xr-x   16631 Dec  7 09:56 install.sh*
+-rw-r--r--      98 Dec  7 10:02 env-set.bash
+-rw-r--r--     121 Dec  7 10:22 cmd-2-shopify-cli-install
+-rw-r--r--    2060 Dec  7 14:04 cmd-1-install-nvm-node20
+-rw-r--r--     231 Dec  7 14:47 cmd-3-shopify-app-scaffold
+-rw-r--r--     113 Dec  9 11:58 tut-01-react-router
+-rw-r--r--    2141 Dec 13 08:48 cmd-4-shopify-app-qrcode
+-rw-r--r--     618 Dec 14 12:54 tut-02-shopify-app-dev-dashboard
+-rw-r--r--    2213 Dec 15 12:39 cmd-5-debugging-tanstack-etc
+-rw-r--r--    3463 Dec 19 08:23 tut-03-reactjs
+-rw-r--r--     290 Dec 19 08:34 tut-04-reactjs-vite
+-rw-r--r--       0 Dec 30 14:29 list-files
+
+

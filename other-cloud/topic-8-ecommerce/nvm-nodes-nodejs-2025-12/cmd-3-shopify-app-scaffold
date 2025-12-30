@@ -1,0 +1,20 @@
+
+2025-12-7
+
+
+https://shopify.dev/docs/apps/build/scaffold-app
+
+
+$ shopify app init
+$ shopify app dev
+$ shopify app dev clean
+
+$ shopify app dev --reset
+
+
+sign in to a different account
+
+$ shopify auth logout
+$ shopify auth login
+
+

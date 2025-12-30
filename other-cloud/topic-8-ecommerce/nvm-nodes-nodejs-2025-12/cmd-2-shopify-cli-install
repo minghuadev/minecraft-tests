@@ -1,0 +1,13 @@
+
+2025-12-7
+
+
+https://shopify.dev/docs/api/shopify-cli
+
+$ npm install -g @shopify/cli@latest
+
+$ shopify version
+3.88.0
+
+
+
