@@ -1,0 +1,912 @@
+
+2026-9-19
+https://gist.github.com/ArkAung/1419dc62d80ccc85cd40e5e598caa2c6
+ArkAung/plan.txt dated feb 9 2026
+
+
+Complete End-to-End Plan: IntelliJ Debugger MCP Server for Rovo Dev
+
+## Product Vision
+
+Goal: Enable Rovo Dev (and other MCP clients) to autonomously debug Kotlin codebases through full programmatic control of IntelliJ IDEA's debugger, eliminating manual debugging workflows.
+
+Success Metric: Developer says "Debug why X is broken" and the agent fully investigates, identifies root cause, and suggests fixes without any manual debugging steps.
+
+Phase 1: Foundation (Week 1)
+1.1 Project Setup & Architecture
+Deliverable: Working IntelliJ plugin skeleton with MCP server
+Tasks:
+
+Project Scaffolding
+
+Create IntelliJ plugin project via New Project Wizard
+Configure build.gradle.kts with all dependencies
+Set up plugin.xml with proper metadata
+Create basic package structure
+
+
+MCP Server Infrastructure
+
+Implement HTTP server using Ktor (port 8080)
+Create MCP protocol types (Request/Response/Error)
+Implement JSON-RPC handler
+Add server lifecycle management (start/stop with IntelliJ)
+
+
+Plugin Integration
+
+Register ApplicationService component
+Auto-start MCP server on IntelliJ launch
+Add graceful shutdown handling
+Implement health check endpoint
+
+
+
+Acceptance Criteria:
+
+✅ Plugin installs in IntelliJ without errors
+✅ MCP server starts on port 8080
+✅ curl localhost:8080/health returns 200 OK
+✅ Server responds to MCP initialize request
+
+Rovo Dev Prompt:
+Create an IntelliJ IDEA plugin project that serves as an MCP (Model Context Protocol) server.
+
+Requirements:
+- Language: Kotlin
+- Build system: Gradle with intellij plugin
+- HTTP server: Ktor on port 8080
+- Plugin type: ApplicationService (auto-starts with IntelliJ)
+
+Project structure:
+/src/main/kotlin/com/debugger/mcp/
+  - MCPServerComponent.kt (main plugin component)
+  - MCPServer.kt (HTTP server with Ktor)
+  - protocol/MCPProtocol.kt (MCP types: Request, Response, Tool, Error)
+  - protocol/JSONRPCHandler.kt (handles JSON-RPC 2.0)
+
+/src/main/resources/META-INF/
+  - plugin.xml (plugin configuration)
+  - pluginIcon.svg
+
+/src/test/kotlin/
+  - MCPServerTest.kt (basic server tests)
+
+Dependencies needed:
+- IntelliJ Platform SDK (via intellij gradle plugin)
+- Ktor server (ktor-server-netty, ktor-server-core)
+- Kotlin serialization (kotlinx-serialization-json)
+- JUnit for testing
+
+The HTTP server should:
+- Listen on port 8080
+- Respond to POST /mcp with MCP protocol messages
+- Have GET /health endpoint
+- Return proper MCP protocol responses
+
+Create complete working project with:
+1. build.gradle.kts with all dependencies
+2. All source files with proper implementation
+3. plugin.xml configuration
+4. README.md with setup instructions
+5. Test file to verify server starts correctly
+
+Follow MCP spec from https://spec.modelcontextprotocol.io/specification/basic/lifecycle/
+
+Phase 2: Core Debugging Tools (Week 1-2)
+2.1 Breakpoint Management
+Deliverable: Full breakpoint control via MCP
+Tools to implement:
+kotlin// Basic breakpoints
+set_line_breakpoint(file: String, line: Int, condition?: String)
+remove_breakpoint(breakpointId: String)
+toggle_breakpoint(file: String, line: Int)
+list_breakpoints() → List<Breakpoint>
+
+// Advanced breakpoints
+set_method_breakpoint(className: String, methodName: String)
+set_exception_breakpoint(exceptionType: String, catchMode: String)
+set_field_watchpoint(className: String, fieldName: String, accessType: String)
+set_conditional_breakpoint(file: String, line: Int, condition: String)
+
+// Breakpoint properties
+enable_breakpoint(breakpointId: String)
+disable_breakpoint(breakpointId: String)
+set_breakpoint_condition(breakpointId: String, condition: String)
+```
+
+**Rovo Dev Prompt:**
+```
+Extend the IntelliJ MCP server with breakpoint management tools.
+
+Use IntelliJ Platform SDK APIs:
+- XDebuggerManager.getInstance(project).breakpointManager
+- XLineBreakpointType for line breakpoints
+- XBreakpoint interface for breakpoint instances
+
+Create new files:
+/src/main/kotlin/com/debugger/mcp/
+  - tools/BreakpointTools.kt (breakpoint operations)
+  - tools/ToolRegistry.kt (registers all tools with MCP)
+  - debugger/BreakpointManager.kt (wraps IntelliJ API)
+
+Implement these MCP tools with proper schemas:
+1. set_line_breakpoint - Sets breakpoint at file:line
+2. remove_breakpoint - Removes breakpoint by ID
+3. list_breakpoints - Returns all active breakpoints
+4. set_conditional_breakpoint - Breakpoint with condition expression
+5. set_exception_breakpoint - Break on exception type
+
+Each tool needs:
+- MCP Tool definition with name, description, inputSchema
+- Implementation using IntelliJ debugger APIs
+- Error handling (file not found, invalid line, etc.)
+- Proper JSON response format
+
+Handle IntelliJ threading:
+- Use ApplicationManager.getApplication().invokeLater for UI thread operations
+- Use ReadAction.compute for read operations
+
+Return structured responses:
+{
+  "breakpointId": "bp_123",
+  "file": "/path/to/File.kt",
+  "line": 42,
+  "enabled": true,
+  "condition": "user != null"
+}
+
+Add unit tests for each tool.
+2.2 Execution Control
+Deliverable: Step-through debugging control
+Tools to implement:
+kotlin// Stepping
+step_over()
+step_into()
+step_out()
+step_to_line(file: String, line: Int)
+run_to_cursor(file: String, line: Int)
+
+// Session control
+resume()
+pause()
+stop_debugging()
+restart_debugging()
+
+// Status
+get_debug_status() → {running, paused, stopped, position}
+```
+
+**Rovo Dev Prompt:**
+```
+Add execution control tools to the IntelliJ MCP server.
+
+Use APIs:
+- XDebugSession for session control
+- XDebugSession.stepOver(), stepInto(), stepOut()
+- XDebugSession.resume(), pause(), stop()
+- XDebuggerManager.getInstance(project).currentSession
+
+Create:
+/src/main/kotlin/com/debugger/mcp/
+  - tools/ExecutionTools.kt
+  - debugger/SessionManager.kt
+
+Implement MCP tools:
+1. step_over - Execute next line in current method
+2. step_into - Step into method calls
+3. step_out - Return from current method
+4. resume - Continue execution
+5. pause - Pause execution
+6. get_debug_status - Get current debug state
+
+Handle cases:
+- No active debug session (return error)
+- Invalid state transitions (can't step when running)
+- Session ended unexpectedly
+
+Return current position after each operation:
+{
+  "status": "paused",
+  "file": "/path/to/File.kt",
+  "line": 42,
+  "method": "authenticate",
+  "thread": "main"
+}
+
+Add listeners for debug events:
+- Use XDebugSessionListener to track state changes
+- Update MCP clients when breakpoints hit
+- Notify when execution stops
+2.3 State Inspection
+Deliverable: Variable and stack inspection
+Tools to implement:
+kotlin// Variables
+get_local_variables() → Map<String, Value>
+get_variable_value(name: String) → Value
+evaluate_expression(expression: String) → Value
+watch_expression(expression: String) → WatchId
+
+// Stack
+get_stack_trace() → List<StackFrame>
+get_frame_variables(frameIndex: Int) → Map<String, Value>
+navigate_to_frame(frameIndex: Int)
+
+// Threads
+get_threads() → List<Thread>
+switch_thread(threadId: String)
+```
+
+**Rovo Dev Prompt:**
+```
+Add state inspection tools to the IntelliJ MCP server.
+
+Use APIs:
+- XDebugSession.currentStackFrame
+- XStackFrame.computeChildren() for variables
+- XDebuggerEvaluator.evaluate() for expressions
+- XExecutionStack for stack traces
+
+Create:
+/src/main/kotlin/com/debugger/mcp/
+  - tools/InspectionTools.kt
+  - debugger/StateInspector.kt
+  - model/DebugValue.kt (represents variable values)
+
+Implement MCP tools:
+1. get_local_variables - All variables in current scope
+2. get_variable_value - Specific variable value
+3. evaluate_expression - Evaluate code expression
+4. get_stack_trace - Full call stack
+5. get_threads - All threads and their states
+
+Handle async operations:
+- computeChildren is async, use XCompositeNode callbacks
+- evaluate() returns CompletableFuture, handle properly
+
+Convert IntelliJ types to JSON-friendly format:
+{
+  "name": "user",
+  "type": "User",
+  "value": "User(id=123, name='John')",
+  "children": [
+    {"name": "id", "type": "Int", "value": "123"},
+    {"name": "name", "type": "String", "value": "'John'"}
+  ]
+}
+
+Support complex types:
+- Collections (List, Map, Set)
+- Data classes
+- Null values
+- Lazy properties
+
+Phase 3: Autonomous Debugging Tools (Week 2-3)
+3.1 Intelligent Analysis Tools
+Deliverable: High-level debugging workflows
+Tools to implement:
+kotlin// Crash analysis
+analyze_crash(
+  stackTrace: String,
+  exceptionType: String
+) → CrashAnalysis {
+  suspectedCauses: List<Cause>
+  suggestedBreakpoints: List<Location>
+  suggestedWatches: List<Expression>
+  investigationPlan: List<Step>
+}
+
+// Performance analysis
+profile_method(
+  className: String,
+  methodName: String,
+  iterations: Int = 100
+) → PerformanceProfile {
+  avgExecutionTime: Duration
+  breakdown: Map<String, Duration>
+  bottlenecks: List<Bottleneck>
+  suggestions: List<Optimization>
+}
+
+// Data flow tracing
+trace_variable_origin(
+  variableName: String,
+  fromLine: Int
+) → VariableTrace {
+  assignments: List<Assignment>
+  transformations: List<Transformation>
+  sources: List<Source>
+}
+
+// Control flow analysis
+analyze_execution_path(
+  startLine: Int,
+  endLine: Int
+) → ExecutionPath {
+  possiblePaths: List<Path>
+  conditions: List<Condition>
+  coverage: CoverageInfo
+}
+```
+
+**Rovo Dev Prompt:**
+```
+Add autonomous debugging tools that orchestrate multiple low-level operations.
+
+Create:
+/src/main/kotlin/com/debugger/mcp/
+  - tools/AnalysisTools.kt
+  - analysis/CrashAnalyzer.kt
+  - analysis/PerformanceProfiler.kt
+  - analysis/DataFlowTracer.kt
+  - analysis/ControlFlowAnalyzer.kt
+
+Tool 1: analyze_crash
+Input: { stackTrace: string, exceptionType: string }
+Process:
+1. Parse stack trace to identify frames
+2. Use PsiFile to analyze code at each frame
+3. Identify potential null sources, uninitialized variables
+4. Set breakpoints at suspected locations
+5. Return investigation plan
+
+Output:
+{
+  "rootCause": "NullPointerException in UserService.authenticate",
+  "suspectedNullSources": [
+    {"variable": "user", "line": 135, "likelihood": 0.8},
+    {"variable": "cache", "line": 142, "likelihood": 0.5}
+  ],
+  "suggestedBreakpoints": [135, 138, 142],
+  "investigationSteps": [
+    "Set breakpoint at line 135 to check user initialization",
+    "Watch expression: userCache.get(userId)",
+    "Verify cache is not empty"
+  ]
+}
+
+Tool 2: profile_method
+Input: { className: string, methodName: string }
+Process:
+1. Find method using PsiClass APIs
+2. Set breakpoints at method entry and exit
+3. Track timestamps between breakpoints
+4. Identify called methods and their durations
+5. Calculate statistical breakdown
+
+Output:
+{
+  "method": "UserService.authenticate",
+  "avgTime": "4500ms",
+  "breakdown": {
+    "DatabaseQuery.execute": "4200ms (93%)",
+    "PasswordHash.verify": "250ms (6%)",
+    "Other": "50ms (1%)"
+  },
+  "bottleneck": "DatabaseQuery.execute",
+  "suggestion": "Database query is slow. Check for missing indexes."
+}
+
+Use IntelliJ PSI (Program Structure Interface) APIs:
+- PsiManager to access code structure
+- PsiFile, PsiClass, PsiMethod for code analysis
+- PsiElement.getText() to read source
+
+Implement helper methods:
+- parseStackTrace(trace: String): List<StackFrame>
+- findNullSources(method: PsiMethod): List<Variable>
+- instrumentMethod(method: PsiMethod): Instrumentation
+- measureExecutionTime(start: Breakpoint, end: Breakpoint): Duration
+3.2 Smart Workflows
+Deliverable: One-command debugging
+Tools to implement:
+kotlin// Auto-debug
+auto_debug(
+  issueDescription: String,
+  testCase: String? = null,
+  maxTimeSeconds: Int = 300
+) → DebugReport {
+  investigation: List<Step>
+  findings: List<Finding>
+  rootCause: Cause?
+  fixSuggestions: List<Fix>
+}
+
+// Code health check
+analyze_code_quality(
+  file: String? = null,
+  package: String? = null
+) → QualityReport {
+  potentialBugs: List<Bug>
+  performanceIssues: List<Issue>
+  securityConcerns: List<Concern>
+}
+```
+
+**Rovo Dev Prompt:**
+```
+Add smart workflow tools that autonomously debug issues.
+
+Create:
+/src/main/kotlin/com/debugger/mcp/
+  - tools/SmartWorkflows.kt
+  - workflows/AutoDebugger.kt
+  - workflows/CodeAnalyzer.kt
+
+Tool: auto_debug
+Input: { issueDescription: string, testCase?: string }
+
+Process:
+1. Analyze issue description (NLP parsing)
+   - Extract keywords: "slow", "crash", "null", "timeout"
+   - Identify affected components
+   
+2. Generate debugging strategy:
+   - Performance issue → profile relevant methods
+   - Crash → analyze stack trace, set breakpoints
+   - Logic bug → trace data flow
+   
+3. Execute strategy autonomously:
+   - Set appropriate breakpoints
+   - Run test case (if provided)
+   - Collect data at each breakpoint
+   - Analyze collected data
+   
+4. Synthesize findings:
+   - Correlate observations
+   - Identify root cause
+   - Generate fix suggestions
+
+Example flow for "login is slow":
+1. Identify login-related methods (LoginService, authenticate, etc.)
+2. Profile each method to find bottleneck
+3. If database → analyze query, check indexes
+4. If computation → analyze algorithm complexity
+5. Return detailed report with fix suggestions
+
+Output:
+{
+  "issueType": "performance",
+  "affectedComponent": "LoginService.authenticate",
+  "investigation": [
+    "Profiled LoginService.authenticate - 4500ms",
+    "Identified bottleneck: DatabaseQuery.execute - 4200ms",
+    "Analyzed query: SELECT * FROM users WHERE email = ?",
+    "Checked database indexes: No index on email column"
+  ],
+  "rootCause": {
+    "description": "Missing database index on users.email column",
+    "confidence": 0.95,
+    "evidence": ["Full table scan observed", "Linear growth with data"]
+  },
+  "fixSuggestions": [
+    {
+      "description": "Add database index on users.email",
+      "code": "CREATE INDEX idx_users_email ON users(email)",
+      "expectedImprovement": "99% reduction in query time"
+    }
+  ]
+}
+
+Make it context-aware:
+- Use project structure to understand codebase
+- Learn from previous debugging sessions
+- Adapt strategy based on findings
+
+Phase 4: Advanced Features (Week 3-4)
+4.1 Multi-Language Support
+Deliverable: Support Java, Kotlin, Scala
+Enhancements:
+
+Language-specific breakpoint types
+Language-specific expression evaluation
+Polyglot debugging (mixed Java/Kotlin)
+
+4.2 Remote Debugging
+Deliverable: Debug remote JVMs
+Features:
+
+Connect to remote debug ports
+Support remote breakpoints
+Remote variable inspection
+
+4.3 Collaborative Debugging
+Deliverable: Multi-user debugging sessions
+Features:
+
+Share debug sessions via MCP
+Synchronized breakpoints across users
+Shared debug annotations
+
+4.4 Learning & Memory
+Deliverable: AI learns from debugging patterns
+Features:
+kotlin// Session memory
+save_debug_session(sessionId: String, metadata: Map<String, Any>)
+get_similar_issues(issueDescription: String) → List<PastSession>
+learn_from_fix(issue: Issue, fix: Fix)
+
+// Pattern recognition
+detect_common_patterns() → List<Pattern>
+suggest_preventive_measures(codeArea: String) → List<Suggestion>
+
+Phase 5: Integration & Testing (Week 4)
+5.1 Rovo Dev CLI Integration
+Deliverable: Seamless Rovo Dev connection
+Configuration:
+json// ~/.rovodev/mcp.json
+{
+  "mcpServers": {
+    "intellij-debugger": {
+      "url": "http://localhost:8080/mcp",
+      "transport": "http",
+      "auto_start": true,
+      "config": {
+        "project_path": "/path/to/kotlin/project",
+        "auto_attach": true
+      }
+    }
+  }
+}
+```
+
+**Integration tests:**
+- Rovo Dev can discover all tools
+- Rovo Dev can call each tool successfully
+- Error handling works end-to-end
+- Performance is acceptable (<500ms per tool call)
+
+### 5.2 End-to-End Testing
+
+**Test scenarios:**
+
+**Scenario 1: NullPointerException debugging**
+```
+User: "I'm getting a NullPointerException in UserService, debug it"
+
+Rovo Dev:
+1. Calls analyze_crash with stack trace
+2. Sets breakpoints at suspected null sources
+3. Runs test case
+4. Inspects variables at each breakpoint
+5. Identifies root cause
+6. Suggests fix
+
+Expected: Correctly identifies null source and suggests fix
+```
+
+**Scenario 2: Performance issue**
+```
+User: "Login is taking 5 seconds, figure out why"
+
+Rovo Dev:
+1. Calls auto_debug with description
+2. Profiles login methods
+3. Identifies database bottleneck
+4. Analyzes query performance
+5. Suggests adding index
+
+Expected: Identifies slow query and suggests optimization
+```
+
+**Scenario 3: Logic bug**
+```
+User: "Users are seeing wrong data, debug the feed algorithm"
+
+Rovo Dev:
+1. Traces variable flow through algorithm
+2. Sets breakpoints at key decision points
+3. Compares expected vs actual values
+4. Identifies incorrect condition
+5. Suggests fix
+
+Expected: Finds logic error and suggests correction
+5.3 Documentation
+Deliverables:
+1. README.md
+markdown# IntelliJ Debugger MCP Server
+
+## Overview
+MCP server that exposes IntelliJ IDEA debugger via Model Context Protocol
+
+## Installation
+1. Download plugin from releases
+2. Install in IntelliJ: Settings → Plugins → Install from disk
+3. Restart IntelliJ
+4. MCP server starts automatically on port 8080
+
+## Configuration
+Configure Rovo Dev CLI:
+[instructions]
+
+## Available Tools
+[complete tool list with examples]
+
+## Usage Examples
+[common debugging workflows]
+
+## Troubleshooting
+[common issues and solutions]
+2. API Documentation
+
+Complete tool reference
+Input/output schemas
+Example requests/responses
+Error codes and handling
+
+3. Developer Guide
+
+Architecture overview
+How to extend with new tools
+Testing guidelines
+Contributing guidelines
+
+
+Phase 6: Deployment & Optimization (Week 4-5)
+6.1 Performance Optimization
+Targets:
+
+Tool call latency: <200ms (95th percentile)
+Variable inspection: <100ms for <1000 variables
+Expression evaluation: <500ms
+Breakpoint setting: <50ms
+
+Optimizations:
+
+Cache PSI analysis results
+Batch variable requests
+Use read actions for thread safety
+Implement connection pooling
+
+6.2 Error Handling & Resilience
+Error categories:
+
+User errors (invalid input)
+
+Return clear error messages
+Suggest corrections
+
+
+State errors (no active session)
+
+Return meaningful state info
+Suggest how to fix
+
+
+System errors (IntelliJ API failures)
+
+Log for debugging
+Return generic error to client
+Auto-recover when possible
+
+
+
+6.3 Security & Safety
+Security measures:
+
+API key authentication for MCP server
+Rate limiting (prevent abuse)
+Sandboxed expression evaluation
+Project boundary enforcement (don't access files outside project)
+
+Safety measures:
+
+Prevent infinite loops in auto-debug
+Timeout long-running operations
+Limit breakpoint count
+Validate all file paths
+
+6.4 Plugin Distribution
+Distribution channels:
+
+JetBrains Marketplace
+
+Submit plugin for review
+Handle feedback/approval
+Publish official release
+
+
+GitHub Releases
+
+Tag versions
+Provide .zip distribution
+Include installation instructions
+
+
+Direct Download
+
+Host on website
+Provide checksums
+Update documentation
+
+
+
+
+Phase 7: User Onboarding & Feedback (Week 5-6)
+7.1 Example Workflows
+Create example projects:
+Example 1: Debug a crash
+kotlin// BuggyService.kt with intentional NPE
+// README with: "Ask Rovo Dev to debug the crash"
+Example 2: Optimize performance
+kotlin// SlowService.kt with inefficient algorithm
+// README with: "Ask Rovo Dev why this is slow"
+Example 3: Fix logic bug
+kotlin// Calculator.kt with subtle logic error
+// README with: "Ask Rovo Dev why calculations are wrong"
+```
+
+### 7.2 Tutorial & Guides
+
+**Quick Start Guide:**
+```
+1. Install plugin
+2. Configure Rovo Dev CLI
+3. Open example project
+4. Say: "Debug why tests are failing"
+5. Watch Rovo Dev autonomously debug
+Advanced Tutorials:
+
+Custom debugging workflows
+Extending the MCP server
+Integrating with CI/CD
+Multi-project debugging
+
+7.3 Feedback Collection
+Feedback mechanisms:
+
+GitHub Issues for bugs
+Discussions for features
+In-plugin feedback form
+Usage analytics (opt-in)
+
+Metrics to track:
+
+Tool usage frequency
+Success rate of auto_debug
+Average debugging time saved
+User satisfaction scores
+
+
+Success Metrics & KPIs
+Week 4 Goals:
+
+✅ All core tools functional
+✅ 3 autonomous workflows working
+✅ Rovo Dev can successfully debug 80% of common issues
+✅ <500ms average tool latency
+
+Week 8 Goals:
+
+✅ Published to JetBrains Marketplace
+✅ 100+ active users
+✅ 90% autonomous debugging success rate
+✅ 50% reduction in manual debugging time
+
+6-Month Goals:
+
+✅ 1000+ active users
+✅ Integration with popular MCP clients
+✅ Support for 5+ JVM languages
+✅ Community contributions
+
+
+Risk Mitigation
+Technical Risks:
+Risk: IntelliJ API changes break plugin
+
+Mitigation: Pin to specific IntelliJ version initially, test thoroughly before upgrades
+
+Risk: MCP protocol changes
+
+Mitigation: Implement versioning, support multiple protocol versions
+
+Risk: Performance issues with large codebases
+
+Mitigation: Implement caching, lazy loading, pagination
+
+Product Risks:
+Risk: Users don't understand how to use it
+
+Mitigation: Excellent documentation, video tutorials, example workflows
+
+Risk: Competitors build similar tools
+
+Mitigation: Focus on autonomous features, build community
+
+Risk: Low adoption
+
+Mitigation: Market through developer communities, create compelling demos
+
+
+Resource Requirements
+Development:
+
+Time: 4-6 weeks full-time (or Rovo Dev builds it in days!)
+Skills: Kotlin, IntelliJ Platform SDK, MCP protocol
+Tools: IntelliJ IDEA, Gradle, Git
+
+Infrastructure:
+
+Hosting: GitHub for code
+Distribution: JetBrains Marketplace
+Documentation: GitHub Pages
+Analytics: (optional) Posthog or similar
+
+Ongoing:
+
+Maintenance: ~5 hours/week
+Support: ~3 hours/week
+Feature development: ~10 hours/week
+
+
+Final Deliverables Checklist
+Code:
+
+ IntelliJ plugin with MCP server
+ All core debugging tools implemented
+ 3+ autonomous workflows
+ Comprehensive test suite
+ CI/CD pipeline
+
+Documentation:
+
+ README with installation & usage
+ API reference for all tools
+ Developer contribution guide
+ Example projects
+ Video tutorials
+
+Distribution:
+
+ Published to JetBrains Marketplace
+ GitHub releases with artifacts
+ Installation instructions
+ Rovo Dev CLI integration guide
+
+Community:
+
+ GitHub repository with clear structure
+ Issue templates
+ Discussion forum
+ Contributing guidelines
+ Code of conduct
+
+
+Next Steps: Getting Started
+Immediate Actions (Today):
+
+Start Phase 1 with Rovo Dev:
+
+bashacli rovodev
+Use the Phase 1 prompt I provided above to generate the project skeleton.
+
+Set up development environment:
+
+Install IntelliJ IDEA
+Install Plugin DevKit
+Clone generated project
+
+
+Validate foundation:
+
+Build project: ./gradlew buildPlugin
+Run plugin: ./gradlew runIde
+Test MCP server: curl http://localhost:8080/health
+
+
+Begin Phase 2:
+
+Use Phase 2.1 prompt for breakpoint tools
+Test each tool manually
+Iterate with Rovo Dev
+
+
+
+Week 1 Goals:
+
+ Complete Phase 1 (foundation)
+ Complete Phase 2.1 (breakpoints)
+ Begin Phase 2.2 (execution control)
+
+
